@@ -3,5 +3,7 @@ dist
 .tmp
 .sass-cache
 .idea
+*.iml
 node_modules
 app/bower_components
+npm-debug.log
