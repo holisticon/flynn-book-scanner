@@ -1,6 +1,35 @@
-<img ng-src="{{book.volumeInfo.imageLinks.thumbnail}}" />
-        <h2>{{book.volumeInfo.title}}</h2>
-<em>{{book.volumeInfo.subtitle}}</em><br />
-<em ng-repeat="author in book.volumeInfo.authors">{{author}}</em>
+
+<div ng-repeat="book in books" class="paragraphs" style="margin: 10px 0">
+    <img style="float: left; margin: 0 5px 5px 0" ng-src="{{book.volumeInfo.imageLinks.thumbnail}}" />
+    <h2>{{book.volumeInfo.title}}</h2>
+    <strong>{{book.volumeInfo.subtitle}}</strong>
+
+
+    by <em ng-repeat="author in book.volumeInfo.authors">{{author}},</em> {{book.volumeInfo.publisher}}, {{book.volumeInfo.publishedDate}}.
+
+    <p>
+        ISBN-13: {{book.volumeInfo.industryIdentifiers[1].identifier}}
+    </p>
+
+    <h4 ng-show="book.volumeInfo.description">Beschreibung</h4>
+    <p>
+       {{book.volumeInfo.description}}
+    </p>
+    <div style="clear: left"></div>
+    <button class="btn btn-large btn-primary btn-block glyphicon glyphicon-floppy-open" > Save</button>
+
+</div>
 
 <!-- {{book}} -->
+
+
+
+<!-- Thumbnail (big)
+Autors (alle)
+Title
+Subtitle
+Publisher
+Publish Date
+ISBN
+PrintPageCount
+Description -->
