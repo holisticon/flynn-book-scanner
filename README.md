@@ -23,6 +23,9 @@ Steps in project directory `./flynn-book-scanner`:
 * `bower install`
 * `grunt`
 
+### Running on an Android device
+* `cordova run android -d`
+
 ## Sponsoring
 This project is sponsored and supported by [holisticon AG](http://holisticon.de/cms/About/Startseite)
 
