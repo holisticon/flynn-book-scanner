@@ -19,20 +19,11 @@
        under the License.
 */
 
-var exec  = require('./exec'),
-    path  = require('path'),
-    ROOT = path.join(__dirname, '..', '..');
+var android_sdk_version = require('./lib/android_sdk_version');
 
-/*
- * Cleans the project using ant
- * Returns a promise.
- */
-module.exports.run = function() {
-    return exec('ant clean -f ' + path.join(ROOT, 'build.xml'));
-}
+android_sdk_version.run().done(null, function(err) {
+    console.log(err);
+    process.exit(2);
+});
 
-module.exports.help = function() {
-    console.log('Usage: ' + path.relative(process.cwd(), process.argv[1]));
-    console.log('Cleans the project directory.');
-    process.exit(0);
-}
+
