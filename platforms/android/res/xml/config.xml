@@ -11,8 +11,8 @@
     <description>
         Description
     </description>
-    <author email="oliver.ochs@holisticon.de" href="http://www.holisticon.de">
-        Holistiocn
+    <author email="info@holisticon.de" href="http://www.holisticon.de">
+        Holisticon AG
     </author>
     <content src="index.html" />
     <access origin="*" />
