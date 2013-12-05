@@ -14,3 +14,5 @@ www
 plato
 platforms/android/bin
 platforms/android/local.properties
+platforms/android/gen
+platforms/android/src
