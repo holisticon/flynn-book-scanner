@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="de.holisticon.flynn-book-scanner" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Flynn - The Book Scanner</name>
+<widget id="de.holisticon.flynn" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Flynn</name>
     <description>
         Description
     </description>
-    <author email="oliver.ochs@holisticon.de" href="http://www.holisticon.de">
+    <author email="info@holisticon.de" href="http://www.holisticon.de">
         Holistiocn
     </author>
     <content src="index.html" />

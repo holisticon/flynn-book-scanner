@@ -1,12 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="de.holisticon.flynn-book-scanner" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">    <preference name="loglevel" value="DEBUG" />
-    <name>Flynn - The Book Scanner</name>
+<widget id="de.holisticon.flynn" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Hello Cordova</name>
     <description>
-        Description
+        A sample Apache Cordova application that responds to the deviceready event.
     </description>
+    <preference name="loglevel" value="DEBUG" />
     <feature name="App">
         <param name="android-package" value="org.apache.cordova.App" />
     </feature>
+    <name>Flynn</name>
+    <description>
+        Description
+    </description>
     <author email="oliver.ochs@holisticon.de" href="http://www.holisticon.de">
         Holistiocn
     </author>
