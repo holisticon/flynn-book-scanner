@@ -27,10 +27,10 @@ Steps in project directory `./flynn-book-scanner`:
 * `cordova run android -d`
 
 ## Sponsoring
-This project is sponsored and supported by [holisticon AG](http://holisticon.de/cms/About/Startseite)
+This project is sponsored and supported by [holisticon AG](http://www.holisticon.de/cms/About/Startseite)
 
 ## License
-This project is released under the revised BSD License (s. license.txt).
+This project is released under the revised BSD License (s. LICENSE).
 
 ## Build status
 
