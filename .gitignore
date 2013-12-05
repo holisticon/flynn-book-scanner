@@ -7,3 +7,6 @@ dist
 node_modules
 app/bower_components
 npm-debug.log
+www
+plato
+platforms/android/bin
