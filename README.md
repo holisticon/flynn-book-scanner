@@ -12,6 +12,8 @@ flynn-book-scanner
 Preparation steps:
 
 * Install Android Developer Tools
+* Install Android target 19 or higher (the Android newest SDK)
+* Install Apache Ant
 
 Global steps:
 
