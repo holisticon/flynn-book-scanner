@@ -9,6 +9,10 @@ flynn-book-scanner
 
 ### Setup a development environment
 
+Preparation steps:
+
+* Install Android Developer Tools
+
 Global steps:
 
 * Install nodejs (0.10.x+) + npm
@@ -27,7 +31,7 @@ Steps in project directory `./flynn-book-scanner`:
 * `cordova run android -d`
 
 ## Sponsoring
-This project is sponsored and supported by [holisticon AG](http://www.holisticon.de/cms/About/Startseite)
+This project is sponsored and supported by [Holisticon AG](http://www.holisticon.de/cms/About/Startseite)
 
 ## License
 This project is released under the revised BSD License (s. LICENSE).
