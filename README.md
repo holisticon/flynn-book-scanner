@@ -29,7 +29,13 @@ Steps in project directory `./flynn-book-scanner`:
 * `bower install`
 * `grunt`
 
+### Building Cordova
+* `cordova platform add android`
+* `cordova plugins add https://github.com/wildabeast/BarcodeScanner.git`
+* `cordova build`
+
 ### Running on an Android device
+
 * `cordova run android -d`
 
 ## Sponsoring
