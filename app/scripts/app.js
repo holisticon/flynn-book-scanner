@@ -11,13 +11,10 @@ angular.module('flynnBookScannerApp', [
     ])
     .config(function ($routeProvider) {
         $routeProvider
-            .when('/', {
-                templateUrl: 'views/main.html',
-                controller: 'MainCtrl'
-            }).when('/book', {
+            .when('/book', {
                 templateUrl: 'views/bookView.html',
                 controller: 'BookController'
             }).otherwise({
-                redirectTo: '/'
+                redirectTo: '/book'
             });
     });
