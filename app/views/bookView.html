@@ -1,3 +1,4 @@
+<button class="btn btn-large btn-primary btn-block glyphicon glyphicon-camera " ng-click="scan()"> Scan</button>
 
 <div ng-repeat="book in books" class="paragraphs" style="margin: 10px 0">
     <img style="float: left; margin: 0 5px 5px 0" ng-src="{{book.volumeInfo.imageLinks.thumbnail}}" />
@@ -16,11 +17,9 @@
        {{book.volumeInfo.description}}
     </p>
     <div style="clear: left"></div>
-    <button class="btn btn-large btn-primary btn-block glyphicon glyphicon-floppy-open" > Save</button>
-    <button class="btn btn-large btn-primary btn-block " ng-click="scan()"> Scan</button>
+    <button class="btn btn-large btn-primary btn-block glyphicon glyphicon-floppy-open" ng-click="save(book)"> Save</button>
 
 </div>
-
 <!-- {{book}} -->
 
 
