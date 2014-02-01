@@ -11,7 +11,8 @@
     "angular-cookies": "~1.2.1",
     "angular-sanitize": "~1.2.1",
     "angular-route": "~1.2.1",
-    "cordova": "~3.0.0"
+    "cordova": "~3.0.0",
+    "angular-local-storage": "latest"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.1",

@@ -7,13 +7,17 @@ angular.module('flynnBookScannerApp', [
         'ngCookies',
         'ngResource',
         'ngSanitize',
-        'ngRoute'
+        'ngRoute',
+        'LocalStorageModule'
     ])
     .config(function ($routeProvider) {
         $routeProvider
             .when('/book', {
                 templateUrl: 'views/bookView.html',
                 controller: 'BookController'
+            }).when('/settings', {
+                templateUrl: 'views/settingsView.html',
+                controller: 'SettingsController'
             }).otherwise({
                 redirectTo: '/book'
             });
