@@ -12,6 +12,5 @@ app/bower_components
 npm-debug.log
 www
 plato
-platforms/android/bin
-platforms/android/local.properties
-platforms/android/gen
+platforms/*
+plugins/*
