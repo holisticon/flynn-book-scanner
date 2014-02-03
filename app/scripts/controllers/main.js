@@ -98,8 +98,6 @@ app.controller('BookController', ['$scope', '$http', '$location', '$resource', '
             $location.path("/settings");
         }
 
-        $http.defaults.useXDomain = true;
-        delete $http.defaults.headers.common['X-Requested-With'];
         $http.defaults.headers.post = {'Authorization': 'Basic ' + $base64.encode(credentials.user +':' + credentials.password), 'Content-Type': 'application/json' };
 
         BookResource = $resource(credentials.couchdb);
