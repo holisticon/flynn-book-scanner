@@ -116,7 +116,7 @@ app.controller('BookController', ['$scope', '$http', '$location', '$resource', '
         }
 
         function retrieve(isbn) {
-            $http.get('https://www.googleapis.com/books/v1/volumes/?q=:isbn='+isbn+'&projection=full&maxResults=1').success(function(data) {
+            $http.get('https://www.googleapis.com/books/v1/volumes/?q=isbn:'+isbn+'&projection=full&maxResults=1').success(function(data) {
                 $scope.books = data.items;
             }, function(error) {
                 alert(JSON.stringify(error));
