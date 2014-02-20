@@ -1,5 +1,9 @@
+<div class="input-group input-group-lg" style="width: 100%">
+    <input class="form-control" type="tel" placeholder="ISBN" ng-model="isbn">
+</div>
+<button class="btn btn-large btn-primary btn-block" ng-click="search()"> Search</button>
 <button class="btn btn-large btn-primary btn-block glyphicon glyphicon-camera " ng-click="scan()" data-ng-disabled="! device"> Scan</button>
-
+<div ng-if="!books" class="paragraphs" style="margin: 10px 0">No book found</div>
 <div ng-repeat="book in books" class="paragraphs" style="margin: 10px 0">
     <img style="float: left; margin: 0 5px 5px 0" ng-src="{{book.volumeInfo.imageLinks.thumbnail}}" />
     <h2>{{book.volumeInfo.title}}</h2>
@@ -16,6 +20,10 @@
     <p>
        {{book.volumeInfo.description}}
     </p>
+    <div style="clear: left"></div>
+    <div class="input-group input-group-lg" style="width: 100%">
+        <input class="form-control" type="number" ng-model="book.count" required min="1">
+    </div>
     <div style="clear: left"></div>
     <button class="btn btn-large btn-primary btn-block glyphicon glyphicon-floppy-open" ng-click="save(book)"> Save</button>
 </div>

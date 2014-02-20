@@ -94,20 +94,16 @@ app.controller('BookController', ['$scope', '$http', '$location', '$resource', '
             credentials = $settings.load(),
             credentialsComplete = $settings.verify();
 
-        if (!credentialsComplete) {
-            $location.path("/settings");
-        }
-
-        $http.defaults.headers.post = {'Authorization': 'Basic ' + $base64.encode(credentials.user +':' + credentials.password), 'Content-Type': 'application/json' };
-
-        BookResource = $resource(credentials.couchdb);
 
         function scan() {
             cordova.plugins.barcodeScanner.scan(
                 function (result) {
-                    alert('We got a barcode\n' +
-                        'Result: ' + result.text + '\n' +  'Format: ' + result.format + '\n' +  'Cancelled: ' + result.cancelled);
+                    if (! result.cancelled) {
+                        alert('We got a barcode\n' +
+                            'Result: ' + result.text + '\n' +  'Format: ' + result.format + '\n');
+                    }
                     retrieve(result.text);
+                    $scope.isbn = result.text;
                 },
                 function (error) {
                     alert('Scanning failed: ' + error);
@@ -115,9 +111,40 @@ app.controller('BookController', ['$scope', '$http', '$location', '$resource', '
             );
         }
 
-        function retrieve(isbn) {
-            $http.get('https://www.googleapis.com/books/v1/volumes/?q=isbn:'+isbn+'&projection=full&maxResults=1').success(function(data) {
+        function search() {
+            retrieve($scope.isbn);
+        }
+
+        function retrieve(code) {
+            function convertCodeToIsbn(number) {
+                if (number.indexOf("978") == 0) {
+                    number = number.substr(3, 9);
+                    var xsum = 0;
+                    var add = 0;
+                    var i = 0;
+                    for (i = 0; i < 9; i++) {
+                        add = number.substr(i, 1);
+                        xsum += (10 - i) * add;
+                    }
+                    xsum %= 11;
+                    xsum = 11 - xsum;
+                    if (xsum == 10) {
+                        xsum = "X";
+                    }
+                    if (xsum == 11) {
+                        xsum = "0";
+                    }
+                    number += xsum;
+                }
+                return number;
+            }
+            code = convertCodeToIsbn(code);
+            $http.get('https://www.googleapis.com/books/v1/volumes/?q=:isbn='+code+'&projection=full&maxResults=1').success(function(data) {
+                for (var itemIndex in data.items) {
+                    data.items[itemIndex].count = 1;
+                }
                 $scope.books = data.items;
+
             }, function(error) {
                 alert(JSON.stringify(error));
             });
@@ -127,17 +154,28 @@ app.controller('BookController', ['$scope', '$http', '$location', '$resource', '
             var bookResource = new BookResource(book);
             bookResource.$save({
             }, function(data) {
-                alert('Saving OK: ' + JSON.stringify(data));
+                alert('OK');
             }, function(data) {
                 alert('Failed: ' + JSON.stringify(data));
             });
         }
+
+        $scope.isbn = isbn;
+
+        if (!credentialsComplete) {
+            $location.path("/settings");
+        }
+
+        $http.defaults.headers.post = {'Authorization': 'Basic ' + $base64.encode(credentials.user +':' + credentials.password), 'Content-Type': 'application/json' };
+
+        BookResource = $resource(credentials.couchdb);
 
         retrieve(isbn);
 
         $scope.isbn = isbn;
         $scope.scan = scan;
         $scope.save = save;
+        $scope.search = search;
         $scope.device = typeof cordova !== 'undefined';
 
  }]);
