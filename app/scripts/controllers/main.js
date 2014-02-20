@@ -88,6 +88,24 @@ app.factory('Base64', function() {
     };
 });
 
+app.controller('BooksController', ['$scope', '$http', 'SettingsService', 'Base64', function($scope, $http, $settings, $base64) {
+    // https://host:port/flynn/_design/books/_view/all
+    var credentials = $settings.load();
+    $http.defaults.headers.get = {'Authorization': 'Basic ' + $base64.encode(credentials.user +':' + credentials.password), 'Content-Type': 'application/json' };
+
+    function load() {
+        $http.get(credentials.couchdb + '/_design/books/_view/all' ).success(function(data) {
+            $scope.books = data.rows;
+        }, function(error) {
+            alert(JSON.stringify(error));
+        });
+    }
+
+    $scope.books = null;
+    $scope.load = load;
+
+}]);
+
 app.controller('BookController', ['$scope', '$http', '$location', '$resource', 'SettingsService', 'Base64', function ($scope, $http, $location, $resource, $settings, $base64) {
         var isbn = $location.search().isbn || '9783898646123',
             BookResource,

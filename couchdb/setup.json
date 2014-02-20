@@ -1,0 +1,9 @@
+{
+    "_id": "_design/books",
+    "language": "javascript",
+    "views": {
+        "all": {
+            "map" : "function(document) {emit(null, document);}"
+        }
+    }
+}

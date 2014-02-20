@@ -18,6 +18,9 @@ angular.module('flynnBookScannerApp', [
             }).when('/settings', {
                 templateUrl: 'views/settingsView.html',
                 controller: 'SettingsController'
+            }).when('/books', {
+                templateUrl: 'views/booksView.html',
+                controller: 'BooksController'
             }).otherwise({
                 redirectTo: '/book'
             });
