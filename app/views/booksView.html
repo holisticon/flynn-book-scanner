@@ -2,8 +2,10 @@
     <button class="btn btn-large btn-primary btn-block glyphicon glyphicon-floppy-open" ng-click="load()"> Load</button>
 </div>
 <ul ng-repeat="book in books" class="paragraphs" style="margin: 10px 0">
-    <strong>{{book.value.volumeInfo.title}}</strong> - {{book.value.volumeInfo.subtitle}} <br>
-    {{book.value.count}}
+    <div ng-if="book.value.volumeInfo">
+        <strong>{{book.value.volumeInfo.title}}</strong> - {{book.value.volumeInfo.subtitle}} <br>
+        {{book.value.count}}
+    </div>
 </ul>
 <!-- Thumbnail (big)
 Autors (alle)
