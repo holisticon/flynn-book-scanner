@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -39,6 +38,9 @@
 		7E7966E61810823500FA85AD /* icon-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DC1810823500FA85AD /* icon-small.png */; };
 		7E7966E71810823500FA85AD /* icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DD1810823500FA85AD /* icon-small@2x.png */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
+		3C610E1E939D4EF7BFD5A99E /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A168C974BE4F62A88A3FBB /* CDVDevice.m */; };
+		63A25DE53C7E42EBA9474DC7 /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 99198C84EACA4CA2B301AF66 /* CDVLogger.m */; };
+		60A83FA2864343C4B037E0A2 /* APPHiddenStatusbarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = E77CAA5FDF9843ADB127E3A8 /* APPHiddenStatusbarOverlay.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,12 @@
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = Flynn/config.xml; sourceTree = "<group>"; };
+		D3A168C974BE4F62A88A3FBB /* CDVDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVDevice.m"; path = "org.apache.cordova.device/CDVDevice.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		36657D1C4B484B8A86D428C9 /* CDVDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVDevice.h"; path = "org.apache.cordova.device/CDVDevice.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		99198C84EACA4CA2B301AF66 /* CDVLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVLogger.m"; path = "org.apache.cordova.console/CDVLogger.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		66668E0B4EEE42699456D493 /* CDVLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVLogger.h"; path = "org.apache.cordova.console/CDVLogger.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		E77CAA5FDF9843ADB127E3A8 /* APPHiddenStatusbarOverlay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "APPHiddenStatusbarOverlay.m"; path = "de.appplant.cordova.plugin.hidden-statusbar-overlay/APPHiddenStatusbarOverlay.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		717573C05487415BABAC8AB6 /* APPHiddenStatusbarOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "APPHiddenStatusbarOverlay.h"; path = "de.appplant.cordova.plugin.hidden-statusbar-overlay/APPHiddenStatusbarOverlay.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +231,12 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				D3A168C974BE4F62A88A3FBB /* CDVDevice.m */,
+				36657D1C4B484B8A86D428C9 /* CDVDevice.h */,
+				99198C84EACA4CA2B301AF66 /* CDVLogger.m */,
+				66668E0B4EEE42699456D493 /* CDVLogger.h */,
+				E77CAA5FDF9843ADB127E3A8 /* APPHiddenStatusbarOverlay.m */,
+				717573C05487415BABAC8AB6 /* APPHiddenStatusbarOverlay.h */,
 			);
 			name = Plugins;
 			path = Flynn/Plugins;
@@ -316,7 +330,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 510;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Flynn" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -417,6 +431,9 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
+				3C610E1E939D4EF7BFD5A99E /* CDVDevice.m in Sources */,
+				63A25DE53C7E42EBA9474DC7 /* CDVLogger.m in Sources */,
+				60A83FA2864343C4B037E0A2 /* APPHiddenStatusbarOverlay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

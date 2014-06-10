@@ -79,5 +79,9 @@
     </array>
     <key>CFBundleShortVersionString</key>
     <string>0.2.0</string>
+    <key>UIStatusBarHidden</key>
+    <true/>
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
   </dict>
 </plist>

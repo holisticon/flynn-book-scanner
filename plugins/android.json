@@ -4,8 +4,39 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {}
+        "files": {
+            "res/xml/config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<preference name=\"Fullscreen\" value=\"true\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
     },
-    "installed_plugins": {},
+    "installed_plugins": {
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "de.holisticon.flynn"
+        },
+        "org.apache.cordova.console": {
+            "PACKAGE_NAME": "de.holisticon.flynn"
+        },
+        "de.appplant.cordova.plugin.hidden-statusbar-overlay": {
+            "PACKAGE_NAME": "de.holisticon.flynn"
+        }
+    },
     "dependent_plugins": {}
 }
