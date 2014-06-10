@@ -11,6 +11,5 @@ node_modules
 app/bower_components
 npm-debug.log
 www
-plato
-platforms/*
-plugins/*
+.cordova/config.json
+platforms/android/*
