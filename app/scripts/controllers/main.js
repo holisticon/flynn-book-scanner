@@ -216,10 +216,10 @@ app.service('SettingsService',['localStorageService', function (localStorage){
     return {
         save: function(user, password, couchdb) {
             localStorage.clearAll();
-            localStorage.add('settings', {'user': user, 'password' : password, 'couchdb': couchdb});
+            localStorage.add('flynn.settings', {'user': user, 'password' : password, 'couchdb': couchdb});
         },
         load: function() {
-            var settings = localStorage.get('settings');
+            var settings = localStorage.get('flynn.settings');
             if (settings) {
                 return settings;
             } else {

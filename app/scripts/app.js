@@ -2,17 +2,20 @@
 
 angular.module('controllers', []);
 
-angular.module('flynnBookScannerApp', [
+var app = angular.module('flynnBookScannerApp', [
         'controllers',
         'ngCookies',
         'ngResource',
         'ngSanitize',
         'ngRoute',
+        'mobile-angular-ui',
         'LocalStorageModule'
-    ])
-    .config(function ($routeProvider) {
+    ]);
+app.config(function ($routeProvider) {
         $routeProvider
-            .when('/book', {
+            .when('/', {
+                redirectTo: '/books',
+            }).when('/book', {
                 templateUrl: 'views/bookView.html',
                 controller: 'BookController'
             }).when('/settings', {
@@ -24,7 +27,8 @@ angular.module('flynnBookScannerApp', [
             }).otherwise({
                 redirectTo: '/book'
             });
-    }).config(['$httpProvider', function ($httpProvider) {
+    });
+app.config(['$httpProvider', function ($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }]);

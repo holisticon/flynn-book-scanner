@@ -8,6 +8,9 @@
         <meta name="viewport" content="width=device-width">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
+        <link rel="stylesheet" href="bower_components/mobile-angular-ui/dist/css/mobile-angular-ui-base.css">
+        <link rel="stylesheet" href="bower_components/mobile-angular-ui/dist/css/mobile-angular-ui-desktop.css">
+
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
@@ -20,18 +23,39 @@
           <script src="bower_components/json3/lib/json3.min.js"></script>
         <![endif]-->
 
-        <nav class="navbar navbar-default" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#/book">Flynn</a>
-                <a class="navbar-brand" href="#/settings">Settings</a>
+
+        <div ng-include="'views/navbarView.html'" class="sidebar sidebar-left"
+        toggleable parent-active-class="sidebar-left-in" id="mainSidebar"></div>
+
+        <div class="app">
+
+                <div class="navbar navbar-app navbar-absolute-top">
+                <div class="navbar-brand navbar-brand-center" yield-to="title">
+                    <span>Flynn</span>
+                </div>
+                <div class="btn-group pull-left">
+                    <div ng-click="toggle('mainSidebar')"
+                        class="btn btn-navbar sidebar-toggle">
+                        <i class="fa fa-bars"></i> Menu
+                    </div>
+                </div>
+
+            </nav>
+
+
+                <!-- Add your site or application content here -->        
+
+            <div class="app-body" ng-class="{loading: loading}">
+                <div ng-show="loading" class="app-content-loading">
+                    <i class="fa fa-spinner fa-spin loading-spinner"></i>
+                    <div overlay="overlayLoading" ng-show="loading">
+                        <h4 class="overlay-title">Loading</h4>
+                        <p>Please wait</p>
+                    </div>
+                </div>
+                <ng-view class="app-content" ng-hide="loading"></ng-view>
             </div>
-        </nav>
 
-
-            <!-- Add your site or application content here -->
-        <div class="container" data-ng-view="">
-            Initializing....
         </div>
         <!-- Cordova stuff -->
         <script src="cordova.js"></script>
@@ -40,8 +64,9 @@
         <!-- jquery stuff -->
         <script src="bower_components/jquery/jquery.js"></script>
         <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/mobile-angular-ui/dist/js/mobile-angular-ui.js"></script>
 
-        <!-- build:js scripts/plugins.js -->
+        <!-- build:js scripts/plugins.js 
         <script src="bower_components/bootstrap-sass/js/affix.js"></script>
         <script src="bower_components/bootstrap-sass/js/alert.js"></script>
         <script src="bower_components/bootstrap-sass/js/button.js"></script>
@@ -53,15 +78,15 @@
         <script src="bower_components/bootstrap-sass/js/popover.js"></script>
         <script src="bower_components/bootstrap-sass/js/scrollspy.js"></script>
         <script src="bower_components/bootstrap-sass/js/tab.js"></script>
-        <script src="bower_components/bootstrap-sass/js/transition.js"></script>
+        <script src="bower_components/bootstrap-sass/js/transition.js"></script>-->
         <!-- endbuild -->
 
         <!-- build:js scripts/modules.js -->
-        <script src="bower_components/angular-base64/angular-base64.js"></script>
         <script src="bower_components/angular-resource/angular-resource.js"></script>
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
         <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular-touch/angular-touch.js"></script>
         <script src="bower_components/angular-local-storage/angular-local-storage.js"></script>
         <!-- endbuild -->
 

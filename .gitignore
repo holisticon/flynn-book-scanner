@@ -17,3 +17,4 @@ platforms/android/CordovaLib/*
 platforms/android/ant-gen/*
 platforms/android/res/*
 platforms/ios/Flynn/config.xml
+platforms/ios/Flynn.xcodeproj/project.xcworkspace/xcuserdata/*
