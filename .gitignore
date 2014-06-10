@@ -12,4 +12,5 @@ app/bower_components
 npm-debug.log
 www
 .cordova/config.json
-platforms/android/*
+platforms/android/ant-build/*
+platforms/android/CordovaLib/*
