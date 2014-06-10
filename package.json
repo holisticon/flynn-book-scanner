@@ -1,6 +1,6 @@
 {
   "name": "flynn-book-scanner",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -32,7 +32,7 @@
     "karma-firefox-launcher": "~0.1.0",
     "karma-chrome-launcher": "~0.1.0",
     "karma-html2js-preprocessor": "~0.1.0",
-    "karma-requirejs": "~0.1.0",
+    "karma-requirejs": "~0.2.0",
     "karma-jasmine": "~0.1.3",
     "karma-coffee-preprocessor": "~0.1.0",
     "karma-phantomjs-launcher": "~0.1.0",
