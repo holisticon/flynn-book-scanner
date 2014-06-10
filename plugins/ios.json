@@ -23,6 +23,10 @@
                         {
                             "xml": "<feature name=\"HiddenStatusbarOverlay\"><param name=\"ios-package\" value=\"APPHiddenStatusbarOverlay\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -42,6 +46,40 @@
                         }
                     ]
                 }
+            },
+            "framework": {
+                "parents": {
+                    "libiconv.dylib": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ],
+                    "AVFoundation.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ],
+                    "AssetsLibrary.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ],
+                    "CoreVideo.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ],
+                    "QuartzCore.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ]
+                }
             }
         }
     },
@@ -53,6 +91,9 @@
             "PACKAGE_NAME": "de.holisticon.flynn"
         },
         "de.appplant.cordova.plugin.hidden-statusbar-overlay": {
+            "PACKAGE_NAME": "de.holisticon.flynn"
+        },
+        "com.phonegap.plugins.barcodescanner": {
             "PACKAGE_NAME": "de.holisticon.flynn"
         }
     },

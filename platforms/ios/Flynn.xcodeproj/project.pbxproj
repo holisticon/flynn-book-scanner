@@ -41,6 +41,13 @@
 		3C610E1E939D4EF7BFD5A99E /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A168C974BE4F62A88A3FBB /* CDVDevice.m */; };
 		63A25DE53C7E42EBA9474DC7 /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 99198C84EACA4CA2B301AF66 /* CDVLogger.m */; };
 		60A83FA2864343C4B037E0A2 /* APPHiddenStatusbarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = E77CAA5FDF9843ADB127E3A8 /* APPHiddenStatusbarOverlay.m */; };
+		BE5D4C98094D4810A99724C1 /* CDVBarcodeScanner.mm in Resources */ = {isa = PBXBuildFile; fileRef = 18AED20879B34E12AE88BA5F /* CDVBarcodeScanner.mm */; settings = {COMPILER_FLAGS = -fno-objc-arc; }; };
+		33D87C1C3C1C44649B204C00 /* zxing-all-in-one.cpp in Resources */ = {isa = PBXBuildFile; fileRef = 73643E3AB9994B49A1AAFDCF /* zxing-all-in-one.cpp */; };
+		6E7C63E72C4A49A8B217FBDF /* scannerOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D692A25A27040C28AEBC678 /* scannerOverlay.xib */; };
+		9B19E7C3756244B3B06587AF /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E27FA85DF6594A9D96BD5781 /* libiconv.dylib */; };
+		B9220C7556BE405FBBE325E0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3236C793955B464B8BF99B06 /* AVFoundation.framework */; };
+		3E8BC12CA5334A17824A49A7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D430E07DCC4C87AD17E201 /* CoreVideo.framework */; };
+		47775AADD8DF4FC8B7587108 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97FE5AFD753C40C297128B1C /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +118,14 @@
 		66668E0B4EEE42699456D493 /* CDVLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVLogger.h"; path = "org.apache.cordova.console/CDVLogger.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		E77CAA5FDF9843ADB127E3A8 /* APPHiddenStatusbarOverlay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "APPHiddenStatusbarOverlay.m"; path = "de.appplant.cordova.plugin.hidden-statusbar-overlay/APPHiddenStatusbarOverlay.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		717573C05487415BABAC8AB6 /* APPHiddenStatusbarOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "APPHiddenStatusbarOverlay.h"; path = "de.appplant.cordova.plugin.hidden-statusbar-overlay/APPHiddenStatusbarOverlay.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		18AED20879B34E12AE88BA5F /* CDVBarcodeScanner.mm */ = {isa = PBXFileReference; lastKnownFileType = unknown; name = "CDVBarcodeScanner.mm"; path = "com.phonegap.plugins.barcodescanner/CDVBarcodeScanner.mm"; sourceTree = "<group>"; fileEncoding = 4; };
+		73643E3AB9994B49A1AAFDCF /* zxing-all-in-one.cpp */ = {isa = PBXFileReference; lastKnownFileType = unknown; name = "zxing-all-in-one.cpp"; path = "com.phonegap.plugins.barcodescanner/zxing-all-in-one.cpp"; sourceTree = "<group>"; fileEncoding = 4; };
+		D18153A7EB89495A83711625 /* zxing-all-in-one.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "zxing-all-in-one.h"; path = "com.phonegap.plugins.barcodescanner/zxing-all-in-one.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		0D692A25A27040C28AEBC678 /* scannerOverlay.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "scannerOverlay.xib"; path = "scannerOverlay.xib"; sourceTree = "<group>"; fileEncoding = 4; };
+		E27FA85DF6594A9D96BD5781 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libiconv.dylib"; path = "usr/lib/libiconv.dylib"; sourceTree = SDKROOT; fileEncoding = 4; };
+		3236C793955B464B8BF99B06 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "AVFoundation.framework"; path = "System/Library/Frameworks/AVFoundation.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		E2D430E07DCC4C87AD17E201 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "CoreVideo.framework"; path = "System/Library/Frameworks/CoreVideo.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		97FE5AFD753C40C297128B1C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "QuartzCore.framework"; path = "System/Library/Frameworks/QuartzCore.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +138,10 @@
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
 				5AEE5B35173C68D80009041E /* CoreLocation.framework in Frameworks */,
+				9B19E7C3756244B3B06587AF /* libiconv.dylib in Frameworks */,
+				B9220C7556BE405FBBE325E0 /* AVFoundation.framework in Frameworks */,
+				3E8BC12CA5334A17824A49A7 /* CoreVideo.framework in Frameworks */,
+				47775AADD8DF4FC8B7587108 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +223,7 @@
 				308D052D1370CCF300D202BF /* icons */,
 				308D05311370CCF300D202BF /* splash */,
 				8D1107310486CEB800E47090 /* Flynn-Info.plist */,
+				0D692A25A27040C28AEBC678 /* scannerOverlay.xib */,
 			);
 			name = Resources;
 			path = Flynn/Resources;
@@ -216,6 +236,10 @@
 				5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */,
+				E27FA85DF6594A9D96BD5781 /* libiconv.dylib */,
+				3236C793955B464B8BF99B06 /* AVFoundation.framework */,
+				E2D430E07DCC4C87AD17E201 /* CoreVideo.framework */,
+				97FE5AFD753C40C297128B1C /* QuartzCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -237,6 +261,9 @@
 				66668E0B4EEE42699456D493 /* CDVLogger.h */,
 				E77CAA5FDF9843ADB127E3A8 /* APPHiddenStatusbarOverlay.m */,
 				717573C05487415BABAC8AB6 /* APPHiddenStatusbarOverlay.h */,
+				18AED20879B34E12AE88BA5F /* CDVBarcodeScanner.mm */,
+				73643E3AB9994B49A1AAFDCF /* zxing-all-in-one.cpp */,
+				D18153A7EB89495A83711625 /* zxing-all-in-one.h */,
 			);
 			name = Plugins;
 			path = Flynn/Plugins;
@@ -400,6 +427,7 @@
 				7E7966E11810823500FA85AD /* icon-50@2x.png in Resources */,
 				7E7966E51810823500FA85AD /* icon-76@2x.png in Resources */,
 				30FC414916E50CA1004E6F35 /* icon-72@2x.png in Resources */,
+				6E7C63E72C4A49A8B217FBDF /* scannerOverlay.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +462,8 @@
 				3C610E1E939D4EF7BFD5A99E /* CDVDevice.m in Sources */,
 				63A25DE53C7E42EBA9474DC7 /* CDVLogger.m in Sources */,
 				60A83FA2864343C4B037E0A2 /* APPHiddenStatusbarOverlay.m in Sources */,
+				BE5D4C98094D4810A99724C1 /* CDVBarcodeScanner.mm in Resources */,
+				33D87C1C3C1C44649B204C00 /* zxing-all-in-one.cpp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

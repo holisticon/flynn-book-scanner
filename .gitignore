@@ -15,5 +15,5 @@ www
 platforms/android/ant-build/*
 platforms/android/CordovaLib/*
 platforms/android/ant-gen/*
-platforms/android/res/xml/*
+platforms/android/res/*
 platforms/ios/Flynn/config.xml
