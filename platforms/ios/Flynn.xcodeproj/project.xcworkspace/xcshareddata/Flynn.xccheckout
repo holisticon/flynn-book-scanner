@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>11F5B21D-901C-4A65-91DD-470143CEE6E8</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Flynn</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C9D5DCA4-FAFC-4F04-B9F7-9B77C9C2246A</key>
+		<string>https://github.com/holisticon/flynn-book-scanner.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>platforms/ios/Flynn.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C9D5DCA4-FAFC-4F04-B9F7-9B77C9C2246A</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/holisticon/flynn-book-scanner.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C9D5DCA4-FAFC-4F04-B9F7-9B77C9C2246A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C9D5DCA4-FAFC-4F04-B9F7-9B77C9C2246A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>flynn-book-scanner</string>
+		</dict>
+	</array>
+</dict>
+</plist>
