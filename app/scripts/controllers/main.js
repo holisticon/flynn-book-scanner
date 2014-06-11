@@ -1,7 +1,7 @@
 'use strict';
 
 // http://127.0.0.1:9000/#/book?isbn=9783499606601
-var app = angular.module('flynnBookScannerApp');
+var app = angular.module('controllers', []);
 
 app.factory('Base64', function() {
     var keyStr = 'ABCDEFGHIJKLMNOP' +
@@ -10,7 +10,7 @@ app.factory('Base64', function() {
         'wxyz0123456789+/' +
         '=';
     return {
-        encode: function (input) {
+        encode: function(input) {
             var output = "";
             var chr1, chr2, chr3 = "";
             var enc1, enc2, enc3, enc4 = "";
@@ -44,7 +44,7 @@ app.factory('Base64', function() {
             return output;
         },
 
-        decode: function (input) {
+        decode: function(input) {
             var output = "";
             var chr1, chr2, chr3 = "";
             var enc1, enc2, enc3, enc4 = "";
@@ -88,25 +88,31 @@ app.factory('Base64', function() {
     };
 });
 
-app.controller('BooksController', ['$scope', '$http', 'SettingsService', 'Base64', function($scope, $http, $settings, $base64) {
-    // https://host:port/flynn/_design/books/_view/all
-    var credentials = $settings.load();
-    $http.defaults.headers.get = {'Authorization': 'Basic ' + $base64.encode(credentials.user +':' + credentials.password), 'Content-Type': 'application/json' };
+app.controller('BooksController', ['$scope', '$log', '$http', 'SettingsService', 'Base64',
+    function($scope, $log, $http, $settings, $base64) {
+        // https://host:port/flynn/_design/books/_view/all
+        var credentials = $settings.load();
+        $http.defaults.headers.get = {
+            'Authorization': 'Basic ' + $base64.encode(credentials.user + ':' + credentials.password),
+            'Content-Type': 'application/json'
+        };
 
-    function load() {
-        $http.get(credentials.couchdb + '/_design/books/_view/all' ).success(function(data) {
-            $scope.books = data.rows;
-        }, function(error) {
-            alert(JSON.stringify(error));
-        });
+        function load() {
+            $http.get(credentials.couchdb + '/_design/books/_view/all').success(function(data) {
+                $scope.books = data.rows;
+            }, function(error) {
+                alert(JSON.stringify(error));
+            });
+        }
+
+        $scope.books = null;
+        $scope.load = load;
+
     }
+]);
 
-    $scope.books = null;
-    $scope.load = load;
-
-}]);
-
-app.controller('BookController', ['$scope', '$http', '$location', '$resource', 'SettingsService', 'Base64', function ($scope, $http, $location, $resource, $settings, $base64) {
+app.controller('BookController', ['$scope', '$http', '$location', '$resource', 'SettingsService', 'Base64',
+    function($scope, $http, $location, $resource, $settings, $base64) {
         var isbn = $location.search().isbn || '9783898646123',
             BookResource,
             credentials = $settings.load(),
@@ -115,16 +121,16 @@ app.controller('BookController', ['$scope', '$http', '$location', '$resource', '
 
         function scan() {
             cordova.plugins.barcodeScanner.scan(
-                function (result) {
-                    if (! result.cancelled) {
-                        alert('We got a barcode\n' +
-                            'Result: ' + result.text + '\n' +  'Format: ' + result.format + '\n');
+                function(result) {
+                    if (!result.cancelled) {
+                        console.debug('We got a barcode\n' +
+                            'Result: ' + result.text + '\n' + 'Format: ' + result.format + '\n');
                     }
                     retrieve(result.text);
                     $scope.isbn = result.text;
                 },
-                function (error) {
-                    alert('Scanning failed: ' + error);
+                function(error) {
+                    console.error('Scanning failed: ' + error);
                 }
             );
         }
@@ -157,7 +163,7 @@ app.controller('BookController', ['$scope', '$http', '$location', '$resource', '
                 return number;
             }
             code = convertCodeToIsbn(code);
-            $http.get('https://www.googleapis.com/books/v1/volumes/?q=:isbn='+code+'&projection=full&maxResults=1').success(function(data) {
+            $http.get('https://www.googleapis.com/books/v1/volumes/?q=:isbn=' + code + '&projection=full&maxResults=1').success(function(data) {
                 for (var itemIndex in data.items) {
                     data.items[itemIndex].count = 1;
                 }
@@ -168,10 +174,9 @@ app.controller('BookController', ['$scope', '$http', '$location', '$resource', '
             });
         }
 
-       function save(book) {
+        function save(book) {
             var bookResource = new BookResource(book);
-            bookResource.$save({
-            }, function(data) {
+            bookResource.$save({}, function(data) {
                 alert('OK');
             }, function(data) {
                 alert('Failed: ' + JSON.stringify(data));
@@ -184,10 +189,13 @@ app.controller('BookController', ['$scope', '$http', '$location', '$resource', '
             $location.path("/settings");
         }
 
-        $http.defaults.headers.post = {'Authorization': 'Basic ' + $base64.encode(credentials.user +':' + credentials.password), 'Content-Type': 'application/json' };
+        $http.defaults.headers.post = {
+            'Authorization': 'Basic ' + $base64.encode(credentials.user + ':' + credentials.password),
+            'Content-Type': 'application/json'
+        };
 
         BookResource = $resource(credentials.couchdb);
-
+        console.debug("Reading book data for ISBN " + isbn);
         retrieve(isbn);
 
         $scope.isbn = isbn;
@@ -196,40 +204,55 @@ app.controller('BookController', ['$scope', '$http', '$location', '$resource', '
         $scope.search = search;
         $scope.device = typeof cordova !== 'undefined';
 
- }]);
-
-app.controller('SettingsController', ['$scope', '$location', 'SettingsService', function ($scope, $location, $settings) {
-    var credentials = $settings.load(),
-        defaultCouch = 'http://mmd.holisticon.de:5984/books/';
-
-    function save() {
-        $settings.save($scope.user, $scope.password, $scope.couchdb);
-        $location.path("/book");
     }
-    $scope.user = credentials.user;
-    $scope.password = credentials.password;
-    $scope.couchdb = credentials.couchdb || defaultCouch;
-    $scope.save = save;
-}]);
+]);
 
-app.service('SettingsService',['localStorageService', function (localStorage){
-    return {
-        save: function(user, password, couchdb) {
-            localStorage.clearAll();
-            localStorage.add('flynn.settings', {'user': user, 'password' : password, 'couchdb': couchdb});
-        },
-        load: function() {
-            var settings = localStorage.get('flynn.settings');
-            if (settings) {
-                return settings;
-            } else {
-                return {}
-            }
-        },
-        verify: function() {
-            var credentials = this.load();
-            return (credentials && credentials.user && credentials.password && credentials.couchdb);
+app.controller('SettingsController', ['$scope', '$location', 'SettingsService',
+    function($scope, $location, $settings) {
+
+        var credentials = $settings.load(),
+            defaultCouch = 'https://server.holisticon.de/couchdb/flynn',
+            defaultUser = 'flynn_user',
+            defaultPassword = 'Passw0rd!';
+
+        function save() {
+            console.debug("Saving settings to local storage");
+            $settings.save($scope.user, $scope.password, $scope.couchdb);
+            $location.path("/book");
         }
-    };
+        $scope.user = credentials.user || defaultUser;
+        $scope.password = credentials.password || defaultPassword;
+        $scope.couchdb = credentials.couchdb || defaultCouch;
+        $scope.save = save;
+    }
+]);
 
-}]);
+app.service('SettingsService', ['localStorageService',
+    function(localStorage) {
+        return {
+            save: function(user, password, couchdb) {
+                localStorage.clearAll();
+                localStorage.add('flynn.settings', {
+                    'user': user,
+                    'password': password,
+                    'couchdb': couchdb
+                });
+            },
+            load: function() {
+                console.log("Loading settings from local storage");
+                var settings = localStorage.get('flynn.settings');
+                if (settings) {
+                    return settings;
+                } else {
+                    return {}
+                }
+            },
+            verify: function() {
+                console.log("Verifying flynn settings");
+                var credentials = this.load();
+                return (credentials && credentials.user && credentials.password && credentials.couchdb);
+            }
+        };
+
+    }
+]);
