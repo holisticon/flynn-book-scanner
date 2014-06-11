@@ -8,6 +8,9 @@
         <meta name="viewport" content="width=device-width">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
+        <!-- build:css(.tmp) styles/bootstrap.css -->
+        <link rel="stylesheet" href="styles/bootstrap.css">
+
         <link rel="stylesheet" href="bower_components/mobile-angular-ui/dist/css/mobile-angular-ui-base.css">
         <link rel="stylesheet" href="bower_components/mobile-angular-ui/dist/css/mobile-angular-ui-desktop.css">
 
@@ -29,7 +32,7 @@
 
         <div class="app">
 
-                <div class="navbar navbar-app navbar-absolute-top">
+            <div class="navbar navbar-app navbar-absolute-top">
                 <div class="navbar-brand navbar-brand-center" yield-to="title">
                     <span>Flynn</span>
                 </div>
@@ -39,21 +42,13 @@
                         <i class="fa fa-bars"></i> Menu
                     </div>
                 </div>
-
-            </nav>
-
-
-                <!-- Add your site or application content here -->        
+            </div>   
 
             <div class="app-body" ng-class="{loading: loading}">
                 <div ng-show="loading" class="app-content-loading">
-                    <i class="fa fa-spinner fa-spin loading-spinner"></i>
-                    <div overlay="overlayLoading" ng-show="loading">
-                        <h4 class="overlay-title">Loading</h4>
-                        <p>Please wait</p>
-                    </div>
+                  <i class="fa fa-spinner fa-spin loading-spinner"></i>
                 </div>
-                <ng-view class="app-content" ng-hide="loading"></ng-view>
+                <ng-view class="app-content ng-scope" ng-hide="loading"></ng-view>
             </div>
 
         </div>
@@ -66,7 +61,7 @@
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/mobile-angular-ui/dist/js/mobile-angular-ui.js"></script>
 
-        <!-- build:js scripts/plugins.js 
+        <!-- build:js scripts/plugins.js -->
         <script src="bower_components/bootstrap-sass/js/affix.js"></script>
         <script src="bower_components/bootstrap-sass/js/alert.js"></script>
         <script src="bower_components/bootstrap-sass/js/button.js"></script>
@@ -78,7 +73,7 @@
         <script src="bower_components/bootstrap-sass/js/popover.js"></script>
         <script src="bower_components/bootstrap-sass/js/scrollspy.js"></script>
         <script src="bower_components/bootstrap-sass/js/tab.js"></script>
-        <script src="bower_components/bootstrap-sass/js/transition.js"></script>-->
+        <script src="bower_components/bootstrap-sass/js/transition.js"></script>
         <!-- endbuild -->
 
         <!-- build:js scripts/modules.js -->
@@ -94,5 +89,19 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <!-- endbuild -->
+
+
+
+    <script>
+        if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+            document.addEventListener("deviceready", deviceReady, false);
+        } else {
+            deviceReady();
+        }
+
+        function deviceReady() {
+            console.log("Device is ready!");
+        }
+    </script>
     </body>
 </html>

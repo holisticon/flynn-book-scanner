@@ -1,12 +1,31 @@
-<div>
-    <button class="btn btn-large btn-primary btn-block glyphicon glyphicon-floppy-open" ng-click="load()"> Load</button>
+
+<div class="scrollable">
+	<div class="scrollable-content">
+		<div class="container section" id="bookactions">
+			<button type="button" class="btn btn-default"
+				ng-click="load()">
+				<i class="fa fa-refresh"></i> Aktualisieren
+			</button>
+		</div>
+		<form>
+			<div class="list-books">
+				<div ng-repeat="book in books" href="#" class="list-group-item">
+					<div class="pull-left">
+						<i class="fa fa-book feature-icon"></i>
+					</div>
+					<div class="media-body">
+						<div>
+								<h4>{{book.value.volumeInfo.title}}</h4>
+								<small>{{book.value.volumeInfo.subtitle}}</small>
+								<small>{{book.value.count}}</small>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
 </div>
-<ul ng-repeat="book in books" class="paragraphs" style="margin: 10px 0">
-    <div ng-if="book.value.volumeInfo">
-        <strong>{{book.value.volumeInfo.title}}</strong> - {{book.value.volumeInfo.subtitle}} <br>
-        {{book.value.count}}
-    </div>
-</ul>
 <!-- Thumbnail (big)
 Autors (alle)
 Title

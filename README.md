@@ -28,6 +28,8 @@ Steps in project directory `./flynn-book-scanner`:
 * `npm install`
 * `bower install`
 * `grunt`
+# `grunt server` (open chrome with `open /Applications/Google\ Chrome.app --args --disable-web-security` to http://127.0.0.1:9000/#/)
+
 
 ### Building Cordova
 * `cordova platform add android`
