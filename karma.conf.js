@@ -20,6 +20,7 @@ module.exports = function(config) {
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/mobile-angular-ui/dist/js/mobile-angular-ui.js',
       'app/bower_components/angular-local-storage/angular-local-storage.js',
+      'app/bower_components/angular-block-ui/angular-block-ui.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/spec/**/*.js'

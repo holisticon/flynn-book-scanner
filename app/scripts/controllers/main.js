@@ -1,7 +1,7 @@
 'use strict';
 
 // http://127.0.0.1:9000/#/book?isbn=9783499606601
-var app = angular.module('controllers', []);
+var app = angular.module('flynnBookScannerApp');
 
 app.factory('Base64', function() {
     var keyStr = 'ABCDEFGHIJKLMNOP' +
@@ -88,8 +88,8 @@ app.factory('Base64', function() {
     };
 });
 
-app.controller('BooksController', ['$scope', '$log', '$http', 'SettingsService', 'Base64',
-    function($scope, $log, $http, $settings, $base64) {
+app.controller('BooksController', ['$scope', 'blockUI', '$http', 'SettingsService', 'Base64',
+    function($scope, blockUI, $http, $settings, $base64) {
         // https://host:port/flynn/_design/books/_view/all
         var credentials = $settings.load();
         $http.defaults.headers.get = {
@@ -101,6 +101,7 @@ app.controller('BooksController', ['$scope', '$log', '$http', 'SettingsService',
         load();
 
         function load() {
+            blockUI.start();
             $http.get(credentials.couchdb + '/_design/books/_view/all').success(function(data) {
                 var books = [];
                 var rows = data.rows;
@@ -114,8 +115,10 @@ app.controller('BooksController', ['$scope', '$log', '$http', 'SettingsService',
                     }
                 }
                 $scope.books = books;
+                blockUI.stop();
             }, function(error) {
-                alert(JSON.stringify(error));
+                console.log("Error during reading data from couchdb: " + JSON.stringify(error));
+                blockUI.stop();
             });
         }
 
@@ -125,15 +128,15 @@ app.controller('BooksController', ['$scope', '$log', '$http', 'SettingsService',
     }
 ]);
 
-app.controller('BookController', ['$scope', '$http', '$location', '$resource', 'SettingsService', 'Base64',
-    function($scope, $http, $location, $resource, $settings, $base64) {
+app.controller('BookController', ['$scope', 'blockUI', '$http', '$location', '$resource', 'SettingsService', 'Base64',
+    function($scope, blockUI, $http, $location, $resource, $settings, $base64) {
         var isbn = $location.search().isbn || '9783898646123',
             BookResource,
             credentials = $settings.load(),
             credentialsComplete = $settings.verify();
 
-
         function scan() {
+            blockUI.start();
             cordova.plugins.barcodeScanner.scan(
                 function(result) {
                     if (!result.cancelled) {
@@ -142,15 +145,20 @@ app.controller('BookController', ['$scope', '$http', '$location', '$resource', '
                     }
                     retrieve(result.text);
                     $scope.isbn = result.text;
+                    blockUI.stop();
                 },
                 function(error) {
-                    console.error('Scanning failed: ' + error);
+                    console.log('Scanning failed: ' + error);
+                    $rootScope.$broadcast("barcode.error");
+                    blockUI.stop();
                 }
             );
         }
 
         function search() {
+            blockUI.start();
             retrieve($scope.isbn);
+            blockUI.stop();
         }
 
         function retrieve(code) {
@@ -177,14 +185,21 @@ app.controller('BookController', ['$scope', '$http', '$location', '$resource', '
                 return number;
             }
             code = convertCodeToIsbn(code);
-            $http.get('https://www.googleapis.com/books/v1/volumes/?q=:isbn=' + code + '&projection=full&maxResults=1').success(function(data) {
+
+            $scope.categories = [];
+            $scope.events = [];
+            $scope.labels = [];
+
+
+            $http.get('https://www.googleapis.com/books/v1/volumes/?q=:isbn=' + code + '&projection=full&maxResults=1&key=AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY').success(function(data) {
                 for (var itemIndex in data.items) {
                     data.items[itemIndex].count = 1;
                 }
                 $scope.books = data.items;
 
             }, function(error) {
-                alert(JSON.stringify(error));
+                $rootScope.$broadcast("booksearch.invalid");
+                console.log(JSON.stringify(error));
             });
         }
 
@@ -193,7 +208,9 @@ app.controller('BookController', ['$scope', '$http', '$location', '$resource', '
             bookResource.$save({}, function(data) {
                 alert('OK');
             }, function(data) {
-                alert('Failed: ' + JSON.stringify(data));
+                $rootScope.$broadcast("booksave.error");
+                console.log(JSON.stringify(error));
+                blockUI.stop();
             });
         }
 
@@ -241,6 +258,58 @@ app.controller('SettingsController', ['$scope', '$location', 'SettingsService',
     }
 ]);
 
+
+
+/**
+ * Controller for the app.
+ */
+app.controller('MainController', ['$scope', '$rootScope', 'blockUI', 'SettingsService',
+    function($scope, $rootScope, blockUI, SettingsService) {
+
+        //timeout of 30 seconds
+        $rootScope.timeout = 30000;
+
+        $rootScope.$on("$routeChangeStart", function() {
+            // Block the user interface
+            blockUI.start();
+        });
+        $rootScope.$on("$routeChangeSuccess", function() {
+            // Unblock the user interface
+            blockUI.stop();
+        });
+
+        // TODO show setup popup
+        var settings = SettingsService.load();
+        if (settings && !settings.valid) {
+            // blockUI.stop();
+            //$scope.toggle('overlaySetup');
+        }
+
+        $rootScope.$on('server.timeout', function(event) {
+            showErrorDialog($rootScope, $scope, blockUI, "Timeout", 1, "No answer from server");
+        });
+
+        $rootScope.$on('login.failed', function(event) {
+            showErrorDialog($rootScope, $scope, blockUI, "Settings incorrect", 3001, "Please check your settings");
+        });
+
+        $rootScope.$on('barcode.error', function(event) {
+            showErrorDialog($rootScope, $scope, blockUI, "Barcode error", 4001, "Barcode reader not working. Did you enable camera access?");
+        });
+
+        $rootScope.$on('booksearch.invalid', function(event) {
+            showErrorDialog($rootScope, $scope, blockUI, "Book couldn't be loaded.", 5001, "The book search wasn't successfull. Server didn't respond.");
+        });
+
+        $rootScope.$on('booksave.error', function(event) {
+            showErrorDialog($rootScope, $scope, blockUI, "Book couldn't be saved.", 5101, "The book save wasn't successfull. Server didn't respond.");
+        });
+
+        $scope.userAgent = navigator.userAgent;
+
+    }
+]);
+
 app.service('SettingsService', ['localStorageService',
     function(localStorage) {
         return {
@@ -255,7 +324,9 @@ app.service('SettingsService', ['localStorageService',
             load: function() {
                 console.log("Loading settings from local storage");
                 var settings = localStorage.get('flynn.settings');
+                // TODO check settings
                 if (settings) {
+                    settings.valid = true;
                     return settings;
                 } else {
                     return {}

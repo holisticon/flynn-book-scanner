@@ -13,6 +13,7 @@
 
         <link rel="stylesheet" href="bower_components/mobile-angular-ui/dist/css/mobile-angular-ui-base.css">
         <link rel="stylesheet" href="bower_components/mobile-angular-ui/dist/css/mobile-angular-ui-desktop.css">
+        <link rel="stylesheet" href="bower_components/angular-block-ui/angular-block-ui.css" />
 
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
@@ -30,7 +31,17 @@
         <div ng-include="'views/navbarView.html'" class="sidebar sidebar-left"
         toggleable parent-active-class="sidebar-left-in" id="mainSidebar"></div>
 
-        <div class="app">
+
+        <div overlay="overlayError">
+            <h4 class="overlay-title">Error occurred - {{ error_msg.title }}</h4>
+            <p>{{ error_msg.code }}</p>
+            <p>{{ error_msg.details }}</p>
+            <p toggle="off" bubble target="overlayError">
+                <span class="btn btn-primary">Ok</span>
+            </p>
+        </div>
+
+       <div class="app" ng-controller="MainController">
 
             <div class="navbar navbar-app navbar-absolute-top">
                 <div class="navbar-brand navbar-brand-center" yield-to="title">
@@ -52,6 +63,7 @@
             </div>
 
         </div>
+
         <!-- Cordova stuff -->
         <script src="cordova.js"></script>
         <script src="cordova_plugins.js"></script>
@@ -68,6 +80,7 @@
         <script src="bower_components/angular-route/angular-route.js"></script>
         <script src="bower_components/angular-touch/angular-touch.js"></script>
         <script src="bower_components/angular-local-storage/angular-local-storage.js"></script>
+        <script src="bower_components/angular-block-ui/angular-block-ui.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
