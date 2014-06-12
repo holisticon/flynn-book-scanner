@@ -1,18 +1,26 @@
-<h1 class="app-name">Settings</h1>
 <div class="scrollable">
     <div class="scrollable-content container section">
         <form>
-            <div class="input-group input-group-lg" style="width: 100%">
-                <input class="form-control" type="url" data-ng-model="couchdb" placeholder="URL der CouchDB" required /><br />
+            <div class="panel-heading">
+                <h2 class="panel-title">
+                Settings
+                </h2>
+            </div> 
+            <div class="panel" bs-panel="">
+                <div class="input-group input-group-lg" style="width: 100%">
+                    <input class="form-control" type="url" data-ng-model="couchdb" placeholder="URL der CouchDB" required /><br />
+                </div>
+                <div class="input-group input-group-lg" style="width: 100%">
+                    <input class="form-control" type="text" data-ng-model="user" placeholder="Nutzer" required /><br />
+                </div>
+                <div class="input-group input-group-lg" style="width: 100%">
+                    <input class="form-control" type="password" data-ng-model="password" label="Passwort" placeholder="Passwort"  required/><br />
+                </div>
+                <br />
             </div>
-            <div class="input-group input-group-lg" style="width: 100%">
-                <input class="form-control" type="text" data-ng-model="user" placeholder="Nutzer" required /><br />
+            <div bs-panel class="form-actions">
+                <button ng-click="save()" class="btn btn-primary"><i class="fa fa-save"></i>  Save</button>
             </div>
-            <div class="input-group input-group-lg" style="width: 100%">
-                <input class="form-control" type="password" data-ng-model="password" label="Passwort" placeholder="Passwort"  required/><br />
-            </div>
-            <br />
-            <button class="btn btn-large btn-primary btn-block glyphicon glyphicon-floppy-open" ng-click="save()"> Save</button>
         </form>
     </div>
 </div>

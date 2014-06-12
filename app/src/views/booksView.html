@@ -1,14 +1,12 @@
-
 <div class="scrollable">
-	<div class="scrollable-content">
-		<div class="container section" id="bookactions">
-			<button type="button" class="btn btn-default"
-				ng-click="load()">
-				<i class="fa fa-refresh"></i> Aktualisieren
-			</button>
-		</div>
-		<form>
-			<div class="list-books">
+    <div class="scrollable-content container section">
+        <form>
+            <div class="panel-heading">
+			 	<h2 class="panel-title">
+			    Available books
+			  	</h2>
+			</div> 
+            <div bs-panel class="panel">
 				<div ng-repeat="book in books" href="#" class="list-group-item">
 					<div class="pull-left">
 						<i class="fa fa-book feature-icon"></i>
@@ -22,7 +20,10 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>            
+            <div bs-panel class="form-actions panel">
+                <button type="button" class="btn btn-default" ng-click="load()"> <i class="fa fa-refresh"></i>  Aktualisieren</button>
+            </div>
 		</form>
 	</div>
 </div>

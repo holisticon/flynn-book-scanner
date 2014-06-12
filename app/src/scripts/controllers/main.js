@@ -249,7 +249,7 @@ app.controller('SettingsController', ['$scope', '$location', 'SettingsService',
         function save() {
             console.debug("Saving settings to local storage");
             $settings.save($scope.user, $scope.password, $scope.couchdb);
-            $location.path("/book");
+            $location.path("/books");
         }
         $scope.user = credentials.user || defaultUser;
         $scope.password = credentials.password || defaultPassword;
