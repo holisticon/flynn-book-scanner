@@ -265,9 +265,8 @@ app.controller('SettingsController', ['$scope', '$location', 'SettingsService',
  */
 app.controller('MainController', ['$scope', '$rootScope', 'blockUI', 'SettingsService',
     function($scope, $rootScope, blockUI, SettingsService) {
-
-        //timeout of 30 seconds
-        $rootScope.timeout = 30000;
+        // Cordova is ready
+        console.log("Device is ready!");
 
         $rootScope.$on("$routeChangeStart", function() {
             // Block the user interface
@@ -281,6 +280,8 @@ app.controller('MainController', ['$scope', '$rootScope', 'blockUI', 'SettingsSe
         // TODO show setup popup
         var settings = SettingsService.load();
         if (settings && !settings.valid) {
+            //timeout of 30 seconds
+            settings.timeout = 30000;
             // blockUI.stop();
             //$scope.toggle('overlaySetup');
         }
@@ -306,7 +307,6 @@ app.controller('MainController', ['$scope', '$rootScope', 'blockUI', 'SettingsSe
         });
 
         $scope.userAgent = navigator.userAgent;
-
     }
 ]);
 
@@ -337,6 +337,7 @@ app.service('SettingsService', ['localStorageService',
                 var credentials = this.load();
                 return (credentials && credentials.user && credentials.password && credentials.couchdb);
             }
+
         };
 
     }

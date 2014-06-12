@@ -8,15 +8,19 @@ describe('Controller: MainCtrl', function() {
   beforeEach(module('flynnBookScannerApp'));
 
   var MainCtrl,
-      scope;
+      scope,
+      settings;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function($controller, $rootScope) {
 
     scope = $rootScope.$new();
-    ;
+    settings = {};
+    settings.load = function(){};
+    
     MainCtrl = $controller('BookController', {
-      $scope: scope
+      $scope: scope,
+      $settings: settings
     });
   }));
 
