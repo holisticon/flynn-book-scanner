@@ -3,9 +3,9 @@ node_js:
   - 0.10
 before_install: gem install compass
 before_script:
-  - cd app
   - npm install -g grunt-cli
   - npm install -g bower
+  - cd app
   - bower install
   - bower update
   - bower prune

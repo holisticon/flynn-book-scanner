@@ -7,6 +7,7 @@ atlassian-ide-plugin.xml
 *.iml
 *.ipr
 *.iws
+*.log
 app/node_modules
 app/src/bower_components
 app/npm-debug.log
