@@ -14,7 +14,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     yeoman: {
       // configurable paths
-      app: require('./bower.json').appPath || 'app',
+      app: require('./bower.json').appPath || 'src',
       dist: 'www'
     },
     watch: {
@@ -304,7 +304,7 @@ module.exports = function (grunt) {
     plato: {
       report: {
         files: {
-          'plato': ['app/scripts/**/*.js', 'test/**/*.js']
+          'plato': ['src/scripts/**/*.js', 'test/**/*.js']
         }
       }
     }

@@ -25,6 +25,7 @@ Global steps:
 
 Steps in project directory `./flynn-book-scanner`:
 
+* `cd app`
 * `npm install`
 * `bower install`
 * `grunt`
