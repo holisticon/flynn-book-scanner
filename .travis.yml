@@ -9,4 +9,5 @@ before_script:
   - bower install
   - bower update
   - bower prune
-  
+script: 
+  -grunt
