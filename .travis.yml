@@ -10,4 +10,5 @@ before_script:
   - bower update
   - bower prune
 script: 
+  - cd app 
   - grunt
