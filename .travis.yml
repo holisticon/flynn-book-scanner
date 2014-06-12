@@ -10,4 +10,4 @@ before_script:
   - bower update
   - bower prune
 script: 
-  -grunt
+  - grunt
