@@ -97,9 +97,23 @@ app.controller('BooksController', ['$scope', '$log', '$http', 'SettingsService',
             'Content-Type': 'application/json'
         };
 
+        // autoload
+        load();
+
         function load() {
             $http.get(credentials.couchdb + '/_design/books/_view/all').success(function(data) {
-                $scope.books = data.rows;
+                var books = [];
+                var rows = data.rows;
+                if (rows) {
+                    for (var id in rows) {
+                        var bookEntry = rows[id];
+                        //only add complet entries to results
+                        if (bookEntry.value.volumeInfo) {
+                            books.push(bookEntry);
+                        }
+                    }
+                }
+                $scope.books = books;
             }, function(error) {
                 alert(JSON.stringify(error));
             });
@@ -211,7 +225,7 @@ app.controller('SettingsController', ['$scope', '$location', 'SettingsService',
     function($scope, $location, $settings) {
 
         var credentials = $settings.load(),
-            defaultCouch = 'https://server.holisticon.de/couchdb/flynn',
+            defaultCouch = 'https://server.holisticon.de/couchdb/flynn/',
             defaultUser = 'flynn_user',
             defaultPassword = 'Passw0rd!';
 
