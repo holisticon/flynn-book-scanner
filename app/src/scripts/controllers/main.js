@@ -166,16 +166,19 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
 
         function search() {
             var searchQuery = $scope.searchQuery;
-            if (searchQuery.isbn) {
+            var isbn = searchQuery.isbn;
+            if (isbn) {
+                console.log("Start searching for ISBN " + isbn);
                 blockUI.start();
-                retrieve(searchQuery.isbn);
+                retrieve(isbn);
                 blockUI.stop();
             }
         }
 
         function retrieve(code) {
             function convertCodeToIsbn(number) {
-                if (number.indexOf("978") == 0) {
+                console.log('Converting convertCodeToIsbn: ' + number);
+                if (number && number.indexOf("978") == 0) {
                     number = number.substr(3, 9);
                     var xsum = 0;
                     var add = 0;
@@ -194,19 +197,19 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                     }
                     number += xsum;
                 }
-                console.log('Converted ISBN: ' + number);
+                console.log('Converted convertCodeToIsbn: ' + number);
                 return number;
             }
             code = convertCodeToIsbn(code);
             // save code for later usage
-            console.debug("Reading book data for ISBN " + code);
+            console.log("Reading book data for ISBN " + code);
 
             $scope.categories = [];
             $scope.events = [];
             $scope.labels = [];
             var gbooksUrl = 'https://www.googleapis.com/books/v1/volumes/?q=:isbn=' + code + '&projection=full&maxResults=1&key=AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY';
             //var deferred = $q.defer();
-            console.debug("Reading book data with google books url: " + gbooksUrl);
+            console.log("Reading book data with google books url: " + gbooksUrl);
             $http({
                 method: 'GET',
                 url: gbooksUrl,
@@ -226,7 +229,7 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                     var usedISBN = convertCodeToIsbn(usedCode);
                     var book;
                     if (data) {
-                        console.log("Book RAW data: " + JSON.stringify(data));
+                        console.log("Receveid book RAW data: " + JSON.stringify(data));
                         for (var itemIndex in data.items) {
                             book = data.items[itemIndex];
                             var bookIDs = book.volumeInfo.industryIdentifiers;
@@ -250,6 +253,7 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                             $scope.books = null;
                         }
                     } else {
+                        console.log("Received no data.");
                         $scope.books = null;
                     }
                 }

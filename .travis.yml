@@ -6,9 +6,10 @@ before_script:
   - npm install -g grunt-cli
   - npm install -g bower
   - cd app
+  - npm install
   - bower install
   - bower update
   - bower prune
 script: 
-  - cd app 
+  - pwd 
   - grunt
