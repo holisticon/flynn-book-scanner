@@ -7,9 +7,10 @@
                 </h2>
             </div> 
             <div bs-panel class="panel">
-                <input class="form-control" type="number" placeholder="ISBN" ng-model="isbn">
+                <input class="form-control" type="tel" placeholder="ISBN" data-ng-model="isbn">
             </div>
             <div bs-panel class="form-actions">
+                <button ng-click="scan()" class="btn"><i class="fa fa-barcode"></i>  Scan</button>
                 <button ng-click="search()" class="btn btn-primary"><i class="fa fa-search"></i>  Search</button>
             </div>
             <div bs-panel class="panel">
@@ -33,10 +34,8 @@
                     <div class="input-group input-group-lg" style="width: 100%">
                         <input class="form-control" type="number" ng-model="book.count" required min="1">
                     </div>
+                    <button ng-click="save(book)" class="btn btn-primary"><i class="fa fa-save"></i>  Save</button>
                 </div>
-            </div>
-            <div bs-panel class="form-actions">
-                <button ng-click="save(book)" class="btn btn-primary"><i class="fa fa-save"></i>  Save</button>
             </div>
         </form>
     </div>

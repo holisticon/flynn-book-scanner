@@ -92,19 +92,25 @@ app.controller('BooksController', ['$scope', 'blockUI', '$http', 'SettingsServic
     function($scope, blockUI, $http, $settings, $base64) {
         // https://host:port/flynn/_design/books/_view/all
         var credentials = $settings.load();
-        $http.defaults.headers.get = {
-            'Authorization': 'Basic ' + $base64.encode(credentials.user + ':' + credentials.password),
-            'Content-Type': 'application/json'
-        };
 
         // autoload
         load();
 
         function load() {
             blockUI.start();
-            $http.get(credentials.couchdb + '/_design/books/_view/all').success(function(data) {
+            $http({
+                method: 'GET',
+                url: credentials.couchdb + '/_design/books/_view/all',
+                timeout: $settings.timeout,
+                headers: {
+                    'Authorization': 'Basic ' + $base64.encode(credentials.user + ':' + credentials.password),
+                    'Content-Type': 'application/json'
+                }
+            }).then(onSuccess, onError);
+
+            function onSuccess(response) {
                 var books = [];
-                var rows = data.rows;
+                var rows = response.data.rows;
                 if (rows) {
                     for (var id in rows) {
                         var bookEntry = rows[id];
@@ -116,10 +122,12 @@ app.controller('BooksController', ['$scope', 'blockUI', '$http', 'SettingsServic
                 }
                 $scope.books = books;
                 blockUI.stop();
-            }, function(error) {
+            }
+
+            function onError(response) {
                 console.log("Error during reading data from couchdb: " + JSON.stringify(error));
                 blockUI.stop();
-            });
+            }
         }
 
         $scope.books = null;
@@ -128,10 +136,11 @@ app.controller('BooksController', ['$scope', 'blockUI', '$http', 'SettingsServic
     }
 ]);
 
-app.controller('BookController', ['$scope', 'blockUI', '$http', '$location', '$resource', 'SettingsService', 'Base64',
-    function($scope, blockUI, $http, $location, $resource, $settings, $base64) {
+app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$q', '$location', '$resource', 'SettingsService', 'Base64',
+    function($rootScope, $scope, blockUI, $http, $q, $location, $resource, $settings, $base64) {
         var isbn = $location.search().isbn || '9783898646123',
             BookResource,
+            saveSuccess,
             credentials = $settings.load(),
             credentialsComplete = $settings.verify();
 
@@ -189,51 +198,83 @@ app.controller('BookController', ['$scope', 'blockUI', '$http', '$location', '$r
             $scope.categories = [];
             $scope.events = [];
             $scope.labels = [];
+            var gbooksUrl = 'https://www.googleapis.com/books/v1/volumes/?q=:isbn=' + code + '&projection=full&maxResults=1&key=AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY';
+            //var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: gbooksUrl,
+                timeout: $settings.timeout,
+                headers: {
+                    'Access-Control-Allow-Origin': 'localhost',
+                    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+                }
+            }).then(onSuccess, onError);
 
-
-            $http.get('https://www.googleapis.com/books/v1/volumes/?q=:isbn=' + code + '&projection=full&maxResults=1&key=AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY').success(function(data) {
+            function onSuccess(response) {
+                console.log("Got valid book data.");
+                var data = response.data;
                 for (var itemIndex in data.items) {
                     data.items[itemIndex].count = 1;
                 }
                 $scope.books = data.items;
+               // deferred.resolve(response);
+            }
 
-            }, function(error) {
+            function onError(response) {
                 $rootScope.$broadcast("booksearch.invalid");
-                console.log(JSON.stringify(error));
-            });
+                console.log("Got HTTP error " + response.status + " (" + response.statusText + ")");
+                //console.log(JSON.stringify(response));
+               // deferred.reject(response);
+            }
+           // return deferred.promise;
         }
 
         function save(book) {
-            var bookResource = new BookResource(book);
-            bookResource.$save({}, function(data) {
-                alert('OK');
-            }, function(data) {
+            //var bookResource = new BookResource(book);
+            $http({
+                method: 'POST',
+                url: credentials.couchdb,
+                data: book,
+                timeout: $settings.timeout,
+                xhrFields: {
+                    withCredentials: true
+                },
+                headers: {
+                    'Authorization': 'Basic ' + $base64.encode(credentials.user + ':' + credentials.password),
+                    'Access-Control-Allow-Origin': 'localhost',
+                    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+                    'Content-Type': 'application/json'
+                }
+            }).then(onSuccess, onError);
+
+            function onSuccess(response) {
+                // TODO add confirm
+                console.log("Successfully added book");
+                saveSuccess = true;
+            }
+
+            function onError(response) {
                 $rootScope.$broadcast("booksave.error");
                 console.log(JSON.stringify(error));
                 blockUI.stop();
-            });
+            }
         }
-
-        $scope.isbn = isbn;
 
         if (!credentialsComplete) {
             $location.path("/settings");
         }
-
-        $http.defaults.headers.post = {
-            'Authorization': 'Basic ' + $base64.encode(credentials.user + ':' + credentials.password),
-            'Content-Type': 'application/json'
-        };
-
-        BookResource = $resource(credentials.couchdb);
-        console.debug("Reading book data for ISBN " + isbn);
-        retrieve(isbn);
-
         $scope.isbn = isbn;
+        if (isbn) {
+            console.debug("Reading book data for ISBN " + isbn);
+            retrieve(isbn);
+        }
+        $scope.isbn = isbn;
+
+        // public methods
+
         $scope.scan = scan;
         $scope.save = save;
         $scope.search = search;
-        $scope.device = typeof cordova !== 'undefined';
 
     }
 ]);
