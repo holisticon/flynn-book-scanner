@@ -1,21 +1,20 @@
+<div content-for="title">
+  <span>Available books</span>
+</div>
 <div class="scrollable">
     <div class="scrollable-content container section">
         <form>
-            <div class="panel-heading">
-			 	<h2 class="panel-title">
-			    Available books
-			  	</h2>
-			</div> 
             <div bs-panel class="panel">
-				<div ng-repeat="book in books" href="#" class="list-group-item">
-					<div class="pull-left">
-						<i class="fa fa-book feature-icon"></i>
-					</div>
-					<div class="media-body">
-						<div>
-								<h4>{{book.value.volumeInfo.title}}</h4>
-								<small>{{book.value.volumeInfo.subtitle}}</small>
-								<small>{{book.value.count}}</small>
+				<div ng-repeat="book in books" href="#" class="list-group-item row">
+  						<div class="col-xs-2"><img ng-src="{{book.value.volumeInfo.imageLinks.thumbnail}}" /></div>
+  						<div class="col-xs-10">                    			
+								<h3>{{book.value.volumeInfo.title}}</h3>
+								<p>{{book.value.volumeInfo.subtitle}}</p>
+								<p> by <span ng-repeat="author in book.value.volumeInfo.authors">{{author}}, </span> {{book.value.volumeInfo.publisher}}, {{book.value.volumeInfo.publishedDate}}
+									<br>                    
+                        			ISBN-13: {{book.value.volumeInfo.industryIdentifiers[1].identifier}}
+                    			</p>
+								<p ng-show="book.value.count">Amount: {{book.value.count}}</p>
 
 						</div>
 					</div>

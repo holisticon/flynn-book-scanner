@@ -1,22 +1,56 @@
-/* Put your CSS here */
-html, body {
-
-
-}
 
 body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-weight: 500;
     background: #fafafa;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
 }
 
 
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #666666;
+}
+
+a.list-group-item {
+    color: #1952A0;
+}
+
+.navbar-app {
+    color: #1952A0;
+}
+
+.panel-title {
+    color: #666666;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+small, .small {
+    color: #6A7A9A;
+}
+
+.navbar-app .btn-navbar, .navbar-app .btn{
+color: #1952A0;
+}
+
+footer {
+    padding: 5px;
+}
+
+
 .feature-icon {
     font-size: 44px;
-    padding: 0;
-    color: #0062cc;
-    line-height: 64px;
-    width: 64px;
+    padding: 5px;
+    color: #DE0027;
     text-align: center;
     opacity: .8;
 }
