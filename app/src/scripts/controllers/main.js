@@ -131,6 +131,8 @@ app.controller('BooksController', ['$scope', 'blockUI', '$http', 'SettingsServic
         }
 
         $scope.books = null;
+
+        // public methods
         $scope.load = load;
 
     }
@@ -138,9 +140,7 @@ app.controller('BooksController', ['$scope', 'blockUI', '$http', 'SettingsServic
 
 app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$q', '$location', '$resource', 'SettingsService', 'Base64',
     function($rootScope, $scope, blockUI, $http, $q, $location, $resource, $settings, $base64) {
-        var isbn = $location.search().isbn || '9783898646123',
-            BookResource,
-            saveSuccess,
+        var saveSuccess,
             credentials = $settings.load(),
             credentialsComplete = $settings.verify();
 
@@ -153,7 +153,7 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                             'Result: ' + result.text + '\n' + 'Format: ' + result.format + '\n');
                     }
                     retrieve(result.text);
-                    $scope.isbn = result.text;
+                    $scope.searchQuery.isbn = result.text;
                     blockUI.stop();
                 },
                 function(error) {
@@ -165,9 +165,12 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
         }
 
         function search() {
-            blockUI.start();
-            retrieve($scope.isbn);
-            blockUI.stop();
+            var searchQuery = $scope.searchQuery;
+            if (searchQuery.isbn) {
+                blockUI.start();
+                retrieve(searchQuery.isbn);
+                blockUI.stop();
+            }
         }
 
         function retrieve(code) {
@@ -191,15 +194,19 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                     }
                     number += xsum;
                 }
+                console.log('Converted ISBN: ' + number);
                 return number;
             }
             code = convertCodeToIsbn(code);
+            // save code for later usage
+            console.debug("Reading book data for ISBN " + code);
 
             $scope.categories = [];
             $scope.events = [];
             $scope.labels = [];
             var gbooksUrl = 'https://www.googleapis.com/books/v1/volumes/?q=:isbn=' + code + '&projection=full&maxResults=1&key=AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY';
             //var deferred = $q.defer();
+            console.debug("Reading book data with google books url: " + gbooksUrl);
             $http({
                 method: 'GET',
                 url: gbooksUrl,
@@ -212,21 +219,47 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
 
             function onSuccess(response) {
                 console.log("Got valid book data.");
+                var valid = false;
                 var data = response.data;
-                for (var itemIndex in data.items) {
-                    data.items[itemIndex].count = 1;
+                var usedCode = $scope.searchQuery.isbn;
+                if (usedCode) {
+                    var usedISBN = convertCodeToIsbn(usedCode);
+                    var book;
+                    if (data) {
+                        console.log("Book RAW data: " + JSON.stringify(data));
+                        for (var itemIndex in data.items) {
+                            book = data.items[itemIndex];
+                            var bookIDs = book.volumeInfo.industryIdentifiers;
+                            for (var bookIdIndex in bookIDs) {
+                                var bookIdDtls = bookIDs[bookIdIndex];
+                                if (bookIdDtls) {
+                                    if (bookIdDtls.identifier === usedISBN) {
+                                        valid = true;
+                                    }
+                                }
+
+                            }
+                        }
+                        if (valid) {
+                            var books = [];
+                            books.push(book);
+                            $scope.books = books;
+                            console.log("Found matching result.");
+                        } else  {
+                            console.log("Found no matching result.");
+                            $scope.books = null;
+                        }
+                    } else {
+                        $scope.books = null;
+                    }
                 }
-                $scope.books = data.items;
-               // deferred.resolve(response);
             }
 
             function onError(response) {
                 $rootScope.$broadcast("booksearch.invalid");
                 console.log("Got HTTP error " + response.status + " (" + response.statusText + ")");
-                //console.log(JSON.stringify(response));
-               // deferred.reject(response);
+
             }
-           // return deferred.promise;
         }
 
         function save(book) {
@@ -263,19 +296,13 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
         if (!credentialsComplete) {
             $location.path("/settings");
         }
-        $scope.isbn = isbn;
-        if (isbn) {
-            console.debug("Reading book data for ISBN " + isbn);
-            retrieve(isbn);
-        }
-        $scope.isbn = isbn;
+
+        $scope.searchQuery = {};
 
         // public methods
-
         $scope.scan = scan;
         $scope.save = save;
         $scope.search = search;
-
     }
 ]);
 
@@ -292,9 +319,12 @@ app.controller('SettingsController', ['$scope', '$location', 'SettingsService',
             $settings.save($scope.user, $scope.password, $scope.couchdb);
             $location.path("/books");
         }
+
         $scope.user = credentials.user || defaultUser;
         $scope.password = credentials.password || defaultPassword;
         $scope.couchdb = credentials.couchdb || defaultCouch;
+
+        // public methods
         $scope.save = save;
     }
 ]);
