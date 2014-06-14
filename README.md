@@ -2,10 +2,10 @@ flynn-book-scanner
 ==================
 
 ## Introduction
-*tbd*
+flynn is a book scanning app which saves the added books on a couchdb.
 
 ## Getting started
-*tbd*
+See below steps to get starting working with flynn:
 
 ### Setup a development environment
 
@@ -21,7 +21,7 @@ Global steps:
 * Install ruby
 * `gem install compass`
 * `sudo npm install -g grunt-cli`
-* `sudp npm install -g bower`
+* `sudo npm install -g bower`
 
 Steps in project directory `./flynn-book-scanner`:
 
@@ -31,6 +31,17 @@ Steps in project directory `./flynn-book-scanner`:
 * `grunt`
 # `grunt server` (open chrome with `open /Applications/Google\ Chrome.app --args --disable-web-security` to http://127.0.0.1:9000/#/)
 
+### Setup a development environment
+
+Steps in project directory `./flynn-book-scanner`:
+* `cd app`
+* `grunt`
+
+For debugging in project directory `./flynn-book-scanner`:
+* `cd app`
+* `./node_modules/karma/bin/karma start`
+
+open brower at http://localhost:8080
 
 ### Building Cordova
 * `cordova platform add android`
