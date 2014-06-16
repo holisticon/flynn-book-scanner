@@ -358,7 +358,7 @@ app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'Se
                         var usedISBN = convertCodeToIsbn(usedCode);
                         var book;
                         if (data) {
-                            $log.debug("Receveid book RAW data: " + JSON.stringify(data));
+                            $log.debug("Received book RAW data: " + JSON.stringify(data));
                             for (var itemIndex in data.items) {
                                 book = data.items[itemIndex];
                                 var bookIDs = book.volumeInfo.industryIdentifiers;
