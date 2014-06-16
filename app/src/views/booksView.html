@@ -1,28 +1,78 @@
 <div content-for="title">
-  <span>Available books</span>
+  <span>Books</span>
 </div>
+
+<div overlay="overlaySearchEntry">
+	<h4 class="overlay-title">{{selectedBook.volumeInfo.title}}</h4>
+	<h5 class="overlay-title">{{selectedBook.volumeInfo.subtitle}}</h5>
+	<img class="img-thumbnail" alt="book image"  ng-show="selectedBook.volumeInfo.imageLinks.thumbnail" ng-src="{{selectedBook.volumeInfo.imageLinks.thumbnail}}" />
+	<div class="text-left">
+		<div class="row">
+			<div class="col-xs-4">
+				<label>ISBN-13:</label>
+			</div>
+			<div class="col-xs-8">
+				<div>{{selectedBook.volumeInfo.industryIdentifiers[1].identifier}}</div>
+			</div>
+		</div>
+		<div class="row" ng-show="selectedBook.authorInfo">
+			<div class="col-xs-4">
+				<label>Author:</label>
+			</div>
+			<div class="col-xs-8">
+				<div>{{selectedBook.authorInfo}}</div>						
+			</div>
+		</div>
+		<div class="row" ng-show="selectedBook.volumeInfo.publisher">
+			<div class="col-xs-4">
+				<label>Publisher:</label>
+			</div>
+			<div class="col-xs-8">
+				<div>{{selectedBook.volumeInfo.publisher}}</div>
+			</div>
+		</div>
+		<div class="row" ng-show="selectedBook.volumeInfo.publishedDate">
+			<div class="col-xs-4">
+				<label>Published date:</label>
+			</div>
+			<div class="col-xs-8">
+				<div>{{selectedBook.volumeInfo.publishedDate}}</div>
+			</div>
+		</div>	
+		<div class="row">
+			<div class="col-xs-4">
+				<label>Amount:</label>
+			</div>
+			<div class="col-xs-8">
+				<div>{{selectedBook.count}}</div>
+			</div>
+		</div>										
+		<br>
+	</div>
+	<p toggle="off" bubble target="overlaySearchEntry">
+		<span class="btn btn-primary">Ok</span>
+	</p>
+</div>
+            
 <div class="scrollable">
     <div class="scrollable-content container section">
-        <form>
-            <div bs-panel class="panel">
-				<div ng-repeat="book in books" href="#" class="list-group-item row">
-  						<div class="col-xs-2"><img ng-src="{{book.value.volumeInfo.imageLinks.thumbnail}}" /></div>
-  						<div class="col-xs-10">                    			
-								<h3>{{book.value.volumeInfo.title}}</h3>
-								<p>{{book.value.volumeInfo.subtitle}}</p>
-								<p> by <span ng-repeat="author in book.value.volumeInfo.authors">{{author}}, </span> {{book.value.volumeInfo.publisher}}, {{book.value.volumeInfo.publishedDate}}
-									<br>                    
-                        			ISBN-13: {{book.value.volumeInfo.industryIdentifiers[1].identifier}}
-                    			</p>
-								<p ng-show="book.value.count">Amount: {{book.value.count}}</p>
-
-						</div>
-					</div>
-				</div>
-			</div>            
-            <div bs-panel class="form-actions panel">
-                <button type="button" class="btn btn-default" ng-click="load()"> <i class="fa fa-refresh"></i>  Refresh</button>
+        <form>  
+        	<div content-for="section-menu">
+                <button class="btn btn-default" ng-click="load()"> <i class="fa fa-refresh"></i> Refresh</button>
             </div>
+            <div bs-panel class="panel">
+				<div ng-repeat="book in books">
+					<a ng-click="showBookDetails(book)" class="list-group-item">    
+						<div>                			
+						<h3>{{book.value.volumeInfo.title}}</h3>
+						<p>{{book.value.volumeInfo.subtitle}}</p>
+						<p> by <span ng-repeat="author in book.value.volumeInfo.authors">{{author}}, </span> {{book.value.volumeInfo.publishedDate}}
+							<br>
+            			</p>
+            			</div>
+					</a>
+				</div>
+			</div>   
 		</form>
 	</div>
 </div>

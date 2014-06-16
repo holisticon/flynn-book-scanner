@@ -5,7 +5,7 @@ describe('main', function() {
   // load the controller's module
   beforeEach(module('flynnBookScannerApp'));
 
-  describe("BookController", function() {
+  describe("SearchController", function() {
 
     var controller,
       scope,
@@ -16,7 +16,7 @@ describe('main', function() {
     beforeEach(inject(function($controller, $rootScope, $httpBackend) {
       scope = $rootScope.$new();
       httpBackend = $httpBackend;
-      $controller("BookController", {
+      $controller("SearchController", {
         $scope: scope
       });
     }));

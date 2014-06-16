@@ -11,7 +11,7 @@
             </div> 
             <div bs-panel class="panel">          
                 <div class="form-group row">
-                    <div class="form-control-wrapper col-xs-12 col-sm-12col-lg-12">
+                    <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12">
                         <input bs-form-control type="tel" data-ng-model="searchQuery.isbn" label="ISBN"
                             label-class="col-xs-3 col-sm-2 col-lg-1" class="ng-scope ng-pristine ng-valid needsclick form-control"
                             placeholder="ISBN of the book" required>
@@ -29,8 +29,8 @@
             </div> 
             <div bs-panel class="panel">
                 <div ng-if="!books" class="paragraphs" style="margin: 10px 0">No book found</div>
-                <div ng-repeat="book in books" class="paragraphs" style="margin: 10px 0">
-                    <img style="float: left; margin: 0 5px 5px 0" ng-src="{{book.volumeInfo.imageLinks.thumbnail}}" />
+                <div ng-repeat="book in books" class="paragraphs">
+                    <img ng-src="{{book.volumeInfo.imageLinks.thumbnail}}" />
                     <h2>{{book.volumeInfo.title}}</h2>
                     <strong>{{book.volumeInfo.subtitle}}</strong>
 
@@ -46,7 +46,7 @@
                        {{book.volumeInfo.description}}
                     </p>         
                     <div class="form-group row">
-                        <div class="form-control-wrapper col-xs-12 col-sm-12col-lg-12">
+                        <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12">
                             <input bs-form-control type="number" data-ng-model="book.count" label="Amount"
                                 label-class="col-xs-3 col-sm-2 col-lg-1" class="ng-scope ng-pristine ng-valid needsclick form-control"
                                 placeholder="Amount of the book" required min="1">

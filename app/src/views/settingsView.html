@@ -4,17 +4,20 @@
 <div class="scrollable">
     <div class="scrollable-content container section">
         <form>
-            <div bs-panel class="panel">
-                <div class="input-group input-group-lg" style="width: 100%">
-                    <input class="form-control" type="text" data-ng-model="couchdb" placeholder="URL der CouchDB" required /><br />
+            <div bs-panel class="panel">        
+                <div class="form-group row">
+                    <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12">
+                        <input bs-form-control type="url" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-ng-model="couchdb" label="CouchDB Server"
+                            label-class="col-xs-3 col-sm-2 col-lg-1" class="ng-scope ng-pristine ng-valid needsclick form-control"
+                            placeholder="URL of the CouchDB server" required>
+                        <input bs-form-control type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  data-ng-model="user" label="User"
+                            label-class="col-xs-3 col-sm-2 col-lg-1" class="ng-scope ng-pristine ng-valid needsclick form-control"
+                            placeholder="User" required>
+                        <input bs-form-control type="password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  data-ng-model="password" label="Password"
+                            label-class="col-xs-3 col-sm-2 col-lg-1" class="ng-scope ng-pristine ng-valid needsclick form-control"
+                            placeholder="Password" required>
+                    </div>
                 </div>
-                <div class="input-group input-group-lg" style="width: 100%">
-                    <input class="form-control" type="text" data-ng-model="user" placeholder="Nutzer" required /><br />
-                </div>
-                <div class="input-group input-group-lg" style="width: 100%">
-                    <input class="form-control" type="password" data-ng-model="password" label="Passwort" placeholder="Passwort"  required/><br />
-                </div>
-                <br />
             </div>
             <div bs-panel class="form-actions">
                 <button ng-click="save()" class="btn btn-primary"><i class="fa fa-save"></i>  Save</button>

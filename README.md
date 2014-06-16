@@ -4,6 +4,11 @@ flynn-book-scanner
 ## Introduction
 flynn is a book scanning app which saves the added books on a couchdb.
 
+
+## Status
+
+[![Build Status](https://travis-ci.org/holisticon/flynn-book-scanner.png?branch=master)](https://travis-ci.org/holisticon/flynn-book-scanner)
+
 ## Getting started
 See below steps to get starting working with flynn:
 
@@ -20,6 +25,9 @@ Global steps:
 * Install nodejs (0.10.x+) + npm
 * Install ruby
 * `gem install compass`
+* Install Cordova
+* `sudo npm install -g cordova`
+* Install build tools
 * `sudo npm install -g grunt-cli`
 * `sudo npm install -g bower`
 
@@ -57,7 +65,3 @@ This project is sponsored and supported by [Holisticon AG](http://www.holisticon
 
 ## License
 This project is released under the revised BSD License (s. LICENSE).
-
-## Build status
-
-[![Build Status](https://travis-ci.org/holisticon/flynn-book-scanner.png?branch=master)](https://travis-ci.org/holisticon/flynn-book-scanner)

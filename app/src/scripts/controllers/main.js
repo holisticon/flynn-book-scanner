@@ -125,20 +125,44 @@ app.controller('BooksController', ['$scope', 'blockUI', '$http', 'SettingsServic
             }
 
             function onError(response) {
-                console.log("Error during reading data from couchdb: " + JSON.stringify(error));
+                var errorCode = response.status;
+                console.log("Error during reading data from couchdb: " + errorCode);
+                if (errorCode == 0) {
+                    console.log("Network error!");
+                }                
+                $rootScope.$broadcast("server.error");
                 blockUI.stop();
             }
+        }
+
+        function showBookDetails(pSelectedBookValue) {
+            blockUI.start();
+            var book = pSelectedBookValue.value;
+            console.log('Showing details for book: ' + book.volumeInfo.title);
+            var authorInfo = "";
+            var authorCount = book.volumeInfo.authors.length;
+            for (var itemIndex in book.volumeInfo.authors) {
+                authorInfo += book.volumeInfo.authors[itemIndex];
+                if (itemIndex < authorCount) {
+                    authorInfo += ",";
+                }
+            }
+            book.authorInfo = authorInfo;
+            $scope.selectedBook = book;
+            $scope.toggle('overlaySearchEntry');
+            blockUI.stop();
         }
 
         $scope.books = null;
 
         // public methods
         $scope.load = load;
+        $scope.showBookDetails = showBookDetails;
 
     }
 ]);
 
-app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$q', '$location', '$resource', 'SettingsService', 'Base64',
+app.controller('SearchController', ['$rootScope', '$scope', 'blockUI', '$http', '$q', '$location', '$resource', 'SettingsService', 'Base64',
     function($rootScope, $scope, blockUI, $http, $q, $location, $resource, $settings, $base64) {
         var saveSuccess,
             credentials = $settings.load(),
@@ -163,6 +187,7 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                 }
             );
         }
+
 
         function search() {
             var searchQuery = $scope.searchQuery;
@@ -262,7 +287,6 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
             function onError(response) {
                 $rootScope.$broadcast("booksearch.invalid");
                 console.log("Got HTTP error " + response.status + " (" + response.statusText + ")");
-
             }
         }
 
@@ -362,7 +386,11 @@ app.controller('MainController', ['$scope', '$rootScope', 'blockUI', 'SettingsSe
         }
 
         $rootScope.$on('server.timeout', function(event) {
-            showErrorDialog($rootScope, $scope, blockUI, "Timeout", 1, "No answer from server");
+            showErrorDialog($rootScope, $scope, blockUI, "Timeout", 2001, "No answer from server");
+        });
+
+        $rootScope.$on('server.error', function(event) {
+            showErrorDialog($rootScope, $scope, blockUI, "Books couldn't be loaded.", 2002, "The server didn't respond. Please check your network settings.");
         });
 
         $rootScope.$on('login.failed', function(event) {
