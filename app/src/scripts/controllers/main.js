@@ -88,8 +88,8 @@ app.factory('Base64', function() {
     };
 });
 
-app.controller('BooksController', ['$scope', 'blockUI', '$http', 'SettingsService', 'Base64',
-    function($scope, blockUI, $http, $settings, $base64) {
+app.controller('BooksController', ['$scope', 'blockUI', '$http', 'SettingsService', 'InventoryService', 'Base64',
+    function($scope, blockUI, $http, $settings, $inventory, $base64) {
         // https://host:port/flynn/_design/books/_view/all
         var credentials = $settings.load();
 
@@ -98,38 +98,14 @@ app.controller('BooksController', ['$scope', 'blockUI', '$http', 'SettingsServic
 
         function load() {
             blockUI.start();
-            $http({
-                method: 'GET',
-                url: credentials.couchdb + '/_design/books/_view/all',
-                timeout: $settings.timeout,
-                headers: {
-                    'Authorization': 'Basic ' + $base64.encode(credentials.user + ':' + credentials.password),
-                    'Content-Type': 'application/json'
-                }
-            }).then(onSuccess, onError);
+            $inventory.read().then(onSuccess, onError);
 
             function onSuccess(response) {
-                var books = [];
-                var rows = response.data.rows;
-                if (rows) {
-                    for (var id in rows) {
-                        var bookEntry = rows[id];
-                        //only add complet entries to results
-                        if (bookEntry.value.volumeInfo) {
-                            books.push(bookEntry);
-                        }
-                    }
-                }
-                $scope.books = books;
+                $scope.books = response.books;
                 blockUI.stop();
             }
 
             function onError(response) {
-                var errorCode = response.status;
-                console.log("Error during reading data from couchdb: " + errorCode);
-                if (errorCode == 0) {
-                    console.log("Network error!");
-                }
                 $rootScope.$broadcast("server.error");
                 blockUI.stop();
             }
@@ -162,8 +138,9 @@ app.controller('BooksController', ['$scope', 'blockUI', '$http', 'SettingsServic
     }
 ]);
 
-app.controller('SearchController', ['$rootScope', '$scope', 'blockUI', '$http', '$q', '$location', '$resource', 'SettingsService', 'Base64',
-    function($rootScope, $scope, blockUI, $http, $q, $location, $resource, $settings, $base64) {
+app.controller('SearchController', ['$rootScope', '$scope', 'blockUI', '$http', '$q', '$location', '$resource', 'SettingsService', 'GoogleBookService',
+    'Base64',
+    function($rootScope, $scope, blockUI, $http, $q, $location, $resource, $settings, $books, $base64) {
         var saveSuccess,
             credentials = $settings.load(),
             credentialsComplete = $settings.verify();
@@ -191,102 +168,24 @@ app.controller('SearchController', ['$rootScope', '$scope', 'blockUI', '$http', 
 
         function search() {
             var searchQuery = $scope.searchQuery;
-            var isbn = searchQuery.isbn;
-            if (isbn) {
-                console.log("Start searching for ISBN " + isbn);
+            if (searchQuery) {
+                console.log("Start searching with criteria: " + JSON.stringify(searchQuery));
                 blockUI.start();
-                retrieve(isbn);
+                retrieve(searchQuery);
                 blockUI.stop();
             }
         }
 
-        function retrieve(code) {
-            function convertCodeToIsbn(number) {
-                console.log('Converting convertCodeToIsbn: ' + number);
-                if (number && number.indexOf("978") == 0) {
-                    number = number.substr(3, 9);
-                    var xsum = 0;
-                    var add = 0;
-                    var i = 0;
-                    for (i = 0; i < 9; i++) {
-                        add = number.substr(i, 1);
-                        xsum += (10 - i) * add;
-                    }
-                    xsum %= 11;
-                    xsum = 11 - xsum;
-                    if (xsum == 10) {
-                        xsum = "X";
-                    }
-                    if (xsum == 11) {
-                        xsum = "0";
-                    }
-                    number += xsum;
-                }
-                console.log('Converted convertCodeToIsbn: ' + number);
-                return number;
-            }
-            //code = convertCodeToIsbn(code);
-            // save code for later usage
-            console.log("Reading book data for ISBN " + code);
-
-            $scope.categories = [];
-            $scope.events = [];
-            $scope.labels = [];
-            var gbooksUrl = 'https://www.googleapis.com/books/v1/volumes/?q=:isbn=' + code + '&projection=full&key=AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY';
-            //var deferred = $q.defer();
-            console.log("Reading book data with google books url: " + gbooksUrl);
-            $http({
-                method: 'GET',
-                url: gbooksUrl,
-                timeout: $settings.timeout,
-                headers: {
-                    'Access-Control-Allow-Origin': 'localhost',
-                    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
-                }
-            }).then(onSuccess, onError);
+        function retrieve(pSearchQuery) {
+            $books.search(pSearchQuery).then(onSuccess, onError);
 
             function onSuccess(response) {
-                console.log("Got valid book data.");
-                var valid = false;
-                var data = response.data;
-                var usedCode = $scope.searchQuery.isbn;
-                if (usedCode) {
-                    var usedISBN = convertCodeToIsbn(usedCode);
-                    var book;
-                    if (data) {
-                        console.log("Receveid book RAW data: " + JSON.stringify(data));
-                        for (var itemIndex in data.items) {
-                            book = data.items[itemIndex];
-                            var bookIDs = book.volumeInfo.industryIdentifiers;
-                            for (var bookIdIndex in bookIDs) {
-                                var bookIdDtls = bookIDs[bookIdIndex];
-                                if (bookIdDtls) {
-                                    if (bookIdDtls.identifier === usedISBN) {
-                                        valid = true;
-                                    }
-                                }
-
-                            }
-                        }
-                        if (valid) {
-                            var books = [];
-                            books.push(book);
-                            $scope.books = books;
-                            console.log("Found matching result.");
-                        } else  {
-                            console.log("Found no matching result.");
-                            $scope.books = null;
-                        }
-                    } else {
-                        console.log("Received no data.");
-                        $scope.books = null;
-                    }
-                }
+                console.log("Got valid service response");
+                $scope.books = response.books;
             }
 
             function onError(response) {
                 $rootScope.$broadcast("booksearch.invalid");
-                console.log("Got HTTP error " + response.status + " (" + response.statusText + ")");
             }
         }
 
@@ -361,11 +260,12 @@ app.controller('SettingsController', ['$scope', '$location', 'SettingsService',
         var credentials = $settings.load(),
             defaultCouch = 'https://server.holisticon.de/couchdb/flynn/',
             defaultUser = 'flynn_user',
-            defaultPassword = 'Passw0rd!';
+            defaultPassword = 'Passw0rd!',
+            defaultApiKey = 'AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY';
 
         function save() {
             console.debug("Saving settings to local storage");
-            $settings.save($scope.user, $scope.password, $scope.couchdb);
+            $settings.save($scope.user, $scope.password, $scope.couchdb, defaultApiKey);
             $location.path("/books");
         }
 
@@ -434,15 +334,188 @@ app.controller('MainController', ['$scope', '$rootScope', 'blockUI', 'SettingsSe
     }
 ]);
 
+app.service('LogService', ['$rootScope', '$log',
+    function($rootScope, $log) {
+        return {
+            info: function(pMsg) {
+                console.log(pMsg);
+            },
+            error: function(pMsg) {
+                console.log(pMsg);
+            },
+            debug: function(pMsg) {
+                console.log(pMsg);
+            },
+            trace: function(pMsg) {
+                console.log(pMsg);
+            }
+        }
+    }
+]);
+
+
+app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'SettingsService', 'Base64',
+    function($rootScope, $log, $http, $q, $settings, $base64) {
+        var usedCode;
+        return {
+            search: function(pSearchCriteria) {
+                var config = $settings.load();
+                usedCode = pSearchCriteria.isbn;
+
+                function convertCodeToIsbn(number) {
+                    $log.debug('Converting convertCodeToIsbn: ' + number);
+                    if (number && number.indexOf("978") == 0) {
+                        number = number.substr(3, 9);
+                        var xsum = 0;
+                        var add = 0;
+                        var i = 0;
+                        for (i = 0; i < 9; i++) {
+                            add = number.substr(i, 1);
+                            xsum += (10 - i) * add;
+                        }
+                        xsum %= 11;
+                        xsum = 11 - xsum;
+                        if (xsum == 10) {
+                            xsum = "X";
+                        }
+                        if (xsum == 11) {
+                            xsum = "0";
+                        }
+                        number += xsum;
+                    }
+                    $log.debug("Converted convertCodeToIsbn: " + number);
+                    return number;
+                }
+                var code = convertCodeToIsbn(usedCode);
+                // save code for later usage
+                $log.debug("Reading book data for ISBN " + code);
+
+                var deferred = $q.defer();
+                var gbooksUrl = 'https://www.googleapis.com/books/v1/volumes/?q=:isbn=' + code + '&projection=full&key=' + config.googleApiKey;
+                //var deferred = $q.defer();
+                $log.debug("Reading book data with google books url: " + gbooksUrl);
+                $http({
+                    method: 'GET',
+                    url: gbooksUrl,
+                    timeout: config.timeout,
+                    headers: {
+                        'Access-Control-Allow-Origin': 'localhost',
+                        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+                    }
+                }).then(onSuccess, onError);
+
+                function onSuccess(response) {
+                    console.log("Got valid book data.");
+                    var valid = false;
+                    var data = response.data;
+                    if (usedCode) {
+                        var usedISBN = convertCodeToIsbn(usedCode);
+                        var book;
+                        if (data) {
+                            $log.debug("Receveid book RAW data: " + JSON.stringify(data));
+                            for (var itemIndex in data.items) {
+                                book = data.items[itemIndex];
+                                var bookIDs = book.volumeInfo.industryIdentifiers;
+                                for (var bookIdIndex in bookIDs) {
+                                    var bookIdDtls = bookIDs[bookIdIndex];
+                                    if (bookIdDtls) {
+                                        if (bookIdDtls.identifier === usedISBN) {
+                                            valid = true;
+                                        }
+                                    }
+
+                                }
+                            }
+                            if (valid) {
+                                var books = [];
+                                books.push(book);
+                                response.books = books;
+                                $log.info("Found matching result.");
+                            } else  {
+                                $log.info("Found no matching result.");
+                                response.books = null;
+                            }
+                        } else {
+                            $log.error("Received no data.");
+                            response.books = null;
+                        }
+                    }
+                    deferred.resolve(response);
+                }
+
+                function onError(response) {
+                    $log.error("Got HTTP error " + response.status + " (" + response.statusText + ")");
+                    deferred.reject(response);
+                }
+                return deferred.promise;
+            }
+
+        };
+
+    }
+]);
+
+app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'SettingsService', 'Base64',
+    function($rootScope, $log, $http, $q, $settings, $base64) {
+        return {
+            read: function() {
+                var deferred = $q.defer(),
+                    credentials = $settings.load();
+                $http({
+                    method: 'GET',
+                    url: credentials.couchdb + '/_design/books/_view/all',
+                    timeout: credentials.timeout,
+                    headers: {
+                        'Authorization': 'Basic ' + $base64.encode(credentials.user + ':' + credentials.password),
+                        'Content-Type': 'application/json'
+                    }
+                }).then(onSuccess, onError);
+
+                function onSuccess(response) {
+                    var books = [];
+                    var rows = response.data.rows;
+                    if (rows) {
+                        for (var id in rows) {
+                            var bookEntry = rows[id];
+                            // only add complet entries to results
+                            if (bookEntry.value.volumeInfo) {
+                                $log.debug("Adding following valid book entry: " + JSON.stringify(bookEntry));
+                                books.push(bookEntry);
+                            }
+                        }
+                    }
+                    response.books = books;
+                    deferred.resolve(response);
+                }
+
+                function onError(response) {
+                    var errorCode = response.status;
+                    $log.error("Error during reading data from couchdb: " + errorCode);
+                    if (errorCode == 0) {
+                        $log.error("Network error!");
+                    }
+                    deferred.reject(response);
+                }
+                return deferred.promise;
+            }
+
+        };
+
+    }
+]);
+
+
+
 app.service('SettingsService', ['localStorageService',
     function(localStorage) {
         return {
-            save: function(user, password, couchdb) {
+            save: function(user, password, couchdb, googleApiKey) {
                 localStorage.clearAll();
                 localStorage.add('flynn.settings', {
                     'user': user,
                     'password': password,
-                    'couchdb': couchdb
+                    'couchdb': couchdb,
+                    'googleApiKey': googleApiKey
                 });
             },
             load: function() {
