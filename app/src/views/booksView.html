@@ -25,37 +25,39 @@
 			<div overlay="overlaySearchEntry">
 				<h4 class="overlay-title">{{selectedBook.volumeInfo.title}}</h4>
 				<h5>{{selectedBook.volumeInfo.subtitle}} ({{selectedBook.volumeInfo.pageCount}} pages)</h5>
-				<img class="img-thumbnail" alt="book image"  ng-show="selectedBook.volumeInfo.imageLinks.thumbnail" ng-src="{{selectedBook.volumeInfo.imageLinks.thumbnail}}" />
+				<div class="hidden-xs">
+					<img id="img1" class="img-thumbnail" alt="book image" ng-show="selectedBook.volumeInfo.imageLinks.thumbnail" ng-src="{{selectedBook.volumeInfo.imageLinks.thumbnail}}" />
+				</div>
 				<div class="text-left">
 					<div class="row">
-						<div class="col-xs-4">
+						<div class="col-xs-3">
 							<label>ISBN-13:</label>
 						</div>
-						<div class="col-xs-8">
+						<div class="col-xs-9">
 							<div>{{selectedBook.volumeInfo.industryIdentifiers[1].identifier}}</div>
 						</div>
 					</div>
 					<div class="row" ng-show="selectedBook.authorInfo">
-						<div class="col-xs-4">
+						<div class="col-xs-3">
 							<label>Author:</label>
 						</div>
-						<div class="col-xs-8">
+						<div class="col-xs-9">
 							<div>{{selectedBook.authorInfo}}</div>						
 						</div>
 					</div>
 					<div class="row" ng-show="selectedBook.volumeInfo.publisher">
-						<div class="col-xs-4">
+						<div class="col-xs-3">
 							<label>Publisher:</label>
 						</div>
-						<div class="col-xs-8">
+						<div class="col-xs-9">
 							<div>{{selectedBook.volumeInfo.publisher}} ({{selectedBook.volumeInfo.publishedDate}}) </div>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-xs-4">
+						<div class="col-xs-3">
 							<label>Amount:</label>
 						</div>
-						<div class="col-xs-8">
+						<div class="col-xs-9">
 							<div>{{selectedBook.count}}</div>
 						</div>
 					</div>										

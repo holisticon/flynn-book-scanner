@@ -254,8 +254,8 @@ app.controller('SearchController', ['$rootScope', '$scope', 'blockUI', '$http', 
     }
 ]);
 
-app.controller('SettingsController', ['$scope', '$location', 'SettingsService',
-    function($scope, $location, $settings) {
+app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'SettingsService',
+    function($rootScope, $scope, $location, $settings) {
 
         var credentials = $settings.load(),
             defaultCouch = 'https://server.holisticon.de/couchdb/flynn/',
@@ -279,60 +279,6 @@ app.controller('SettingsController', ['$scope', '$location', 'SettingsService',
 ]);
 
 
-
-/**
- * Controller for the app.
- */
-app.controller('MainController', ['$scope', '$rootScope', 'blockUI', 'SettingsService',
-    function($scope, $rootScope, blockUI, SettingsService) {
-        // Cordova is ready
-        console.log("Device is ready!");
-
-        $rootScope.$on("$routeChangeStart", function() {
-            // Block the user interface
-            blockUI.start();
-        });
-        $rootScope.$on("$routeChangeSuccess", function() {
-            // Unblock the user interface
-            blockUI.stop();
-        });
-
-        // TODO show setup popup
-        var settings = SettingsService.load();
-        if (settings && !settings.valid) {
-            //timeout of 30 seconds
-            settings.timeout = 30000;
-            // blockUI.stop();
-            //$scope.toggle('overlaySetup');
-        }
-
-        $rootScope.$on('server.timeout', function(event) {
-            showErrorDialog($rootScope, $scope, blockUI, "Timeout", 2001, "No answer from server");
-        });
-
-        $rootScope.$on('server.error', function(event) {
-            showErrorDialog($rootScope, $scope, blockUI, "Books couldn't be loaded.", 2002, "The server didn't respond. Please check your network settings.");
-        });
-
-        $rootScope.$on('login.failed', function(event) {
-            showErrorDialog($rootScope, $scope, blockUI, "Settings incorrect", 3001, "Please check your settings");
-        });
-
-        $rootScope.$on('barcode.error', function(event) {
-            showErrorDialog($rootScope, $scope, blockUI, "Barcode error", 4001, "Barcode reader not working. Did you enable camera access?");
-        });
-
-        $rootScope.$on('booksearch.invalid', function(event) {
-            showErrorDialog($rootScope, $scope, blockUI, "Book couldn't be loaded.", 5001, "The book search wasn't successfull. Server didn't respond.");
-        });
-
-        $rootScope.$on('booksave.error', function(event) {
-            showErrorDialog($rootScope, $scope, blockUI, "Book couldn't be saved.", 5101, "The book save wasn't successfull. Server didn't respond.");
-        });
-
-        $scope.userAgent = navigator.userAgent;
-    }
-]);
 
 app.service('LogService', ['$rootScope', '$log',
     function($rootScope, $log) {
@@ -506,8 +452,8 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
 
 
 
-app.service('SettingsService', ['localStorageService',
-    function(localStorage) {
+app.service('SettingsService', ['$rootScope', 'localStorageService',
+    function($rootScope, localStorage) {
         return {
             save: function(user, password, couchdb, googleApiKey) {
                 localStorage.clearAll();
@@ -524,10 +470,12 @@ app.service('SettingsService', ['localStorageService',
                 // TODO check settings
                 if (settings) {
                     settings.valid = true;
-                    return settings;
                 } else {
-                    return {}
+                    settings = {};
+                    settings.valid = false;
                 }
+                $rootScope.settings = settings;
+                return settings;
             },
             verify: function() {
                 console.log("Verifying flynn settings");

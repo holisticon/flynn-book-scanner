@@ -77,3 +77,60 @@ app.config(function(blockUIConfigProvider) {
     blockUIConfigProvider.delay(50);
 
 });
+
+
+
+/**
+ * Controller for the app.
+ */
+app.controller('MainController', ['$scope', '$rootScope', '$location', 'blockUI', 'SettingsService',
+    function($scope, $rootScope, $location, blockUI, $settings) {
+        // Block the user interface
+        blockUI.start();
+        // Cordova is ready
+        console.log("Device is ready!");
+
+        $rootScope.$on("$routeChangeStart", function() {
+
+        });
+        $rootScope.$on("$routeChangeSuccess", function() {});
+
+        $rootScope.$on('server.timeout', function(event) {
+            showErrorDialog($rootScope, $scope, blockUI, "Timeout", 2001, "No answer from server");
+        });
+
+        $rootScope.$on('server.error', function(event) {
+            showErrorDialog($rootScope, $scope, blockUI, "Books couldn't be loaded.", 2002, "The server didn't respond. Please check your network settings.");
+        });
+
+        $rootScope.$on('login.failed', function(event) {
+            showErrorDialog($rootScope, $scope, blockUI, "Settings incorrect", 3001, "Please check your settings");
+        });
+
+        $rootScope.$on('barcode.error', function(event) {
+            showErrorDialog($rootScope, $scope, blockUI, "Barcode error", 4001, "Barcode reader not working. Did you enable camera access?");
+        });
+
+        $rootScope.$on('booksearch.invalid', function(event) {
+            showErrorDialog($rootScope, $scope, blockUI, "Book couldn't be loaded.", 5001, "The book search wasn't successfull. Server didn't respond.");
+        });
+
+        $rootScope.$on('booksave.error', function(event) {
+            showErrorDialog($rootScope, $scope, blockUI, "Book couldn't be saved.", 5101, "The book save wasn't successfull. Server didn't respond.");
+        });
+
+        $scope.userAgent = navigator.userAgent;
+
+        //  show settings 
+        var settings = $settings.load();
+        if (settings && !settings.valid) {
+            //timeout of 30 seconds
+            settings.timeout = 30000;
+            blockUI.stop();
+            $location.path("/settings");
+        } else {
+            blockUI.stop();
+        }
+        $rootScope.settings = settings;        
+    }
+]);
