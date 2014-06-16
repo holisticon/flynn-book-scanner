@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Deployment AppPlatformVersion="7.1" xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment">
+    <App Author="Flynn author" BitsPerPixel="32" Description="Apache Cordova for Windows Phone 7" Genre="apps.normal" ProductID="{4B7A9DFB-4551-44A2-8362-E304266AAD99}" Publisher="Flynn" RuntimeType="Silverlight" Title="Flynn" Version="0.2.0" xmlns="">
+        <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
+        <Capabilities>
+            <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
+            <Capability Name="ID_CAP_NETWORKING" />
+            <Capability Name="ID_CAP_IDENTITY_DEVICE" />
+        </Capabilities>
+        <Tasks>
+            <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
+        </Tasks>
+        <Tokens>
+            <PrimaryToken TaskName="_default" TokenID="FlynnToken">
+                <TemplateType5>
+                    <BackgroundImageURI IsRelative="true" IsResource="false">Background.png</BackgroundImageURI>
+                    <Count>0</Count>
+                    <Title>Flynn</Title>
+                </TemplateType5>
+            </PrimaryToken>
+        </Tokens>
+    </App>
+</Deployment>

@@ -1,0 +1,4056 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProductVersion>10.0.20506</ProductVersion>
+        <SchemaVersion>2.0</SchemaVersion>
+        <ProjectGuid>{3677C1B7-D68B-4CF9-BF8A-E869D437A6DF}</ProjectGuid>
+        <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>de.holisticon.flynn</RootNamespace>
+        <AssemblyName>de.holisticon.flynn</AssemblyName>
+        <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+        <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+        <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
+        <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+        <SilverlightApplication>true</SilverlightApplication>
+        <SupportedCultures>
+        </SupportedCultures>
+        <XapOutputs>true</XapOutputs>
+        <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+        <XapFilename>de.holisticon.flynn.xap</XapFilename>
+        <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+        <SilverlightAppEntry>de.holisticon.flynn.App</SilverlightAppEntry>
+        <ValidateXaml>true</ValidateXaml>
+        <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>Bin\Debug</OutputPath>
+        <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;WP7</DefineConstants>
+        <NoStdLib>true</NoStdLib>
+        <NoConfig>true</NoConfig>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>Bin\Release</OutputPath>
+        <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+        <NoStdLib>true</NoStdLib>
+        <NoConfig>true</NoConfig>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="Microsoft.Devices.Sensors" />
+        <Reference Include="Microsoft.Phone" />
+        <Reference Include="Microsoft.Phone.Interop" />
+        <Reference Include="Microsoft.Xna.Framework" />
+        <Reference Include="System.Device" />
+        <Reference Include="System.Runtime.Serialization" />
+        <Reference Include="System.Servicemodel.Web" />
+        <Reference Include="System.Windows" />
+        <Reference Include="system" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Net" />
+        <Reference Include="System.Xml" />
+        <Reference Include="System.Xml.Linq" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="App.xaml.cs">
+            <DependentUpon>App.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="cordovalib\BaseCommand.cs" />
+        <Compile Include="cordovalib\BrowserMouseHelper.cs" />
+        <Compile Include="cordovalib\CommandFactory.cs" />
+        <Compile Include="cordovalib\ConfigHandler.cs" />
+        <Compile Include="cordovalib\ConsoleHelper.cs" />
+        <Compile Include="cordovalib\CordovaCommandCall.cs" />
+        <Compile Include="cordovalib\CordovaView.xaml.cs">
+            <DependentUpon>CordovaView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="cordovalib\DOMStorageHelper.cs" />
+        <Compile Include="cordovalib\IBrowserDecorator.cs" />
+        <Compile Include="cordovalib\ImageExifHelper.cs" />
+        <Compile Include="cordovalib\JSON\JsonHelper.cs" />
+        <Compile Include="cordovalib\NativeExecution.cs" />
+        <Compile Include="cordovalib\OrientationHelper.cs" />
+        <Compile Include="cordovalib\PluginResult.cs" />
+        <Compile Include="cordovalib\ScriptCallback.cs" />
+        <Compile Include="cordovalib\XHRHelper.cs" />
+        <Compile Include="cordovalib\MimeTypeMapper.cs" />
+        <Compile Include="MainPage.xaml.cs">
+            <DependentUpon>MainPage.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Properties\AssemblyInfo.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <ApplicationDefinition Include="App.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </ApplicationDefinition>
+        <Page Include="MainPage.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+        <Page Include="cordovalib\CordovaView.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+        </Page>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="config.xml" />
+        <Content Include="Images\appbar.back.rest.png" />
+        <Content Include="Images\appbar.close.rest.png" />
+        <Content Include="Images\appbar.feature.video.rest.png" />
+        <Content Include="Images\appbar.next.rest.png" />
+        <Content Include="Images\appbar.save.rest.png" />
+        <Content Include="Images\appbar.stop.rest.png" />
+        <None Include="cordova\lib\build.js" />
+        <None Include="cordova\lib\clean.js" />
+        <None Include="cordova\lib\deploy.js" />
+        <None Include="cordova\lib\log.js" />
+        <None Include="cordova\lib\target-list.js" />
+        <None Include="cordova\build.bat" />
+        <None Include="cordova\clean.bat" />
+        <None Include="cordova\lib\install-device.bat" />
+        <None Include="cordova\lib\install-emulator.bat" />
+        <None Include="cordova\lib\list-devices.bat" />
+        <None Include="cordova\lib\list-emulator-images.bat" />
+        <None Include="cordova\lib\list-started-emulators.bat" />
+        <None Include="cordova\lib\start-emulator.bat" />
+        <None Include="cordova\log.bat" />
+        <None Include="cordova\run.bat" />
+        <None Include="cordova\version.bat" />
+        <None Include="VERSION" />
+        <Content Include="CordovaSourceDictionary.xml">
+            <SubType>Designer</SubType>
+        </Content>
+        <None Include="BuildManifestProcessor.js" />
+        <None Include="Properties\AppManifest.xml">
+            <SubType>Designer</SubType>
+        </None>
+        <None Include="Properties\WMAppManifest.xml">
+            <SubType>Designer</SubType>
+        </None>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="ApplicationIcon.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Background.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="SplashScreenImage.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <WCFMetadata Include="Service References\" />
+    </ItemGroup>
+    <ItemGroup>
+        <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    </ItemGroup>
+    <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
+    <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
+    <ProjectExtensions />
+    <PropertyGroup>
+        <PreBuildEvent>CScript "$(ProjectDir)/BuildManifestProcessor.js" "$(ProjectPath)"</PreBuildEvent>
+    </PropertyGroup>
+    <PropertyGroup>
+        <PostBuildEvent>
+        </PostBuildEvent>
+    </PropertyGroup>
+    <ItemGroup>
+        <Content Include="www\404.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\.DS_Store" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular\angular-csp.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular\angular.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular\angular.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular\angular.min.js.gzip" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular\angular.min.js.map" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-block-ui\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-block-ui\angular-block-ui.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-block-ui\angular-block-ui.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-block-ui\angular-block-ui.min.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-block-ui\angular-block-ui.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-block-ui\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-block-ui\LICENSE" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-block-ui\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-cookies\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-cookies\angular-cookies.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-cookies\angular-cookies.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-cookies\angular-cookies.min.js.map" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-cookies\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-cookies\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-local-storage\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-local-storage\.DS_Store" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-local-storage\angular-local-storage.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-local-storage\angular-local-storage.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-local-storage\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-local-storage\demo\demo-app.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-local-storage\demo\demo-style.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-local-storage\demo\demo.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-local-storage\Gruntfile.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-local-storage\LICENSE" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-local-storage\package.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-local-storage\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-mocks\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-mocks\angular-mocks.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-mocks\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-mocks\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-resource\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-resource\angular-resource.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-resource\angular-resource.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-resource\angular-resource.min.js.map" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-resource\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-resource\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-route\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-route\angular-route.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-route\angular-route.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-route\angular-route.min.js.map" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-route\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-route\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-sanitize\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-sanitize\angular-sanitize.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-sanitize\angular-sanitize.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-sanitize\angular-sanitize.min.js.map" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-sanitize\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-sanitize\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-scenario\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-scenario\angular-scenario.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-scenario\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-scenario\jstd-scenario-adapter-config.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-scenario\jstd-scenario-adapter.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-scenario\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-touch\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-touch\angular-touch.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-touch\angular-touch.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-touch\angular-touch.min.js.map" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-touch\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\angular-touch\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\dist\css\bootstrap-theme.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\dist\css\bootstrap-theme.css.map" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\dist\css\bootstrap-theme.min.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\dist\css\bootstrap.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\dist\css\bootstrap.css.map" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\dist\css\bootstrap.min.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\dist\js\bootstrap.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\dist\js\bootstrap.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\grunt\bs-lessdoc-parser.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\grunt\bs-raw-files-generator.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\grunt\shrinkwrap.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\Gruntfile.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\js\affix.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\js\alert.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\js\button.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\js\carousel.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\js\collapse.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\js\dropdown.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\js\modal.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\js\popover.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\js\scrollspy.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\js\tab.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\js\tooltip.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\js\transition.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\alerts.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\badges.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\bootstrap.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\breadcrumbs.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\button-groups.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\buttons.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\carousel.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\close.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\code.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\component-animations.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\dropdowns.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\forms.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\glyphicons.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\grid.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\input-groups.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\jumbotron.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\labels.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\list-group.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\media.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\mixins.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\modals.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\navbar.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\navs.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\normalize.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\pager.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\pagination.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\panels.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\popovers.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\print.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\progress-bars.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\responsive-utilities.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\scaffolding.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\tables.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\theme.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\thumbnails.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\tooltip.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\type.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\utilities.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\variables.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\less\wells.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\LICENSE" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\package.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\test-infra\npm-shrinkwrap.canonical.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\test-infra\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\test-infra\requirements.txt" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\test-infra\s3_cache.py" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\test-infra\sauce_browsers.yml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap\test-infra\uncached-npm-install.sh" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\_config.yml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\_includes\ads.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\_includes\footer.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\_includes\header.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\_includes\nav-about.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\_includes\nav-components.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\_includes\nav-css.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\_includes\nav-customize.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\_includes\nav-getting-started.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\_includes\nav-javascript.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\_includes\nav-main.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\_includes\old-bs-docs.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\_includes\social-buttons.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\_layouts\default.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\_layouts\home.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\about.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\browserstack.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\CNAME" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\components.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\composer.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\CONTRIBUTING.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\css.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\customize.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\dist\css\bootstrap-theme.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\dist\css\bootstrap-theme.min.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\dist\css\bootstrap.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\dist\css\bootstrap.min.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\dist\fonts\glyphicons-halflings-regular.eot" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\dist\fonts\glyphicons-halflings-regular.svg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\dist\fonts\glyphicons-halflings-regular.ttf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\dist\fonts\glyphicons-halflings-regular.woff" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\dist\js\bootstrap.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\dist\js\bootstrap.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\docs-assets\css\docs.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\docs-assets\css\pygments-manni.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\docs-assets\ico\apple-touch-icon-144-precomposed.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\docs-assets\ico\favicon.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\docs-assets\js\application.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\docs-assets\js\customizer.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\docs-assets\js\filesaver.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\docs-assets\js\holder.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\docs-assets\js\ie8-responsive-file-warning.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\docs-assets\js\jszip.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\docs-assets\js\less.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\docs-assets\js\raw-files.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\docs-assets\js\uglify.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\DOCS-LICENSE" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\carousel\carousel.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\carousel\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\grid\grid.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\grid\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\jumbotron\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\jumbotron\jumbotron.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\jumbotron-narrow\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\jumbotron-narrow\jumbotron-narrow.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\justified-nav\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\justified-nav\justified-nav.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\navbar\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\navbar\navbar.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\navbar-fixed-top\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\navbar-fixed-top\navbar-fixed-top.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\navbar-static-top\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\navbar-static-top\navbar-static-top.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\non-responsive\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\non-responsive\non-responsive.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\offcanvas\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\offcanvas\offcanvas.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\offcanvas\offcanvas.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\screenshots\carousel.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\screenshots\grid.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\screenshots\jumbotron-narrow.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\screenshots\jumbotron.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\screenshots\justified-nav.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\screenshots\navbar-fixed.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\screenshots\navbar-static.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\screenshots\navbar.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\screenshots\non-responsive.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\screenshots\offcanvas.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\screenshots\sign-in.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\screenshots\starter-template.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\screenshots\sticky-footer-navbar.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\screenshots\sticky-footer.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\screenshots\theme.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\signin\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\signin\signin.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\starter-template\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\starter-template\starter-template.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\sticky-footer\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\sticky-footer\sticky-footer.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\sticky-footer-navbar\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\sticky-footer-navbar\sticky-footer-navbar.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\theme\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\examples\theme\theme.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\fonts\glyphicons-halflings-regular.eot" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\fonts\glyphicons-halflings-regular.svg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\fonts\glyphicons-halflings-regular.ttf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\fonts\glyphicons-halflings-regular.woff" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\Gemfile" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\Gemfile.lock" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\getting-started.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\Gruntfile.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\javascript.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\affix.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\alert.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\button.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\carousel.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\collapse.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\dropdown.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\modal.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\popover.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\scrollspy.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tab.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tests\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tests\unit\affix.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tests\unit\alert.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tests\unit\button.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tests\unit\carousel.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tests\unit\collapse.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tests\unit\dropdown.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tests\unit\modal.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tests\unit\phantom.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tests\unit\popover.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tests\unit\scrollspy.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tests\unit\tab.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tests\unit\tooltip.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tests\unit\transition.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tests\vendor\jquery.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tests\vendor\qunit.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tests\vendor\qunit.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\tooltip.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\js\transition.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_alerts.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_badges.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_breadcrumbs.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_button-groups.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_buttons.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_carousel.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_close.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_code.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_component-animations.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_dropdowns.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_forms.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_glyphicons.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_grid.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_input-groups.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_jumbotron.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_labels.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_list-group.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_media.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_mixins.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_modals.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_navbar.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_navs.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_normalize.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_pager.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_pagination.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_panels.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_popovers.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_print.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_progress-bars.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_responsive-utilities.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_scaffolding.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_tables.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_theme.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_thumbnails.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_tooltip.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_type.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_utilities.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_variables.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\_wells.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\lib\bootstrap.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\LICENSE" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\LICENSE-MIT" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\package.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\Rakefile" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\bootstrap-sass\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\cordova.amazon-fireos.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\cordova.android.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\cordova.bada.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\cordova.blackberry.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\cordova.blackberry10.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\cordova.browser.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\cordova.errgen.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\cordova.firefoxos.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\cordova.ios.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\cordova.osx.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\cordova.test.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\cordova.tizen.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\cordova.ubuntu.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\cordova.webos.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\cordova.windows8.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\cordova.windowsphone.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\debug\cordova.amazon-fireos-debug.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\debug\cordova.android-debug.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\debug\cordova.bada-debug.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\debug\cordova.blackberry-debug.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\debug\cordova.blackberry10-debug.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\debug\cordova.browser-debug.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\debug\cordova.errgen-debug.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\debug\cordova.firefoxos-debug.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\debug\cordova.ios-debug.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\debug\cordova.osx-debug.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\debug\cordova.test-debug.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\debug\cordova.tizen-debug.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\debug\cordova.ubuntu-debug.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\debug\cordova.webos-debug.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\debug\cordova.windows8-debug.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\debug\cordova.windowsphone-debug.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\cordova\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\.gitignore" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\CHANGES" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\CONTRIBUTORS.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\es5-sham.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\es5-sham.map" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\es5-sham.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\es5-shim.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\es5-shim.map" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\es5-shim.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\LICENSE" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\package.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\tests\helpers\h-kill.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\tests\helpers\h-matchers.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\tests\helpers\h.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\tests\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\tests\index.min.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\tests\lib\jasmine-html.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\tests\lib\jasmine.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\tests\lib\jasmine.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\tests\lib\jasmine_favicon.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\tests\lib\json2.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\tests\spec\s-array.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\tests\spec\s-date.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\tests\spec\s-function.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\tests\spec\s-number.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\tests\spec\s-object.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\es5-shim\tests\spec\s-string.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\fastclick\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\fastclick\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\fastclick\lib\fastclick.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\fastclick\LICENSE" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\fastclick\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\.DS_Store" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\.gitignore" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\_config.yml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\component.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\composer.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\CONTRIBUTING.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\css\font-awesome.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\css\font-awesome.min.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\fonts\fontawesome-webfont.eot" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\fonts\fontawesome-webfont.svg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\fonts\fontawesome-webfont.ttf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\fonts\fontawesome-webfont.woff" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\fonts\FontAwesome.otf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\Gemfile" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\Gemfile.lock" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\less\bordered-pulled.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\less\core.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\less\extras.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\less\fixed-width.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\less\font-awesome.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\less\icons.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\less\larger.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\less\list.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\less\mixins.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\less\path.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\less\rotated-flipped.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\less\spinning.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\less\stacked.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\less\variables.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\package.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\scss\_bordered-pulled.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\scss\_core.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\scss\_extras.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\scss\_fixed-width.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\scss\_icons.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\scss\_larger.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\scss\_list.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\scss\_mixins.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\scss\_path.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\scss\_rotated-flipped.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\scss\_spinning.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\scss\_stacked.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\scss\_variables.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\scss\font-awesome.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\css\prettify.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\css\pygments.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\css\site.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\css\font-awesome-ie7.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\css\font-awesome-ie7.min.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\css\font-awesome.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\css\font-awesome.min.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\font\fontawesome-webfont.eot" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\font\fontawesome-webfont.svg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\font\fontawesome-webfont.ttf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\font\fontawesome-webfont.woff" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\font\FontAwesome.otf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\less\bootstrap.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\less\core.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\less\extras.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\less\font-awesome-ie7.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\less\font-awesome.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\less\icons.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\less\mixins.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\less\path.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\less\variables.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\scss\_bootstrap.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\scss\_core.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\scss\_extras.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\scss\_icons.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\scss\_mixins.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\scss\_path.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\scss\_variables.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\scss\font-awesome-ie7.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome\scss\font-awesome.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\font-awesome.zip" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\ico\favicon.ico" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\img\contribution-sample.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\img\fort_awesome.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\img\glyphicons-halflings-white.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\img\glyphicons-halflings.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\img\icon-flag.pdf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\js\backbone.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\js\bootstrap-2.3.1.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\js\bootstrap-222.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\js\jquery-1.7.1.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\js\prettify.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\js\site.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\js\underscore.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\js\ZeroClipboard-1.1.7.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\js\ZeroClipboard-1.1.7.swf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\accordion.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\alerts.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\bootstrap.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\breadcrumbs.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\button-groups.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\buttons.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\carousel.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\close.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\code.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\component-animations.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\dropdowns.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\forms.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\grid.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\hero-unit.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\labels-badges.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\layouts.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\media.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\mixins.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\modals.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\navbar.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\navs.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\pager.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\pagination.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\popovers.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\progress-bars.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\reset.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\responsive-1200px-min.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\responsive-767px-max.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\responsive-768px-979px.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\responsive-navbar.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\responsive-utilities.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\responsive.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\scaffolding.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\sprites.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\tables.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\thumbnails.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\tooltip.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\type.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\utilities.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\variables.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\bootstrap-2.3.2\wells.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\lazy.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\mixins.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\responsive-1200px-min.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\responsive-767px-max.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\responsive-768px-979px.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\responsive-navbar.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\responsive.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\site.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\sticky-footer.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\assets\less\variables.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\cheatsheet\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\CNAME" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\community\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\design.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\examples\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\get-started\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\adjust\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\adn\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\align-center\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\align-justify\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\align-left\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\align-right\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\ambulance\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\anchor\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\android\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\angle-down\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\angle-left\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\angle-right\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\angle-up\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\apple\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\archive\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\arrow-down\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\arrow-left\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\arrow-right\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\arrow-up\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\asterisk\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\backward\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\ban-circle\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\bar-chart\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\barcode\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\beaker\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\beer\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\bell\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\bell-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\bitbucket\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\bitbucket-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\bold\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\bolt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\book\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\bookmark\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\bookmark-empty\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\briefcase\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\btc\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\bug\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\building\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\bullhorn\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\bullseye\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\calendar\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\calendar-empty\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\camera\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\camera-retro\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\caret-down\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\caret-left\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\caret-right\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\caret-up\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\certificate\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\check\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\check-empty\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\check-minus\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\check-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\chevron-down\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\chevron-left\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\chevron-right\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\chevron-sign-down\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\chevron-sign-left\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\chevron-sign-right\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\chevron-sign-up\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\chevron-up\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\circle\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\circle-arrow-down\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\circle-arrow-left\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\circle-arrow-right\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\circle-arrow-up\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\circle-blank\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\cloud\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\cloud-download\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\cloud-upload\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\cny\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\code\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\code-fork\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\coffee\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\cog\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\cogs\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\collapse\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\collapse-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\collapse-top\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\columns\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\comment\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\comment-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\comments\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\comments-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\compass\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\copy\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\credit-card\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\crop\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\css3\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\cut\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\dashboard\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\desktop\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\double-angle-down\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\double-angle-left\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\double-angle-right\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\double-angle-up\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\download\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\download-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\dribbble\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\dropbox\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\edit\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\edit-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\eject\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\ellipsis-horizontal\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\ellipsis-vertical\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\envelope\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\envelope-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\eraser\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\eur\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\exchange\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\exclamation\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\exclamation-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\expand\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\expand-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\external-link\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\external-link-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\eye-close\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\eye-open\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\facebook\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\facebook-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\facetime-video\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\fast-backward\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\fast-forward\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\female\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\fighter-jet\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\file\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\file-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\file-text\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\file-text-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\film\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\filter\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\fire\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\fire-extinguisher\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\flag\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\flag-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\flag-checkered\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\flickr\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\folder-close\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\folder-close-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\folder-open\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\folder-open-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\font\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\food\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\forward\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\foursquare\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\frown\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\fullscreen\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\gamepad\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\gbp\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\gift\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\github\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\github-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\github-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\gittip\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\glass\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\globe\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\google-plus\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\google-plus-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\group\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\h-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\hand-down\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\hand-left\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\hand-right\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\hand-up\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\hdd\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\headphones\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\heart\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\heart-empty\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\home\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\hospital\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\html5\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\inbox\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\indent-left\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\indent-right\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\info\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\info-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\inr\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\instagram\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\italic\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\jpy\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\key\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\keyboard\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\krw\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\laptop\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\leaf\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\legal\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\lemon\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\level-down\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\level-up\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\lightbulb\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\link\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\linkedin\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\linkedin-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\linux\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\list\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\list-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\list-ol\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\list-ul\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\location-arrow\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\lock\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\long-arrow-down\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\long-arrow-left\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\long-arrow-right\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\long-arrow-up\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\magic\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\magnet\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\mail-reply-all\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\male\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\map-marker\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\maxcdn\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\medkit\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\meh\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\microphone\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\microphone-off\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\minus\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\minus-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\minus-sign-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\mobile-phone\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\money\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\moon\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\move\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\music\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\off\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\ok\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\ok-circle\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\ok-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\paper-clip\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\paste\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\pause\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\pencil\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\phone\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\phone-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\picture\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\pinterest\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\pinterest-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\plane\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\play\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\play-circle\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\play-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\plus\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\plus-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\plus-sign-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\print\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\pushpin\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\puzzle-piece\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\qrcode\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\question\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\question-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\quote-left\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\quote-right\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\random\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\refresh\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\remove\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\remove-circle\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\remove-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\renren\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\reorder\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\repeat\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\reply\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\reply-all\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\resize-full\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\resize-horizontal\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\resize-small\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\resize-vertical\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\retweet\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\road\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\rocket\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\rss\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\rss-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\save\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\screenshot\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\search\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\share\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\share-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\share-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\shield\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\shopping-cart\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\sign-blank\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\signal\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\signin\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\signout\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\sitemap\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\skype\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\smile\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\sort\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\sort-by-alphabet\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\sort-by-alphabet-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\sort-by-attributes\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\sort-by-attributes-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\sort-by-order\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\sort-by-order-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\sort-down\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\sort-up\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\spinner\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\stackexchange\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\star\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\star-empty\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\star-half\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\star-half-empty\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\step-backward\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\step-forward\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\stethoscope\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\stop\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\strikethrough\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\subscript\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\suitcase\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\sun\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\superscript\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\table\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\tablet\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\tag\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\tags\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\tasks\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\terminal\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\text-height\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\text-width\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\th\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\th-large\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\th-list\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\thumbs-down\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\thumbs-down-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\thumbs-up\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\thumbs-up-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\ticket\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\time\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\tint\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\trash\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\trello\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\trophy\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\truck\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\tumblr\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\tumblr-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\twitter\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\twitter-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\umbrella\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\underline\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\undo\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\unlink\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\unlock\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\unlock-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\upload\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\upload-alt\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\usd\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\user\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\user-md\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\vk\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\volume-down\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\volume-off\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\volume-up\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\warning-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\weibo\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\windows\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\wrench\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\xing\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\xing-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\youtube\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\youtube-play\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\youtube-sign\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\zoom-in\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icon\zoom-out\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icons\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\icons.yml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\license\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\Makefile" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\test\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\3.2.1\whats-new\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\ads\carbon-dark-vertical.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\ads\carbon-light-horizontal.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\ads\carbon-light-vertical.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\brand-license.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\community\getting-support.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\community\project-milestones.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\community\reporting-bugs.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\community\requesting-new-icons.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\community\submitting-pull-requests.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\examples\bootstrap.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\examples\bordered-pulled.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\examples\custom.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\examples\fixed-width.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\examples\inline.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\examples\larger.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\examples\list.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\examples\rotated-flipped.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\examples\spinning.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\examples\stacked.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\footer.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\icons\brand.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\icons\currency.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\icons\directional.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\icons\form-control.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\icons\medical.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\icons\new.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\icons\text-editor.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\icons\video-player.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\icons\web-application.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\jumbotron-carousel.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\jumbotron.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\license-code.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\navbar.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\new-features.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\new-naming.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\new-upgrading.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\stripe-ad.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\stripe-social.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\tell-me-thanks.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\tests\rotated-flipped-inside-anchor.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\tests\rotated-flipped-inside-btn.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\tests\rotated-flipped.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\tests\stacked-inside-anchor.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\tests\stacked.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\thanks-to.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_includes\why.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_layouts\base.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_layouts\icon.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_plugins\icon_page_generator.rb" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\_plugins\site.rb" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\css\prettify.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\css\pygments.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\fonts\fontawesome-webfont.eot" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\fonts\fontawesome-webfont.svg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\fonts\fontawesome-webfont.ttf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\fonts\fontawesome-webfont.woff" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\fonts\FontAwesome.otf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\less\bordered-pulled.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\less\core.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\less\fixed-width.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\less\font-awesome.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\less\icons.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\less\larger.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\less\list.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\less\mixins.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\less\path.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\less\rotated-flipped.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\less\spinning.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\less\stacked.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\less\variables.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\scss\_bordered-pulled.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\scss\_core.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\scss\_fixed-width.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\scss\_icons.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\scss\_larger.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\scss\_list.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\scss\_mixins.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\scss\_path.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\scss\_rotated-flipped.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\scss\_spinning.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\scss\_stacked.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\scss\_variables.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\font-awesome\scss\font-awesome.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\ico\favicon.ico" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\js\backbone.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\js\bootstrap-2.3.1.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\js\bootstrap-222.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\js\bootstrap-3.0.0.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\js\html5shiv.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\js\jquery-1.10.2.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\js\jquery-1.10.2.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\js\jquery-1.10.2.min.map" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\js\jquery-1.7.1.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\js\prettify.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\js\respond.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\js\site.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\js\underscore.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\js\ZeroClipboard-1.1.7.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\js\ZeroClipboard-1.1.7.swf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\alerts.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\badges.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\bootstrap.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\breadcrumbs.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\button-groups.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\buttons.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\carousel.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\close.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\code.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\component-animations.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\dropdowns.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\forms.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\glyphicons.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\grid.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\input-groups.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\jumbotron.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\labels.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\list-group.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\media.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\mixins.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\modals.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\navbar.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\navs.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\normalize.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\pager.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\pagination.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\panels.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\popovers.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\print.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\progress-bars.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\responsive-utilities.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\scaffolding.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\tables.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\theme.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\thumbnails.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\tooltip.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\type.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\utilities.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\variables.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\bootstrap-3.0.0\wells.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\bootstrap\buttons.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\bootstrap\jumbotron.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\bootstrap\navbar.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\bootstrap\type.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\bootstrap\variables.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\bootstrap\wells.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\carbonad.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\example-rating.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\feature-list.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\fontawesome-icon-list.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\footer.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\jumbotron-carousel.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\layout.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\lazy.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\responsive\screen-lg.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\responsive\screen-md.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\responsive\screen-sm.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\responsive\screen-xs.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\social-buttons.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\stripe-ad.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site\textured-bg.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\assets\less\site.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\cheatsheet.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\CNAME" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\community.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\design.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\examples.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\get-started.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\glyphicons-test.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\icons.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\icons.yml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\license.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\Makefile" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\test-2.3.2.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\test.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\font-awesome\src\whats-new.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\.DS_Store" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\dist\jquery.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\dist\jquery.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\dist\jquery.min.map" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\MIT-LICENSE.txt" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\ajax\jsonp.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\ajax\load.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\ajax\parseJSON.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\ajax\parseXML.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\ajax\script.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\ajax\var\nonce.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\ajax\var\rquery.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\ajax\xhr.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\ajax.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\attributes\attr.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\attributes\classes.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\attributes\prop.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\attributes\support.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\attributes\val.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\attributes.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\callbacks.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\core\access.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\core\init.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\core\parseHTML.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\core\ready.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\core\var\rsingleTag.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\core.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\css\addGetHookIf.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\css\curCSS.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\css\defaultDisplay.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\css\hiddenVisibleSelectors.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\css\support.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\css\swap.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\css\var\cssExpand.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\css\var\getStyles.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\css\var\isHidden.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\css\var\rmargin.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\css\var\rnumnonpx.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\css.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\data\accepts.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\data\Data.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\data\var\data_priv.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\data\var\data_user.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\data.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\deferred.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\deprecated.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\dimensions.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\effects\animatedSelector.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\effects\Tween.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\effects.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\event\alias.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\event\support.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\event.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\exports\amd.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\exports\global.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\intro.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\jquery.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\manipulation\_evalUrl.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\manipulation\support.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\manipulation\var\rcheckableType.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\manipulation.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\offset.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\outro.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\queue\delay.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\queue.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\selector-native.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\selector-sizzle.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\selector.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\serialize.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\sizzle\dist\sizzle.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\sizzle\dist\sizzle.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\sizzle\dist\sizzle.min.map" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\traversing\findFilter.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\traversing\var\rneedsContext.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\traversing.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\var\arr.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\var\class2type.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\var\concat.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\var\hasOwn.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\var\indexOf.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\var\pnum.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\var\push.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\var\rnotwhite.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\var\slice.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\var\strundefined.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\var\support.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\var\toString.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\jquery\src\wrap.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\json3\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\json3\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\json3\lib\json3.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\json3\lib\json3.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\json3\LICENSE" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\json3\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\.DS_Store" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\CHANGELOG.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\dist\.DS_Store" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\dist\css\mobile-angular-ui-base.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\dist\css\mobile-angular-ui-base.min.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\dist\css\mobile-angular-ui-desktop.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\dist\css\mobile-angular-ui-desktop.min.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\dist\fonts\fontawesome-webfont.eot" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\dist\fonts\fontawesome-webfont.svg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\dist\fonts\fontawesome-webfont.ttf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\dist\fonts\fontawesome-webfont.woff" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\dist\fonts\FontAwesome.otf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\dist\js\mobile-angular-ui.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\dist\js\mobile-angular-ui.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\Gruntfile.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\LICENSE" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\package.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\.DS_Store" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\js\.DS_Store" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\js\lib\active-links.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\js\lib\capture.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\js\lib\carousel.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\js\lib\fastclick.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\js\lib\forms.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\js\lib\navbars.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\js\lib\overlay.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\js\lib\panel.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\js\lib\pointer-events.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\js\lib\scrollable.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\js\lib\sidebars.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\js\lib\toggle.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\js\mobile-angular-ui.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\.DS_Store" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\lib\app.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\lib\buttons.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\lib\carousel.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\lib\forms.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\lib\globals.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\lib\justified.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\lib\layout.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\lib\list-groups.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\lib\navbars.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\lib\overlay.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\lib\panel.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\lib\scrollable.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\lib\sections.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\lib\sidebar.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\lib\validations.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\mobile-angular-ui-desktop.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\mobile-angular-ui.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\sm-grid.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\src\less\variables.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\tasks\grunt-smq.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\tasks\release.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\mobile-angular-ui\tasks\site-devel.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\.gitignore" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\.jenkins" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\.travis.yml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\extensions\anchorscroll.overthrow.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\extensions\overthrow-sidescroller.append.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\extensions\overthrow-sidescroller.disable-nav.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\extensions\overthrow-sidescroller.goto.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\extensions\overthrow-sidescroller.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\extensions\overthrow-sidescroller.skip.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\extensions\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\Gruntfile.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\license.txt" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\package.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\src\overthrow-detect.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\src\overthrow-init.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\src\overthrow-polyfill.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\bower_components\overthrow\src\overthrow-toss.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\config.xml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\cordova.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\favicon.ico" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\fonts\glyphicons-halflings-regular.eot" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\fonts\glyphicons-halflings-regular.svg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\fonts\glyphicons-halflings-regular.ttf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\fonts\glyphicons-halflings-regular.woff" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\images\0220d123.glyphicons-halflings-white.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\images\5aa9bc32.glyphicons-halflings.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\robots.txt" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\scripts\2eb1eef5.plugins.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\scripts\47e9bece.modules.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\scripts\d7673771.scripts.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\styles\471bd986.main.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\styles\eb56f177.bootstrap.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\views\booksView.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\views\bookView.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\views\navbarView.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\views\settingsView.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\org.apache.cordova.console\DebugConsole.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\org.apache.cordova.device\Device.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\com.phonegap.plugins.barcodescanner\www\barcodescanner.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.console\www\console-via-logger.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.console\www\logger.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.device\www\device.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\cordova_plugins.js" />
+    </ItemGroup>
+</Project>
