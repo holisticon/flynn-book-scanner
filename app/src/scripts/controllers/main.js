@@ -129,7 +129,7 @@ app.controller('BooksController', ['$scope', 'blockUI', '$http', 'SettingsServic
                 console.log("Error during reading data from couchdb: " + errorCode);
                 if (errorCode == 0) {
                     console.log("Network error!");
-                }                
+                }
                 $rootScope.$broadcast("server.error");
                 blockUI.stop();
             }
@@ -143,8 +143,8 @@ app.controller('BooksController', ['$scope', 'blockUI', '$http', 'SettingsServic
             var authorCount = book.volumeInfo.authors.length;
             for (var itemIndex in book.volumeInfo.authors) {
                 authorInfo += book.volumeInfo.authors[itemIndex];
-                if (itemIndex < authorCount) {
-                    authorInfo += ",";
+                if (itemIndex < authorCount - 1) {
+                    authorInfo += ", ";
                 }
             }
             book.authorInfo = authorInfo;
