@@ -5,10 +5,26 @@
             
 <div class="scrollable">
     <div class="scrollable-content container section">
-        <form>  
+        <form>
+        	<div content-for="section-menu">
+                <button class="btn btn-default" ng-click="load()"> <i class="fa fa-refresh"></i> Refresh</button>
+            </div>
+            <div bs-panel class="panel">
+				<div ng-repeat="book in books">
+					<a ng-click="showBookDetails(book)" class="list-group-item">    
+						<div>                			
+						<h3>{{book.value.volumeInfo.title}}</h3>
+						<p>{{book.value.volumeInfo.subtitle}}</p>
+						<p> by <span ng-repeat="author in book.value.volumeInfo.authors">{{author}}, </span> {{book.value.volumeInfo.publishedDate}}
+							<br>
+            			</p>
+            			</div>
+					</a>
+				</div>
+			</div>   
 			<div overlay="overlaySearchEntry">
 				<h4 class="overlay-title">{{selectedBook.volumeInfo.title}}</h4>
-				<h5>{{selectedBook.volumeInfo.subtitle}}</h5>
+				<h5>{{selectedBook.volumeInfo.subtitle}} ({{selectedBook.volumeInfo.pageCount}} pages)</h5>
 				<img class="img-thumbnail" alt="book image"  ng-show="selectedBook.volumeInfo.imageLinks.thumbnail" ng-src="{{selectedBook.volumeInfo.imageLinks.thumbnail}}" />
 				<div class="text-left">
 					<div class="row">
@@ -32,17 +48,9 @@
 							<label>Publisher:</label>
 						</div>
 						<div class="col-xs-8">
-							<div>{{selectedBook.volumeInfo.publisher}}</div>
+							<div>{{selectedBook.volumeInfo.publisher}} ({{selectedBook.volumeInfo.publishedDate}}) </div>
 						</div>
 					</div>
-					<div class="row" ng-show="selectedBook.volumeInfo.publishedDate">
-						<div class="col-xs-4">
-							<label>Published date:</label>
-						</div>
-						<div class="col-xs-8">
-							<div>{{selectedBook.volumeInfo.publishedDate}}</div>
-						</div>
-					</div>	
 					<div class="row">
 						<div class="col-xs-4">
 							<label>Amount:</label>
@@ -56,23 +64,7 @@
 				<p toggle="off" bubble target="overlaySearchEntry">
 					<span class="btn btn-primary">Ok</span>
 				</p>
-			</div>
-        	<div content-for="section-menu">
-                <button class="btn btn-default" ng-click="load()"> <i class="fa fa-refresh"></i> Refresh</button>
-            </div>
-            <div bs-panel class="panel">
-				<div ng-repeat="book in books">
-					<a ng-click="showBookDetails(book)" class="list-group-item">    
-						<div>                			
-						<h3>{{book.value.volumeInfo.title}}</h3>
-						<p>{{book.value.volumeInfo.subtitle}}</p>
-						<p> by <span ng-repeat="author in book.value.volumeInfo.authors">{{author}}, </span> {{book.value.volumeInfo.publishedDate}}
-							<br>
-            			</p>
-            			</div>
-					</a>
-				</div>
-			</div>   
+			</div>  
 		</form>
 	</div>
 </div>

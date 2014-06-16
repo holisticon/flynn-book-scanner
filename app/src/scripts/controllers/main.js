@@ -225,14 +225,14 @@ app.controller('SearchController', ['$rootScope', '$scope', 'blockUI', '$http', 
                 console.log('Converted convertCodeToIsbn: ' + number);
                 return number;
             }
-            code = convertCodeToIsbn(code);
+            //code = convertCodeToIsbn(code);
             // save code for later usage
             console.log("Reading book data for ISBN " + code);
 
             $scope.categories = [];
             $scope.events = [];
             $scope.labels = [];
-            var gbooksUrl = 'https://www.googleapis.com/books/v1/volumes/?q=:isbn=' + code + '&projection=full&maxResults=1&key=AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY';
+            var gbooksUrl = 'https://www.googleapis.com/books/v1/volumes/?q=:isbn=' + code + '&projection=full&key=AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY';
             //var deferred = $q.defer();
             console.log("Reading book data with google books url: " + gbooksUrl);
             $http({
@@ -290,7 +290,27 @@ app.controller('SearchController', ['$rootScope', '$scope', 'blockUI', '$http', 
             }
         }
 
+        function selectBook(pSelectedBookValue) {
+            blockUI.start();
+            var book = pSelectedBookValue;
+            //TODO search in backend !!
+            console.log('Showing details for book: ' + book.volumeInfo.title);
+            var authorInfo = "";
+            var authorCount = book.volumeInfo.authors.length;
+            for (var itemIndex in book.volumeInfo.authors) {
+                authorInfo += book.volumeInfo.authors[itemIndex];
+                if (itemIndex < authorCount - 1) {
+                    authorInfo += ", ";
+                }
+            }
+            book.authorInfo = authorInfo;
+            $scope.selectedBook = book;
+            $scope.toggle('overlaySelectedBookEntry');
+            blockUI.stop();
+        }
+
         function save(book) {
+            console.log('Starting save for book: ' + JSON.stringify(book));
             //var bookResource = new BookResource(book);
             $http({
                 method: 'POST',
@@ -330,6 +350,7 @@ app.controller('SearchController', ['$rootScope', '$scope', 'blockUI', '$http', 
         // public methods
         $scope.scan = scan;
         $scope.save = save;
+        $scope.selectBook = selectBook;
         $scope.search = search;
     }
 ]);
