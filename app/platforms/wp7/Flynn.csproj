@@ -166,6 +166,12 @@
         </PostBuildEvent>
     </PropertyGroup>
     <ItemGroup>
+        <Compile Include="Plugins\org.apache.cordova.console\DebugConsole.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\org.apache.cordova.device\Device.cs" />
+    </ItemGroup>
+    <ItemGroup>
         <Content Include="www\404.html" />
     </ItemGroup>
     <ItemGroup>
@@ -3979,6 +3985,9 @@
         <Content Include="www\cordova.js" />
     </ItemGroup>
     <ItemGroup>
+        <Content Include="www\cordova_plugins.js" />
+    </ItemGroup>
+    <ItemGroup>
         <Content Include="www\favicon.ico" />
     </ItemGroup>
     <ItemGroup>
@@ -4000,7 +4009,22 @@
         <Content Include="www\images\5aa9bc32.glyphicons-halflings.png" />
     </ItemGroup>
     <ItemGroup>
+        <Content Include="www\images\Thumbs.db" />
+    </ItemGroup>
+    <ItemGroup>
         <Content Include="www\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\com.phonegap.plugins.barcodescanner\www\barcodescanner.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.console\www\console-via-logger.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.console\www\logger.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.device\www\device.js" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\robots.txt" />
@@ -4031,26 +4055,5 @@
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\views\settingsView.html" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Plugins\org.apache.cordova.console\DebugConsole.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Plugins\org.apache.cordova.device\Device.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\plugins\com.phonegap.plugins.barcodescanner\www\barcodescanner.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\plugins\org.apache.cordova.console\www\console-via-logger.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\plugins\org.apache.cordova.console\www\logger.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\plugins\org.apache.cordova.device\www\device.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\cordova_plugins.js" />
     </ItemGroup>
 </Project>

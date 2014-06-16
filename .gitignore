@@ -22,3 +22,5 @@ app/platforms/ios/www/bower_components/*
 app/platforms/ios/www/*
 app/platforms/android/assets/www/*
 app/platforms/wp7/www/*
+app/platforms/wp7/obj/Debug/*
+app/platforms/wp7/Bin/Debug/*
