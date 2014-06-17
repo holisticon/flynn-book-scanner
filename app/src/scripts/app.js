@@ -45,7 +45,7 @@ app.config(function($routeProvider) {
             redirectTo: '/books',
         }).when('/book', {
             templateUrl: 'views/bookView.html',
-            controller: 'SearchController'
+            controller: 'BookController'
         }).when('/settings', {
             templateUrl: 'views/settingsView.html',
             controller: 'SettingsController'
@@ -53,7 +53,7 @@ app.config(function($routeProvider) {
             templateUrl: 'views/booksView.html',
             controller: 'BooksController'
         }).otherwise({
-            redirectTo: '/book'
+            redirectTo: '/book/search'
         });
 });
 

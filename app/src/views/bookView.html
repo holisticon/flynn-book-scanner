@@ -3,26 +3,28 @@
 </div>
 <div class="scrollable">
     <div class="scrollable-content container section">
-        <form name="bookForm">
+        <form name="searchForm" type="search" ng-submit="search(searchQuery)">
             <div class="panel-heading">
                 <h2 class="panel-title">
                 Search a book
                 </h2>
             </div> 
-            <div bs-panel class="panel">          
+            <div bs-panel class="panel">                      
                 <div class="form-group row">
                     <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12">
-                        <input bs-form-control type="tel" data-ng-model="searchQuery.isbn" label="ISBN"
+                        <input bs-form-control type="tel" data-ng-model="searchQuery.isbn" label="ISBN" name="isbn"
                             label-class="col-xs-3 col-sm-2 col-lg-1" class="ng-scope ng-pristine ng-valid needsclick form-control"
                             placeholder="ISBN of the book" required>
+                        <p class="help-block error" ng-show="searchForm.isbn.$error.required">Required</p>  
                     </div>
                 </div>
             </div>
             <div bs-panel class="form-actions">
                 <button ng-click="scan()" class="btn"><i class="fa fa-barcode"></i>  Scan</button>
-                <button ng-click="search()" class="btn btn-primary"><i class="fa fa-search"></i>  Search</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>  Search</button>
             </div>
             <div bs-panel class="panel">
+                <p class="help-block warning" ng-show="infoMsg">{{infoMsg}}</p>
                 <div ng-if="!books" class="paragraphs" style="margin: 10px 0">No book found</div>
                 <div ng-repeat="book in books">
                     <a ng-click="selectBook(book)" class="list-group-item">    
@@ -34,54 +36,54 @@
                         </p>
                         </div>
                     </a>
-                </div>    
-
-            <div overlay="overlaySelectedBookEntry">
-                <h4 class="overlay-title">{{selectedBook.volumeInfo.title}}</h4>
-                <h5>{{selectedBook.volumeInfo.subtitle}} ({{selectedBook.volumeInfo.pageCount}} pages)</h5>
-                <img class="img-thumbnail" alt="book image"  ng-show="selectedBook.volumeInfo.imageLinks.thumbnail" ng-src="{{selectedBook.volumeInfo.imageLinks.thumbnail}}" />
-                <div class="text-left">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <label>ISBN-13:</label>
-                        </div>
-                        <div class="col-xs-8">
-                            <div>{{selectedBook.volumeInfo.industryIdentifiers[1].identifier}}</div>
-                        </div>
-                    </div>
-                    <div class="row" ng-show="selectedBook.authorInfo">
-                        <div class="col-xs-4">
-                            <label>Author:</label>
-                        </div>
-                        <div class="col-xs-8">
-                            <div>{{selectedBook.authorInfo}}</div>                      
-                        </div>
-                    </div>
-                    <div class="row" ng-show="selectedBook.volumeInfo.publisher">
-                        <div class="col-xs-4">
-                            <label>Publisher:</label>
-                        </div>
-                        <div class="col-xs-8">
-                            <div>{{selectedBook.volumeInfo.publisher}} ({{selectedBook.volumeInfo.publishedDate}}) </div>
-                        </div>
-                    </div> 
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <label>Amount:</label>
-                        </div>
-                        <div class="col-xs-8">
-                             <input type="number" data-ng-model="selectedBook.count" label="Amount"
-                                class="ng-scope ng-pristine ng-valid needsclick form-control"
-                                placeholder="Amount of the book" required min="1">
-                        </div>
-                    </div>                                      
-                    <br>
                 </div>
-                <p toggle="off" bubble target="overlaySelectedBookEntry">
-                    <button ng-click="save(selectedBook)" class="btn btn-primary"><i class="fa fa-save"></i>  Save</button>
-                    <button class="btn">Cancel</button>
-                </p>
-            </div>
+                <div overlay="overlaySelectedBookEntry">
+                    <h4 class="overlay-title">{{selectedBook.volumeInfo.title}}</h4>
+                    <h5>{{selectedBook.volumeInfo.subtitle}} ({{selectedBook.volumeInfo.pageCount}} pages)</h5>
+                    <img class="img-thumbnail" alt="book image"  ng-show="selectedBook.volumeInfo.imageLinks.thumbnail" ng-src="{{selectedBook.volumeInfo.imageLinks.thumbnail}}" />
+                    <div class="text-left">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <label>ISBN-13:</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <div>{{selectedBook.volumeInfo.industryIdentifiers[1].identifier}}</div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="selectedBook.authorInfo">
+                            <div class="col-xs-4">
+                                <label>Author:</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <div>{{selectedBook.authorInfo}}</div>                      
+                            </div>
+                        </div>
+                        <div class="row" ng-show="selectedBook.volumeInfo.publisher">
+                            <div class="col-xs-4">
+                                <label>Publisher:</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <div>{{selectedBook.volumeInfo.publisher}} ({{selectedBook.volumeInfo.publishedDate}}) </div>
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <label>Amount:</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <p class="help-block warning" ng-show="infoMsg">{{infoMsg}}</p>
+                                <input type="number" data-ng-model="selectedBook.count" label="Amount"
+                                    class="ng-scope ng-pristine ng-valid needsclick form-control"
+                                    placeholder="Amount of the book" required min="1">
+                            </div>
+                        </div>                                      
+                        <br>
+                    </div>
+                    <p toggle="off" bubble target="overlaySelectedBookEntry">
+                        <button ng-click="save(selectedBook)" class="btn btn-primary"><i class="fa fa-save"></i>  Save</button>
+                        <button class="btn">Cancel</button>
+                    </p>
+                </div>
             </div>
         </form>
     </div>
