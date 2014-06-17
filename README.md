@@ -51,14 +51,21 @@ For debugging in project directory `./flynn-book-scanner`:
 
 open brower at http://localhost:8080
 
-### Building Cordova
-* `cordova platform add android`
-* `cordova plugins add https://github.com/wildabeast/BarcodeScanner.git`
-* `cordova build`
+For windows phone support within an VM: http://blogs.msdn.com/b/interoperability/archive/2012/12/21/how-to-develop-for-windows-phone-8-on-your-mac.aspx
 
-### Running on an Android device
+
+### Building & Deployment
+* `grunt`
+* `cordova build android` or `cordova build ios`
+
+For running on an android device execute:
 
 * `cordova run android -d`
+
+Please refer to the cordova setup guide regarding the android emulator configuration:
+http://cordova.apache.org/docs/en/3.5.0/guide_platforms_android_index.md.html#Android%20Platform%20Guide
+
+Install HAXM for better emulator speed: https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager
 
 ## Sponsoring
 This project is sponsored and supported by [Holisticon AG](http://www.holisticon.de/cms/About/Startseite)
