@@ -88,8 +88,8 @@ app.factory('Base64', function() {
     };
 });
 
-app.controller('BooksController', ['$scope', 'blockUI', '$http', 'SettingsService', 'InventoryService', 'Base64',
-    function($scope, blockUI, $http, $settings, $inventory, $base64) {
+app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', 'SettingsService', 'InventoryService', 'Base64',
+    function($rootScope, $scope, blockUI, $http, $settings, $inventory, $base64) {
         // https://host:port/flynn/_design/books/_view/all
         var credentials = $settings.load();
 
@@ -254,26 +254,42 @@ app.controller('SearchController', ['$rootScope', '$scope', 'blockUI', '$http', 
     }
 ]);
 
-app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'SettingsService',
-    function($rootScope, $scope, $location, $settings) {
+app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'SettingsService', 'InventoryService',
+    function($rootScope, $scope, $location, $settings, $inventory) {
 
-        var credentials = $settings.load(),
-            defaultCouch = 'https://server.holisticon.de/couchdb/flynn/',
+        var defaultCouch = 'https://server.holisticon.de/couchdb/flynn/',
             defaultUser = 'flynn_user',
             defaultPassword = 'Passw0rd!',
             defaultApiKey = 'AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY';
 
-        function save() {
-            console.debug("Saving settings to local storage");
-            $settings.save($scope.user, $scope.password, $scope.couchdb, defaultApiKey);
-            $location.path("/books");
+        function load() {
+            console.debug("Loading settings from local storage");
+            var credentials = $settings.load();
+            $scope.flynn.user = credentials.user || defaultUser;
+            $scope.flynn.password = credentials.password || defaultPassword;
+            $scope.flynn.couchdb = credentials.couchdb || defaultCouch;
         }
 
-        $scope.user = credentials.user || defaultUser;
-        $scope.password = credentials.password || defaultPassword;
-        $scope.couchdb = credentials.couchdb || defaultCouch;
+        function save() {
+            console.debug("Saving settings to local storage");
+            $settings.save($scope.flynn.user, $scope.flynn.password, $scope.flynn.couchdb, defaultApiKey);
+            $inventory.read().then(onSuccess, onError);
+
+            function onSuccess(response) {
+                console.log("Got valid server response. Settings seeem to be valid.");
+                $location.path("/books");
+            }
+
+            function onError(response) {
+                $settings.valid = false;
+                $rootScope.$broadcast("settings.invalid");
+            }
+        }
+
+        $scope.flynn = {};
 
         // public methods
+        $scope.load = load;
         $scope.save = save;
     }
 ]);

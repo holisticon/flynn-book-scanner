@@ -95,12 +95,16 @@ app.controller('MainController', ['$scope', '$rootScope', '$location', 'blockUI'
         });
         $rootScope.$on("$routeChangeSuccess", function() {});
 
+        $rootScope.$on('settings.invalid', function(event) {
+            showErrorDialog($rootScope, $scope, blockUI, "Settings invalid", 1001, "Settings seems to be incorrect. Please correct or check network settings.");
+        });
+
         $rootScope.$on('server.timeout', function(event) {
             showErrorDialog($rootScope, $scope, blockUI, "Timeout", 2001, "No answer from server");
         });
 
         $rootScope.$on('server.error', function(event) {
-            showErrorDialog($rootScope, $scope, blockUI, "Books couldn't be loaded.", 2002, "The server didn't respond. Please check your network settings.");
+            showErrorDialog($rootScope, $scope, blockUI, "Books couldn't be loaded", 2002, "The server didn't respond. Please check your network settings.");
         });
 
         $rootScope.$on('login.failed', function(event) {
@@ -112,11 +116,11 @@ app.controller('MainController', ['$scope', '$rootScope', '$location', 'blockUI'
         });
 
         $rootScope.$on('booksearch.invalid', function(event) {
-            showErrorDialog($rootScope, $scope, blockUI, "Book couldn't be loaded.", 5001, "The book search wasn't successfull. Server didn't respond.");
+            showErrorDialog($rootScope, $scope, blockUI, "Book couldn't be loaded", 5001, "The book search wasn't successfull. Server didn't respond.");
         });
 
         $rootScope.$on('booksave.error', function(event) {
-            showErrorDialog($rootScope, $scope, blockUI, "Book couldn't be saved.", 5101, "The book save wasn't successfull. Server didn't respond.");
+            showErrorDialog($rootScope, $scope, blockUI, "Book couldn't be saved", 5101, "The book save wasn't successfull. Server didn't respond.");
         });
 
         $scope.userAgent = navigator.userAgent;
@@ -131,6 +135,6 @@ app.controller('MainController', ['$scope', '$rootScope', '$location', 'blockUI'
         } else {
             blockUI.stop();
         }
-        $rootScope.settings = settings;        
+        $rootScope.settings = settings;
     }
 ]);

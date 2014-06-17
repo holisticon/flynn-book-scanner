@@ -3,17 +3,17 @@
 </div>
 <div class="scrollable">
     <div class="scrollable-content container section">
-        <form>
+        <form data-ng-init="load()">
             <div bs-panel class="panel">        
                 <div class="form-group row">
                     <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12">
-                        <input bs-form-control type="url" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-ng-model="couchdb" label="CouchDB Server"
+                        <input bs-form-control type="url" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-ng-model="flynn.couchdb" label="CouchDB Server"
                             label-class="col-xs-3 col-sm-2 col-lg-1" class="ng-scope ng-pristine ng-valid needsclick form-control"
                             placeholder="URL of the CouchDB server" required>
-                        <input bs-form-control type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  data-ng-model="user" label="User"
+                        <input bs-form-control type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  data-ng-model="flynn.user" label="User"
                             label-class="col-xs-3 col-sm-2 col-lg-1" class="ng-scope ng-pristine ng-valid needsclick form-control"
                             placeholder="User" required>
-                        <input bs-form-control type="password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  data-ng-model="password" label="Password"
+                        <input bs-form-control type="password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  data-ng-model="flynn.password" label="Password"
                             label-class="col-xs-3 col-sm-2 col-lg-1" class="ng-scope ng-pristine ng-valid needsclick form-control"
                             placeholder="Password" required>
                     </div>
