@@ -5,6 +5,13 @@ flynn-book-scanner
 flynn is a book scanning app which saves the added books on a couchdb.
 
 
+![Book listing](https://github.com/holisticon/flynn-book-scanner/raw/master/docs/screenshots/iPhone_bookListing.png)
+
+![Book details popup](https://github.com/holisticon/flynn-book-scanner/raw/master/docs/screenshots/iPhone_bookDetails.png)
+
+![Adding a book](https://github.com/holisticon/flynn-book-scanner/raw/master/docs/screenshots/iPhone_addBook.png)
+
+
 ## Status
 
 [![Build Status](https://travis-ci.org/holisticon/flynn-book-scanner.png?branch=master)](https://travis-ci.org/holisticon/flynn-book-scanner)
