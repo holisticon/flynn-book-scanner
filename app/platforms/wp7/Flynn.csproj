@@ -4009,9 +4009,6 @@
         <Content Include="www\images\5aa9bc32.glyphicons-halflings.png" />
     </ItemGroup>
     <ItemGroup>
-        <Content Include="www\images\Thumbs.db" />
-    </ItemGroup>
-    <ItemGroup>
         <Content Include="www\index.html" />
     </ItemGroup>
     <ItemGroup>
@@ -4033,13 +4030,13 @@
         <Content Include="www\scripts\2eb1eef5.plugins.js" />
     </ItemGroup>
     <ItemGroup>
+        <Content Include="www\scripts\39f2dfd9.scripts.js" />
+    </ItemGroup>
+    <ItemGroup>
         <Content Include="www\scripts\47e9bece.modules.js" />
     </ItemGroup>
     <ItemGroup>
-        <Content Include="www\scripts\d7673771.scripts.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\styles\471bd986.main.css" />
+        <Content Include="www\styles\225a68c4.main.css" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\styles\eb56f177.bootstrap.css" />

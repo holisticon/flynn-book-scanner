@@ -1272,6 +1272,7 @@
     <FilePath Value="www\bower_components\overthrow\src\overthrow-toss.js"/>
     <FilePath Value="www\config.xml"/>
     <FilePath Value="www\cordova.js"/>
+    <FilePath Value="www\cordova_plugins.js"/>
     <FilePath Value="www\favicon.ico"/>
     <FilePath Value="www\fonts\glyphicons-halflings-regular.eot"/>
     <FilePath Value="www\fonts\glyphicons-halflings-regular.svg"/>
@@ -1280,19 +1281,18 @@
     <FilePath Value="www\images\0220d123.glyphicons-halflings-white.png"/>
     <FilePath Value="www\images\5aa9bc32.glyphicons-halflings.png"/>
     <FilePath Value="www\index.html"/>
+    <FilePath Value="www\plugins\com.phonegap.plugins.barcodescanner\www\barcodescanner.js"/>
+    <FilePath Value="www\plugins\org.apache.cordova.console\www\console-via-logger.js"/>
+    <FilePath Value="www\plugins\org.apache.cordova.console\www\logger.js"/>
+    <FilePath Value="www\plugins\org.apache.cordova.device\www\device.js"/>
     <FilePath Value="www\robots.txt"/>
     <FilePath Value="www\scripts\2eb1eef5.plugins.js"/>
+    <FilePath Value="www\scripts\39f2dfd9.scripts.js"/>
     <FilePath Value="www\scripts\47e9bece.modules.js"/>
-    <FilePath Value="www\scripts\d7673771.scripts.js"/>
-    <FilePath Value="www\styles\471bd986.main.css"/>
+    <FilePath Value="www\styles\225a68c4.main.css"/>
     <FilePath Value="www\styles\eb56f177.bootstrap.css"/>
     <FilePath Value="www\views\booksView.html"/>
     <FilePath Value="www\views\bookView.html"/>
     <FilePath Value="www\views\navbarView.html"/>
     <FilePath Value="www\views\settingsView.html"/>
-    <FilePath Value="www\plugins\com.phonegap.plugins.barcodescanner\www\barcodescanner.js"/>
-    <FilePath Value="www\plugins\org.apache.cordova.console\www\console-via-logger.js"/>
-    <FilePath Value="www\plugins\org.apache.cordova.console\www\logger.js"/>
-    <FilePath Value="www\plugins\org.apache.cordova.device\www\device.js"/>
-    <FilePath Value="www\cordova_plugins.js"/>
 </CordovaSourceDictionary>
