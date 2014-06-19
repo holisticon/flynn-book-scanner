@@ -54,7 +54,7 @@ For debugging in project directory `./flynn-book-scanner`:
 * `cd app`
 * `./node_modules/karma/bin/karma start`
 
-open brower at http://localhost:8080
+open browser at http://localhost:8080
 
 For windows phone support within an VM: http://blogs.msdn.com/b/interoperability/archive/2012/12/21/how-to-develop-for-windows-phone-8-on-your-mac.aspx
 
