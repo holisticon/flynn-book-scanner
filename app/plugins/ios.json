@@ -27,6 +27,10 @@
                         {
                             "xml": "<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"ios-package\" value=\"SQLitePlugin\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -78,6 +82,12 @@
                             "xml": "false",
                             "count": 1
                         }
+                    ],
+                    "libsqlite3.dylib": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
                     ]
                 }
             }
@@ -94,6 +104,9 @@
             "PACKAGE_NAME": "de.holisticon.flynn"
         },
         "com.phonegap.plugins.barcodescanner": {
+            "PACKAGE_NAME": "de.holisticon.flynn"
+        },
+        "com.phonegap.plugins.sqlite": {
             "PACKAGE_NAME": "de.holisticon.flynn"
         }
     },

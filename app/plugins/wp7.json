@@ -47,6 +47,9 @@
         },
         "org.apache.cordova.device": {
             "PACKAGE_NAME": "{4B7A9DFB-4551-44A2-8362-E304266AAD99}"
+        },
+        "com.phonegap.plugins.sqlite": {
+            "PACKAGE_NAME": "{4B7A9DFB-4551-44A2-8362-E304266AAD99}"
         }
     },
     "dependent_plugins": {}

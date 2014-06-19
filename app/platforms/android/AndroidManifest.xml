@@ -27,6 +27,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:label="@string/app_name" android:name="org.pgsqlite.SQLitePlugin">
+            <intent-filter />
+        </activity>
     </application>
     <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="19" />
     <uses-permission android:name="android.permission.CAMERA" />

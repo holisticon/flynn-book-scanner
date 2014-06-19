@@ -48,6 +48,8 @@
 		B9220C7556BE405FBBE325E0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3236C793955B464B8BF99B06 /* AVFoundation.framework */; };
 		3E8BC12CA5334A17824A49A7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D430E07DCC4C87AD17E201 /* CoreVideo.framework */; };
 		47775AADD8DF4FC8B7587108 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97FE5AFD753C40C297128B1C /* QuartzCore.framework */; };
+		431B01DCBF5D474AAABDD1F3 /* SQLitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 9708FBF0F06F4B15A8DF476F /* SQLitePlugin.m */; };
+		20FDCA004A534E338BF309A4 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC06B0E001FE4126872ED7DB /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +128,9 @@
 		3236C793955B464B8BF99B06 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "AVFoundation.framework"; path = "System/Library/Frameworks/AVFoundation.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 		E2D430E07DCC4C87AD17E201 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "CoreVideo.framework"; path = "System/Library/Frameworks/CoreVideo.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 		97FE5AFD753C40C297128B1C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "QuartzCore.framework"; path = "System/Library/Frameworks/QuartzCore.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		9708FBF0F06F4B15A8DF476F /* SQLitePlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "SQLitePlugin.m"; path = "com.phonegap.plugins.sqlite/SQLitePlugin.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		B3D7759745C84FC4B1E946E7 /* SQLitePlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SQLitePlugin.h"; path = "com.phonegap.plugins.sqlite/SQLitePlugin.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		CC06B0E001FE4126872ED7DB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsqlite3.dylib"; path = "usr/lib/libsqlite3.dylib"; sourceTree = SDKROOT; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +147,7 @@
 				B9220C7556BE405FBBE325E0 /* AVFoundation.framework in Frameworks */,
 				3E8BC12CA5334A17824A49A7 /* CoreVideo.framework in Frameworks */,
 				47775AADD8DF4FC8B7587108 /* QuartzCore.framework in Frameworks */,
+				20FDCA004A534E338BF309A4 /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +246,7 @@
 				3236C793955B464B8BF99B06 /* AVFoundation.framework */,
 				E2D430E07DCC4C87AD17E201 /* CoreVideo.framework */,
 				97FE5AFD753C40C297128B1C /* QuartzCore.framework */,
+				CC06B0E001FE4126872ED7DB /* libsqlite3.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -264,6 +271,8 @@
 				18AED20879B34E12AE88BA5F /* CDVBarcodeScanner.mm */,
 				73643E3AB9994B49A1AAFDCF /* zxing-all-in-one.cpp */,
 				D18153A7EB89495A83711625 /* zxing-all-in-one.h */,
+				9708FBF0F06F4B15A8DF476F /* SQLitePlugin.m */,
+				B3D7759745C84FC4B1E946E7 /* SQLitePlugin.h */,
 			);
 			name = Plugins;
 			path = Flynn/Plugins;
@@ -464,6 +473,7 @@
 				60A83FA2864343C4B037E0A2 /* APPHiddenStatusbarOverlay.m in Sources */,
 				BE5D4C98094D4810A99724C1 /* CDVBarcodeScanner.mm in Resources */,
 				33D87C1C3C1C44649B204C00 /* zxing-all-in-one.cpp in Resources */,
+				431B01DCBF5D474AAABDD1F3 /* SQLitePlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

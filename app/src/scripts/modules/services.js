@@ -202,8 +202,13 @@ app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'Se
 
 app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'SettingsService', 'Base64',
     function($rootScope, $log, $http, $q, $settings, $base64) {
+        var flynnDB;
         return {
-            read: function() {
+            sync: function(pSearchQuery) {
+                log.debug('Startin');
+
+
+                /*
                 var deferred = $q.defer(),
                     credentials = $settings.load();
                 $http({
@@ -242,13 +247,9 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                     deferred.reject(response);
                 }
                 return deferred.promise;
-
-
+*/
             },
-            search: function(pSearchQuery) {
-                log.debug('Startin');
-            },
-            save: function(pBookToSave) {
+            saveRemote: function(pBookToSave) {
                 var deferred = $q.defer(),
                     credentials = $settings.load();
                 $log.debug('Starting save for book: ' + JSON.stringify(pBookToSave));
@@ -284,6 +285,74 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                     }
                     deferred.reject(response);
                 }
+                return deferred.promise;
+            },
+            read: function() {
+                var deferred = $q.defer(),
+                    books = null,
+                    local = {};
+                flynnDB = new PouchDB('flynn');
+                if (flynnDB) {
+                    $log.debug(flynnDB.adapter);
+                    flynnDB.allDocs({
+                        include_docs: true,
+                        descending: true
+                    }, function(err, doc) {
+                        if (!err) {
+                            var books = null,
+                                rows = doc.rows;
+                            if (rows && rows.length > 0) {
+                                books = [];
+                                for (var id in rows) {
+                                    var bookEntry = rows[id].doc;
+                                    // only add complet entries to results
+                                    if (bookEntry.value.volumeInfo) {
+                                        $log.debug("Read following valid book entry: " + JSON.stringify(bookEntry));
+                                        books.push(bookEntry);
+                                    }
+                                }
+                            }
+                            local.books = books;
+                            deferred.resolve(local);
+                        } else  {
+                            $log.error("Reading from local db not working");
+                            deferred.reject(local);
+                        }
+                    });
+                    // TODO Sync with remote db
+                } else  {
+                    deferred.reject(local);
+                }
+                return deferred.promise;
+
+            },
+            search: function(pSearchQuery) {
+                log.debug('Startin');
+            },
+            save: function(pBookToSave) {
+                var deferred = $q.defer(),
+                    credentials = $settings.load();
+                $log.debug('Starting save for book: ' + JSON.stringify(pBookToSave));
+                if (flynnDB) {
+                    var book = {};
+                    if (!book._id) {
+                        book._id = (new Date()).getTime();
+                    }
+                    book.value = pBookToSave;
+                    flynnDB.put(book, function callback(err, result) {
+                        var response = {};
+                        if (!err) {
+                            console.log('Successfully posted a todo!');
+                            $log.info("Successfully added book");
+                            $log.debug("Saved book: " + JSON.stringify(result));
+                            response.saveSuccess = true;
+                            deferred.resolve(response);
+                        } else {
+                            deferred.reject(response);
+                        }
+                    });
+                }
+                // TODO error handling
                 return deferred.promise;
             }
         };
