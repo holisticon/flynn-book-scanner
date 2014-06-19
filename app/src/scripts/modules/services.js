@@ -306,7 +306,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                     opts = {
                         live: true
                     },
-                    pouchDB = new PouchDB(NAME_OF_POUCHDB);
+                    pouchDB = new PouchDB(NAME_OF_POUCHDB); // TODO: Move to Top, we only need one DB
                 $log.debug(remoteCouch);
                 if (pouchDB) {
                     pouchDB.replicate.to(remoteCouch, opts, syncError);
