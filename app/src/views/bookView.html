@@ -29,17 +29,17 @@
                 <div ng-repeat="book in books">
                     <a ng-click="selectBook(book)" class="list-group-item">    
                         <div>                           
-                        <h3>{{book.volumeInfo.title}}</h3>
-                        <p>{{book.volumeInfo.subtitle}}</p>
-                        <p> by <span ng-repeat="author in book.value.volumeInfo.authors">{{author}}, </span> {{book.volumeInfo.publishedDate}}
+                        <h3>{{book.value.volumeInfo.title}}</h3>
+                        <p>{{book.value.volumeInfo.subtitle}}</p>
+                        <p> by <span ng-repeat="author in book.value.volumeInfo.authors">{{author}}, </span> {{book.value.volumeInfo.publishedDate}}
                             <br>
                         </p>
                         </div>
                     </a>
                 </div>
                 <div overlay="overlaySelectedBookEntry">
-                    <h4 class="overlay-title">{{selectedBook.volumeInfo.title}}</h4>
-                    <h5>{{selectedBook.volumeInfo.subtitle}} ({{selectedBook.volumeInfo.pageCount}} pages)</h5>
+                    <h4 class="overlay-title">{{selectedBook.value.volumeInfo.title}}</h4>
+                    <h5>{{selectedBook.value.volumeInfo.subtitle}} ({{selectedBook.value.volumeInfo.pageCount}} pages)</h5>
                     <img class="img-thumbnail" alt="book image"  ng-show="selectedBook.volumeInfo.imageLinks.thumbnail" ng-src="{{selectedBook.volumeInfo.imageLinks.thumbnail}}" />
                     <div class="text-left">
                         <div class="row">
@@ -47,7 +47,7 @@
                                 <label>ISBN-13:</label>
                             </div>
                             <div class="col-xs-8">
-                                <div>{{selectedBook.volumeInfo.industryIdentifiers[1].identifier}}</div>
+                                <div>{{selectedBook.value.volumeInfo.industryIdentifiers[1].identifier}}</div>
                             </div>
                         </div>
                         <div class="row" ng-show="selectedBook.authorInfo">
@@ -63,7 +63,7 @@
                                 <label>Publisher:</label>
                             </div>
                             <div class="col-xs-8">
-                                <div>{{selectedBook.volumeInfo.publisher}} ({{selectedBook.volumeInfo.publishedDate}}) </div>
+                                <div>{{selectedBook.value.volumeInfo.publisher}} ({{selectedBook.value.volumeInfo.publishedDate}}) </div>
                             </div>
                         </div> 
                         <div class="row">
