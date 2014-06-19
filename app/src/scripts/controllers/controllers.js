@@ -223,10 +223,15 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogS
             }
         }
 
+        function sync() {
+            $inventory.syncRemote();
+        }
+
         $scope.flynn = {};
 
         // public methods
         $scope.load = load;
         $scope.save = save;
+        $scope.sync = sync;
     }
 ]);

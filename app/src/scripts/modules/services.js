@@ -202,7 +202,9 @@ app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'Se
 
 app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'SettingsService', 'Base64',
     function($rootScope, $log, $http, $q, $settings, $base64) {
-        var flynnDB;
+        var pouchDB,
+            NAME_OF_POUCHDB = 'flynn';
+
         return {
             sync: function(pSearchQuery) {
                 log.debug('Startin');
@@ -287,14 +289,33 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                 }
                 return deferred.promise;
             },
+            syncRemote: function() {
+                function syncError(error) {
+                    $log.error(error);
+                }
+                // TODO: Add authentical (rly, it's https already).
+                var credentials = $settings.load(),
+                    couchDbUrl = credentials.couchdb,
+                    authorization = credentials.user + ':' + credentials.password,
+                    remoteCouch = couchDbUrl.replace("://", "://" + authorization + "@"), // FIXME: just to try it out
+                    opts = {
+                        live: true
+                    },
+                    pouchDB = new PouchDB(NAME_OF_POUCHDB);
+                $log.debug(remoteCouch);
+                if (pouchDB) {
+                    pouchDB.replicate.to(remoteCouch, opts, syncError);
+                    pouchDB.replicate.from(remoteCouch, opts, syncError);
+                }
+            },
             read: function() {
                 var deferred = $q.defer(),
                     books = null,
                     local = {};
-                flynnDB = new PouchDB('flynn');
-                if (flynnDB) {
-                    $log.debug(flynnDB.adapter);
-                    flynnDB.allDocs({
+                pouchDB = new PouchDB(NAME_OF_POUCHDB);
+                if (pouchDB) {
+                    $log.debug(pouchDB.adapter);
+                    pouchDB.allDocs({
                         include_docs: true,
                         descending: true
                     }, function(err, doc) {
@@ -306,7 +327,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                                 for (var id in rows) {
                                     var bookEntry = rows[id].doc;
                                     // only add complet entries to results
-                                    if (bookEntry.value.volumeInfo) {
+                                    if (bookEntry.value && bookEntry.value.volumeInfo) {
                                         $log.debug("Read following valid book entry: " + JSON.stringify(bookEntry));
                                         books.push(bookEntry);
                                     }
@@ -333,13 +354,13 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                 var deferred = $q.defer(),
                     credentials = $settings.load();
                 $log.debug('Starting save for book: ' + JSON.stringify(pBookToSave));
-                if (flynnDB) {
+                if (pouchDB) {
                     var book = {};
                     if (!book._id) {
                         book._id = 'bookid_' + (new Date()).getTime();
                     }
                     book.value = pBookToSave;
-                    flynnDB.put(book, function callback(err, result) {
+                    pouchDB.put(book, function callback(err, result) {
                         var response = {};
                         if (!err) {
                             console.log('Successfully posted a todo!');
