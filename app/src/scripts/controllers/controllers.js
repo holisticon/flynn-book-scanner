@@ -117,19 +117,21 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
             blockUI.start();
             var newEntry = true,
                 book = pSelectedBookValue,
-                isbn = pSelectedBookValue.volumeInfo.industryIdentifiers[1].identifier,
+                isbn = pSelectedBookValue.value.volumeInfo.industryIdentifiers[1].identifier,
                 books = booksInventory,
                 authorInfo = "";
-            $log.debug('Showing details for book: ' + book.volumeInfo.title);
-            for (var itemIndex in book.volumeInfo.authors) {
-                if (pSelectedBookValue.volumeInfo.authors) {
-                    var authorCount = pSelectedBookValue.volumeInfo.authors.length;
-                    authorInfo += book.volumeInfo.authors[itemIndex];
+            $log.debug('Showing details for book: ' + JSON.stringify(book.value));
+            for (var itemIndex in book.value.volumeInfo.authors) {
+                var authorsInfo = book.value.volumeInfo.authors;
+                if (authorsInfo) {
+                    var authorCount = authorsInfo.length;
+                    authorInfo += authorsInfo[itemIndex];
                     if (itemIndex < authorCount - 1) {
                         authorInfo += ", ";
                     }
                 }
             }
+            var count = 0;
             if (books) {
                 for (var id in books) {
                     var bookEntry = books[id],
@@ -137,21 +139,21 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                     // only add complet entries to results
                     if (currentISBN == isbn) {
                         $log.debug("Already found a saved book entry: " + JSON.stringify(bookEntry));
-                        book = bookEntry.value;
-                        newEntry = false;
+                        book = bookEntry;
+                        count++;
                     }
                 }
             }
-            if (!newEntry) {
+            if (count > 0) {
                 $log.debug("Found already entry in couchdb");
                 $scope.infoMsg = "Book is already added to library. Please update amount.";
             } else {
                 $log.debug("Found no existing entry in couchdb");
                 $scope.infoMsg = null;
             }
+            book.count = count;
             book.authorInfo = authorInfo;
             $scope.selectedBook = book;
-
             $scope.toggle("overlaySelectedBookEntry");
             blockUI.stop();
         }

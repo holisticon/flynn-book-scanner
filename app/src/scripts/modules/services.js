@@ -166,8 +166,9 @@ app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'Se
                         if (data) {
                             $log.debug("Received book RAW data: " + JSON.stringify(data));
                             for (var itemIndex in data.items) {
-                                book = data.items[itemIndex];
-                                var bookIDs = book.volumeInfo.industryIdentifiers;
+                                book = {};
+                                book.value = data.items[itemIndex];
+                                var bookIDs = book.value.volumeInfo.industryIdentifiers;
                                 for (var bookIdIndex in bookIDs) {
                                     var bookIdDtls = bookIDs[bookIdIndex];
                                     if (bookIdDtls) {
@@ -202,9 +203,13 @@ app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'Se
 
 app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'SettingsService', 'Base64',
     function($rootScope, $log, $http, $q, $settings, $base64) {
-        var pouchDB,
+        var flynnDB,
             NAME_OF_POUCHDB = 'flynn';
 
+        function generateBookID() {
+            var id = 'bookid_' + (new Date()).getTime();
+            return id;
+        }
         return {
             sync: function(pSearchQuery) {
                 log.debug('Startin');
@@ -311,11 +316,11 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
             read: function() {
                 var deferred = $q.defer(),
                     books = null,
-                    local = {};
-                pouchDB = new PouchDB(NAME_OF_POUCHDB);
-                if (pouchDB) {
-                    $log.debug(pouchDB.adapter);
-                    pouchDB.allDocs({
+                    local = {},
+                    flynnDB = new PouchDB(NAME_OF_POUCHDB);
+                if (flynnDB) {
+                    $log.debug(flynnDB.adapter);
+                    flynnDB.allDocs({
                         include_docs: true,
                         descending: true
                     }, function(err, doc) {
@@ -354,13 +359,55 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                 var deferred = $q.defer(),
                     credentials = $settings.load();
                 $log.debug('Starting save for book: ' + JSON.stringify(pBookToSave));
-                if (pouchDB) {
-                    var book = {};
+
+                if (flynnDB) {
+                    var book = {},
+                        updateNeeded = true;
                     if (!book._id) {
-                        book._id = 'bookid_' + (new Date()).getTime();
+                        book._id = generateBookID();
+                    } else {
+                        // check if amount is changed
+                        db.get(function(doc, emit) {
+                            if (doc.value.value.volumeInfo.industryIdentifiers[1].identifier === pBookToSave.value.value.volumeInfo.industryIdentifiers[1].identifier) {
+                                emit(doc);
+                            }
+                        }, function(err, foundExistingBookEntries) {
+                            if (!err) {
+                                $log.debug("Got existing book entry");
+                                // if amount wasn't touched skip save to avoid duplicates
+                                if (foundExistingBookEntries.length == pBookToSave.amount) {
+                                    updateNeeded = false;
+                                } else {
+                                    // otherwise create new id
+                                    book._id = generateBookID();
+                                }
+                            } else {
+                                console.log('Error during reading orginal book entry');
+                                deferred.reject(response);
+                            }
+                        });
+                    }
+                    if (updateNeeded) {
+                        book = pBookToSave.value;
+                        flynnDB.put(book, function callback(err, result) {
+                            var response = {};
+                            if (!err) {
+                                console.log('Successfully posted a todo!');
+                                $log.info("Successfully added book");
+                                $log.debug("Saved book: " + JSON.stringify(result));
+                                response.saveSuccess = true;
+                                deferred.resolve(response);
+                            } else {
+                                deferred.reject(response);
+                            }
+                        });
+                    } else {
+                        $log.info("Skipping untouched record");
+                        deferred.resolve(response);
+
                     }
                     book.value = pBookToSave;
-                    pouchDB.put(book, function callback(err, result) {
+                    flynnDB.put(book, function callback(err, result) {
                         var response = {};
                         if (!err) {
                             console.log('Successfully posted a todo!');
