@@ -336,7 +336,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                 if (flynnDB) {
                     var book = {};
                     if (!book._id) {
-                        book._id = (new Date()).getTime();
+                        book._id = 'bookid_' + (new Date()).getTime();
                     }
                     book.value = pBookToSave;
                     flynnDB.put(book, function callback(err, result) {
