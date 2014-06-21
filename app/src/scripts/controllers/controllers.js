@@ -16,7 +16,32 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
             $inventory.read().then(onSuccess, onError);
 
             function onSuccess(response) {
-                $scope.books = response.books;
+                var inventory = response.books,
+                    bookEntries = {},
+                    resultsFound = false;
+                for (var itemIndex in inventory) {
+                    var itemInfo = inventory[itemIndex];
+                    var isbn = itemInfo.value.volumeInfo.industryIdentifiers[1].identifier;
+                    if (bookEntries[isbn]) {
+
+                        bookEntries[isbn].count += 1;
+                        bookEntries[isbn].docs.push(itemInfo);
+                    } else {
+                        bookEntries[isbn] = {};
+                        bookEntries[isbn].value = itemInfo.value;
+                        bookEntries[isbn].count = 1;
+                        bookEntries[isbn].docs = [];
+                        bookEntries[isbn].docs.push(itemInfo);
+                        resultsFound = true;
+                    }
+                }
+                if (resultsFound) {
+                    // transfer to array
+                    $scope.books = [];
+                    for (var isbn in bookEntries) {
+                        $scope.books.push(bookEntries[isbn]);
+                    }
+                }
                 blockUI.stop();
             }
 
@@ -28,12 +53,12 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
 
         function showBookDetails(pSelectedBookValue) {
             blockUI.start();
-            var book = pSelectedBookValue.value;
-            $log.debug('Showing details for book: ' + book.volumeInfo.title);
+            var book = pSelectedBookValue;
+            $log.debug('Showing details for book: ' + book.value.volumeInfo.title);
             var authorInfo = "";
-            var authorCount = book.volumeInfo.authors.length;
-            for (var itemIndex in book.volumeInfo.authors) {
-                authorInfo += book.volumeInfo.authors[itemIndex];
+            var authorCount = book.value.volumeInfo.authors.length;
+            for (var itemIndex in book.value.volumeInfo.authors) {
+                authorInfo += book.value.volumeInfo.authors[itemIndex];
                 if (itemIndex < authorCount - 1) {
                     authorInfo += ", ";
                 }
@@ -161,9 +186,8 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
         function save(book) {
             blockUI.start();
             $log.debug("Starting save for book: ");
-            $inventory.save(book).then(onSuccess, onError);
-
-            function onSuccess(response) {
+            var response = $inventory.save(book);
+            if (response.saveSuccess) {
                 // TODO add confirm
                 $log.info("Successfully added book");
                 $scope.infoMsg = "Book successfully added.";
@@ -172,12 +196,12 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                 saveSuccess = true;
                 blockUI.stop();
                 $location.path("/book");
-            }
-
-            function onError(response) {
-                $rootScope.$broadcast("booksave.error");
-                $log.debug("Error during book saving: ");
-                $scope.infoMsg = null;
+            } else {
+                if (response.errorOccurred) {
+                    $rootScope.$broadcast("booksave.error");
+                    $log.debug("Error during book saving: ");
+                    $scope.infoMsg = null;
+                }
                 blockUI.stop();
             }
         }

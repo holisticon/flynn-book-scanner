@@ -203,13 +203,42 @@ app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'Se
 
 app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'SettingsService', 'Base64',
     function($rootScope, $log, $http, $q, $settings, $base64) {
-        var flynnDB,
-            NAME_OF_POUCHDB = 'flynn';
+        var NAME_OF_POUCHDB = 'flynnBookDB';
 
         function generateBookID() {
-            var id = 'bookid_' + (new Date()).getTime();
+            var id = 'bookid_' + (new Date()).getTime() + Math.random();
             return id;
-        }
+        };
+
+        function saveToDB(pDB, pEntityToSave, pNumberOfEntities) {
+            var saveSuccess = true;
+            if (pNumberOfEntities > 0) {
+                for (var i = 1; i <= pNumberOfEntities; i++) {
+                    var bookEntry = {};
+                    bookEntry.value = pEntityToSave.value;
+                    // if update is need we always create a new id
+                    bookEntry._id = generateBookID() + i;
+                    pDB.put(bookEntry, function callback(err, result) {
+                        var response = {};
+                        if (!err) {
+                            $log.info("Successfully added book");
+                            $log.trace("Saved book: " + JSON.stringify(result));
+                        } else {
+                            saveSuccess = false;
+                        }
+                    });
+                    if (saveSuccess) {
+                        $log.info("Successfully added all book entries.");
+                        saveSuccess = true;
+                    } else {
+                        $log.error("Error during saving new book entries.");
+                    }
+                }
+            } else {
+                $log.info("Skipping untouched record");
+            }
+            return saveSuccess;
+        };
         return {
             sync: function(pSearchQuery) {
                 log.debug('Startin');
@@ -306,7 +335,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                     opts = {
                         live: true
                     },
-                    pouchDB = new PouchDB(NAME_OF_POUCHDB); // TODO: Move to Top, we only need one DB
+                    ç; // TODO: Move to Top, we only need one DB
                 $log.debug(remoteCouch);
                 if (pouchDB) {
                     pouchDB.replicate.to(remoteCouch, opts, syncError);
@@ -339,6 +368,9 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                                 }
                             }
                             local.books = books;
+                            if (books) {
+                                $log.debug("Found " + books.length + " books in inventory.");
+                            }
                             deferred.resolve(local);
                         } else  {
                             $log.error("Reading from local db not working");
@@ -353,75 +385,55 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
 
             },
             search: function(pSearchQuery) {
-                log.debug('Startin');
+                log.debug("Starting search: " + JSON.stringify(pSearchQuery));
             },
             save: function(pBookToSave) {
-                var deferred = $q.defer(),
-                    credentials = $settings.load();
-                $log.debug('Starting save for book: ' + JSON.stringify(pBookToSave));
-
+                var response = {},
+                    credentials = $settings.load(),
+                    saveSuccess = false,
+                    errorOccurred = false,
+                    flynnDB = new PouchDB(NAME_OF_POUCHDB);
+                $log.debug('Starting save for book: ' + pBookToSave.value.volumeInfo.title);
                 if (flynnDB) {
-                    var book = {},
+                    var bookEntriesToAdd = 0,
                         updateNeeded = true;
-                    if (!book._id) {
-                        book._id = generateBookID();
+                    if ((typeof pBookToSave._id) === "undefined") {
+                        bookEntriesToAdd = pBookToSave.count;
+                        // otherwise we need to update
+                        $log.info("Need to create record");
+                        saveSuccess = saveToDB(flynnDB, pBookToSave, bookEntriesToAdd);
                     } else {
+                        // update already saved entry, maybe changed amount?   
+                        var isbn = pBookToSave.value.volumeInfo.industryIdentifiers[1].identifier;
                         // check if amount is changed
-                        db.get(function(doc, emit) {
-                            if (doc.value.value.volumeInfo.industryIdentifiers[1].identifier === pBookToSave.value.value.volumeInfo.industryIdentifiers[1].identifier) {
+                        flynnDB.query(function(doc, emit) {
+                            if (doc.value.volumeInfo.industryIdentifiers[1].identifier == isbn) {
                                 emit(doc);
                             }
                         }, function(err, foundExistingBookEntries) {
                             if (!err) {
                                 $log.debug("Got existing book entry");
                                 // if amount wasn't touched skip save to avoid duplicates
-                                if (foundExistingBookEntries.length == pBookToSave.amount) {
-                                    updateNeeded = false;
+                                var countOfExistingBooks = foundExistingBookEntries.rows.length;
+                                if (countOfExistingBooks == pBookToSave.count) {
+                                    $log.info("No need to update. Amount not changed");
+                                    errorOccurred = false;
                                 } else {
-                                    // otherwise create new id
-                                    book._id = generateBookID();
+                                    bookEntriesToAdd = pBookToSave.count - countOfExistingBooks;
+                                    // otherwise we need to update
+                                    $log.info("Need to update/add another record");
+                                    saveSuccess = saveToDB(flynnDB, pBookToSave, bookEntriesToAdd);
                                 }
                             } else {
-                                console.log('Error during reading orginal book entry');
-                                deferred.reject(response);
+                                $log.error("Error during reading orginal book entry: " + JSON.stringify(err));
+                                errorOccurred = true;
                             }
                         });
                     }
-                    if (updateNeeded) {
-                        book = pBookToSave.value;
-                        flynnDB.put(book, function callback(err, result) {
-                            var response = {};
-                            if (!err) {
-                                console.log('Successfully posted a todo!');
-                                $log.info("Successfully added book");
-                                $log.debug("Saved book: " + JSON.stringify(result));
-                                response.saveSuccess = true;
-                                deferred.resolve(response);
-                            } else {
-                                deferred.reject(response);
-                            }
-                        });
-                    } else {
-                        $log.info("Skipping untouched record");
-                        deferred.resolve(response);
-
-                    }
-                    book.value = pBookToSave;
-                    flynnDB.put(book, function callback(err, result) {
-                        var response = {};
-                        if (!err) {
-                            console.log('Successfully posted a todo!');
-                            $log.info("Successfully added book");
-                            $log.debug("Saved book: " + JSON.stringify(result));
-                            response.saveSuccess = true;
-                            deferred.resolve(response);
-                        } else {
-                            deferred.reject(response);
-                        }
-                    });
                 }
                 // TODO error handling
-                return deferred.promise;
+                response.saveSuccess = saveSuccess;
+                return response;
             }
         };
 
