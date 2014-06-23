@@ -348,7 +348,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                     response = {},
                     flynnDB = new PouchDB(NAME_OF_POUCHDB);
                 if (flynnDB) {
-                    $log.debug(flynnDB.adapter);
+                    $log.debug("Using db-adapter: " + flynnDB.adapter);
                     flynnDB.allDocs({
                         include_docs: true,
                         descending: true
@@ -480,14 +480,15 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
 app.service('SettingsService', ['$rootScope', 'localStorageService',
     function($rootScope, localStorage) {
         return {
-            save: function(pOwner, user, password, couchdb, googleApiKey) {
+            save: function(pOwner, googleApiKey, pRemotesync, couchdb, user, password) {
                 localStorage.clearAll();
                 localStorage.add('flynn_app.settings', {
                     'owner': pOwner,
-                    'user': user,
-                    'password': password,
+                    'remotesync': pRemotesync,
+                    'googleApiKey': googleApiKey,
                     'couchdb': couchdb,
-                    'googleApiKey': googleApiKey
+                    'user': user,
+                    'password': password
                 });
             },
             load: function() {
@@ -507,7 +508,7 @@ app.service('SettingsService', ['$rootScope', 'localStorageService',
             verify: function() {
                 console.log("Verifying flynn settings");
                 var credentials = this.load();
-                if (credentials.couchdb) {
+                if (credentials.remotesync) {
                     return (credentials && credentials.owner && credentials.user && credentials.password && credentials.couchdb);
                 } else {
                     return (credentials && credentials.owner);

@@ -171,6 +171,7 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                 book = pSelectedBookValue,
                 isbn = pSelectedBookValue.value.volumeInfo.industryIdentifiers[1].identifier,
                 books = booksInventory,
+                credentials = $settings.load(),
                 authorInfo = "";
             $log.debug('Showing details for book: ' + JSON.stringify(book.value));
             for (var itemIndex in book.value.volumeInfo.authors) {
@@ -202,9 +203,12 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
             } else {
                 $log.debug("Found no existing entry in couchdb");
                 $scope.infoMsg = null;
+                // set default count to 1
+                count = 1;
             }
             book.count = count;
             book.authorInfo = authorInfo;
+            book.value.owner = book.value.owner || credentials.owner;
             $scope.selectedBook = book;
             $scope.toggle("overlaySelectedBookEntry");
             blockUI.stop();
@@ -247,28 +251,29 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
 app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogService', 'SettingsService', 'InventoryService',
     function($rootScope, $scope, $location, $log, $settings, $inventory) {
 
+        var defaultCouch = 'https://server.holisticon.de/couchdb/flynn/',
+            defaultUser = '<LDAP_Nutzer>',
+            defaultPassword,
+            defaultOwner = 'Holisticon AG',
+            defaultApiKey = 'AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY';
+
         // autoload
         load();
-
-        var defaultCouch = 'https://server.holisticon.de/couchdb/flynn/',
-            defaultUser = 'flynn_user',
-            defaultPassword = 'Passw0rd!',
-            defaultOwner = 'Holisticon',
-            defaultApiKey = 'AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY';
 
         function load() {
             console.debug("Loading settings from local storage");
             var credentials = $settings.load();
             $scope.flynn = {};
             $scope.flynn.owner = credentials.owner || defaultOwner;
+            $scope.flynn.remotesync = credentials.remotesync || false;
+            $scope.flynn.couchdb = credentials.couchdb || defaultCouch;
             $scope.flynn.user = credentials.user || defaultUser;
             $scope.flynn.password = credentials.password || defaultPassword;
-            $scope.flynn.couchdb = credentials.couchdb || defaultCouch;
         }
 
         function save() {
             $log.debug("Saving settings to local storage");
-            $settings.save($scope.flynn.owner, $scope.flynn.user, $scope.flynn.password, $scope.flynn.couchdb, defaultApiKey);
+            $settings.save($scope.flynn.owner, defaultApiKey, $scope.flynn.remotesync, $scope.flynn.couchdb, $scope.flynn.user, $scope.flynn.password);
             $inventory.read().then(onSuccess, onError);
 
             function onSuccess(response) {
