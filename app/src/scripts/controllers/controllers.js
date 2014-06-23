@@ -5,22 +5,14 @@ var app = angular.module('flynnBookScannerApp');
 
 app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', 'LogService', 'SettingsService', 'InventoryService',
     function($rootScope, $scope, blockUI, $http, $log, $settings, $inventory) {
-        // https://host:port/flynn/_design/books/_view/all
-        var credentials = $settings.load();
 
-        // autoload
-        load();
-
-        function load() {
-            blockUI.start();
-            $inventory.read().then(onSuccess, onError);
-
-            function onSuccess(response) {
-                var inventory = response.books,
-                    bookEntries = {},
-                    resultsFound = false;
-                for (var itemIndex in inventory) {
-                    var itemInfo = inventory[itemIndex];
+        function enrichDbData(pDbEntries) {
+            var result,
+                bookEntries = {},
+                resultsFound = false;
+            if (pDbEntries) {
+                for (var itemIndex in pDbEntries) {
+                    var itemInfo = pDbEntries[itemIndex];
                     var isbn = itemInfo.value.volumeInfo.industryIdentifiers[1].identifier;
                     if (bookEntries[isbn]) {
 
@@ -46,17 +38,51 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
                 }
                 if (resultsFound) {
                     // transfer to array
-                    $scope.books = [];
+                    result = [];
                     for (var isbn in bookEntries) {
-                        $scope.books.push(bookEntries[isbn]);
+                        result.push(bookEntries[isbn]);
                     }
                 }
+            }
+            return result;
+        };
+
+        // https://host:port/flynn/_design/books/_view/all
+        var credentials = $settings.load();
+
+        // autoload
+        load();
+
+        function load() {
+            blockUI.start();
+            $scope.searchQuery = {};
+            $inventory.read().then(onSuccess, onError);
+
+            function onSuccess(response) {
+                $scope.books = enrichDbData(response.books);
                 blockUI.stop();
             }
 
             function onError(response) {
                 $rootScope.$broadcast("server.error");
                 blockUI.stop();
+            }
+        }
+
+        function search() {
+            var searchQuery = $scope.searchQuery;
+            if ($scope.searchQuery.fullTextSearch) {
+                $inventory.search(searchQuery).then(onSuccess, onError);
+            } else {
+                $inventory.read().then(onSuccess, onError);
+            }
+
+            function onSuccess(response) {
+                $scope.books = enrichDbData(response.books);
+            }
+
+            function onError(response) {
+                $rootScope.$broadcast("server.error");
             }
         }
 
@@ -74,6 +100,7 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
 
         // public methods
         $scope.load = load;
+        $scope.search = search;
         $scope.showBookDetails = showBookDetails;
 
     }
@@ -103,7 +130,6 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
             );
             blockUI.stop();
         }
-
 
         function search() {
             var searchQuery = $scope.searchQuery;
@@ -259,7 +285,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogS
         function sync() {
             $inventory.syncRemote();
         }
-        
+
         // public methods
         $scope.load = load;
         $scope.save = save;

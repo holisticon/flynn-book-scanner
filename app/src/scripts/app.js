@@ -1,5 +1,6 @@
 'use strict';
 
+//PouchDB.plugin(require('pouchdb-quick-search'));
 
 /**
  * Shows up the error dialog with the given error details
@@ -192,6 +193,6 @@ app.controller('MainController', ['$scope', '$rootScope', '$location', 'blockUI'
         } else {
             blockUI.stop();
         }
-        $rootScope.settings = settings;
+        $rootScope.settings = settings;        
     }
 ]);

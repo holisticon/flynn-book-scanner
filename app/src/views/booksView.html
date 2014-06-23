@@ -2,6 +2,7 @@
   <span>Books</span>
 </div>
 
+<input type="text" class="form-control app-search" placeholder="Search ..." data-ng-model="searchQuery.fullTextSearch"  ng-change="search()"/>
             
 <div class="scrollable">
     <div class="scrollable-content container section">
@@ -10,7 +11,7 @@
                 <button class="btn btn-default" ng-click="load()"> <i class="fa fa-refresh"></i> Refresh</button>
             </div>
             <div bs-panel class="panel">
-                <div ng-if="!books" class="paragraphs" style="margin: 10px 0">No books in library</div>
+                <div ng-if="!books" class="paragraphs" style="margin: 10px 0">No books found.</div>
 				<div ng-repeat="book in books">
 					<a ng-click="showBookDetails(book)" class="list-group-item">    
 						<div>                			

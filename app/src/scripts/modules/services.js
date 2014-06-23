@@ -345,7 +345,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
             read: function() {
                 var deferred = $q.defer(),
                     books = null,
-                    local = {},
+                    response = {},
                     flynnDB = new PouchDB(NAME_OF_POUCHDB);
                 if (flynnDB) {
                     $log.debug(flynnDB.adapter);
@@ -367,25 +367,60 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                                     }
                                 }
                             }
-                            local.books = books;
+                            response.books = books;
                             if (books) {
                                 $log.debug("Found " + books.length + " books in inventory.");
                             }
-                            deferred.resolve(local);
+                            deferred.resolve(response);
                         } else  {
                             $log.error("Reading from local db not working");
-                            deferred.reject(local);
+                            deferred.reject(response);
                         }
                     });
-                    // TODO Sync with remote db
                 } else  {
-                    deferred.reject(local);
+                    deferred.reject(response);
                 }
                 return deferred.promise;
 
             },
             search: function(pSearchQuery) {
-                log.debug("Starting search: " + JSON.stringify(pSearchQuery));
+                var deferred = $q.defer(),
+                    response = {},
+                    flynnDB = new PouchDB(NAME_OF_POUCHDB);
+                $log.debug("Starting search: " + JSON.stringify(pSearchQuery));
+                // check if we have fulltext search
+                if (pSearchQuery.fullTextSearch) {
+                    var query = pSearchQuery.fullTextSearch;
+                    $log.debug("Starting fulltext-search: " + query);
+                    flynnDB.search({
+                        query: query,
+                        fields: [
+                            'value.volumeInfo.title',
+                            'value.volumeInfo.subtitle',
+                            'value.volumeInfo.description',
+                            'value.volumeInfo.publisher',
+                            'value.volumeInfo.authors',
+                            'value.volumeInfo.publishedDate'
+                        ],
+                        mm: '10%',
+                        include_docs: true
+                    }).then(function(res) {
+                        $log.debug("Got following result: " + JSON.stringify(res));
+                        var rows = res.rows;
+                        if (rows && rows.length > 0) {
+                            response.books = {};
+                            for (var id in rows) {
+                                var bookEntry = rows[id].doc;
+                                response.books[id] = bookEntry;
+                            }
+                        }
+                        deferred.resolve(response);
+                    }).catch(function(err) {
+                        $log.error("Search error");
+                        deferred.reject(response);
+                    });
+                }
+                return deferred.promise;
             },
             save: function(pBookToSave) {
                 var response = {},
