@@ -26,9 +26,7 @@
 			<div overlay="overlaySearchEntry">
 				<h4 class="overlay-title">{{selectedBook.value.volumeInfo.title}}</h4>
 				<h5>{{selectedBook.value.volumeInfo.subtitle}} ({{selectedBook.value.volumeInfo.pageCount}} pages)</h5>
-				<div class="hidden-xs">
-					<img id="img1" class="img-thumbnail" alt="book image" ng-show="selectedBook.value.volumeInfo.imageLinks.thumbnail" ng-src="{{selectedBook.value.volumeInfo.imageLinks.thumbnail}}" />
-				</div>
+				<img id="bookThumbnail" class="img-thumbnail" alt="book image" ng-show="selectedBook.value.volumeInfo.imageLinks.thumbnail" ng-src="{{selectedBook.value.volumeInfo.imageLinks.thumbnail}}" />
 				<div class="text-left">
 					<div class="row">
 						<div class="col-xs-3">
