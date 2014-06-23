@@ -445,9 +445,10 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
 app.service('SettingsService', ['$rootScope', 'localStorageService',
     function($rootScope, localStorage) {
         return {
-            save: function(user, password, couchdb, googleApiKey) {
+            save: function(pOwner, user, password, couchdb, googleApiKey) {
                 localStorage.clearAll();
                 localStorage.add('flynn_app.settings', {
+                    'owner': pOwner,
                     'user': user,
                     'password': password,
                     'couchdb': couchdb,
@@ -471,7 +472,12 @@ app.service('SettingsService', ['$rootScope', 'localStorageService',
             verify: function() {
                 console.log("Verifying flynn settings");
                 var credentials = this.load();
-                return (credentials && credentials.user && credentials.password && credentials.couchdb);
+                if (credentials.couchdb) {
+                    return (credentials && credentials.owner && credentials.user && credentials.password && credentials.couchdb);
+                } else {
+                    return (credentials && credentials.owner);
+                }
+
             }
 
         };

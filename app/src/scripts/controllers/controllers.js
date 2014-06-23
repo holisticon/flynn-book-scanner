@@ -221,14 +221,20 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
 app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogService', 'SettingsService', 'InventoryService',
     function($rootScope, $scope, $location, $log, $settings, $inventory) {
 
+        // autoload
+        load();
+
         var defaultCouch = 'https://server.holisticon.de/couchdb/flynn/',
             defaultUser = 'flynn_user',
             defaultPassword = 'Passw0rd!',
+            defaultOwner = 'Holisticon',
             defaultApiKey = 'AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY';
 
         function load() {
             console.debug("Loading settings from local storage");
             var credentials = $settings.load();
+            $scope.flynn = {};
+            $scope.flynn.owner = credentials.owner || defaultOwner;
             $scope.flynn.user = credentials.user || defaultUser;
             $scope.flynn.password = credentials.password || defaultPassword;
             $scope.flynn.couchdb = credentials.couchdb || defaultCouch;
@@ -236,7 +242,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogS
 
         function save() {
             $log.debug("Saving settings to local storage");
-            $settings.save($scope.flynn.user, $scope.flynn.password, $scope.flynn.couchdb, defaultApiKey);
+            $settings.save($scope.flynn.owner, $scope.flynn.user, $scope.flynn.password, $scope.flynn.couchdb, defaultApiKey);
             $inventory.read().then(onSuccess, onError);
 
             function onSuccess(response) {
@@ -253,9 +259,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogS
         function sync() {
             $inventory.syncRemote();
         }
-
-        $scope.flynn = {};
-
+        
         // public methods
         $scope.load = load;
         $scope.save = save;

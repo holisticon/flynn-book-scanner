@@ -2,27 +2,57 @@
   <span>Settings</span>
 </div>
 <div class="scrollable">
-    <div class="scrollable-content container section">
-        <form data-ng-init="load()">
-            <div bs-panel class="panel">        
-                <div class="form-group row">
-                    <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12">
-                        <input bs-form-control type="url" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-ng-model="flynn.couchdb" label="CouchDB Server"
-                            label-class="col-xs-3 col-sm-2 col-lg-1" class="ng-scope ng-pristine ng-valid needsclick form-control"
-                            placeholder="URL of the CouchDB server" required>
-                        <input bs-form-control type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  data-ng-model="flynn.user" label="User"
-                            label-class="col-xs-3 col-sm-2 col-lg-1" class="ng-scope ng-pristine ng-valid needsclick form-control"
-                            placeholder="User" required>
-                        <input bs-form-control type="password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  data-ng-model="flynn.password" label="Password"
-                            label-class="col-xs-3 col-sm-2 col-lg-1" class="ng-scope ng-pristine ng-valid needsclick form-control"
-                            placeholder="Password" required>
+    <div class="scrollable-content">
+        <form name="settingsForm" novalidate ng-submit="save()">
+            <div class="section container-fluid">
+                <ul class="nav  nav-tabs">
+                    <li><a href="#general" toggle="on" parent-active-class="active">General</a></li>
+                    <li><a href="#server" toggle="on" parent-active-class="active">Server</a></li>
+                </ul> 
+                <div class="panel tab-content">
+                    <div id="general" class="tab-pane" toggleable active-class="active" default="active" exclusion-group="myTabs">
+                        <br/>  
+                        <p>Define here default values to use, like default owner of Books.</p>        
+                        <div name="appDetails" class="form-group row">
+                            <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12">
+                                <input bs-form-control name="owner" type="text" data-ng-model="flynn.owner" label="Default Owner"
+                                    label-class="col-xs-12 col-sm-4 col-lg-4" class="col-xs-12 col-sm-8 col-lg-8 form-control"
+                                    placeholder="Default for owner value" required>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" ng-disabled="settingsForm.$invalid" class="btn btn-primary"><i class="fa fa-save"></i>  Save</button>
+                        </div>
+                    </div>
+
+                    <div id="server" class="tab-pane" toggleable active-class="active" exclusion-group="myTabs">
+                        <br/>  
+                        <p>If you like to syncronize with a remote CouchDB activate the remote sync here:</p>     
+                        <div name="serverSync" class="form-group row">
+                            <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12">
+                                <switch name="remoteSync" data-ng-model="flynn.remotesync"></switch>
+                            </div>
+                        </div>        
+                        <div name="serverDetails" class="form-group row">
+                            <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12" ng-show="flynn.remotesync" >
+                                <input bs-form-control name="couchdb" type="url" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-ng-model="flynn.couchdb" 
+                                    label="CouchDB server" label-class="col-xs-12 col-sm-4 col-lg-4" class="col-xs-12 col-sm-8 col-lg-8 form-control"
+                                    placeholder="URL of the CouchDB server" ng-required="flynn.remotesync === true">
+                                <input bs-form-control name="user" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-ng-model="flynn.user" 
+                                    label="User" label-class="col-xs-12 col-sm-4 col-lg-4" class="col-xs-12 col-sm-8 col-lg-8 form-control"
+                                    placeholder="User" ng-required="flynn.remotesync === true">
+                                <input bs-form-control name="password" type="password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-ng-model="flynn.password" 
+                                    label="Password" label-class="col-xs-12 col-sm-4 col-lg-4" class="col-xs-12 col-sm-8 col-lg-8 form-control"
+                                    placeholder="User" ng-required="flynn.remotesync === true">
+                            </div>
+                        </div>
+                        <br/>                       
+                        <div class="form-actions">
+                            <button type="submit" ng-disabled="settingsForm.$invalid" class="btn btn-primary"><i class="fa fa-save"></i>  Save</button>
+                            <button type="button" ng-click="sync()" ng-show="serverEnabled"class="btn"><i class="fa fa-sync"></i>  Sync</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div bs-panel class="form-actions">
-                <button ng-click="save()" class="btn btn-primary"><i class="fa fa-save"></i>  Save</button>
-                <button ng-click="sync()" class="btn btn-primary"><i class="fa fa-sync"></i>  Sync</button>
-
             </div>
         </form>
     </div>
