@@ -133,6 +133,8 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
 
         function search() {
             var searchQuery = $scope.searchQuery;
+            // reset search
+            booksInventory = {};
 
             $inventory.read().then(onSuccess, onError);
 
@@ -140,9 +142,7 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                 booksInventory = response.books;
             }
 
-            function onError(response) {
-                booksInventory = {};
-            }
+            function onError(response) {}
 
             if (searchQuery) {
                 $log.debug("Start searching with criteria: " + JSON.stringify(searchQuery));

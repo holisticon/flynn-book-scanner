@@ -222,7 +222,6 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                         var response = {};
                         if (!err) {
                             $log.info("Successfully added book");
-                            $log.trace("Saved book: " + JSON.stringify(result));
                         } else {
                             saveSuccess = false;
                         }
@@ -288,7 +287,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
             saveRemote: function(pBookToSave) {
                 var deferred = $q.defer(),
                     credentials = $settings.load();
-                $log.debug('Starting save for book: ' + JSON.stringify(pBookToSave));
+                $log.debug('Starting save for book: ' + pBookToSave.value.volumeInfo.title);
                 //var bookResource = new BookResource(book);
                 $http({
                     method: 'POST',
@@ -362,7 +361,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                                     var bookEntry = rows[id].doc;
                                     // only add complet entries to results
                                     if (bookEntry.value && bookEntry.value.volumeInfo) {
-                                        $log.debug("Read following valid book entry: " + JSON.stringify(bookEntry));
+                                        $log.debug("Read following valid book entry: " + bookEntry.value.volumeInfo.title);
                                         books.push(bookEntry);
                                     }
                                 }
@@ -402,17 +401,19 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                             'value.volumeInfo.authors',
                             'value.volumeInfo.publishedDate'
                         ],
-                        mm: '10%',
+                        mm: '30%',
                         include_docs: true
                     }).then(function(res) {
-                        $log.debug("Got following result: " + JSON.stringify(res));
                         var rows = res.rows;
                         if (rows && rows.length > 0) {
+                            $log.debug("Got " + rows.length + " results.");
                             response.books = {};
                             for (var id in rows) {
                                 var bookEntry = rows[id].doc;
                                 response.books[id] = bookEntry;
                             }
+                        } else {
+                            $log.debug("Got no results.");
                         }
                         deferred.resolve(response);
                     }).catch(function(err) {
