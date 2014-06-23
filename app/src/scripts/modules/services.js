@@ -447,7 +447,7 @@ app.service('SettingsService', ['$rootScope', 'localStorageService',
         return {
             save: function(user, password, couchdb, googleApiKey) {
                 localStorage.clearAll();
-                localStorage.add('flynn.settings', {
+                localStorage.add('flynn_app.settings', {
                     'user': user,
                     'password': password,
                     'couchdb': couchdb,
@@ -456,7 +456,7 @@ app.service('SettingsService', ['$rootScope', 'localStorageService',
             },
             load: function() {
                 console.log("Loading settings from local storage");
-                var settings = localStorage.get('flynn.settings');
+                var settings = localStorage.get('flynn_app.settings');
                 // TODO check settings
                 if (settings) {
                     settings.valid = true;
