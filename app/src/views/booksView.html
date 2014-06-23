@@ -26,11 +26,12 @@
 			<div overlay="overlaySearchEntry">
 				<h4 class="overlay-title">{{selectedBook.value.volumeInfo.title}}</h4>
 				<h5>{{selectedBook.value.volumeInfo.subtitle}} ({{selectedBook.value.volumeInfo.pageCount}} pages)</h5>
-				<img id="bookThumbnail" class="img-thumbnail" alt="book image" ng-show="selectedBook.value.volumeInfo.imageLinks.thumbnail" ng-src="{{selectedBook.value.volumeInfo.imageLinks.thumbnail}}" />
+				<img id="bookThumbnail" class="img-thumbnail" alt="book image" ng-show="selectedBook.value.volumeInfo.imageLinks.smallThumbnail" ng-src="{{selectedBook.value.volumeInfo.imageLinks.smallThumbnail}}" />
+				<p>{{selectedBook.value.volumeInfo.description}}</p>
 				<div class="text-left">
 					<div class="row">
 						<div class="col-xs-3">
-							<label>ISBN-13:</label>
+							<label>ISBN:</label>
 						</div>
 						<div class="col-xs-9">
 							<div>{{selectedBook.value.volumeInfo.industryIdentifiers[1].identifier}}</div>
@@ -44,7 +45,7 @@
 							<div>{{selectedBook.authorInfo}}</div>						
 						</div>
 					</div>
-					<div class="row" ng-show="selectedBook.volumeInfo.publisher">
+					<div class="row" ng-show="selectedBook.value.volumeInfo.publisher">
 						<div class="col-xs-3">
 							<label>Publisher:</label>
 						</div>

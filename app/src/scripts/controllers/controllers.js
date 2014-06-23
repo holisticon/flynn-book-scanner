@@ -32,6 +32,15 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
                         bookEntries[isbn].count = 1;
                         bookEntries[isbn].docs = [];
                         bookEntries[isbn].docs.push(itemInfo);
+                        var authorInfo = "";
+                        var authorCount = itemInfo.value.volumeInfo.authors.length;
+                        for (var itemIndex in itemInfo.value.volumeInfo.authors) {
+                            authorInfo += itemInfo.value.volumeInfo.authors[itemIndex];
+                            if (itemIndex < authorCount - 1) {
+                                authorInfo += ", ";
+                            }
+                        }
+                        bookEntries[isbn].authorInfo = authorInfo;
                         resultsFound = true;
                     }
                 }
@@ -55,15 +64,7 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
             blockUI.start();
             var book = pSelectedBookValue;
             $log.debug('Showing details for book: ' + book.value.volumeInfo.title);
-            var authorInfo = "";
-            var authorCount = book.value.volumeInfo.authors.length;
-            for (var itemIndex in book.value.volumeInfo.authors) {
-                authorInfo += book.value.volumeInfo.authors[itemIndex];
-                if (itemIndex < authorCount - 1) {
-                    authorInfo += ", ";
-                }
-            }
-            book.authorInfo = authorInfo;
+
             $scope.selectedBook = book;
             $scope.toggle('overlaySearchEntry');
             blockUI.stop();

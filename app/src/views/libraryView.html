@@ -1,0 +1,40 @@
+<div content-for="title">
+  <span>Library View</span>
+</div>
+<div class="scrollable">
+    <div class="scrollable-content container section">
+        <form name="libraryForm">
+            <div content-for="section-menu">
+                <button class="btn btn-default" ng-click="load()"> <i class="fa fa-refresh"></i> Refresh</button>
+            </div>
+        </form>
+        <div id="carousel" class="carousel">
+            <div class="carousel-inner">
+                <div ng-repeat="book in books" href="" class="item" carousel-item>
+                      <div class="carousel-content">                      
+                        <h4>{{book.value.volumeInfo.title}}</h4>
+                        <h5>{{book.value.volumeInfo.subtitle}}</h5>
+                        <p ng-show="book.authorInfo"> Author: {{book.authorInfo}}</p>
+                        <p>{{book.value.volumeInfo.pageCount}} pages</p>
+                        <p>ISBN: {{book.value.volumeInfo.industryIdentifiers[1].identifier}}</p>
+                        <p ng-show="book.value.publisher">Publisher: {{selectedBook.value.volumeInfo.publisher}} ({{selectedBook.value.volumeInfo.publishedDate}}) </p>
+                        <img id="bookThumbnail" alt="book image" ng-show="book.value.volumeInfo.imageLinks.thumbnail" ng-src="{{book.value.volumeInfo.imageLinks.thumbnail}}" />
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- {{book}} -->
+
+
+
+<!-- Thumbnail (big)
+Autors (alle)
+Title
+Subtitle
+Publisher
+Publish Date
+ISBN
+PrintPageCount
+Description -->
