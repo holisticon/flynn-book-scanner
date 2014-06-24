@@ -339,6 +339,17 @@ module.exports = function (grunt) {
     'autoprefixer',
     'concat',
     'copy:dist',
+    'rev',
+    'usemin'
+  ]);
+
+  grunt.registerTask('release', [
+    'clean:dist',
+    'useminPrepare',
+    'concurrent:dist',
+    'autoprefixer',
+    'concat',
+    'copy:dist',
     'cdnify',
     'ngmin',
     'cssmin',

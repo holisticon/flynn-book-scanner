@@ -15,7 +15,7 @@ function errorDialogClosed($rootScope, $scope, $log) {
  */
 function showErrorDialog($rootScope, $scope, $log, blockUI, errorTitle, errorCode, errorDetails) {
     blockUI.start();
-    navigator.notification.alert(errorCode + "\n" + errorDetails, errorDialogClosed($rootScope, $scope, $log), "Error occurred" + errorTitle);
+    navigator.notification.alert(errorCode + "\n" + errorDetails, errorDialogClosed($rootScope, $scope, $log), "Error - " + errorTitle);
     blockUI.stop();
 }
 
