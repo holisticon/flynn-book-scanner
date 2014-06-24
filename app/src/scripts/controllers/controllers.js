@@ -11,7 +11,7 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
          * to get the amount of book entries
          */
         function enrichDbData(pDbEntries) {
-            var result,
+            var result = null,
                 bookEntries = {},
                 resultsFound = false;
             if (pDbEntries) {
@@ -99,7 +99,7 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
             }
 
             function onError(response) {
-                $rootScope.$broadcast("server.error");
+                $scope.books = null;
                 $scope.searching = false;
             }
         }
