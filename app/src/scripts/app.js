@@ -1,7 +1,5 @@
 'use strict';
 
-//PouchDB.plugin(require('pouchdb-quick-search'));
-
 /**
  * Shows up the error dialog with the given error details
  * @param $rootScope root scope
@@ -69,7 +67,6 @@ app.config(['$httpProvider',
     }
 ]);
 
-
 /**
  * Configure blockUI
  */
@@ -83,8 +80,9 @@ app.config(function(blockUIConfigProvider) {
 
 });
 
-
-
+/**
+ * Creates a carousel to allow swipping between entries 
+ */
 app.directive("carouselItem", function($rootScope, $swipe) {
     return function(scope, element, attrs) {
         var startX = null;
@@ -101,17 +99,17 @@ app.directive("carouselItem", function($rootScope, $swipe) {
         }
 
         $swipe.bind(element, {
-            start: function(coords)  {
+            start: function(coords) {
                 startX = coords.x;
                 startY = coords.y;
             },
 
-            cancel: function(e)  {
+            cancel: function(e) {
                 translateAndRotate(0, 0, 0, 0);
                 e.stopPropagation();
             },
 
-            end: function(coords, e)  {
+            end: function(coords, e) {
                 if (endAction == "prev") {
                     $rootScope.carouselPrev(carouselId);
                 } else if (endAction == "next") {
@@ -121,7 +119,7 @@ app.directive("carouselItem", function($rootScope, $swipe) {
                 e.stopPropagation();
             },
 
-            move: function(coords)  {
+            move: function(coords) {
                 if (startX != null) {
                     var deltaX = coords.x - startX;
                     var deltaXRatio = deltaX / element[0].clientWidth;
@@ -145,9 +143,6 @@ app.controller('MainController', ['$scope', '$rootScope', '$location', 'blockUI'
     function($scope, $rootScope, $location, blockUI, $settings) {
         // Block the user interface
         blockUI.start();
-        // Cordova is ready
-        console.log("Device is ready!");
-
         $rootScope.$on("$routeChangeStart", function() {
 
         });

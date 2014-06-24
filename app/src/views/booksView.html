@@ -1,34 +1,40 @@
 <div content-for="title">
-  <span>Books</span>
+	<span>Books</span>
 </div>
 
-<input type="text" class="form-control app-search" placeholder="Type keywords to search ..." data-ng-model="searchQuery.fullTextSearch"  ng-change="search()"/>
-            
+<input type="text" class="form-control app-search" placeholder="Type keywords to search ..."
+	data-ng-model="searchQuery.fullTextSearch" ng-change="search()"/>
+
+			
 <div class="scrollable">
-    <div class="scrollable-content container section">
-        <form>
-        	<div content-for="section-menu">
-                <button class="btn btn-default" ng-click="load()"> <i class="fa fa-refresh"></i> Refresh</button>
-            </div>
-            <div bs-panel class="panel">
-                <div ng-if="!books" class="paragraphs" style="margin: 10px 0">No books found.</div>
-				<div ng-repeat="book in books">
-					<a ng-click="showBookDetails(book)" class="list-group-item">    
-						<div>                			
+
+	<div class="scrollable-content section">
+		<form>
+			<div content-for="section-menu">
+				<button class="btn btn-default" ng-click="load()">
+					<i class="fa fa-refresh"></i> Refresh
+				</button>
+			</div>
+			<div ng-if="!books && !searching" class="list-group-item">No books found.</div>
+			<div ng-if="searching" class="list-group-item">Searching ...</div>
+			<div ng-repeat="book in books">
+				<a ng-click="showBookDetails(book)" class="list-group-item">
+					<div>
 						<h3>{{book.value.volumeInfo.title}}</h3>
 						<p>{{book.value.volumeInfo.subtitle}}</p>
-						<p> by <span ng-repeat="author in book.value.volumeInfo.authors">{{author}}, </span> {{book.value.volumeInfo.publishedDate}}
-							<br>
-            			</p>
-            			</div>
-					</a>
-				</div>
-			</div>   
+						<p>	by <span ng-show="book.value.volumeInfo.authors" ng-repeat="author in book.value.volumeInfo.authors">
+							{{author}}, </span>
+							{{book.value.volumeInfo.publishedDate}} <br>
+						</p>
+					</div>
+				</a>
+			</div>
 			<div overlay="overlaySearchEntry">
 				<h4 class="overlay-title">{{selectedBook.value.volumeInfo.title}}</h4>
 				<h5>{{selectedBook.value.volumeInfo.subtitle}} ({{selectedBook.value.volumeInfo.pageCount}} pages)</h5>
-				<img id="bookThumbnail" class="img-thumbnail" alt="book image" ng-show="selectedBook.value.volumeInfo.imageLinks.smallThumbnail" ng-src="{{selectedBook.value.volumeInfo.imageLinks.smallThumbnail}}" />
-				<p>{{selectedBook.value.volumeInfo.description}}</p>
+				<img id="bookThumbnail" class="img-thumbnail" alt="book image"
+					ng-show="selectedBook.value.volumeInfo.imageLinks.smallThumbnail"
+					ng-src="{{selectedBook.value.volumeInfo.imageLinks.smallThumbnail}}"/>
 				<div class="text-left">
 					<div class="row">
 						<div class="col-xs-3">
@@ -43,7 +49,7 @@
 							<label>Author:</label>
 						</div>
 						<div class="col-xs-9">
-							<div>{{selectedBook.authorInfo}}</div>						
+							<div>{{selectedBook.authorInfo}}</div>
 						</div>
 					</div>
 					<div class="row" ng-show="selectedBook.value.volumeInfo.publisher">
@@ -51,7 +57,7 @@
 							<label>Publisher:</label>
 						</div>
 						<div class="col-xs-9">
-							<div>{{selectedBook.value.volumeInfo.publisher}} ({{selectedBook.value.volumeInfo.publishedDate}}) </div>
+							<div>{{selectedBook.value.volumeInfo.publisher}} ({{selectedBook.value.volumeInfo.publishedDate}})</div>
 						</div>
 					</div>
 					<div class="row">
@@ -61,13 +67,23 @@
 						<div class="col-xs-9">
 							<div>{{selectedBook.count}}</div>
 						</div>
-					</div>										
+					</div>
 					<br>
+					<div class="panel panel-default" ng-show="selectedBook.value.volumeInfo.description">
+				        <div class="panel-heading" toggle target="collapseDesc">
+				          <h6 class="panel-title"> Description </h6>
+				        </div>
+				        <div id="collapseDesc" toggleable active-class="in" class="panel-collapse collapse">
+				          <div class="panel-body">
+				            {{selectedBook.value.volumeInfo.description}}
+				          </div>
+				        </div>
+				    </div>	
 				</div>
 				<p toggle="off" bubble target="overlaySearchEntry">
 					<span class="btn btn-primary">Ok</span>
 				</p>
-			</div>  
+			</div>
 		</form>
 	</div>
 </div>

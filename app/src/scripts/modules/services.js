@@ -203,7 +203,8 @@ app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'Se
 
 app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'SettingsService', 'Base64',
     function($rootScope, $log, $http, $q, $settings, $base64) {
-        var NAME_OF_POUCHDB = 'flynnBookDB';
+        var config = $settings.load();
+        var NAME_OF_POUCHDB = config.dbName;
 
         function generateBookID() {
             var id = 'bookid_' + (new Date()).getTime() + Math.random();
@@ -239,56 +240,10 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
             return saveSuccess;
         };
         return {
-            sync: function(pSearchQuery) {
-                log.debug('Startin');
-
-
-                /*
-                var deferred = $q.defer(),
-                    credentials = $settings.load();
-                $http({
-                    method: 'GET',
-                    url: credentials.couchdb + '/_design/books/_view/all',
-                    timeout: credentials.timeout,
-                    headers: {
-                        'Authorization': 'Basic ' + $base64.encode(credentials.user + ':' + credentials.password),
-                        'Content-Type': 'application/json'
-                    }
-                }).then(onSuccess, onError);
-
-                function onSuccess(response) {
-                    var books = [];
-                    var rows = response.data.rows;
-                    if (rows) {
-                        for (var id in rows) {
-                            var bookEntry = rows[id];
-                            // only add complet entries to results
-                            if (bookEntry.value.volumeInfo) {
-                                $log.debug("Adding following valid book entry: " + JSON.stringify(bookEntry));
-                                books.push(bookEntry);
-                            }
-                        }
-                    }
-                    response.books = books;
-                    deferred.resolve(response);
-                }
-
-                function onError(response) {
-                    var errorCode = response.status;
-                    $log.error("Error during reading data from couchdb: " + errorCode);
-                    if (errorCode == 0) {
-                        $log.error("Network error!");
-                    }
-                    deferred.reject(response);
-                }
-                return deferred.promise;
-*/
-            },
             saveRemote: function(pBookToSave) {
                 var deferred = $q.defer(),
                     credentials = $settings.load();
                 $log.debug('Starting save for book: ' + pBookToSave.value.volumeInfo.title);
-                //var bookResource = new BookResource(book);
                 $http({
                     method: 'POST',
                     url: credentials.couchdb,
@@ -327,15 +282,14 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                     $log.error(error);
                 }
                 // TODO: Add authentical (rly, it's https already).
-                var credentials = $settings.load(),
-                    couchDbUrl = credentials.couchdb,
-                    authorization = credentials.user + ':' + credentials.password,
+                var couchDbUrl = config.couchdb,
+                    authorization = config.user + ':' + config.password,
                     remoteCouch = couchDbUrl.replace("://", "://" + authorization + "@"), // FIXME: just to try it out
                     opts = {
                         live: true
-                    },
-                    ç; // TODO: Move to Top, we only need one DB
-                $log.debug(remoteCouch);
+                    }
+                ; // TODO: Move to Top, we only need one DB
+                $log.debug("Using remote server: " + remoteCouch);
                 if (pouchDB) {
                     pouchDB.replicate.to(remoteCouch, opts, syncError);
                     pouchDB.replicate.from(remoteCouch, opts, syncError);
@@ -499,6 +453,7 @@ app.service('SettingsService', ['$rootScope', 'localStorageService',
                 if (settings) {
                     settings.valid = true;
                     settings.timeout = 20000;
+                    settings.dbName = 'flynnBookDB';
                 } else {
                     settings = {};
                     settings.valid = false;

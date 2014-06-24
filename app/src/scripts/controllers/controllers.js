@@ -6,6 +6,10 @@ var app = angular.module('flynnBookScannerApp');
 app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', 'LogService', 'SettingsService', 'InventoryService',
     function($rootScope, $scope, blockUI, $http, $log, $settings, $inventory) {
 
+        /**
+         * Reduces multiple db entries to set without duplicates. This method also counts the records
+         * to get the amount of book entries
+         */
         function enrichDbData(pDbEntries) {
             var result,
                 bookEntries = {},
@@ -47,12 +51,15 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
             return result;
         };
 
-        // https://host:port/flynn/_design/books/_view/all
         var credentials = $settings.load();
 
         // autoload
         load();
 
+        /**
+         * load data via inventory service
+         *
+         */
         function load() {
             blockUI.start();
             $scope.searchQuery = {};
@@ -69,8 +76,14 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
             }
         }
 
+        /**
+         * Perform search within the all books view.
+         * Currently only fulltext search is supported
+         *
+         */
         function search() {
             var searchQuery = $scope.searchQuery;
+            $scope.searching = true;
             if ($scope.searchQuery.fullTextSearch) {
                 $inventory.search(searchQuery).then(onSuccess, onError);
             } else {
@@ -79,24 +92,27 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
 
             function onSuccess(response) {
                 $scope.books = enrichDbData(response.books);
+                $scope.searching = false;
             }
 
             function onError(response) {
                 $rootScope.$broadcast("server.error");
+                $scope.searching = false;
             }
         }
 
+        /**
+         * On select show book details in popup
+         *
+         */
         function showBookDetails(pSelectedBookValue) {
             blockUI.start();
             var book = pSelectedBookValue;
             $log.debug('Showing details for book: ' + book.value.volumeInfo.title);
-
             $scope.selectedBook = book;
             $scope.toggle('overlaySearchEntry');
             blockUI.stop();
         }
-
-        $scope.books = null;
 
         // public methods
         $scope.load = load;
@@ -106,12 +122,19 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
     }
 ]);
 
+/**
+ * Controller to add new book entries to inventory
+ *
+ */
 app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$q', '$location', '$resource', 'LogService', 'SettingsService', 'InventoryService', 'GoogleBookService',
     function($rootScope, $scope, blockUI, $http, $q, $location, $resource, $log, $settings, $inventory, $books) {
         var saveSuccess,
             booksInventory,
             credentials = $settings.load();
 
+        /**
+         * Scan book via ISBN barcode
+         */
         function scan() {
             blockUI.start();
             cordova.plugins.barcodeScanner.scan(
@@ -131,27 +154,37 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
             blockUI.stop();
         }
 
+        /**
+         * Search a book to add via Google Book Search.
+         * Currently only isbn search is implemented.
+         *
+         */
         function search() {
+            blockUI.start();
             var searchQuery = $scope.searchQuery;
-            // reset search
-            booksInventory = {};
 
-            $inventory.read().then(onSuccess, onError);
+            if (searchQuery) {
+                // reset search
+                booksInventory = {};
+                $inventory.read().then(onSuccess, onError);
+            }
 
             function onSuccess(response) {
                 booksInventory = response.books;
+                $log.debug("Start searching with criteria: " + JSON.stringify(searchQuery));
+                retrieve(searchQuery);
+                blockUI.stop();
             }
 
-            function onError(response) {}
-
-            if (searchQuery) {
-                $log.debug("Start searching with criteria: " + JSON.stringify(searchQuery));
-                blockUI.start();
-                retrieve(searchQuery);
+            function onError(response) {
                 blockUI.stop();
             }
         }
 
+        /**
+         * Perform Google Book Search
+         *
+         */
         function retrieve(pSearchQuery) {
             $books.search(pSearchQuery).then(onSuccess, onError);
 
@@ -165,6 +198,10 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
             }
         }
 
+        /**
+         * Triggered from the UI if user selects a book which he wants to add.
+         *
+         */
         function selectBook(pSelectedBookValue) {
             blockUI.start();
             var newEntry = true,
