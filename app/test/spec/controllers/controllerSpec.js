@@ -58,6 +58,7 @@ describe('main', function() {
         response.books = books;
         deferred.resolve(response);
         spyOn(bookService, 'search').andReturn(deferred.promise);
+        spyOn(inventoryService, 'read').andReturn(deferred.promise);
       });
     });
 
