@@ -287,8 +287,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                     remoteCouch = couchDbUrl.replace("://", "://" + authorization + "@"), // FIXME: just to try it out
                     opts = {
                         live: true
-                    }
-                ; // TODO: Move to Top, we only need one DB
+                    }; // TODO: Move to Top, we only need one DB
                 $log.debug("Using remote server: " + remoteCouch);
                 if (pouchDB) {
                     pouchDB.replicate.to(remoteCouch, opts, syncError);
@@ -374,11 +373,15 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                         $log.error("Search error");
                         deferred.reject(response);
                     });
+                } else  {
+                    $log.error("Search error");
+                    deferred.reject(response);
                 }
                 return deferred.promise;
             },
             save: function(pBookToSave) {
-                var response = {},
+                var deferred = $q.defer(),
+                    response = {},
                     credentials = $settings.load(),
                     saveSuccess = false,
                     errorOccurred = false,
@@ -392,6 +395,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                         // otherwise we need to update
                         $log.info("Need to create record");
                         saveSuccess = saveToDB(flynnDB, pBookToSave, bookEntriesToAdd);
+                        deferred.resolve(response);
                     } else {
                         // update already saved entry, maybe changed amount?   
                         var isbn = pBookToSave.value.volumeInfo.industryIdentifiers[1].identifier;
@@ -407,23 +411,23 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                                 var countOfExistingBooks = foundExistingBookEntries.rows.length;
                                 if (countOfExistingBooks == pBookToSave.count) {
                                     $log.info("No need to update. Amount not changed");
-                                    errorOccurred = false;
+                                    response.noUpdate = true;
+                                    deferred.resolve(response);
                                 } else {
                                     bookEntriesToAdd = pBookToSave.count - countOfExistingBooks;
                                     // otherwise we need to update
                                     $log.info("Need to update/add another record");
                                     saveSuccess = saveToDB(flynnDB, pBookToSave, bookEntriesToAdd);
+                                    deferred.resolve(response);
                                 }
                             } else {
                                 $log.error("Error during reading orginal book entry: " + JSON.stringify(err));
-                                errorOccurred = true;
+                                deferred.reject(response);
                             }
                         });
                     }
                 }
-                // TODO error handling
-                response.saveSuccess = saveSuccess;
-                return response;
+                return deferred.promise;
             }
         };
 

@@ -28,12 +28,15 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
                         bookEntries[isbn].count = 1;
                         bookEntries[isbn].docs = [];
                         bookEntries[isbn].docs.push(itemInfo);
-                        var authorInfo = "";
-                        var authorCount = itemInfo.value.volumeInfo.authors.length;
-                        for (var itemIndex in itemInfo.value.volumeInfo.authors) {
-                            authorInfo += itemInfo.value.volumeInfo.authors[itemIndex];
-                            if (itemIndex < authorCount - 1) {
-                                authorInfo += ", ";
+                        var authorInfo;
+                        if (itemInfo.value.volumeInfo.authors) {
+                            authorInfo = '';
+                            var authorCount = itemInfo.value.volumeInfo.authors.length;
+                            for (var itemIndex in itemInfo.value.volumeInfo.authors) {
+                                authorInfo += itemInfo.value.volumeInfo.authors[itemIndex];
+                                if (itemIndex < authorCount - 1) {
+                                    authorInfo += ', ';
+                                }
                             }
                         }
                         bookEntries[isbn].authorInfo = authorInfo;
@@ -128,8 +131,7 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
  */
 app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$q', '$location', '$resource', 'LogService', 'SettingsService', 'InventoryService', 'GoogleBookService',
     function($rootScope, $scope, blockUI, $http, $q, $location, $resource, $log, $settings, $inventory, $books) {
-        var saveSuccess,
-            booksInventory,
+        var booksInventory,
             credentials = $settings.load();
 
         /**
@@ -198,6 +200,17 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
             }
         }
 
+        function reset() {
+            blockUI.start();
+            $scope.books = null;
+            $scope.infoMsg = null;
+            $scope.searchQuery = null;
+            $scope.selectedBook = null;
+            $scope.searchQuery = {};
+            blockUI.stop();
+            $location.path("/book");
+        }
+
         /**
          * Triggered from the UI if user selects a book which he wants to add.
          *
@@ -208,7 +221,6 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                 book = pSelectedBookValue,
                 isbn = pSelectedBookValue.value.volumeInfo.industryIdentifiers[1].identifier,
                 books = booksInventory,
-                credentials = $settings.load(),
                 authorInfo = "";
             $log.debug('Showing details for book: ' + JSON.stringify(book.value));
             for (var itemIndex in book.value.volumeInfo.authors) {
@@ -254,22 +266,22 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
         function save(book) {
             blockUI.start();
             $log.debug("Starting save for book: ");
-            var response = $inventory.save(book);
-            if (response.saveSuccess) {
-                // TODO add confirm
+            $inventory.save(book).then(onSuccess, onError);
+
+            function onSuccess(response) {
                 $log.info("Successfully added book");
-                $scope.infoMsg = "Book successfully added.";
-                $scope.searchQuery = null;
-                $scope.books = {};
-                saveSuccess = true;
                 blockUI.stop();
-                $location.path("/book");
-            } else {
-                if (response.errorOccurred) {
-                    $rootScope.$broadcast("booksave.error");
-                    $log.debug("Error during book saving: ");
-                    $scope.infoMsg = null;
+                if (response.noUpdate) {
+                    navigator.notification.alert("Book already added. Please increase amount.", reset, "Book");
+                } else  {
+                    navigator.notification.alert("Book successfully added.", reset, "Book");
                 }
+            }
+
+            function onError(response) {
+                $rootScope.$broadcast("booksave.error");
+                $log.debug("Error during book saving: ");
+                $scope.infoMsg = null;
                 blockUI.stop();
             }
         }
@@ -289,7 +301,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogS
     function($rootScope, $scope, $location, $log, $settings, $inventory) {
 
         var defaultCouch = 'https://server.holisticon.de/couchdb/flynn/',
-            defaultUser = '<LDAP_Nutzer>',
+            defaultUser = '<LDAP-User>',
             defaultPassword,
             defaultOwner = 'Holisticon AG',
             defaultApiKey = 'AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY';

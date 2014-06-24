@@ -1,5 +1,9 @@
 'use strict';
 
+function errorDialogClosed($rootScope, $scope, $log) {
+
+}
+
 /**
  * Shows up the error dialog with the given error details
  * @param $rootScope root scope
@@ -9,19 +13,11 @@
  * @param errorCode error code to use
  * @param errorDetails message to display
  */
-function showErrorDialog($rootScope, $scope, blockUI, errorTitle, errorCode, errorDetails) {
-    // handle error
-    var errorMsg = {
-        title: errorTitle,
-        code: errorCode,
-        details: errorDetails
-    };
-    $rootScope.error_msg = errorMsg; // Unblock the user interface
+function showErrorDialog($rootScope, $scope, $log, blockUI, errorTitle, errorCode, errorDetails) {
+    blockUI.start();
+    navigator.notification.alert(errorCode + "\n" + errorDetails, errorDialogClosed($rootScope, $scope, $log), "Error occurred" + errorTitle);
     blockUI.stop();
-    $scope.toggle('overlayError');
 }
-
-
 
 var app = angular.module('flynnBookScannerApp', [
     'ngCookies',
@@ -81,7 +77,7 @@ app.config(function(blockUIConfigProvider) {
 });
 
 /**
- * Creates a carousel to allow swipping between entries 
+ * Creates a carousel to allow swipping between entries
  */
 app.directive("carouselItem", function($rootScope, $swipe) {
     return function(scope, element, attrs) {
@@ -139,41 +135,42 @@ app.directive("carouselItem", function($rootScope, $swipe) {
 /**
  * Controller for the app.
  */
-app.controller('MainController', ['$scope', '$rootScope', '$location', 'blockUI', 'SettingsService',
-    function($scope, $rootScope, $location, blockUI, $settings) {
-        // Block the user interface
-        blockUI.start();
-        $rootScope.$on("$routeChangeStart", function() {
+app.controller('MainController', ['$scope', '$rootScope', '$location', 'blockUI', 'SettingsService', 'LogService',
+    function($scope, $rootScope, $location, blockUI, $settings, $log) {
 
+        $rootScope.$on("$routeChangeStart", function() {
+            blockUI.start();
         });
-        $rootScope.$on("$routeChangeSuccess", function() {});
+        $rootScope.$on("$routeChangeSuccess", function() {
+            blockUI.stop();
+        });
 
         $rootScope.$on('settings.invalid', function(event) {
-            showErrorDialog($rootScope, $scope, blockUI, "Settings invalid", 1001, "Settings seems to be incorrect. Please correct or check network settings.");
+            showErrorDialog($rootScope, $scope, $log, blockUI, "Settings invalid", 1001, "Settings seems to be incorrect. Please correct or check network settings.");
         });
 
         $rootScope.$on('server.timeout', function(event) {
-            showErrorDialog($rootScope, $scope, blockUI, "Timeout", 2001, "No answer from server");
+            showErrorDialog($rootScope, $scope, $log, blockUI, "Timeout", 2001, "No answer from server");
         });
 
         $rootScope.$on('server.error', function(event) {
-            showErrorDialog($rootScope, $scope, blockUI, "Books couldn't be loaded", 2002, "The server didn't respond. Please check your network settings.");
+            showErrorDialog($rootScope, $scope, $log, blockUI, "Books couldn't be loaded", 2002, "The server didn't respond. Please check your network settings.");
         });
 
         $rootScope.$on('login.failed', function(event) {
-            showErrorDialog($rootScope, $scope, blockUI, "Settings incorrect", 3001, "Please check your settings");
+            showErrorDialog($rootScope, $scope, $log, blockUI, "Settings incorrect", 3001, "Please check your settings");
         });
 
         $rootScope.$on('barcode.error', function(event) {
-            showErrorDialog($rootScope, $scope, blockUI, "Barcode error", 4001, "Barcode reader not working. Did you enable camera access?");
+            showErrorDialog($rootScope, $scope, $log, blockUI, "Barcode error", 4001, "Barcode reader not working. Did you enable camera access?");
         });
 
         $rootScope.$on('booksearch.invalid', function(event) {
-            showErrorDialog($rootScope, $scope, blockUI, "Book couldn't be loaded", 5001, "The book search wasn't successfull. Server didn't respond.");
+            showErrorDialog($rootScope, $scope, $log, blockUI, "Book couldn't be loaded", 5001, "The book search wasn't successfull. Server didn't respond.");
         });
 
         $rootScope.$on('booksave.error', function(event) {
-            showErrorDialog($rootScope, $scope, blockUI, "Book couldn't be saved", 5101, "The book save wasn't successfull. Server didn't respond.");
+            showErrorDialog($rootScope, $scope, $log, blockUI, "Book couldn't be saved", 5101, "The book save wasn't successfull. Server didn't respond.");
         });
 
         $scope.userAgent = navigator.userAgent;
@@ -188,6 +185,6 @@ app.controller('MainController', ['$scope', '$rootScope', '$location', 'blockUI'
         } else {
             blockUI.stop();
         }
-        $rootScope.settings = settings;        
+        $rootScope.settings = settings;
     }
 ]);

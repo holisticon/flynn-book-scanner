@@ -33,16 +33,6 @@
         <div ng-include="'views/navbarView.html'" class="sidebar sidebar-left"
         toggleable parent-active-class="sidebar-left-in" id="mainSidebar"></div>
 
-
-        <div overlay="overlayError">
-            <h4 class="overlay-title">Error occurred - {{ error_msg.title }}</h4>
-            <p>{{ error_msg.code }}</p>
-            <p>{{ error_msg.details }}</p>
-            <p toggle="off" bubble target="overlayError">
-                <span class="btn btn-primary">Ok</span>
-            </p>
-        </div>
-
        <div class="app">
 
             <div class="navbar navbar-app navbar-absolute-top">

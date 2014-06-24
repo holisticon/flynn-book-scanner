@@ -50,6 +50,9 @@
 		B9220C7556BE405FBBE325E0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3236C793955B464B8BF99B06 /* AVFoundation.framework */; };
 		BE5D4C98094D4810A99724C1 /* CDVBarcodeScanner.mm in Sources */ = {isa = PBXBuildFile; fileRef = 18AED20879B34E12AE88BA5F /* CDVBarcodeScanner.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
+		8E4C1567DB594ED489195033 /* CDVNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F12136768946B6A8F68E02 /* CDVNotification.m */; };
+		C30539A86DD7411B98EB7141 /* CDVNotification.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B68B231341EB41379E9F6C49 /* CDVNotification.bundle */; };
+		DF470C4ECC024FFB9D803EC2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F286945552BC4DF39B67DE04 /* AudioToolbox.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +134,10 @@
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = Flynn/config.xml; sourceTree = "<group>"; };
+		B9F12136768946B6A8F68E02 /* CDVNotification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVNotification.m"; path = "org.apache.cordova.dialogs/CDVNotification.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		9F1A9F4A7A8E4AAFA09D6B63 /* CDVNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVNotification.h"; path = "org.apache.cordova.dialogs/CDVNotification.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		B68B231341EB41379E9F6C49 /* CDVNotification.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "CDVNotification.bundle"; path = "CDVNotification.bundle"; sourceTree = "<group>"; };
+		F286945552BC4DF39B67DE04 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "AudioToolbox.framework"; path = "System/Library/Frameworks/AudioToolbox.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +155,7 @@
 				3E8BC12CA5334A17824A49A7 /* CoreVideo.framework in Frameworks */,
 				47775AADD8DF4FC8B7587108 /* QuartzCore.framework in Frameworks */,
 				20FDCA004A534E338BF309A4 /* libsqlite3.dylib in Frameworks */,
+				DF470C4ECC024FFB9D803EC2 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +238,7 @@
 				308D05311370CCF300D202BF /* splash */,
 				8D1107310486CEB800E47090 /* Flynn-Info.plist */,
 				0D692A25A27040C28AEBC678 /* scannerOverlay.xib */,
+				B68B231341EB41379E9F6C49 /* CDVNotification.bundle */,
 			);
 			name = Resources;
 			path = Flynn/Resources;
@@ -247,6 +256,7 @@
 				E2D430E07DCC4C87AD17E201 /* CoreVideo.framework */,
 				97FE5AFD753C40C297128B1C /* QuartzCore.framework */,
 				CC06B0E001FE4126872ED7DB /* libsqlite3.dylib */,
+				F286945552BC4DF39B67DE04 /* AudioToolbox.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -273,6 +283,8 @@
 				D18153A7EB89495A83711625 /* zxing-all-in-one.h */,
 				9708FBF0F06F4B15A8DF476F /* SQLitePlugin.m */,
 				B3D7759745C84FC4B1E946E7 /* SQLitePlugin.h */,
+				B9F12136768946B6A8F68E02 /* CDVNotification.m */,
+				9F1A9F4A7A8E4AAFA09D6B63 /* CDVNotification.h */,
 			);
 			name = Plugins;
 			path = Flynn/Plugins;
@@ -437,6 +449,7 @@
 				7E7966E51810823500FA85AD /* icon-76@2x.png in Resources */,
 				30FC414916E50CA1004E6F35 /* icon-72@2x.png in Resources */,
 				6E7C63E72C4A49A8B217FBDF /* scannerOverlay.xib in Resources */,
+				C30539A86DD7411B98EB7141 /* CDVNotification.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +487,7 @@
 				BE5D4C98094D4810A99724C1 /* CDVBarcodeScanner.mm in Sources */,
 				33D87C1C3C1C44649B204C00 /* zxing-all-in-one.cpp in Sources */,
 				431B01DCBF5D474AAABDD1F3 /* SQLitePlugin.m in Sources */,
+				8E4C1567DB594ED489195033 /* CDVNotification.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

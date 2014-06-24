@@ -19,6 +19,10 @@
                         {
                             "xml": "<feature name=\"SQLitePlugin\"><param name=\"android-package\" value=\"org.pgsqlite.SQLitePlugin\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Notification\"><param name=\"android-package\" value=\"org.apache.cordova.dialogs.Notification\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -567,6 +571,9 @@
             "PACKAGE_NAME": "de.holisticon.flynn"
         },
         "com.phonegap.plugins.sqlite": {
+            "PACKAGE_NAME": "de.holisticon.flynn"
+        },
+        "org.apache.cordova.dialogs": {
             "PACKAGE_NAME": "de.holisticon.flynn"
         }
     },
