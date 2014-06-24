@@ -3,7 +3,7 @@
 </div>
 <div class="scrollable">
     <div class="scrollable-content container section">
-        <form name="libraryForm">
+        <form id="bookLibrary" data-ng-init="load()">
             <div content-for="section-menu">
                 <button class="btn btn-default" ng-click="load()"> <i class="fa fa-refresh"></i> Refresh</button>
             </div>

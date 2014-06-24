@@ -273,7 +273,9 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                 var deferred = $q.defer(),
                     books = null,
                     response = {},
-                    flynnDB = new PouchDB(NAME_OF_POUCHDB);
+                    flynnDB = new PouchDB(NAME_OF_POUCHDB, {
+                        adapter: 'websql'
+                    });
                 if (flynnDB) {
                     $log.debug("Using db-adapter: " + flynnDB.adapter);
                     flynnDB.allDocs({
@@ -315,7 +317,9 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
             search: function(pSearchQuery) {
                 var deferred = $q.defer(),
                     response = {},
-                    flynnDB = new PouchDB(NAME_OF_POUCHDB);
+                    flynnDB = new PouchDB(NAME_OF_POUCHDB, {
+                        adapter: 'websql'
+                    });
                 $log.debug("Starting search: " + JSON.stringify(pSearchQuery));
                 // check if we have fulltext search
                 if (pSearchQuery.fullTextSearch) {
@@ -356,22 +360,25 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                     if (pSearchQuery.isbn) {
                         var isbn = '' + pSearchQuery.isbn;
                         $log.debug("Starting isbn-search: " + isbn);
-                        flynnDB.query(function(doc, emit) {
-                            if (doc.value.volumeInfo.industryIdentifiers[1].identifier == isbn) {
-                                emit(doc.value.volumeInfo.title);
-                            }
+                        flynnDB.allDocs({
+                            include_docs: true,
+                            descending: true
                         }, function(err, res) {
                             $rootScope.$apply(function() {
                                 if (!err) {
                                     var rows = res.rows;
                                     if (rows && rows.length > 0) {
-                                        $log.debug("Got " + rows.length + " results.");
-                                        response.count = rows.length;
                                         response.books = {};
+                                        var count = 0;
                                         for (var id in rows) {
-                                            var bookEntry = rows[id];
-                                            response.books[id] = bookEntry;
+                                            var bookEntry = rows[id].doc;
+                                            if (bookEntry.value.volumeInfo.industryIdentifiers[1].identifier == isbn) {
+                                                response.books[id] = bookEntry;
+                                                count++;
+                                            }
                                         }
+                                        response.count = count;
+                                        $log.debug("Got " + count + " results.");
                                         deferred.resolve(response);
                                     } else {
                                         $log.debug("Got no results.");
@@ -398,7 +405,9 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                     credentials = $settings.load(),
                     saveSuccess = false,
                     errorOccurred = false,
-                    flynnDB = new PouchDB(NAME_OF_POUCHDB);
+                    flynnDB = new PouchDB(NAME_OF_POUCHDB, {
+                        adapter: 'websql'
+                    });
                 $log.debug('Starting save for book: ' + pBookToSave.value.volumeInfo.title);
                 if (flynnDB) {
                     var bookEntriesToAdd = 0,

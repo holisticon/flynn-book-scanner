@@ -3,7 +3,7 @@
 </div>
 <div class="scrollable">
     <div class="scrollable-content container section">
-        <form name="searchForm" type="search" ng-submit="search()">
+        <form name="searchForm" type="search" novalidate ng-submit="search()">
             <div class="panel-heading">
                 <h2 class="panel-title">
                 Search a book
@@ -88,8 +88,8 @@
                         <br>
                     </div>
                     <p toggle="off" bubble target="overlaySelectedBookEntry">
-                        <button ng-click="save(selectedBook)" class="btn btn-primary"><i class="fa fa-save"></i>  Save</button>
-                        <button class="btn">Cancel</button>
+                        <button button="button" ng-click="save(selectedBook)" class="btn btn-primary"><i class="fa fa-save"></i>  Save</button>
+                        <button button="button" class="btn">Cancel</button>
                     </p>
                 </div>
             </div>

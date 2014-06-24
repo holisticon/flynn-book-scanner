@@ -3,9 +3,8 @@
 // http://127.0.0.1:9000/#/book?isbn=9783499606601
 var app = angular.module('flynnBookScannerApp');
 
-app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', 'LogService', 'SettingsService', 'InventoryService',
-    function($rootScope, $scope, blockUI, $http, $log, $settings, $inventory) {
-
+app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', 'LogService', 'InventoryService',
+    function($rootScope, $scope, blockUI, $http, $log, $inventory) {
         /**
          * Reduces multiple db entries to set without duplicates. This method also counts the records
          * to get the amount of book entries
@@ -53,11 +52,6 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
             }
             return result;
         };
-
-        var credentials = $settings.load();
-
-        // autoload
-        load();
 
         /**
          * load data via inventory service
@@ -121,7 +115,6 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
         $scope.load = load;
         $scope.search = search;
         $scope.showBookDetails = showBookDetails;
-
     }
 ]);
 
@@ -201,14 +194,16 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
         }
 
         function reset() {
-            blockUI.start();
-            $scope.books = null;
-            $scope.infoMsg = null;
-            $scope.searchQuery = null;
-            $scope.selectedBook = null;
-            $scope.searchQuery = {};
-            blockUI.stop();
-            $location.path("/book");
+            $rootScope.$apply(function() {
+                blockUI.start();
+                $scope.books = null;
+                $scope.infoMsg = null;
+                $scope.searchQuery = null;
+                $scope.selectedBook = null;
+                $scope.searchQuery = {};
+                blockUI.stop();
+                $location.path("/book");
+            });
         }
 
         /**
@@ -272,8 +267,9 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                 $log.info("Successfully added book");
                 blockUI.stop();
                 if (response.noUpdate) {
-                    navigator.notification.alert("Book already added. Please increase amount.", reset, "Book");
+                    navigator.notification.alert("Book already added. Please increase amount.");
                 } else  {
+                    $scope.toggle("overlaySelectedBookEntry");
                     navigator.notification.alert("Book successfully added.", reset, "Book");
                 }
             }
