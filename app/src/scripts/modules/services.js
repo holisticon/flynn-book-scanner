@@ -201,68 +201,51 @@ app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'Se
     }
 ]);
 
-app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'SettingsService', 'Base64',
-    function($rootScope, $log, $http, $q, $settings, $base64) {
+app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'SettingsService', 'Base64', 'localStorageService',
+    function($rootScope, $log, $http, $q, $settings, $base64, localStorage) {
         var config = $settings.load();
         var NAME_OF_POUCHDB = config.dbName;
 
-        function generateBookID() {
-            var id = 'bookid_' + (new Date()).getTime() + Math.random();
-            return id;
-        };
-
         return {
-            saveRemote: function(pBookToSave) {
-                var deferred = $q.defer();
-                $log.debug('Starting save for book: ' + pBookToSave.value.volumeInfo.title);
-                $http({
-                    method: 'POST',
-                    url: config.couchdb,
-                    data: pBookToSave,
-                    timeout: config.timeout,
-                    xhrFields: {
-                        withCredentials: true
-                    },
-                    headers: {
-                        'Authorization': 'Basic ' + $base64.encode(config.user + ':' + config.password),
-                        'Access-Control-Allow-Origin': 'localhost',
-                        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-                        'Content-Type': 'application/json'
-                    }
-                }).then(onSuccess, onError);
-
-                function onSuccess(response) {
-                    // TODO add confirm
-                    $log.info("Successfully added book");
-                    response.saveSuccess = true;
-                    deferred.resolve(response);
+            logSync: function(pLogCategory, pLogEntry) {
+                var now = new Date();
+                var logger = localStorage.get('flynn_app.log'),
+                    logEntry = {
+                        date: new Date(),
+                        category: pLogCategory,
+                        entry: pLogEntry
+                    };
+                if (!logger) {
+                    var sync = {}; // init
+                    localStorage.add('flynn_app.log', {
+                        sync: []
+                    });
+                    logger = localStorage.get('flynn_app.log');
                 }
-
-                function onError(response) {
-                    var errorCode = response.status;
-                    $log.error("Error during saving data to couchdb: " + errorCode);
-                    if (errorCode == 0) {
-                        $log.error("Network error!");
-                    }
-                    deferred.reject(response);
-                }
-                return deferred.promise;
+                logger.sync.push(logEntry);
+                localStorage.set('flynn_app.log', logger);
             },
             syncRemote: function() {
                 function syncError(error) {
                     $log.error(error);
+                    self.logSync("Error", JSON.stringify(error));
                 }
                 // TODO: Add authentical (rly, it's https already).
                 var couchDbUrl = config.couchdb,
+                    self = this,
+                    localDB = new PouchDB(NAME_OF_POUCHDB, {
+                        adapter: 'websql'
+                    }),
                     authorization = config.user + ':' + config.password,
                     remoteCouch = couchDbUrl.replace("://", "://" + authorization + "@"), // FIXME: just to try it out
                     opts = {
                         live: true
                     }; // TODO: Move to Top, we only need one DB
                 $log.debug("Using remote server: " + remoteCouch);
-                if (pouchDB) {
-                    pouchDB.replicate.to(remoteCouch, opts, syncError);
-                    pouchDB.replicate.from(remoteCouch, opts, syncError);
+                if (localDB) {
+                    self.logSync("Info", "Syncing with couchDB started: " + remoteCouch);
+                    localDB.replicate.to(remoteCouch, opts, syncError);
+                    localDB.replicate.from(remoteCouch, opts, syncError);
                 }
             },
             read: function() {
@@ -372,7 +355,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                                         var count = 0;
                                         for (var id in rows) {
                                             var bookEntry = rows[id].doc;
-                                            if (bookEntry.value.volumeInfo.industryIdentifiers[1].identifier == isbn) {
+                                            if (bookEntry.value && bookEntry.value.volumeInfo.industryIdentifiers[1].identifier == isbn) {
                                                 response.books[id] = bookEntry;
                                                 count++;
                                             }
@@ -480,7 +463,7 @@ app.service('SettingsService', ['$rootScope', 'localStorageService',
     function($rootScope, localStorage) {
         return {
             save: function(pOwner, googleApiKey, pRemotesync, couchdb, user, password) {
-                localStorage.clearAll();
+                localStorage.remove('flynn_app.settings');
                 localStorage.add('flynn_app.settings', {
                     'owner': pOwner,
                     'googleApiKey': googleApiKey,
@@ -518,5 +501,38 @@ app.service('SettingsService', ['$rootScope', 'localStorageService',
 
         };
 
+    }
+]);
+
+
+angular.module('fsCordova', []).service('CordovaService', ['$document', '$q',
+    function($document, $q) {
+
+        var d = $q.defer(),
+            resolved = false;
+
+        var self = this;
+        this.ready = d.promise;
+
+        document.addEventListener('deviceready', function() {
+            resolved = true;
+            d.resolve(window.cordova);
+        });
+
+        // Check to make sure we didn't miss the 
+        // event (just in case)
+        setTimeout(function() {
+            if (!resolved) {
+                if (window.cordova) {
+                    d.resolve(window.cordova);
+                } else {
+                    // for local dev mock it
+                    var cord = {};
+                    cord.ready = {};
+                    d.resolve(cord);
+                }
+
+            }
+        }, 3000);
     }
 ]);
