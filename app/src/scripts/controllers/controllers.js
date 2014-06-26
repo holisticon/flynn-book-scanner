@@ -139,14 +139,15 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                             'Result: ' + result.text + '\n' + 'Format: ' + result.format + '\n');
                         $scope.searchQuery.isbn = result.text;
                         search();
+                        blockUI.stop();
                     }
                 },
                 function(error) {
                     $log.error("Scanning failed.");
                     $rootScope.$broadcast("barcode.error");
+                    blockUI.stop();
                 }
             );
-            blockUI.stop();
         }
 
         /**
@@ -194,16 +195,14 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
         }
 
         function reset() {
-            $rootScope.$apply(function() {
-                blockUI.start();
-                $scope.books = null;
-                $scope.infoMsg = null;
-                $scope.searchQuery = null;
-                $scope.selectedBook = null;
-                $scope.searchQuery = {};
-                blockUI.stop();
-                $location.path("/book");
-            });
+            blockUI.start();
+            $scope.books = null;
+            $scope.infoMsg = null;
+            $scope.searchQuery = null;
+            $scope.selectedBook = null;
+            $scope.searchQuery = {};
+            blockUI.stop();
+            $location.path("/book");
         }
 
         /**

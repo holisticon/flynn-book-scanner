@@ -226,10 +226,6 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                 localStorage.set('flynn_app.log', logger);
             },
             syncRemote: function() {
-                function syncError(error) {
-                    $log.error(error);
-                    self.logSync("Error", JSON.stringify(error));
-                }
                 // TODO: Add authentical (rly, it's https already).
                 var couchDbUrl = config.couchdb,
                     self = this,
@@ -244,8 +240,20 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                 $log.debug("Using remote server: " + remoteCouch);
                 if (localDB) {
                     self.logSync("Info", "Syncing with couchDB started: " + remoteCouch);
-                    localDB.replicate.to(remoteCouch, opts, syncError);
-                    localDB.replicate.from(remoteCouch, opts, syncError);
+                    localDB.sync(remoteCouch)
+                        .on('change', function(info) {
+                            $log.info(info);
+                            self.logSync("Info", JSON.stringify(info));
+
+                        })
+                        .on('complete', function(info) {
+                            $log.info(info);
+                            self.logSync("Info", JSON.stringify(info));
+                        })
+                        .on('info', function(info) {
+                            $log.error(info);
+                            self.logSync("Error", JSON.stringify(info));
+                        });
                 }
             },
             read: function() {
