@@ -8,6 +8,7 @@
                 <ul class="nav  nav-tabs">
                     <li><a href="#general" toggle="on" parent-active-class="active">General</a></li>
                     <li><a href="#server" toggle="on" parent-active-class="active">Server</a></li>
+                    <li><a href="#logs" toggle="on" parent-active-class="active" ng-show="flynn.remotesync">Logs</a></li>
                 </ul> 
                 <div class="panel tab-content">
                     <div id="general" class="tab-pane" toggleable active-class="active" default="active" exclusion-group="myTabs">
@@ -20,6 +21,10 @@
                                     placeholder="Default for owner value" required>
                             </div>
                         </div>
+                        <br>                  
+                        <div class="form-actions">
+                            <button type="submit" ng-disabled="settingsForm.$invalid" class="btn btn-primary"><i class="fa fa-save"></i>  Save</button>
+                        </div>  
                     </div>
 
                     <div id="server" class="tab-pane" toggleable active-class="active" exclusion-group="myTabs">
@@ -43,12 +48,26 @@
                                     placeholder="User" ng-required="flynn.remotesync === true">
                             </div>
                         </div>
-                        <br/>  
-                    </div>                     
-                    <div class="form-actions">
-                        <button type="submit" ng-disabled="settingsForm.$invalid" class="btn btn-primary"><i class="fa fa-save"></i>  Save</button>
-                        <button type="button" ng-click="sync()" ng-show="flynn.remotesync" class="btn"><i class="fa fa-sync"></i>  Sync</button>
+                        <br>                  
+                        <div class="form-actions">
+                            <button type="submit" ng-disabled="settingsForm.$invalid" class="btn btn-primary"><i class="fa fa-save"></i>  Save</button>
+                            <button type="button" ng-click="sync()" ng-show="flynn.remotesync" class="btn"><i class="fa fa-sync"></i>  Sync</button>
+                        </div>  
                     </div>
+                    <div id="logs" class="tab-pane" toggleable active-class="active" exclusion-group="myTabs">
+                        <br/>  
+                        <p>Sync logs:</p> 
+                        <div class="form-group">
+                            <div ng-repeat="logEntry in syncLogs" class="list-group-item">
+                                {{logEntry.date | date: format}} - {{logEntry.category}}: {{logEntry.entry}}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-actions">
+                            <button type="button" ng-click="showLogs()" class="btn"><i class="fa fa-refresh"></i>  Logs</button>
+                        </div>
+                        <br>
+                    </div>     
                 </div>
             </div>
         </form>

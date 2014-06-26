@@ -207,6 +207,10 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
         var NAME_OF_POUCHDB = config.dbName;
 
         return {
+            readLogs: function() {
+                var logger = localStorage.get('flynn_app.log');
+                return logger;
+            },
             logSync: function(pLogCategory, pLogEntry) {
                 var now = new Date();
                 var logger = localStorage.get('flynn_app.log'),
@@ -239,7 +243,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                     }; // TODO: Move to Top, we only need one DB
                 $log.debug("Using remote server: " + remoteCouch);
                 if (localDB) {
-                    self.logSync("Info", "Syncing with couchDB started: " + remoteCouch);
+                    self.logSync("Info", "Syncing with couchDB started: " + couchDbUrl);
                     localDB.sync(remoteCouch)
                         .on('change', function(info) {
                             $log.info(info);
@@ -249,6 +253,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                         .on('complete', function(info) {
                             $log.info(info);
                             self.logSync("Info", JSON.stringify(info));
+                            self.read();
                         })
                         .on('info', function(info) {
                             $log.error(info);

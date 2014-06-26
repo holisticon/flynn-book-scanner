@@ -324,9 +324,10 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogS
             defaultApiKey = 'AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY';
 
         // autoload
-        load();
+        loadSettings();
+        readSyncLogs();
 
-        function load() {
+        function loadSettings() {
             console.debug("Loading settings from local storage");
             var credentials = $settings.load();
             $scope.flynn = {};
@@ -337,7 +338,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogS
             $scope.flynn.password = credentials.password || defaultPassword;
         }
 
-        function save() {
+        function saveSettings() {
             $log.debug("Saving settings to local storage");
             $settings.save($scope.flynn.owner, defaultApiKey, $scope.flynn.remotesync, $scope.flynn.couchdb, $scope.flynn.user, $scope.flynn.password);
             $inventory.read().then(onSuccess, onError);
@@ -353,13 +354,21 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogS
             }
         }
 
-        function sync() {
+        function syncWithServer() {
             $inventory.syncRemote();
         }
 
+        function readSyncLogs() {
+            var logs = $inventory.readLogs();
+            if (logs) {
+                $scope.syncLogs = logs.sync;
+            }
+        }
+
         // public methods
-        $scope.load = load;
-        $scope.save = save;
-        $scope.sync = sync;
+        $scope.load = loadSettings;
+        $scope.save = saveSettings;
+        $scope.sync = syncWithServer;
+        $scope.showLogs = readSyncLogs;
     }
 ]);
