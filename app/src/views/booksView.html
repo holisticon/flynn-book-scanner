@@ -17,7 +17,15 @@
 			<div ng-if="!books && !searching" class="list-group-item">No books found.</div>
 			<div ng-if="searching" class="list-group-item">Searching ...</div>
 			<div ng-repeat="book in books">
-				<a ng-click="showBookDetails(book)" class="list-group-item">
+				<a class="list-group-item">
+					<div class="pull-right">
+						<button button="button" ng-click="showBookDetails(book)" class="btn btn-block btn-info">
+							<i class="fa fa-info">  Info </i>
+						</button >
+						<button button="button" ng-click="remove(book)" class="btn btn-block btn-danger">
+							<i class="fa fa-trash-o">  Delete </i> 
+						</button >
+					</div>
 					<div>
 						<h3>{{book.value.volumeInfo.title}}</h3>
 						<p>{{book.value.volumeInfo.subtitle}}</p>

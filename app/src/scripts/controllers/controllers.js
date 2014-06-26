@@ -99,6 +99,27 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
         }
 
         /**
+         * remove book from inventory
+         *
+         */
+        function remove(pBookToRemove) {
+            var self = this;
+            blockUI.start();
+            $scope.searchQuery = {};
+            $inventory.remove(pBookToRemove).then(onSuccess, onError);
+
+            function onSuccess(response) {
+                blockUI.stop();
+                self.load();
+            }
+
+            function onError(response) {
+                $rootScope.$broadcast("server.error");
+                blockUI.stop();
+            }
+        }
+
+        /**
          * On select show book details in popup
          *
          */
@@ -113,6 +134,7 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
 
         // public methods
         $scope.load = load;
+        $scope.remove = remove;
         $scope.search = search;
         $scope.showBookDetails = showBookDetails;
     }

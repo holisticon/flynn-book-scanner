@@ -389,6 +389,63 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                 }
                 return deferred.promise;
             },
+            remove: function(pBookToRemove) {
+                var deferred = $q.defer(),
+                    self = this,
+                    response = {},
+                    credentials = $settings.load(),
+                    flynnDB = new PouchDB(NAME_OF_POUCHDB, {
+                        adapter: 'websql'
+                    });
+                $log.debug('Starting delete of book: ' + pBookToRemove.value.volumeInfo.title);
+                if (flynnDB) {
+                    var isbn = pBookToRemove.value.volumeInfo.industryIdentifiers[1].identifier;
+                    var searchQuery = {};
+                    searchQuery.isbn = isbn;
+                    self.search(searchQuery).then(function(response) {
+                        var count = 0
+                        if (response.books) {
+                            count = response.count;
+                        }
+                        if (count > 0) {
+                            var errorOccurred = false;
+                            for (var index in response.books) {
+                                var pBookToRemove = response.books[index];
+                                flynnDB.remove(pBookToRemove, function(err, result) {
+                                    if (!err) {
+                                        $log.info("Delete of entry was successfull.");
+                                    } else {
+                                        $log.error("Error deleting entry: " + err);
+                                        errorOccurred = true;
+                                    }
+                                })
+                            }
+                            if (errorOccurred) {
+                                $log.error("Error during delete. Skipping delete");
+                                deferred.reject(response);
+                            } else {
+                                $log.info("Delete successfull.");
+                                deferred.resolve(response);
+                            }
+                        }
+                        deferred.resolve(response);
+                        /*
+                        flynnDB.remove(pBookToRemove, function(err, result) {
+                            if (!err) {
+                                $log.info("Delete successfull.");
+                                deferred.resolve(response);
+                            } else {
+                                $log.error("Error deleting entry: " + err);
+                                deferred.reject(response);
+                            }
+                        });*/
+                    }, function(response) {
+                        $log.info("Delete successfull.");
+                    });
+                }
+                return deferred.promise;
+
+            },
             save: function(pBookToSave) {
                 var deferred = $q.defer(),
                     self = this,
