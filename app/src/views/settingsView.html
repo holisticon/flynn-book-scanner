@@ -8,7 +8,7 @@
                 <ul class="nav  nav-tabs">
                     <li><a href="#general" toggle="on" parent-active-class="active">General</a></li>
                     <li><a href="#server" toggle="on" parent-active-class="active">Server</a></li>
-                    <li><a href="#logs" toggle="on" parent-active-class="active" ng-show="flynn.remotesync">Logs</a></li>
+                    <li><a href="#logs" toggle="on" parent-active-class="active" ng-show="flynn.activeProfile.remotesync">Logs</a></li>
                 </ul> 
                 <div class="panel tab-content">
                     <div id="general" class="tab-pane" toggleable active-class="active" default="active" exclusion-group="myTabs">
@@ -16,7 +16,7 @@
                         <p>Define here default values to use, like default owner of Books.</p>        
                         <div name="appDetails" class="form-group row">
                             <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12">
-                                <input bs-form-control name="owner" type="text" data-ng-model="flynn.owner" label="Default Owner"
+                                <input bs-form-control name="owner" type="text" data-ng-model="flynn.activeProfile.owner" label="Default Owner"
                                     label-class="col-xs-12 col-sm-4 col-lg-4" class="col-xs-12 col-sm-8 col-lg-8 form-control"
                                     placeholder="Default for owner value" required>
                             </div>
@@ -32,26 +32,26 @@
                         <p>If you like to syncronize with a remote CouchDB activate the remote sync here:</p>     
                         <div name="serverSync" class="form-group row">
                             <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12">
-                                <switch name="remoteSync" data-ng-model="flynn.remotesync"></switch>
+                                <switch name="remoteSync" data-ng-model="flynn.activeProfile.remotesync"></switch>
                             </div>
                         </div>        
                         <div name="serverDetails" class="form-group row">
-                            <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12" ng-show="flynn.remotesync" >
-                                <input bs-form-control name="couchdb" type="url" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-ng-model="flynn.couchdb" 
+                            <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12" ng-show="flynn.activeProfile.remotesync" >
+                                <input bs-form-control name="couchdb" type="url" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-ng-model="flynn.activeProfile.couchdb" 
                                     label="CouchDB server" label-class="col-xs-12 col-sm-4 col-lg-4" class="col-xs-12 col-sm-8 col-lg-8 form-control"
-                                    placeholder="URL of the CouchDB server" ng-required="flynn.remotesync === true">
-                                <input bs-form-control name="user" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-ng-model="flynn.user" 
+                                    placeholder="URL of the CouchDB server" ng-required="flynn.activeProfile.remotesync === true">
+                                <input bs-form-control name="user" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-ng-model="flynn.activeProfile.user" 
                                     label="User" label-class="col-xs-12 col-sm-4 col-lg-4" class="col-xs-12 col-sm-8 col-lg-8 form-control"
-                                    placeholder="User" ng-required="flynn.remotesync === true">
-                                <input bs-form-control name="password" type="password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-ng-model="flynn.password" 
+                                    placeholder="User" ng-required="flynn.activeProfile.remotesync === true">
+                                <input bs-form-control name="password" type="password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-ng-model="flynn.activeProfile.password" 
                                     label="Password" label-class="col-xs-12 col-sm-4 col-lg-4" class="col-xs-12 col-sm-8 col-lg-8 form-control"
-                                    placeholder="User" ng-required="flynn.remotesync === true">
+                                    placeholder="User" ng-required="flynn.activeProfile.remotesync === true">
                             </div>
                         </div>
                         <br>                  
                         <div class="form-actions">
                             <button type="submit" ng-disabled="settingsForm.$invalid" class="btn btn-primary"><i class="fa fa-save"></i>  Save</button>
-                            <button type="button" ng-click="sync()" ng-show="flynn.remotesync" class="btn"><i class="fa fa-sync"></i>  Sync</button>
+                            <button type="button" ng-click="sync()" ng-show="flynn.activeProfile.remotesync" class="btn"><i class="fa fa-sync"></i>  Sync</button>
                         </div>  
                     </div>
                     <div id="logs" class="tab-pane" toggleable active-class="active" exclusion-group="myTabs">

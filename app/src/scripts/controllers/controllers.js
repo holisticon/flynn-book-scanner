@@ -147,7 +147,7 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
 app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$q', '$location', '$resource', 'LogService', 'SettingsService', 'InventoryService', 'GoogleBookService',
     function($rootScope, $scope, blockUI, $http, $q, $location, $resource, $log, $settings, $inventory, $books) {
         var booksInventory,
-            credentials = $settings.load();
+            credentials = $settings.load().activeProfile();
 
         /**
          * Scan book via ISBN barcode
@@ -320,8 +320,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogS
         var defaultCouch = 'https://server.holisticon.de/couchdb/flynn/',
             defaultUser = '<LDAP-User>',
             defaultPassword,
-            defaultOwner = 'Holisticon AG',
-            defaultApiKey = 'AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY';
+            defaultOwner = 'Holisticon AG';
 
         // autoload
         loadSettings();
@@ -329,18 +328,27 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogS
 
         function loadSettings() {
             console.debug("Loading settings from local storage");
-            var credentials = $settings.load();
+            var config = $settings.load();
             $scope.flynn = {};
-            $scope.flynn.owner = credentials.owner || defaultOwner;
-            $scope.flynn.remotesync = credentials.remotesync || false;
-            $scope.flynn.couchdb = credentials.couchdb || defaultCouch;
-            $scope.flynn.user = credentials.user || defaultUser;
-            $scope.flynn.password = credentials.password || defaultPassword;
+			$scope.flynn.activeProfile = {};
+			$scope.flynn.activeProfile.name = config.activeProfile().name || 'default';
+            $scope.flynn.activeProfile.owner = config.activeProfile().owner || defaultOwner;
+            $scope.flynn.activeProfile.dbName = config.activeProfile().dbName || 'flynnDB_' + config.activeProfile().name;
+            $scope.flynn.activeProfile.remotesync = config.activeProfile().remotesync || false;
+            $scope.flynn.activeProfile.couchdb = config.activeProfile().couchdb || defaultCouch;
+            $scope.flynn.activeProfile.user = config.activeProfile().user || defaultUser;
+            $scope.flynn.activeProfile.password = config.activeProfile().password || defaultPassword;
         }
 
         function saveSettings() {
             $log.debug("Saving settings to local storage");
-            $settings.save($scope.flynn.owner, defaultApiKey, $scope.flynn.remotesync, $scope.flynn.couchdb, $scope.flynn.user, $scope.flynn.password);
+			var profile = $scope.flynn.activeProfile;
+			
+			// adding default profile
+			var profiles = [];
+			profiles.push(profile);
+			
+            $settings.save(0, profiles);
             $inventory.read().then(onSuccess, onError);
 
             function onSuccess(response) {

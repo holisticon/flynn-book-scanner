@@ -110,7 +110,7 @@ app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'Se
         var usedCode;
         return {
             search: function(pSearchCriteria) {
-                var config = $settings.load();
+                var config = $settings.load().activeProfile();
                 usedCode = pSearchCriteria.isbn;
 
                 function convertCodeToIsbn(number) {
@@ -203,8 +203,9 @@ app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'Se
 
 app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'SettingsService', 'Base64', 'localStorageService',
     function($rootScope, $log, $http, $q, $settings, $base64, localStorage) {
-        var config = $settings.load();
-        var NAME_OF_POUCHDB = config.dbName;
+        var config = $settings.load(),
+			activeProfile = config.activeProfile(),
+       	 	NAME_OF_POUCHDB = activeProfile.dbName;
 
         return {
             readLogs: function() {
@@ -231,12 +232,12 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
             },
             syncRemote: function() {
                 // TODO: Add authentical (rly, it's https already).
-                var couchDbUrl = config.couchdb,
+                var couchDbUrl = activeProfile.couchdb,
                     self = this,
                     localDB = new PouchDB(NAME_OF_POUCHDB, {
                         adapter: 'websql'
                     }),
-                    authorization = config.user + ':' + config.password,
+                    authorization = activeProfile.user + ':' + activeProfile.password,
                     remoteCouch = couchDbUrl.replace("://", "://" + authorization + "@"), // FIXME: just to try it out
                     opts = {
                         live: true
@@ -264,7 +265,8 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
             read: function() {
                 if (!config.valid) {
                     config = $settings.load();
-                    NAME_OF_POUCHDB = config.dbName;
+					activeProfile = config.activeProfile();
+                    NAME_OF_POUCHDB = activeProfile.dbName;
                 }
                 var deferred = $q.defer(),
                     books = null,
@@ -299,7 +301,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                                 }
                                 deferred.resolve(response);
                             } else  {
-                                $log.error("Reading from local db not working");
+                                $log.error("Reading from local db not working: " + JSON.stringify(err));
                                 deferred.reject(response);
                             }
                         });
@@ -532,17 +534,13 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
 app.service('SettingsService', ['$rootScope', 'localStorageService',
     function($rootScope, localStorage) {
         return {
-            save: function(pOwner, googleApiKey, pRemotesync, couchdb, user, password) {
+            save: function(pActiveProileID, pProfiles) {
                 localStorage.remove('flynn_app.settings');
                 localStorage.add('flynn_app.settings', {
-                    'owner': pOwner,
-                    'googleApiKey': googleApiKey,
+                    'googleApiKey': 'AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY',
                     'timeout': 20000,
-                    'dbName': 'flynnBookDB',
-                    'remotesync': pRemotesync,
-                    'couchdb': couchdb,
-                    'user': user,
-                    'password': password
+					'activeProfileID': pActiveProileID,
+					'profiles' : pProfiles
                 });
             },
             load: function() {
@@ -554,13 +552,20 @@ app.service('SettingsService', ['$rootScope', 'localStorageService',
                 } else {
                     settings = {};
                     settings.valid = false;
+					settings.activeProfileID = 0;
+					settings.profiles = [];
+					settings.profiles.push({});
                 }
+				settings.activeProfile = function() {
+					return settings.profiles[settings.activeProfileID];
+				}
                 $rootScope.settings = settings;
                 return settings;
             },
             verify: function() {
                 console.log("Verifying flynn settings");
-                var credentials = this.load();
+                var config = this.load();
+				var credentials = config.activeProfile();
                 if (credentials.remotesync) {
                     return (credentials && credentials.owner && credentials.user && credentials.password && credentials.couchdb);
                 } else {
