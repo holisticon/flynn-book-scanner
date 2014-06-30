@@ -12,8 +12,8 @@ app/node_modules
 app/src/bower_components
 app/npm-debug.log
 app/www
-app/platforms/android/ant-build/*
-app/platforms/android/CordovaLib/*
+app/platforms/android/ant-build/
+app/platforms/android/CordovaLib/
 app/platforms/android/ant-gen/*
 app/platforms/ios/Flynn/config.xml
 app/platforms/ios/Flynn.xcodeproj/project.xcworkspace/xcuserdata/*
