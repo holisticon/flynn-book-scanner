@@ -57,7 +57,7 @@ For windows phone support within an VM: http://blogs.msdn.com/b/interoperability
 ### Building & Deployment
 * `cd app`
 * `grunt`
-* For first build on android run `android update project --path platforms/android/ --target android-17 -s` to set ADT app
+* For first build on android run `android update project --path platforms/android/ --target android-17 -s -l CordovaLib` to set ADT project settings
 * `cordova build android` or `cordova build ios`
 
 
