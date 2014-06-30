@@ -24,7 +24,7 @@ Global steps:
 
 * Install nodejs (0.10.x+) + npm
 * Install ruby
-* `gem install compass`
+* `sudo gem install compass`
 * Install Cordova
 * `sudo npm install -g cordova`
 * Install build tools
@@ -34,7 +34,7 @@ Global steps:
 Steps in project directory `./flynn-book-scanner`:
 
 * `cd app`
-* `npm install`
+* `sudo npm install`
 * `bower install`
 * `grunt`
 # `grunt server` (open chrome with `open /Applications/Google\ Chrome.app --args --disable-web-security` to http://127.0.0.1:9000/#/)
