@@ -15,6 +15,8 @@ app/www
 app/platforms/android/ant-build/
 app/platforms/android/CordovaLib/
 app/platforms/android/ant-gen/*
+app/platforms/android/local.properties
+app/platforms/android/project.properties
 app/platforms/ios/Flynn/config.xml
 app/platforms/ios/Flynn.xcodeproj/project.xcworkspace/xcuserdata/*
 app/platforms/android/assets/www/bower_components/*
