@@ -34,7 +34,7 @@ Global steps:
 Steps in project directory `./flynn-book-scanner`:
 
 * `cd app`
-* `sudo npm install`
+* `npm install`
 * `bower install`
 * `grunt`
 # `grunt server` (open chrome with `open /Applications/Google\ Chrome.app --args --disable-web-security` to http://127.0.0.1:9000/#/)
@@ -55,8 +55,11 @@ For windows phone support within an VM: http://blogs.msdn.com/b/interoperability
 
 
 ### Building & Deployment
+* `cd app`
 * `grunt`
+* For first build on android run `android update project --path platforms/android/ --target android-17 -s` to set ADT app
 * `cordova build android` or `cordova build ios`
+
 
 For running on an android device execute:
 
