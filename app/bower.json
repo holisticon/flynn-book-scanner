@@ -1,6 +1,6 @@
 {
   "name": "flynnBookScanner",
-  "version": "0.2.0",
+  "version": "0.8.0",
   "dependencies": {
     "pouchdb": "^2.2.3",
     "angular": "~1.2.16",
