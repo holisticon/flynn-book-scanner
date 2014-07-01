@@ -326,7 +326,6 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
 
             function onSettingsSuccess(response) {
                 $log.debug("Settings saving successfull.");
-                $location.path("/books");
             }
 
             function onSettingsError(response) {
@@ -342,7 +341,7 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                     navigator.notification.alert("Book already added. Please increase amount.");
                 } else  {
                     $scope.toggle("overlaySelectedBookEntry");
-                    navigator.notification.alert("Book successfully added.", reset, "Book");
+                    navigator.notification.alert("Book successfully added.", reset(), "Book");
                 }
             }
 
