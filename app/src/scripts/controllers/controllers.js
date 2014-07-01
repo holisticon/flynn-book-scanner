@@ -330,8 +330,8 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogS
             console.debug("Loading settings from local storage");
             var config = $settings.load();
             $scope.flynn = {};
-			$scope.flynn.activeProfile = {};
-			$scope.flynn.activeProfile.name = config.activeProfile().name || 'default';
+            $scope.flynn.activeProfile = {};
+            $scope.flynn.activeProfile.name = config.activeProfile().name || 'default';
             $scope.flynn.activeProfile.owner = config.activeProfile().owner || defaultOwner;
             $scope.flynn.activeProfile.dbName = config.activeProfile().dbName || 'flynnDB_' + config.activeProfile().name;
             $scope.flynn.activeProfile.remotesync = config.activeProfile().remotesync || false;
@@ -342,13 +342,16 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogS
 
         function saveSettings() {
             $log.debug("Saving settings to local storage");
-			var profile = $scope.flynn.activeProfile;
-			
-			// adding default profile
-			var profiles = [];
-			profiles.push(profile);
-			
-            $settings.save(0, profiles);
+            var profile = $scope.flynn.activeProfile;
+
+            // adding default profile
+            var config = {},
+                profiles = [];
+            profiles.push(profile);
+            config.activeProfileID = 0;
+            config.profiles = profiles;
+            // save config
+            $settings.save(config);
             $inventory.read().then(onSuccess, onError);
 
             function onSuccess(response) {

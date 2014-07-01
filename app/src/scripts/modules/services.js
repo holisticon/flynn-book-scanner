@@ -204,8 +204,8 @@ app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'Se
 app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'SettingsService', 'Base64', 'localStorageService',
     function($rootScope, $log, $http, $q, $settings, $base64, localStorage) {
         var config = $settings.load(),
-			activeProfile = config.activeProfile(),
-       	 	NAME_OF_POUCHDB = activeProfile.dbName;
+            activeProfile = config.activeProfile(),
+            NAME_OF_POUCHDB = activeProfile.dbName;
 
         return {
             readLogs: function() {
@@ -265,7 +265,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
             read: function() {
                 if (!config.valid) {
                     config = $settings.load();
-					activeProfile = config.activeProfile();
+                    activeProfile = config.activeProfile();
                     NAME_OF_POUCHDB = activeProfile.dbName;
                 }
                 var deferred = $q.defer(),
@@ -534,14 +534,12 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
 app.service('SettingsService', ['$rootScope', 'localStorageService',
     function($rootScope, localStorage) {
         return {
-            save: function(pActiveProileID, pProfiles) {
+            save: function(pConfig) {
                 localStorage.remove('flynn_app.settings');
-                localStorage.add('flynn_app.settings', {
-                    'googleApiKey': 'AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY',
-                    'timeout': 20000,
-					'activeProfileID': pActiveProileID,
-					'profiles' : pProfiles
-                });
+                var config = pConfig;
+                config.googleApiKey = 'AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY';
+                config.timeout = 20000;
+                localStorage.add('flynn_app.settings', config);
             },
             load: function() {
                 console.log("Loading settings from local storage");
@@ -552,20 +550,20 @@ app.service('SettingsService', ['$rootScope', 'localStorageService',
                 } else {
                     settings = {};
                     settings.valid = false;
-					settings.activeProfileID = 0;
-					settings.profiles = [];
-					settings.profiles.push({});
+                    settings.activeProfileID = 0;
+                    settings.profiles = [];
+                    settings.profiles.push({});
                 }
-				settings.activeProfile = function() {
-					return settings.profiles[settings.activeProfileID];
-				}
+                settings.activeProfile = function() {
+                    return settings.profiles[settings.activeProfileID];
+                }
                 $rootScope.settings = settings;
                 return settings;
             },
             verify: function() {
                 console.log("Verifying flynn settings");
                 var config = this.load();
-				var credentials = config.activeProfile();
+                var credentials = config.activeProfile();
                 if (credentials.remotesync) {
                     return (credentials && credentials.owner && credentials.user && credentials.password && credentials.couchdb);
                 } else {
