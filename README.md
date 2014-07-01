@@ -17,7 +17,7 @@ See below steps to get starting working with flynn:
 Preparation steps:
 
 * Install Android Developer Tools
-* Install Android target 19 or higher (the Android newest SDK)
+* Install Android target 19 SDK or higher (the Android newest SDK)
 * Install Apache Ant
 
 Global steps:
@@ -57,7 +57,7 @@ For windows phone support within an VM: http://blogs.msdn.com/b/interoperability
 ### Building & Deployment
 * `cd app`
 * `grunt`
-* For first build on android run `android update project --path platforms/android/ --target android-17 -s -l CordovaLib` to set ADT project settings
+* For first build on android run `android update project --path platforms/android/ -s` to set ADT project settings
 * `cordova build android` or `cordova build ios`
 
 
