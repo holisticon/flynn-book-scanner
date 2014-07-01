@@ -67,6 +67,22 @@
 							<div>{{selectedBook.value.volumeInfo.publisher}} ({{selectedBook.value.volumeInfo.publishedDate}})</div>
 						</div>
 					</div>
+					<div class="row" ng-show="selectedBook.value.bookshelf">
+						<div class="col-xs-3">
+							<label>Bookshelf:</label>
+						</div>
+						<div class="col-xs-9">
+							<div>{{selectedBook.value.bookshelf}}</div>
+						</div>
+					</div>
+					<div class="row" ng-show="selectedBook.value.owner">
+						<div class="col-xs-3">
+							<label>Owner:</label>
+						</div>
+						<div class="col-xs-9">
+							<div>{{selectedBook.value.owner}}</div>
+						</div>
+					</div>		
 					<div class="row">
 						<div class="col-xs-3">
 							<label>Amount:</label>
@@ -74,7 +90,7 @@
 						<div class="col-xs-9">
 							<div>{{selectedBook.count}}</div>
 						</div>
-					</div>
+					</div>			
 					<br>
 					<div class="panel panel-default" ng-show="selectedBook.value.volumeInfo.description">
 				        <div class="panel-heading" toggle target="collapseDesc">

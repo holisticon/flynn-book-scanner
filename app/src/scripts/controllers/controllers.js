@@ -270,6 +270,7 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                 $scope.infoMsg = null;
                 // set default count to 1
                 count = 1;
+                book.value.bookshelf = credentials.lastBookshelf;
             }
             book.count = count;
             book.authorInfo = authorInfo;
@@ -282,6 +283,22 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
         function save(book) {
             blockUI.start();
             $log.debug("Starting save for book: ");
+
+            // remember last bookshelf
+            var config = $settings.load();
+            config.activeProfile().lastBookshelf = book.value.bookshelf;
+            $settings.save(config);
+            $inventory.read().then(onSettingsSuccess, onSettingsError);
+
+            function onSettingsSuccess(response) {
+                $log.debug("Settings saving successfull.");
+                $location.path("/books");
+            }
+
+            function onSettingsError(response) {
+                $log.error("Settings saving was not successfull.");
+            }
+
             $inventory.save(book).then(onSuccess, onError);
 
             function onSuccess(response) {

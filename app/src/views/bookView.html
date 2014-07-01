@@ -84,7 +84,25 @@
                                 <input type="text" data-ng-model="selectedBook.value.owner" label="Owner"
                                     class="form-control" placeholder="Owner of the book" required min="1">
                             </div>
-                        </div>                                       
+                        </div> 
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <label>Bookshelf:</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type="text" data-ng-model="selectedBook.value.bookshelf" label="Bookshelf"
+                                    class="form-control" placeholder="Location of the book">
+                            </div>
+                        </div>    
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <label>Comment:</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type="text" data-ng-model="selectedBook.value.comment" label="Comment"
+                                    class="form-control">
+                            </div>
+                        </div>                                      
                         <br>
                     </div>
                     <p toggle="off" bubble target="overlaySelectedBookEntry">

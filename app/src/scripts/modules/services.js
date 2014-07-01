@@ -110,7 +110,7 @@ app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'Se
         var usedCode;
         return {
             search: function(pSearchCriteria) {
-                var config = $settings.load().activeProfile();
+                var config = $settings.load();
                 usedCode = pSearchCriteria.isbn;
 
                 function convertCodeToIsbn(number) {
