@@ -165,6 +165,7 @@ app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'Se
                             books = [];
                         if (data) {
                             $log.debug("Received book RAW data: " + JSON.stringify(data));
+                            var count = 0;
                             for (var itemIndex in data.items) {
                                 book = {};
                                 book.value = data.items[itemIndex];
@@ -175,14 +176,20 @@ app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'Se
                                         if (bookIdDtls.identifier === usedISBN) {
                                             books.push(book);
                                             $log.info("Found matching result.");
+                                            count++;
                                         }
                                     }
 
                                 }
                             }
-                            response.books = books;
+                            if (count > 0) {
+                                response.books = books;
+                            } else {
+                                $log.info("Received no results.");
+                                response.books = null;
+                            }
                         } else {
-                            $log.error("Received no data.");
+                            $log.info("Received no data.");
                             response.books = null;
                         }
                     }
