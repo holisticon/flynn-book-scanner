@@ -28,7 +28,8 @@ var app = angular.module('flynnBookScannerApp', [
     'ngRoute',
     'ngTouch',
     'mobile-angular-ui',
-    'LocalStorageModule'
+    'LocalStorageModule',
+    'ui.bootstrap'
 ]);
 
 app.config(function($logProvider) {

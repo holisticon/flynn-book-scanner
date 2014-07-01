@@ -3,8 +3,8 @@
 // http://127.0.0.1:9000/#/book?isbn=9783499606601
 var app = angular.module('flynnBookScannerApp');
 
-app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', 'LogService', 'InventoryService',
-    function($rootScope, $scope, blockUI, $http, $log, $inventory) {
+app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', 'LogService', '$modal', 'InventoryService',
+    function($rootScope, $scope, blockUI, $http, $log, $modal, $inventory) {
         /**
          * Reduces multiple db entries to set without duplicates. This method also counts the records
          * to get the amount of book entries
@@ -99,27 +99,6 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
         }
 
         /**
-         * remove book from inventory
-         *
-         */
-        function remove(pBookToRemove) {
-            var self = this;
-            blockUI.start();
-            $scope.searchQuery = {};
-            $inventory.remove(pBookToRemove).then(onSuccess, onError);
-
-            function onSuccess(response) {
-                blockUI.stop();
-                self.load();
-            }
-
-            function onError(response) {
-                $rootScope.$broadcast("server.error");
-                blockUI.stop();
-            }
-        }
-
-        /**
          * On select show book details in popup
          *
          */
@@ -132,14 +111,69 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
             blockUI.stop();
         }
 
+        function openActionsModal(book) {
+            $scope.book = book;
+
+            var modalInstance = $modal.open({
+                templateUrl: 'bookActions.html',
+                controller: ModalInstanceCtrl,
+                resolve: {
+                    book: function() {
+                        return $scope.book;
+                    },
+                    inventory: function() {
+                        return $inventory;
+                    }
+                }
+            });
+            modalInstance.result.then(function(pRemovedBook) {
+                load();
+            }, function() {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        }
+
+
         // public methods
         $scope.load = load;
-        $scope.remove = remove;
         $scope.search = search;
         $scope.showBookDetails = showBookDetails;
+        $scope.open = openActionsModal;
     }
 ]);
 
+// Please note that $modalInstance represents a modal window (instance) dependency.
+// It is not the same as the $modal service used above.
+var ModalInstanceCtrl = function($rootScope, $scope, $modalInstance, inventory, book) {
+
+    $scope.book = book;
+
+    function cancel() {
+        $modalInstance.dismiss('cancel');
+    }
+    /**
+     * remove book from inventory
+     *
+     */
+    function remove() {
+        var self = this;
+        $scope.searchQuery = {};
+        var bookToRemove = $scope.book;
+        inventory.remove(bookToRemove).then(onSuccess, onError);
+
+        function onSuccess(response) {
+            $modalInstance.close(bookToRemove);
+        }
+
+        function onError(response) {
+            $rootScope.$broadcast("server.error");
+            cancel();
+        }
+    }
+
+    $scope.remove = remove;
+    $scope.cancel = cancel;
+};
 /**
  * Controller to add new book entries to inventory
  *

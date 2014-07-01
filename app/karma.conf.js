@@ -21,6 +21,8 @@ module.exports = function(config) {
       'src/bower_components/mobile-angular-ui/dist/js/mobile-angular-ui.js',
       'src/bower_components/angular-local-storage/angular-local-storage.js',
       'src/bower_components/angular-block-ui/angular-block-ui.js',
+      'src/bower_components/angular-bootstrap/ui-bootstrap.js',
+      'src/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'src/scripts/*.js',
       'src/scripts/**/*.js',
       'test/spec/**/*.js'

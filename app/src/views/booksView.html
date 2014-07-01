@@ -22,9 +22,23 @@
 						<button button="button" ng-click="showBookDetails(book)" class="btn btn-block btn-info">
 							<i class="fa fa-info">  Info </i>
 						</button >
-						<button button="button" ng-click="remove(book)" class="btn btn-block btn-danger">
-							<i class="fa fa-trash-o">  Delete </i> 
+						<button button="button" ng-click="open(book)" class="btn btn-block">
+							<i class="fa fa-bars"> Actions </i> 
 						</button >
+						<script type="text/ng-template" id="bookActions.html">
+					        <div class="modal-header">
+					            <h3 class="modal-title">Select an action</h3>
+					        </div>
+					        <div class="modal-body">
+					        	Book: {{book.value.volumeInfo.title}}
+								<button button="button" ng-click="remove()" class="btn btn-block btn-danger">
+									<i class="fa fa-trash-o">  Delete </i> 
+								</button >
+					        </div>
+					        <div class="modal-footer">
+					            <button class="btn" ng-click="cancel()">Cancel</button>
+					        </div>
+					    </script>
 					</div>
 					<div>
 						<h3>{{book.value.volumeInfo.title}}</h3>
