@@ -135,8 +135,8 @@ app.directive("carouselItem", function($rootScope, $swipe) {
 /**
  * Controller for the app.
  */
-app.controller('MainController', ['$scope', '$rootScope', '$location', 'CordovaService', 'blockUI', 'SettingsService', 'LogService',
-    function($scope, $rootScope, $location, cordovaService, blockUI, $settings, $log) {
+app.controller('MainController', ['$scope', '$rootScope', '$location', 'CordovaService', 'blockUI', 'SettingsService', 'LogService', 'InventoryService',
+    function($scope, $rootScope, $location, cordovaService, blockUI, $settings, $log, $inventory) {
         cordovaService.ready.then(function() {
             // Cordova is ready
             $log.info("Cordova device ready!");
@@ -187,6 +187,8 @@ app.controller('MainController', ['$scope', '$rootScope', '$location', 'CordovaS
                 $location.path("/settings");
             } else {
                 $location.path("/books");
+                //sync on sgarg              
+                $inventory.syncRemote();
                 blockUI.stop();
             }
             $rootScope.settings = settings;

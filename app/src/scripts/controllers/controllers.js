@@ -340,6 +340,8 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                 if (response.noUpdate) {
                     navigator.notification.alert("Book already added. Please increase amount.");
                 } else  {
+                    // sync on save
+                    $inventory.syncRemote();
                     $scope.toggle("overlaySelectedBookEntry");
                     navigator.notification.alert("Book successfully added.", reset(), "Book");
                 }
@@ -402,6 +404,10 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogS
             config.profiles = profiles;
             // save config
             $settings.save(config);
+            // sync if server was added
+            if ($scope.flynn.activeProfile.remotesync) {
+                syncWithServer();
+            }
             $inventory.read().then(onSuccess, onError);
 
             function onSuccess(response) {
