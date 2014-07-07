@@ -137,38 +137,26 @@ app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'Se
                     $log.debug("Converted convertCodeToIsbn: " + number);
                     return number;
                 }
-                var code = convertCodeToIsbn(usedCode);
-                // save code for later usage
-                $log.debug("Reading book data for ISBN " + code);
 
-                var deferred = $q.defer();
-                var gbooksUrl = 'https://www.googleapis.com/books/v1/volumes/?q=:isbn=' + code + '&projection=full&key=' + config.googleApiKey;
-                //var deferred = $q.defer();
-                $log.debug("Reading book data with google books url: " + gbooksUrl);
-                $http({
-                    method: 'GET',
-                    url: gbooksUrl,
-                    timeout: config.timeout,
-                    headers: {
-                        'Access-Control-Allow-Origin': 'localhost',
-                        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
-                    }
-                }).then(onSuccess, onError);
+
 
                 function onSuccess(response) {
                     console.log("Got valid book data.");
                     var valid = false;
                     var data = response.data;
+                    var usedISBN,
+                        book,
+                        books = [];
                     if (usedCode) {
-                        var usedISBN = convertCodeToIsbn(usedCode),
-                            book,
-                            books = [];
-                        if (data) {
-                            $log.debug("Received book RAW data: " + JSON.stringify(data));
-                            var count = 0;
-                            for (var itemIndex in data.items) {
-                                book = {};
-                                book.value = data.items[itemIndex];
+                        usedISBN = convertCodeToIsbn(usedCode);
+                    }
+                    if (data) {
+                        $log.debug("Received book RAW data: " + JSON.stringify(data));
+                        var count = 0;
+                        for (var itemIndex in data.items) {
+                            book = {};
+                            book.value = data.items[itemIndex];
+                            if (usedCode) {
                                 var bookIDs = book.value.volumeInfo.industryIdentifiers;
                                 for (var bookIdIndex in bookIDs) {
                                     var bookIdDtls = bookIDs[bookIdIndex];
@@ -179,26 +167,53 @@ app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'Se
                                             count++;
                                         }
                                     }
-
                                 }
-                            }
-                            if (count > 0) {
-                                response.books = books;
                             } else {
-                                $log.info("Received no results.");
-                                response.books = null;
+                                books.push(book);
+                                count++;
                             }
+                        }
+                        if (count > 0) {
+                            response.books = books;
                         } else {
-                            $log.info("Received no data.");
+                            $log.info("Received no results.");
                             response.books = null;
                         }
+                    } else {
+                        $log.info("Received no data.");
+                        response.books = null;
                     }
                     deferred.resolve(response);
                 }
 
                 function onError(response) {
                     $log.error("Got HTTP error " + response.status + " (" + response.statusText + ")");
+
                     deferred.reject(response);
+                }
+
+                var deferred = $q.defer();
+                var searchQuery;
+                if (usedCode) {
+                    var code = convertCodeToIsbn(usedCode);
+                    $log.debug("Reading book data for ISBN " + code);
+                    searchQuery = ':isbn=' + code;
+                } else {
+                    searchQuery = pSearchCriteria.keyword;
+                }
+                if (searchQuery) {
+                    var gbooksUrl = 'https://www.googleapis.com/books/v1/volumes/?q=' + searchQuery + '&projection=full&key=' + config.googleApiKey;
+                    //var deferred = $q.defer();
+                    $log.debug("Reading book data with google books url: " + gbooksUrl);
+                    $http({
+                        method: 'GET',
+                        url: gbooksUrl,
+                        timeout: config.timeout,
+                        headers: {
+                            'Access-Control-Allow-Origin': 'localhost',
+                            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+                        }
+                    }).then(onSuccess, onError);
                 }
                 return deferred.promise;
             }

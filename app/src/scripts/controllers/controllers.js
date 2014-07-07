@@ -213,6 +213,7 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
          */
         function search() {
             blockUI.start();
+            $scope.books = null;
             var searchQuery = $scope.searchQuery;
 
             if (searchQuery) {

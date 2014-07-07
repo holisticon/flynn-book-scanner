@@ -13,14 +13,18 @@
                 <div class="form-group row">
                     <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12">
                         <input bs-form-control type="tel" data-ng-model="searchQuery.isbn" label="ISBN" name="isbn"
-                            label-class="col-xs-3 col-sm-2 col-lg-1" class="ng-scope ng-pristine ng-valid needsclick form-control"
-                            placeholder="ISBN of the book" required>
-                        <p class="help-block error" ng-show="searchForm.isbn.$error.required">Required</p>  
+                            label-class="col-xs-12 col-sm-2 col-lg-2" class="ng-scope ng-pristine ng-valid needsclick form-control col-xs-12 col-sm-10 col-lg-10"
+                            placeholder="ISBN of the book">
+                    </div>
+                    <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12">
+                        <input bs-form-control type="tel" data-ng-model="searchQuery.keyword" label="Keyword" name="keyword"
+                            label-class="col-xs-12 col-sm-2 col-lg-2" class="ng-scope ng-pristine ng-valid needsclick form-control col-xs-12 col-sm-10 col-lg-10"
+                            placeholder="Search for books that contain this text string">
                     </div>
                 </div>
             </div>
             <div bs-panel class="form-actions">
-                <button ng-click="scan()" class="btn"><i class="fa fa-barcode"></i>  Scan</button>
+                <button ng-click="scan()" class="btn"><i class="fa fa-barcode"></i>  Scan ISBN</button>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>  Search</button>
             </div>
             <div bs-panel class="panel">
