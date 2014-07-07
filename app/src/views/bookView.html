@@ -2,7 +2,7 @@
   <span>Add a book</span>
 </div>
 <div class="scrollable">
-    <div class="scrollable-content container section">
+    <div class="scrollable-content section">
         <form name="searchForm" type="search" novalidate ng-submit="search()">
             <div class="panel-heading">
                 <h2 class="panel-title">
@@ -27,7 +27,7 @@
                 <button ng-click="scan()" class="btn"><i class="fa fa-barcode"></i>  Scan ISBN</button>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>  Search</button>
             </div>
-            <div bs-panel class="panel">
+            <div>
                 <p class="help-block warning" ng-show="infoMsg">{{infoMsg}}</p>
                 <div ng-if="!books" class="paragraphs" style="margin: 10px 0">No book found</div>
                 <div ng-repeat="book in books">

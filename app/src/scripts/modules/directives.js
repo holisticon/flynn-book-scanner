@@ -133,7 +133,7 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
         $scope.load = load;
         $scope.search = search;
         $scope.showBookDetails = showBookDetails;
-        $scope.showActionMenu = openActionsModal;
+        $scope.open = openActionsModal;
     }
 ]);
 

@@ -17,14 +17,18 @@
 			<div ng-if="!books && !searching" class="list-group-item">No books found.</div>
 			<div ng-if="searching" class="list-group-item">Searching ...</div>
 			<div ng-repeat="book in books">
-				<a class="list-group-item">
+                <div class="item-actions pull-right" ng-show="showActions">
+                    <div class="btn-group btn-group-vertical">
+                        <button button="button" ng-click="showBookDetails(book)" class="btn btn-info">
+                            <i class="fa fa-info"></i> Info
+                        </button >
+                        <button button="button" ng-click="showActionMenu(book)" class="btn">
+                            <i class="fa fa-bars"></i> Delete
+                        </button >
+                    </div>
+                </div> 
+				<a class="list-group-item" ng-click="showBookDetails(book)" ng-class="{swipehide:showActions,swipeslide:!showActions}">
 					<div class="pull-right">
-						<button button="button" ng-click="showBookDetails(book)" class="btn btn-block btn-info">
-							<i class="fa fa-info">  Info </i>
-						</button >
-						<button button="button" ng-click="open(book)" class="btn btn-block">
-							<i class="fa fa-bars"> Actions </i> 
-						</button >
 						<script type="text/ng-template" id="bookActions.html">
 					        <div class="modal-header">
 					            <h3 class="modal-title">Select an action</h3>
@@ -40,11 +44,11 @@
 					        </div>
 					    </script>
 					</div>
-					<div>
+					<div class="item-with-logo"v ng-class="{swipeshow:showActions}" ng-swipe-left="showActions = true" ng-swipe-right="showActions = false">
+						<img ng-src="{{book.value.volumeInfo.imageLinks.thumbnail}}" />
 						<h3>{{book.value.volumeInfo.title}}</h3>
 						<p>{{book.value.volumeInfo.subtitle}}</p>
-						<p>	by <span ng-show="book.value.volumeInfo.authors" ng-repeat="author in book.value.volumeInfo.authors">
-							{{author}}, </span>
+						<p>	<span ng-show="book.authorInfo">by {{book.authorInfo}}</span>
 							{{book.value.volumeInfo.publishedDate}} <br>
 						</p>
 					</div>
