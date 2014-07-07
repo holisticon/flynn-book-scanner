@@ -11,7 +11,7 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
             if (pDbEntries) {
                 for (var itemIndex in pDbEntries) {
                     var itemInfo = pDbEntries[itemIndex];
-                    var isbn = itemInfo.value.volumeInfo.industryIdentifiers[1].identifier;
+                    var isbn = itemInfo.value.volumeInfo.industryIdentifiers[0].identifier;
                     if (bookEntries[isbn]) {
 
                         bookEntries[isbn].count += 1;
@@ -265,7 +265,6 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
             blockUI.start();
             var newEntry = true,
                 book = pSelectedBookValue,
-                isbn = pSelectedBookValue.value.volumeInfo.industryIdentifiers[1].identifier,
                 books = booksInventory,
                 authorInfo = "";
             $log.debug('Showing details for book: ' + JSON.stringify(book.value));
@@ -281,11 +280,18 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
             }
             var count = 0;
             if (books) {
+                var isbn0;
+                if (pSelectedBookValue.value.volumeInfo.industryIdentifiers) {
+                    var indIDs = pSelectedBookValue.value.volumeInfo.industryIdentifiers;
+                    if (indIDs[0]) {
+                        isbn0 = indIDs[0].identifier;
+                    }
+                }
                 for (var id in books) {
                     var bookEntry = books[id],
-                        currentISBN = bookEntry.value.volumeInfo.industryIdentifiers[1].identifier;
+                        currentISBN = bookEntry.value.volumeInfo.industryIdentifiers[0].identifier;
                     // only add complet entries to results
-                    if (currentISBN == isbn) {
+                    if (isbn0 && currentISBN == isbn0) {
                         $log.debug("Already found a saved book entry: " + JSON.stringify(bookEntry));
                         book = bookEntry;
                         count++;

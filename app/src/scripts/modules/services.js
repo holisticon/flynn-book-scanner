@@ -253,6 +253,9 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                 localStorage.set('flynn_app.log', logger);
             },
             syncRemote: function() {
+                // reload config
+                config = $settings.load();
+                activeProfile = config.activeProfile();
                 // TODO: Add authentical (rly, it's https already).
                 var couchDbUrl = activeProfile.couchdb,
                     self = this,
@@ -263,8 +266,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                     remoteCouch = couchDbUrl.replace("://", "://" + authorization + "@"), // FIXME: just to try it out
                     opts = {
                         live: true
-                    }; // TODO: Move to Top, we only need one DB
-                $log.debug("Using remote server: " + remoteCouch);
+                    }; 
                 if (localDB) {
                     self.logSync("Info", "Syncing with couchDB started: " + couchDbUrl);
                     localDB.sync(remoteCouch)
@@ -490,7 +492,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                     var bookEntriesToAdd = 0,
                         updateNeeded = true;
                     // update already saved entry, maybe changed amount?   
-                    var isbn = pBookToSave.value.volumeInfo.industryIdentifiers[1].identifier;
+                    var isbn = pBookToSave.value.volumeInfo.industryIdentifiers[0].identifier;
                     var searchQuery = {};
                     searchQuery.isbn = isbn;
                     self.search(searchQuery).then(function(response) {
