@@ -17,7 +17,7 @@
 			<div ng-if="!books && !searching" class="list-group-item">No books found.</div>
 			<div ng-if="searching" class="list-group-item">Searching ...</div>
 			<div ng-repeat="book in books">
-                <div class="item-actions pull-right" ng-show="showActions">
+                <div class="item-actions pull-right">
                     <div class="btn-group btn-group-vertical">
                         <button button="button" ng-click="showBookDetails(book)" class="btn btn-info">
                             <i class="fa fa-info"></i> Info
@@ -27,7 +27,7 @@
                         </button >
                     </div>
                 </div> 
-				<a class="list-group-item" ng-click="showBookDetails(book)" ng-class="{swipehide:showActions,swipeslide:!showActions}">
+				<a class="list-group-item" ng-click="showBookDetails(book)" ng-class="{swipehide:showActions,swipeslide:!showActions}" ng-swipe-left="showActions = true" ng-swipe-right="showActions = false">
 					<div class="pull-right">
 						<script type="text/ng-template" id="bookActions.html">
 					        <div class="modal-header">
@@ -44,7 +44,7 @@
 					        </div>
 					    </script>
 					</div>
-					<div class="item-with-logo"v ng-class="{swipeshow:showActions}" ng-swipe-left="showActions = true" ng-swipe-right="showActions = false">
+					<div class="item-with-logo" >
 						<img ng-src="{{book.value.volumeInfo.imageLinks.thumbnail}}" />
 						<h3>{{book.value.volumeInfo.title}}</h3>
 						<p>{{book.value.volumeInfo.subtitle}}</p>
