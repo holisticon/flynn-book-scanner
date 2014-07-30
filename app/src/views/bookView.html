@@ -1,0 +1,55 @@
+<div content-for="nav-menu">
+    <button class="btn btn-default">
+        <a href back-button><i class="fa fa-chevron-left"> Books</i></a>
+    </button>
+</div>
+
+<div content-for="title">
+    <span>{{selectedBook.value.volumeInfo.title}}</span>
+</div>
+
+<div class="scrollable">
+    <div class="scrollable-content section">
+        <div class="panel-heading">
+            <h2 class="panel-title">{{selectedBook.value.volumeInfo.subtitle}}</h2>
+        </div>
+        <div bs-panel class="panel">
+            <img ng-src="{{selectedBook.value.volumeInfo.imageLinks.thumbnail}}"/> <br> <br>
+            <span ng-show="selectedBook.value.volumeInfo.description">{{selectedBook.value.volumeInfo.description}}<br> <br></span>
+            <div class="text-left">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label>ISBN:</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <div>{{selectedBook.value.volumeInfo.industryIdentifiers[1].identifier}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label>Pages:</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <div>{{selectedBook.value.volumeInfo.pageCount}}</div>
+                    </div>
+                </div>
+                <div class="row" ng-show="selectedBook.authorInfo">
+                    <div class="col-xs-3">
+                        <label>Author:</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <div>{{selectedBook.authorInfo}}</div>
+                    </div>
+                </div>
+                <div class="row" ng-show="selectedBook.value.volumeInfo.publisher">
+                    <div class="col-xs-3">
+                        <label>Publisher:</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <div>{{selectedBook.value.volumeInfo.publisher}} ({{selectedBook.value.volumeInfo.publishedDate}})</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
