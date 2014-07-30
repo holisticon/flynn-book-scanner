@@ -39,7 +39,7 @@
                 <div class="navbar-brand navbar-brand-center" yield-to="title">
                     <span>Flynn</span>
                 </div>
-                <div class="btn-group pull-left">
+                <div class="btn-group pull-left" yield-to="nav-menu">
                     <div ng-click="toggle('mainSidebar')"
                         class="btn btn-navbar sidebar-toggle">
                         <i class="fa fa-bars"></i> Menu
@@ -69,6 +69,7 @@
         <!-- endbuild -->
 
         <!-- build:js scripts/modules.js -->
+        <script src="bower_components/angular-cache/dist/angular-cache.min.js"></script>
         <script src="bower_components/angular-resource/angular-resource.js"></script>
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
         <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
@@ -84,6 +85,7 @@
         <!-- build:js({.tmp,src}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/controllers.js"></script>
+        <script src="scripts/modules/directives.js"></script>
         <script src="scripts/modules/services.js"></script>
         <!-- endbuild -->
 

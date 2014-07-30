@@ -39,8 +39,8 @@ app.config(function($logProvider) {
 
 app.config(function($routeProvider) {
     $routeProvider
-        .when('/book', {
-            templateUrl: 'views/bookView.html',
+        .when('/book/add', {
+            templateUrl: 'views/addBookView.html',
             controller: 'BookController'
         }).when('/settings', {
             templateUrl: 'views/settingsView.html',
@@ -48,6 +48,9 @@ app.config(function($routeProvider) {
         }).when('/books', {
             templateUrl: 'views/booksView.html',
             controller: 'BooksController'
+        }).when('/books/show/:bookId', {
+            templateUrl: 'views/bookView.html',
+            controller: 'BookDetailsController'
         }).when('/library', {
             templateUrl: 'views/libraryView.html',
             controller: 'BooksController'

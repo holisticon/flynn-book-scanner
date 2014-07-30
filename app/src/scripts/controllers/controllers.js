@@ -1,52 +1,62 @@
+function enrichSingleDbEntry(pDbEntry) {
+    var authorInfo;
+    if (pDbEntry.value.volumeInfo.authors) {
+        authorInfo = '';
+        var authorCount = pDbEntry.value.volumeInfo.authors.length;
+        for (var itemIndex in pDbEntry.value.volumeInfo.authors) {
+            authorInfo += pDbEntry.value.volumeInfo.authors[itemIndex];
+            if (itemIndex < authorCount - 1) {
+                authorInfo += ', ';
+            }
+        }
+    }
+    pDbEntry.authorInfo = authorInfo;
+
+}
+
+/**
+ * Reduces multiple db entries to set without duplicates. This method also counts the records
+ * to get the amount of book entries
+ */
+function enrichDbData(pDbEntries) {
+    var result = null,
+        bookEntries = {},
+        resultsFound = false;
+    if (pDbEntries) {
+        for (var itemIndex in pDbEntries) {
+            var itemInfo = pDbEntries[itemIndex];
+            var isbn = itemInfo.value.volumeInfo.industryIdentifiers[0].identifier;
+            if (bookEntries[isbn]) {
+
+                bookEntries[isbn].count += 1;
+                bookEntries[isbn].docs.push(itemInfo);
+            } else {
+                bookEntries[isbn] = {};
+                bookEntries[isbn].value = itemInfo.value;
+                bookEntries[isbn].count = 1;
+                bookEntries[isbn].docs = [];
+                bookEntries[isbn].docs.push(itemInfo);
+                enrichSingleDbEntry(bookEntries[isbn]);
+                //expose id
+                bookEntries[isbn]._id = itemInfo._id;
+                resultsFound = true;
+            }
+        }
+        if (resultsFound) {
+            // transfer to array
+            result = [];
+            for (var isbn in bookEntries) {
+                result.push(bookEntries[isbn]);
+            }
+        }
+    }
+    return result;
+};
+
+
 app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', 'LogService', '$modal', 'InventoryService',
     function($rootScope, $scope, blockUI, $http, $log, $modal, $inventory) {
-        /**
-         * Reduces multiple db entries to set without duplicates. This method also counts the records
-         * to get the amount of book entries
-         */
-        function enrichDbData(pDbEntries) {
-            var result = null,
-                bookEntries = {},
-                resultsFound = false;
-            if (pDbEntries) {
-                for (var itemIndex in pDbEntries) {
-                    var itemInfo = pDbEntries[itemIndex];
-                    var isbn = itemInfo.value.volumeInfo.industryIdentifiers[0].identifier;
-                    if (bookEntries[isbn]) {
 
-                        bookEntries[isbn].count += 1;
-                        bookEntries[isbn].docs.push(itemInfo);
-                    } else {
-                        bookEntries[isbn] = {};
-                        bookEntries[isbn].value = itemInfo.value;
-                        bookEntries[isbn].count = 1;
-                        bookEntries[isbn].docs = [];
-                        bookEntries[isbn].docs.push(itemInfo);
-                        var authorInfo;
-                        if (itemInfo.value.volumeInfo.authors) {
-                            authorInfo = '';
-                            var authorCount = itemInfo.value.volumeInfo.authors.length;
-                            for (var itemIndex in itemInfo.value.volumeInfo.authors) {
-                                authorInfo += itemInfo.value.volumeInfo.authors[itemIndex];
-                                if (itemIndex < authorCount - 1) {
-                                    authorInfo += ', ';
-                                }
-                            }
-                        }
-                        bookEntries[isbn].authorInfo = authorInfo;
-                        resultsFound = true;
-                    }
-                }
-                if (resultsFound) {
-                    // transfer to array
-                    result = [];
-                    for (var isbn in bookEntries) {
-                        result.push(bookEntries[isbn]);
-                    }
-                }
-            }
-            return result;
-        };
 
         /**
          * load data via inventory service
@@ -134,6 +144,47 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
         $scope.search = search;
         $scope.showBookDetails = showBookDetails;
         $scope.showActionMenu = openActionsModal;
+    }
+]);
+
+
+/**
+ * Controller to add new book entries to inventory
+ *
+ */
+app.controller('BookDetailsController', ['$rootScope', '$scope', '$routeParams', 'blockUI', '$location', 'LogService', 'SettingsService', 'InventoryService', 'GoogleBookService',
+    function($rootScope, $scope, $routeParams, blockUI, $location, $log, $settings, $inventory, $books) {
+        var booksInventory, credentials = $settings.load();
+        var bookID = $routeParams.bookId;
+
+        function load() {
+            if (bookID) {
+                $inventory.read().then(onSuccess, onError);
+            }
+
+            function onSuccess(response) {
+                var allBooks = response.books;
+                var selectedBook;
+                for (var index in allBooks) {
+                    var book = allBooks[index];
+                    if (book._id == bookID) {
+                        selectedBook = book;
+                        break;
+                    }
+                }
+                $scope.selectedBook = enrichSingleDbEntry(selectedBook)
+                $scope.selectedBook = selectedBook;
+                $scope.searching = false;
+            }
+
+            function onError(response) {
+                $scope.selectedBook = null;
+                $scope.searching = false;
+            }
+        }
+
+        load(bookID);
+
     }
 ]);
 

@@ -17,7 +17,8 @@
     "angular-local-storage": "latest",
     "angular-block-ui": "~0.0.8",
     "pouchdb-quick-search": "~0.2.0",
-    "angular-bootstrap": "~0.11.0"
+    "angular-bootstrap": "~0.11.0",
+    "angular-cache": "~3.0.3"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.1",

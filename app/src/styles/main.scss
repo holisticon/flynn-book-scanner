@@ -7,6 +7,7 @@ body {
     background: #fafafa;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
+    -webkit-overflow-scrolling: auto;
 }
 
 h1,
@@ -72,7 +73,18 @@ footer {
 @import "compass";
 @import "compass/css3/user-interface";
 
-
+[menu-slideout] {
+    @include transform(translate3d(0,0,0));
+    &.menu-slideout-transition { 
+        @include transition(transform 0.5s); 
+    }
+    &.menu-slideout-open { 
+        @include transform(translate3d(230px, 0, 0)); 
+    }
+    &.menu-slideout-is-sliding {
+        @include user-select(none);
+    }
+}
 
 /* swipping */
 

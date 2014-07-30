@@ -26,8 +26,8 @@
                             <i class="fa fa-bars"></i> Actions
                         </button >
                     </div>
-                </div> 
-				<a class="list-group-item" ng-click="showBookDetails(book)" ng-class="{swipehide:showActions,swipeslide:!showActions}" ng-swipe-left="showActions = true" ng-swipe-right="showActions = false">
+                </div>
+				<a class="list-group-item" href="#/books/show/{{book._id}}" ng-class="{swipehide:showActions,swipeslide:!showActions}" ng-swipe-left="showActions = true" ng-swipe-right="showActions = false">
 					<div class="pull-right">
 						<script type="text/ng-template" id="bookActions.html">
 					        <div class="modal-header">
@@ -54,86 +54,6 @@
 					</div>
 				</a>
 			</div>
-			<div overlay="overlaySearchEntry">
-				<h4 class="overlay-title">{{selectedBook.value.volumeInfo.title}}</h4>
-				<h5>{{selectedBook.value.volumeInfo.subtitle}} ({{selectedBook.value.volumeInfo.pageCount}} pages)</h5>
-				<img id="bookThumbnail" class="img-thumbnail" alt="book image"
-					ng-show="selectedBook.value.volumeInfo.imageLinks.smallThumbnail"
-					ng-src="{{selectedBook.value.volumeInfo.imageLinks.smallThumbnail}}"/>
-				<div class="text-left">
-					<div class="row">
-						<div class="col-xs-3">
-							<label>ISBN:</label>
-						</div>
-						<div class="col-xs-9">
-							<div>{{selectedBook.value.volumeInfo.industryIdentifiers[1].identifier}}</div>
-						</div>
-					</div>
-					<div class="row" ng-show="selectedBook.authorInfo">
-						<div class="col-xs-3">
-							<label>Author:</label>
-						</div>
-						<div class="col-xs-9">
-							<div>{{selectedBook.authorInfo}}</div>
-						</div>
-					</div>
-					<div class="row" ng-show="selectedBook.value.volumeInfo.publisher">
-						<div class="col-xs-3">
-							<label>Publisher:</label>
-						</div>
-						<div class="col-xs-9">
-							<div>{{selectedBook.value.volumeInfo.publisher}} ({{selectedBook.value.volumeInfo.publishedDate}})</div>
-						</div>
-					</div>
-					<div class="row" ng-show="selectedBook.value.bookshelf">
-						<div class="col-xs-3">
-							<label>Bookshelf:</label>
-						</div>
-						<div class="col-xs-9">
-							<div>{{selectedBook.value.bookshelf}}</div>
-						</div>
-					</div>
-					<div class="row" ng-show="selectedBook.value.owner">
-						<div class="col-xs-3">
-							<label>Owner:</label>
-						</div>
-						<div class="col-xs-9">
-							<div>{{selectedBook.value.owner}}</div>
-						</div>
-					</div>		
-					<div class="row">
-						<div class="col-xs-3">
-							<label>Amount:</label>
-						</div>
-						<div class="col-xs-9">
-							<div>{{selectedBook.count}}</div>
-						</div>
-					</div>			
-					<br>
-					<div class="panel panel-default" ng-show="selectedBook.value.volumeInfo.description">
-				        <div class="panel-heading" toggle target="collapseDesc">
-				          <h6 class="panel-title"> Description </h6>
-				        </div>
-				        <div id="collapseDesc" toggleable active-class="in" class="panel-collapse collapse">
-				          <div class="panel-body">
-				            {{selectedBook.value.volumeInfo.description}}
-				          </div>
-				        </div>
-				    </div>	
-				</div>
-				<p toggle="off" bubble target="overlaySearchEntry">
-					<span class="btn btn-primary">Ok</span>
-				</p>
-			</div>
 		</form>
 	</div>
 </div>
-<!-- Thumbnail (big)
-Autors (alle)
-Title
-Subtitle
-Publisher
-Publish Date
-ISBN
-PrintPageCount
-Description -->
