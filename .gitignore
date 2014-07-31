@@ -31,3 +31,4 @@ app/platforms/wp7/www/*
 app/platforms/wp7/obj/Debug/*
 app/platforms/wp7/Bin/Debug/*
 app/bin/*
+app/test-results.xml

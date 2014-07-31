@@ -419,8 +419,8 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
     }
 ]);
 
-app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogService', 'SettingsService', 'InventoryService',
-    function($rootScope, $scope, $location, $log, $settings, $inventory) {
+app.controller('SettingsController', ['$rootScope', '$scope', 'blockUI', '$location', 'LogService', 'SettingsService', 'InventoryService',
+    function($rootScope, $scope, blockUI, $location, $log, $settings, $inventory) {
 
         var defaultCouch = 'https://server.holisticon.de/couchdb/flynn/',
             defaultUser = '<LDAP-User>',
@@ -447,6 +447,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogS
 
         function saveSettings() {
             $log.debug("Saving settings to local storage");
+            blockUI.start();
             var profile = $scope.flynn.activeProfile;
 
             // adding default profile
@@ -464,11 +465,13 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$location', 'LogS
             $inventory.read().then(onSuccess, onError);
 
             function onSuccess(response) {
+                blockUI.stop();
                 $log.debug("Got valid server response. Settings seeem to be valid.");
                 $location.path("/books");
             }
 
             function onError(response) {
+                blockUI.stop();
                 $settings.valid = false;
                 $rootScope.$broadcast("settings.invalid");
             }
