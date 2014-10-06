@@ -3,25 +3,28 @@
   "version": "1.0.0",
   "dependencies": {
     "pouchdb": "^2.2.3",
-    "angular": "~1.2.16",
-    "json3": "~3.2.4",
-    "bootstrap-sass": "~3.0.2",
-    "es5-shim": "~2.0.8",
-    "angular-resource": "~1.2.16",
-    "angular-cookies": "~1.2.16",
-    "angular-sanitize": "~1.2.16",
-    "angular-route": "~1.2.16",
-    "angular-touch": "~1.2.16",
-    "mobile-angular-ui": "~1.1.0-beta.22",
-    "cordova": "~3.4.0",
-    "angular-local-storage": "latest",
-    "angular-block-ui": "~0.0.8",
     "pouchdb-quick-search": "~0.2.0",
-    "angular-bootstrap": "~0.11.0",
-    "angular-cache": "~3.0.3"
+    "angular": "~1.2.26",
+    "bootstrap-sass": "~3.0.2",
+    "angular-resource": "~1.2.26",
+    "angular-cookies": "~1.2.26",
+    "angular-sanitize": "~1.2.26",
+    "angular-route": "~1.2.26",
+    "angular-touch": "~1.2.26",
+    "mobile-angular-ui": "~1.1.0-beta.22",
+    "angular-local-storage": "0.0.7",
+    "angular-block-ui": "~0.0.12",
+    "angular-bootstrap": "~0.11.2",
+    "angular-cache": "~3.1.1",
+    "cordova": "~3.4.0",
+    "ionic": "~0.9.27"
   },
   "devDependencies": {
-    "angular-mocks": "~1.2.1",
-    "angular-scenario": "~1.2.1"
+    "angular-mocks": "~1.2.26",
+    "angular-scenario": "~1.2.26"
+  },
+  "resolutions": {
+    "angular": "~1.2.26",
+    "angular-sanitize": "~1.2.26"
   }
 }
