@@ -19,7 +19,7 @@ function enrichSingleDbEntry(pDbEntry) {
  * to get the amount of book entries
  */
 function enrichDbData(pDbEntries) {
-    var result = null,
+    var result = false,
         bookEntries = {},
         resultsFound = false;
     if (pDbEntries) {
@@ -54,28 +54,37 @@ function enrichDbData(pDbEntries) {
 };
 
 
-app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', 'LogService', '$modal', 'InventoryService',
-    function($rootScope, $scope, blockUI, $http, $log, $modal, $inventory) {
+app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoading', '$ionicListDelegate', '$http', '$ionicActionSheet', 'LogService', 'InventoryService',
+    function($rootScope, $scope, $state, $ionicLoading, $ionicListDelegate, $http, $ionicActionSheet, $log, $inventory) {
 
+        var listDelegate = $ionicListDelegate.$getByHandle('booksListing');
 
-        /**
-         * load data via inventory service
-         *
-         */
+        listDelegate.more = function() {
+                alert('abc')
+            }
+            /**
+             * load data via inventory service
+             *
+             */
         function load() {
-            blockUI.start();
+            $ionicLoading.show();
             $scope.searchQuery = {};
             $inventory.read().then(onSuccess, onError);
 
             function onSuccess(response) {
                 $scope.books = enrichDbData(response.books);
-                blockUI.stop();
+                $ionicLoading.hide();
             }
 
             function onError(response) {
                 $rootScope.$broadcast("server.error");
-                blockUI.stop();
+                $ionicLoading.hide();
             }
+        }
+
+        function resetSearch() {
+            $scope.searchQuery = {};
+            search();
         }
 
         /**
@@ -86,7 +95,7 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
         function search() {
             var searchQuery = $scope.searchQuery;
             $scope.searching = true;
-            if ($scope.searchQuery.fullTextSearch) {
+            if (searchQuery.fullTextSearch) {
                 $inventory.search(searchQuery).then(onSuccess, onError);
             } else {
                 $inventory.read().then(onSuccess, onError);
@@ -98,27 +107,61 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
             }
 
             function onError(response) {
-                $scope.books = null;
+                $scope.books = false;
                 $scope.searching = false;
             }
         }
 
-        /**
-         * On select show book details in popup
-         *
-         */
-        function showBookDetails(pSelectedBookValue) {
-            blockUI.start();
-            var book = pSelectedBookValue;
-            $log.debug('Showing details for book: ' + book.value.volumeInfo.title);
-            $scope.selectedBook = book;
-            $scope.toggle('overlaySearchEntry');
-            blockUI.stop();
+        function removeBook(pBookToRemove) {
+            $inventory.remove(pBookToRemove).then(onSuccess, onError);
+
+            function onSuccess(response) {
+                $ionicLoading.show();
+                load();
+            }
+
+            function onError(response) {
+                $ionicLoading.hide();
+                $rootScope.$broadcast("server.error");
+            }
         }
 
-        function openActionsModal(book) {
+        function showBookDetails(pBook) {
+            var book = pBook;
+            $log.debug('Showing details for book: ' + book.value.volumeInfo.title);
+            $state.go('app.book_show', {
+                'bookId': book._id
+            });
+        }
+
+        function showActionMenu(book) {
             $scope.book = book;
 
+
+            // Show the action sheet
+            var hideSheet = $ionicActionSheet.show({
+                // TODO_edit book
+                /*buttons: [{
+                    text: '<b>Edit</b>'
+                }],*/
+                destructiveText: 'Delete',
+                titleText: 'Modify book entry',
+                cancelText: 'Cancel',
+                cancel: function() {
+                    // hideSheet();
+                },
+                buttonClicked: function(index) {
+                    //return true;
+                },
+                destructiveButtonClicked: function() {
+                    var bookToRemove = $scope.book;
+                    removeBook(bookToRemove);
+                    return true;
+                }
+            });
+
+            /*
+            
             var modalInstance = $modal.open({
                 templateUrl: 'bookActions.html',
                 controller: ModalInstanceCtrl,
@@ -135,15 +178,18 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
                 load();
             }, function() {
                 $log.info('Modal dismissed at: ' + new Date());
-            });
+            });*/
         }
 
+        load();
 
         // public methods
         $scope.load = load;
         $scope.search = search;
         $scope.showBookDetails = showBookDetails;
-        $scope.showActionMenu = openActionsModal;
+        $scope.showActionMenu = showActionMenu;
+        $scope.resetSearch = resetSearch;
+
     }
 ]);
 
@@ -152,10 +198,10 @@ app.controller('BooksController', ['$rootScope', '$scope', 'blockUI', '$http', '
  * Controller to add new book entries to inventory
  *
  */
-app.controller('BookDetailsController', ['$rootScope', '$scope', '$routeParams', 'blockUI', '$location', 'LogService', 'SettingsService', 'InventoryService', 'GoogleBookService',
-    function($rootScope, $scope, $routeParams, blockUI, $location, $log, $settings, $inventory, $books) {
+app.controller('BookDetailsController', ['$rootScope', '$scope', '$stateParams', '$ionicLoading', '$location', 'LogService', 'SettingsService', 'InventoryService', 'GoogleBookService',
+    function($rootScope, $scope, $stateParams, $ionicLoading, $location, $log, $settings, $inventory, $books) {
         var booksInventory, credentials = $settings.load();
-        var bookID = $routeParams.bookId;
+        var bookID = $stateParams.bookId;
 
         function load() {
             if (bookID) {
@@ -188,52 +234,39 @@ app.controller('BookDetailsController', ['$rootScope', '$scope', '$routeParams',
     }
 ]);
 
-// Please note that $modalInstance represents a modal window (instance) dependency.
-// It is not the same as the $modal service used above.
-var ModalInstanceCtrl = function($rootScope, $scope, $modalInstance, inventory, book) {
-
-    $scope.book = book;
-
-    function cancel() {
-        $modalInstance.dismiss('cancel');
-    }
-    /**
-     * remove book from inventory
-     *
-     */
-    function remove() {
-        var self = this;
-        $scope.searchQuery = {};
-        var bookToRemove = $scope.book;
-        inventory.remove(bookToRemove).then(onSuccess, onError);
-
-        function onSuccess(response) {
-            $modalInstance.close(bookToRemove);
-        }
-
-        function onError(response) {
-            $rootScope.$broadcast("server.error");
-            cancel();
-        }
-    }
-
-    $scope.remove = remove;
-    $scope.cancel = cancel;
-};
 /**
  * Controller to add new book entries to inventory
  *
  */
-app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$q', '$location', '$resource', 'LogService', 'SettingsService', 'InventoryService', 'GoogleBookService',
-    function($rootScope, $scope, blockUI, $http, $q, $location, $resource, $log, $settings, $inventory, $books) {
+app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$http', '$q', '$state', '$resource', '$ionicModal', 'LogService', 'SettingsService', 'InventoryService', 'GoogleBookService',
+    function($rootScope, $scope, $ionicLoading, $http, $q, $state, $resource, $ionicModal, $log, $settings, $inventory, $books) {
         var booksInventory,
             credentials = $settings.load().activeProfile();
+
+        function init() {
+            $ionicModal.fromTemplateUrl('book_modal.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function(modal) {
+                $scope.modal = modal;
+            });
+            $scope.openModal = function() {
+                $scope.modal.show();
+            };
+            $scope.closeModal = function() {
+                $scope.modal.hide();
+            };
+            //Cleanup the modal when we're done with it!
+            $scope.$on('$destroy', function() {
+                $scope.modal.remove();
+            });
+        }
 
         /**
          * Scan book via ISBN barcode
          */
         function scan() {
-            blockUI.start();
+            $ionicLoading.show();
             cordova.plugins.barcodeScanner.scan(
                 function(result) {
                     if (!result.cancelled) {
@@ -241,13 +274,13 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                             'Result: ' + result.text + '\n' + 'Format: ' + result.format + '\n');
                         $scope.searchQuery.isbn = result.text;
                         search();
-                        blockUI.stop();
+                        $ionicLoading.hide();
                     }
                 },
                 function(error) {
                     $log.error("Scanning failed.");
                     $rootScope.$broadcast("barcode.error");
-                    blockUI.stop();
+                    $ionicLoading.hide();
                 }
             );
         }
@@ -258,7 +291,7 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
          *
          */
         function search() {
-            blockUI.start();
+            $ionicLoading.show();
             $scope.books = null;
             var searchQuery = $scope.searchQuery;
 
@@ -272,11 +305,11 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                 booksInventory = response.books;
                 $log.debug("Start searching with criteria: " + JSON.stringify(searchQuery));
                 retrieve(searchQuery);
-                blockUI.stop();
+                $ionicLoading.hide();
             }
 
             function onError(response) {
-                blockUI.stop();
+                $ionicLoading.hide();
             }
         }
 
@@ -285,27 +318,30 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
          *
          */
         function retrieve(pSearchQuery) {
+            $ionicLoading.show();
             $books.search(pSearchQuery).then(onSuccess, onError);
 
             function onSuccess(response) {
                 $log.info("Got valid service response");
                 $scope.books = response.books;
+                $ionicLoading.hide();
             }
 
             function onError(response) {
                 $rootScope.$broadcast("booksearch.invalid");
+                $ionicLoading.hide();
             }
         }
 
         function reset() {
-            blockUI.start();
+            $ionicLoading.show();
             $scope.books = null;
             $scope.infoMsg = null;
             $scope.searchQuery = null;
             $scope.selectedBook = null;
             $scope.searchQuery = {};
-            blockUI.stop();
-            $location.path("/book");
+            $ionicLoading.hide();
+            $state.go('app.books');
         }
 
         /**
@@ -313,7 +349,7 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
          *
          */
         function selectBook(pSelectedBookValue) {
-            blockUI.start();
+            $ionicLoading.show();
             var newEntry = true,
                 book = pSelectedBookValue,
                 books = booksInventory,
@@ -363,12 +399,13 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
             book.authorInfo = authorInfo;
             book.value.owner = book.value.owner || credentials.owner;
             $scope.selectedBook = book;
-            $scope.toggle("overlaySelectedBookEntry");
-            blockUI.stop();
+            $scope.openModal();
+            //$scope.toggle("overlaySelectedBookEntry");
+            $ionicLoading.hide();
         }
 
         function save(book) {
-            blockUI.start();
+            $ionicLoading.show();
             $log.debug("Starting save for book: ");
 
             // remember last bookshelf
@@ -389,13 +426,14 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
 
             function onSuccess(response) {
                 $log.info("Successfully added book");
-                blockUI.stop();
+                $ionicLoading.hide();
                 if (response.noUpdate) {
                     navigator.notification.alert("Book already added. Please increase amount.");
                 } else  {
                     // sync on save
-                    $inventory.syncRemote();
-                    $scope.toggle("overlaySelectedBookEntry");
+                    if (config.activeProfile().remotesync) {
+                        $inventory.syncRemote();
+                    }
                     navigator.notification.alert("Book successfully added.", reset(), "Book");
                 }
             }
@@ -404,9 +442,11 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
                 $rootScope.$broadcast("booksave.error");
                 $log.debug("Error during book saving: ");
                 $scope.infoMsg = null;
-                blockUI.stop();
+                $ionicLoading.hide();
             }
         }
+
+        init();
 
         $scope.searchQuery = {};
         $scope.infoMsg = null;
@@ -419,8 +459,8 @@ app.controller('BookController', ['$rootScope', '$scope', 'blockUI', '$http', '$
     }
 ]);
 
-app.controller('SettingsController', ['$rootScope', '$scope', 'blockUI', '$location', 'LogService', 'SettingsService', 'InventoryService',
-    function($rootScope, $scope, blockUI, $location, $log, $settings, $inventory) {
+app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '$state', 'LogService', 'SettingsService', 'InventoryService',
+    function($rootScope, $scope, $ionicLoading, $state, $log, $settings, $inventory) {
 
         var defaultCouch = 'https://server.holisticon.de/couchdb/flynn/',
             defaultUser = '<LDAP-User>',
@@ -438,7 +478,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', 'blockUI', '$locat
             $scope.flynn.activeProfile = {};
             $scope.flynn.activeProfile.name = config.activeProfile().name || 'default';
             $scope.flynn.activeProfile.owner = config.activeProfile().owner || defaultOwner;
-            $scope.flynn.activeProfile.dbName = config.activeProfile().dbName || 'flynnDB_' + config.activeProfile().name;
+            $scope.flynn.activeProfile.dbName = config.activeProfile().dbName || 'flynnDB_' + $scope.flynn.activeProfile.name;
             $scope.flynn.activeProfile.remotesync = config.activeProfile().remotesync || false;
             $scope.flynn.activeProfile.couchdb = config.activeProfile().couchdb || defaultCouch;
             $scope.flynn.activeProfile.user = config.activeProfile().user || defaultUser;
@@ -447,7 +487,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', 'blockUI', '$locat
 
         function saveSettings() {
             $log.debug("Saving settings to local storage");
-            blockUI.start();
+            $ionicLoading.show();
             var profile = $scope.flynn.activeProfile;
 
             // adding default profile
@@ -465,13 +505,13 @@ app.controller('SettingsController', ['$rootScope', '$scope', 'blockUI', '$locat
             $inventory.read().then(onSuccess, onError);
 
             function onSuccess(response) {
-                blockUI.stop();
+                $ionicLoading.hide();
                 $log.debug("Got valid server response. Settings seeem to be valid.");
-                $location.path("/books");
+                $state.go('app.books');
             }
 
             function onError(response) {
-                blockUI.stop();
+                $ionicLoading.hide();
                 $settings.valid = false;
                 $rootScope.$broadcast("settings.invalid");
             }
@@ -482,10 +522,12 @@ app.controller('SettingsController', ['$rootScope', '$scope', 'blockUI', '$locat
         }
 
         function readSyncLogs() {
+            $ionicLoading.show();
             var logs = $inventory.readLogs();
             if (logs) {
                 $scope.syncLogs = logs.sync;
             }
+            $ionicLoading.hide();
         }
 
         // public methods

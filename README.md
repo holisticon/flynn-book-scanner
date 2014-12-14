@@ -1,4 +1,4 @@
-flynn-book-scanner
+flynn book scanner
 ==================
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/holisticon/flynn-book-scanner?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -29,6 +29,7 @@ Global steps:
 * `sudo gem install compass`
 * Install Cordova
 * `sudo npm install -g cordova`
+* `sudo npm install -g ios-deploy`
 * Install build tools
 * `sudo npm install -g grunt-cli`
 * `sudo npm install -g bower`

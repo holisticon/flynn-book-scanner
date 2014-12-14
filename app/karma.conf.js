@@ -11,21 +11,41 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'src/bower_components/angular/angular.js',
-      'src/bower_components/angular-resource/angular-resource.js',
-      'src/bower_components/angular-cookies/angular-cookies.js',
-      'src/bower_components/angular-route/angular-route.js',
-      'src/bower_components/angular-touch/angular-touch.js',
-      'src/bower_components/angular-sanitize/angular-sanitize.js',
-      'src/bower_components/angular-mocks/angular-mocks.js',
-      'src/bower_components/mobile-angular-ui/dist/js/mobile-angular-ui.js',
-      'src/bower_components/angular-local-storage/angular-local-storage.js',
-      'src/bower_components/angular-block-ui/angular-block-ui.js',
-      'src/bower_components/angular-bootstrap/ui-bootstrap.js',
-      'src/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+
+      'bower_components/angular/angular.js',
+      'bower_components/angular-cache/dist/angular-cache.min.js',
+      'bower_components/angular-resource/angular-resource.js',
+      'bower_components/angular-cookies/angular-cookies.js',
+      'bower_components/angular-route/angular-route.js',
+      'bower_components/angular-touch/angular-touch.js',
+      'bower_components/angular-animate/angular-animate.js',
+      'bower_components/angular-sanitize/angular-sanitize.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/ionic/release/js/ionic.js',
+      'bower_components/ionic/release/js/ionic-angular.js',
+      'bower_components/angular-local-storage/angular-local-storage.js',
+      'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/ionic/release/js/ionic.js',
+      'bower_components/ionic/release/js/ionic-angular.js',
+      'bower_components/angular-bootstrap/ui-bootstrap.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'src/scripts/*.js',
       'src/scripts/**/*.js',
-      'test/spec/**/*.js'
+      'test/spec/**/*.js',
+      // fixtures
+      {
+        pattern: 'test/*.json',
+        watched: true,
+        served: true,
+        included: false
+      },
+      // html
+      {
+        pattern: 'src/views/*.html',
+        watched: true,
+        served: true,
+        included: true
+      }
     ],
 
     // list of files / patterns to exclude
@@ -66,4 +86,7 @@ module.exports = function(config) {
     // if true, it capture browsers, run tests and exit
     singleRun: false
   });
+  config.proxies = {
+    '/config.json': 'http://localhost:' + config.port + '/base/test/config.json'
+  }
 };

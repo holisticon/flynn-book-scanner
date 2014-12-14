@@ -1,0 +1,26 @@
+{
+	"info": {
+		"version": {
+			"label": "Version",
+			"hidden": false,
+			"value": "1.1.0"
+		},
+		"release_notes": {
+			"label": "Release Notes",
+			"hidden": false,
+			"value": ""
+		},
+		"copyright": {
+			"label": "Copyright",
+			"hidden": false,
+			"value": "© Copyright 2014 Holisticon AG"
+		}
+	},
+	"timeout": {
+		"label": "Timeout for deferred calls",
+		"hidden": true,
+		"value": "30000"
+	},
+	"dev": "true",
+	"debug": "false"
+}

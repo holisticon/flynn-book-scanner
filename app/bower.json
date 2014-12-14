@@ -1,30 +1,26 @@
 {
   "name": "flynnBookScanner",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "dependencies": {
-    "pouchdb": "^2.2.3",
-    "pouchdb-quick-search": "~0.2.0",
-    "angular": "~1.2.26",
-    "bootstrap-sass": "~3.0.2",
-    "angular-resource": "~1.2.26",
-    "angular-cookies": "~1.2.26",
-    "angular-sanitize": "~1.2.26",
-    "angular-route": "~1.2.26",
-    "angular-touch": "~1.2.26",
-    "mobile-angular-ui": "~1.1.0-beta.22",
-    "angular-local-storage": "0.0.7",
+    "angular": "~1.2.25",
     "angular-block-ui": "~0.0.12",
     "angular-bootstrap": "~0.11.2",
     "angular-cache": "~3.1.1",
-    "cordova": "~3.4.0",
-    "ionic": "~0.9.27"
+    "angular-cookies": "~1.2.25",
+    "angular-file-upload": "~1.1.5",
+    "angular-local-storage": "0.0.7",
+    "angular-resource": "~1.2.25",
+    "angular-route": "~1.2.25",
+    "angular-sanitize": "~1.2.25",
+    "angular-touch": "~1.2.25",
+    "bootstrap-sass": "~3.0.2",
+    "ionic": "~1.0.0-beta.13",
+    "pouchdb": "^3.2.0",
+    "pouchdb-quick-search": "~1.0.1"
   },
   "devDependencies": {
-    "angular-mocks": "~1.2.26",
-    "angular-scenario": "~1.2.26"
-  },
-  "resolutions": {
-    "angular": "~1.2.26",
-    "angular-sanitize": "~1.2.26"
+    "es5-shim": "~3.4.0",
+    "angular-mocks": "~1.2.25",
+    "angular-scenario": "~1.2.25"
   }
 }

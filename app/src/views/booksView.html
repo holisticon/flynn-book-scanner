@@ -1,59 +1,39 @@
-<div content-for="title">
-	<span>Books</span>
-</div>
-
-<input type="text" class="form-control app-search" placeholder="Type keywords to search ..."
-	data-ng-model="searchQuery.fullTextSearch" ng-change="search()"/>
-
-			
-<div class="scrollable">
-	<div class="scrollable-content section">
-		<form id="books" data-ng-init="load()">
-			<div content-for="section-menu">
-				<button class="btn btn-default" ng-click="load()">
-					<i class="fa fa-refresh"></i> Refresh
-				</button>
-			</div>
-			<div ng-if="!books && !searching" class="list-group-item">No books found.</div>
-			<div ng-if="searching" class="list-group-item">Searching ...</div>
-			<div ng-repeat="book in books">
-                <div class="item-actions pull-right">
-                    <div class="btn-group btn-group-vertical">
-                        <button button="button" ng-click="showBookDetails(book)" class="btn btn-info">
-                            <i class="fa fa-info"></i> Info
-                        </button >
-                        <button button="button" ng-click="showActionMenu(book)" class="btn">
-                            <i class="fa fa-bars"></i> Actions
-                        </button >
-                    </div>
-                </div>
-				<a class="list-group-item" href="#/books/show/{{book._id}}" ng-class="{swipehide:showActions,swipeslide:!showActions}" ng-swipe-left="showActions = true" ng-swipe-right="showActions = false">
-					<div class="pull-right">
-						<script type="text/ng-template" id="bookActions.html">
-					        <div class="modal-header">
-					            <h3 class="modal-title">Select an action</h3>
-					        </div>
-					        <div class="modal-body">
-					        	Book: {{book.value.volumeInfo.title}}
-								<button button="button" ng-click="remove()" class="btn btn-block btn-danger">
-									<i class="fa fa-trash-o">  Delete </i> 
-								</button >
-					        </div>
-					        <div class="modal-footer">
-					            <button class="btn" ng-click="cancel()">Cancel</button>
-					        </div>
-					    </script>
-					</div>
-					<div class="item-with-logo" >
-						<img ng-src="{{book.value.volumeInfo.imageLinks.thumbnail}}" />
-						<h3>{{book.value.volumeInfo.title}}</h3>
-						<p>{{book.value.volumeInfo.subtitle}}</p>
-						<p>	<span ng-show="book.authorInfo">by {{book.authorInfo}}</span>
-							{{book.value.volumeInfo.publishedDate}} <br>
-						</p>
-					</div>
-				</a>
-			</div>
-		</form>
+<ion-view title="Books">
+  	<ion-nav-buttons side="left">
+    	<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  	</ion-nav-buttons>
+  	<ion-nav-buttons side="right">
+  		<button class="button button-icon icon ion-refresh" ng-click="load()"></button>
+  	</ion-nav-buttons>
+	<ion-content>
+		<div class="bar bar-header item-input-inset">
+			<label class="item-input-wrapper">
+	    		<i class="icon ion-ios7-search placeholder-icon"></i>
+	    		<input type="search" data-ng-model="searchQuery.fullTextSearch" ng-change="search()" 
+	    		   placeholder="Type keywords to search ...">
+			</label>
+			<button ng-click="resetSearch()" class="button-clear icon ion-close-circled"></button> 		
 	</div>
-</div>
+	
+	<div ng-show="!books && !searching" class="list-group-item">No books found.</div>
+	<div ng-show="searching" class="list-group-item">Searching ...</div>
+	
+	<ion-list ng-show="books">
+       	<ion-item ng-repeat="book in books" class="item-thumbnail-left" href="#/app/book/{{book._id}}">
+			<img src="{{book.value.volumeInfo.imageLinks.thumbnail}}" />
+			<h2>{{book.value.volumeInfo.title}}</h2>
+
+			<span>{{book.value.volumeInfo.subtitle}}</span>
+			<span ng-show="book.authorInfo">by {{book.authorInfo}}</span>
+			<span>{{book.value.volumeInfo.publishedDate}}</span>	    	
+			<ion-option-button ng-click="showBookDetails(book)" class="button-positive">
+	      		Info
+	    	</ion-option-button>
+	    	<ion-option-button ng-click="showActionMenu(book)" class=" button-assertive">
+	      		Modify
+	    	</ion-option-button>
+       	</ion-item>
+   	</ion-list>
+   	
+  </ion-content>
+</ion-view>

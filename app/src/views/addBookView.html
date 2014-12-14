@@ -1,133 +1,91 @@
-<div content-for="title">
-  <span>Add a book</span>
-</div>
-<div class="scrollable">
-    <div class="scrollable-content section">
-        <form name="searchForm" type="search" novalidate ng-submit="search()">
-            <div class="panel-heading">
-                <h2 class="panel-title">
-                Search a book
-                </h2>
-            </div> 
-            <div bs-panel class="panel">                      
-                <div class="form-group row">
-                    <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12">
-                        <input bs-form-control type="tel" data-ng-model="searchQuery.isbn" label="ISBN" name="isbn"
-                            label-class="col-xs-12 col-sm-2 col-lg-2" class="ng-scope ng-pristine ng-valid needsclick form-control col-xs-12 col-sm-10 col-lg-10"
-                            placeholder="ISBN of the book">
-                    </div>
-                    <div class="form-control-wrapper col-xs-12 col-sm-12 col-lg-12">
-                        <input bs-form-control type="text" data-ng-model="searchQuery.keyword" label="Keyword" name="keyword"
-                            label-class="col-xs-12 col-sm-2 col-lg-2" class="ng-scope ng-pristine ng-valid needsclick form-control col-xs-12 col-sm-10 col-lg-10"
-                            placeholder="Search for books that contain this text string">
-                    </div>
-                </div>
-            </div>
-            <div bs-panel class="form-actions">
-                <button ng-click="scan()" class="btn"><i class="fa fa-barcode"></i>  Scan ISBN</button>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>  Search</button>
-            </div>
-            <div>
-                <p class="help-block warning" ng-show="infoMsg">{{infoMsg}}</p>
-                <div ng-if="!books" class="paragraphs" style="margin: 10px 0">No book found</div>
-                <div ng-repeat="book in books">
-                    <a ng-click="selectBook(book)" class="list-group-item">    
-                        <div>                           
-                        <h3>{{book.value.volumeInfo.title}}</h3>
-                        <p>{{book.value.volumeInfo.subtitle}}</p>
-                        <p> by <span ng-repeat="author in book.value.volumeInfo.authors">{{author}}, </span> {{book.value.volumeInfo.publishedDate}}
-                            <br>
-                        </p>
-                        </div>
-                    </a>
-                </div>
-                <div overlay="overlaySelectedBookEntry">
-                    <h4 class="overlay-title">{{selectedBook.value.volumeInfo.title}}</h4>
-                    <h5>{{selectedBook.value.volumeInfo.subtitle}} ({{selectedBook.value.volumeInfo.pageCount}} pages)</h5>
-                    <img class="img-thumbnail" alt="book image"  ng-show="selectedBook.volumeInfo.imageLinks.thumbnail" ng-src="{{selectedBook.volumeInfo.imageLinks.thumbnail}}" />
-                    <div class="text-left">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <label>ISBN-13:</label>
-                            </div>
-                            <div class="col-xs-8">
-                                <div>{{selectedBook.value.volumeInfo.industryIdentifiers[1].identifier}}</div>
-                            </div>
-                        </div>
-                        <div class="row" ng-show="selectedBook.authorInfo">
-                            <div class="col-xs-4">
-                                <label>Author:</label>
-                            </div>
-                            <div class="col-xs-8">
-                                <div>{{selectedBook.authorInfo}}</div>                      
-                            </div>
-                        </div>
-                        <div class="row" ng-show="selectedBook.volumeInfo.publisher">
-                            <div class="col-xs-4">
-                                <label>Publisher:</label>
-                            </div>
-                            <div class="col-xs-8">
-                                <div>{{selectedBook.value.volumeInfo.publisher}} ({{selectedBook.value.volumeInfo.publishedDate}}) </div>
-                            </div>
-                        </div> 
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <label>Amount:</label>
-                            </div>
-                            <div class="col-xs-8">
-                                <input type="number" data-ng-model="selectedBook.count" label="Amount"
-                                    class="form-control" placeholder="Amount of the book" required min="1">
-                                <p class="help-block warning" ng-show="infoMsg">{{infoMsg}}</p>
-                            </div>
-                        </div> 
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <label>Owner:</label>
-                            </div>
-                            <div class="col-xs-8">
-                                <input type="text" data-ng-model="selectedBook.value.owner" label="Owner"
-                                    class="form-control" placeholder="Owner of the book" required min="1">
-                            </div>
-                        </div> 
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <label>Bookshelf:</label>
-                            </div>
-                            <div class="col-xs-8">
-                                <input type="text" data-ng-model="selectedBook.value.bookshelf" label="Bookshelf"
-                                    class="form-control" placeholder="Location of the book">
-                            </div>
-                        </div>    
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <label>Comment:</label>
-                            </div>
-                            <div class="col-xs-8">
-                                <input type="text" data-ng-model="selectedBook.value.comment" label="Comment"
-                                    class="form-control">
-                            </div>
-                        </div>                                      
+<ion-view title="Add a book">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content id="addBook" class="padding">
+  	<form name="searchForm" type="search" novalidate ng-submit="search()">
+		<h2>Search a book</h2>
+       	<div name="searchData">                        	
+        	<label class="item-input">
+		  		<span class="input-label">ISBN</span>
+		  		<input id="isbn" type="tel" data-ng-model="searchQuery.isbn" placeholder="ISBN of the book">
+			</label>                        	
+        	<label class="item-input">
+		  		<span class="input-label">Keyword</span>
+		  		<input id="keyword" type="text" data-ng-model="searchQuery.keyword" placeholder="Search for books that contain this text ">
+			</label>
+		</div>
+        <button type="submit" class="button button-positive"> Search</button>
+        <button ng-click="scan()" class="button"> Scan ISBN</button>
+        <p class="help-block warning" ng-show="infoMsg">{{infoMsg}}</p>
+        <div ng-show="!books" class="paragraphs" style="margin: 10px 0">No book found</div>
+        <ion-list class="list card" ng-show="books">
+        	<br>
+            <div class="item item-divider">
+	          Search Results
+	        </div> 
+            <ion-item ng-repeat="book in books" class="item" ng-click="selectBook(book)">
+                <h3>{{book.value.volumeInfo.title}}</h3>
+                <p>{{book.value.volumeInfo.subtitle}}</p>
+                <p> by <span ng-repeat="author in book.value.volumeInfo.authors">{{author}}, </span> {{book.value.volumeInfo.publishedDate}}
+                    <br>
+                </p>
+            </ion-item>
+		</ion-list>
+        <script id="book_modal.html" type="text/ng-template">
+  			<ion-modal-view>
+    			<ion-header-bar>
+      				<h1 class="title">{{selectedBook.value.volumeInfo.title}}</h1>
+        			<button class="button button-clear" ng-click="closeModal()">Cancel</button>
+    			</ion-header-bar>
+    			<ion-content class="modal-background">
+               		<div class="padding">
+						<h2>{{selectedBook.value.volumeInfo.subtitle}}</h2>
+                    	<img class="img-thumbnail" alt="book image"  ng-show="selectedBook.volumeInfo.imageLinks.thumbnail" ng-src="{{selectedBook.volumeInfo.imageLinks.thumbnail}}" />
+                    	                       	
+        				<label class="item-input">
+		  					<span class="input-label">Pages</span>
+				  			<span class="input-label">{{selectedBook.value.volumeInfo.pageCount}}</span>  		
+						</label>
+        				<label class="item-input">
+		  					<span class="input-label">ISBN-13</span>
+				  			<span class="input-label">{{selectedBook.value.volumeInfo.industryIdentifiers[1].identifier}}</span>  		
+						</label>
+        				<label class="item-input" ng-show="selectedBook.authorInfo">
+		  					<span class="input-label">Author</span>
+				  			<span class="input-label">{{selectedBook.authorInfo}}</span>  		
+						</label>
+        				<label class="item-input" ng-show="selectedBook.volumeInfo.publisher">
+		  					<span class="input-label">Publisher</span>
+				  			<span class="input-label">{{selectedBook.value.volumeInfo.publisher}}  ({{selectedBook.value.volumeInfo.publishedDate}})</span>  		
+						</label>
+        				<label class="item-input">
+		  					<span class="input-label">Amount</span>
+		  					<input type="number" data-ng-model="selectedBook.count" placeholder="Amount of the book" required min="1">
+							<br>
+							<p class="help-block warning" ng-show="infoMsg">{{infoMsg}}</p>
+						</label>                           	
+        				<label class="item-input">
+		  					<span class="input-label">Owner</span>
+                            <input type="text" data-ng-model="selectedBook.value.owner" placeholder="Owner of the book" required min="1">
+						</label>
+        				<label class="item-input">
+		  					<span class="input-label">Bookshelf</span>
+                            <input type="text" data-ng-model="selectedBook.value.bookshelf" placeholder="Location of the book">
+						</label>
+        				<label class="item-input">
+		  					<span class="input-label">Comment</span>
+                            <input type="text" data-ng-model="selectedBook.value.comment">
+						</label>                                   
                         <br>
+                        <button button="button" ng-click="save(selectedBook)" class="button button-positive">
+							Save
+						</button>
                     </div>
-                    <p toggle="off" bubble target="overlaySelectedBookEntry">
-                        <button button="button" ng-click="save(selectedBook)" class="btn btn-primary"><i class="fa fa-save"></i>  Save</button>
-                        <button button="button" class="btn">Cancel</button>
-                    </p>
-                </div>
-            </div>
+    			</ion-content>
+  			</ion-modal-view>
+		</script>
+            
         </form>
-    </div>
-</div>
-<!-- {{book}} -->
-
-
-
-<!-- Thumbnail (big)
-Autors (alle)
-Title
-Subtitle
-Publisher
-Publish Date
-ISBN
-PrintPageCount
-Description -->
+	</ion-content>
+</ion-view>

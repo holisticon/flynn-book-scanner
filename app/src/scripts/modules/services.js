@@ -1,6 +1,6 @@
-'use strict';
-
 app.factory('Base64', function() {
+    'use strict';
+
     var keyStr = 'ABCDEFGHIJKLMNOP' +
         'QRSTUVWXYZabcdef' +
         'ghijklmnopqrstuv' +
@@ -86,7 +86,9 @@ app.factory('Base64', function() {
 });
 
 app.service('LogService', ['$rootScope', '$log',
+
     function($rootScope, $log) {
+        'use strict';
         return {
             info: function(pMsg) {
                 console.log(pMsg);
@@ -106,7 +108,9 @@ app.service('LogService', ['$rootScope', '$log',
 
 
 app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'SettingsService', 'Base64',
+
     function($rootScope, $log, $http, $q, $settings, $base64) {
+        'use strict';
         var usedCode;
         return {
             search: function(pSearchCriteria) {
@@ -224,10 +228,26 @@ app.service('GoogleBookService', ['$rootScope', 'LogService', '$http', '$q', 'Se
 ]);
 
 app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'SettingsService', 'Base64', 'localStorageService',
+
     function($rootScope, $log, $http, $q, $settings, $base64, localStorage) {
+        'use strict';
         var config = $settings.load(),
             activeProfile = config.activeProfile(),
+            db;
+
+        function getDB() {
+            var NAME_OF_POUCHDB;
+            config = $settings.load();
+            activeProfile = config.activeProfile();
             NAME_OF_POUCHDB = activeProfile.dbName;
+
+            if (!db) {
+                db = new PouchDB(NAME_OF_POUCHDB, {
+                    adapter: 'websql'
+                });
+            }
+            return db;
+        }
 
         return {
             readLogs: function() {
@@ -259,15 +279,13 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                 // TODO: Add authentical (rly, it's https already).
                 var couchDbUrl = activeProfile.couchdb,
                     self = this,
-                    localDB = new PouchDB(NAME_OF_POUCHDB, {
-                        adapter: 'websql'
-                    }),
-                    authorization = activeProfile.user + ':' + activeProfile.password,
-                    remoteCouch = couchDbUrl.replace("://", "://" + authorization + "@"), // FIXME: just to try it out
-                    opts = {
-                        live: true
-                    }; 
+                    localDB = getDB();
                 if (localDB) {
+                    var authorization = activeProfile.user + ':' + activeProfile.password,
+                        remoteCouch = couchDbUrl.replace("://", "://" + authorization + "@"), // FIXME: just to try it out
+                        opts = {
+                            live: true
+                        };
                     self.logSync("Info", "Syncing with couchDB started: " + couchDbUrl);
                     localDB.sync(remoteCouch)
                         .on('change', function(info) {
@@ -287,17 +305,10 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                 }
             },
             read: function() {
-                if (!config.valid) {
-                    config = $settings.load();
-                    activeProfile = config.activeProfile();
-                    NAME_OF_POUCHDB = activeProfile.dbName;
-                }
                 var deferred = $q.defer(),
                     books = null,
                     response = {},
-                    flynnDB = new PouchDB(NAME_OF_POUCHDB, {
-                        adapter: 'websql'
-                    });
+                    flynnDB = getDB();
                 if (flynnDB) {
                     $log.debug("Using db-adapter: " + flynnDB.adapter);
                     flynnDB.allDocs({
@@ -339,9 +350,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
             search: function(pSearchQuery) {
                 var deferred = $q.defer(),
                     response = {},
-                    flynnDB = new PouchDB(NAME_OF_POUCHDB, {
-                        adapter: 'websql'
-                    });
+                    flynnDB = getDB();
                 $log.debug("Starting search: " + JSON.stringify(pSearchQuery));
                 // check if we have fulltext search
                 if (pSearchQuery.fullTextSearch) {
@@ -358,25 +367,30 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                             'value.volumeInfo.publishedDate'
                         ],
                         mm: '30%',
-                        include_docs: true
-                    }).then(function(res) {
-                        var rows = res.rows;
-                        if (rows && rows.length > 0) {
-                            $log.debug("Got " + rows.length + " results.");
-                            response.count = rows.length;
-                            response.books = {};
-                            for (var id in rows) {
-                                var bookEntry = rows[id].doc;
-                                response.books[id] = bookEntry;
+                        include_docs: true,
+                        //stale: 'update_after'
+                    }, function(err, res) {
+                        $rootScope.$apply(function() {
+                            if (err) {
+                                $log.error("Search error");
+                                deferred.reject(response);
+                            } else {
+                                var rows = res.rows;
+                                if (rows && rows.length > 0) {
+                                    $log.debug("Got " + rows.length + " results.");
+                                    response.count = rows.length;
+                                    response.books = {};
+                                    for (var id in rows) {
+                                        var bookEntry = rows[id].doc;
+                                        response.books[id] = bookEntry;
+                                    }
+                                    deferred.resolve(response);
+                                } else {
+                                    $log.debug("Got no results.");
+                                    deferred.reject(response);
+                                }
                             }
-                            deferred.resolve(response);
-                        } else {
-                            $log.debug("Got no results.");
-                            deferred.reject(response);
-                        }
-                    }).catch(function(err) {
-                        $log.error("Search error");
-                        deferred.reject(response);
+                        });
                     });
                 } else  {
                     if (pSearchQuery.isbn) {
@@ -394,9 +408,12 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                                         var count = 0;
                                         for (var id in rows) {
                                             var bookEntry = rows[id].doc;
-                                            if (bookEntry.value && bookEntry.value.volumeInfo.industryIdentifiers[1].identifier == isbn) {
-                                                response.books[id] = bookEntry;
-                                                count++;
+                                            if (bookEntry.value && bookEntry.value.volumeInfo) {
+                                                var idInfoDtls = bookEntry.value.volumeInfo.industryIdentifiers;
+                                                if (idInfoDtls && idInfoDtls.length > 1 && idInfoDtls[1].identifier == isbn) {
+                                                    response.books[id] = bookEntry;
+                                                    count++;
+                                                }
                                             }
                                         }
                                         response.count = count;
@@ -414,8 +431,45 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                         });
 
                     } else {
-                        $log.error("Search error");
-                        deferred.reject(response);
+
+                        if (pSearchQuery.id) {
+                            var bookId = '' + pSearchQuery.id;
+                            $log.debug("Starting id-search: " + bookId);
+                            flynnDB.allDocs({
+                                include_docs: true,
+                                descending: true
+                            }, function(err, res) {
+                                $rootScope.$apply(function() {
+                                    if (!err) {
+                                        var rows = res.rows;
+                                        if (rows && rows.length > 0) {
+                                            response.books = {};
+                                            var count = 0;
+                                            for (var id in rows) {
+                                                var bookEntry = rows[id].doc;
+                                                if (bookEntry.value && bookEntry.value.id == bookId) {
+                                                    response.books[id] = bookEntry;
+                                                    count++;
+                                                }
+                                            }
+                                            response.count = count;
+                                            $log.debug("Got " + count + " results.");
+                                            deferred.resolve(response);
+                                        } else {
+                                            $log.debug("Got no results.");
+                                            deferred.reject(response);
+                                        }
+                                    } else {
+                                        $log.error("Search error: " + err);
+                                        deferred.reject(response);
+                                    }
+                                });
+                            });
+
+                        } else {
+                            $log.error("Search error");
+                            deferred.reject(response);
+                        }
                     }
                 }
                 return deferred.promise;
@@ -425,53 +479,41 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                     self = this,
                     response = {},
                     credentials = $settings.load(),
-                    flynnDB = new PouchDB(NAME_OF_POUCHDB, {
-                        adapter: 'websql'
-                    });
+                    flynnDB = getDB();
                 $log.debug('Starting delete of book: ' + pBookToRemove.value.volumeInfo.title);
                 if (flynnDB) {
-                    var isbn = pBookToRemove.value.volumeInfo.industryIdentifiers[1].identifier;
                     var searchQuery = {};
-                    searchQuery.isbn = isbn;
+                    searchQuery.id = pBookToRemove.value.id;
                     self.search(searchQuery).then(function(response) {
-                        var count = 0
+                        var count = 0,
+                            booksToRemove = [];
                         if (response.books) {
                             count = response.count;
                         }
                         if (count > 0) {
-                            var errorOccurred = false;
                             for (var index in response.books) {
                                 var pBookToRemove = response.books[index];
-                                flynnDB.remove(pBookToRemove, function(err, result) {
-                                    if (!err) {
-                                        $log.info("Delete of entry was successfull.");
-                                    } else {
-                                        $log.error("Error deleting entry: " + err);
-                                        errorOccurred = true;
-                                    }
-                                })
+                                pBookToRemove._deleted = true;
+                                booksToRemove.push(pBookToRemove);
                             }
-                            if (errorOccurred) {
-                                $log.error("Error during delete. Skipping delete");
-                                deferred.reject(response);
-                            } else {
-                                $log.info("Delete successfull.");
-                                deferred.resolve(response);
-                            }
+                        } else {
+                            $log.error('Error deleting entry. Book not found');
+                            deferred.reject(response);
                         }
-                        deferred.resolve(response);
-                        /*
-                        flynnDB.remove(pBookToRemove, function(err, result) {
-                            if (!err) {
-                                $log.info("Delete successfull.");
-                                deferred.resolve(response);
-                            } else {
-                                $log.error("Error deleting entry: " + err);
-                                deferred.reject(response);
-                            }
-                        });*/
-                    }, function(response) {
-                        $log.info("Delete successfull.");
+                        db.bulkDocs(booksToRemove, function(err, result) {
+                            $rootScope.$apply(function() {
+                                if (!err) {
+                                    $log.info("Delete of entry was successfull.");
+                                    deferred.resolve(result);
+                                } else {
+                                    $log.error("Error deleting entry: " + err);
+                                    deferred.reject(err);
+                                }
+                            });
+                        }, function(response) {
+                            $log.error('Error deleting entry.');
+                            deferred.reject(response);
+                        });
                     });
                 }
                 return deferred.promise;
@@ -484,9 +526,7 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
                     credentials = $settings.load(),
                     saveSuccess = false,
                     errorOccurred = false,
-                    flynnDB = new PouchDB(NAME_OF_POUCHDB, {
-                        adapter: 'websql'
-                    });
+                    flynnDB = getDB();
                 $log.debug('Starting save for book: ' + pBookToSave.value.volumeInfo.title);
                 if (flynnDB) {
                     var bookEntriesToAdd = 0,
@@ -556,7 +596,9 @@ app.service('InventoryService', ['$rootScope', 'LogService', '$http', '$q', 'Set
 
 
 app.service('SettingsService', ['$rootScope', 'localStorageService',
+
     function($rootScope, localStorage) {
+        'use strict';
         return {
             save: function(pConfig) {
                 localStorage.remove('flynn_app.settings');
@@ -603,7 +645,9 @@ app.service('SettingsService', ['$rootScope', 'localStorageService',
 
 
 angular.module('fsCordova', []).service('CordovaService', ['$document', '$q',
+
     function($document, $q) {
+        'use strict';
 
         var d = $q.defer(),
             resolved = false;

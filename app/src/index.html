@@ -3,91 +3,55 @@
   <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Flynn</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <meta name="format-detection" content="telephone=no">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <!-- build:css(.tmp) styles/bootstrap.css -->
-        <link rel="stylesheet" href="styles/bootstrap.css">
+    	<!-- build:css(./)  styles/base.css -->
+        <link rel="stylesheet" href="/bower_components/ionic/release/css/ionic.css">
         <!-- endbuild -->
 
-        <link rel="stylesheet" href="bower_components/mobile-angular-ui/dist/css/mobile-angular-ui-base.css">
-        <link rel="stylesheet" href="bower_components/mobile-angular-ui/dist/css/mobile-angular-ui-desktop.css">
-        <link rel="stylesheet" href="bower_components/angular-block-ui/angular-block-ui.css" />
-
-        <!-- build:css(.tmp) styles/main.css -->
+        <!-- build:css(.tmp) styles/app.css -->
+        <link rel="stylesheet" href="styles/bootstrap.css">
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
-    </head>
-    <body data-ng-app="flynnBookScannerApp" ng-controller="MainController">
 
+        <!-- build:js(./) scripts/plugins.js -->
+        <script src="/bower_components/angular/angular.js"></script>
+        <script src="/bower_components/angular-cache/dist/angular-cache.min.js"></script>
+        <script src="/bower_components/angular-resource/angular-resource.js"></script>
+        <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="/bower_components/angular-animate/angular-animate.js"></script>
+        <script src="/bower_components/angular-route/angular-route.js"></script>
+        <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="/bower_components/angular-touch/angular-touch.js"></script>
+        <script src="/bower_components/ionic/release/js/ionic.js"></script>
+        <script src="/bower_components/ionic/release/js/ionic-angular.js"></script>
+        <script src="/bower_components/pouchdb/dist/pouchdb.js"></script>
+        <script src="/bower_components/pouchdb-quick-search/dist/pouchdb.quick-search.js"></script>
+        <!-- endbuild -->
 
-        <!--[if lt IE 9]>
-          <script src="bower_components/es5-shim/es5-shim.js"></script>
-          <script src="bower_components/json3/lib/json3.min.js"></script>
-        <![endif]-->
-
-
-        <div ng-include="'views/navbarView.html'" class="sidebar sidebar-left"
-        toggleable parent-active-class="sidebar-left-in" id="mainSidebar"></div>
-
-       <div class="app">
-
-            <div class="navbar navbar-app navbar-absolute-top">
-                <div class="navbar-brand navbar-brand-center" yield-to="title">
-                    <span>Flynn</span>
-                </div>
-                <div class="btn-group pull-left" yield-to="nav-menu">
-                    <div ng-click="toggle('mainSidebar')"
-                        class="btn btn-navbar sidebar-toggle">
-                        <i class="fa fa-bars"></i> Menu
-                    </div>
-                </div>
-                <div class="btn-group pull-right" yield-to="section-menu">
-                </div>
-            </div>   
-
-            <div class="app-body" ng-class="{loading: loading}">
-                <div ng-show="loading" class="app-content-loading">
-                  <i class="fa fa-spinner fa-spin loading-spinner"></i>
-                </div>
-                <ng-view class="app-content ng-scope" ng-hide="loading"></ng-view>
-            </div>
-
-        </div>
+        <!-- build:js(./) scripts/modules.js -->
+        <script src="/bower_components/angular-local-storage/angular-local-storage.js"></script>
+        <script src="/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+        <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <!-- endbuild -->
 
         <!-- Cordova stuff -->
         <script src="cordova.js"></script>
         <script src="cordova_plugins.js"></script>
 
-        <!-- build:js scripts/plugins.js -->
-        <script src="bower_components/angular/angular.js"></script>
-        <script src="bower_components/pouchdb/dist/pouchdb-nightly.js"></script>
-        <script src="bower_components/pouchdb-quick-search/dist/pouchdb.quick-search.js"></script>
-        <!-- endbuild -->
-
-        <!-- build:js scripts/modules.js -->
-        <script src="bower_components/angular-cache/dist/angular-cache.min.js"></script>
-        <script src="bower_components/angular-resource/angular-resource.js"></script>
-        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-        <script src="bower_components/angular-route/angular-route.js"></script>
-        <script src="bower_components/angular-touch/angular-touch.js"></script>
-        <script src="bower_components/angular-local-storage/angular-local-storage.js"></script>
-        <script src="bower_components/angular-block-ui/angular-block-ui.js"></script>
-        <script src="bower_components/mobile-angular-ui/dist/js/mobile-angular-ui.js"></script>
-        <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-        <!-- endbuild -->
-
-        <!-- build:js({.tmp,src}) scripts/scripts.js -->
+        <!-- build:js({.tmp,src}) scripts/app.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/controllers.js"></script>
         <script src="scripts/modules/directives.js"></script>
         <script src="scripts/modules/services.js"></script>
         <!-- endbuild -->
-
+    </head>
+    <body>
+		<ion-nav-view></ion-nav-view>
     </body>
 </html>

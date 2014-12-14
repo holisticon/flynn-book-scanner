@@ -1,225 +1,58 @@
-
-body {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    font-weight: 500;
-    background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #333;
-    -webkit-overflow-scrolling: auto;
+.menu-left .bar-header {
+  background-color: #153D8E;
+  
+  .title {
+  	color: #ffffff;
+  }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    color: #666666;
+.menu-left .scroll-content {
+  background-color: #DEDEDE;
 }
 
-a.list-group-item {
-    color: #1952A0;
+.tabs-positive > .tabs, .tabs.tabs-positive {
+  border-color: #145fd7;
+  background-color: #153D8E;
 }
 
-.navbar-app {
-    color: #1952A0;
+.modal-background {
+	background: #eeeeee;
 }
 
-.panel-title {
-    color: #666666;
-    font-weight: 500;
-    font-size: 20px;
+.item-thumbnail-left .item-content > img:first-child{
+	width: auto;
 }
 
-small, .small {
-    color: #6A7A9A;
+.button.button-positive {
+  border-color: #145fd7;
+  background-color: #153D8E;
 }
 
-.navbar-app .btn-navbar, .navbar-app .btn{
-color: #1952A0;
-}
-
-footer {
-    padding: 5px;
+.button.button-positive.active, .button.button-positive.activated {
+  border-color: #145fd7;
+  background-color: #4a87ee;
 }
 
 
-.feature-icon {
-    font-size: 44px;
-    padding: 5px;
-    color: #DE0027;
-    text-align: center;
-    opacity: .8;
-}
+// fix for side-menu issue on android, see https://github.com/driftyco/ionic/issues/2122
 
-
-.item-with-logo {
-  padding-left: 60px;
-  min-height: 60px;
-}
-
-.item-with-logo>img:first-child {
-  position: absolute;
-  top: 15px;
-  left: 2px;
-  max-width: 60px;
-  max-height: 60px;
-  width: 100%;
-  border-radius: 1px;
-}
-
-/* navbar */
-@media (min-width: 992px) {
-
-.navbar-brand-center {
-text-align: center; 
-}
-
-}
-
-.navbar-brand {
-  float: left;
-  padding: 15px 25px 0px 25px;
-  font-size: 18px;
-  line-height: 20px;
-  height: 50px;
-}
-
-@import "compass";
-@import "compass/css3/user-interface";
-
-[menu-slideout] {
-    @include transform(translate3d(0,0,0));
-    &.menu-slideout-transition { 
-        @include transition(transform 0.5s); 
-    }
-    &.menu-slideout-open { 
-        @include transform(translate3d(230px, 0, 0)); 
-    }
-    &.menu-slideout-is-sliding {
-        @include user-select(none);
-    }
-}
-
-/* swipping */
-
-.swipeslide.ng-enter,
-.swipeslide.ng-leave,
-.swipehide.ng-enter,
-.swipehide.ng-leave
-{
-    position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
-    background: inherit;
-    -ms-transition: .25s ease-in-out;
-    -webkit-transition: .25s ease-in-out;
-    transition:  .25s ease-in-out;
-}
-
-.swipeslide {
-  @include transform(translate3d(0, 0, 0)); 
-}
-
-.swipehide {
-  @include transform(translate3d(-100px, 0, 0)); 
-}
-
-
-.swipeslide,.swipehide {
-  transition: all 0.2s ease;
-}
-
-
-
-.swipeslide.ng-enter {
-    z-index: 101;
-    -webkit-transform: translateX(100%);
-    transform: translateX(100%);
-}
-
-.swipeslide.ng-enter.ng-enter-active {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
-}
-
-.swipeslide.ng-leave {
-    z-index: 100;
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
-}
-
-.swipeslide.ng-leave.ng-leave-active {
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%);
-}
-
-/* library */
-
-
-.carousel-content {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  top: 20%;
-  margin-top: -50px;
-}
-
-
-.carousel .item {
-  color: #444;
-  background: #f4f4f4;
-  box-shadow: 0px 0px 3px rgba(0,0,0,0.5);
-}
-
-
-.carousel {
-  padding: 20px;
-  overflow: visible;
-}
-
-.carousel-inner {
-  position: relative;
-  overflow: visible;
-
-}
-
-.carousel-inner>.item {
-  top: 0;
-  left: 0;
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.carousel-inner>.item:first-child {
-  z-index: 1998; 
-}
-
-.carousel-inner>.item.active {
-  z-index: 2000;
-}
-
-.carousel-inner>.item.active + .item {
-  z-index: 1999;
-}
-
-/* Error handling and validation */
-
-.pristine.true, .dirty.true, .invalid.true {
-  background: gray;
-}
-.valid.false {
-  background: red;
-}
-.valid.true {
-  background: green; 
-}
-.error {
-  color: red; 
-}
-.warning {
-  color: orange; 
+header.bar {
+	 /*CSS transitions*/
+	 -o-transition-property: none !important;
+	 -moz-transition-property: none !important;
+	 -ms-transition-property: none !important;
+	 -webkit-transition-property: none !important;
+	 transition-property: none !important;
+	 /*CSS transforms*/
+	 -o-transform: none !important;
+	 -moz-transform: none !important;
+	 -ms-transform: none !important;
+	 -webkit-transform: none !important;
+	 transform: none !important;
+	 /*CSS animations*/
+	 -webkit-animation: none !important;
+	 -moz-animation: none !important;
+	 -o-animation: none !important;
+	 -ms-animation: none !important;
+	 animation: none !important;
 }

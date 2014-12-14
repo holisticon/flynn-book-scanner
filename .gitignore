@@ -9,7 +9,7 @@ atlassian-ide-plugin.xml
 *.iws
 *.log
 app/node_modules
-app/src/bower_components
+app/bower_components
 app/npm-debug.log
 app/www
 app/platforms/android/local.properties

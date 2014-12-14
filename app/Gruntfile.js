@@ -1,15 +1,12 @@
-// Generated on 2013-10-18 using generator-angular 0.5.0
 'use strict';
-
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
 
 module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-bower-task');
+  grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-plato');
 
   grunt.initConfig({
     yeoman: {
@@ -31,10 +28,11 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '<%= yeoman.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
-          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+	      '<%= yeoman.app %>/{,*/}*.html',
+	      '.tmp/styles/{,*/}*.css',
+	      '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+	      '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+	      'bower_components/{,*/}*'
         ]
       }
     },
@@ -61,7 +59,8 @@ module.exports = function (grunt) {
           open: true,
           base: [
             '.tmp',
-            '<%= yeoman.app %>'
+            '<%= yeoman.app %>',
+            '.'
           ]
         }
       },
@@ -69,11 +68,13 @@ module.exports = function (grunt) {
         options: {
           port: 9001,
           base: [
-            '.tmp',
-            'test',
-            '<%= yeoman.app %>'
-          ]
-        }
+                 '<%= yeoman.app %>/{,*/}*.html',
+                 '.tmp/styles/{,*/}*.css',
+                 '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+                 '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+                 'bower_components/{,*/}*'
+              ]
+            }
       },
       dist: {
         options: {
@@ -111,7 +112,7 @@ module.exports = function (grunt) {
         imagesDir: '<%= yeoman.app %>/images',
         javascriptsDir: '<%= yeoman.app %>/scripts',
         fontsDir: '<%= yeoman.app %>/styles/fonts',
-        importPath: '<%= yeoman.app %>/bower_components',
+        importPath: 'bower_components',
         httpImagesPath: '/images',
         httpGeneratedImagesPath: '/images/generated',
         httpFontsPath: '/styles/fonts',
@@ -124,11 +125,6 @@ module.exports = function (grunt) {
         }
       }
     },
-    // not used since Uglify task does concat,
-    // but still available if needed
-    /*concat: {
-      dist: {}
-    },*/
     rev: {
       dist: {
         files: {
@@ -154,56 +150,13 @@ module.exports = function (grunt) {
         dirs: ['<%= yeoman.dist %>']
       }
     },
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg}',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
-    },
-    svgmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
-    },
-    cssmin: {
-      // By default, your `index.html` <!-- Usemin Block --> will take care of
-      // minification. This option is pre-configured if you do not wish to use
-      // Usemin blocks.
-      // dist: {
-      //   files: {
-      //     '<%= yeoman.dist %>/styles/main.css': [
-      //       '.tmp/styles/{,*/}*.css',
-      //       '<%= yeoman.app %>/styles/{,*/}*.css'
-      //     ]
-      //   }
-      // }
-    },
     htmlmin: {
       dist: {
-        options: {
-          /*removeCommentsFromCDATA: true,
-          // https://github.com/yeoman/grunt-usemin/issues/44
-          //collapseWhitespace: true,
-          collapseBooleanAttributes: true,
-          removeAttributeQuotes: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeOptionalTags: true*/
-        },
+        options: {},
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>',
-          src: ['*.html', 'views/*.html'],
+          src: ['index.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -219,16 +172,23 @@ module.exports = function (grunt) {
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
-            'bower_components/**/*',
+            'config.json',
             'images/{,*/}*.{gif,webp}',
             'styles/fonts/*',
             '*.js'
           ]
-        }, {
+        }, {         
+           expand: true,
+            dest: '<%= yeoman.dist %>',
+            src: [
+              'config.xml'
+            ]
+       }, {
           expand: true,
+          cwd: '<%= yeoman.app %>',
           dest: '<%= yeoman.dist %>',
           src: [
-            'config.xml'
+            'views/*.html'
           ]
         }, {
           expand: true,
@@ -237,10 +197,16 @@ module.exports = function (grunt) {
           src: [
             'generated/*'
           ]
-        },
-        {
+        }, {
             expand: true,
-            cwd: '<%= yeoman.app %>/bower_components/bootstrap-sass/fonts/',
+            cwd: 'bower_components/ionic/release/fonts/',
+            dest: '<%= yeoman.dist %>/fonts',
+            src: [
+              '*',
+            ]
+        }, {
+            expand: true,
+            cwd: 'bower_components/bootstrap-sass/fonts/',
             dest: '<%= yeoman.dist %>/fonts',
             src: [
                 '*'
@@ -266,8 +232,6 @@ module.exports = function (grunt) {
       dist: [
         'compass:dist',
         'copy:styles',
-        'imagemin',
-        'svgmin',
         'htmlmin'
       ]
     },
@@ -275,6 +239,11 @@ module.exports = function (grunt) {
       unit: {
         configFile: 'karma.conf.js',
         singleRun: true
+      },
+      server: {
+        configFile: 'karma.conf.js',
+        singleRun: false,
+        autoWatch: true
       }
     },
     cdnify: {
@@ -329,7 +298,7 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma'
+    'karma:unit'
   ]);
 
   grunt.registerTask('build', [

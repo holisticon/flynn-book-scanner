@@ -1,18 +1,10 @@
-<div content-for="nav-menu">
-    <button class="btn btn-default">
-        <a href back-button><i class="fa fa-chevron-left"></i></a>
-    </button>
-</div>
-
-<div content-for="title">
-    <span>{{selectedBook.value.volumeInfo.title}}</span>
-</div>
-
-<div class="scrollable">
-    <div class="scrollable-content section">
-        <div class="panel-heading">
-            <h2 class="panel-title">{{selectedBook.value.volumeInfo.subtitle}}</h2>
-        </div>
+<ion-view title="Book">
+  <ion-nav-buttons side="left">
+   <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
+  </ion-nav-buttons>
+  <ion-content id="book" class="padding">
+    <h1>{{selectedBook.value.volumeInfo.title}}</h1>
+    <h2 class="panel-title">{{selectedBook.value.volumeInfo.subtitle}}</h2>     
         <div bs-panel class="panel">
             <img ng-src="{{selectedBook.value.volumeInfo.imageLinks.thumbnail}}"/> <br> <br>
             <span ng-show="selectedBook.value.volumeInfo.description">{{selectedBook.value.volumeInfo.description}}<br> <br></span>
@@ -51,5 +43,5 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+	</ion-content>
+</ion-view>

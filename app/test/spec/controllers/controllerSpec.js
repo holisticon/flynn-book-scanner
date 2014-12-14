@@ -18,9 +18,8 @@ describe('main', function() {
 
     // define the mock book service
     beforeEach(function() {
-      inject(function(GoogleBookService, InventoryService, $q, $rootScope) {
+      inject(function($injector, $controller, $q, $rootScope) {
         q = $q;
-        deferred = $q.defer();
         scope = $rootScope;
         PouchDB = function(dbname) {
 
@@ -30,7 +29,6 @@ describe('main', function() {
             }
           }
         };
-        bookService = GoogleBookService;
         var books = [{
           "kind": "books#volumes",
           "totalItems": 77,
@@ -53,12 +51,24 @@ describe('main', function() {
             }
           }]
         }];
-        inventoryService = InventoryService;
-        var response = {};
-        response.books = books;
-        deferred.resolve(response);
-        spyOn(bookService, 'search').andReturn(deferred.promise);
-        spyOn(inventoryService, 'read').andReturn(deferred.promise);
+        bookService = {
+          search: function(searchQuery) {
+            var deferred = $q.defer();
+            var response = {};
+            response.books = books;
+            deferred.resolve(response);
+            return deferred.promise;
+          }
+        }
+        inventoryService = {
+          read: function() {
+            var deferred = $q.defer();
+            var response = {};
+            response.books = books;
+            deferred.resolve(response);
+            return deferred.promise;
+          }
+        }
       });
     });
 
@@ -84,6 +94,8 @@ describe('main', function() {
     });
 
     it('do isbn search - update existing', function() {
+      httpBackend.when('GET', 'book_modal.html').respond('');
+      httpBackend.when('GET', 'views/navbarView.html').respond('');
       scope.searchQuery = {};
       scope.searchQuery.isbn = "9783898646123";
       scope.search();
@@ -92,6 +104,8 @@ describe('main', function() {
     });
 
     it('do isbn search - add new', function() {
+      httpBackend.when('GET', 'book_modal.html').respond('');
+      httpBackend.when('GET', 'views/navbarView.html').respond('');
       scope.searchQuery = {};
       scope.searchQuery.isbn = "9783898646123";
       scope.search();
