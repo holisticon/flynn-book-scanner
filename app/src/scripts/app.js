@@ -64,7 +64,8 @@ if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
  * @ngdoc
  *
  * @name flynn app
- * @module angular
+ * 
+ * @module flynnBookScannerApp
  *
  */
 var app = angular.module('flynnBookScannerApp', [
@@ -77,6 +78,23 @@ var app = angular.module('flynnBookScannerApp', [
     'ngTouch',
     'ionic'
 ]);
+
+/**
+ * @ngdoc
+ * 
+ * Reverse list in order
+ * 
+ * @module flynnBookScannerApp
+ */
+app.filter('reverse', function() {
+    return function(items) {
+        if (items) {
+            return items.slice().reverse();
+        } else {
+            return;
+        }
+    };
+});
 
 app.config(function($logProvider) {
     $logProvider.debugEnabled(true);

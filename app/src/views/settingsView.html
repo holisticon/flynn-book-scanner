@@ -59,7 +59,7 @@
 		                    	<div class="item item-divider">
 						          Log Entries
 						        </div>
-		                        <ion-item ng-repeat="logEntry in syncLogs" class="item">
+		                        <ion-item ng-repeat="logEntry in syncLogs | reverse" class="item">
 		                            {{logEntry.date | date: format}} - {{logEntry.category}} <br> {{logEntry.entry}}
 		                        </ion-item>
 		                    </ion-list>
