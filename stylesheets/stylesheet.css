@@ -856,9 +856,6 @@ footer a:hover {
     padding: 20px 0;
     min-height: 0;
   }
-  aside#sidebar a.button {
-    display: none;
-  }
   #main-content h1:before,
   #main-content h2:before,
   #main-content h3:before,
