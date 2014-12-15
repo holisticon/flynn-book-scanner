@@ -1,34 +1,36 @@
-var cordova,
-  PouchDB;
+var cordova;
 
 describe('main', function() {
+	var logger;
+	
+    beforeEach(function() {
+        module(function($provide) {
+          $provide.constant('APP_CONFIG', {
+            timeout: '10000',
+            dev: false,
+            debug: true,
+          });
+        });
+      });
+	
 
-  // load the controller's module
-  beforeEach(module('flynnBookScannerApp'));
-
+    beforeEach(module('flynnBookScannerApp'));
+    
   describe("BookController", function() {
 
     var fakeFactory, deferred, q,
       controller,
-      bookService,
-      inventoryService,
+      mockedBookService,
+      mockedInventoryService,
       scope,
       httpBackend,
       settings;
 
     // define the mock book service
     beforeEach(function() {
-      inject(function($injector, $controller, $q, $rootScope) {
-        q = $q;
+      inject(function($injector,$controller, $q, $rootScope,$httpBackend) {
+    	  q = $q;
         scope = $rootScope;
-        PouchDB = function(dbname) {
-
-          return {
-            allDocs: function() {
-              return [];
-            }
-          }
-        };
         var books = [{
           "kind": "books#volumes",
           "totalItems": 77,
@@ -51,7 +53,7 @@ describe('main', function() {
             }
           }]
         }];
-        bookService = {
+        mockedBookService = {
           search: function(searchQuery) {
             var deferred = $q.defer();
             var response = {};
@@ -60,7 +62,7 @@ describe('main', function() {
             return deferred.promise;
           }
         }
-        inventoryService = {
+        mockedInventoryService = {
           read: function() {
             var deferred = $q.defer();
             var response = {};
@@ -69,20 +71,13 @@ describe('main', function() {
             return deferred.promise;
           }
         }
-      });
-    });
-
-    // Initialize the controller and a mock scope
-    beforeEach(inject(function($rootScope, $controller, GoogleBookService, InventoryService, $q, $httpBackend) {
-      scope = $rootScope.$new();
-      q = $q;
       httpBackend = $httpBackend;
       controller = $controller("BookController", {
         $scope: scope,
-        GoogleBookService: bookService,
-        InventoryService: inventoryService
+        googleBookService: mockedBookService,
+        inventoryService: mockedInventoryService
       });
-    }));
+    })});
 
     it('Init module failed', function() {
       expect(true).toBe(true);

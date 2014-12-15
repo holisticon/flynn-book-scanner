@@ -21,6 +21,7 @@
 		"hidden": true,
 		"value": "30000"
 	},
-	"dev": "true",
-	"debug": "false"
+	"dev": false,
+	"debug": true,
+	"trace": true
 }

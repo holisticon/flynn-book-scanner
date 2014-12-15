@@ -1,25 +1,35 @@
 'use strict';
 
-function errorDialogClosed($rootScope, $scope, $log) {
-    $log.debug("Error dialog closed.");
+/**
+ * @ngdoc Called after error dialog is closed.
+ * @param $rootScope root scope
+ * @param $scope current scope
+ * @param log reference to log service
+ */
+function errorDialogClosed($rootScope, $scope, log) {
+    log.debug("Error dialog closed.");
 }
 
 /**
- * Shows up the error dialog with the given error details
+ * @ngdoc Shows up the error dialog with the given error details
  * @param $rootScope root scope
  * @param $scope current scope
- * @param $ionicLoading reference to remove $ionicLoading
+ * @param $ionicLoading reference to loading indicator
+ * @param log reference to log service
  * @param errorTitle title to use
  * @param errorCode error code to use
  * @param errorDetails message to display
  */
-function showErrorDialog($rootScope, $scope, $log, $ionicLoading, errorTitle, errorCode, errorDetails) {
+function showErrorDialog($rootScope, $scope, $ionicLoading, log, errorTitle, errorCode, errorDetails) {
     $ionicLoading.show();
-    navigator.notification.alert(errorCode + "\n" + errorDetails, errorDialogClosed($rootScope, $scope, $log), "Error - " + errorTitle);
+    navigator.notification.alert(errorCode + "\n" + errorDetails, errorDialogClosed($rootScope, $scope, log), "Error - " + errorTitle);
     $ionicLoading.hide();
 }
 
-
+/**
+ *
+ * @ngdoc Called after device is ready to use
+ */
 var onDeviceReady = function() {
     var $http = angular.injector(['ng']).get('$http'),
         $rootScope = angular.injector(['ng']).get('$rootScope');
@@ -27,18 +37,10 @@ var onDeviceReady = function() {
     $http.get('config.json')
         .success(function(data, status, headers, config) {
             var config = data;
-            // enable debugging
-            if (config.debug === 'true') {
-                config.debug = true;
-            }
-            // enable development mode
-            if (config.dev === 'true') {
-                config.dev = true;
-            }
             app.constant("APP_CONFIG", config);
-            if (config.debug === true) {
-                console.debug('Skipping bootstrapping on debug.');
-                navigator.notification.alert('Running in debug mode!', null, 'Info');
+            if (config.dev === true) {
+                console.debug('Skipping bootstrapping on dev mode.');
+                navigator.notification.alert('Running in dev mode!', null, 'Info');
             } else {
                 // Add additional services/constants/variables to your app,
                 // and then finally bootstrap it:
@@ -61,10 +63,8 @@ if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
 }
 
 /**
- * @ngdoc
+ * @ngdoc flynn app
  *
- * @name flynn app
- * 
  * @module flynnBookScannerApp
  *
  */
@@ -76,14 +76,13 @@ var app = angular.module('flynnBookScannerApp', [
     'ngSanitize',
     'ngRoute',
     'ngTouch',
-    'ionic'
+    'ionic',
+    'dbLog'
 ]);
 
 /**
- * @ngdoc
- * 
- * Reverse list in order
- * 
+ * @ngdoc Reverse list in order
+ *
  * @module flynnBookScannerApp
  */
 app.filter('reverse', function() {
@@ -96,10 +95,13 @@ app.filter('reverse', function() {
     };
 });
 
-app.config(function($logProvider) {
-    $logProvider.debugEnabled(true);
-});
 
+
+/**
+ * @ngdoc Set loading text
+ *
+ * @module flynnBookScannerApp
+ */
 app.constant('$ionicLoadingConfig', {
     template: 'Loading ...'
 });
@@ -119,11 +121,20 @@ app.run(function($ionicPlatform) {
 })
 
 
-app.config(function($stateProvider, $urlRouterProvider) {
+/**
+ * @ngdoc configure app module
+ *
+ * @module flynnBookScannerApp
+ */
+app.config(function($stateProvider, $urlRouterProvider, $httpProvider, logServiceProvider, APP_CONFIG) {
+    // configure logging
+	logServiceProvider.dbName('flynnDB_logs');
+	logServiceProvider.enableDebugLogging(APP_CONFIG.debug);
+	logServiceProvider.enableTraceLogging(APP_CONFIG.trace);
+    // configure routes and states
     $stateProvider
         .state('app', {
             url: "/app",
-            // abstract: true,
             templateUrl: 'views/navbarView.html',
             controller: 'AppController'
         })
@@ -173,81 +184,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app');
+    // configure http provider for cross-domain
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
-
-app.config(['$httpProvider',
-    function($httpProvider) {
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
-    }
-]);
-
-
-/**
- * Controller for the app.
- */
-app.controller('AppController', ['$scope', '$rootScope', '$state', '$ionicLoading', 'SettingsService', 'LogService', 'InventoryService',
-    function($scope, $rootScope, $state, $ionicLoading, $settings, $log, $inventory) {
-
-        $ionicLoading.show();
-        $rootScope.$on("$routeChangeStart", function() {
-            $ionicLoading.show();
-        });
-        $rootScope.$on("$routeChangeSuccess", function() {
-            $ionicLoading.hide();
-        });
-
-        $rootScope.$on('settings.invalid', function(event) {
-            showErrorDialog($rootScope, $scope, $log, $ionicLoading, "Settings invalid", 1001, "Settings seems to be incorrect. Please correct or check network settings.");
-        });
-
-        $rootScope.$on('server.timeout', function(event) {
-            showErrorDialog($rootScope, $scope, $log, $ionicLoading, "Timeout", 2001, "No answer from server");
-        });
-
-        $rootScope.$on('server.error', function(event) {
-            showErrorDialog($rootScope, $scope, $log, $ionicLoading, "Books couldn't be loaded", 2002, "The server didn't respond. Please check your network settings.");
-        });
-
-        $rootScope.$on('login.failed', function(event) {
-            showErrorDialog($rootScope, $scope, $log, $ionicLoading, "Settings incorrect", 3001, "Please check your settings");
-        });
-
-        $rootScope.$on('barcode.error', function(event) {
-            showErrorDialog($rootScope, $scope, $log, $ionicLoading, "Barcode error", 4001, "Barcode reader not working. Did you enable camera access?");
-        });
-
-        $rootScope.$on('booksearch.invalid', function(event) {
-            showErrorDialog($rootScope, $scope, $log, $ionicLoading, "Book couldn't be loaded", 5001, "The book search wasn't successfull. Server didn't respond.");
-        });
-
-        $rootScope.$on('booksave.error', function(event) {
-            showErrorDialog($rootScope, $scope, $log, $ionicLoading, "Book couldn't be saved", 5101, "The book save wasn't successfull. Server didn't respond.");
-        });
-
-        $scope.userAgent = navigator.userAgent;
-
-        //  show settings 
-        var config = $settings.load();
-        if (config && !config.valid) {
-            //timeout of 30 seconds
-            config.timeout = 30000;
-            $state.go('app.settings'); //, {}, {reload: true});
-            //if($state.current.name !== 'app.settings'){
-            //$state.go('app.settings', {}, {reload: true});
-            // }
-        } else {
-            $state.go('app.books');
-            //$state.go('app.books');//, {}, {reload: true});
-            //$state.go('app.books', {}, {reload: true});
-            //sync on start 
-            if (config.activeProfile().remotesync) {
-                $inventory.syncRemote();
-            }
-            $ionicLoading.hide();
-
-        }
-        $ionicLoading.hide();
-        $rootScope.settings = config;
-    }
-]);

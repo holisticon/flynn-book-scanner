@@ -1,19 +1,35 @@
 var cordova;
 
 describe('main', function() {
+	
+	 beforeEach(function() {
+		    module(function($provide) {
+		      $provide.constant('APP_CONFIG', {
+		        timeout: '10000',
+		        dev: 'true',
+		        debug: 'false',
+		        gitlabConfig: {
+		          gitlabServer: 'https://martinreinhardt-online.de/gitlab/',
+		          token: '2mkdaL8iSBkjPKArHpGk',
+		          projectID: '9',
+		          labels: 'enduser'
+		        }
+		      });
+		    });
+		  });
 
   // load the controller's module
   beforeEach(module('flynnBookScannerApp'));
 
-  describe("GoogleBookService", function() {
+  describe("googleBookService", function() {
 
     var service,
       httpBackend,
       settings;
 
     // Initialize the controller and a mock scope
-    beforeEach(inject(function(GoogleBookService, $httpBackend) {
-      service = GoogleBookService;
+    beforeEach(inject(function(googleBookService, $httpBackend) {
+      service = googleBookService;
       httpBackend = $httpBackend;
     }));
 

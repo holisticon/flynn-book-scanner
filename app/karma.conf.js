@@ -11,8 +11,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-
       'bower_components/angular/angular.js',
+      'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/angular-cache/dist/angular-cache.min.js',
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/angular-cookies/angular-cookies.js',
@@ -20,17 +20,21 @@ module.exports = function(config) {
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/ionic/release/js/ionic.js',
-      'bower_components/ionic/release/js/ionic-angular.js',
       'bower_components/angular-local-storage/angular-local-storage.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/ionic/release/js/ionic.js',
       'bower_components/ionic/release/js/ionic-angular.js',
       'bower_components/angular-bootstrap/ui-bootstrap.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/es5-shim/es5-shim.js',
+      'bower_components/pouchdb/dist/pouchdb.js',
+      'bower_components/pouchdb/dist/pouchdb.idb-alt.js',
+      'bower_components/pouchdb/dist/pouchdb.localstorage.js',
+      'bower_components/pouchdb/dist/pouchdb.memory.js',
       'src/scripts/*.js',
-      'src/scripts/**/*.js',
+      'src/scripts/plugins/*.js',
+      'src/scripts/modules/*.js',
+      'src/scripts/controllers/*.js',
       'test/spec/**/*.js',
       // fixtures
       {

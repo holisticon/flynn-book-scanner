@@ -54,17 +54,18 @@
 	                        <button type="button" ng-click="sync()" ng-show="flynn.activeProfile.remotesync" class="button">
 	                        	Sync
 	                        </button>   
-	                        <br>
-	                        <ion-list class="list card">
-		                    	<div class="item item-divider">
-						          Log Entries
-						        </div>
-		                        <ion-item ng-repeat="logEntry in syncLogs | reverse" class="item">
-		                            {{logEntry.date | date: format}} - {{logEntry.category}} <br> {{logEntry.entry}}
-		                        </ion-item>
-		                    </ion-list>
 		               	</div>  
                     </ion-content>
+  			</ion-tab>
+     		<ion-tab title="Logs" icon-on="ion-ios7-speedometer" icon-off="ion-ios7-speedometer-outline">
+ 				<ion-content id="logs" class="padding">
+                    <h2>Log Entries</h2> 
+                    <ion-list class="list card">
+                     <ion-item ng-repeat="logEntry in logs | reverse" class="item">
+                         {{logEntry.timestamp | date: 'dd.MM.yyyy HH:mm'}} - {{logEntry.level}} <br> {{logEntry.details}}
+                     </ion-item>
+                 	</ion-list>  
+               </ion-content>
   			</ion-tab>
      	</ion-tabs>
      </form>

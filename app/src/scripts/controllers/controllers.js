@@ -54,22 +54,82 @@ function enrichDbData(pDbEntries) {
 };
 
 
-app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoading', '$ionicListDelegate', '$http', '$ionicActionSheet', 'LogService', 'InventoryService',
-    function($rootScope, $scope, $state, $ionicLoading, $ionicListDelegate, $http, $ionicActionSheet, $log, $inventory) {
+/**
+ * @ngdoc controller
+ * @name AppController
+ *
+ * @description
+ * Controller for the app
+ *
+ * @module flynnBookScannerApp
+ */
+app.controller('AppController', ['$scope', '$rootScope', '$state', '$ionicLoading', 'settingsService', 'logService', 'inventoryService',
+    function($scope, $rootScope, $state, $ionicLoading, settings, log, inventory) {
 
-        var listDelegate = $ionicListDelegate.$getByHandle('booksListing');
+        $ionicLoading.show();
+        $rootScope.$on('settings.invalid', function(event) {
+            showErrorDialog($rootScope, $scope, $ionicLoading, log, "Settings invalid", 1001, "Settings seems to be incorrect. Please correct or check network settings.");
+        });
+        $rootScope.$on('server.timeout', function(event) {
+            showErrorDialog($rootScope, $scope, $ionicLoading, log, "Timeout", 2001, "No answer from server");
+        });
+        $rootScope.$on('server.error', function(event) {
+            showErrorDialog($rootScope, $scope, $ionicLoading, log, "Books couldn't be loaded", 2002, "The server didn't respond. Please check your network settings.");
+        });
+        $rootScope.$on('login.failed', function(event) {
+            showErrorDialog($rootScope, $scope, $ionicLoading, log, "Settings incorrect", 3001, "Please check your settings");
+        });
+        $rootScope.$on('barcode.error', function(event) {
+            showErrorDialog($rootScope, $scope, $ionicLoading, log, "Barcode error", 4001, "Barcode reader not working. Did you enable camera access?");
+        });
+        $rootScope.$on('booksearch.invalid', function(event) {
+            showErrorDialog($rootScope, $scope, $ionicLoading, log, "Book couldn't be loaded", 5001, "The book search wasn't successfull. Server didn't respond.");
+        });
+        $rootScope.$on('booksave.error', function(event) {
+            showErrorDialog($rootScope, $scope, $ionicLoading, log, "Book couldn't be saved", 5101, "The book save wasn't successfull. Server didn't respond.");
+        });
 
-        listDelegate.more = function() {
-                alert('abc')
+        $scope.userAgent = navigator.userAgent;
+
+        //  show settings 
+        var config = settings.load();
+        if (config && !config.valid) {
+            //timeout of 30 seconds
+            config.timeout = 30000;
+            $state.go('app.settings');
+        } else {
+            $state.go('app.books');
+            //sync on start 
+            if (config.activeProfile().remotesync) {
+                inventory.syncRemote();
             }
-            /**
-             * load data via inventory service
-             *
-             */
+            $ionicLoading.hide();
+
+        }
+        $ionicLoading.hide();
+        $rootScope.settings = config;
+    }
+]);
+
+/**
+ * @ngdoc controller
+ * @name BooksController
+ * @module flynnBookScannerApp
+ *
+ * @description
+ * Interacts with inventory backend to show up book details
+ */
+app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoading', '$ionicListDelegate', '$http', '$ionicActionSheet', 'logService', 'inventoryService',
+    function($rootScope, $scope, $state, $ionicLoading, $ionicListDelegate, $http, $ionicActionSheet, logService, inventoryService) {
+
+        /**
+         * load data via inventory service
+         *
+         */
         function load() {
             $ionicLoading.show();
             $scope.searchQuery = {};
-            $inventory.read().then(onSuccess, onError);
+            inventoryService.read().then(onSuccess, onError);
 
             function onSuccess(response) {
                 $scope.books = enrichDbData(response.books);
@@ -96,9 +156,9 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
             var searchQuery = $scope.searchQuery;
             $scope.searching = true;
             if (searchQuery.fullTextSearch) {
-                $inventory.search(searchQuery).then(onSuccess, onError);
+                inventoryService.search(searchQuery).then(onSuccess, onError);
             } else {
-                $inventory.read().then(onSuccess, onError);
+                inventoryService.read().then(onSuccess, onError);
             }
 
             function onSuccess(response) {
@@ -113,7 +173,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
         }
 
         function removeBook(pBookToRemove) {
-            $inventory.remove(pBookToRemove).then(onSuccess, onError);
+            inventoryService.remove(pBookToRemove).then(onSuccess, onError);
 
             function onSuccess(response) {
                 $ionicLoading.show();
@@ -128,7 +188,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
 
         function showBookDetails(pBook) {
             var book = pBook;
-            $log.debug('Showing details for book: ' + book.value.volumeInfo.title);
+            logService.debug('Showing details for book: ' + book.value.volumeInfo.title);
             $state.go('app.book_show', {
                 'bookId': book._id
             });
@@ -136,8 +196,6 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
 
         function showActionMenu(book) {
             $scope.book = book;
-
-
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
                 // TODO_edit book
@@ -159,26 +217,6 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
                     return true;
                 }
             });
-
-            /*
-            
-            var modalInstance = $modal.open({
-                templateUrl: 'bookActions.html',
-                controller: ModalInstanceCtrl,
-                resolve: {
-                    book: function() {
-                        return $scope.book;
-                    },
-                    inventory: function() {
-                        return $inventory;
-                    }
-                }
-            });
-            modalInstance.result.then(function(pRemovedBook) {
-                load();
-            }, function() {
-                $log.info('Modal dismissed at: ' + new Date());
-            });*/
         }
 
         load();
@@ -193,19 +231,22 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
     }
 ]);
 
-
 /**
- * Controller to add new book entries to inventory
+ * @ngdoc controller
+ * @name BookDetailsController
+ * @module flynnBookScannerApp
  *
+ * @description
+ * Controller to show book details from inventory
  */
-app.controller('BookDetailsController', ['$rootScope', '$scope', '$stateParams', '$ionicLoading', '$location', 'LogService', 'SettingsService', 'InventoryService', 'GoogleBookService',
-    function($rootScope, $scope, $stateParams, $ionicLoading, $location, $log, $settings, $inventory, $books) {
-        var booksInventory, credentials = $settings.load();
+app.controller('BookDetailsController', ['$rootScope', '$scope', '$stateParams', '$ionicLoading', '$location', 'logService', 'settingsService', 'inventoryService', 'googleBookService',
+    function($rootScope, $scope, $stateParams, $ionicLoading, $location, log, settingsService, inventoryService, googleBookService) {
+        var booksInventory, credentials = settingsService.load();
         var bookID = $stateParams.bookId;
 
         function load() {
             if (bookID) {
-                $inventory.read().then(onSuccess, onError);
+                inventoryService.read().then(onSuccess, onError);
             }
 
             function onSuccess(response) {
@@ -235,13 +276,17 @@ app.controller('BookDetailsController', ['$rootScope', '$scope', '$stateParams',
 ]);
 
 /**
- * Controller to add new book entries to inventory
+ * @ngdoc controller
+ * @name BookController
+ * @module flynnBookScannerApp
  *
+ * @description
+ * Controller to add new book entries to inventory
  */
-app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$http', '$q', '$state', '$resource', '$ionicModal', 'LogService', 'SettingsService', 'InventoryService', 'GoogleBookService',
-    function($rootScope, $scope, $ionicLoading, $http, $q, $state, $resource, $ionicModal, $log, $settings, $inventory, $books) {
+app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$http', '$q', '$state', '$resource', '$ionicModal', 'logService', 'settingsService', 'inventoryService', 'googleBookService',
+    function($rootScope, $scope, $ionicLoading, $http, $q, $state, $resource, $ionicModal, logService, settingsService, inventoryService, googleBookService) {
         var booksInventory,
-            credentials = $settings.load().activeProfile();
+            credentials = settingsService.load().activeProfile();
 
         function init() {
             $ionicModal.fromTemplateUrl('book_modal.html', {
@@ -270,7 +315,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
             cordova.plugins.barcodeScanner.scan(
                 function(result) {
                     if (!result.cancelled) {
-                        $log.debug('We got a barcode\n' +
+                        logService.debug('We got a barcode\n' +
                             'Result: ' + result.text + '\n' + 'Format: ' + result.format + '\n');
                         $scope.searchQuery.isbn = result.text;
                         search();
@@ -278,7 +323,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
                     }
                 },
                 function(error) {
-                    $log.error("Scanning failed.");
+                    logService.error("Scanning failed.");
                     $rootScope.$broadcast("barcode.error");
                     $ionicLoading.hide();
                 }
@@ -297,17 +342,17 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
             if (searchQuery) {
                 // reset search
                 booksInventory = {};
-                $inventory.read().then(onSuccess, onError);
+                inventoryService.read().then(onSuccess, onError);
             }
 
             function onSuccess(response) {
                 booksInventory = response.books;
-                $log.debug("Start searching with criteria: " + JSON.stringify(searchQuery));
+                logService.debug("Start searching with criteria: " + JSON.stringify(searchQuery));
                 retrieve(searchQuery);
             }
 
             function onError(response) {
-                $log.error('Error during reading inventory for search with critera ' + JSON.stringify(searchQuery) + ':' + JSON.stringify(response));
+                logService.error('Error during reading inventory for search with critera ' + JSON.stringify(searchQuery) + ':' + JSON.stringify(response));
             }
         }
 
@@ -317,10 +362,10 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
          */
         function retrieve(pSearchQuery) {
             $ionicLoading.show();
-            $books.search(pSearchQuery).then(onSuccess, onError);
+            googleBookService.search(pSearchQuery).then(onSuccess, onError);
 
             function onSuccess(response) {
-                $log.info("Got valid service response");
+                logService.info("Got valid service response");
                 $scope.books = response.books;
                 $ionicLoading.hide();
             }
@@ -352,7 +397,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
                 book = pSelectedBookValue,
                 books = booksInventory,
                 authorInfo = "";
-            $log.debug('Showing details for book: ' + JSON.stringify(book.value));
+            logService.debug('Showing details for book: ' + JSON.stringify(book.value));
             for (var itemIndex in book.value.volumeInfo.authors) {
                 var authorsInfo = book.value.volumeInfo.authors;
                 if (authorsInfo) {
@@ -377,17 +422,17 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
                         currentISBN = bookEntry.value.volumeInfo.industryIdentifiers[0].identifier;
                     // only add complet entries to results
                     if (isbn0 && currentISBN == isbn0) {
-                        $log.debug("Already found a saved book entry: " + JSON.stringify(bookEntry));
+                        logService.debug("Already found a saved book entry: " + JSON.stringify(bookEntry));
                         book = bookEntry;
                         count++;
                     }
                 }
             }
             if (count > 0) {
-                $log.debug("Found already entry in couchdb");
+                logService.debug("Found already entry in couchdb");
                 $scope.infoMsg = "Book is already added to library. Please update amount.";
             } else {
-                $log.debug("Found no existing entry in couchdb");
+                logService.debug("Found no existing entry in couchdb");
                 $scope.infoMsg = null;
                 // set default count to 1
                 count = 1;
@@ -404,33 +449,33 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
 
         function save(book) {
             $ionicLoading.show();
-            $log.debug("Starting save for book: ");
+            logService.debug("Starting save for book: ");
 
             // remember last bookshelf
-            var config = $settings.load();
+            var config = settingsService.load();
             config.activeProfile().lastBookshelf = book.value.bookshelf;
-            $settings.save(config);
-            $inventory.read().then(onSettingsSuccess, onSettingsError);
+            settingsService.save(config);
+            inventoryService.read().then(onSettingsSuccess, onSettingsError);
 
             function onSettingsSuccess(response) {
-                $log.debug("Settings saving successfull.");
+                logService.debug("Settings saving successfull.");
             }
 
             function onSettingsError(response) {
-                $log.error("Settings saving was not successfull.");
+                logService.error("Settings saving was not successfull.");
             }
 
-            $inventory.save(book).then(onSuccess, onError);
+            inventoryService.save(book).then(onSuccess, onError);
 
             function onSuccess(response) {
-                $log.info("Successfully added book");
+                logService.info("Successfully added book");
                 $ionicLoading.hide();
                 if (response.noUpdate) {
                     navigator.notification.alert("Book already added. Please increase amount.");
                 } else  {
                     // sync on save
                     if (config.activeProfile().remotesync) {
-                        $inventory.syncRemote();
+                        inventoryService.syncRemote();
                     }
                     navigator.notification.alert("Book successfully added.", reset(), "Book");
                 }
@@ -438,7 +483,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
 
             function onError(response) {
                 $rootScope.$broadcast("booksave.error");
-                $log.debug("Error during book saving: ");
+                logService.debug("Error during book saving: ");
                 $scope.infoMsg = null;
                 $ionicLoading.hide();
             }
@@ -457,8 +502,17 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
     }
 ]);
 
-app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '$state', 'LogService', 'SettingsService', 'InventoryService',
-    function($rootScope, $scope, $ionicLoading, $state, $log, $settings, $inventory) {
+
+/**
+ * @ngdoc controller
+ * @name SettingsController
+ * @module flynnBookScannerApp
+ *
+ * @description
+ * Control preference/settings of the app and show log entries
+ */
+app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '$state', 'logService', 'settingsService', 'inventoryService',
+    function($rootScope, $scope, $ionicLoading, $state, logService, settingsService, inventoryService) {
 
         var defaultCouch = 'https://server.holisticon.de/couchdb/flynn/',
             defaultUser = '<LDAP-User>',
@@ -467,11 +521,11 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
 
         // autoload
         loadSettings();
-        readSyncLogs();
+        readLogs();
 
         function loadSettings() {
             console.debug("Loading settings from local storage");
-            var config = $settings.load();
+            var config = settingsService.load();
             $scope.flynn = {};
             $scope.flynn.activeProfile = {};
             $scope.flynn.activeProfile.name = config.activeProfile().name || 'default';
@@ -484,7 +538,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
         }
 
         function saveSettings() {
-            $log.debug("Saving settings to local storage");
+            logService.debug("Saving settings to local storage");
             $ionicLoading.show();
             var profile = $scope.flynn.activeProfile;
 
@@ -495,43 +549,45 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
             config.activeProfileID = 0;
             config.profiles = profiles;
             // save config
-            $settings.save(config);
+            settingsService.save(config);
             // sync if server was added
             if ($scope.flynn.activeProfile.remotesync) {
                 syncWithServer();
             }
-            $inventory.read().then(onSuccess, onError);
+            inventoryService.read().then(onSuccess, onError);
 
             function onSuccess(response) {
                 $ionicLoading.hide();
-                $log.debug("Got valid server response. Settings seeem to be valid.");
+                logService.debug("Got valid server response. Settings seeem to be valid.");
                 $state.go('app.books');
             }
 
             function onError(response) {
                 $ionicLoading.hide();
-                $settings.valid = false;
-                $rootScope.$broadcast("settings.invalid");
+                settingsService.valid = false;
+                $rootScope.$broadcast("settingsService.invalid");
             }
         }
 
         function syncWithServer() {
-            $inventory.syncRemote();
+            inventoryService.syncRemote();
         }
 
-        function readSyncLogs() {
+        function readLogs() {
             $ionicLoading.show();
-            var logs = $inventory.readLogs();
-            if (logs) {
-                $scope.syncLogs = logs.sync;
-            }
-            $ionicLoading.hide();
+            var logs = logService.readLogData().then(function(response) {
+                $scope.logs = response;
+                $ionicLoading.hide();
+            }, function(errorDetails) {
+                logService.error('No log entries found');
+                $ionicLoading.hide();
+            });
         }
 
         // public methods
         $scope.load = loadSettings;
         $scope.save = saveSettings;
         $scope.sync = syncWithServer;
-        $scope.showLogs = readSyncLogs;
+        $scope.showLogs = readLogs;
     }
 ]);
