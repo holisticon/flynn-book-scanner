@@ -19,8 +19,8 @@
   <body>
     <header>
       <div class="inner">
-        <h1>flynn book scanner</h1>
-        <h2></h2>
+        <h1>flynn</h1>
+        <h2>book scanner app</h2>
         <a href="https://github.com/holisticon/flynn-book-scanner" class="button"><small>View project on</small> GitHub</a>
       </div>
     </header>
@@ -30,107 +30,22 @@
         <section id="main-content">
           <h1>
 <a id="flynn-book-scanner" class="anchor" href="#flynn-book-scanner" aria-hidden="true"><span class="octicon octicon-link"></span></a>flynn book scanner</h1>
-
-<p><a href="https://gitter.im/holisticon/flynn-book-scanner?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Gitter"></a></p>
-
-<p><a href="https://travis-ci.org/holisticon/flynn-book-scanner"><img src="https://travis-ci.org/holisticon/flynn-book-scanner.png?branch=master" alt="Build Status"></a></p>
-
 <h2>
 <a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h2>
 
-<p>flynn is a book scanning app which saves the added books on a couchdb.</p>
+<p>flynn is a book scanning app which saves the added books and enables library search. It optionally supports syncing with a remote CouchDB.</p>
 
 <p><img src="https://github.com/holisticon/flynn-book-scanner/raw/master/docs/screenshots/iPhone_sample.png" alt="iPhone Sample"></p>
 
-<h2>
-<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting started</h2>
+<h3>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h3>
 
 <p>See below steps to get starting working with flynn:</p>
 
-<h3>
-<a id="setup-a-development-environment" class="anchor" href="#setup-a-development-environment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup a development environment</h3>
-
-<p>Preparation steps:</p>
-
 <ul>
-<li>Install Android Developer Tools</li>
-<li>Install Android target 19 SDK or higher (the Android newest SDK)</li>
-<li>Install Apache Ant</li>
+  <li>Android 4.4+ or iOS 8.0+</li>
+  <li>Optional CouchDB to enable remote sync</li>
 </ul>
-
-<p>Global steps:</p>
-
-<ul>
-<li>Install nodejs (0.10.x+) + npm</li>
-<li>Install ruby</li>
-<li><code>sudo gem install compass</code></li>
-<li>Install Cordova</li>
-<li><code>sudo npm install -g cordova</code></li>
-<li><code>sudo npm install -g ios-deploy</code></li>
-<li>Install build tools</li>
-<li><code>sudo npm install -g grunt-cli</code></li>
-<li><code>sudo npm install -g bower</code></li>
-</ul>
-
-<p>Steps in project directory <code>./flynn-book-scanner</code>:</p>
-
-<ul>
-<li><code>cd app</code></li>
-<li><code>npm install</code></li>
-<li><code>bower install</code></li>
-<li>
-<code>grunt</code>
-# <code>grunt server</code> (open chrome with <code>open /Applications/Google\ Chrome.app --args --disable-web-security</code> to <a href="http://127.0.0.1:9000/#/">http://127.0.0.1:9000/#/</a>)</li>
-</ul>
-
-<h3>
-<a id="setup-a-development-environment-1" class="anchor" href="#setup-a-development-environment-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup a development environment</h3>
-
-<p>Steps in project directory <code>./flynn-book-scanner</code>:</p>
-
-<ul>
-<li><code>cd app</code></li>
-<li><code>grunt</code></li>
-</ul>
-
-<p>For debugging in project directory <code>./flynn-book-scanner</code>:</p>
-
-<ul>
-<li><code>cd app</code></li>
-<li><code>./node_modules/karma/bin/karma start</code></li>
-</ul>
-
-<p>open browser at http://localhost:8080</p>
-
-<p>For windows phone support within an VM: <a href="http://blogs.msdn.com/b/interoperability/archive/2012/12/21/how-to-develop-for-windows-phone-8-on-your-mac.aspx">http://blogs.msdn.com/b/interoperability/archive/2012/12/21/how-to-develop-for-windows-phone-8-on-your-mac.aspx</a></p>
-
-<h3>
-<a id="building--deployment" class="anchor" href="#building--deployment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building &amp; Deployment</h3>
-
-<ul>
-<li><code>cd app</code></li>
-<li><code>grunt</code></li>
-<li>For first build on android run <code>android update project --path platforms/android/ -s</code> to set ADT project settings</li>
-<li>
-<code>cordova build android</code> or <code>cordova build ios</code>
-</li>
-</ul>
-
-<p>For running on an android device execute:</p>
-
-<ul>
-<li><code>cordova run android -d</code></li>
-</ul>
-
-<p>Please refer to the cordova setup guide regarding the android emulator configuration:
-<a href="http://cordova.apache.org/docs/en/3.5.0/guide_platforms_android_index.md.html#Android%20Platform%20Guide">http://cordova.apache.org/docs/en/3.5.0/guide_platforms_android_index.md.html#Android%20Platform%20Guide</a></p>
-
-<p>Install HAXM for better emulator speed: <a href="https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager">https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager</a></p>
-
-<h2>
-<a id="sponsoring" class="anchor" href="#sponsoring" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sponsoring</h2>
-
-<p>This project is sponsored and supported by <a href="http://www.holisticon.de/cms/About/Startseite">Holisticon AG</a></p>
 
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
@@ -139,18 +54,20 @@
         </section>
 
         <aside id="sidebar">
-          <a href="https://github.com/holisticon/flynn-book-scanner/zipball/master" class="button">
+          <a href="itms-services://?action=download-manifest&https://github.com/holisticon/flynn-book-scanner/releases/download/v1.1/Flynn.plist" class="button">
             <small>Download</small>
-            .zip file
+            iOS App
           </a>
-          <a href="https://github.com/holisticon/flynn-book-scanner/tarball/master" class="button">
+          <a href="https://github.com/holisticon/flynn-book-scanner/releases/download/v1.1/Flynn.apk" class="button">
             <small>Download</small>
-            .tar.gz file
+            Android App
           </a>
 
-          <p class="repo-owner"><a href="https://github.com/holisticon/flynn-book-scanner"></a> is maintained by <a href="https://github.com/holisticon">holisticon</a>.</p>
+          <p><a href="https://gitter.im/holisticon/flynn-book-scanner?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Gitter"></a></p>
 
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+          <p><a href="https://travis-ci.org/holisticon/flynn-book-scanner"><img src="https://travis-ci.org/holisticon/flynn-book-scanner.png?branch=master" alt="Build Status"></a>
+
+          <p class="repo-owner"><a href="https://github.com/holisticon/flynn-book-scanner"></a> is maintained by <a href="https://github.com/holisticon"><img src="images/holisticon-logo-standard.png"></a></p>
         </aside>
       </div>
     </div>
