@@ -291,7 +291,6 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
          *
          */
         function search() {
-            $ionicLoading.show();
             $scope.books = null;
             var searchQuery = $scope.searchQuery;
 
@@ -305,11 +304,10 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
                 booksInventory = response.books;
                 $log.debug("Start searching with criteria: " + JSON.stringify(searchQuery));
                 retrieve(searchQuery);
-                $ionicLoading.hide();
             }
 
             function onError(response) {
-                $ionicLoading.hide();
+                $log.error('Error during reading inventory for search with critera ' + JSON.stringify(searchQuery) + ':' + JSON.stringify(response));
             }
         }
 
