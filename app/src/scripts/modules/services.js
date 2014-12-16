@@ -263,10 +263,10 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                         .on('change', function(info) {
                             logService.info('Updating documents with remote changes...');
                         }).on('complete', function(info) {
-                            logService.info('Completed sync: '+info);
+                            logService.info('Completed sync: ' + info);
                             deferred.resolve(info);
-                        }).on('uptodate', function (info) {
-                            logService.info('Already up-to-date: '+info);
+                        }).on('uptodate', function(info) {
+                            logService.info('Already up-to-date: ' + info);
                             deferred.resolve(info);
                         }).on('error', function(info) {
                             logService.error('Error during remote sync');
@@ -297,13 +297,13 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                         var bookEntry = rows[id].doc;
                                         // only add complet entries to results
                                         if (bookEntry.value && bookEntry.value.volumeInfo) {
-                                            if(bookEntry._attachments){
-                                            	var attachment = bookEntry._attachments['thumbnail_'+bookEntry.value.id];
-                                            	bookEntry.image={};
-                                            	bookEntry.image.content_type=attachment.content_type;
-                                            	bookEntry.image.data=attachment.data;
+                                            if (bookEntry._attachments) {
+                                                var attachment = bookEntry._attachments['thumbnail_' + bookEntry.value.id];
+                                                bookEntry.image = {};
+                                                bookEntry.image.content_type = attachment.content_type;
+                                                bookEntry.image.data = attachment.data;
                                             }
-                                            bookEntry._attachments=null;
+                                            bookEntry._attachments = null;
                                             logService.debug('Read following valid book entry: ' + bookEntry.value.volumeInfo.title);
                                             books.push(bookEntry);
                                         }
@@ -530,16 +530,18 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                 for (var i = 1; i <= booksToAdd; i++) {
                                     var book = {};
                                     book.value = pBookToSave.value;
-                                    book._attachments={};
-                                    book._attachments[pBookToSave.image.name]={};
-                                    book._attachments[pBookToSave.image.name].content_type=pBookToSave.image.content_type;
-                                    book._attachments[pBookToSave.image.name].data=pBookToSave.image.data;
+                                    if (pBookToSave.image) {
+                                        book._attachments = {};
+                                        book._attachments[pBookToSave.image.name] = {};
+                                        book._attachments[pBookToSave.image.name].content_type = pBookToSave.image.content_type;
+                                        book._attachments[pBookToSave.image.name].data = pBookToSave.image.data;
+                                    }
                                     docs.push(book);
                                 }
                                 flynnDB.bulkDocs(docs, function(err, result) {
                                     if (!err) {
                                         logService.info("Saving successfull.");
-                                            deferred.resolve(response);
+                                        deferred.resolve(response);
                                     } else {
                                         logService.error("Error saving new entries: " + err);
                                         deferred.reject(response);
@@ -554,12 +556,14 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                         logService.info("Found no existing entries");
                         var docs = [];
                         for (var i = 1; i <= pBookToSave.count; i++) {
-                        	var book = {};
+                            var book = {};
                             book.value = pBookToSave.value;
-                            book._attachments={};
-                            book._attachments[pBookToSave.image.name]={};
-                            book._attachments[pBookToSave.image.name].content_type=pBookToSave.image.content_type;
-                            book._attachments[pBookToSave.image.name].data=pBookToSave.image.data;
+                            if (pBookToSave.image) {
+                                book._attachments = {};
+                                book._attachments[pBookToSave.image.name] = {};
+                                book._attachments[pBookToSave.image.name].content_type = pBookToSave.image.content_type;
+                                book._attachments[pBookToSave.image.name].data = pBookToSave.image.data;
+                            }
                             docs.push(book);
                         }
                         flynnDB.bulkDocs(docs, function(err, result) {

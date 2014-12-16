@@ -1,5 +1,5 @@
-app.directive('imageData', ['$interval', 'base64',
-	function($interval, base64) {
+app.directive('imageData', ['$interval', 'base64', 'logService',
+	function($interval, base64, logService) {
 		'use strict';
 
 		var b64toBlob = function(b64Data, contentType, sliceSize) {
@@ -34,10 +34,14 @@ app.directive('imageData', ['$interval', 'base64',
 
 				scope.$watch('image', function(image) {
 					if (image) {
-						var blob = b64toBlob(image.data, image.content_type);
-						var blobUrl = URL.createObjectURL(blob);
-						var img = element[0];
-						img.src = blobUrl;
+						try {
+							var blob = b64toBlob(image.data, image.content_type);
+							var blobUrl = URL.createObjectURL(blob);
+							var img = element[0];
+							img.src = blobUrl;
+						} catch (e) {
+							logService.error('Error during image transformation');
+						}
 					}
 				});
 			}

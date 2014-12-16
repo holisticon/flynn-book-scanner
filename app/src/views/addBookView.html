@@ -35,8 +35,13 @@
         <script id="book_modal.html" type="text/ng-template">
   			<ion-modal-view>
     			<ion-header-bar>
+                    <button button="button" ng-click="save(selectedBook)" class="button button-positive">
+                        Save
+                    </button>
       				<h1 class="title">{{selectedBook.value.volumeInfo.title}}</h1>
-        			<button class="button button-clear" ng-click="closeModal()">Cancel</button>
+        			<button class="button button-clear" ng-click="closeModal()">
+                        Cancel
+                    </button>
     			</ion-header-bar>
     			<ion-content class="modal-background">
                		<div class="padding" id="{{selectedBook.value.id}}">
@@ -78,11 +83,7 @@
         				<label class="item-input">
 		  					<span class="input-label">Comment</span>
                             <input type="text" data-ng-model="selectedBook.value.comment">
-						</label>                                   
-                        <br>
-                        <button button="button" ng-click="save(selectedBook)" class="button button-positive">
-							Save
-						</button>
+						</label>      
                     </div>
     			</ion-content>
   			</ion-modal-view>

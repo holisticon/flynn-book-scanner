@@ -100,10 +100,10 @@ app.controller('AppController', ['$scope', '$rootScope', '$state', '$ionicLoadin
         } else {
             //sync on start 
             if (config.activeProfile().remotesync) {
-            	inventoryService.syncRemote().then(function(response){
+                inventoryService.syncRemote().then(function(response) {
                     $ionicLoading.hide();
                     $state.go('app.books');
-                },function(error){
+                }, function(error) {
                     $rootScope.$broadcast("settings.invalid");
                     $state.go('app.settings');
                     $ionicLoading.hide();
@@ -122,8 +122,8 @@ app.controller('AppController', ['$scope', '$rootScope', '$state', '$ionicLoadin
  * @description
  * Interacts with inventory backend to show up book details
  */
-app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoading',  '$http', '$ionicActionSheet', 'logService', 'inventoryService',
-    function($rootScope, $scope, $state, $ionicLoading,  $http, $ionicActionSheet, logService, inventoryService) {
+app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoading', '$http', '$ionicActionSheet', 'logService', 'inventoryService',
+    function($rootScope, $scope, $state, $ionicLoading, $http, $ionicActionSheet, logService, inventoryService) {
 
         /**
          * load data via inventory service
@@ -401,7 +401,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
             $scope.selectedBook = null;
             $scope.searchQuery = {};
             $ionicLoading.hide();
-            $state.go('app.books');
+            $scope.closeModal();
         }
 
         /**
@@ -459,8 +459,8 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
             book.authorInfo = authorInfo;
             book.value.owner = book.value.owner || credentials.owner;
             $scope.selectedBook = book;
-            $scope.openModal();
             $ionicLoading.hide();
+            $scope.openModal();
         }
 
         function save(book) {
@@ -508,9 +508,9 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
                 } else  {
                     // sync on save
                     if (config.activeProfile().remotesync) {
-                        inventory.syncRemote().then(function(response){
+                        inventoryService.syncRemote().then(function(response) {
                             $ionicLoading.hide();
-                        },function(error){
+                        }, function(error) {
                             $rootScope.$broadcast("settings.invalid");
                             $state.go('app.settings');
                             $ionicLoading.hide();
@@ -556,7 +556,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
         var defaultCouch = 'https://server.holisticon.de/couchdb/flynn/',
             defaultUser = '<LDAP-User>',
             defaultPassword,
-            defaultOwner = 'Holisticon AG';          
+            defaultOwner = 'Holisticon AG';
 
         // autoload
         loadSettings();
@@ -575,7 +575,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
             $scope.flynn.activeProfile.user = config.activeProfile().user || defaultUser;
             $scope.flynn.activeProfile.password = config.activeProfile().password || defaultPassword;
             // load log levels
-            $scope.logging={};
+            $scope.logging = {};
             $scope.logging.logLevels = [{
                 name: 'Errors only',
                 logLevel: 'ERROR'
@@ -594,7 +594,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
         function clearLogDB() {
             $ionicLoading.show();
             logService.clearLogData().then(function(logData) {
-            	readLogs();
+                readLogs();
             }, function(response) {
                 $ionicLoading.hide();
             });
@@ -636,15 +636,15 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
             $ionicLoading.show({
                 template: '<i class="icon ion-looping loading-icon"></i>Syncing books ...'
             });
-        	inventoryService.syncRemote().then(function(response){
+            inventoryService.syncRemote().then(function(response) {
                 $ionicLoading.hide();
                 $state.go('app.books');
-            },function(error){
-            	if(error.status === 401){
+            }, function(error) {
+                if (error.status === 401) {
                     $rootScope.$broadcast("login.failed");
-            	} else {
+                } else {
                     $rootScope.$broadcast("settings.invalid");
-            	}
+                }
                 $ionicLoading.hide();
             });
         }
@@ -679,7 +679,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
                     $ionicLoading.hide();
                 });
             } else {
-            	readLogs();
+                readLogs();
             }
         }
     }
