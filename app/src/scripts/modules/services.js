@@ -248,13 +248,13 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                 // reload config
                 config = settingsService.load();
                 activeProfile = config.activeProfile();
-                // TODO: Add authentical (rly, it's https already).
+                // Add authentication data
                 var couchDbUrl = activeProfile.couchdb,
                     self = this,
                     localDB = getDB();
                 if (localDB) {
                     var authorization = activeProfile.user + ':' + activeProfile.password,
-                        remoteCouch = couchDbUrl.replace("://", "://" + authorization + "@"), // FIXME: just to try it out
+                        remoteCouch = couchDbUrl.replace("://", "://" + authorization + "@"),
                         opts = {
                             live: true
                         };
