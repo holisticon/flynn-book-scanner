@@ -281,6 +281,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     logService.debug("Using db-adapter: " + flynnDB.adapter);
                     flynnDB.allDocs({
                         include_docs: true,
+                        attachments: true,
                         descending: true
                     }, function(err, doc) {
                         $rootScope.$apply(function() {
@@ -293,6 +294,13 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                         var bookEntry = rows[id].doc;
                                         // only add complet entries to results
                                         if (bookEntry.value && bookEntry.value.volumeInfo) {
+                                            if(bookEntry._attachments){
+                                            	var attachment = bookEntry._attachments['thumbnail_'+bookEntry.value.id];
+                                            	bookEntry.image={};
+                                            	bookEntry.image.content_type=attachment.content_type;
+                                            	bookEntry.image.data=attachment.data;
+                                            }
+                                            bookEntry._attachments=null;
                                             logService.debug("Read following valid book entry: " + bookEntry.value.volumeInfo.title);
                                             books.push(bookEntry);
                                         }
@@ -397,9 +405,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                 }
                             });
                         });
-
                     } else {
-
                         if (pSearchQuery.id) {
                             var bookId = '' + pSearchQuery.id;
                             logService.debug("Starting id-search: " + bookId);
@@ -521,12 +527,16 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                 for (var i = 1; i <= booksToAdd; i++) {
                                     var book = {};
                                     book.value = pBookToSave.value;
+                                    book._attachments={};
+                                    book._attachments[pBookToSave.image.name]={};
+                                    book._attachments[pBookToSave.image.name].content_type=pBookToSave.image.content_type;
+                                    book._attachments[pBookToSave.image.name].data=pBookToSave.image.data;
                                     docs.push(book);
                                 }
                                 flynnDB.bulkDocs(docs, function(err, result) {
                                     if (!err) {
                                         logService.info("Saving successfull.");
-                                        deferred.resolve(response);
+                                            deferred.resolve(response);
                                     } else {
                                         logService.error("Error saving new entries: " + err);
                                         deferred.reject(response);
@@ -541,7 +551,13 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                         logService.info("Found no existing entries");
                         var docs = [];
                         for (var i = 1; i <= pBookToSave.count; i++) {
-                            docs.push(pBookToSave);
+                        	var book = {};
+                            book.value = pBookToSave.value;
+                            book._attachments={};
+                            book._attachments[pBookToSave.image.name]={};
+                            book._attachments[pBookToSave.image.name].content_type=pBookToSave.image.content_type;
+                            book._attachments[pBookToSave.image.name].data=pBookToSave.image.data;
+                            docs.push(book);
                         }
                         flynnDB.bulkDocs(docs, function(err, result) {
                             if (!err) {

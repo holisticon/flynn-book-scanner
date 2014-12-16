@@ -20,12 +20,11 @@
 	
 	<ion-list ng-show="books">
        	<ion-item ng-repeat="book in books" class="item-thumbnail-left" href="#/app/book/{{book._id}}">
-			<img src="{{book.value.volumeInfo.imageLinks.thumbnail}}" />
+       		<image-data image="book.image"></image-data>
 			<h2>{{book.value.volumeInfo.title}}</h2>
-
+			
 			<span>{{book.value.volumeInfo.subtitle}}</span>
-			<span ng-show="book.authorInfo">by {{book.authorInfo}}</span>
-			<span>{{book.value.volumeInfo.publishedDate}}</span>	    	
+			<span ng-show="book.authorInfo">by {{book.authorInfo}}</    	
 			<ion-option-button ng-click="showBookDetails(book)" class="button-positive">
 	      		Info
 	    	</ion-option-button>

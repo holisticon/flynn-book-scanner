@@ -33,6 +33,7 @@ function enrichDbData(pDbEntries) {
             } else {
                 bookEntries[isbn] = {};
                 bookEntries[isbn].value = itemInfo.value;
+                bookEntries[isbn].image = itemInfo.image;
                 bookEntries[isbn].count = 1;
                 bookEntries[isbn].docs = [];
                 bookEntries[isbn].docs.push(itemInfo);
@@ -450,11 +451,11 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
         function save(book) {
             $ionicLoading.show();
             logService.debug("Starting save for book: ");
-
             // remember last bookshelf
             var config = settingsService.load();
             config.activeProfile().lastBookshelf = book.value.bookshelf;
             settingsService.save(config);
+            // verify new settings
             inventoryService.read().then(onSettingsSuccess, onSettingsError);
 
             function onSettingsSuccess(response) {
@@ -465,7 +466,27 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
                 logService.error("Settings saving was not successfull.");
             }
 
-            inventoryService.save(book).then(onSuccess, onError);
+
+
+            // TODO fallback when empty
+            var bookImage = document.getElementById(book.value.id).getElementsByClassName('img-thumbnail')[0];
+            blobUtil.imgSrcToBlob(bookImage.src).then(function(blob) {
+
+
+                //b64Text = b64Text.replace('data&colon;image/jpeg;base64,','');
+                var reader = new window.FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function() {
+                    var image = {};
+                    image.name = 'thumbnail_' + book.value.id;
+                    image.content_type = blob.type;
+                    image.data = reader.result.replace('data:image/jpeg;base64,', '');
+                    book.image = image;
+                    inventoryService.save(book).then(onSuccess, onError);
+                }
+            });
+
+
 
             function onSuccess(response) {
                 logService.info("Successfully added book");

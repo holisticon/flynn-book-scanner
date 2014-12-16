@@ -39,7 +39,7 @@
         			<button class="button button-clear" ng-click="closeModal()">Cancel</button>
     			</ion-header-bar>
     			<ion-content class="modal-background">
-               		<div class="padding">
+               		<div class="padding" id="{{selectedBook.value.id}}">
 						<h2>{{selectedBook.value.volumeInfo.subtitle}}</h2>           	                       	
         				<label class="item-input" ng-show="selectedBook.value.volumeInfo.imageLinks.thumbnail" >
 		  					<span class="input-label">Thumbnail</span>				  			

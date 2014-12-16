@@ -6,7 +6,8 @@
     <h1>{{selectedBook.value.volumeInfo.title}}</h1>
     <h2 class="panel-title">{{selectedBook.value.volumeInfo.subtitle}}</h2>     
         <div bs-panel class="panel">
-            <img ng-src="{{selectedBook.value.volumeInfo.imageLinks.thumbnail}}"/> <br> <br>
+        	<image-data image="selectedBook.image"></image-data>
+            <br> <br>
             <span ng-show="selectedBook.value.volumeInfo.description">{{selectedBook.value.volumeInfo.description}}<br> <br></span>
             <div class="text-left">
                 <div class="row">
