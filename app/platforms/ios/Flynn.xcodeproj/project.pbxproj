@@ -53,6 +53,9 @@
 		C30539A86DD7411B98EB7141 /* CDVNotification.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B68B231341EB41379E9F6C49 /* CDVNotification.bundle */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		DF470C4ECC024FFB9D803EC2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F286945552BC4DF39B67DE04 /* AudioToolbox.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		0D0A43AC905D4084882A3349 /* CDVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = D14A5BEFB1DF4A3196B4BEF4 /* CDVCamera.m */; };
+		F67F2B331960463785AF6BA3 /* CDVJpegHeaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 351FA44D83A34149A710324D /* CDVJpegHeaderWriter.m */; };
+		9BEE5E06BA7648AB9D1DC4E6 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2904B0B73844DB0B93F7E9A /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +141,12 @@
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		F286945552BC4DF39B67DE04 /* AudioToolbox.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = Flynn/config.xml; sourceTree = "<group>"; };
+		D14A5BEFB1DF4A3196B4BEF4 /* CDVCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVCamera.m"; path = "org.apache.cordova.camera/CDVCamera.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		351FA44D83A34149A710324D /* CDVJpegHeaderWriter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVJpegHeaderWriter.m"; path = "org.apache.cordova.camera/CDVJpegHeaderWriter.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		EB9774DD2A3742FB8AB57CBD /* CDVCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVCamera.h"; path = "org.apache.cordova.camera/CDVCamera.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		B6107E9D6BBD404CB112EAE7 /* CDVJpegHeaderWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVJpegHeaderWriter.h"; path = "org.apache.cordova.camera/CDVJpegHeaderWriter.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		83CAF7FBB6DD46E9BF0C66F4 /* CDVExif.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVExif.h"; path = "org.apache.cordova.camera/CDVExif.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		C2904B0B73844DB0B93F7E9A /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "ImageIO.framework"; path = "System/Library/Frameworks/ImageIO.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +165,7 @@
 				47775AADD8DF4FC8B7587108 /* QuartzCore.framework in Frameworks */,
 				20FDCA004A534E338BF309A4 /* libsqlite3.dylib in Frameworks */,
 				DF470C4ECC024FFB9D803EC2 /* AudioToolbox.framework in Frameworks */,
+				9BEE5E06BA7648AB9D1DC4E6 /* ImageIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +267,7 @@
 				97FE5AFD753C40C297128B1C /* QuartzCore.framework */,
 				CC06B0E001FE4126872ED7DB /* libsqlite3.dylib */,
 				F286945552BC4DF39B67DE04 /* AudioToolbox.framework */,
+				C2904B0B73844DB0B93F7E9A /* ImageIO.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -285,6 +296,11 @@
 				B3D7759745C84FC4B1E946E7 /* SQLitePlugin.h */,
 				B9F12136768946B6A8F68E02 /* CDVNotification.m */,
 				9F1A9F4A7A8E4AAFA09D6B63 /* CDVNotification.h */,
+				D14A5BEFB1DF4A3196B4BEF4 /* CDVCamera.m */,
+				351FA44D83A34149A710324D /* CDVJpegHeaderWriter.m */,
+				EB9774DD2A3742FB8AB57CBD /* CDVCamera.h */,
+				B6107E9D6BBD404CB112EAE7 /* CDVJpegHeaderWriter.h */,
+				83CAF7FBB6DD46E9BF0C66F4 /* CDVExif.h */,
 			);
 			name = Plugins;
 			path = Flynn/Plugins;
@@ -498,6 +514,8 @@
 				33D87C1C3C1C44649B204C00 /* zxing-all-in-one.cpp in Sources */,
 				431B01DCBF5D474AAABDD1F3 /* SQLitePlugin.m in Sources */,
 				8E4C1567DB594ED489195033 /* CDVNotification.m in Sources */,
+				0D0A43AC905D4084882A3349 /* CDVCamera.m in Sources */,
+				F67F2B331960463785AF6BA3 /* CDVJpegHeaderWriter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
