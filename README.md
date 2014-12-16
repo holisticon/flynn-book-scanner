@@ -71,6 +71,13 @@ http://cordova.apache.org/docs/en/3.5.0/guide_platforms_android_index.md.html#An
 
 Install HAXM for better emulator speed: https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager
 
+### Release
+
+* `./scripts/release_notes.sh 58` (use environment parameter!)
+* `cd app`
+* `grunt build`
+* `cordova build`
+
 ## Sponsoring
 This project is sponsored and supported by [Holisticon AG](http://www.holisticon.de/cms/About/Startseite)
 
