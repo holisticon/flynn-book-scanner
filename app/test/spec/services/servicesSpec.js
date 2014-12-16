@@ -40,6 +40,10 @@ describe('main', function() {
 
     it('do empty search', function() {
       httpBackend.when('GET', 'views/navbarView.html').respond('');
+      httpBackend.when('GET', 'views/aboutView.html').respond('');
+      httpBackend.when('GET', 'views/bookView.html').respond('');
+      httpBackend.when('GET', 'views/booksView.html').respond('');
+      httpBackend.when('GET', 'views/addBookView.html').respond('');
       var searchQuery = {};
       searchQuery.isbn = '9783898646123';
       var response = {};
@@ -56,6 +60,10 @@ describe('main', function() {
 
     it('do isbn search', function() {
       httpBackend.when('GET', 'views/navbarView.html').respond('');
+      httpBackend.when('GET', 'views/aboutView.html').respond('');
+      httpBackend.when('GET', 'views/bookView.html').respond('');
+      httpBackend.when('GET', 'views/booksView.html').respond('');
+      httpBackend.when('GET', 'views/addBookView.html').respond('');
       var validBookEntry = {
         "kind": "books#volumes",
         "totalItems": 77,

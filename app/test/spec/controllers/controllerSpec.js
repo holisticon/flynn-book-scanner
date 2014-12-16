@@ -91,6 +91,10 @@ describe('main', function() {
     it('do isbn search - update existing', function() {
       httpBackend.when('GET', 'book_modal.html').respond('');
       httpBackend.when('GET', 'views/navbarView.html').respond('');
+      httpBackend.when('GET', 'views/aboutView.html').respond('');
+      httpBackend.when('GET', 'views/bookView.html').respond('');
+      httpBackend.when('GET', 'views/booksView.html').respond('');
+      httpBackend.when('GET', 'views/addBookView.html').respond('');
       scope.searchQuery = {};
       scope.searchQuery.isbn = "9783898646123";
       scope.search();
@@ -101,6 +105,10 @@ describe('main', function() {
     it('do isbn search - add new', function() {
       httpBackend.when('GET', 'book_modal.html').respond('');
       httpBackend.when('GET', 'views/navbarView.html').respond('');
+      httpBackend.when('GET', 'views/aboutView.html').respond('');
+      httpBackend.when('GET', 'views/bookView.html').respond('');
+      httpBackend.when('GET', 'views/booksView.html').respond('');
+      httpBackend.when('GET', 'views/addBookView.html').respond('');
       scope.searchQuery = {};
       scope.searchQuery.isbn = "9783898646123";
       scope.search();
