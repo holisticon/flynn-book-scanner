@@ -32,19 +32,19 @@
                         <div name="serverDetails" ng-show="flynn.activeProfile.remotesync">                        	
 	                     	<label class="item-input">
 						  		<span class="input-label">CouchDB server</span>
-						  		<input id="syncURL" type="url" class="form-control" data-ng-model="flynn.activeProfile.couchdb" placeholder="URL of the CouchDB server"
+						  		<input id="syncURL" type="url" data-ng-model="flynn.activeProfile.couchdb" placeholder="URL of the CouchDB server"
 						  			   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
 						  		 	   ng-required="flynn.activeProfile.remotesync === true">
 							</label>
 	                     	<label class="item-input">
 						  		<span class="input-label">User</span>
-						  		<input id="syncUser" type="text" class="form-control" data-ng-model="flynn.activeProfile.user" placeholder="User"
+						  		<input id="syncUser" type="text" data-ng-model="flynn.activeProfile.user" placeholder="User"
 						  			   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
 						  		 	   ng-required="flynn.activeProfile.remotesync === true">
 							</label>
 	                     	<label class="item-input">
 						  		<span class="input-label">Password</span>
-						  		<input id="syncPassword" type="password" class="form-control" data-ng-model="flynn.activeProfile.password" 
+						  		<input id="syncPassword" type="password" data-ng-model="flynn.activeProfile.password" 
 						  			   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
 						  		 	   ng-required="flynn.activeProfile.remotesync === true">
 							</label>

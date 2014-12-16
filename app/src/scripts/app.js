@@ -33,7 +33,6 @@ function showErrorDialog($rootScope, $scope, $ionicLoading, log, errorTitle, err
 var onDeviceReady = function() {
     var $http = angular.injector(['ng']).get('$http'),
         $rootScope = angular.injector(['ng']).get('$rootScope');
-    $rootScope.loading = true;
     $http.get('config.json')
         .success(function(data, status, headers, config) {
             var config = data;
@@ -51,7 +50,6 @@ var onDeviceReady = function() {
         .error(function(data, status, headers, config) {
             console.error('Did not get valid config.json file.');
             navigator.notification.alert('Server did not show valid response.', null, 'Server Error');
-            $rootScope.loading = false;
         });
 }
 
@@ -96,14 +94,13 @@ app.filter('reverse', function() {
 });
 
 
-
 /**
  * @ngdoc Set loading text
  *
  * @module flynnBookScannerApp
  */
 app.constant('$ionicLoadingConfig', {
-    template: '<span>Loading ...</span>'
+    template: '<i class="icon ion-loading-d"></i>Loading ...'
 });
 
 app.run(function($ionicPlatform) {

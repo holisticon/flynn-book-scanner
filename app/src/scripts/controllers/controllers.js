@@ -66,7 +66,6 @@ function enrichDbData(pDbEntries) {
  */
 app.controller('AppController', ['$scope', '$rootScope', '$state', '$ionicLoading', 'settingsService', 'logService', 'inventoryService',
     function($scope, $rootScope, $state, $ionicLoading, settings, logService, inventoryService) {
-
         $ionicLoading.show();
         $rootScope.$on('settings.invalid', function(event) {
             showErrorDialog($rootScope, $scope, $ionicLoading, logService, "Settings invalid", 1001, "Settings seems to be incorrect. Please correct or check network settings.");
@@ -123,8 +122,8 @@ app.controller('AppController', ['$scope', '$rootScope', '$state', '$ionicLoadin
  * @description
  * Interacts with inventory backend to show up book details
  */
-app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoading', '$ionicListDelegate', '$http', '$ionicActionSheet', 'logService', 'inventoryService',
-    function($rootScope, $scope, $state, $ionicLoading, $ionicListDelegate, $http, $ionicActionSheet, logService, inventoryService) {
+app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoading',  '$http', '$ionicActionSheet', 'logService', 'inventoryService',
+    function($rootScope, $scope, $state, $ionicLoading,  $http, $ionicActionSheet, logService, inventoryService) {
 
         /**
          * load data via inventory service
@@ -634,7 +633,9 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
         }
 
         function syncWithServer() {
-            $ionicLoading.show();
+            $ionicLoading.show({
+                template: '<i class="icon ion-looping loading-icon"></i>Syncing books ...'
+            });
         	inventoryService.syncRemote().then(function(response){
                 $ionicLoading.hide();
                 $state.go('app.books');
@@ -649,7 +650,9 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
         }
 
         function readLogs() {
-            $ionicLoading.show();
+            $ionicLoading.show({
+                template: '<i class="icon ion-looping loading-icon"></i>Loading log data ...'
+            });
             var logs = logService.readLogData().then(function(response) {
                 $scope.logs = response;
                 $ionicLoading.hide();
