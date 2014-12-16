@@ -331,6 +331,20 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
             );
         }
 
+        // TODO_#21_take book image
+        function takePicture() {
+            navigator.camera.getPicture(function(imageURI) {
+
+                // imageURI is the URL of the image that we can use for
+                // an <img> element or backgroundImage.
+
+            }, function(err) {
+
+                // Ruh-roh, something bad happened
+
+            }, cameraOptions);
+        }
+
         /**
          * Search a book to add via Google Book Search.
          * Currently only isbn search is implemented.
@@ -421,7 +435,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
                 for (var id in books) {
                     var bookEntry = books[id],
                         currentISBN = bookEntry.value.volumeInfo.industryIdentifiers[0].identifier;
-                    // only add complet entries to results
+                    // only add complete entries to results
                     if (isbn0 && currentISBN == isbn0) {
                         logService.debug("Already found a saved book entry: " + JSON.stringify(bookEntry));
                         book = bookEntry;
@@ -444,7 +458,6 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
             book.value.owner = book.value.owner || credentials.owner;
             $scope.selectedBook = book;
             $scope.openModal();
-            //$scope.toggle("overlaySelectedBookEntry");
             $ionicLoading.hide();
         }
 
@@ -466,26 +479,24 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
                 logService.error("Settings saving was not successfull.");
             }
 
-
-
-            // TODO fallback when empty
             var bookImage = document.getElementById(book.value.id).getElementsByClassName('img-thumbnail')[0];
-            blobUtil.imgSrcToBlob(bookImage.src).then(function(blob) {
-
-
-                //b64Text = b64Text.replace('data&colon;image/jpeg;base64,','');
-                var reader = new window.FileReader();
-                reader.readAsDataURL(blob);
-                reader.onloadend = function() {
-                    var image = {};
-                    image.name = 'thumbnail_' + book.value.id;
-                    image.content_type = blob.type;
-                    image.data = reader.result.replace('data:image/jpeg;base64,', '');
-                    book.image = image;
-                    inventoryService.save(book).then(onSuccess, onError);
-                }
-            });
-
+            if (bookImage.src) {
+                // extract image info
+                blobUtil.imgSrcToBlob(bookImage.src).then(function(blob) {
+                    var reader = new window.FileReader();
+                    reader.readAsDataURL(blob);
+                    reader.onloadend = function() {
+                        var image = {};
+                        image.name = 'thumbnail_' + book.value.id;
+                        image.content_type = blob.type;
+                        image.data = reader.result.replace('data:image/jpeg;base64,', '');
+                        book.image = image;
+                        inventoryService.save(book).then(onSuccess, onError);
+                    }
+                });
+            } else {
+                inventoryService.save(book).then(onSuccess, onError);
+            }
 
 
             function onSuccess(response) {
