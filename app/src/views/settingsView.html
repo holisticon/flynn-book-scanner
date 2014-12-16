@@ -61,7 +61,7 @@
  				<ion-content id="logs" class="padding">
                     <h2>Log Entries</h2> 
                     <ion-list class="list card">
-                     <ion-item ng-repeat="logEntry in logs | reverse" class="item">
+                     <ion-item ng-repeat="logEntry in logs | orderBy:'timestamp':true" class="item">
                          {{logEntry.timestamp | date: 'dd.MM.yyyy HH:mm'}} - {{logEntry.level}} <br> {{logEntry.details}}
                      </ion-item>
                  	</ion-list>  
