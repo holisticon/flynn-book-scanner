@@ -35,3 +35,5 @@ app/src-gen/*
 app/test-results.xml
 
 app/src-gen/config.json
+
+app/platforms/android/res/xml/config.xml

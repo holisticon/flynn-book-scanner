@@ -65,29 +65,29 @@ function enrichDbData(pDbEntries) {
  * @module flynnBookScannerApp
  */
 app.controller('AppController', ['$scope', '$rootScope', '$state', '$ionicLoading', 'settingsService', 'logService', 'inventoryService',
-    function($scope, $rootScope, $state, $ionicLoading, settings, log, inventory) {
+    function($scope, $rootScope, $state, $ionicLoading, settings, logService, inventoryService) {
 
         $ionicLoading.show();
         $rootScope.$on('settings.invalid', function(event) {
-            showErrorDialog($rootScope, $scope, $ionicLoading, log, "Settings invalid", 1001, "Settings seems to be incorrect. Please correct or check network settings.");
+            showErrorDialog($rootScope, $scope, $ionicLoading, logService, "Settings invalid", 1001, "Settings seems to be incorrect. Please correct or check network settings.");
         });
         $rootScope.$on('server.timeout', function(event) {
-            showErrorDialog($rootScope, $scope, $ionicLoading, log, "Timeout", 2001, "No answer from server");
+            showErrorDialog($rootScope, $scope, $ionicLoading, logService, "Timeout", 2001, "No answer from server");
         });
         $rootScope.$on('server.error', function(event) {
-            showErrorDialog($rootScope, $scope, $ionicLoading, log, "Books couldn't be loaded", 2002, "The server didn't respond. Please check your network settings.");
+            showErrorDialog($rootScope, $scope, $ionicLoading, logService, "Books couldn't be loaded", 2002, "The server didn't respond. Please check your network settings.");
         });
         $rootScope.$on('login.failed', function(event) {
-            showErrorDialog($rootScope, $scope, $ionicLoading, log, "Settings incorrect", 3001, "Please check your settings");
+            showErrorDialog($rootScope, $scope, $ionicLoading, logService, "Login error", 3001, "Please check your sync user data.");
         });
         $rootScope.$on('barcode.error', function(event) {
-            showErrorDialog($rootScope, $scope, $ionicLoading, log, "Barcode error", 4001, "Barcode reader not working. Did you enable camera access?");
+            showErrorDialog($rootScope, $scope, $ionicLoading, logService, "Barcode error", 4001, "Barcode reader not working. Did you enable camera access?");
         });
         $rootScope.$on('booksearch.invalid', function(event) {
-            showErrorDialog($rootScope, $scope, $ionicLoading, log, "Book couldn't be loaded", 5001, "The book search wasn't successfull. Server didn't respond.");
+            showErrorDialog($rootScope, $scope, $ionicLoading, logService, "Book couldn't be loaded", 5001, "The book search wasn't successfull. Server didn't respond.");
         });
         $rootScope.$on('booksave.error', function(event) {
-            showErrorDialog($rootScope, $scope, $ionicLoading, log, "Book couldn't be saved", 5101, "The book save wasn't successfull. Server didn't respond.");
+            showErrorDialog($rootScope, $scope, $ionicLoading, logService, "Book couldn't be saved", 5101, "The book save wasn't successfull. Server didn't respond.");
         });
 
         $scope.userAgent = navigator.userAgent;
@@ -99,15 +99,18 @@ app.controller('AppController', ['$scope', '$rootScope', '$state', '$ionicLoadin
             config.timeout = 30000;
             $state.go('app.settings');
         } else {
-            $state.go('app.books');
             //sync on start 
             if (config.activeProfile().remotesync) {
-                inventory.syncRemote();
+            	inventoryService.syncRemote().then(function(response){
+                    $ionicLoading.hide();
+                    $state.go('app.books');
+                },function(error){
+                    $rootScope.$broadcast("settings.invalid");
+                    $state.go('app.settings');
+                    $ionicLoading.hide();
+                });
             }
-            $ionicLoading.hide();
-
         }
-        $ionicLoading.hide();
         $rootScope.settings = config;
     }
 ]);
@@ -501,13 +504,18 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
 
             function onSuccess(response) {
                 logService.info("Successfully added book");
-                $ionicLoading.hide();
                 if (response.noUpdate) {
                     navigator.notification.alert("Book already added. Please increase amount.");
                 } else  {
                     // sync on save
                     if (config.activeProfile().remotesync) {
-                        inventoryService.syncRemote();
+                        inventory.syncRemote().then(function(response){
+                            $ionicLoading.hide();
+                        },function(error){
+                            $rootScope.$broadcast("settings.invalid");
+                            $state.go('app.settings');
+                            $ionicLoading.hide();
+                        });
                     }
                     navigator.notification.alert("Book successfully added.", reset(), "Book");
                 }
@@ -626,7 +634,18 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
         }
 
         function syncWithServer() {
-            inventoryService.syncRemote();
+            $ionicLoading.show();
+        	inventoryService.syncRemote().then(function(response){
+                $ionicLoading.hide();
+                $state.go('app.books');
+            },function(error){
+            	if(error.status === 401){
+                    $rootScope.$broadcast("login.failed");
+            	} else {
+                    $rootScope.$broadcast("settings.invalid");
+            	}
+                $ionicLoading.hide();
+            });
         }
 
         function readLogs() {

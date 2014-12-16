@@ -103,7 +103,7 @@ app.filter('reverse', function() {
  * @module flynnBookScannerApp
  */
 app.constant('$ionicLoadingConfig', {
-    template: 'Loading ...'
+    template: '<span>Loading ...</span>'
 });
 
 app.run(function($ionicPlatform) {

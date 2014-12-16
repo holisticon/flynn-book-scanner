@@ -244,6 +244,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
 
         return {
             syncRemote: function() {
+                var deferred = $q.defer();
                 // reload config
                 config = settingsService.load();
                 activeProfile = config.activeProfile();
@@ -260,16 +261,18 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     logService.info('Syncing with couchDB started: ' + couchDbUrl);
                     localDB.sync(remoteCouch)
                         .on('change', function(info) {
-                            logService.info(info);
-
-                        })
-                        .on('complete', function(info) {
-                            logService.info(info);
-                            self.read();
-                        })
-                        .on('info', function(info) {
-                            logService.error(info);
+                            logService.info('Updating documents with remote changes...');
+                        }).on('complete', function(info) {
+                            logService.info('Completed sync: '+info);
+                            deferred.resolve(info);
+                        }).on('uptodate', function (info) {
+                            logService.info('Already up-to-date: '+info);
+                            deferred.resolve(info);
+                        }).on('error', function(info) {
+                            logService.error('Error during remote sync');
+                            deferred.reject(info);
                         });
+                    return deferred.promise;
                 }
             },
             read: function() {
