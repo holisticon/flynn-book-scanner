@@ -60,6 +60,15 @@
      		<ion-tab title="Logs" icon-on="ion-ios7-speedometer" icon-off="ion-ios7-speedometer-outline">
  				<ion-content id="logs" class="padding">
                     <h2>Log Entries</h2> 
+                    <label class="item item-input item-select">
+						<div class="input-label">
+					      Loglevel
+					    </div>
+					    <select data-ng-model="logging.selectedLogLevel" ng-options="logLevel.name for logLevel in logging.logLevels" ng-change="filterLogs()">
+                        	<option value="">All logs</option>
+					    </select>
+				  	</label>
+                  	<button type="button" ng-click="clearLogs()" class="button button-assertive">Clear logs</button>
                     <ion-list class="list card">
                      <ion-item ng-repeat="logEntry in logs | orderBy:'timestamp':true" class="item">
                          {{logEntry.timestamp | date: 'dd.MM.yyyy HH:mm'}} - {{logEntry.level}} <br> {{logEntry.details}}

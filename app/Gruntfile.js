@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
@@ -12,6 +12,7 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'src',
+      gen: require('./bower.json').appPath || 'src-gen',
       dist: 'www'
     },
     watch: {
@@ -28,11 +29,11 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-	      '<%= yeoman.app %>/{,*/}*.html',
-	      '.tmp/styles/{,*/}*.css',
-	      '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-	      '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-	      'bower_components/{,*/}*'
+          '<%= yeoman.app %>/{,*/}*.html',
+          '.tmp/styles/{,*/}*.css',
+          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          'bower_components/{,*/}*'
         ]
       }
     },
@@ -68,13 +69,13 @@ module.exports = function (grunt) {
         options: {
           port: 9001,
           base: [
-                 '<%= yeoman.app %>/{,*/}*.html',
-                 '.tmp/styles/{,*/}*.css',
-                 '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-                 '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-                 'bower_components/{,*/}*'
-              ]
-            }
+            '<%= yeoman.app %>/{,*/}*.html',
+            '.tmp/styles/{,*/}*.css',
+            '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+            '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+            'bower_components/{,*/}*'
+          ]
+        }
       },
       dist: {
         options: {
@@ -131,7 +132,6 @@ module.exports = function (grunt) {
           src: [
             '<%= yeoman.dist %>/scripts/{,*/}*.js',
             '<%= yeoman.dist %>/styles/{,*/}*.css',
-            '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
             '<%= yeoman.dist %>/styles/fonts/*'
           ]
         }
@@ -173,17 +173,30 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             'config.json',
-            'images/{,*/}*.{gif,webp}',
+            'images/{,*/}*.*',
             'styles/fonts/*',
             '*.js'
           ]
-        }, {         
-           expand: true,
-            dest: '<%= yeoman.dist %>',
-            src: [
-              'config.xml'
-            ]
-       }, {
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.gen %>',
+          dest: '<%= yeoman.dist %>',
+          src: [
+            '*.{ico,png,txt}',
+            '.htaccess',
+            'config.json',
+            'images/{,*/}*.*',
+            'styles/fonts/*',
+            '*.js'
+          ]
+        }, {
+          expand: true,
+          dest: '<%= yeoman.dist %>',
+          src: [
+            'config.xml'
+          ]
+        }, {
           expand: true,
           cwd: '<%= yeoman.app %>',
           dest: '<%= yeoman.dist %>',
@@ -198,19 +211,19 @@ module.exports = function (grunt) {
             'generated/*'
           ]
         }, {
-            expand: true,
-            cwd: 'bower_components/ionic/release/fonts/',
-            dest: '<%= yeoman.dist %>/fonts',
-            src: [
-              '*',
-            ]
+          expand: true,
+          cwd: 'bower_components/ionic/release/fonts/',
+          dest: '<%= yeoman.dist %>/fonts',
+          src: [
+            '*',
+          ]
         }, {
-            expand: true,
-            cwd: 'bower_components/bootstrap-sass/fonts/',
-            dest: '<%= yeoman.dist %>/fonts',
-            src: [
-                '*'
-            ]
+          expand: true,
+          cwd: 'bower_components/bootstrap-sass/fonts/',
+          dest: '<%= yeoman.dist %>/fonts',
+          src: [
+            '*'
+          ]
         }]
       },
       styles: {
@@ -279,7 +292,7 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('server', function (target) {
+  grunt.registerTask('server', function(target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }

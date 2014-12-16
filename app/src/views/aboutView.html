@@ -2,17 +2,25 @@
   <ion-nav-buttons side="left">
     <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
-  <ion-content id="about">		
-	<div class="list">
-		<a class="item item-icon-left" target="_blank" href="https://github.com/holisticon/flynn-book-scanner">
-	    	<i class="icon ion-code"></i>
-	    	Sources
-	  	</a>	
-		<a class="item item-icon-left" target="_blank" href="https://github.com/holisticon/flynn-book-scanner/issues">
-	    	<i class="icon ion-pound"></i>
-	    	Issues
-	  	</a>		  	         		
- 	</div>
-	<footer>Sponsored by <a target="_blank" href="http://www.holisticon.de">Holisticon AG</a></footer>
+  <ion-content id="about" class="padding">		
+    <div ng-repeat="entry in info" ng-show=!entry.hidden>
+        <label>
+            {{entry.label}}:
+        </label> 
+        &nbsp;
+        <div ng-bind-html="entry.value">
+        </div>
+        <br>
+    </div>
+    <br>
+    <br>
+    <a  target="_blank" href="https://github.com/holisticon/flynn-book-scanner" class="button icon-left ion-social-github"><small>View project on</small> GitHub</a>
+    <br>
+    <br>
+    Sponsored by <a target="_blank" href="https://www.holisticon.de">Holisticon AG</a>
+    <br>
+    <a href="https://www.holisticon.de"><img src="images/holisticon-logo-standard.png"></a>
+    <br>
+    <br>
 	</ion-content>
 </ion-view>

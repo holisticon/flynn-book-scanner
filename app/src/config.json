@@ -22,6 +22,6 @@
 		"value": "30000"
 	},
 	"dev": false,
-	"debug": true,
-	"trace": true
+	"debug": false,
+	"trace": false
 }

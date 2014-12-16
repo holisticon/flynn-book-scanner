@@ -178,7 +178,8 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, logServic
             url: "/about",
             views: {
                 'menuContent': {
-                    templateUrl: 'views/aboutView.html'
+                    templateUrl: 'views/aboutView.html',
+                    controller: 'AboutController'
                 }
             }
         });

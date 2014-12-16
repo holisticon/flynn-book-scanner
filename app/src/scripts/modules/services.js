@@ -257,7 +257,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                         opts = {
                             live: true
                         };
-                    self.logSync("Info", "Syncing with couchDB started: " + couchDbUrl);
+                    logService.info('Syncing with couchDB started: ' + couchDbUrl);
                     localDB.sync(remoteCouch)
                         .on('change', function(info) {
                             logService.info(info);
@@ -278,7 +278,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     response = {},
                     flynnDB = getDB();
                 if (flynnDB) {
-                    logService.debug("Using db-adapter: " + flynnDB.adapter);
+                    logService.debug('Using db-adapter: ' + flynnDB.adapter);
                     flynnDB.allDocs({
                         include_docs: true,
                         attachments: true,
@@ -301,18 +301,18 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                             	bookEntry.image.data=attachment.data;
                                             }
                                             bookEntry._attachments=null;
-                                            logService.debug("Read following valid book entry: " + bookEntry.value.volumeInfo.title);
+                                            logService.debug('Read following valid book entry: ' + bookEntry.value.volumeInfo.title);
                                             books.push(bookEntry);
                                         }
                                     }
                                 }
                                 response.books = books;
                                 if (books) {
-                                    logService.debug("Found " + books.length + " books in inventory.");
+                                    logService.debug('Found ' + books.length + ' books in inventory.');
                                 }
                                 deferred.resolve(response);
                             } else  {
-                                logService.error("Reading from local db not working: " + JSON.stringify(err));
+                                logService.error('Reading from local db not working: ' + JSON.stringify(err));
                                 deferred.reject(response);
                             }
                         });
@@ -327,11 +327,11 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                 var deferred = $q.defer(),
                     response = {},
                     flynnDB = getDB();
-                logService.debug("Starting search: " + JSON.stringify(pSearchQuery));
+                logService.debug('Starting search: ' + JSON.stringify(pSearchQuery));
                 // check if we have fulltext search
                 if (pSearchQuery.fullTextSearch) {
                     var query = pSearchQuery.fullTextSearch;
-                    logService.debug("Starting fulltext-search: " + query);
+                    logService.debug('Starting fulltext-search: ' + query);
                     flynnDB.search({
                         query: query,
                         fields: [
@@ -348,12 +348,12 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     }, function(err, res) {
                         $rootScope.$apply(function() {
                             if (err) {
-                                logService.error("Search error");
+                                logService.error('Search error');
                                 deferred.reject(response);
                             } else {
                                 var rows = res.rows;
                                 if (rows && rows.length > 0) {
-                                    logService.debug("Got " + rows.length + " results.");
+                                    logService.debug('Got ' + rows.length + ' results.');
                                     response.count = rows.length;
                                     response.books = {};
                                     for (var id in rows) {
@@ -362,7 +362,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                     }
                                     deferred.resolve(response);
                                 } else {
-                                    logService.debug("Got no results.");
+                                    logService.debug('Got no results.');
                                     deferred.reject(response);
                                 }
                             }

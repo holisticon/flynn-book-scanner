@@ -549,7 +549,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
         var defaultCouch = 'https://server.holisticon.de/couchdb/flynn/',
             defaultUser = '<LDAP-User>',
             defaultPassword,
-            defaultOwner = 'Holisticon AG';
+            defaultOwner = 'Holisticon AG';          
 
         // autoload
         loadSettings();
@@ -567,6 +567,30 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
             $scope.flynn.activeProfile.couchdb = config.activeProfile().couchdb || defaultCouch;
             $scope.flynn.activeProfile.user = config.activeProfile().user || defaultUser;
             $scope.flynn.activeProfile.password = config.activeProfile().password || defaultPassword;
+            // load log levels
+            $scope.logging={};
+            $scope.logging.logLevels = [{
+                name: 'Errors only',
+                logLevel: 'ERROR'
+            }, {
+                name: 'Info',
+                logLevel: 'INFO'
+            }, {
+                name: 'Debug info',
+                logLevel: 'DEBUG'
+            }, {
+                name: 'Trace messages',
+                logLevel: 'TRACE'
+            }];
+        }
+
+        function clearLogDB() {
+            $ionicLoading.show();
+            logService.clearLogData().then(function(logData) {
+            	readLogs();
+            }, function(response) {
+                $ionicLoading.hide();
+            });
         }
 
         function saveSettings() {
@@ -621,5 +645,46 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
         $scope.save = saveSettings;
         $scope.sync = syncWithServer;
         $scope.showLogs = readLogs;
+        $scope.clearLogs = clearLogDB;
+        $scope.filterLogs = function() {
+            if ($scope.logging.selectedLogLevel) {
+                $ionicLoading.show();
+                var logLevel = $scope.logging.selectedLogLevel.logLevel;
+                logService.readLogData(logLevel).then(function(logData) {
+                    $scope.logs = logData;
+                    $ionicLoading.hide();
+                }, function(response) {
+                    $ionicLoading.hide();
+                });
+            } else {
+            	readLogs();
+            }
+        }
+    }
+]);
+
+app.controller('AboutController', ['$scope', '$rootScope', 'APP_CONFIG',
+    function($scope, $rootScope, APP_CONFIG) {
+        'use strict';
+
+        var load = function() {
+            var info = [];
+            angular.forEach(APP_CONFIG.info, function(value, key) {
+                if (key === 'release_notes') {
+                    var entry = {};
+                    entry.label = value.label;
+                    entry.hidden = value.hidden;
+                    entry.value = value.value;
+                    var htmlString = '<ul class="list list-inset">' + entry.value.replace(/[0-9a-f]{7}/g, '<li class="item">') + '</ul>';
+                    entry.value = htmlString;
+                    this.push(entry);
+                } else {
+                    this.push(value);
+                }
+            }, info);
+            $scope.info = info;
+        }
+
+        load();
     }
 ]);
