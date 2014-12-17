@@ -43,11 +43,11 @@ module.exports = function(grunt) {
         dest: 'docs',
         html5Mode: true,
         startPage: '/api',
-        title: 'My Documentation',
+        title: 'Flynn Book Scanner',
       },
       api: {
         src: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        title: 'API Documentation'
+        title: 'App Documentation'
       }
     },
     autoprefixer: {

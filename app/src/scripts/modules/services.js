@@ -88,11 +88,8 @@ app.factory('base64', function() {
 /**
  * @ngdoc service
  * @name googleBookService
- *
  * @module flynnBookScannerApp
- *
- * @description
- * Provides access to the book search. Used Google Book Search as backend.
+ * @description Provides access to the book search. Used Google Book Search as backend.
  */
 app.service('googleBookService', ['$rootScope', '$http', '$q', 'settingsService', 'base64', 'logService',
 
