@@ -125,9 +125,9 @@ app.run(function($ionicPlatform) {
  */
 app.config(function($stateProvider, $urlRouterProvider, $httpProvider, logServiceProvider, APP_CONFIG) {
     // configure logging
-	logServiceProvider.dbName('flynnDB_logs');
-	logServiceProvider.enableDebugLogging(APP_CONFIG.debug);
-	logServiceProvider.enableTraceLogging(APP_CONFIG.trace);
+    logServiceProvider.dbName('flynnDB_logs');
+    logServiceProvider.enableDebugLogging(APP_CONFIG.debug);
+    logServiceProvider.enableTraceLogging(APP_CONFIG.trace);
     // configure routes and states
     $stateProvider
         .state('app', {
@@ -186,3 +186,60 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, logServic
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
+
+
+/**
+ * @ngdoc book filter
+ *
+ * @module flynnBookScannerApp
+ */
+app.filter('bookFilter', [function() {
+    /**
+     * Search in list for text
+     */
+    function searchList(pList, pSearchText) {
+        for (var i = 0, len = pList.length; i < len; i++) {
+            var entry = pList[i].toUpperCase();
+            if (entry.indexOf(pSearchText) > -1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    return function(pBooks, pSearchText) {
+        if (pSearchText) {
+            var filtered = [],
+            searchText= pSearchText.toUpperCase();
+            for (var i = 0, len = pBooks.length; i < len; i++) {
+                var book = pBooks[i];
+                if (book.value.volumeInfo.title.toUpperCase() === searchText) { // matches whole word
+                    filtered.push(book);
+                } else {
+                    if (book.value.volumeInfo.title.toUpperCase().indexOf(searchText) > -1) {
+                        filtered.push(book);
+                    } else {
+                        if (book.value.volumeInfo.subtitle && book.value.volumeInfo.subtitle.toUpperCase().indexOf(searchText) > -1) {
+                            filtered.push(book);
+                        } else {
+                            if (book.value.volumeInfo.description && book.value.volumeInfo.description.toUpperCase().indexOf(searchText) > -1) {
+                                filtered.push(book);
+                            } else {
+                                if (book.value.volumeInfo.publishedDate && book.value.volumeInfo.publishedDate.toUpperCase().indexOf(searchText) > -1) {
+                                    filtered.push(book);
+                                } else {
+                                    if (book.value.volumeInfo.authors && searchList(book.value.volumeInfo.authors, searchText)) {
+                                        filtered.push(book);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            return filtered;
+        } else {
+            return pBooks;
+        }
+    };
+}]);

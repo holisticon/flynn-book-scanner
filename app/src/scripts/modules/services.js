@@ -225,15 +225,14 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
     function($rootScope, $http, $q, settingsService, base64, logService) {
         'use strict';
         var config = settingsService.load(),
-            activeProfile = config.activeProfile(),
-            db;
+            activeProfile = config.activeProfile();
 
         function getDB() {
             var NAME_OF_POUCHDB;
             config = settingsService.load();
             activeProfile = config.activeProfile();
             NAME_OF_POUCHDB = activeProfile.dbName;
-
+            var db;
             if (!db) {
                 db = new PouchDB(NAME_OF_POUCHDB, {
                     adapter: 'websql'
@@ -253,25 +252,34 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     self = this,
                     localDB = getDB();
                 if (localDB) {
-                    var authorization = activeProfile.user + ':' + activeProfile.password,
-                        remoteCouch = couchDbUrl.replace("://", "://" + authorization + "@"),
-                        opts = {
-                            live: true
-                        };
-                    logService.info('Syncing with couchDB started: ' + couchDbUrl);
-                    localDB.sync(remoteCouch)
-                        .on('change', function(info) {
-                            logService.info('Updating documents with remote changes...');
-                        }).on('complete', function(info) {
-                            logService.info('Completed sync: ' + info);
-                            deferred.resolve(info);
-                        }).on('uptodate', function(info) {
-                            logService.info('Already up-to-date: ' + info);
-                            deferred.resolve(info);
-                        }).on('error', function(info) {
-                            logService.error('Error during remote sync');
-                            deferred.reject(info);
-                        });
+                    if (activeProfile.user && activeProfile.password) {
+                        var authorization = activeProfile.user + ':' + activeProfile.password,
+                            remoteCouch = couchDbUrl.replace("://", "://" + authorization + "@"),
+                            opts = {
+                                live: true
+                            };
+                        logService.info('Syncing with couchDB started: ' + couchDbUrl);
+                        localDB.sync(remoteCouch)
+                            .on('change', function(info) {
+                                logService.info('Updating documents with remote changes...');
+                                logService.debug('Updating documents with remote changes with following answer: ' + JSON.stringify(info));
+                            }).on('complete', function(info) {
+                                logService.info('Completed sync.');
+                                logService.debug('Completed sync with following answer: ' + JSON.stringify(info));
+                                deferred.resolve(info);
+                            }).on('uptodate', function(info) {
+                                logService.info('Already up-to-date.');
+                                logService.debug('Already up-to-date with following answer: ' + JSON.stringify(info));
+                                deferred.resolve(info);
+                            }).on('error', function(info) {
+                                logService.error('Error during remote sync with following answer: ' + JSON.stringify(info));
+                                deferred.reject(info);
+                            });
+                    } else {
+                        var response = {};
+                        response.status = 401;
+                        deferred.reject(response);
+                    }
                     return deferred.promise;
                 }
             },
@@ -331,50 +339,46 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     response = {},
                     flynnDB = getDB();
                 logService.debug('Starting search: ' + JSON.stringify(pSearchQuery));
-                // check if we have fulltext search
-                if (pSearchQuery.fullTextSearch) {
-                    var query = pSearchQuery.fullTextSearch;
-                    logService.debug('Starting fulltext-search: ' + query);
-                    flynnDB.search({
-                        query: query,
-                        fields: [
-                            'value.volumeInfo.title',
-                            'value.volumeInfo.subtitle',
-                            'value.volumeInfo.description',
-                            'value.volumeInfo.publisher',
-                            'value.volumeInfo.authors',
-                            'value.volumeInfo.publishedDate'
-                        ],
-                        mm: '30%',
+                if (pSearchQuery.isbn) {
+                    var isbn = '' + pSearchQuery.isbn;
+                    logService.debug("Starting isbn-search: " + isbn);
+                    flynnDB.allDocs({
                         include_docs: true,
-                        //stale: 'update_after'
+                        descending: true
                     }, function(err, res) {
                         $rootScope.$apply(function() {
-                            if (err) {
-                                logService.error('Search error');
-                                deferred.reject(response);
-                            } else {
+                            if (!err) {
                                 var rows = res.rows;
                                 if (rows && rows.length > 0) {
-                                    logService.debug('Got ' + rows.length + ' results.');
-                                    response.count = rows.length;
                                     response.books = {};
+                                    var count = 0;
                                     for (var id in rows) {
                                         var bookEntry = rows[id].doc;
-                                        response.books[id] = bookEntry;
+                                        if (bookEntry.value && bookEntry.value.volumeInfo) {
+                                            var idInfoDtls = bookEntry.value.volumeInfo.industryIdentifiers;
+                                            if (idInfoDtls && idInfoDtls.length > 1 && idInfoDtls[1].identifier == isbn) {
+                                                response.books[id] = bookEntry;
+                                                count++;
+                                            }
+                                        }
                                     }
+                                    response.count = count;
+                                    logService.info("Got " + count + " results.");
                                     deferred.resolve(response);
                                 } else {
-                                    logService.debug('Got no results.');
+                                    logService.info("Got no results.");
                                     deferred.reject(response);
                                 }
+                            } else {
+                                logService.error("Search error: " + err);
+                                deferred.reject(response);
                             }
                         });
                     });
-                } else  {
-                    if (pSearchQuery.isbn) {
-                        var isbn = '' + pSearchQuery.isbn;
-                        logService.debug("Starting isbn-search: " + isbn);
+                } else {
+                    if (pSearchQuery.id) {
+                        var bookId = '' + pSearchQuery.id;
+                        logService.debug("Starting id-search: " + bookId);
                         flynnDB.allDocs({
                             include_docs: true,
                             descending: true
@@ -387,12 +391,9 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                         var count = 0;
                                         for (var id in rows) {
                                             var bookEntry = rows[id].doc;
-                                            if (bookEntry.value && bookEntry.value.volumeInfo) {
-                                                var idInfoDtls = bookEntry.value.volumeInfo.industryIdentifiers;
-                                                if (idInfoDtls && idInfoDtls.length > 1 && idInfoDtls[1].identifier == isbn) {
-                                                    response.books[id] = bookEntry;
-                                                    count++;
-                                                }
+                                            if (bookEntry.value && bookEntry.value.id == bookId) {
+                                                response.books[id] = bookEntry;
+                                                count++;
                                             }
                                         }
                                         response.count = count;
@@ -408,47 +409,13 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                 }
                             });
                         });
-                    } else {
-                        if (pSearchQuery.id) {
-                            var bookId = '' + pSearchQuery.id;
-                            logService.debug("Starting id-search: " + bookId);
-                            flynnDB.allDocs({
-                                include_docs: true,
-                                descending: true
-                            }, function(err, res) {
-                                $rootScope.$apply(function() {
-                                    if (!err) {
-                                        var rows = res.rows;
-                                        if (rows && rows.length > 0) {
-                                            response.books = {};
-                                            var count = 0;
-                                            for (var id in rows) {
-                                                var bookEntry = rows[id].doc;
-                                                if (bookEntry.value && bookEntry.value.id == bookId) {
-                                                    response.books[id] = bookEntry;
-                                                    count++;
-                                                }
-                                            }
-                                            response.count = count;
-                                            logService.info("Got " + count + " results.");
-                                            deferred.resolve(response);
-                                        } else {
-                                            logService.info("Got no results.");
-                                            deferred.reject(response);
-                                        }
-                                    } else {
-                                        logService.error("Search error: " + err);
-                                        deferred.reject(response);
-                                    }
-                                });
-                            });
 
-                        } else {
-                            logService.error("Search error");
-                            deferred.reject(response);
-                        }
+                    } else {
+                        logService.error("Search error");
+                        deferred.reject(response);
                     }
                 }
+
                 return deferred.promise;
             },
             remove: function(pBookToRemove) {

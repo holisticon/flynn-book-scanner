@@ -9,7 +9,7 @@
 		<div class="bar bar-header item-input-inset">
 			<label class="item-input-wrapper">
 	    		<i class="icon ion-ios7-search placeholder-icon"></i>
-	    		<input type="search" data-ng-model="searchQuery.fullTextSearch" ng-change="search()" 
+	    		<input type="search" data-ng-model="searchQuery.fullTextSearch"
 	    		   placeholder="Type keywords to search ...">
 			</label>
 			<button ng-click="resetSearch()" class="button-clear icon ion-close-circled"></button> 		
@@ -19,7 +19,7 @@
 	<div ng-show="searching" class="list-group-item">Searching ...</div>
 	
 	<ion-list ng-show="books">
-       	<ion-item ng-repeat="book in books | orderBy:'value.volumeInfo.title'" class="item-thumbnail-left" href="#/app/book/{{book._id}}">
+       	<ion-item ng-repeat="book in books | orderBy:'value.volumeInfo.title' | bookFilter:searchQuery.fullTextSearch" class="item-thumbnail-left" href="#/app/book/{{book._id}}">
        		<image-data image="book.image"></image-data>
 			<h2>{{book.value.volumeInfo.title}}</h2>
 			

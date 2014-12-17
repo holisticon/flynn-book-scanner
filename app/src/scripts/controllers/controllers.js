@@ -125,6 +125,8 @@ app.controller('AppController', ['$scope', '$rootScope', '$state', '$ionicLoadin
 app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoading', '$http', '$ionicActionSheet', 'logService', 'inventoryService',
     function($rootScope, $scope, $state, $ionicLoading, $http, $ionicActionSheet, logService, inventoryService) {
 
+        var allBooks;
+
         /**
          * load data via inventory service
          *
@@ -135,6 +137,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
             inventoryService.read().then(onSuccess, onError);
 
             function onSuccess(response) {
+                allBooks = enrichDbData(response.books);
                 $scope.books = enrichDbData(response.books);
                 $ionicLoading.hide();
             }
@@ -147,32 +150,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
 
         function resetSearch() {
             $scope.searchQuery = {};
-            search();
-        }
-
-        /**
-         * Perform search within the all books view.
-         * Currently only fulltext search is supported
-         *
-         */
-        function search() {
-            var searchQuery = $scope.searchQuery;
-            $scope.searching = true;
-            if (searchQuery.fullTextSearch) {
-                inventoryService.search(searchQuery).then(onSuccess, onError);
-            } else {
-                inventoryService.read().then(onSuccess, onError);
-            }
-
-            function onSuccess(response) {
-                $scope.books = enrichDbData(response.books);
-                $scope.searching = false;
-            }
-
-            function onError(response) {
-                $scope.books = false;
-                $scope.searching = false;
-            }
+            load();
         }
 
         function removeBook(pBookToRemove) {
@@ -226,7 +204,6 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
 
         // public methods
         $scope.load = load;
-        $scope.search = search;
         $scope.showBookDetails = showBookDetails;
         $scope.showActionMenu = showActionMenu;
         $scope.resetSearch = resetSearch;
@@ -600,7 +577,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
             });
         }
 
-        function saveSettings() {
+        function saveSettings(redirect) {
             logService.debug("Saving settings to local storage");
             $ionicLoading.show();
             var profile = $scope.flynn.activeProfile;
@@ -613,22 +590,26 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
             config.profiles = profiles;
             // save config
             settingsService.save(config);
-            // sync if server was added
-            if ($scope.flynn.activeProfile.remotesync) {
-                syncWithServer();
-            }
-            inventoryService.read().then(onSuccess, onError);
+            if (redirect) {
+                // sync if server was added
+                if ($scope.flynn.activeProfile.remotesync) {
+                    syncWithServer();
+                }
+                inventoryService.read().then(onSuccess, onError);
 
-            function onSuccess(response) {
-                $ionicLoading.hide();
-                logService.debug("Got valid server response. Settings seeem to be valid.");
-                $state.go('app.books');
-            }
+                function onSuccess(response) {
+                    $ionicLoading.hide();
+                    logService.debug("Got valid server response. Settings seeem to be valid.");
+                    $state.go('app.books');
+                }
 
-            function onError(response) {
+                function onError(response) {
+                    $ionicLoading.hide();
+                    settingsService.valid = false;
+                    $rootScope.$broadcast("settingsService.invalid");
+                }
+            } else {
                 $ionicLoading.hide();
-                settingsService.valid = false;
-                $rootScope.$broadcast("settingsService.invalid");
             }
         }
 
@@ -664,8 +645,13 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
 
         // public methods
         $scope.load = loadSettings;
-        $scope.save = saveSettings;
-        $scope.sync = syncWithServer;
+        $scope.save = function() {
+            saveSettings(true);
+        }
+        $scope.sync = function() {
+            saveSettings(false);
+            syncWithServer();
+        }
         $scope.showLogs = readLogs;
         $scope.clearLogs = clearLogDB;
         $scope.filterLogs = function() {

@@ -33,7 +33,7 @@ app.directive('imageData', ['$interval', 'base64', 'logService',
 			link: function(scope, element, attrs) {
 
 				scope.$watch('image', function(image) {
-					if (image) {
+					if (image && image.data) {
 						try {
 							var blob = b64toBlob(image.data, image.content_type);
 							var blobUrl = URL.createObjectURL(blob);
