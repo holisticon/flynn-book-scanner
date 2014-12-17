@@ -32,8 +32,7 @@ app/platforms/wp7/obj/Debug/*
 app/platforms/wp7/Bin/Debug/*
 app/bin/*
 app/src-gen/*
+app/docs/*
 app/test-results.xml
-
-app/src-gen/config.json
-
 app/platforms/android/res/xml/config.xml
+

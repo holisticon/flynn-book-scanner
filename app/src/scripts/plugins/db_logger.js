@@ -1,12 +1,10 @@
 var dbLog = angular.module('dbLog', []);
 
 /**
- * @ngdoc provider
+ * @ngdoc service
  * @name logService
- * @kind function
- *
- * @description
- * Provides logging service in browser db.
+ * @module dbLog
+ * @description Provides logging service in browser db.
  */
 dbLog.provider('logService', function LogServiceProvider() {
     var debug = false,
@@ -15,7 +13,7 @@ dbLog.provider('logService', function LogServiceProvider() {
         $log, $q;
 
     /**
-     * @ngdoc method
+     * @ngdoc function
      * @name logService#enableDebugLogging
      *
      * @param {boolean} value to configure if debug entries should be logged
@@ -24,7 +22,7 @@ dbLog.provider('logService', function LogServiceProvider() {
         debug = !!value;
     };
     /**
-     * @ngdoc method
+     * @ngdoc function
      * @name logService#enableTraceLogging
      *
      * @param {boolean} valuee to configure if trace entries should be logged
@@ -33,7 +31,7 @@ dbLog.provider('logService', function LogServiceProvider() {
         trace = !!value;
     };
     /**
-     * @ngdoc method
+     * @ngdoc function
      * @name logService#dbName
      *
      * @param {string} name of the database

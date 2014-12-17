@@ -1,24 +1,28 @@
 'use strict';
 
 /**
- * @ngdoc Called after error dialog is closed.
- * @param $rootScope root scope
- * @param $scope current scope
- * @param log reference to log service
+ * @ngdoc function
+ * @name errorDialogClosed
+ * @description Called after error dialog is closed.
+ * @param {object} root scope
+ * @param {object} current scope
+ * @param {object} reference to log service
  */
 function errorDialogClosed($rootScope, $scope, log) {
     log.debug("Error dialog closed.");
 }
 
 /**
- * @ngdoc Shows up the error dialog with the given error details
- * @param $rootScope root scope
- * @param $scope current scope
- * @param $ionicLoading reference to loading indicator
- * @param log reference to log service
- * @param errorTitle title to use
- * @param errorCode error code to use
- * @param errorDetails message to display
+ * @ngdoc function
+ * @name showErrorDialog
+ * @description Shows up the error dialog with the given error details
+ * @param {object} root scope
+ * @param {object} current scope
+ * @param {object} reference to loading indicator
+ * @param {object} reference to log service
+ * @param {object} title to use
+ * @param {object} error code to use
+ * @param {object} message to display
  */
 function showErrorDialog($rootScope, $scope, $ionicLoading, log, errorTitle, errorCode, errorDetails) {
     $ionicLoading.show();
@@ -27,8 +31,9 @@ function showErrorDialog($rootScope, $scope, $ionicLoading, log, errorTitle, err
 }
 
 /**
- *
- * @ngdoc Called after device is ready to use
+ * @ngdoc function
+ * @name onDeviceReady
+ * @description Called after device is ready to use
  */
 var onDeviceReady = function() {
     var $http = angular.injector(['ng']).get('$http'),
@@ -61,10 +66,10 @@ if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
 }
 
 /**
- * @ngdoc flynn app
- *
+ * @ngdoc object
+ * @name app declaration
+ * @description  declares flynn app
  * @module flynnBookScannerApp
- *
  */
 var app = angular.module('flynnBookScannerApp', [
     'ui.bootstrap',
@@ -79,9 +84,10 @@ var app = angular.module('flynnBookScannerApp', [
 ]);
 
 /**
- * @ngdoc Reverse list in order
- *
+ * @ngdoc filter
+ * @name reverse
  * @module flynnBookScannerApp
+ * @description Reverse list in order
  */
 app.filter('reverse', function() {
     return function(items) {
@@ -93,16 +99,80 @@ app.filter('reverse', function() {
     };
 });
 
+/**
+ * @ngdoc filter
+ * @name bookFilter
+ * @module flynnBookScannerApp
+ * @description book filter
+ */
+app.filter('bookFilter', [function() {
+    /**
+     * Search in list for text
+     */
+    function searchList(pList, pSearchText) {
+        for (var i = 0, len = pList.length; i < len; i++) {
+            var entry = pList[i].toUpperCase();
+            if (entry.indexOf(pSearchText) > -1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    return function(pBooks, pSearchText) {
+        if (pSearchText) {
+            var filtered = [],
+                searchText = pSearchText.toUpperCase();
+            for (var i = 0, len = pBooks.length; i < len; i++) {
+                var book = pBooks[i];
+                if (book.value.volumeInfo.title.toUpperCase() === searchText) { // matches whole word
+                    filtered.push(book);
+                } else {
+                    if (book.value.volumeInfo.title.toUpperCase().indexOf(searchText) > -1) {
+                        filtered.push(book);
+                    } else {
+                        if (book.value.volumeInfo.subtitle && book.value.volumeInfo.subtitle.toUpperCase().indexOf(searchText) > -1) {
+                            filtered.push(book);
+                        } else {
+                            if (book.value.volumeInfo.description && book.value.volumeInfo.description.toUpperCase().indexOf(searchText) > -1) {
+                                filtered.push(book);
+                            } else {
+                                if (book.value.volumeInfo.publishedDate && book.value.volumeInfo.publishedDate.toUpperCase().indexOf(searchText) > -1) {
+                                    filtered.push(book);
+                                } else {
+                                    if (book.value.volumeInfo.authors && searchList(book.value.volumeInfo.authors, searchText)) {
+                                        filtered.push(book);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            return filtered;
+        } else {
+            return pBooks;
+        }
+    };
+}]);
 
 /**
- * @ngdoc Set loading text
- *
+ * @ngdoc function
+ * @name constant
  * @module flynnBookScannerApp
+ * @description  Set loading text
  */
 app.constant('$ionicLoadingConfig', {
     template: '<i class="icon ion-loading-d"></i>Loading ...'
 });
 
+
+/**
+ * @ngdoc function
+ * @name run
+ * @module flynnBookScannerApp
+ * @description  init ionic
+ */
 app.run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -119,9 +189,10 @@ app.run(function($ionicPlatform) {
 
 
 /**
- * @ngdoc configure app module
- *
+ * @ngdoc function
+ * @name config
  * @module flynnBookScannerApp
+ * @description configure app
  */
 app.config(function($stateProvider, $urlRouterProvider, $httpProvider, logServiceProvider, APP_CONFIG) {
     // configure logging
@@ -186,60 +257,3 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, logServic
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
-
-
-/**
- * @ngdoc book filter
- *
- * @module flynnBookScannerApp
- */
-app.filter('bookFilter', [function() {
-    /**
-     * Search in list for text
-     */
-    function searchList(pList, pSearchText) {
-        for (var i = 0, len = pList.length; i < len; i++) {
-            var entry = pList[i].toUpperCase();
-            if (entry.indexOf(pSearchText) > -1) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-    return function(pBooks, pSearchText) {
-        if (pSearchText) {
-            var filtered = [],
-            searchText= pSearchText.toUpperCase();
-            for (var i = 0, len = pBooks.length; i < len; i++) {
-                var book = pBooks[i];
-                if (book.value.volumeInfo.title.toUpperCase() === searchText) { // matches whole word
-                    filtered.push(book);
-                } else {
-                    if (book.value.volumeInfo.title.toUpperCase().indexOf(searchText) > -1) {
-                        filtered.push(book);
-                    } else {
-                        if (book.value.volumeInfo.subtitle && book.value.volumeInfo.subtitle.toUpperCase().indexOf(searchText) > -1) {
-                            filtered.push(book);
-                        } else {
-                            if (book.value.volumeInfo.description && book.value.volumeInfo.description.toUpperCase().indexOf(searchText) > -1) {
-                                filtered.push(book);
-                            } else {
-                                if (book.value.volumeInfo.publishedDate && book.value.volumeInfo.publishedDate.toUpperCase().indexOf(searchText) > -1) {
-                                    filtered.push(book);
-                                } else {
-                                    if (book.value.volumeInfo.authors && searchList(book.value.volumeInfo.authors, searchText)) {
-                                        filtered.push(book);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            };
-            return filtered;
-        } else {
-            return pBooks;
-        }
-    };
-}]);

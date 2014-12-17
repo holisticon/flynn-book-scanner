@@ -7,6 +7,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-plato');
+  grunt.loadNpmTasks('grunt-ngdocs');
 
   grunt.initConfig({
     yeoman: {
@@ -35,6 +36,18 @@ module.exports = function(grunt) {
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           'bower_components/{,*/}*'
         ]
+      }
+    },
+    ngdocs: {
+      options: {
+        dest: 'docs',
+        html5Mode: true,
+        startPage: '/api',
+        title: 'My Documentation',
+      },
+      api: {
+        src: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+        title: 'API Documentation'
       }
     },
     autoprefixer: {
@@ -337,7 +350,8 @@ module.exports = function(grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    'ngdocs'
   ]);
 
   grunt.registerTask('default', [

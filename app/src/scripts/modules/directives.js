@@ -1,3 +1,9 @@
+/**
+ * @ngdoc directive
+ * @name imageData
+ * @module flynnBookScannerApp
+ * @description creates img element from provide base64 encoded image data
+ */
 app.directive('imageData', ['$interval', 'base64', 'logService',
 	function($interval, base64, logService) {
 		'use strict';
