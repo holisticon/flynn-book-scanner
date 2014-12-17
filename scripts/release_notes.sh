@@ -1,5 +1,7 @@
 #!/bin/sh
-# 
+# Adds simple release notes to config.json and appends build number
+#  e.g. release_notes.sh 42 -> uses 42 as build number
+
 
 BASEDIR=$(dirname $0)
 buildNo=$1
