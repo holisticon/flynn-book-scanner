@@ -194,7 +194,11 @@ app.run(function($ionicPlatform) {
  * @module flynnBookScannerApp
  * @description configure app
  */
-app.config(function($stateProvider, $urlRouterProvider, $httpProvider, logServiceProvider, APP_CONFIG) {
+app.config(function($urlRouterProvider, $httpProvider,$stateProvider,$ionicConfigProvider,  logServiceProvider, APP_CONFIG) {
+	//Places them at the bottom for all OS
+	$ionicConfigProvider.tabs.position("bottom"); 
+	//Makes them all look the same across all OS
+	$ionicConfigProvider.tabs.style("standard"); 
     // configure logging
     logServiceProvider.dbName('flynnDB_logs');
     logServiceProvider.enableDebugLogging(APP_CONFIG.debug);
