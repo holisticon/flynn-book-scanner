@@ -3,41 +3,23 @@
     <h1>{{selectedBook.value.volumeInfo.title}}</h1>
     <h2 class="panel-title">{{selectedBook.value.volumeInfo.subtitle}}</h2>     
         <div bs-panel class="panel">
-        	<image-data image="selectedBook.image"></image-data>
+        	<div style=" width:100%;text-align:center">
+        		<image-data image="selectedBook.image" ></image-data>
+            </div>
             <br> <br>
             <span ng-show="selectedBook.value.volumeInfo.description">{{selectedBook.value.volumeInfo.description}}<br> <br></span>
             <div class="text-left">
                 <div class="row">
-                    <div class="col-xs-3">
-                        <label>ISBN:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <div>{{selectedBook.value.volumeInfo.industryIdentifiers[1].identifier}}</div>
-                    </div>
+                    <span class="entryLabel">ISBN:</span>&nbsp;<span class="entryValue">{{selectedBook.value.volumeInfo.industryIdentifiers[1].identifier}}</span>
                 </div>
                 <div class="row">
-                    <div class="col-xs-3">
-                        <label>Pages:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <div>{{selectedBook.value.volumeInfo.pageCount}}</div>
-                    </div>
+                    <span class="entryLabel">Pages:</span>&nbsp;<span class="entryValue">{{selectedBook.value.volumeInfo.pageCount}}</span>
                 </div>
                 <div class="row" ng-show="selectedBook.authorInfo">
-                    <div class="col-xs-3">
-                        <label>Author:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <div>{{selectedBook.authorInfo}}</div>
-                    </div>
+                    <span class="entryLabel">Author:</span>&nbsp;<span class="entryValue">{{selectedBook.authorInfo}}</span>
                 </div>
                 <div class="row" ng-show="selectedBook.value.volumeInfo.publisher">
-                    <div class="col-xs-3">
-                        <label>Publisher:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <div>{{selectedBook.value.volumeInfo.publisher}} ({{selectedBook.value.volumeInfo.publishedDate}})</div>
-                    </div>
+                    <span class="entryLabel">Publisher:</span>&nbsp;<span class="entryValue">{{selectedBook.value.volumeInfo.publisher}} ({{selectedBook.value.volumeInfo.publishedDate}}) </span>
                 </div>
             </div>
         </div>
