@@ -683,7 +683,7 @@ app.controller('AboutController', ['$scope', '$rootScope', 'APP_CONFIG',
                     entry.label = value.label;
                     entry.hidden = value.hidden;
                     entry.value = value.value;
-                    var htmlString = '<ul class="list list-inset">' + entry.value.replace(/[0-9a-f]{7}/g, '<li class="item">') + '</ul>';
+                    var htmlString = '<ul class="list-group">' + entry.value.replace(/[0-9a-f]{7}/g, '<li class="list-group-item">') + '</ul>';
                     entry.value = htmlString;
                     this.push(entry);
                 } else {

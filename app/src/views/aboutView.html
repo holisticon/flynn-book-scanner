@@ -4,12 +4,12 @@
   </ion-nav-buttons>
   <ion-content id="about" class="padding">		
     <div ng-repeat="entry in info" ng-show=!entry.hidden>
-        <label>
+        <span class="entryLabel">
             {{entry.label}}:
-        </label> 
+        </span> 
         &nbsp;
-        <div ng-bind-html="entry.value">
-        </div>
+        <span ng-bind-html="entry.value" class="entryValue">
+        </span>
         <br>
     </div>
     <br>
