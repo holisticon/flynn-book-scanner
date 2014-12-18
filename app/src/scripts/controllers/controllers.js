@@ -333,10 +333,12 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
             $scope.books = null;
             var searchQuery = $scope.searchQuery;
 
-            if (searchQuery) {
+            if (searchQuery && (searchQuery.isbn || searchQuery.keyword)) {
                 // reset search
                 booksInventory = {};
                 inventoryService.read().then(onSuccess, onError);
+            } else {
+                navigator.notification.alert('Please enter search details.', null, 'Info');
             }
 
             function onSuccess(response) {
