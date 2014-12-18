@@ -1,1 +1,14 @@
-/bin
+# Non-project-specific build files:
+build.xml
+local.properties
+/gradlew
+/gradlew.bat
+/gradle
+# Ant builds
+ant-built
+ant-gen
+# Eclipse builds
+gen
+out
+# Gradle builds
+/build

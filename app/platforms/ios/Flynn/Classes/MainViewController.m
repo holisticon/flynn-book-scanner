@@ -19,10 +19,10 @@
 
 //
 //  MainViewController.h
-//  Flynn
+//  flynn book scanning app
 //
-//  Created by ___FULLUSERNAME___ on ___DATE___.
-//  Copyright ___ORGANIZATIONNAME___ ___YEAR___. All rights reserved.
+//  Created by Martin Reinhardt on 06.07.2014.
+//  Copyright Holisticon AG 2014. All rights reserved.
 //
 
 #import "MainViewController.h"
@@ -67,7 +67,7 @@
 {
     // View defaults to full size.  If you want to customize the view's size, or its subviews (e.g. webView),
     // you can do so here.
-
+    
     [super viewWillAppear:animated];
 }
 
@@ -158,15 +158,6 @@
     return [super getCommandInstance:className];
 }
 
-/*
-   NOTE: this will only inspect execute calls coming explicitly from native plugins,
-   not the commandQueue (from JavaScript). To see execute calls from JavaScript, see
-   MainCommandQueue below
-*/
-- (BOOL)execute:(CDVInvokedUrlCommand*)command
-{
-    return [super execute:command];
-}
 
 - (NSString*)pathForResource:(NSString*)resourcepath;
 {

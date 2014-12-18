@@ -5,70 +5,6 @@
     },
     "config_munge": {
         "files": {
-            "config.xml": {
-                "parents": {
-                    "/*": [
-                        {
-                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"Fullscreen\" value=\"true\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"HiddenStatusbarOverlay\"><param name=\"ios-package\" value=\"APPHiddenStatusbarOverlay\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"ios-package\" value=\"SQLitePlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
-                            "count": 1
-                        }
-                    ]
-                }
-            },
-            "*-Info.plist": {
-                "parents": {
-                    "UIStatusBarHidden": [
-                        {
-                            "xml": "<true />",
-                            "count": 1
-                        }
-                    ],
-                    "UIViewControllerBasedStatusBarAppearance": [
-                        {
-                            "xml": "<false />",
-                            "count": 1
-                        }
-                    ],
-                    "NSLocationWhenInUseUsageDescription": [
-                        {
-                            "xml": "<string />",
-                            "count": 1
-                        }
-                    ]
-                }
-            },
             "framework": {
                 "parents": {
                     "libiconv.dylib": [
@@ -107,12 +43,6 @@
                             "count": 1
                         }
                     ],
-                    "AudioToolbox.framework": [
-                        {
-                            "xml": "true",
-                            "count": 1
-                        }
-                    ],
                     "ImageIO.framework": [
                         {
                             "xml": "true",
@@ -136,31 +66,101 @@
                             "xml": "false",
                             "count": 1
                         }
+                    ],
+                    "AudioToolbox.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"ios-package\" value=\"SQLitePlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"Fullscreen\" value=\"true\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"HiddenStatusbarOverlay\"><param name=\"ios-package\" value=\"APPHiddenStatusbarOverlay\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "*-Info.plist": {
+                "parents": {
+                    "UIStatusBarHidden": [
+                        {
+                            "xml": "<true />",
+                            "count": 1
+                        }
+                    ],
+                    "UIViewControllerBasedStatusBarAppearance": [
+                        {
+                            "xml": "<false />",
+                            "count": 1
+                        }
+                    ],
+                    "NSLocationWhenInUseUsageDescription": [
+                        {
+                            "xml": "<string />",
+                            "count": 1
+                        }
                     ]
                 }
             }
         }
     },
     "installed_plugins": {
-        "org.apache.cordova.device": {
-            "PACKAGE_NAME": "de.holisticon.flynn"
-        },
-        "org.apache.cordova.console": {
-            "PACKAGE_NAME": "de.holisticon.flynn"
-        },
-        "de.appplant.cordova.plugin.hidden-statusbar-overlay": {
-            "PACKAGE_NAME": "de.holisticon.flynn"
-        },
         "com.phonegap.plugins.barcodescanner": {
             "PACKAGE_NAME": "de.holisticon.flynn"
         },
         "com.phonegap.plugins.sqlite": {
             "PACKAGE_NAME": "de.holisticon.flynn"
         },
-        "org.apache.cordova.dialogs": {
+        "de.appplant.cordova.plugin.hidden-statusbar-overlay": {
             "PACKAGE_NAME": "de.holisticon.flynn"
         },
         "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "de.holisticon.flynn"
+        },
+        "org.apache.cordova.console": {
+            "PACKAGE_NAME": "de.holisticon.flynn"
+        },
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "de.holisticon.flynn"
+        },
+        "org.apache.cordova.dialogs": {
             "PACKAGE_NAME": "de.holisticon.flynn"
         }
     },

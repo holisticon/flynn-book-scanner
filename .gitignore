@@ -23,6 +23,7 @@ app/platforms/android/CordovaLib/gen/*
 app/platforms/android/CordovaLib/local.properties
 app/platforms/ios/Flynn/config.xml
 app/platforms/ios/Flynn.xcodeproj/project.xcworkspace/xcuserdata/*
+app/platforms/ios/Flynn.xcodeproj/xcuserdata/*
 app/platforms/android/assets/www/bower_components/*
 app/platforms/ios/www/bower_components/*
 app/platforms/ios/www/*
@@ -35,4 +36,3 @@ app/src-gen/*
 app/docs/*
 app/test-results.xml
 app/platforms/android/res/xml/config.xml
-
