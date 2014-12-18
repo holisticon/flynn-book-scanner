@@ -1,4 +1,9 @@
-var cordova;
+var cordova,
+    navigator;
+
+//TODO_move to mocks
+navigator.notification = {};
+navigator.notification.alert = function(){};
 
 describe('main', function() {
 	var logger;
