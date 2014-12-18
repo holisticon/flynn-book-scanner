@@ -557,12 +557,7 @@
             },
             "config.xml": {
                 "parents": {
-                    "/*": [
-                        {
-                            "xml": "<preference name=\"Fullscreen\" value=\"true\" />",
-                            "count": 1
-                        }
-                    ]
+                    "/*": []
                 }
             }
         }
@@ -572,9 +567,6 @@
             "PACKAGE_NAME": "de.holisticon.flynn"
         },
         "com.phonegap.plugins.sqlite": {
-            "PACKAGE_NAME": "de.holisticon.flynn"
-        },
-        "de.appplant.cordova.plugin.hidden-statusbar-overlay": {
             "PACKAGE_NAME": "de.holisticon.flynn"
         },
         "org.apache.cordova.camera": {

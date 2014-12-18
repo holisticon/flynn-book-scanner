@@ -87,14 +87,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<preference name=\"Fullscreen\" value=\"true\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"HiddenStatusbarOverlay\"><param name=\"ios-package\" value=\"APPHiddenStatusbarOverlay\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
                             "count": 1
                         },
@@ -119,18 +111,8 @@
             },
             "*-Info.plist": {
                 "parents": {
-                    "UIStatusBarHidden": [
-                        {
-                            "xml": "<true />",
-                            "count": 1
-                        }
-                    ],
-                    "UIViewControllerBasedStatusBarAppearance": [
-                        {
-                            "xml": "<false />",
-                            "count": 1
-                        }
-                    ],
+                    "UIStatusBarHidden": [],
+                    "UIViewControllerBasedStatusBarAppearance": [],
                     "NSLocationWhenInUseUsageDescription": [
                         {
                             "xml": "<string />",
@@ -146,9 +128,6 @@
             "PACKAGE_NAME": "de.holisticon.flynn"
         },
         "com.phonegap.plugins.sqlite": {
-            "PACKAGE_NAME": "de.holisticon.flynn"
-        },
-        "de.appplant.cordova.plugin.hidden-statusbar-overlay": {
             "PACKAGE_NAME": "de.holisticon.flynn"
         },
         "org.apache.cordova.camera": {

@@ -5,9 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
-		0C46B3E982E448379E3A50EA /* APPHiddenStatusbarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DA61AF0F3A4BA6A88AC48C /* APPHiddenStatusbarOverlay.m */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
@@ -132,13 +130,11 @@
 		8D1107310486CEB800E47090 /* Flynn-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Flynn-Info.plist"; path = "../Flynn-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		8E4173CAE89F42AB8BB33D02 /* CDVCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVCamera.m; path = org.apache.cordova.camera/CDVCamera.m; sourceTree = "<group>"; };
 		97B3D4B29BA34715A9F5A458 /* CoreVideo.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
-		A6DA61AF0F3A4BA6A88AC48C /* APPHiddenStatusbarOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APPHiddenStatusbarOverlay.m; path = "de.appplant.cordova.plugin.hidden-statusbar-overlay/APPHiddenStatusbarOverlay.m"; sourceTree = "<group>"; };
 		BF22DF69BB184EA49CE044B2 /* CDVNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVNotification.m; path = org.apache.cordova.dialogs/CDVNotification.m; sourceTree = "<group>"; };
 		C0EB95AB3A97440FB417657F /* libsqlite3.dylib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		C4646FD4AC4B4093830E4338 /* AVFoundation.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
 		D8AD582AF82C44FCA250F913 /* CDVJpegHeaderWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVJpegHeaderWriter.m; path = org.apache.cordova.camera/CDVJpegHeaderWriter.m; sourceTree = "<group>"; };
-		E327BFB8057349A39A32A818 /* APPHiddenStatusbarOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APPHiddenStatusbarOverlay.h; path = "de.appplant.cordova.plugin.hidden-statusbar-overlay/APPHiddenStatusbarOverlay.h"; sourceTree = "<group>"; };
 		E5665037F90D454698A44EC3 /* CDVDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVDevice.h; path = org.apache.cordova.device/CDVDevice.h; sourceTree = "<group>"; };
 		E99ED8E38A5547788D5BA233 /* AudioToolbox.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		EA7D49BB931A4A0BA6F8A6BD /* QuartzCore.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -271,8 +267,6 @@
 				761E8DEF5D8A4B649411E652 /* zxing-all-in-one.h */,
 				3ADBF70241724391BAD12DC5 /* SQLitePlugin.m */,
 				052667DDE9894AC1A434DBC3 /* SQLitePlugin.h */,
-				A6DA61AF0F3A4BA6A88AC48C /* APPHiddenStatusbarOverlay.m */,
-				E327BFB8057349A39A32A818 /* APPHiddenStatusbarOverlay.h */,
 				8E4173CAE89F42AB8BB33D02 /* CDVCamera.m */,
 				D8AD582AF82C44FCA250F913 /* CDVJpegHeaderWriter.m */,
 				04BE5EDD3E0F4E18A784CBAD /* CDVCamera.h */,
@@ -482,7 +476,6 @@
 				9B98F342DC6D4CBF958C7C9C /* CDVBarcodeScanner.mm in Sources */,
 				44CEECEB626E4A3C80D2CAF5 /* zxing-all-in-one.cpp in Sources */,
 				70B655DA97B140AFAF7D0DBD /* SQLitePlugin.m in Sources */,
-				0C46B3E982E448379E3A50EA /* APPHiddenStatusbarOverlay.m in Sources */,
 				4353F21352484C36B65065E3 /* CDVCamera.m in Sources */,
 				B48D3C83EB384C148311EDE5 /* CDVJpegHeaderWriter.m in Sources */,
 				C67AD11580054A0EA5764E20 /* CDVLogger.m in Sources */,
