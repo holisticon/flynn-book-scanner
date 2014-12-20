@@ -13,6 +13,8 @@ if [ -z "$1" ] || [ $1 = "autocommit"  ]; then
 else
 	newVersionNumber=$1
 fi
+sed -e "s/${versionNumber}/${newVersionNumber}/g" ${BASEDIR}/../app/src/config.json > ${BASEDIR}/../app/src/config.json.new 
+mv ${BASEDIR}/../app/src/config.json.new ${BASEDIR}/../app/src/config.json
 sed -e "s/\"version\": \".*\"/\"version\": \"${newVersionNumber}\"/g" ${BASEDIR}/../app/bower.json > ${BASEDIR}/../app/bower.json.new
 mv ${BASEDIR}/../app/bower.json.new ${BASEDIR}/../app/bower.json
 sed -e "s/\"version\": \".*\"/\"version\": \"${newVersionNumber}\"/g" ${BASEDIR}/../app/package.json > ${BASEDIR}/../app/package.json.new
