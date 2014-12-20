@@ -40,7 +40,7 @@ module.exports = function(grunt) {
     },
     ngdocs: {
       options: {
-        dest: 'docs',
+        dest: 'target/docs',
         html5Mode: true,
         startPage: '/api',
         title: 'Flynn Book Scanner',
@@ -299,7 +299,7 @@ module.exports = function(grunt) {
     plato: {
       report: {
         files: {
-          'plato': ['src/scripts/**/*.js', 'test/**/*.js']
+          'target/plato-report': ['<%= yeoman.app %>/scripts/**/*.js']
         }
       }
     }
@@ -335,7 +335,9 @@ module.exports = function(grunt) {
     'concat',
     'copy:dist',
     'rev',
-    'usemin'
+    'usemin',
+    'ngdocs',
+    'plato'
   ]);
 
   grunt.registerTask('release', [
@@ -350,8 +352,7 @@ module.exports = function(grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin',
-    'ngdocs'
+    'usemin'
   ]);
 
   grunt.registerTask('default', [

@@ -81,7 +81,7 @@ module.exports = function(config) {
 
     // the default configuration
     junitReporter: {
-      outputFile: 'test-results.xml',
+      outputFile: 'target/test-results.xml',
       suite: ''
     },
 
