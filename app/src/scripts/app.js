@@ -195,10 +195,13 @@ app.run(function($ionicPlatform) {
  * @description configure app
  */
 app.config(function($urlRouterProvider, $httpProvider,$stateProvider,$ionicConfigProvider,  logServiceProvider, APP_CONFIG) {
-	//Places them at the bottom for all OS
+	// places them at the bottom for all OS
 	$ionicConfigProvider.tabs.position("bottom"); 
-	//Makes them all look the same across all OS
+	// makes them all look the same across all OS
 	$ionicConfigProvider.tabs.style("standard"); 
+	// configure caching
+	$ionicConfigProvider.views.maxCache(10);	
+	$ionicConfigProvider.templates.maxPrefetch(5);
     // configure logging
     logServiceProvider.dbName('flynnDB_logs');
     logServiceProvider.enableDebugLogging(APP_CONFIG.debug);

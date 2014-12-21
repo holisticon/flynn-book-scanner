@@ -231,9 +231,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
             NAME_OF_POUCHDB = activeProfile.dbName;
             var db;
             if (!db) {
-                db = new PouchDB(NAME_OF_POUCHDB, {
-                    adapter: 'websql'
-                });
+                db = new PouchDB(NAME_OF_POUCHDB, {});
             }
             return db;
         }

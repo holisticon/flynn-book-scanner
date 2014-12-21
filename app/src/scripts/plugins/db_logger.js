@@ -41,9 +41,7 @@ dbLog.provider('logService', function LogServiceProvider() {
     };
 
     var getDB = function() {
-        var logDB = new PouchDB(dbName, {
-            adapter: 'websql'
-        });
+        var logDB = new PouchDB(dbName, {});
         return logDB;
     }
     var writeLogEntry = function(pLogLevel, pMessage) {
