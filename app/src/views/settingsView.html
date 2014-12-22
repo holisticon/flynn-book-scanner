@@ -9,11 +9,14 @@
   		         	<h2>General</h2>
   		         	<div>
                      	<p>Define here default values to use, like default owner of Books.</p>
-                     	<label class="item-input">
-					  		<span class="input-label">Default Owner</span>
-					  		<input type="text" class="form-control" data-ng-model="flynn.activeProfile.owner" placeholder="Default for owner value"">
-						</label>
+                     	<div class="list">
+	                     	<label class="item item-input item-stacked-label">
+						  		<span class="input-label">Default Owner</span>
+						  		<input type="text" class="form-control" data-ng-model="flynn.activeProfile.owner" placeholder="Default for owner value"">
+							</label>
+						</div>
 					</div>
+		            <br>
                     <button type="submit" ng-disabled="settingsForm.$invalid" class="button button-positive">
                     		Save
                    	</button>  
@@ -29,32 +32,33 @@
 						     <div class="handle"></div>
 						   </div>
 						</label>     
-                        <div name="serverDetails" ng-show="flynn.activeProfile.remotesync">                        	
-	                     	<label class="item-input">
+                        <div name="serverDetails" ng-show="flynn.activeProfile.remotesync" class="list">                     	
+	                     	<label class="item item-input item-stacked-label">
 						  		<span class="input-label">CouchDB server</span>
 						  		<input id="syncURL" type="url" data-ng-model="flynn.activeProfile.couchdb" placeholder="URL of the CouchDB server"
 						  			   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
 						  		 	   ng-required="flynn.activeProfile.remotesync === true">
 							</label>
-	                     	<label class="item-input">
+	                     	<label class="item item-input item-stacked-label">
 						  		<span class="input-label">User</span>
 						  		<input id="syncUser" type="text" data-ng-model="flynn.activeProfile.user" placeholder="User"
 						  			   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
 						  		 	   ng-required="flynn.activeProfile.remotesync === true">
 							</label>
-	                     	<label class="item-input">
+	                     	<label class="item item-input item-stacked-label">
 						  		<span class="input-label">Password</span>
 						  		<input id="syncPassword" type="password" data-ng-model="flynn.activeProfile.password" 
 						  			   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
 						  		 	   ng-required="flynn.activeProfile.remotesync === true">
-							</label>
-	                        <button type="submit" ng-disabled="settingsForm.$invalid" class="button button-positive">
-	                        	Save
-	                        </button>
-	                        <button type="button" ng-click="sync()" ng-show="flynn.activeProfile.remotesync" class="button">
-	                        	Sync
-	                        </button>   
-		               	</div>  
+							</label> 
+		               	</div> 
+		               	<br>
+                        <button type="submit" ng-disabled="settingsForm.$invalid" class="button button-positive">
+                        	Save
+                        </button>
+                        <button type="button" ng-click="sync()" ng-show="flynn.activeProfile.remotesync" class="button">
+                        	Sync
+                        </button>   
                     </ion-content>
   			</ion-tab>
      		<ion-tab title="Logs" icon-on="ion-ios7-speedometer" icon-off="ion-ios7-speedometer-outline">
