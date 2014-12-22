@@ -4,8 +4,8 @@
  * @module flynnBookScannerApp
  * @description creates img element from provide base64 encoded image data
  */
-app.directive('bookDetails', ['$interval','$ionicLoading', 'base64', 'logService',
-	function($interval,$ionicLoading, base64, logService) {
+app.directive('bookDetails', ['$interval', '$ionicLoading', 'base64', 'logService',
+	function($interval, $ionicLoading, base64, logService) {
 		'use strict';
 		return {
 			restrict: 'E',
@@ -19,7 +19,7 @@ app.directive('bookDetails', ['$interval','$ionicLoading', 'base64', 'logService
 			link: function(scope, element, attrs) {
 				$ionicLoading.show();
 				scope.$watch('selectedBook', function(selectedBook) {
-					 $ionicLoading.hide();					
+					$ionicLoading.hide();
 				});
 			}
 		}

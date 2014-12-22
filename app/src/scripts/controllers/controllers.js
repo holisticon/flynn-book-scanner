@@ -37,7 +37,7 @@ function enrichDbData(pDbEntries) {
                 bookEntries[isbn].count = 1;
                 bookEntries[isbn].docs = [];
                 bookEntries[isbn].docs.push(itemInfo);
-                bookEntries[isbn]=enrichSingleDbEntry(bookEntries[isbn]);
+                bookEntries[isbn] = enrichSingleDbEntry(bookEntries[isbn]);
                 //expose id
                 bookEntries[isbn]._id = itemInfo._id;
                 resultsFound = true;
@@ -351,6 +351,18 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
             }
         }
 
+        function addManual($event) {
+            // our function body
+            $event.preventDefault();
+            var book = {};
+            book.value = {};
+            book.value.volumeInfo = {};
+            book.value.volumeInfo.industryIdentifiers = [];
+            book.value.volumeInfo.industryIdentifiers.push({});
+            book.value.volumeInfo.industryIdentifiers.push({});
+            selectBook(book)
+        }
+
         /**
          * Perform Google Book Search
          *
@@ -516,6 +528,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
         $scope.save = save;
         $scope.selectBook = selectBook;
         $scope.search = search;
+        $scope.manual = addManual;
     }
 ]);
 

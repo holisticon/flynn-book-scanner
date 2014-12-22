@@ -17,7 +17,7 @@
     </div>
         <button type="submit" class="button button-positive"> Search</button>
         <button ng-click="scan()" class="button"> Scan ISBN</button>
-        <button ng-click="addManual" class="button">Manual</button>
+        <button ng-click="manual($event)" class="button">Manual</button>
         <p class="help-block warning" ng-show="infoMsg">{{infoMsg}}</p>
         <div ng-show="!books" class="paragraphs" style="margin: 10px 0">No book found</div>
         <ion-list class="list card" ng-show="books">
@@ -45,7 +45,7 @@
                     </button>
           </ion-header-bar>
           <ion-content class="modal-background">
-          	<bookDetails book="selectedBook" readOnly="true"/>
+          	<book-details book="selectedBook" edit="true"/>
           </ion-content>
         </ion-modal-view>
     </script>
