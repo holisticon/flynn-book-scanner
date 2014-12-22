@@ -1,0 +1,64 @@
+<div class="padding" id="{{selectedBook.value.id}}">
+  
+	<label class="item-input" ng-show="selectedBook.value.volumeInfo.title || editMode">
+			<span class="input-label">Title:</span>
+ 			<input id="titleInput" type="text" ng-if="editMode" contenteditable=true class="input-label" data-ng-model="selectedBook.value.volumeInfo.title"/>
+ 			<span id="title" type="text" ng-if="!editMode" >{{::selectedBook.value.volumeInfo.title}}</span>
+	</label>     
+	<label class="item-input" ng-show="selectedBook.value.volumeInfo.subtitle || editMode">
+			<span class="input-label">Subtitle:</span>
+ 			<input id="subtitleInput" type="text" ng-if="editMode" contenteditable=true class="input-label" data-ng-model="selectedBook.value.volumeInfo.subtitle"/>
+ 			<span id="subtitle" type="text" ng-if="!editMode">{{::selectedBook.value.volumeInfo.subtitle}}</span>
+	</label>       	                       	
+   	<label class="item-input" ng-show="selectedBook.value.volumeInfo.imageLinks.thumbnail" >
+		<span class="input-label"></span>
+		<image-data image="selectedBook.image" ng-show="!editMode"></image-data>
+		<img class="img-thumbnail" alt="book image" ng-show="editMode" ng-src="{{selectedBook.value.volumeInfo.imageLinks.thumbnail}}" />  				  			
+	</label>  
+	<label class="item-input" ng-show="selectedBook.value.volumeInfo.pageCount || editMode">
+			<span class="input-label">Pages:</span>
+ 			<input id="pagesInput" type="text" ng-if="editMode" contenteditable=true class="input-label" data-ng-model="selectedBook.value.volumeInfo.pageCount"/>
+ 			<span id="pages" type="text" ng-if="!editMode">{{::selectedBook.value.volumeInfo.pageCount}}</span>
+	</label>
+	<label class="item-input" ng-show="selectedBook.volumeInfo.industryIdentifiers[1].identifier || editMode">
+			<span class="input-label">ISBN:</span>
+ 			<input id="isbnInput" type="text" ng-if="editMode" contenteditable=true class="input-label" data-ng-model="selectedBook.value.volumeInfo.industryIdentifiers[1].identifier"/>
+ 			<span id="isbn" type="text" ng-if="!editMode">{{::selectedBook.value.volumeInfo.industryIdentifiers[1].identifier}}</span>
+	</label>
+	<label class="item-input" ng-show="selectedBook.authorInfo || editMode">
+			<span class="input-label">Author:</span>
+ 			<input id="authorInput" type="text" ng-if="editMode" contenteditable=true class="input-label" data-ng-model="selectedBook.authorInfo"/>
+ 			<span id="author" type="text" ng-if="!editMode">{{::selectedBook.authorInfo}}</span>
+	</label>
+	<label class="item-input" ng-show="selectedBook.value.volumeInfo.publisher || editMode">
+			<span class="input-label">Publisher:</span>
+ 			<input id="publisherInput" type="text" ng-if="editMode" contenteditable=true class="input-label" data-ng-model="selectedBook.value.volumeInfo.publisher"/>
+ 			<span id="publisher" type="text" ng-if="!editMode">{{::selectedBook.value.volumeInfo.publisher}}</span>
+	</label>
+	<label class="item-input" ng-show="selectedBook.value.volumeInfo.publishedDate || editMode">
+			<span class="input-label">Publish Date:</span>
+ 			<input id="publishDateInput" type="date" ng-if="editMode" contenteditable=true class="input-label" data-ng-model="selectedBook.value.volumeInfo.publishedDate"/>
+ 			<span id="publisher" type="text" ng-if="!editMode">{{::selectedBook.value.volumeInfo.publishedDate | date: 'dd.MM.yyyy'}}</span>
+	</label>
+	<p class="help-block warning" ng-show="infoMsg">{{infoMsg}}</p>    
+	<label class="item-input" ng-show="selectedBook.count || editMode">
+			<span class="input-label">Amount:</span>
+ 			<input id="amountInput" type="tel" ng-if="editMode" contenteditable=true class="input-label" data-ng-model="selectedBook.count"/>
+ 			<span id="amount" type="tel" ng-if="!editMode">{{::selectedBook.count}}</span>
+	</label>
+	<label class="item-input" ng-show="selectedBook.value.owner || editMode">
+			<span class="input-label">Owner:</span>
+ 			<input id="ownerInput" type="text" ng-if="editMode" contenteditable=true class="input-label" data-ng-model="selectedBook.value.owner"/>
+ 			<span id="owner" type="text" ng-if="!editMode">{{::selectedBook.value.owner}}</span>
+	</label>
+	<label class="item-input" ng-show="selectedBook.value.bookshelf || editMode">
+			<span class="input-label">Bookshelf:</span>
+ 			<input id="bookshelfInput" type="text" ng-if="editMode" contenteditable=true class="input-label" data-ng-model="selectedBook.value.bookshelf"/>
+ 			<span id="bookshelf" type="text" ng-if="!editMode">{{::selectedBook.value.bookshelf}}</span>
+	</label>
+	<label class="item-input" ng-show="selectedBook.value.comment || editMode">
+			<span class="input-label">Comment:</span>
+ 			<input id="commentInput" type="text" ng-if="editMode" contenteditable=true class="input-label" data-ng-model="selectedBook.count.comment"/>
+ 			<span id="comment" type="text" ng-if="!editMode">{{::selectedBook.value.volumeInfo.subtitle}}</span>
+	</label>    
+</div>

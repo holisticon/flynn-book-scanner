@@ -11,7 +11,7 @@ function enrichSingleDbEntry(pDbEntry) {
         }
     }
     pDbEntry.authorInfo = authorInfo;
-
+    return pDbEntry;
 }
 
 /**
@@ -37,7 +37,7 @@ function enrichDbData(pDbEntries) {
                 bookEntries[isbn].count = 1;
                 bookEntries[isbn].docs = [];
                 bookEntries[isbn].docs.push(itemInfo);
-                enrichSingleDbEntry(bookEntries[isbn]);
+                bookEntries[isbn]=enrichSingleDbEntry(bookEntries[isbn]);
                 //expose id
                 bookEntries[isbn]._id = itemInfo._id;
                 resultsFound = true;
@@ -240,7 +240,6 @@ app.controller('BookDetailsController', ['$rootScope', '$scope', '$stateParams',
                     }
                 }
                 $scope.selectedBook = enrichSingleDbEntry(selectedBook)
-                $scope.selectedBook = selectedBook;
                 $scope.searching = false;
             }
 

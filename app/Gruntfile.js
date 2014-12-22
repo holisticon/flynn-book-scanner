@@ -188,7 +188,9 @@ module.exports = function(grunt) {
             'config.json',
             'images/{,*/}*.*',
             'styles/fonts/*',
-            '*.js'
+            '*.js',
+            'views/*.html',
+            'templates/*.html'
           ]
         }, {
           expand: true,
@@ -202,19 +204,6 @@ module.exports = function(grunt) {
             'images/{,*/}*.*',
             'styles/fonts/*',
             '*.js'
-          ]
-        }, {
-          expand: true,
-          dest: '<%= yeoman.dist %>',
-          src: [
-            'config.xml'
-          ]
-        }, {
-          expand: true,
-          cwd: '<%= yeoman.app %>',
-          dest: '<%= yeoman.dist %>',
-          src: [
-            'views/*.html'
           ]
         }, {
           expand: true,

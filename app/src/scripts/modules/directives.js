@@ -4,6 +4,34 @@
  * @module flynnBookScannerApp
  * @description creates img element from provide base64 encoded image data
  */
+app.directive('bookDetails', ['$interval','$ionicLoading', 'base64', 'logService',
+	function($interval,$ionicLoading, base64, logService) {
+		'use strict';
+		return {
+			restrict: 'E',
+			scope: {
+				selectedBook: '=book',
+				editMode: '=edit'
+			},
+			replace: true,
+			templateUrl: 'templates/bookDetails.html',
+
+			link: function(scope, element, attrs) {
+				$ionicLoading.show();
+				scope.$watch('selectedBook', function(selectedBook) {
+					 $ionicLoading.hide();					
+				});
+			}
+		}
+	}
+]);
+
+/**
+ * @ngdoc directive
+ * @name imageData
+ * @module flynnBookScannerApp
+ * @description creates img element from provide base64 encoded image data
+ */
 app.directive('imageData', ['$interval', 'base64', 'logService',
 	function($interval, base64, logService) {
 		'use strict';

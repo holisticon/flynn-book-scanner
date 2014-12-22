@@ -1,33 +1,5 @@
 <ion-view title="Book">
-  <ion-content id="book" class="padding">
-    <h1>{{selectedBook.value.volumeInfo.title}}</h1>
-    <h2 class="panel-title">{{selectedBook.value.volumeInfo.subtitle}}</h2>     
-        <div bs-panel class="panel">
-        	<div style=" width:100%;text-align:center">
-        		<image-data image="selectedBook.image" ></image-data>
-            </div>
-            <br> <br>
-            <span ng-show="selectedBook.value.volumeInfo.description">{{selectedBook.value.volumeInfo.description}}<br> <br></span>
-            <div class="text-left">
-                <div class="row">
-                    <div class="col bold">ISBN:</div>
-                    <div class="col">{{selectedBook.value.volumeInfo.industryIdentifiers[1].identifier}}</div>
-                </div>
-                <div class="row">
-                    <div class="col bold">Pages:</div>
-                    <div class="col">{{selectedBook.value.volumeInfo.pageCount}}</div>
-                </div>
-                <div class="row" ng-show="selectedBook.authorInfo">
-                    <div class="col bold">Author:</div>
-                    <div class="col">{{selectedBook.authorInfo}}</div>
-                </div>
-                <div class="row" ng-show="selectedBook.value.volumeInfo.publisher">
-                    <div class="col bold">Publisher:</div>
-                   	<div class="col">{{selectedBook.value.volumeInfo.publisher}}
-               			<div ng-show="selectedBook.value.volumeInfo.publishedDate"><br>{{selectedBook.value.volumeInfo.publishedDate | date: 'dd.MM.yyyy'}}</div>
-               		</div>
-                </div>
-            </div>
-        </div>
+  	<ion-content id="book" class="padding"> 
+		<book-details book="selectedBook"/>
 	</ion-content>
 </ion-view>
