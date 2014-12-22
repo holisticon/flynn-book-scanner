@@ -1,22 +1,22 @@
 var cordova;
 
 describe('main', function() {
-	
-	 beforeEach(function() {
-		    module(function($provide) {
-		      $provide.constant('APP_CONFIG', {
-		        timeout: '10000',
-		        dev: 'true',
-		        debug: 'false',
-		        gitlabConfig: {
-		          gitlabServer: 'https://martinreinhardt-online.de/gitlab/',
-		          token: '2mkdaL8iSBkjPKArHpGk',
-		          projectID: '9',
-		          labels: 'enduser'
-		        }
-		      });
-		    });
-		  });
+
+  beforeEach(function() {
+    module(function($provide) {
+      $provide.constant('APP_CONFIG', {
+        timeout: '10000',
+        dev: 'true',
+        debug: 'false',
+        gitlabConfig: {
+          gitlabServer: 'https://martinreinhardt-online.de/gitlab/',
+          token: '2mkdaL8iSBkjPKArHpGk',
+          projectID: '9',
+          labels: 'enduser'
+        }
+      });
+    });
+  });
 
   // load the controller's module
   beforeEach(module('flynnBookScannerApp'));
@@ -31,6 +31,12 @@ describe('main', function() {
     beforeEach(inject(function(googleBookService, $httpBackend) {
       service = googleBookService;
       httpBackend = $httpBackend;
+      httpBackend.when('GET', 'views/navbarView.html').respond('');
+      httpBackend.when('GET', 'views/aboutView.html').respond('');
+      httpBackend.when('GET', 'views/bookView.html').respond('');
+      httpBackend.when('GET', 'views/booksView.html').respond('');
+      httpBackend.when('GET', 'views/addBookView.html').respond('');
+      httpBackend.when('GET', 'views/settingsView.html').respond(''); 
     }));
 
 
@@ -39,11 +45,6 @@ describe('main', function() {
     });
 
     it('do empty search', function() {
-      httpBackend.when('GET', 'views/navbarView.html').respond('');
-      httpBackend.when('GET', 'views/aboutView.html').respond('');
-      httpBackend.when('GET', 'views/bookView.html').respond('');
-      httpBackend.when('GET', 'views/booksView.html').respond('');
-      httpBackend.when('GET', 'views/addBookView.html').respond('');
       var searchQuery = {};
       searchQuery.isbn = '9783898646123';
       var response = {};
@@ -55,15 +56,9 @@ describe('main', function() {
         books = response.books;
       });
       httpBackend.flush();
-      //  scope.search();
     });
 
     it('do isbn search', function() {
-      httpBackend.when('GET', 'views/navbarView.html').respond('');
-      httpBackend.when('GET', 'views/aboutView.html').respond('');
-      httpBackend.when('GET', 'views/bookView.html').respond('');
-      httpBackend.when('GET', 'views/booksView.html').respond('');
-      httpBackend.when('GET', 'views/addBookView.html').respond('');
       var validBookEntry = {
         "kind": "books#volumes",
         "totalItems": 77,

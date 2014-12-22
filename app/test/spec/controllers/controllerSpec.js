@@ -1,26 +1,26 @@
 var cordova,
-    navigator;
+  navigator;
 
 //TODO_move to mocks
 navigator.notification = {};
-navigator.notification.alert = function(){};
+navigator.notification.alert = function() {};
 
 describe('main', function() {
-	var logger;
-	
-    beforeEach(function() {
-        module(function($provide) {
-          $provide.constant('APP_CONFIG', {
-            timeout: '10000',
-            dev: false,
-            debug: true,
-          });
-        });
-      });
-	
+  var logger;
 
-    beforeEach(module('flynnBookScannerApp'));
-    
+  beforeEach(function() {
+    module(function($provide) {
+      $provide.constant('APP_CONFIG', {
+        timeout: '10000',
+        dev: false,
+        debug: true,
+      });
+    });
+  });
+
+
+  beforeEach(module('flynnBookScannerApp'));
+
   describe("BookController", function() {
 
     var fakeFactory, deferred, q,
@@ -33,8 +33,8 @@ describe('main', function() {
 
     // define the mock book service
     beforeEach(function() {
-      inject(function($injector,$controller, $q, $rootScope,$httpBackend) {
-    	  q = $q;
+      inject(function($injector, $controller, $q, $rootScope, $httpBackend) {
+        q = $q;
         scope = $rootScope;
         var books = [{
           "kind": "books#volumes",
@@ -76,13 +76,21 @@ describe('main', function() {
             return deferred.promise;
           }
         }
-      httpBackend = $httpBackend;
-      controller = $controller("BookController", {
-        $scope: scope,
-        googleBookService: mockedBookService,
-        inventoryService: mockedInventoryService
-      });
-    })});
+        httpBackend = $httpBackend;
+        controller = $controller("BookController", {
+          $scope: scope,
+          googleBookService: mockedBookService,
+          inventoryService: mockedInventoryService
+        });
+        httpBackend.when('GET', 'book_modal.html').respond('');
+        httpBackend.when('GET', 'views/navbarView.html').respond('');
+        httpBackend.when('GET', 'views/aboutView.html').respond('');
+        httpBackend.when('GET', 'views/bookView.html').respond('');
+        httpBackend.when('GET', 'views/booksView.html').respond('');
+        httpBackend.when('GET', 'views/addBookView.html').respond('');
+        httpBackend.when('GET', 'views/settingsView.html').respond('');
+      })
+    });
 
     it('Init module failed', function() {
       expect(true).toBe(true);
@@ -94,12 +102,6 @@ describe('main', function() {
     });
 
     it('do isbn search - update existing', function() {
-      httpBackend.when('GET', 'book_modal.html').respond('');
-      httpBackend.when('GET', 'views/navbarView.html').respond('');
-      httpBackend.when('GET', 'views/aboutView.html').respond('');
-      httpBackend.when('GET', 'views/bookView.html').respond('');
-      httpBackend.when('GET', 'views/booksView.html').respond('');
-      httpBackend.when('GET', 'views/addBookView.html').respond('');
       scope.searchQuery = {};
       scope.searchQuery.isbn = "9783898646123";
       scope.search();
@@ -114,6 +116,7 @@ describe('main', function() {
       httpBackend.when('GET', 'views/bookView.html').respond('');
       httpBackend.when('GET', 'views/booksView.html').respond('');
       httpBackend.when('GET', 'views/addBookView.html').respond('');
+      httpBackend.when('GET', 'views/settingsView.html').respond('');
       scope.searchQuery = {};
       scope.searchQuery.isbn = "9783898646123";
       scope.search();
