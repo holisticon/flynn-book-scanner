@@ -9,10 +9,10 @@
   		         	<h2>General</h2>
   		         	<div>
                      	<p>Define here default values to use, like default owner of Books.</p>
-                     	<div class="list">
-	                     	<label class="item item-input item-stacked-label">
+                     	<div>
+	                     	<label class="item-input item-stacked-label">
 						  		<span class="input-label">Default Owner</span>
-						  		<input type="text" class="form-control" data-ng-model="flynn.activeProfile.owner" placeholder="Default for owner value"">
+						  		<input type="text" data-ng-model="flynn.activeProfile.owner" placeholder="Default for owner value"">
 							</label>
 						</div>
 					</div>
@@ -32,20 +32,20 @@
 						     <div class="handle"></div>
 						   </div>
 						</label>     
-                        <div name="serverDetails" ng-show="flynn.activeProfile.remotesync" class="list">                     	
-	                     	<label class="item item-input item-stacked-label">
+                        <div name="serverDetails" ng-show="flynn.activeProfile.remotesync">                     	
+	                     	<label class="item-input item-stacked-label">
 						  		<span class="input-label">CouchDB server</span>
 						  		<input id="syncURL" type="url" data-ng-model="flynn.activeProfile.couchdb" placeholder="URL of the CouchDB server"
 						  			   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
 						  		 	   ng-required="flynn.activeProfile.remotesync === true">
 							</label>
-	                     	<label class="item item-input item-stacked-label">
+	                     	<label class="item-input item-stacked-label">
 						  		<span class="input-label">User</span>
 						  		<input id="syncUser" type="text" data-ng-model="flynn.activeProfile.user" placeholder="User"
 						  			   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
 						  		 	   ng-required="flynn.activeProfile.remotesync === true">
 							</label>
-	                     	<label class="item item-input item-stacked-label">
+	                     	<label class="item-input item-stacked-label">
 						  		<span class="input-label">Password</span>
 						  		<input id="syncPassword" type="password" data-ng-model="flynn.activeProfile.password" 
 						  			   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
@@ -64,7 +64,7 @@
      		<ion-tab title="Logs" icon-on="ion-ios7-speedometer" icon-off="ion-ios7-speedometer-outline">
  				<ion-content id="logs" class="padding">
                     <h2>Log Entries</h2> 
-                    <label class="item item-input item-select">
+                    <label class="item-input item-select">
 						<div class="input-label">
 					      Loglevel
 					    </div>
@@ -72,6 +72,7 @@
                         	<option value="">All logs</option>
 					    </select>
 				  	</label>
+                  	<button type="button" ng-click="filterLogs()" class="button button-positive">Refresh logs</button>
                   	<button type="button" ng-click="clearLogs()" class="button button-assertive">Clear logs</button>
                     <ion-list class="list card">
                      <ion-item ng-repeat="logEntry in logs | orderBy:'timestamp':true" class="item">
