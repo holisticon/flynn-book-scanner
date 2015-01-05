@@ -70,6 +70,9 @@ app.controller('AppController', ['$scope', '$rootScope', '$state', '$ionicLoadin
         $rootScope.$on('settings.invalid', function(event) {
             showErrorDialog($rootScope, $scope, $ionicLoading, logService, "Settings invalid", 1001, "Settings seems to be incorrect. Please correct or check network settings.");
         });
+        $rootScope.$on('network.offline', function(event) {
+            showErrorDialog($rootScope, $scope, $ionicLoading, logService, "No network", 1002, "Network connection seems to be not working. Please try again later.");
+        });
         $rootScope.$on('server.timeout', function(event) {
             showErrorDialog($rootScope, $scope, $ionicLoading, logService, "Timeout", 2001, "No answer from server");
         });
@@ -122,10 +125,27 @@ app.controller('AppController', ['$scope', '$rootScope', '$state', '$ionicLoadin
  * @description
  * Interacts with inventory backend to show up book details
  */
-app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoading', '$http', '$ionicActionSheet', 'logService', 'inventoryService',
-    function($rootScope, $scope, $state, $ionicLoading, $http, $ionicActionSheet, logService, inventoryService) {
+app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoading', '$http', '$ionicActionSheet', 'settingsService', 'logService', 'inventoryService',
+    function($rootScope, $scope, $state, $ionicLoading, $http, $ionicActionSheet, settings, logService, inventoryService) {
 
-        var allBooks;
+        var allBooks, config = settings.load();
+
+
+        function syncWithServer() {
+            $ionicLoading.show({
+                template: '<i class="icon ion-looping loading-icon"></i>Syncing books ...'
+            });
+            inventoryService.syncRemote().then(function(response) {
+                $ionicLoading.hide();
+            }, function(error) {
+                if (error.status === 401) {
+                    $rootScope.$broadcast("login.failed");
+                } else {
+                    $rootScope.$broadcast("settings.invalid");
+                }
+                $ionicLoading.hide();
+            });
+        }
 
         /**
          * load data via inventory service
@@ -140,6 +160,10 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
                 allBooks = enrichDbData(response.books);
                 $scope.books = enrichDbData(response.books);
                 $ionicLoading.hide();
+                // sync if server was added
+                if (config.activeProfile().remotesync) {
+                    syncWithServer();
+                }
             }
 
             function onError(response) {
@@ -147,6 +171,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
                 $ionicLoading.hide();
             }
         }
+
 
         function resetSearch() {
             $scope.searchQuery = {};
@@ -631,14 +656,18 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
             $ionicLoading.show({
                 template: '<i class="icon ion-looping loading-icon"></i>Syncing books ...'
             });
-            inventoryService.syncRemote().then(function(response) {
+            inventoryService.syncRemote(true).then(function(response) {
                 $ionicLoading.hide();
                 $state.go('app.books');
             }, function(error) {
                 if (error.status === 401) {
                     $rootScope.$broadcast("login.failed");
                 } else {
-                    $rootScope.$broadcast("settings.invalid");
+                    if (error.status === 0) {
+                        $rootScope.$broadcast("network.offline");
+                    } else {
+                        $rootScope.$broadcast("settings.invalid");
+                    }
                 }
                 $ionicLoading.hide();
             });

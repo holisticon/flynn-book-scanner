@@ -237,7 +237,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
         }
 
         return {
-            syncRemote: function() {
+            syncRemote: function(reportNetworkError) {
                 var deferred = $q.defer();
                 // reload config
                 config = settingsService.load();
@@ -254,22 +254,45 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                 live: true
                             };
                         logService.info('Syncing with couchDB started: ' + couchDbUrl);
-                        localDB.sync(remoteCouch)
-                            .on('change', function(info) {
-                                logService.info('Updating documents with remote changes...');
-                                logService.debug('Updating documents with remote changes with following answer: ' + JSON.stringify(info));
-                            }).on('complete', function(info) {
-                                logService.info('Completed sync.');
-                                logService.debug('Completed sync with following answer: ' + JSON.stringify(info));
-                                deferred.resolve(info);
-                            }).on('uptodate', function(info) {
-                                logService.info('Already up-to-date.');
-                                logService.debug('Already up-to-date with following answer: ' + JSON.stringify(info));
-                                deferred.resolve(info);
-                            }).on('error', function(info) {
-                                logService.error('Error during remote sync with following answer: ' + JSON.stringify(info));
-                                deferred.reject(info);
-                            });
+
+                        // check for network availability first
+                        $http({
+                            method: 'GET',
+                            url: remoteCouch,
+                            timeout: 300,
+                        }).then(function(response) {
+                            var syncPromise = localDB.sync(remoteCouch)
+                                .on('change', function(info) {
+                                    logService.info('Updating documents with remote changes...');
+                                    logService.debug('Updating documents with remote changes with following answer: ' + JSON.stringify(info));
+                                }).on('complete', function(info) {
+                                    logService.info('Completed sync.');
+                                    logService.debug('Completed sync with following answer: ' + JSON.stringify(info));
+                                    deferred.resolve(info);
+                                }).on('uptodate', function(info) {
+                                    logService.info('Already up-to-date.');
+                                    logService.debug('Already up-to-date with following answer: ' + JSON.stringify(info));
+                                    deferred.resolve(info);
+                                }).on('error', function(info) {
+                                    logService.error('Error during remote sync with following answer: ' + JSON.stringify(info));
+                                    deferred.reject(info);
+                                }).catch(function(err) {
+                                    logService.error('Unkown error during remote sync: ' + JSON.stringify(err));
+                                    deferred.resolve(err);
+                                });
+                        }, function(err) {
+                            if (err.status === 0) {
+                                logService.info('Seems to run in offline mode.');
+                                if (reportNetworkError) {
+                                    deferred.reject(err);
+                                } else {
+                                    deferred.resolve(err);
+                                }
+                            } else {
+                                logService.error('Unkown error during connection check: ' + JSON.stringify(err));
+                                deferred.resolve(err);
+                            }
+                        });
                     } else {
                         var response = {};
                         response.status = 401;
