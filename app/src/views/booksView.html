@@ -6,33 +6,33 @@
   		<button class="button button-icon icon ion-refresh" ng-click="load()"></button>
   	</ion-nav-buttons>
 	<ion-content>
-		<div class="bar bar-header item-input-inset">
+		<div class="item-input-inset">
 			<label class="item-input-wrapper">
 	    		<i class="icon ion-ios7-search placeholder-icon"></i>
 	    		<input type="search" data-ng-model="searchQuery.fullTextSearch"  is-focused="true"
 	    		   placeholder="Type keywords to search ...">
 			</label>
 			<button ng-click="resetSearch()" class="button-clear icon ion-close-circled"></button> 		
-	</div>
+		</div>
 	
-	<div ng-show="!books && !searching" class="list-group-item">No books found.</div>
-	<div ng-show="searching" class="list-group-item">Searching ...</div>
-	
-	<ion-list ng-show="books">
-       	<ion-item ng-repeat="book in books | orderBy:'value.volumeInfo.title' | bookFilter:searchQuery.fullTextSearch" class="item-thumbnail-left" href="#/app/book/{{book._id}}">
-       		<image-data image="book.image"></image-data>
-			<h2>{{::book.value.volumeInfo.title}}</h2>
-			
-			<span>{{::book.value.volumeInfo.subtitle}}</span>
-			<span ng-show="book.authorInfo">by {{book.authorInfo}}</span>
-			<ion-option-button ng-click="showBookDetails(book)" class="button-positive">
-	      		Info
-	    	</ion-option-button>
-	    	<ion-option-button ng-click="showActionMenu(book)" class=" button-assertive">
-	      		Modify
-	    	</ion-option-button>
-       	</ion-item>
-   	</ion-list>
+		<div ng-show="!books && !searching" class="list-group-item">No books found.</div>
+		<div ng-show="searching" class="list-group-item">Searching ...</div>
+		
+		<ion-list ng-show="books">
+	       	<ion-item ng-repeat="book in books | orderBy:'value.volumeInfo.title' | bookFilter:searchQuery.fullTextSearch" class="item-thumbnail-left" href="#/app/book/{{book._id}}">
+	       		<image-data image="book.image"></image-data>
+				<h2>{{::book.value.volumeInfo.title}}</h2>
+				
+				<span>{{::book.value.volumeInfo.subtitle}}</span>
+				<span ng-show="book.authorInfo">by {{book.authorInfo}}</span>
+				<ion-option-button ng-click="showBookDetails(book)" class="button-positive">
+		      		Info
+		    	</ion-option-button>
+		    	<ion-option-button ng-click="showActionMenu(book)" class=" button-assertive">
+		      		Modify
+		    	</ion-option-button>
+	       	</ion-item>
+	   	</ion-list>
    	
-  </ion-content>
+ 	 </ion-content>
 </ion-view>
