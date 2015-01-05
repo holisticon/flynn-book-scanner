@@ -105,6 +105,10 @@
                         {
                             "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -140,6 +144,9 @@
             "PACKAGE_NAME": "de.holisticon.flynn"
         },
         "org.apache.cordova.dialogs": {
+            "PACKAGE_NAME": "de.holisticon.flynn"
+        },
+        "com.ionic.keyboard": {
             "PACKAGE_NAME": "de.holisticon.flynn"
         }
     },

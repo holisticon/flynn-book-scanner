@@ -26,6 +26,30 @@ app.directive('bookDetails', ['$interval', '$ionicLoading', 'base64', 'logServic
 	}
 ]);
 
+
+/**
+ * @ngdoc directive
+ * @name isFocused
+ * @module flynnBookScannerApp
+ * @description gives focus the the element, can be used as attribute
+ */
+app.directive('isFocused', function($timeout) {
+	return {
+		scope: {
+			trigger: '&isFocused'
+		},
+		link: function(scope, element) {
+			if (scope.trigger()) {
+				$timeout(function() {
+					element[0].focus();
+					element[0].click();
+					cordova.plugins.Keyboard.show();
+				});
+			}
+		}
+	};
+});
+
 /**
  * @ngdoc directive
  * @name imageData
