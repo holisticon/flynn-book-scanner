@@ -1,60 +1,3 @@
-function enrichSingleDbEntry(pDbEntry) {
-    var authorInfo;
-    if (pDbEntry.value.volumeInfo.authors) {
-        authorInfo = '';
-        var authorCount = pDbEntry.value.volumeInfo.authors.length;
-        for (var itemIndex in pDbEntry.value.volumeInfo.authors) {
-            authorInfo += pDbEntry.value.volumeInfo.authors[itemIndex];
-            if (itemIndex < authorCount - 1) {
-                authorInfo += ', ';
-            }
-        }
-    }
-    pDbEntry.authorInfo = authorInfo;
-    return pDbEntry;
-}
-
-/**
- * Reduces multiple db entries to set without duplicates. This method also counts the records
- * to get the amount of book entries
- */
-function enrichDbData(pDbEntries) {
-    var result = false,
-        bookEntries = {},
-        resultsFound = false;
-    if (pDbEntries) {
-        for (var itemIndex in pDbEntries) {
-            var itemInfo = pDbEntries[itemIndex];
-            var isbn = itemInfo.value.volumeInfo.industryIdentifiers[0].identifier;
-            if (bookEntries[isbn]) {
-
-                bookEntries[isbn].count += 1;
-                bookEntries[isbn].docs.push(itemInfo);
-            } else {
-                bookEntries[isbn] = {};
-                bookEntries[isbn].value = itemInfo.value;
-                bookEntries[isbn].image = itemInfo.image;
-                bookEntries[isbn].count = 1;
-                bookEntries[isbn].docs = [];
-                bookEntries[isbn].docs.push(itemInfo);
-                bookEntries[isbn] = enrichSingleDbEntry(bookEntries[isbn]);
-                //expose id
-                bookEntries[isbn]._id = itemInfo._id;
-                resultsFound = true;
-            }
-        }
-        if (resultsFound) {
-            // transfer to array
-            result = [];
-            for (var isbn in bookEntries) {
-                result.push(bookEntries[isbn]);
-            }
-        }
-    }
-    return result;
-};
-
-
 /**
  * @ngdoc controller
  * @name AppController
@@ -204,10 +147,9 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
             $scope.book = book;
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
-                // TODO_edit book
-                /*buttons: [{
+                buttons: [{
                     text: '<b>Edit</b>'
-                }],*/
+                }],
                 destructiveText: 'Delete',
                 titleText: 'Modify book entry',
                 cancelText: 'Cancel',
@@ -215,7 +157,9 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
                     // hideSheet();
                 },
                 buttonClicked: function(index) {
-                    //return true;
+                    $state.go('app.book_edit', {
+                        'bookId': book._id
+                    });
                 },
                 destructiveButtonClicked: function() {
                     var bookToRemove = $scope.book;
@@ -257,6 +201,7 @@ app.controller('BookDetailsController', ['$rootScope', '$scope', '$stateParams',
             function onSuccess(response) {
                 var allBooks = response.books;
                 var selectedBook;
+
                 for (var index in allBooks) {
                     var book = allBooks[index];
                     if (book._id == bookID) {
@@ -279,6 +224,129 @@ app.controller('BookDetailsController', ['$rootScope', '$scope', '$stateParams',
     }
 ]);
 
+
+/**
+ * @ngdoc controller
+ * @name BookEditController
+ * @module flynnBookScannerApp
+ *
+ * @description
+ * Controller to edit book details from inventory
+ */
+app.controller('BookEditController', ['$rootScope', '$scope', '$state', '$stateParams', '$ionicLoading', '$location', 'logService', 'settingsService', 'inventoryService',
+    function($rootScope, $scope, $state, $stateParams, $ionicLoading, $location, logService, settingsService, inventoryService) {
+        var booksInventory, credentials = settingsService.load();
+        var bookID = $stateParams.bookId;
+
+        function save() {
+            var book = $scope.selectedBook,
+                config = settingsService.load();
+            $ionicLoading.show();
+            logService.debug("Starting save for book.");
+            var bookImage = document.getElementById(book.value.id).getElementsByClassName('img-thumbnail')[0];
+            if (bookImage.src) {
+                // extract image info
+                blobUtil.imgSrcToBlob(bookImage.src).then(function(blob) {
+                    var reader = new window.FileReader();
+                    reader.readAsDataURL(blob);
+                    reader.onloadend = function() {
+                        var image = {};
+                        image.name = 'thumbnail_' + book.value.id;
+                        image.content_type = blob.type;
+                        image.data = reader.result.replace('data:image/jpeg;base64,', '');
+                        book.image = image;
+                        inventoryService.save(book).then(onSuccess, onError);
+                    }
+                });
+            } else {
+                inventoryService.save(book).then(onSuccess, onError);
+            }
+
+            function onSuccess(response) {
+                logService.info("Successfully added book");
+                if (response.noUpdate) {
+                    navigator.notification.alert("Book already added. Please increase amount.");
+                } else  {
+                    // sync on save
+                    if (config.activeProfile().remotesync) {
+                        inventoryService.syncRemote().then(function(response) {
+                            $ionicLoading.hide();
+                        }, function(error) {
+                            $rootScope.$broadcast("settings.invalid");
+                            $state.go('app.settings');
+                            $ionicLoading.hide();
+                        });
+                    }
+                    navigator.notification.alert("Book successfully updated.", cancel(), "Book");
+                }
+            }
+
+            function onError(response) {
+                $rootScope.$broadcast("booksave.error");
+                logService.debug("Error during book saving: ");
+                $ionicLoading.hide();
+            }
+        }
+
+        function cancel() {
+            $state.go('app.books');
+        }
+
+        function load() {
+            if (bookID) {
+                inventoryService.read().then(onSuccess, onError);
+            }
+
+            function onSuccess(response) {
+                var allBooks = response.books;
+                var selectedBook,
+                    count = 0;
+                for (var index in allBooks) {
+                    var book = allBooks[index];
+                    if (book._id == bookID) {
+                        selectedBook = book;
+                        break;
+                    }
+                }
+                var isbn0;
+                if (selectedBook.value.volumeInfo.industryIdentifiers) {
+                    var indIDs = selectedBook.value.volumeInfo.industryIdentifiers;
+                    if (indIDs[0]) {
+                        isbn0 = indIDs[0].identifier;
+                    }
+                }
+                for (var index in allBooks) {
+                    var bookEntry = allBooks[index],
+                        currentISBN = bookEntry.value.volumeInfo.industryIdentifiers[0].identifier;
+                    // only add complete entries to results
+                    if (isbn0 && currentISBN == isbn0) {
+                        logService.debug("Already found a saved book entry: " + JSON.stringify(bookEntry));
+                        bookToAdd = bookEntry;
+                        count++;
+                    }
+                }
+                selectedBook.count = count;
+                $scope.selectedBook = enrichSingleDbEntry(selectedBook)
+                $scope.searching = false;
+            }
+
+            function onError(response) {
+                $scope.selectedBook = null;
+                $scope.searching = false;
+            }
+        }
+
+        load(bookID);
+
+
+        // public methods
+        $scope.save = save;
+        $scope.cancel = cancel;
+
+    }
+]);
+
+
 /**
  * @ngdoc controller
  * @name BookController
@@ -287,8 +355,8 @@ app.controller('BookDetailsController', ['$rootScope', '$scope', '$stateParams',
  * @description
  * Controller to add new book entries to inventory
  */
-app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$http', '$q', '$state', '$resource', '$ionicModal', 'logService', 'settingsService', 'inventoryService', 'googleBookService',
-    function($rootScope, $scope, $ionicLoading, $http, $q, $state, $resource, $ionicModal, logService, settingsService, inventoryService, googleBookService) {
+app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$http', '$filter', '$q', '$state', '$resource', '$ionicModal', 'logService', 'settingsService', 'inventoryService', 'googleBookService',
+    function($rootScope, $scope, $ionicLoading, $http, $filter, $q, $state, $resource, $ionicModal, logService, settingsService, inventoryService, googleBookService) {
         var booksInventory,
             credentials = settingsService.load().activeProfile();
 
@@ -398,7 +466,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
 
             function onSuccess(response) {
                 logService.info("Got valid service response");
-                $scope.books = response.books;
+                $scope.books = enrichDbData(response.books);
                 $ionicLoading.hide();
             }
 
@@ -411,7 +479,6 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
         function reset() {
             $ionicLoading.show();
             $scope.books = null;
-            $scope.infoMsg = null;
             $scope.searchQuery = null;
             $scope.selectedBook = null;
             $scope.searchQuery = {};
@@ -426,12 +493,12 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
         function selectBook(pSelectedBookValue) {
             $ionicLoading.show();
             var newEntry = true,
-                book = pSelectedBookValue,
+                bookToAdd = pSelectedBookValue,
                 books = booksInventory,
                 authorInfo = "";
-            logService.debug('Showing details for book: ' + JSON.stringify(book.value));
-            for (var itemIndex in book.value.volumeInfo.authors) {
-                var authorsInfo = book.value.volumeInfo.authors;
+            logService.debug('Showing details for book: ' + JSON.stringify(pSelectedBookValue.value));
+            for (var itemIndex in pSelectedBookValue.value.volumeInfo.authors) {
+                var authorsInfo = pSelectedBookValue.value.volumeInfo.authors;
                 if (authorsInfo) {
                     var authorCount = authorsInfo.length;
                     authorInfo += authorsInfo[itemIndex];
@@ -455,25 +522,25 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
                     // only add complete entries to results
                     if (isbn0 && currentISBN == isbn0) {
                         logService.debug("Already found a saved book entry: " + JSON.stringify(bookEntry));
-                        book = bookEntry;
+                        bookToAdd = bookEntry;
                         count++;
                     }
                 }
             }
             if (count > 0) {
                 logService.debug("Found already entry in couchdb");
-                $scope.infoMsg = "Book is already added to library. Please update amount.";
+                bookToAdd.infoMsg = "Book is already added to library. Please update amount.";
             } else {
                 logService.debug("Found no existing entry in couchdb");
-                $scope.infoMsg = null;
+                bookToAdd.infoMsg = null;
                 // set default count to 1
                 count = 1;
-                book.value.bookshelf = credentials.lastBookshelf;
+                bookToAdd.value.bookshelf = credentials.lastBookshelf;
             }
-            book.count = count;
-            book.authorInfo = authorInfo;
-            book.value.owner = book.value.owner || credentials.owner;
-            $scope.selectedBook = book;
+            bookToAdd.count = count;
+            bookToAdd.authorInfo = authorInfo;
+            bookToAdd.value.owner = bookToAdd.value.owner || credentials.owner;
+            $scope.selectedBook = bookToAdd;
             $ionicLoading.hide();
             $scope.openModal();
         }
@@ -538,7 +605,6 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
             function onError(response) {
                 $rootScope.$broadcast("booksave.error");
                 logService.debug("Error during book saving: ");
-                $scope.infoMsg = null;
                 $ionicLoading.hide();
             }
         }
@@ -546,7 +612,6 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
         init();
 
         $scope.searchQuery = {};
-        $scope.infoMsg = null;
 
         // public methods
         $scope.scan = scan;

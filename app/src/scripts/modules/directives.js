@@ -33,22 +33,30 @@ app.directive('bookDetails', ['$interval', '$ionicLoading', 'base64', 'logServic
  * @module flynnBookScannerApp
  * @description gives focus the the element, can be used as attribute
  */
-app.directive('isFocused', function($timeout) {
-	return {
-		scope: {
-			trigger: '&isFocused'
-		},
-		link: function(scope, element) {
-			if (scope.trigger()) {
-				$timeout(function() {
-					element[0].focus();
-					element[0].click();
-					cordova.plugins.Keyboard.show();
-				});
+app.directive('isFocused', ['$timeout', 'logService',
+	function($timeout, logService) {
+		'use strict';
+		return {
+			restrict: 'A',
+			scope: {
+				trigger: '&isFocused'
+			},
+			link: function(scope, element) {
+				if (scope.trigger()) {
+					$timeout(function() {
+						element[0].focus();
+						element[0].click();
+						try {
+							cordova.plugins.Keyboard.show();
+						} catch (e) {
+							logService.error('Error during showing keyboard via cordova plugin');
+						}
+					});
+				}
 			}
 		}
-	};
-});
+	}
+]);
 
 /**
  * @ngdoc directive
@@ -56,8 +64,8 @@ app.directive('isFocused', function($timeout) {
  * @module flynnBookScannerApp
  * @description creates img element from provide base64 encoded image data
  */
-app.directive('imageData', ['$interval', 'base64', 'logService',
-	function($interval, base64, logService) {
+app.directive('imageData', ['$interval', '$ionicLoading', 'base64', 'logService',
+	function($interval, $ionicLoading, base64, logService) {
 		'use strict';
 
 		var b64toBlob = function(b64Data, contentType, sliceSize) {
@@ -89,16 +97,18 @@ app.directive('imageData', ['$interval', 'base64', 'logService',
 			replace: true,
 			template: '<img/>',
 			link: function(scope, element, attrs) {
-
 				scope.$watch('image', function(image) {
 					if (image && image.data) {
+						$ionicLoading.show();
 						try {
 							var blob = b64toBlob(image.data, image.content_type);
 							var blobUrl = URL.createObjectURL(blob);
 							var img = element[0];
 							img.src = blobUrl;
+							$ionicLoading.hide();
 						} catch (e) {
 							logService.error('Error during image transformation');
+							$ionicLoading.hide();
 						}
 					}
 				});

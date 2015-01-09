@@ -249,6 +249,15 @@ app.config(function($urlRouterProvider, $httpProvider,$stateProvider,$ionicConfi
                 }
             }
         })
+        .state('app.book_edit', {
+            url: "/book/edit/:bookId",
+            views: {
+                'menuContent': {
+                    templateUrl: 'views/editBookView.html',
+                    controller: 'BookEditController'
+                }
+            }
+        })
         .state('app.about', {
             url: "/about",
             views: {

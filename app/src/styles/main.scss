@@ -77,7 +77,7 @@
 }
 
 .modal-background {
-	background: #eeeeee;
+	background: #CACACA;
 }
 
 .item-thumbnail-left .item-content > img:first-child{
@@ -94,10 +94,21 @@
   background-color: #4a87ee;
 }
 
+.item-stacked-label .input-label{
+  width: 100%;
+}
+
 .item-input input {
   background-color: #F2F2F2;
   padding-left: 10px;
   padding-right: 10px
+}
+
+.help-block.warning {
+  text-align: center;
+  font-weight: bold;
+  color: $warning-color;
+  font-size: 16px;
 }
 
 

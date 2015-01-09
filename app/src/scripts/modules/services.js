@@ -462,7 +462,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                             logService.error('Error deleting entry. Book not found');
                             deferred.reject(response);
                         }
-                        db.bulkDocs(booksToRemove, function(err, result) {
+                        flynnDB.bulkDocs(booksToRemove, function(err, result) {
                             $rootScope.$apply(function() {
                                 if (!err) {
                                     logService.info("Delete of entry was successfull.");

@@ -36,7 +36,7 @@ describe('main', function() {
       httpBackend.when('GET', 'views/bookView.html').respond('');
       httpBackend.when('GET', 'views/booksView.html').respond('');
       httpBackend.when('GET', 'views/addBookView.html').respond('');
-      httpBackend.when('GET', 'views/settingsView.html').respond(''); 
+      httpBackend.when('GET', 'views/settingsView.html').respond('');
     }));
 
 

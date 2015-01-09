@@ -58,11 +58,31 @@ describe('main', function() {
             }
           }]
         }];
+        var googleSearchResult = [{
+          "value": {
+            "kind": "books#volume",
+            "id": "lwz8ZwEACAAJ",
+            "etag": "b3Rk7DgfRR8",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/lwz8ZwEACAAJ",
+            "volumeInfo": {
+              "title": "EJB 3.1 professionell",
+              "subtitle": "Grundlagen- und Expertenwissen zu Enterprise JavaBeans 3.1 - inkl. JPA 2.0",
+              "publishedDate": "2011",
+              "industryIdentifiers": [{
+                "type": "ISBN_10",
+                "identifier": "3898646122"
+              }, {
+                "type": "ISBN_13",
+                "identifier": "9783898646123"
+              }],
+            }
+          }
+        }];
         mockedBookService = {
           search: function(searchQuery) {
             var deferred = $q.defer();
             var response = {};
-            response.books = books;
+            response.books = googleSearchResult;
             deferred.resolve(response);
             return deferred.promise;
           }
@@ -89,6 +109,8 @@ describe('main', function() {
         httpBackend.when('GET', 'views/booksView.html').respond('');
         httpBackend.when('GET', 'views/addBookView.html').respond('');
         httpBackend.when('GET', 'views/settingsView.html').respond('');
+        httpBackend.when('GET', 'views/editBookView.html').respond('');
+        httpBackend.when('GET', 'views/addBookView.html').respond('');
       })
     });
 
@@ -110,14 +132,6 @@ describe('main', function() {
     });
 
     it('do isbn search - add new', function() {
-      httpBackend.when('GET', 'book_modal.html').respond('');
-      httpBackend.when('GET', 'views/navbarView.html').respond('');
-      httpBackend.when('GET', 'views/aboutView.html').respond('');
-      httpBackend.when('GET', 'views/bookView.html').respond('');
-      httpBackend.when('GET', 'views/booksView.html').respond('');
-      httpBackend.when('GET', 'views/addBookView.html').respond('');
-      httpBackend.when('GET', 'views/settingsView.html').respond('');
-      scope.searchQuery = {};
       scope.searchQuery.isbn = "9783898646123";
       scope.search();
       scope.$apply();
