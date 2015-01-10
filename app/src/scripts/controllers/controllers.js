@@ -54,6 +54,9 @@ app.controller('AppController', ['$scope', '$rootScope', '$state', '$ionicLoadin
                     $state.go('app.settings');
                     $ionicLoading.hide();
                 });
+            } else {
+                $ionicLoading.hide();
+                $state.go('app.books');
             }
         }
         $rootScope.settings = config;
@@ -76,7 +79,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
 
         function syncWithServer() {
             $ionicLoading.show({
-                template: '<i class="icon ion-looping loading-icon"></i>Syncing books ...'
+                template: '<i class="icon ion-looping loading-icon"></i>&nbsp;&nbsp;Syncing books ...'
             });
             inventoryService.syncRemote().then(function(response) {
                 $ionicLoading.hide();
@@ -100,13 +103,15 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
             inventoryService.read().then(onSuccess, onError);
 
             function onSuccess(response) {
-                allBooks = enrichDbData(response.books);
-                $scope.books = enrichDbData(response.books);
-                $ionicLoading.hide();
-                // sync if server was added
-                if (config.activeProfile().remotesync) {
-                    syncWithServer();
+                if (response.books) {
+                    allBooks = enrichDbData(response.books);
+                    $scope.books = enrichDbData(response.books);
+                    // sync if server was added
+                    if (config.activeProfile().remotesync) {
+                        syncWithServer();
+                    }
                 }
+                $ionicLoading.hide();
             }
 
             function onError(response) {
@@ -719,7 +724,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
 
         function syncWithServer() {
             $ionicLoading.show({
-                template: '<i class="icon ion-looping loading-icon"></i>Syncing books ...'
+                template: '<i class="icon ion-looping loading-icon"></i>&nbsp;&nbsp;Syncing books ...'
             });
             inventoryService.syncRemote(true).then(function(response) {
                 $ionicLoading.hide();
@@ -740,9 +745,9 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
 
         function readLogs() {
             $ionicLoading.show({
-                template: '<i class="icon ion-looping loading-icon"></i>Loading log data ...'
+                template: '<i class="icon ion-looping loading-icon"></i>&nbsp;&nbsp;Loading log data ...'
             });
-            var logs = logService.readLogData().then(function(response) {
+            logService.readLogData().then(function(response) {
                 $scope.logs = response;
                 $ionicLoading.hide();
             }, function(errorDetails) {

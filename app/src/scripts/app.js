@@ -163,7 +163,7 @@ app.filter('bookFilter', [function() {
  * @description  Set loading text
  */
 app.constant('$ionicLoadingConfig', {
-    template: '<i class="icon ion-loading-d"></i>Loading ...'
+    template: '<i class="icon ion-loading-d"></i>&nbsp;&nbsp;Loading ...'
 });
 
 
@@ -194,17 +194,21 @@ app.run(function($ionicPlatform) {
  * @module flynnBookScannerApp
  * @description configure app
  */
-app.config(function($urlRouterProvider, $httpProvider,$stateProvider,$ionicConfigProvider,  logServiceProvider, APP_CONFIG) {
-	// places them at the bottom for all OS
-	$ionicConfigProvider.tabs.position("bottom"); 
-	// makes them all look the same across all OS
-	$ionicConfigProvider.tabs.style("standard"); 
-	// configure caching
-	$ionicConfigProvider.views.maxCache(10);	
-	$ionicConfigProvider.templates.maxPrefetch(5);
+app.config(function($urlRouterProvider, $httpProvider, $stateProvider, $ionicConfigProvider, logServiceProvider, APP_CONFIG) {
+    // places them at the bottom for all OS
+    $ionicConfigProvider.tabs.position("bottom");
+    // makes them all look the same across all OS
+    $ionicConfigProvider.tabs.style("standard");
+    // configure caching
+    $ionicConfigProvider.views.maxCache(10);
+    $ionicConfigProvider.templates.maxPrefetch(5);
     // configure logging
     logServiceProvider.dbName('flynnDB_logs');
     logServiceProvider.enableDebugLogging(APP_CONFIG.debug);
+    if (APP_CONFIG.debug) {
+        // enable couchDB debug
+        PouchDB.debug.enable('*');
+    }
     logServiceProvider.enableTraceLogging(APP_CONFIG.trace);
     // configure routes and states
     $stateProvider

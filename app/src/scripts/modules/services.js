@@ -231,7 +231,17 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
             NAME_OF_POUCHDB = activeProfile.dbName;
             var db;
             if (!db) {
-                db = new PouchDB(NAME_OF_POUCHDB, {});
+                if (cordova && cordova.platformId === 'android') {
+                    // for performance use indexedDB on Android
+                    db = new PouchDB(NAME_OF_POUCHDB, {
+                        adapter: 'idb'
+                    });
+                } else {
+                    // default use websql
+                    db = new PouchDB(NAME_OF_POUCHDB, {
+                        adapter: 'websql'
+                    });
+                }
             }
             return db;
         }

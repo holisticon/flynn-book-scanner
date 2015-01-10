@@ -41,7 +41,18 @@ dbLog.provider('logService', function LogServiceProvider() {
     };
 
     var getDB = function() {
-        var logDB = new PouchDB(dbName, {});
+        var logDB;
+        if (cordova && cordova.platformId === 'android') {
+            // for performance use indexedDB on Android
+            logDB = new PouchDB(dbName, {
+                adapter: 'idb'
+            });
+        } else {
+            // default use websql
+            logDB = new PouchDB(dbName, {
+                adapter: 'websql'
+            });
+        }
         return logDB;
     }
     var writeLogEntry = function(pLogLevel, pMessage) {
@@ -63,9 +74,9 @@ dbLog.provider('logService', function LogServiceProvider() {
         }
     }
     var readLogs = function(pLoglevel) {
-        var deferred = q.defer();
-        var db = getDB();
-        var logs = db.allDocs({
+        var deferred = q.defer(),
+            db = getDB();
+        db.allDocs({
             include_docs: true
         }, function(err, response) {
             if (err) {
