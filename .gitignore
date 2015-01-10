@@ -12,13 +12,16 @@ app/node_modules
 app/bower_components
 app/npm-debug.log
 app/www
+app/platforms/android/.gradle/*
 app/platforms/android/bin/*
 app/platforms/android/local.properties
 app/platforms/android/ant-gen/*
 app/platforms/android/ant-build/*
+app/platforms/android/res/xml/config.xml
 app/platforms/android/CordovaLib/ant-build/*
 app/platforms/android/CordovaLib/ant-gen/*
 app/platforms/android/CordovaLib/bin/*
+app/platforms/android/CordovaLib/build/*
 app/platforms/android/CordovaLib/gen/*
 app/platforms/android/CordovaLib/local.properties
 app/platforms/ios/Flynn/config.xml
@@ -27,6 +30,7 @@ app/platforms/ios/Flynn.xcodeproj/xcuserdata/*
 app/platforms/android/assets/www/bower_components/*
 app/platforms/ios/www/bower_components/*
 app/platforms/ios/www/*
+app/platforms/ios/CordovaLib/CordovaLib.xcodeproj/xcuserdata/*
 app/platforms/android/assets/www/*
 app/platforms/wp7/www/*
 app/platforms/wp7/obj/Debug/*
@@ -34,4 +38,3 @@ app/platforms/wp7/Bin/Debug/*
 app/bin/*
 app/target/*
 app/src-gen/*
-app/platforms/android/res/xml/config.xml
