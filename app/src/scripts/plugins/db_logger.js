@@ -42,7 +42,7 @@ dbLog.provider('logService', function LogServiceProvider() {
 
     var getDB = function() {
         var logDB;
-        if (cordova && cordova.platformId === 'android') {
+        if (typeof cordova != 'undefined' && cordova.platformId === 'android') {
             // for performance use indexedDB on Android
             logDB = new PouchDB(dbName, {
                 adapter: 'idb'

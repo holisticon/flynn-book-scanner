@@ -46,10 +46,8 @@ app.directive('isFocused', ['$timeout', 'logService',
 					$timeout(function() {
 						element[0].focus();
 						element[0].click();
-						try {
+						if (typeof cordova != 'undefined') {
 							cordova.plugins.Keyboard.show();
-						} catch (e) {
-							logService.error('Error during showing keyboard via cordova plugin');
 						}
 					});
 				}

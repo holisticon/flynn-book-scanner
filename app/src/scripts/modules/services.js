@@ -231,7 +231,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
             NAME_OF_POUCHDB = activeProfile.dbName;
             var db;
             if (!db) {
-                if (cordova && cordova.platformId === 'android') {
+                if (typeof cordova != 'undefined' && cordova.platformId === 'android') {
                     // for performance use indexedDB on Android
                     db = new PouchDB(NAME_OF_POUCHDB, {
                         adapter: 'idb'
