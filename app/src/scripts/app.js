@@ -238,7 +238,6 @@ app.config(function($urlRouterProvider, $httpProvider, $stateProvider, $ionicCon
             }
         })
         .state('app.books', {
-            cache: false,
             url: "/books",
             views: {
                 'menuContent': {

@@ -110,6 +110,8 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
                     if (config.activeProfile().remotesync) {
                         syncWithServer();
                     }
+                    // Stop the ion-refresher from spinning
+                    $scope.$broadcast('scroll.refreshComplete');
                 }
                 $ionicLoading.hide();
             }
@@ -271,16 +273,12 @@ app.controller('BookEditController', ['$rootScope', '$scope', '$state', '$stateP
                 } else  {
                     // sync on save
                     if (config.activeProfile().remotesync) {
-                        inventoryService.syncRemote().then(function(response) {
-                            $ionicLoading.hide();
-                        }, function(error) {
+                        inventoryService.syncRemote().then(function(response) {}, function(error) {
                             $rootScope.$broadcast("settings.invalid");
                             $state.go('app.settings');
-                            $ionicLoading.hide();
                         });
-                    } else {
-                        $ionicLoading.hide();
                     }
+                    $ionicLoading.hide();
                     navigator.notification.alert('Book successfully updated.', $state.go('app.books', {}, {
                         reload: true
                     }), 'Book');
@@ -313,7 +311,7 @@ app.controller('BookEditController', ['$rootScope', '$scope', '$state', '$stateP
             }
         }
 
-        load(bookID);
+        load();
 
 
         // public methods
@@ -331,8 +329,8 @@ app.controller('BookEditController', ['$rootScope', '$scope', '$state', '$stateP
  * @description
  * Controller to add new book entries to inventory
  */
-app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$http', '$filter', '$q', '$state', '$resource', '$ionicModal', 'logService', 'settingsService', 'inventoryService', 'googleBookService',
-    function($rootScope, $scope, $ionicLoading, $http, $filter, $q, $state, $resource, $ionicModal, logService, settingsService, inventoryService, googleBookService) {
+app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$http', '$filter', '$q', '$state', '$resource', '$ionicModal', '$ionicHistory', 'logService', 'settingsService', 'inventoryService', 'googleBookService',
+    function($rootScope, $scope, $ionicLoading, $http, $filter, $q, $state, $resource, $ionicModal, $ionicHistory, logService, settingsService, inventoryService, googleBookService) {
         var booksInventory,
             credentials = settingsService.load().activeProfile();
 
@@ -400,23 +398,18 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
         function search() {
             $scope.books = null;
             var searchQuery = $scope.searchQuery;
-
             if (searchQuery && (searchQuery.isbn || searchQuery.keyword)) {
                 // reset search
                 booksInventory = {};
-                inventoryService.read().then(onSuccess, onError);
+                inventoryService.read().then(function(response) {
+                    booksInventory = response.books;
+                    logService.debug("Start searching with criteria: " + JSON.stringify(searchQuery));
+                    retrieve(searchQuery);
+                }, function(response) {
+                    logService.error('Error during reading inventory for search with critera ' + JSON.stringify(searchQuery) + ':' + JSON.stringify(response));
+                });
             } else {
                 navigator.notification.alert('Please enter search details.', null, 'Info');
-            }
-
-            function onSuccess(response) {
-                booksInventory = response.books;
-                logService.debug("Start searching with criteria: " + JSON.stringify(searchQuery));
-                retrieve(searchQuery);
-            }
-
-            function onError(response) {
-                logService.error('Error during reading inventory for search with critera ' + JSON.stringify(searchQuery) + ':' + JSON.stringify(response));
             }
         }
 
@@ -438,18 +431,14 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
          */
         function retrieve(pSearchQuery) {
             $ionicLoading.show();
-            googleBookService.search(pSearchQuery).then(onSuccess, onError);
-
-            function onSuccess(response) {
+            googleBookService.search(pSearchQuery).then(function(response) {
                 logService.info("Got valid service response");
                 $scope.books = enrichDbData(response.books);
                 $ionicLoading.hide();
-            }
-
-            function onError(response) {
+            }, function(response) {
                 $rootScope.$broadcast("booksearch.invalid");
                 $ionicLoading.hide();
-            }
+            });
         }
 
         function reset() {
@@ -529,15 +518,11 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
             config.activeProfile().lastBookshelf = book.value.bookshelf;
             settingsService.save(config);
             // verify new settings
-            inventoryService.read().then(onSettingsSuccess, onSettingsError);
-
-            function onSettingsSuccess(response) {
+            inventoryService.read().then(function(response) {
                 logService.debug("Settings saving successfull.");
-            }
-
-            function onSettingsError(response) {
+            }, function(response) {
                 logService.error("Settings saving was not successfull.");
-            }
+            });
 
             var bookImage = document.getElementById(book.value.id).getElementsByClassName('img-thumbnail')[0];
             if (bookImage.src) {
@@ -558,7 +543,6 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
                 inventoryService.save(book).then(onSuccess, onError);
             }
 
-
             function onSuccess(response) {
                 logService.info("Successfully added book");
                 if (response.noUpdate) {
@@ -571,10 +555,11 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
                         }, function(error) {
                             $rootScope.$broadcast("settings.invalid");
                             $state.go('app.settings');
-                            $ionicLoading.hide();
                         });
                     }
+                    $ionicLoading.hide();
                     navigator.notification.alert("Book successfully added.", reset(), "Book");
+                    $ionicHistory.clearHistory();
                 }
             }
 
