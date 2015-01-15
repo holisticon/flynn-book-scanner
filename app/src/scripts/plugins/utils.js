@@ -41,8 +41,20 @@ function parseDate(pDate) {
         }
     }
     return date;
-
 }
+
+
+String.prototype.hashCode = function() {
+    var hash = 0,
+        i, chr, len;
+    if (this.length == 0) return hash;
+    for (i = 0, len = this.length; i < len; i++) {
+        chr = this.charCodeAt(i);
+        hash = ((hash << 5) - hash) + chr;
+        hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
+};
 
 
 /**
@@ -55,7 +67,13 @@ function parseDate(pDate) {
  * Parses a database entry and enrichs for UI
  */
 function enrichSingleDbEntry(pDbEntry) {
-    var authorInfo;
+    var result = {},
+        authorInfo;
+    result.value = pDbEntry.value;
+    result.image = pDbEntry.image;
+    // add hash
+    var isbn = pDbEntry.value.volumeInfo.industryIdentifiers[0] ? pDbEntry.value.volumeInfo.industryIdentifiers[0].identifier : '';
+    result.hashCode = isbn + pDbEntry.value.volumeInfo.title.hashCode();
     if (pDbEntry.value.volumeInfo.authors) {
         authorInfo = '';
         var authorCount = pDbEntry.value.volumeInfo.authors.length;
@@ -65,13 +83,13 @@ function enrichSingleDbEntry(pDbEntry) {
                 authorInfo += ', ';
             }
         }
+        result.authorInfo = authorInfo;
     }
     if (pDbEntry.value.volumeInfo.publishedDate) {
         var parsedDate = parseDate(pDbEntry.value.volumeInfo.publishedDate);
-        pDbEntry.value.volumeInfo.publishedDate = parsedDate;
+        result.value.volumeInfo.publishedDate = parsedDate;
     }
-    pDbEntry.authorInfo = authorInfo;
-    return pDbEntry;
+    return result;
 }
 
 /**
@@ -90,23 +108,19 @@ function enrichDbData(pDbEntries) {
         resultsFound = false;
     if (pDbEntries) {
         for (var itemIndex in pDbEntries) {
-            var itemInfo = pDbEntries[itemIndex];
+            var itemInfo = enrichSingleDbEntry(pDbEntries[itemIndex]);
             if (itemInfo.value && itemInfo.value.volumeInfo) {
-                var isbn = itemInfo.value.volumeInfo.industryIdentifiers[0].identifier;
-                if (bookEntries[isbn]) {
-
-                    bookEntries[isbn].count += 1;
-                    bookEntries[isbn].docs.push(itemInfo);
+                var id = itemInfo.hashCode; // /*itemInfo._id;*/itemInfo.value.volumeInfo.industryIdentifiers[0].identifier;
+                if (bookEntries[id]) {
+                    bookEntries[id].count++;
+                    bookEntries[id].docs.push(itemInfo);
                 } else {
-                    bookEntries[isbn] = {};
-                    bookEntries[isbn].value = itemInfo.value;
-                    bookEntries[isbn].image = itemInfo.image;
-                    bookEntries[isbn].count = 1;
-                    bookEntries[isbn].docs = [];
-                    bookEntries[isbn].docs.push(itemInfo);
-                    bookEntries[isbn] = enrichSingleDbEntry(bookEntries[isbn]);
+                    bookEntries[id] = itemInfo;
+                    bookEntries[id].count = 1;
+                    bookEntries[id].docs = [];
+                    bookEntries[id].docs.push(itemInfo);
                     //expose id
-                    bookEntries[isbn]._id = itemInfo._id;
+                    //bookEntries[id]._id = itemInfo._id;
                     resultsFound = true;
                 }
             }

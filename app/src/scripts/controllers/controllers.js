@@ -144,7 +144,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
             var book = pBook;
             logService.debug('Showing details for book: ' + book.value.volumeInfo.title);
             $state.go('app.book_show', {
-                'bookId': book._id
+                'bookId': book.hashCode
             });
         }
 
@@ -163,7 +163,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
                 },
                 buttonClicked: function(index) {
                     $state.go('app.book_edit', {
-                        'bookId': book._id
+                        'bookId': book.hashCode
                     });
                 },
                 destructiveButtonClicked: function() {
@@ -200,27 +200,20 @@ app.controller('BookDetailsController', ['$rootScope', '$scope', '$stateParams',
 
         function load() {
             if (bookID) {
-                inventoryService.read().then(onSuccess, onError);
-            }
+                inventoryService.read().then(function(response) {
+                    var allBooks = enrichDbData(response.books);
+                    var selectedBook;
 
-            function onSuccess(response) {
-                var allBooks = response.books;
-                var selectedBook;
-
-                for (var index in allBooks) {
-                    var book = allBooks[index];
-                    if (book._id == bookID) {
-                        selectedBook = book;
-                        break;
+                    for (var index in allBooks) {
+                        var book = allBooks[index];
+                        if (book.hashCode == bookID) {
+                            $scope.selectedBook = book;
+                            break;
+                        }
                     }
-                }
-                $scope.selectedBook = enrichSingleDbEntry(selectedBook)
-                $scope.searching = false;
-            }
-
-            function onError(response) {
-                $scope.selectedBook = null;
-                $scope.searching = false;
+                }, function(errorResponse) {
+                    log.error('Error during load book via hashCode');
+                });
             }
         }
 
@@ -285,63 +278,38 @@ app.controller('BookEditController', ['$rootScope', '$scope', '$state', '$stateP
                             $state.go('app.settings');
                             $ionicLoading.hide();
                         });
+                    } else {
+                        $ionicLoading.hide();
                     }
-                    navigator.notification.alert("Book successfully updated.", cancel(), "Book");
+                    navigator.notification.alert('Book successfully updated.', $state.go('app.books', {}, {
+                        reload: true
+                    }), 'Book');
                 }
             }
 
             function onError(response) {
-                $rootScope.$broadcast("booksave.error");
-                logService.debug("Error during book saving: ");
+                $rootScope.$broadcast('booksave.error');
+                logService.debug('Error during book saving.');
                 $ionicLoading.hide();
             }
         }
 
-        function cancel() {
-            $state.go('app.books');
-        }
-
         function load() {
             if (bookID) {
-                inventoryService.read().then(onSuccess, onError);
-            }
-
-            function onSuccess(response) {
-                var allBooks = response.books;
-                var selectedBook,
-                    count = 0;
-                for (var index in allBooks) {
-                    var book = allBooks[index];
-                    if (book._id == bookID) {
-                        selectedBook = book;
-                        break;
+                inventoryService.read().then(function(response) {
+                    var allBooks = enrichDbData(response.books);
+                    var selectedBook,
+                        count = 0;
+                    for (var index in allBooks) {
+                        var book = allBooks[index];
+                        if (book.hashCode == bookID) {
+                            $scope.selectedBook = book;
+                            break;
+                        }
                     }
-                }
-                var isbn0;
-                if (selectedBook.value.volumeInfo.industryIdentifiers) {
-                    var indIDs = selectedBook.value.volumeInfo.industryIdentifiers;
-                    if (indIDs[0]) {
-                        isbn0 = indIDs[0].identifier;
-                    }
-                }
-                for (var index in allBooks) {
-                    var bookEntry = allBooks[index],
-                        currentISBN = bookEntry.value.volumeInfo.industryIdentifiers[0].identifier;
-                    // only add complete entries to results
-                    if (isbn0 && currentISBN == isbn0) {
-                        logService.debug("Already found a saved book entry: " + JSON.stringify(bookEntry));
-                        bookToAdd = bookEntry;
-                        count++;
-                    }
-                }
-                selectedBook.count = count;
-                $scope.selectedBook = enrichSingleDbEntry(selectedBook)
-                $scope.searching = false;
-            }
-
-            function onError(response) {
-                $scope.selectedBook = null;
-                $scope.searching = false;
+                }, function(errorResponse) {
+                    log.error('Error during load book via hashCode');
+                });
             }
         }
 
@@ -350,7 +318,6 @@ app.controller('BookEditController', ['$rootScope', '$scope', '$state', '$stateP
 
         // public methods
         $scope.save = save;
-        $scope.cancel = cancel;
 
     }
 ]);
