@@ -1,7 +1,7 @@
 flynn book scanner
 ==================
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/holisticon/flynn-book-scanner?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/holisticon/flynn-book-scanner.png?branch=master)](https://travis-ci.org/holisticon/flynn-book-scanner)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/holisticon/flynn-book-scanner?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://api.travis-ci.org/holisticon/flynn-book-scanner.svg)](https://travis-ci.org/holisticon/flynn-book-scanner)
 
 ## Introduction
 flynn is a book scanning app which saves the added books on a couchdb.
