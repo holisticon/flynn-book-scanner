@@ -3,7 +3,7 @@
     <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content id="addBook" class="padding">
-    <form name="searchForm" type="search" novalidate ng-submit="search()">
+    <form name="searchForm">
     	<h2>Search a book</h2>
         <div name="searchData">                         
           <label class="item-input">
@@ -15,7 +15,7 @@
           	<input id="keyword" type="text" data-ng-model="searchQuery.keyword" placeholder="Search for books that contain this text ">
       	  </label>
    		</div>
-        <button type="submit" class="button button-positive"> Search</button>
+        <button ng-click="search()" class="button button-positive"> Search</button>
         <button ng-click="scan()" class="button"> Scan ISBN</button>
         <button ng-click="manual($event)" class="button">Manual</button>
         <p class="help-block warning" ng-show="infoMsg">{{infoMsg}}</p>

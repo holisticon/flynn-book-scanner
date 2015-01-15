@@ -367,8 +367,8 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
                             'Result: ' + result.text + '\n' + 'Format: ' + result.format + '\n');
                         $scope.searchQuery.isbn = result.text;
                         search();
-                        $ionicLoading.hide();
                     }
+                    $ionicLoading.hide();
                 },
                 function(error) {
                     logService.error("Scanning failed.");
