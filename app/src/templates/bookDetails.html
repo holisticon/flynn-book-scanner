@@ -16,8 +16,8 @@
 	</label>       	                       	
    	<label class="item-input" ng-show="selectedBook.value.volumeInfo.imageLinks.thumbnail" >
 		<span class="input-label"></span>
-		<image-data image="selectedBook.image" ng-show="!editMode"></image-data>
-		<img class="img-thumbnail" alt="book image" ng-show="editMode" ng-src="{{selectedBook.value.volumeInfo.imageLinks.thumbnail}}" />  				  			
+		<image-data image="selectedBook.image" ng-show="selectedBook.image"></image-data>
+		<img class="img-thumbnail" alt="book image" ng-show="!selectedBook.image" ng-src="{{selectedBook.value.volumeInfo.imageLinks.thumbnail}}" />  				  			
 	</label>  
 	<label class="item-input" ng-show="selectedBook.value.volumeInfo.pageCount || editMode">
 			<span class="input-label">Pages:</span>

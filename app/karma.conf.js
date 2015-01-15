@@ -91,6 +91,7 @@ module.exports = function(config) {
     singleRun: false
   });
   config.proxies = {
-    '/config.json': 'http://localhost:' + config.port + '/base/test/config.json'
+    '/config.json': 'http://localhost:' + config.port + '/base/test/config.json',
+    '/views/': 'http://localhost:' + config.port + '/base/src/views/'
   }
 };

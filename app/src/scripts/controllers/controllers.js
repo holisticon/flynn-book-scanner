@@ -249,22 +249,26 @@ app.controller('BookEditController', ['$rootScope', '$scope', '$state', '$stateP
             $ionicLoading.show();
             logService.debug("Starting save for book.");
             var bookImage = document.getElementById(book.value.id).getElementsByClassName('img-thumbnail')[0];
-            if (bookImage.src) {
-                // extract image info
-                blobUtil.imgSrcToBlob(bookImage.src).then(function(blob) {
-                    var reader = new window.FileReader();
-                    reader.readAsDataURL(blob);
-                    reader.onloadend = function() {
-                        var image = {};
-                        image.name = 'thumbnail_' + book.value.id;
-                        image.content_type = blob.type;
-                        image.data = reader.result.replace('data:image/jpeg;base64,', '');
-                        book.image = image;
-                        inventoryService.save(book).then(onSuccess, onError);
-                    }
-                });
-            } else {
-                inventoryService.save(book).then(onSuccess, onError);
+            try {
+                if (bookImage.src && !book.image) {
+                    // extract image info
+                    blobUtil.imgSrcToBlob(bookImage.src).then(function(blob) {
+                        var reader = new window.FileReader();
+                        reader.readAsDataURL(blob);
+                        reader.onloadend = function() {
+                            var image = {};
+                            image.name = 'thumbnail_' + book.value.id;
+                            image.content_type = blob.type;
+                            image.data = reader.result.replace('data:image/jpeg;base64,', '');
+                            book.image = image;
+                            inventoryService.save(book).then(onSuccess, onError);
+                        }
+                    });
+                } else {
+                    inventoryService.save(book).then(onSuccess, onError);
+                }
+            } catch (e) {
+                navigator.notification.alert('Error during saving Image. Please check your network connection.');
             }
 
             function onSuccess(response) {

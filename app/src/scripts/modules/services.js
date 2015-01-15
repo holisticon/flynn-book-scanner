@@ -384,9 +384,16 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                         var bookEntry = rows[id].doc;
                                         if (bookEntry.value && bookEntry.value.volumeInfo) {
                                             var idInfoDtls = bookEntry.value.volumeInfo.industryIdentifiers;
-                                            if (idInfoDtls && idInfoDtls.length > 1 && idInfoDtls[1].identifier == isbn) {
-                                                response.books[id] = bookEntry;
-                                                count++;
+                                            if (idInfoDtls) {
+                                                if (idInfoDtls[0].identifier == isbn) {
+                                                    response.books[id] = bookEntry;
+                                                    count++;
+                                                } else {
+                                                    if (idInfoDtls.length > 1 && idInfoDtls[1].identifier == isbn) {
+                                                        response.books[id] = bookEntry;
+                                                        count++;
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -456,27 +463,27 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                 if (flynnDB) {
                     var searchQuery = {};
                     searchQuery.id = pBookToRemove.value.id;
-                    self.search(searchQuery).then(function(response) {
+                    self.search(searchQuery).then(function(searchResponse) {
                         var count = 0,
-                            booksToRemove = [];
-                        if (response.books) {
-                            count = response.count;
+                            booksToBeRemoved = [];
+                        if (searchResponse.books) {
+                            count = searchResponse.count;
                         }
                         if (count > 0) {
-                            for (var index in response.books) {
-                                var pBookToRemove = response.books[index];
-                                pBookToRemove._deleted = true;
-                                booksToRemove.push(pBookToRemove);
+                            for (var index in searchResponse.books) {
+                                var bookToRemove = searchResponse.books[index];
+                                bookToRemove._deleted = true;
+                                booksToBeRemoved.push(bookToRemove);
                             }
                         } else {
                             logService.error('Error deleting entry. Book not found');
                             deferred.reject(response);
                         }
-                        flynnDB.bulkDocs(booksToRemove, function(err, result) {
+                        flynnDB.bulkDocs(booksToBeRemoved, function(err, result) {
                             $rootScope.$apply(function() {
                                 if (!err) {
                                     logService.info("Delete of entry was successfull.");
-                                    deferred.resolve(result);
+                                    deferred.resolve(response);
                                 } else {
                                     logService.error("Error deleting entry: " + err);
                                     deferred.reject(err);
@@ -499,6 +506,10 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     saveSuccess = false,
                     errorOccurred = false,
                     flynnDB = getDB();
+                // set to 1 if no amount was set
+                if (!pBookToSave.count) {
+                    pBookToSave.count = 1;
+                }
                 logService.debug('Starting save for book: ' + pBookToSave.value.volumeInfo.title);
                 if (flynnDB) {
                     var bookEntriesToAdd = 0,
@@ -507,13 +518,13 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     var isbn = pBookToSave.value.volumeInfo.industryIdentifiers[0].identifier;
                     var searchQuery = {};
                     searchQuery.isbn = isbn;
-                    self.search(searchQuery).then(function(response) {
+                    self.search(searchQuery).then(function(searchResponse) {
                         logService.info("Found already an db entry");
                         var count = 0
-                        if (response.books) {
-                            count = response.count;
+                        if (searchResponse.books) {
+                            count = searchResponse.count;
                         }
-                        if (count == pBookToSave.count) {
+                        if (count === pBookToSave.count) {
                             logService.info("No need to update. Amount not changed");
                             response.noUpdate = true;
                             deferred.resolve(response);
@@ -534,17 +545,52 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                     docs.push(book);
                                 }
                                 flynnDB.bulkDocs(docs, function(err, result) {
-                                    if (!err) {
-                                        logService.info("Saving successfull.");
-                                        deferred.resolve(response);
-                                    } else {
-                                        logService.error("Error saving new entries: " + err);
-                                        deferred.reject(response);
-                                    }
+
+                                    $rootScope.$apply(function() {
+                                        if (!err) {
+                                            response.books = docs;
+                                            logService.info("Saving successfull.");
+                                            deferred.resolve(response);
+                                        } else {
+                                            logService.error("Error saving new entries: " + err);
+                                            deferred.reject(response);
+                                        }
+                                    });
                                 });
                             } else {
-                                // TODO REMOVE 
-                                deferred.reject(response);
+                                if (booksToAdd === 0) {
+                                    logService.info("No need to update. Amount not changed");
+                                    response.noUpdate = true;
+                                    deferred.resolve(response);
+                                } else {
+                                    var count = 0,
+                                        booksToRemove = Math.abs(booksToAdd);
+                                    logService.info("Removing " + booksToRemove + " existing entries.");
+                                    var booksToBeRemoved = [];
+                                    for (var index in searchResponse.books) {
+                                        if (count < booksToRemove) {
+                                            var bookToRemove = searchResponse.books[index];
+                                            bookToRemove._deleted = true;
+                                            booksToBeRemoved.push(bookToRemove);
+                                            count++;
+                                        }
+                                    }
+                                    flynnDB.bulkDocs(booksToBeRemoved, function(err, result) {
+                                        $rootScope.$apply(function() {
+                                            if (!err) {
+                                                var response = {};
+                                                logService.info("Delete was successfull.");
+                                                deferred.resolve(response);
+                                            } else {
+                                                logService.error("Error during: " + err);
+                                                deferred.reject(err);
+                                            }
+                                        });
+                                    }, function(response) {
+                                        logService.error('Error deleting entry.');
+                                        deferred.reject(response);
+                                    });
+                                }
                             }
                         }
                     }, function(response) {
@@ -562,13 +608,17 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                             docs.push(book);
                         }
                         flynnDB.bulkDocs(docs, function(err, result) {
-                            if (!err) {
-                                logService.info("Saving successfull.");
-                                deferred.resolve(response);
-                            } else {
-                                logService.error("Error saving new entries: " + err);
-                                deferred.reject(response);
-                            }
+
+                            $rootScope.$apply(function() {
+                                if (!err) {
+                                    response.books = docs;
+                                    logService.info("Saving successfull.");
+                                    deferred.resolve(response);
+                                } else {
+                                    logService.error("Error saving new entries: " + err);
+                                    deferred.reject(response);
+                                }
+                            });
                         });
                     });
                 }

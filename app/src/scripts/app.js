@@ -208,6 +208,8 @@ app.config(function($urlRouterProvider, $httpProvider, $stateProvider, $ionicCon
     if (APP_CONFIG.debug) {
         // enable couchDB debug
         PouchDB.debug.enable('*');
+    } else {
+        PouchDB.debug.disable();
     }
     logServiceProvider.enableTraceLogging(APP_CONFIG.trace);
     // configure routes and states
