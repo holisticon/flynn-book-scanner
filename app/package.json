@@ -1,6 +1,6 @@
 {
   "name": "flynnBookScanner",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "repository": "https://github.com/holisticon/flynn-book-scanner.git",
   "dependencies": {},
   "devDependencies": {
