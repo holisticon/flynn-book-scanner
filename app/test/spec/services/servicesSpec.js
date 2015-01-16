@@ -5,14 +5,14 @@ var cordova;
 beforeEach(module('flynnBookScannerApp'));
 
 beforeEach(function() {
-	    module(function($provide) {
-	      $provide.constant('APP_CONFIG', {
-	        timeout: '10000',
-	        dev: false,
-	        debug: true,
-	      });
-	    });
-	  });
+  module(function($provide) {
+    $provide.constant('APP_CONFIG', {
+      timeout: '10000',
+      dev: false,
+      debug: true,
+    });
+  });
+});
 describe("googleBookService", function() {
 
   var service,
@@ -38,6 +38,7 @@ describe("googleBookService", function() {
     var response = {};
     response.books = null;
     httpBackend.when("GET", "https://www.googleapis.com/books/v1/volumes/?q=:isbn=3898646122&projection=full&key=undefined").respond(response);
+    httpBackend.when("GET", "https://www.googleapis.com/books/v1/volumes/?q=9783898646123&projection=full&key=undefined").respond(response);
     var promise = service.search(searchQuery),
       books = null;
     promise.then(function(response) {
@@ -106,6 +107,7 @@ describe("googleBookService", function() {
     var response = {};
     response.books = [validBookEntry];
     httpBackend.when("GET", "https://www.googleapis.com/books/v1/volumes/?q=:isbn=3898646122&projection=full&key=undefined").respond(response);
+    httpBackend.when("GET", "https://www.googleapis.com/books/v1/volumes/?q=9783898646123&projection=full&key=undefined").respond(response);
     var promise = service.search(searchQuery),
       books = null;
 
