@@ -110,7 +110,7 @@ function enrichDbData(pDbEntries) {
         for (var itemIndex in pDbEntries) {
             var itemInfo = enrichSingleDbEntry(pDbEntries[itemIndex]);
             if (itemInfo.value && itemInfo.value.volumeInfo) {
-                var id = itemInfo.hashCode; // /*itemInfo._id;*/itemInfo.value.volumeInfo.industryIdentifiers[0].identifier;
+                var id = itemInfo.hashCode;
                 if (bookEntries[id]) {
                     bookEntries[id].count++;
                     bookEntries[id].docs.push(itemInfo);
@@ -119,8 +119,6 @@ function enrichDbData(pDbEntries) {
                     bookEntries[id].count = 1;
                     bookEntries[id].docs = [];
                     bookEntries[id].docs.push(itemInfo);
-                    //expose id
-                    //bookEntries[id]._id = itemInfo._id;
                     resultsFound = true;
                 }
             }

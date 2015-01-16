@@ -111,6 +111,10 @@
   font-size: 16px;
 }
 
+input[disabled], select[disabled], textarea[disabled], input[readonly]:not(.cloned-text-input), textarea[readonly]:not(.cloned-text-input), select[readonly] {
+  background-color: #ffffff;
+}
+
 
 // fix for side-menu issue on android, see https://github.com/driftyco/ionic/issues/2122
 

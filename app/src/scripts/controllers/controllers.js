@@ -44,20 +44,8 @@ app.controller('AppController', ['$scope', '$rootScope', '$state', '$ionicLoadin
             config.timeout = 30000;
             $state.go('app.settings');
         } else {
-            //sync on start 
-            if (config.activeProfile().remotesync) {
-                inventoryService.syncRemote().then(function(response) {
-                    $ionicLoading.hide();
-                    $state.go('app.books');
-                }, function(error) {
-                    $rootScope.$broadcast("settings.invalid");
-                    $state.go('app.settings');
-                    $ionicLoading.hide();
-                });
-            } else {
-                $ionicLoading.hide();
-                $state.go('app.books');
-            }
+            $ionicLoading.hide();
+            $state.go('app.books');
         }
         $rootScope.settings = config;
     }
@@ -97,7 +85,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
          * load data via inventory service
          *
          */
-        function load() {
+        function load(pDontSync) {
             $ionicLoading.show();
             $scope.searchQuery = {};
             inventoryService.read().then(onSuccess, onError);
@@ -107,7 +95,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
                     allBooks = enrichDbData(response.books);
                     $scope.books = enrichDbData(response.books);
                     // sync if server was added
-                    if (config.activeProfile().remotesync) {
+                    if (config.activeProfile().remotesync && !pDontSync) {
                         syncWithServer();
                     }
                     // Stop the ion-refresher from spinning
@@ -118,6 +106,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
 
             function onError(response) {
                 $rootScope.$broadcast("server.error");
+                $scope.searchQuery = {};
                 $ionicLoading.hide();
             }
         }
@@ -125,7 +114,6 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
 
         function resetSearch() {
             $scope.searchQuery = {};
-            load();
         }
 
         function removeBook(pBookToRemove) {
@@ -160,9 +148,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
                 destructiveText: 'Delete',
                 titleText: 'Modify book entry',
                 cancelText: 'Cancel',
-                cancel: function() {
-                    // hideSheet();
-                },
+                cancel: function() {},
                 buttonClicked: function(index) {
                     $state.go('app.book_edit', {
                         'bookId': book.hashCode
