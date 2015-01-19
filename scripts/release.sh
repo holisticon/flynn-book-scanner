@@ -22,7 +22,7 @@ mv ${BASEDIR}/../app/package.json.new ${BASEDIR}/../app/package.json
 sed -e "s/version=\".*\"/version=\"${newVersionNumber}\"/g" ${BASEDIR}/../app/config.xml > ${BASEDIR}/../app/config.xml.new
 mv ${BASEDIR}/../app/config.xml.new ${BASEDIR}/../app/config.xml
 
-if [ $1 = "autocommit" ] || [ $2 = "autocommit"  ]; then
+if [ ( -z "$1" && $1 = "autocommit") ] || [ ( -z "$2" && $2 = "autocommit")  ]; then
 	echo "autocommitting new version"
 	git add .
 	git commit -m "new dev version ${newVersionNumber}"
