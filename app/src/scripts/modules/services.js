@@ -270,7 +270,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     localDB = getDB();
                 if (localDB) {
                     if (activeProfile.user && activeProfile.password) {
-                        var authorization = activeProfile.user + ':' + activeProfile.password,
+                        var authorization = encodeURIComponent(activeProfile.user) + ':' + encodeURIComponent(activeProfile.password),
                             remoteCouch = couchDbUrl.replace("://", "://" + authorization + "@"),
                             opts = {
                                 live: true
@@ -281,26 +281,36 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                         $http({
                             method: 'GET',
                             url: remoteCouch,
-                            timeout: 300,
+                            timeout: 900,
                         }).then(function(response) {
                             var syncPromise = localDB.sync(remoteCouch)
                                 .on('change', function(info) {
-                                    logService.info('Updating documents with remote changes...');
-                                    logService.debug('Updating documents with remote changes with following answer: ' + JSON.stringify(info));
+                                    $rootScope.$apply(function() {
+                                        logService.info('Updating documents with remote changes...');
+                                        logService.debug('Updating documents with remote changes with following answer: ' + JSON.stringify(info));
+                                    });
                                 }).on('complete', function(info) {
-                                    logService.info('Completed sync.');
-                                    logService.debug('Completed sync with following answer: ' + JSON.stringify(info));
-                                    deferred.resolve(info);
+                                    $rootScope.$apply(function() {
+                                        logService.info('Completed sync.');
+                                        logService.debug('Completed sync with following answer: ' + JSON.stringify(info));
+                                        deferred.resolve(info);
+                                    });
                                 }).on('uptodate', function(info) {
-                                    logService.info('Already up-to-date.');
-                                    logService.debug('Already up-to-date with following answer: ' + JSON.stringify(info));
-                                    deferred.resolve(info);
+                                    $rootScope.$apply(function() {
+                                        logService.info('Already up-to-date.');
+                                        logService.debug('Already up-to-date with following answer: ' + JSON.stringify(info));
+                                        deferred.resolve(info);
+                                    });
                                 }).on('error', function(info) {
-                                    logService.error('Error during remote sync with following answer: ' + JSON.stringify(info));
-                                    deferred.reject(info);
+                                    $rootScope.$apply(function() {
+                                        logService.error('Error during remote sync with following answer: ' + JSON.stringify(info));
+                                        deferred.reject(info);
+                                    });
                                 }).catch(function(err) {
-                                    logService.error('Unkown error during remote sync: ' + JSON.stringify(err));
-                                    deferred.resolve(err);
+                                    $rootScope.$apply(function() {
+                                        logService.error('Unkown error during remote sync: ' + JSON.stringify(err));
+                                        deferred.resolve(err);
+                                    });
                                 });
                         }, function(err) {
                             if (err.status === 0) {
@@ -311,6 +321,10 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                     deferred.resolve(err);
                                 }
                             } else {
+                                if (err.status === 401) {
+                                    logService.info('Seems to use invalid login data.');
+                                    deferred.reject(err);
+                                }
                                 logService.error('Unkown error during connection check: ' + JSON.stringify(err));
                                 deferred.resolve(err);
                             }

@@ -47,6 +47,32 @@ describe("inventoryService", function() {
     })
   });
 
+  it('Use Authentication for Sync', function(done) {
+
+    httpBackend.when('GET', 'http://M%C3%BCller:P%40assword!@remote_test/couchdb').respond({});
+    config = {
+      activeProfile: function() {
+        return {
+          remotesync: true,
+          couchdb: 'http://remote_test/couchdb',
+          dbName: 'test',
+          user: 'Müller',
+          password: 'P@assword!'
+        }
+      }
+    };
+    new PouchDB(config.activeProfile().dbName).destroy(function(err, info) {
+      var books = null;
+      service.syncRemote(true).then(function(response) {
+        fail();
+      }, function(error) {
+        done();
+      });
+      rootScope.$apply();
+      httpBackend.flush();
+    });
+  });
+
   it('Read empty inventory', function(done) {
     new PouchDB(config.activeProfile().dbName).destroy(function(err, info) {
       var promise = service.read(),
