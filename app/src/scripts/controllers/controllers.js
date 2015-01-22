@@ -162,7 +162,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
             });
         }
 
-        load();
+        load(true);
 
         // public methods
         $scope.load = load;
@@ -230,26 +230,23 @@ app.controller('BookEditController', ['$rootScope', '$scope', '$state', '$stateP
             $ionicLoading.show();
             logService.debug("Starting save for book.");
             var bookImage = document.getElementById(book.value.id).getElementsByClassName('img-thumbnail')[0];
-            try {
-                if (bookImage.src && !book.image) {
-                    // extract image info
-                    blobUtil.imgSrcToBlob(bookImage.src).then(function(blob) {
-                        var reader = new window.FileReader();
-                        reader.readAsDataURL(blob);
-                        reader.onloadend = function() {
-                            var image = {};
-                            image.name = 'thumbnail_' + book.value.id;
-                            image.content_type = blob.type;
-                            image.data = reader.result.replace('data:image/jpeg;base64,', '');
-                            book.image = image;
-                            inventoryService.save(book).then(onSuccess, onError);
-                        }
-                    });
-                } else {
-                    inventoryService.save(book).then(onSuccess, onError);
-                }
-            } catch (e) {
-                navigator.notification.alert('Error during saving Image. Please check your network connection.');
+            if (bookImage && bookImage.src && !book.image) {
+                // extract image info
+                blobUtil.imgSrcToBlob(bookImage.src).then(function(blob) {
+                    var reader = new window.FileReader();
+                    reader.readAsDataURL(blob);
+                    reader.onloadend = function() {
+                        var image = {};
+                        image.name = 'thumbnail_' + book.value.id;
+                        image.content_type = blob.type;
+                        image.data = reader.result.replace('data:image/jpeg;base64,', '');
+                        book.image = image;
+                        inventoryService.save(book).then(onSuccess, onError);
+                    }
+                });
+            } else {
+                inventoryService.save(book).then(onSuccess, onError);
+
             }
 
             function onSuccess(response) {
@@ -389,7 +386,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
                 booksInventory = {};
                 inventoryService.read().then(function(response) {
                     booksInventory = response.books;
-                    logService.debug("Start searching with criteria: " + JSON.stringify(searchQuery));
+                    logService.debug('Start searching with criteria:');
                     retrieve(searchQuery);
                 }, function(response) {
                     logService.error('Error during reading inventory for search with critera ' + JSON.stringify(searchQuery) + ':' + JSON.stringify(response));
@@ -418,11 +415,11 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
         function retrieve(pSearchQuery) {
             $ionicLoading.show();
             googleBookService.search(pSearchQuery).then(function(response) {
-                logService.info("Got valid service response");
+                logService.info('Got valid service response');
                 $scope.books = enrichDbData(response.books);
                 $ionicLoading.hide();
             }, function(response) {
-                $rootScope.$broadcast("booksearch.invalid");
+                $rootScope.$broadcast('booksearch.invalid');
                 $ionicLoading.hide();
             });
         }
@@ -447,7 +444,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
                 bookToAdd = pSelectedBookValue,
                 books = booksInventory,
                 authorInfo = "";
-            logService.debug('Showing details for book: ' + JSON.stringify(pSelectedBookValue.value));
+            logService.debug('Showing details for book: ' + pSelectedBookValue.value.volumeInfo.title);
             for (var itemIndex in pSelectedBookValue.value.volumeInfo.authors) {
                 var authorsInfo = pSelectedBookValue.value.volumeInfo.authors;
                 if (authorsInfo) {
@@ -472,7 +469,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
                         currentISBN = bookEntry.value.volumeInfo.industryIdentifiers[0].identifier;
                     // only add complete entries to results
                     if (isbn0 && currentISBN == isbn0) {
-                        logService.debug("Already found a saved book entry: " + JSON.stringify(bookEntry));
+                        logService.debug("Already found a saved book entry: " + bookEntry.value.volumeInfo.title);
                         bookToAdd = bookEntry;
                         count++;
                     }

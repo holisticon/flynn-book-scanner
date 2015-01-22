@@ -4,22 +4,53 @@
  * @module flynnBookScannerApp
  * @description creates img element from provide base64 encoded image data
  */
-app.directive('bookDetails', ['$interval', '$ionicLoading', 'base64', 'logService',
-	function($interval, $ionicLoading, base64, logService) {
+app.directive('bookViewDetails', ['$timeout', '$ionicLoading', 'base64', 'logService',
+	function($timeout, $ionicLoading, base64, logService) {
+		'use strict';
+		return {
+			restrict: 'E',
+			scope: {
+				selectedBook: '=book'
+			},
+			replace: true,
+			templateUrl: 'templates/bookViewDetails.html',
+
+			link: function(scope, element, attrs) {
+				$ionicLoading.show();
+				scope.$watch('selectedBook', function(selectedBook) {
+			         $timeout(function(){
+							$ionicLoading.hide();
+			         }, 5);
+				});
+			}
+		}
+	}
+]);
+
+/**
+ * @ngdoc directive
+ * @name imageData
+ * @module flynnBookScannerApp
+ * @description creates img element from provide base64 encoded image data
+ */
+app.directive('bookEditDetails', ['$timeout', '$ionicLoading', 'base64', 'logService',
+	function($timeout, $ionicLoading, base64, logService) {
 		'use strict';
 		return {
 			restrict: 'E',
 			scope: {
 				selectedBook: '=book',
-				editMode: '=edit'
+				newEntry: '=newEntry'
 			},
 			replace: true,
-			templateUrl: 'templates/bookDetails.html',
+			templateUrl: 'templates/bookEditDetails.html',
 
 			link: function(scope, element, attrs) {
 				$ionicLoading.show();
 				scope.$watch('selectedBook', function(selectedBook) {
-					$ionicLoading.hide();
+			         $timeout(function(){
+							$ionicLoading.hide();
+			         }, 5);
 				});
 			}
 		}

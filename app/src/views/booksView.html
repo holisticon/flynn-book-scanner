@@ -1,11 +1,17 @@
-<ion-view title="Books">
+<ion-view title="Books" cache-view="false">
+
   	<ion-nav-buttons side="left">
+  	
     	<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    	
   	</ion-nav-buttons>
   	<ion-nav-buttons side="right">
+  	
   		<button class="button button-icon icon ion-refresh" ng-click="load()"></button>
+  		
   	</ion-nav-buttons>
-	<ion-content>
+  	
+	<ion-content>	
 	
 	  	<ion-refresher pulling-text="Pull to refresh..." on-refresh="load()"></ion-refresher>
 	
@@ -17,17 +23,14 @@
 			</label>
 			<button ng-click="resetSearch()" class="button-clear icon ion-close-circled"></button> 		
 		</div>
-	
-		<div ng-show="!books && !searching" class="list-group-item">No books found.</div>
-		<div ng-show="searching" class="list-group-item">Searching ...</div>
-		
+			
 		<ion-list ng-show="books">
 	       	<ion-item ng-repeat="book in books | orderBy:'value.volumeInfo.title' | bookFilter:searchQuery.fullTextSearch" class="item-thumbnail-left" href="#/app/book/{{book.hashCode}}">
 	       		<image-data image="book.image"></image-data>
 				<h2>{{::book.value.volumeInfo.title}}</h2>				
 				<h3 ng-show="book.value.volumeInfo.subtitle">{{::book.value.volumeInfo.subtitle}}</h3>
-				<p ng-show="book.authorInfo">by {{::book.authorInfo}}</p>
-				<p ng-show="book.count">Amount: {{::book.count}}</p>
+				<p>by {{::book.authorInfo}}</p>
+				<p>Amount: {{::book.count}}</p>
 				<ion-option-button ng-click="showBookDetails(book)" class="button-positive">
 		      		Info
 		    	</ion-option-button>
@@ -36,6 +39,6 @@
 		    	</ion-option-button>
 	       	</ion-item>
 	   	</ion-list>
-   	
+	   	   	
  	 </ion-content>
 </ion-view>

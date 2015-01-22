@@ -339,10 +339,9 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
             },
             read: function() {
                 var deferred = $q.defer(),
-                    books = null,
                     response = {},
                     flynnDB = getDB();
-                if (flynnDB) {
+                if (flynnDB ) {
                     logService.debug('Using db-adapter: ' + flynnDB.adapter);
                     flynnDB.allDocs({
                         include_docs: true,
@@ -351,13 +350,13 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     }, function(err, doc) {
                         $rootScope.$apply(function() {
                             if (!err) {
-                                var books = null,
+                                var books = {},
                                     rows = doc.rows;
                                 if (rows && rows.length > 0) {
                                     books = [];
                                     for (var id in rows) {
                                         var bookEntry = rows[id].doc;
-                                        // only add complet entries to results
+                                        // only add complete entries to results
                                         if (bookEntry.value && bookEntry.value.volumeInfo) {
                                             if (bookEntry._attachments) {
                                                 var attachment = bookEntry._attachments['thumbnail_' + bookEntry.value.id];
@@ -390,6 +389,54 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                 return deferred.promise;
 
             },
+            searchISBN: function(pBooks,pISBN) {
+                if (rows && rows.length > 0) {
+                    var response = {};
+                    response.books = {}
+                    response.count = 0;
+                    for (var id in rows) {
+                        var bookEntry = rows[id].doc;
+                        if (bookEntry.value && bookEntry.value.volumeInfo) {
+                            var idInfoDtls = bookEntry.value.volumeInfo.industryIdentifiers;
+                            if (idInfoDtls) {
+                                if (idInfoDtls[0].identifier == pISBN) {
+                                    response.books[id] = bookEntry;
+                                    response.count++;
+                                } else {
+                                    if (idInfoDtls.length > 1 && idInfoDtls[1].identifier == pISBN) {
+                                        response.books[id] = bookEntry;
+                                        response.count++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    logService.info('Got ' + response.count + ' results.');
+                    return response;
+                } else {
+                    logService.info('Got no results.');
+                    return false;
+                }
+            },
+            searchID: function(pBooks,pID) {
+                if (rows && rows.length > 0) {
+                    var response = {};
+                    response.books = {}
+                    response.count = 0;
+                    for (var id in pBooks) {
+                        var bookEntry = rows[id].doc;
+                        if (bookEntry.value && bookEntry.value.id == pID) {
+                            response.books[id] = bookEntry;
+                            response.count++;
+                        }
+                    }
+                    logService.info('Got ' + response.count + ' results.');
+                    return response;
+                } else {
+                    logService.info('Got no results.');
+                    return false;
+                }
+            },
             search: function(pSearchQuery) {
                 var deferred = $q.defer(),
                     response = {},
@@ -397,43 +444,21 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                 logService.debug('Starting search: ' + JSON.stringify(pSearchQuery));
                 if (pSearchQuery.isbn) {
                     var isbn = '' + pSearchQuery.isbn;
-                    logService.debug("Starting isbn-search: " + isbn);
+                    logService.debug('Starting isbn-search: ' + isbn);
                     flynnDB.allDocs({
                         include_docs: true,
                         descending: true
                     }, function(err, res) {
                         $rootScope.$apply(function() {
                             if (!err) {
-                                var rows = res.rows;
-                                if (rows && rows.length > 0) {
-                                    response.books = {};
-                                    var count = 0;
-                                    for (var id in rows) {
-                                        var bookEntry = rows[id].doc;
-                                        if (bookEntry.value && bookEntry.value.volumeInfo) {
-                                            var idInfoDtls = bookEntry.value.volumeInfo.industryIdentifiers;
-                                            if (idInfoDtls) {
-                                                if (idInfoDtls[0].identifier == isbn) {
-                                                    response.books[id] = bookEntry;
-                                                    count++;
-                                                } else {
-                                                    if (idInfoDtls.length > 1 && idInfoDtls[1].identifier == isbn) {
-                                                        response.books[id] = bookEntry;
-                                                        count++;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                    response.count = count;
-                                    logService.info("Got " + count + " results.");
-                                    deferred.resolve(response);
-                                } else {
-                                    logService.info("Got no results.");
+                                var result= searchISBN(res.rows,isbn)
+                                if(!result){
                                     deferred.reject(response);
+                                } else {
+                                    deferred.resolve(result);
                                 }
                             } else {
-                                logService.error("Search error: " + err);
+                                logService.error('Search error: ' + err);
                                 deferred.reject(response);
                             }
                         });
@@ -441,30 +466,18 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                 } else {
                     if (pSearchQuery.id) {
                         var bookId = '' + pSearchQuery.id;
-                        logService.debug("Starting id-search: " + bookId);
+                        logService.debug('Starting id-search: ' + bookId);
                         flynnDB.allDocs({
                             include_docs: true,
                             descending: true
                         }, function(err, res) {
                             $rootScope.$apply(function() {
                                 if (!err) {
-                                    var rows = res.rows;
-                                    if (rows && rows.length > 0) {
-                                        response.books = {};
-                                        var count = 0;
-                                        for (var id in rows) {
-                                            var bookEntry = rows[id].doc;
-                                            if (bookEntry.value && bookEntry.value.id == bookId) {
-                                                response.books[id] = bookEntry;
-                                                count++;
-                                            }
-                                        }
-                                        response.count = count;
-                                        logService.info("Got " + count + " results.");
-                                        deferred.resolve(response);
-                                    } else {
-                                        logService.info("Got no results.");
+                                    var result= searchISBN(res.rows,bookId)
+                                    if(!result){
                                         deferred.reject(response);
+                                    } else {
+                                        deferred.resolve(result);
                                     }
                                 } else {
                                     logService.error("Search error: " + err);

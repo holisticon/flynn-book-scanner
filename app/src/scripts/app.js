@@ -194,16 +194,16 @@ app.run(function($ionicPlatform) {
  * @description configure app
  */
 app.config(function($urlRouterProvider, $httpProvider, $stateProvider, $ionicConfigProvider, webWorkerPoolProvider, logServiceProvider, APP_CONFIG) {
-    //
+    // limit webworker threads
     webWorkerPoolProvider.workerUrl('scripts/webworker.renderImage.js');
-    webWorkerPoolProvider.capacity(8);
+    webWorkerPoolProvider.capacity(4);
     // places them at the bottom for all OS
     $ionicConfigProvider.tabs.position("bottom");
     // makes them all look the same across all OS
     $ionicConfigProvider.tabs.style("standard");
     // configure caching
-    $ionicConfigProvider.views.maxCache(10);
-    $ionicConfigProvider.templates.maxPrefetch(5);
+    $ionicConfigProvider.views.maxCache(2);
+    $ionicConfigProvider.templates.maxPrefetch(1);
     // configure logging
     logServiceProvider.dbName('flynnDB_logs');
     logServiceProvider.enableDebugLogging(APP_CONFIG.debug);
