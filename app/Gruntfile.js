@@ -139,17 +139,6 @@ module.exports = function(grunt) {
         }
       }
     },
-    rev: {
-      dist: {
-        files: {
-          src: [
-            '<%= yeoman.dist %>/scripts/{,*/}*.js',
-            '<%= yeoman.dist %>/styles/{,*/}*.css',
-            '<%= yeoman.dist %>/styles/fonts/*'
-          ]
-        }
-      }
-    },
     useminPrepare: {
       html: '<%= yeoman.app %>/index.html',
       options: {
@@ -188,6 +177,7 @@ module.exports = function(grunt) {
             'config.json',
             'images/{,*/}*.*',
             'styles/fonts/*',
+            'scripts/webworker*.js',
             '*.js',
             'views/*.html',
             'templates/*.html'
@@ -271,7 +261,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.dist %>/scripts',
-          src: '*.js',
+          src: ['*.js','!webworker*.js'],
           dest: '<%= yeoman.dist %>/scripts'
         }]
       }
@@ -323,7 +313,6 @@ module.exports = function(grunt) {
     'autoprefixer',
     'concat',
     'copy:dist',
-    'rev',
     'usemin',
     'ngdocs',
     'plato'
@@ -336,12 +325,13 @@ module.exports = function(grunt) {
     'autoprefixer',
     'concat',
     'copy:dist',
-    'cdnify',
     'ngmin',
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    'ngdocs',
+    'plato'
   ]);
 
   grunt.registerTask('default', [

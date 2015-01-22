@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name errorDialogClosed
@@ -80,7 +78,8 @@ var app = angular.module('flynnBookScannerApp', [
     'ngRoute',
     'ngTouch',
     'ionic',
-    'dbLog'
+    'dbLog',
+    'webWorkerPool'
 ]);
 
 /**
@@ -194,7 +193,10 @@ app.run(function($ionicPlatform) {
  * @module flynnBookScannerApp
  * @description configure app
  */
-app.config(function($urlRouterProvider, $httpProvider, $stateProvider, $ionicConfigProvider, logServiceProvider, APP_CONFIG) {
+app.config(function($urlRouterProvider, $httpProvider, $stateProvider, $ionicConfigProvider, webWorkerPoolProvider, logServiceProvider, APP_CONFIG) {
+    //
+    webWorkerPoolProvider.workerUrl('scripts/webworker.renderImage.js');
+    webWorkerPoolProvider.capacity(8);
     // places them at the bottom for all OS
     $ionicConfigProvider.tabs.position("bottom");
     // makes them all look the same across all OS

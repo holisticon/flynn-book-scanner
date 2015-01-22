@@ -28,12 +28,15 @@
         <script src="/bower_components/ionic/release/js/ionic.js"></script>
         <script src="/bower_components/ionic/release/js/ionic-angular.js"></script>
         <script src="/bower_components/pouchdb/dist/pouchdb.js"></script>
-        <!-- endbuild -->
-
-        <!-- build:js(./) scripts/modules.js -->
         <script src="/bower_components/angular-local-storage/angular-local-storage.js"></script>
         <script src="/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
         <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:js({.tmp,src}) scripts/modules.js -->
+        <script src="scripts/plugins/webworkerpool-core-angular.js"></script>
+        <script src="scripts/plugins/utils.js"></script>
+        <script src="scripts/plugins/db_logger.js"></script>
         <!-- endbuild -->
 
         <!-- Cordova stuff -->
@@ -41,14 +44,12 @@
         <script src="cordova_plugins.js"></script>
 
         <!-- build:js({.tmp,src}) scripts/app.js -->
-        <script src="scripts/plugins/utils.js"></script>
-        <script src="scripts/plugins/db_logger.js"></script>
-        <script src="scripts/plugins/blob-util.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/controllers.js"></script>
         <script src="scripts/modules/directives.js"></script>
         <script src="scripts/modules/services.js"></script>
         <!-- endbuild -->
+        
     </head>
     <body>
 		<ion-nav-view></ion-nav-view>
