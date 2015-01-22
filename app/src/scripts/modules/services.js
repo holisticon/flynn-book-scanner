@@ -1,3 +1,7 @@
+app.factory('imageDataCache', function($cacheFactory) {
+    return $cacheFactory('imageData');
+});
+
 app.factory('base64', function() {
     'use strict';
 
@@ -341,12 +345,11 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                 var deferred = $q.defer(),
                     response = {},
                     flynnDB = getDB();
-                if (flynnDB ) {
+                if (flynnDB) {
                     logService.debug('Using db-adapter: ' + flynnDB.adapter);
                     flynnDB.allDocs({
                         include_docs: true,
-                        attachments: true,
-                        descending: true
+                        attachments: true
                     }, function(err, doc) {
                         $rootScope.$apply(function() {
                             if (!err) {
@@ -364,6 +367,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                                     bookEntry.image = {};
                                                     bookEntry.image.content_type = attachment.content_type;
                                                     bookEntry.image.data = attachment.data;
+                                                    bookEntry.image.id = 'thumbnail_' + bookEntry.value.id;
                                                 }
                                             }
                                             bookEntry._attachments = null;
@@ -389,7 +393,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                 return deferred.promise;
 
             },
-            searchISBN: function(pBooks,pISBN) {
+            searchISBN: function(pBooks, pISBN) {
                 if (rows && rows.length > 0) {
                     var response = {};
                     response.books = {}
@@ -418,7 +422,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     return false;
                 }
             },
-            searchID: function(pBooks,pID) {
+            searchID: function(pBooks, pID) {
                 if (rows && rows.length > 0) {
                     var response = {};
                     response.books = {}
@@ -451,8 +455,8 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     }, function(err, res) {
                         $rootScope.$apply(function() {
                             if (!err) {
-                                var result= searchISBN(res.rows,isbn)
-                                if(!result){
+                                var result = searchISBN(res.rows, isbn)
+                                if (!result) {
                                     deferred.reject(response);
                                 } else {
                                     deferred.resolve(result);
@@ -473,8 +477,8 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                         }, function(err, res) {
                             $rootScope.$apply(function() {
                                 if (!err) {
-                                    var result= searchISBN(res.rows,bookId)
-                                    if(!result){
+                                    var result = searchISBN(res.rows, bookId)
+                                    if (!result) {
                                         deferred.reject(response);
                                     } else {
                                         deferred.resolve(result);

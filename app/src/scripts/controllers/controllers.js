@@ -59,10 +59,11 @@ app.controller('AppController', ['$scope', '$rootScope', '$state', '$ionicLoadin
  * @description
  * Interacts with inventory backend to show up book details
  */
-app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoading', '$http', '$ionicActionSheet', 'settingsService', 'logService', 'inventoryService',
-    function($rootScope, $scope, $state, $ionicLoading, $http, $ionicActionSheet, settings, logService, inventoryService) {
+app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', '$ionicLoading', '$http', '$ionicActionSheet', 'settingsService', 'logService', 'inventoryService',
+    function($rootScope, $scope, $state, $filter, $ionicLoading, $http, $ionicActionSheet, settings, logService, inventoryService) {
 
-        var allBooks, config = settings.load();
+        var config = settings.load(),
+            allBooks;
 
 
         function syncWithServer() {
@@ -93,13 +94,11 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
             function onSuccess(response) {
                 if (response.books) {
                     allBooks = enrichDbData(response.books);
-                    $scope.books = enrichDbData(response.books);
+                    $scope.books = allBooks;
                     // sync if server was added
                     if (config.activeProfile().remotesync && !pDontSync) {
                         syncWithServer();
                     }
-                    // Stop the ion-refresher from spinning
-                    $scope.$broadcast('scroll.refreshComplete');
                 }
                 $ionicLoading.hide();
             }
@@ -111,8 +110,12 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
             }
         }
 
+        function doSearch() {
+            $scope.books = $filter('bookFilter')(allBooks, $scope.searchQuery.fullTextSearch);
+        }
 
         function resetSearch() {
+            $scope.books = allBooks;
             $scope.searchQuery = {};
         }
 
@@ -169,6 +172,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
         $scope.showBookDetails = showBookDetails;
         $scope.showActionMenu = showActionMenu;
         $scope.resetSearch = resetSearch;
+        $scope.doSearch = doSearch;
 
     }
 ]);
@@ -183,8 +187,8 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$ionicLoad
  */
 app.controller('BookDetailsController', ['$rootScope', '$scope', '$stateParams', '$ionicLoading', '$location', 'logService', 'settingsService', 'inventoryService', 'googleBookService',
     function($rootScope, $scope, $stateParams, $ionicLoading, $location, log, settingsService, inventoryService, googleBookService) {
-        var booksInventory, credentials = settingsService.load();
-        var bookID = $stateParams.bookId;
+        var credentials = settingsService.load(),
+            bookID = $stateParams.bookId;
 
         function load() {
             if (bookID) {

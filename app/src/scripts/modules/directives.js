@@ -2,7 +2,7 @@
  * @ngdoc directive
  * @name imageData
  * @module flynnBookScannerApp
- * @description creates img element from provide base64 encoded image data
+ * @description show book details
  */
 app.directive('bookViewDetails', ['$timeout', '$ionicLoading', 'base64', 'logService',
 	function($timeout, $ionicLoading, base64, logService) {
@@ -18,9 +18,9 @@ app.directive('bookViewDetails', ['$timeout', '$ionicLoading', 'base64', 'logSer
 			link: function(scope, element, attrs) {
 				$ionicLoading.show();
 				scope.$watch('selectedBook', function(selectedBook) {
-			         $timeout(function(){
-							$ionicLoading.hide();
-			         }, 5);
+					$timeout(function() {
+						$ionicLoading.hide();
+					}, 5);
 				});
 			}
 		}
@@ -31,7 +31,7 @@ app.directive('bookViewDetails', ['$timeout', '$ionicLoading', 'base64', 'logSer
  * @ngdoc directive
  * @name imageData
  * @module flynnBookScannerApp
- * @description creates img element from provide base64 encoded image data
+ * @description creates input formular for adding a book
  */
 app.directive('bookEditDetails', ['$timeout', '$ionicLoading', 'base64', 'logService',
 	function($timeout, $ionicLoading, base64, logService) {
@@ -48,9 +48,9 @@ app.directive('bookEditDetails', ['$timeout', '$ionicLoading', 'base64', 'logSer
 			link: function(scope, element, attrs) {
 				$ionicLoading.show();
 				scope.$watch('selectedBook', function(selectedBook) {
-			         $timeout(function(){
-							$ionicLoading.hide();
-			         }, 5);
+					$timeout(function() {
+						$ionicLoading.hide();
+					}, 5);
 				});
 			}
 		}
@@ -76,7 +76,6 @@ app.directive('isFocused', ['$timeout', 'logService',
 				if (scope.trigger()) {
 					$timeout(function() {
 						element[0].focus();
-						element[0].click();
 						if (typeof cordova != 'undefined') {
 							cordova.plugins.Keyboard.show();
 						}
@@ -93,10 +92,9 @@ app.directive('isFocused', ['$timeout', 'logService',
  * @module flynnBookScannerApp
  * @description creates img element from provide base64 encoded image data
  */
-app.directive('imageData', ['base64', 'logService', 'webWorkerPool',
-	function(base64, logService, webWorkerPool) {
+app.directive('imageData', ['imageDataCache', 'base64', 'logService', 'webWorkerPool',
+	function(imageDataCache, base64, logService, webWorkerPool) {
 		'use strict';
-
 		return {
 			restrict: 'E',
 			scope: {
@@ -107,11 +105,15 @@ app.directive('imageData', ['base64', 'logService', 'webWorkerPool',
 			link: function(scope, element, attrs) {
 				scope.$watch('image', function(image) {
 					if (image && image.data && !element.attr('src')) {
-						webWorkerPool.postMessage(image).then(function(event) {
-							var img = element[0],
-								url = event.data;
-							img.src = url;
-						});
+						if (imageDataCache.get(image.id) === undefined) {
+							webWorkerPool.postMessage(image).then(function(event) {
+								var url = event.data;
+								element[0].src = url;
+								imageDataCache.put(image.id, url);
+							});
+						} else {
+							element[0].src = imageDataCache.get(image.id);
+						}
 					}
 				});
 			}

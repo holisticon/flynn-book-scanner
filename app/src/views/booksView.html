@@ -1,4 +1,4 @@
-<ion-view title="Books" cache-view="false">
+<ion-view title="Books">
 
   	<ion-nav-buttons side="left">
   	
@@ -13,20 +13,22 @@
   	
 	<ion-content>	
 	
-	  	<ion-refresher pulling-text="Pull to refresh..." on-refresh="load()"></ion-refresher>
-	
 		<div class="item-input-inset">
 			<label class="item-input-wrapper">
 	    		<i class="icon ion-ios7-search placeholder-icon"></i>
-	    		<input type="search" data-ng-model="searchQuery.fullTextSearch"  is-focused="true"
+	    		<input type="search" data-ng-model="searchQuery.fullTextSearch"  is-focused="true" ng-change="doSearch()"
 	    		   placeholder="Type keywords to search ...">
 			</label>
-			<button ng-click="resetSearch()" class="button-clear icon ion-close-circled"></button> 		
+			<button ng-click="resetSearch()" class="button button-clear">
+			    Cancel
+			</button>	
 		</div>
+		
+		<div ng-show="!books" class="list-group-item">No books found.</div>
 			
 		<ion-list ng-show="books">
-	       	<ion-item ng-repeat="book in books | orderBy:'value.volumeInfo.title' | bookFilter:searchQuery.fullTextSearch" class="item-thumbnail-left" href="#/app/book/{{book.hashCode}}">
-	       		<image-data image="book.image"></image-data>
+	       	<ion-item ng-repeat="book in books | orderBy:'value.volumeInfo.title'" class="item-thumbnail-left" href="#/app/book/{{book.hashCode}}">
+	       		<image-data image="::book.image"></image-data>
 				<h2>{{::book.value.volumeInfo.title}}</h2>				
 				<h3 ng-show="book.value.volumeInfo.subtitle">{{::book.value.volumeInfo.subtitle}}</h3>
 				<p>by {{::book.authorInfo}}</p>

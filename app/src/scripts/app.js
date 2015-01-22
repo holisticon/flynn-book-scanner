@@ -136,7 +136,7 @@ app.filter('bookFilter', [function() {
                             if (book.value.volumeInfo.description && book.value.volumeInfo.description.toUpperCase().indexOf(searchText) > -1) {
                                 filtered.push(book);
                             } else {
-                                if (book.value.volumeInfo.publishedDate && book.value.volumeInfo.publishedDate.toUpperCase().indexOf(searchText) > -1) {
+                                if (book.value.volumeInfo.publishedDate && book.value.volumeInfo.publishedDate.toString().toUpperCase().indexOf(searchText) > -1) {
                                     filtered.push(book);
                                 } else {
                                     if (book.value.volumeInfo.authors && searchList(book.value.volumeInfo.authors, searchText)) {
@@ -202,7 +202,7 @@ app.config(function($urlRouterProvider, $httpProvider, $stateProvider, $ionicCon
     // makes them all look the same across all OS
     $ionicConfigProvider.tabs.style("standard");
     // configure caching
-    $ionicConfigProvider.views.maxCache(2);
+    $ionicConfigProvider.views.maxCache(3);
     $ionicConfigProvider.templates.maxPrefetch(1);
     // configure logging
     logServiceProvider.dbName('flynnDB_logs');
