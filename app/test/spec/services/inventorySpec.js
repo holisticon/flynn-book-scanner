@@ -78,7 +78,7 @@ describe("inventoryService", function() {
       var promise = service.read(),
         books = null;
       promise.then(function(response) {
-        expect(response.books).toBeNull();
+        expect(response.books).toBeUndefined();
         done();
       });
       rootScope.$apply();
@@ -170,7 +170,7 @@ describe("inventoryService", function() {
         expect(response.books.length).toEqual(1);
         service.remove(bookToSave).then(function(response) {
           service.read().then(function(readResponse) {
-            expect(readResponse.books).toBeNull();
+            expect(readResponse.books).toBeUndefined();
             done();
           });
         });

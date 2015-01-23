@@ -67,11 +67,7 @@ dbLog.provider('logService', function LogServiceProvider() {
             };
         if (db && db.bulkDocs) {
             logEntry._id = '' + timestamp.getTime();
-            db.put(logEntry, function(error, response) {
-                if (error) {
-                    console.error('Error during writing log entries: ' + error);
-                }
-            });
+            db.put(logEntry, function(error, response) { });
         }
     }
     var readLogs = function(pLoglevel) {

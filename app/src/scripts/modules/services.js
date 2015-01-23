@@ -354,7 +354,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     }, function(err, doc) {
                         $rootScope.$apply(function() {
                             if (!err) {
-                                var books = {},
+                                var books,
                                     rows = doc.rows;
                                 if (rows && rows.length > 0) {
                                     books = [];
@@ -377,8 +377,8 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                         }
                                     }
                                 }
-                                response.books = books;
                                 if (books) {
+                                    response.books = books;
                                     logService.debug('Found ' + books.length + ' books in inventory.');
                                 }
                                 deferred.resolve(response);
