@@ -344,6 +344,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
             read: function() {
                 var deferred = $q.defer(),
                     response = {},
+                    self = this,
                     flynnDB = getDB();
                 if (flynnDB) {
                     logService.debug('Using db-adapter: ' + flynnDB.adapter);
@@ -394,12 +395,12 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
 
             },
             searchISBN: function(pBooks, pISBN) {
-                if (rows && rows.length > 0) {
+                if (pBooks && pBooks.length > 0) {
                     var response = {};
                     response.books = {}
                     response.count = 0;
-                    for (var id in rows) {
-                        var bookEntry = rows[id].doc;
+                    for (var id in pBooks) {
+                        var bookEntry = pBooks[id].doc;
                         if (bookEntry.value && bookEntry.value.volumeInfo) {
                             var idInfoDtls = bookEntry.value.volumeInfo.industryIdentifiers;
                             if (idInfoDtls) {
@@ -423,12 +424,12 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                 }
             },
             searchID: function(pBooks, pID) {
-                if (rows && rows.length > 0) {
+                if (pBooks && pBooks.length > 0) {
                     var response = {};
                     response.books = {}
                     response.count = 0;
                     for (var id in pBooks) {
-                        var bookEntry = rows[id].doc;
+                        var bookEntry = pBooks[id].doc;
                         if (bookEntry.value && bookEntry.value.id == pID) {
                             response.books[id] = bookEntry;
                             response.count++;
@@ -444,6 +445,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
             search: function(pSearchQuery) {
                 var deferred = $q.defer(),
                     response = {},
+                    self = this,
                     flynnDB = getDB();
                 logService.debug('Starting search: ' + JSON.stringify(pSearchQuery));
                 if (pSearchQuery.isbn) {
@@ -455,7 +457,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     }, function(err, res) {
                         $rootScope.$apply(function() {
                             if (!err) {
-                                var result = searchISBN(res.rows, isbn)
+                                var result = self.searchISBN(res.rows, isbn)
                                 if (!result) {
                                     deferred.reject(response);
                                 } else {
@@ -477,7 +479,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                         }, function(err, res) {
                             $rootScope.$apply(function() {
                                 if (!err) {
-                                    var result = searchISBN(res.rows, bookId)
+                                    var result = self.searchID(res.rows, bookId)
                                     if (!result) {
                                         deferred.reject(response);
                                     } else {

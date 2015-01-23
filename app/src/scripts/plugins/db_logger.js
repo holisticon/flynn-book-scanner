@@ -42,31 +42,32 @@ dbLog.provider('logService', function LogServiceProvider() {
 
     var getDB = function() {
         var logDB;
-        if (typeof cordova != 'undefined' && cordova.platformId === 'android') {
-            // for performance use indexedDB on Android
-            logDB = new PouchDB(dbName, {
-                adapter: 'idb'
-            });
-        } else {
-            // default use websql
-            logDB = new PouchDB(dbName, {
-                adapter: 'websql'
-            });
+        if (!logDB) {
+            if (typeof cordova != 'undefined' && cordova.platformId === 'android') {
+                // for performance use indexedDB on Android
+                logDB = new PouchDB(dbName, {
+                    adapter: 'idb'
+                });
+            } else {
+                // default use websql
+                logDB = new PouchDB(dbName, {
+                    adapter: 'websql'
+                });
+            }
         }
         return logDB;
     }
     var writeLogEntry = function(pLogLevel, pMessage) {
         var timestamp = new Date(),
             db = getDB(),
-            logs = [],
             logEntry =   {
                 timestamp: timestamp,
                 level: pLogLevel,
                 details: pMessage
             };
-        logs.push(logEntry);
         if (db && db.bulkDocs) {
-            db.bulkDocs(logs, function(error, response) {
+            logEntry._id = '' + timestamp.getTime();
+            db.put(logEntry, function(error, response) {
                 if (error) {
                     console.error('Error during writing log entries: ' + error);
                 }
