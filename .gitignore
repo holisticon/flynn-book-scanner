@@ -35,6 +35,14 @@ app/platforms/android/assets/www/*
 app/platforms/wp7/www/*
 app/platforms/wp7/obj/Debug/*
 app/platforms/wp7/Bin/Debug/*
+app/platforms/windows/www/*
+app/platforms/wp8/www/*
+app/platforms/wp8/obj/Debug/*
+app/platforms/wp8/Bin/*
 app/bin/*
 app/target/*
 app/src-gen/*
+
+
+
+

@@ -1,0 +1,76 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "package.windows.appxmanifest": {
+                "parents": {
+                    "/Package/Capabilities": [
+                        {
+                            "xml": "<Capability Name=\"picturesLibrary\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<DeviceCapability Name=\"webcam\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "package.windows80.appxmanifest": {
+                "parents": {
+                    "/Package/Capabilities": [
+                        {
+                            "xml": "<Capability Name=\"picturesLibrary\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<DeviceCapability Name=\"webcam\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "package.phone.appxmanifest": {
+                "parents": {
+                    "/Package/Capabilities": [
+                        {
+                            "xml": "<Capability Name=\"picturesLibrary\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<DeviceCapability Name=\"webcam\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "com.ionic.keyboard": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "com.phonegap.plugins.barcodescanner": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "com.phonegap.plugins.sqlite": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "org.apache.cordova.console": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "org.apache.cordova.dialogs": {
+            "PACKAGE_NAME": "Flynn"
+        }
+    },
+    "dependent_plugins": {}
+}

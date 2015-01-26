@@ -193,8 +193,10 @@ app.run(function($ionicPlatform) {
  * @module flynnBookScannerApp
  * @description configure app
  */
-app.config(function($urlRouterProvider, $httpProvider, $stateProvider, $ionicConfigProvider, webWorkerPoolProvider, logServiceProvider, APP_CONFIG) {
-    // limit webworker threads
+app.config(function($urlRouterProvider,$compileProvider, $httpProvider, $stateProvider, $ionicConfigProvider, webWorkerPoolProvider, logServiceProvider, APP_CONFIG) {
+	// fix wp8 cordova errors
+	$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|ghttps?|ms-appx|x-wmapp0):/);
+	// limit webworker threads
     webWorkerPoolProvider.workerUrl('scripts/webworker.renderImage.js');
     webWorkerPoolProvider.capacity(4);
     // places them at the bottom for all OS

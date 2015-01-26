@@ -1,0 +1,74 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"wp-package\" value=\"Camera\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Console\"><param name=\"wp-package\" value=\"DebugConsole\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"wp-package\" value=\"Device\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Notification\"><param name=\"wp-package\" value=\"Notification\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "Properties/WMAppManifest.xml": {
+                "parents": {
+                    "/Deployment/App/Capabilities": [
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_ISV_CAMERA\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_MEDIALIB_PHOTO\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_IDENTITY_DEVICE\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "com.ionic.keyboard": {
+            "PACKAGE_NAME": "{a3437850-a542-11e4-b1d5-f53a371496c7}"
+        },
+        "com.phonegap.plugins.barcodescanner": {
+            "PACKAGE_NAME": "{a3437850-a542-11e4-b1d5-f53a371496c7}"
+        },
+        "com.phonegap.plugins.sqlite": {
+            "PACKAGE_NAME": "{a3437850-a542-11e4-b1d5-f53a371496c7}"
+        },
+        "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "{a3437850-a542-11e4-b1d5-f53a371496c7}"
+        },
+        "org.apache.cordova.console": {
+            "PACKAGE_NAME": "{a3437850-a542-11e4-b1d5-f53a371496c7}"
+        },
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "{a3437850-a542-11e4-b1d5-f53a371496c7}"
+        },
+        "org.apache.cordova.dialogs": {
+            "PACKAGE_NAME": "{a3437850-a542-11e4-b1d5-f53a371496c7}"
+        }
+    },
+    "dependent_plugins": {}
+}
