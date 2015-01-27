@@ -65,6 +65,15 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
         var config = settings.load(),
             allBooks;
 
+        // use paged list for view contents only
+        function getBooks() {
+            return $scope.books;
+        }
+
+        function getBookHeight(book, index) {
+            //Make evenly indexed items be 10px taller, for the sake of example
+            return (index % 2) === 0 ? 100 : 100;
+        }
 
         function syncWithServer() {
             $ionicLoading.show({
@@ -94,7 +103,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
             function onSuccess(response) {
                 if (response.books) {
                     allBooks = enrichDbData(response.books);
-                    $scope.books = allBooks;
+                    resetSearch();
                     // sync if server was added
                     if (config.activeProfile().remotesync && !pDontSync) {
                         syncWithServer();
@@ -173,6 +182,8 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
         $scope.showActionMenu = showActionMenu;
         $scope.resetSearch = resetSearch;
         $scope.doSearch = doSearch;
+        $scope.getBooks = getBooks;
+        $scope.getBookHeight = getBookHeight;
 
     }
 ]);

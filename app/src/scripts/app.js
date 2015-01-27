@@ -120,32 +120,39 @@ app.filter('bookFilter', [function() {
     }
     return function(pBooks, pSearchText) {
         if (pSearchText) {
-            var filtered = [],
+            var found=false,
+            	filtered,
                 searchText = pSearchText.toUpperCase();
             for (var i = 0, len = pBooks.length; i < len; i++) {
-                var book = pBooks[i];
+                var book = pBooks[i],found=false;
                 if (book.value.volumeInfo.title.toUpperCase() === searchText) { // matches whole word
-                    filtered.push(book);
+                	found=true;
                 } else {
                     if (book.value.volumeInfo.title.toUpperCase().indexOf(searchText) > -1) {
-                        filtered.push(book);
+                    	found=true;
                     } else {
                         if (book.value.volumeInfo.subtitle && book.value.volumeInfo.subtitle.toUpperCase().indexOf(searchText) > -1) {
-                            filtered.push(book);
+                        	found=true;
                         } else {
                             if (book.value.volumeInfo.description && book.value.volumeInfo.description.toUpperCase().indexOf(searchText) > -1) {
-                                filtered.push(book);
+                            	found=true;
                             } else {
                                 if (book.value.volumeInfo.publishedDate && book.value.volumeInfo.publishedDate.toString().toUpperCase().indexOf(searchText) > -1) {
-                                    filtered.push(book);
+                                	found=true;
                                 } else {
                                     if (book.value.volumeInfo.authors && searchList(book.value.volumeInfo.authors, searchText)) {
-                                        filtered.push(book);
+                                    	found=true;
                                     }
                                 }
                             }
                         }
                     }
+                }
+                if(found){
+                	if(!filtered){
+                    	filtered=[];                		
+                	}
+                    filtered.push(book);
                 }
             };
             return filtered;

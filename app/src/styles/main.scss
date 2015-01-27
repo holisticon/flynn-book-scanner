@@ -80,8 +80,13 @@
 	background: #CACACA;
 }
 
+.item-complex {
+  left: 0;
+  right: 0;
+}
+
 .item-thumbnail-left .item-content > img:first-child{
-	width: auto;
+  width: auto;
 }
 
 .button.button-positive {

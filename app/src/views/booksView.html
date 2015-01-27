@@ -24,10 +24,15 @@
 			</button>	
 		</div>
 		
-		<div ng-show="!books" class="list-group-item">No books found.</div>
+		
 			
-		<ion-list ng-show="books">
-	       	<ion-item ng-repeat="book in books | orderBy:'value.volumeInfo.title'" class="item-thumbnail-left" href="#/app/book/{{book.hashCode}}">
+		<ion-list>
+			<div ng-show="!books" class="item">No books found.</div>
+	       	<ion-item class="item-thumbnail-left"
+	       		collection-repeat="book in getBooks()" 
+				collection-item-width="'100%'"      			
+    			collection-item-height="'100px'"
+	       		href="#/app/book/{{book.hashCode}}">
 	       		<image-data image="::book.image"></image-data>
 				<h2>{{::book.value.volumeInfo.title}}</h2>				
 				<h3 ng-show="book.value.volumeInfo.subtitle">{{::book.value.volumeInfo.subtitle}}</h3>
