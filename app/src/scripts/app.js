@@ -211,8 +211,8 @@ app.config(function($urlRouterProvider,$compileProvider, $httpProvider, $statePr
     // makes them all look the same across all OS
     $ionicConfigProvider.tabs.style("standard");
     // configure caching
-    $ionicConfigProvider.views.maxCache(3);
-    $ionicConfigProvider.templates.maxPrefetch(1);
+    $ionicConfigProvider.views.maxCache(5);
+    $ionicConfigProvider.templates.maxPrefetch(3);
     // configure logging
     logServiceProvider.dbName('flynnDB_logs');
     logServiceProvider.enableDebugLogging(APP_CONFIG.debug);
@@ -249,6 +249,7 @@ app.config(function($urlRouterProvider,$compileProvider, $httpProvider, $statePr
             }
         })
         .state('app.books', {
+        	cache: false,
             url: "/books",
             views: {
                 'menuContent': {
