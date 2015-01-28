@@ -29,7 +29,7 @@
 		<ion-list>
 			<div ng-show="!books" class="item">No books found.</div>
 	       	<ion-item class="item-thumbnail-left"
-	       		collection-repeat="book in getBooks()" 
+	       		collection-repeat="book in getBooks() | orderBy:'value.volumeInfo.title'" 
 				collection-item-width="'100%'"      			
     			collection-item-height="'100px'"
 	       		href="#/app/book/{{book.hashCode}}">
