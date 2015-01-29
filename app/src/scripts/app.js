@@ -249,7 +249,6 @@ app.config(function($urlRouterProvider,$compileProvider, $httpProvider, $statePr
             }
         })
         .state('app.books', {
-        	cache: false,
             url: "/books",
             views: {
                 'menuContent': {

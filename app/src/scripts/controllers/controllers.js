@@ -114,7 +114,8 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
         }
 
         function resetSearch() {
-        	load(false);
+            $scope.searchQuery = {};
+            $scope.books = allBooks;
         }
 
         function removeBook(pBookToRemove) {
