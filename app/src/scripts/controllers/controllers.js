@@ -59,21 +59,11 @@ app.controller('AppController', ['$scope', '$rootScope', '$state', '$ionicLoadin
  * @description
  * Interacts with inventory backend to show up book details
  */
-app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', '$ionicLoading', '$http', '$ionicActionSheet', 'settingsService', 'logService', 'inventoryService',
-    function($rootScope, $scope, $state, $filter, $ionicLoading, $http, $ionicActionSheet, settings, logService, inventoryService) {
+app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', '$ionicScrollDelegate', '$ionicLoading', '$http', '$ionicActionSheet', 'settingsService', 'logService', 'inventoryService',
+    function($rootScope, $scope, $state, $filter, $ionicScrollDelegate, $ionicLoading, $http, $ionicActionSheet, settings, logService, inventoryService) {
 
         var config = settings.load(),
             allBooks;
-
-        // use paged list for view contents only
-        function getBooks() {
-            return $scope.books;
-        }
-
-        function getBookHeight(book, index) {
-            //Make evenly indexed items be 10px taller, for the sake of example
-            return (index % 2) === 0 ? 100 : 100;
-        }
 
         function syncWithServer() {
             $ionicLoading.show({
@@ -103,13 +93,14 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
             function onSuccess(response) {
                 if (response.books) {
                     allBooks = enrichDbData(response.books);
-                    resetSearch();
+                    $scope.books = enrichDbData(response.books);
                     // sync if server was added
                     if (config.activeProfile().remotesync && !pDontSync) {
                         syncWithServer();
                     }
+                    $ionicLoading.hide();
+                    $ionicScrollDelegate.scrollTop();
                 }
-                $ionicLoading.hide();
             }
 
             function onError(response) {
@@ -118,14 +109,12 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
                 $ionicLoading.hide();
             }
         }
-
         function doSearch() {
             $scope.books = $filter('bookFilter')(allBooks, $scope.searchQuery.fullTextSearch);
         }
 
         function resetSearch() {
-            $scope.books = allBooks;
-            $scope.searchQuery = {};
+        	load(false);
         }
 
         function removeBook(pBookToRemove) {
@@ -143,10 +132,9 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
         }
 
         function showBookDetails(pBook) {
-            var book = pBook;
-            logService.debug('Showing details for book: ' + book.value.volumeInfo.title);
+            logService.debug('Showing details for book: ' + pBook.value.volumeInfo.title);
             $state.go('app.book_show', {
-                'bookId': book.hashCode
+                'bookId': pBook.hashCode
             });
         }
 
@@ -182,8 +170,6 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
         $scope.showActionMenu = showActionMenu;
         $scope.resetSearch = resetSearch;
         $scope.doSearch = doSearch;
-        $scope.getBooks = getBooks;
-        $scope.getBookHeight = getBookHeight;
 
     }
 ]);
@@ -224,6 +210,7 @@ app.controller('BookDetailsController', ['$rootScope', '$scope', '$stateParams',
 
     }
 ]);
+
 
 
 /**

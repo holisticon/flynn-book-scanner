@@ -104,7 +104,7 @@ app.directive('imageData', ['imageDataCache', 'base64', 'logService', 'webWorker
 			template: '<img/>',
 			link: function(scope, element, attrs) {
 				scope.$watch('image', function(image) {
-					if (image && image.data && !element.attr('src')) {
+					if (image && image.data && image.id) {
 						if (imageDataCache.get(image.id) === undefined) {
 							webWorkerPool.postMessage(image).then(function(event) {
 								var url = event.data;
@@ -114,7 +114,7 @@ app.directive('imageData', ['imageDataCache', 'base64', 'logService', 'webWorker
 						} else {
 							element[0].src = imageDataCache.get(image.id);
 						}
-					}
+					} 
 				});
 			}
 		}
