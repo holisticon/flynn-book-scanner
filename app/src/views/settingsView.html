@@ -1,80 +1,77 @@
 <ion-view title="Settings">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
-    <form name="settingsForm" novalidate ng-submit="save()">
-    	<ion-tabs class="tabs-positive tabs-icon-left">
-     		<ion-tab title="General" icon-on="ion-ios7-gear" icon-off="ion-ios7-gear-outline">
-  		         <ion-content id="general" class="padding">
-  		         	<div>
-                     	<p>Define here default values to use, like default owner of Books.</p>
-                     	<div>
-	                     	<label class="item-input item-stacked-label">
+	<form name="settingsForm" novalidate ng-submit="save()">
+		<ion-tabs class="tabs-positive tabs-icon-left">
+			<ion-tab title="General" icon-on="ion-ios7-gear" icon-off="ion-ios7-gear-outline">
+				<ion-content id="general" has-tabs="true" class="padding">
+					<div>
+						<p>Define here default values to use, like default owner of Books.</p>
+	                  	<div>
+	                    	<label class="item-input item-stacked-label">
 						  		<span class="input-label">Default Owner</span>
 						  		<input type="text" data-ng-model="flynn.activeProfile.owner" placeholder="Default for owner value"">
 							</label>
 						</div>
-					</div>
-		            <br>
-                    <button type="submit" ng-disabled="settingsForm.$invalid" class="button button-positive">
-                    		Save
-                   	</button>  
-                 </ion-content>
-     		</ion-tab>
-     		<ion-tab title="Server" icon-on="ion-ios7-refresh" icon-off="ion-ios7-refresh-outline">
- 				<ion-content id="server" class="padding">
-                        <p>If you like to syncronize with a remote CouchDB activate the remote sync here:</p>     
-                        <label class="toggle">
-						   <input type="checkbox" data-ng-model="flynn.activeProfile.remotesync">
-						   <div class="track">
-						     <div class="handle"></div>
-						   </div>
-						</label>     
-                        <div name="serverDetails" ng-show="flynn.activeProfile.remotesync">                     	
-	                     	<label class="item-input item-stacked-label">
-						  		<span class="input-label">CouchDB server</span>
-						  		<input id="syncURL" type="url" data-ng-model="flynn.activeProfile.couchdb" placeholder="URL of the CouchDB server"
-						  			   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
-						  		 	   ng-required="flynn.activeProfile.remotesync === true">
-							</label>
-	                     	<label class="item-input item-stacked-label">
-						  		<span class="input-label">User</span>
-						  		<input id="syncUser" type="text" data-ng-model="flynn.activeProfile.user" placeholder="User"
-						  			   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
-						  		 	   ng-required="flynn.activeProfile.remotesync === true">
-							</label>
-	                     	<label class="item-input item-stacked-label">
-						  		<span class="input-label">Password</span>
-						  		<input id="syncPassword" type="password" data-ng-model="flynn.activeProfile.password" 
-						  			   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
-						  		 	   ng-required="flynn.activeProfile.remotesync === true">
-							</label> 
-		               	</div> 
-		               	<br>
-                        <button type="submit" ng-disabled="settingsForm.$invalid" class="button button-positive">
-                        	Save
-                        </button> 
-                    </ion-content>
-  			</ion-tab>
-     		<ion-tab title="Logs" icon-on="ion-ios7-speedometer" icon-off="ion-ios7-speedometer-outline">
- 				<ion-content id="logs" class="padding">
-                    <label class="item-input item-select">
+		           	 	<br>
+	                   	<button type="submit" ng-disabled="settingsForm.$invalid" class="button button-positive">
+	                   		Save
+	                  	</button>
+					</div>  
+				</ion-content>
+			</ion-tab>
+    		<ion-tab title="Server" icon-on="ion-ios7-refresh" icon-off="ion-ios7-refresh-outline">
+				<ion-content id="server" has-tabs="true" class="padding">
+					<p>If you like to syncronize with a remote CouchDB activate the remote sync here:</p>     
+					<label class="toggle">
+					   	<input type="checkbox" data-ng-model="flynn.activeProfile.remotesync">
+					   	<div class="track">
+					     	<div class="handle"></div>
+					   	</div>
+					</label>     
+					<div name="serverDetails" ng-show="flynn.activeProfile.remotesync">                     	
+						<label class="item-input item-stacked-label">
+							<span class="input-label">CouchDB server</span>
+					  		<input id="syncURL" type="url" data-ng-model="flynn.activeProfile.couchdb" placeholder="URL of the CouchDB server"
+					  			   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
+					  		 	   ng-required="flynn.activeProfile.remotesync === true">
+						</label>
+                     	<label class="item-input item-stacked-label">
+					  		<span class="input-label">User</span>
+					  		<input id="syncUser" type="text" data-ng-model="flynn.activeProfile.user" placeholder="User"
+					  			   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
+					  		 	   ng-required="flynn.activeProfile.remotesync === true">
+						</label>
+                     	<label class="item-input item-stacked-label">
+					  		<span class="input-label">Password</span>
+					  		<input id="syncPassword" type="password" data-ng-model="flynn.activeProfile.password" 
+					  			   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
+					  		 	   ng-required="flynn.activeProfile.remotesync === true">
+						</label> 
+	               		<br>
+                       	<button type="submit" ng-disabled="settingsForm.$invalid" class="button button-positive">
+                       		Save
+                       	</button>
+	               	</div>  
+				</ion-content>
+			</ion-tab>
+    		<ion-tab title="Logs" icon-on="ion-ios7-speedometer" icon-off="ion-ios7-speedometer-outline">
+				<ion-content id="logs" has-tabs="true" class="padding">
+                   	<label class="item-input item-select">
 						<div class="input-label">
 					      Loglevel
 					    </div>
 					    <select data-ng-model="logging.selectedLogLevel" ng-options="logLevel.name for logLevel in logging.logLevels" ng-change="filterLogs()">
-                        	<option value="">All logs</option>
+	                       	<option value="">All logs</option>
 					    </select>
-				  	</label>
-                  	<button type="button" ng-click="filterLogs()" class="button button-positive">Refresh logs</button>
-                  	<button type="button" ng-click="clearLogs()" class="button button-assertive">Clear logs</button>
-                    <ion-list class="list card">
-                     <ion-item ng-repeat="logEntry in logs | orderBy:'timestamp':true" class="item">
-                         {{logEntry.timestamp | date: 'dd.MM.yyyy HH:mm'}} - {{logEntry.level}} <br> {{logEntry.details}}
-                     </ion-item>
-                 	</ion-list>  
-               </ion-content>
-  			</ion-tab>
-     	</ion-tabs>
-     </form>
+			  		</label>
+                 	<button type="button" ng-click="filterLogs()" class="button button-positive">Refresh logs</button>
+                 	<button type="button" ng-click="clearLogs()" class="button button-assertive">Clear logs</button>
+                   	<ion-list class="list card">
+	                    <ion-item ng-repeat="logEntry in logs | orderBy:'timestamp':true" class="item">
+	                        {{logEntry.timestamp | date: 'dd.MM.yyyy HH:mm'}} - {{logEntry.level}} <br> {{logEntry.details}}
+	                    </ion-item>
+                	</ion-list>  
+              	</ion-content>
+ 			</ion-tab>
+    	</ion-tabs>
+    </form>
 </ion-view>

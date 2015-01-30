@@ -35,6 +35,9 @@
   }
 }
 
+.item-input {
+	padding: 6px 0 0 0
+}
 
 .entryValue {
   display: inline;
@@ -67,7 +70,21 @@
   }
 }
 
-@media screen and (orientation:landscape) {
+// tabs
+ion-tabs { 
+	.has-tabs {
+		top: 54px;
+	} 
+}
+.platform-browser {
+	ion-tabs { 
+		.has-tabs {
+			top: 44px;
+		} 
+	}
+}
+
+@media screen and (orientation:landscape)  {
 	.platform-ios.platform-cordova:not(.fullscreen){
 	 	.bar-header:not(.bar-subheader) {
    			height: 40px;
@@ -82,6 +99,9 @@
 		.has-subheader {
     		top: 88px;
 		}
+	}
+	ion-tabs .has-tabs {
+		top: 44px;
 	}
 }
 
