@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
 
-        <!-- build:js(./) scripts/plugins.js -->
+        <!-- build:js(./) scripts/libs.js -->
         <script src="/bower_components/angular/angular.js"></script>
         <script src="/bower_components/angular-cache/dist/angular-cache.min.js"></script>
         <script src="/bower_components/angular-resource/angular-resource.js"></script>
@@ -33,7 +33,7 @@
         <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         <!-- endbuild -->
 
-        <!-- build:js({.tmp,src}) scripts/modules.js -->
+        <!-- build:js({.tmp,src}) scripts/plugins.js -->
         <script src="scripts/plugins/webworkerpool-core-angular.js"></script>
         <script src="scripts/plugins/blob-util.js"></script>
         <script src="scripts/plugins/utils.js"></script>
@@ -46,7 +46,19 @@
 
         <!-- build:js({.tmp,src}) scripts/app.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/controllers.js"></script>
+        <!-- endbuild -->
+        
+        <!-- build:js({.tmp,src}) scripts/controllers.js -->
+        <script src="scripts/controllers/ctlr.app.js"></script>
+        <script src="scripts/controllers/ctlr.book.js"></script>
+        <script src="scripts/controllers/ctlr.books.js"></script>
+        <script src="scripts/controllers/ctlr.bookDtls.js"></script>
+        <script src="scripts/controllers/ctlr.bookEdit.js"></script>
+        <script src="scripts/controllers/ctlr.settings.js"></script>
+        <script src="scripts/controllers/ctlr.about.js"></script>
+        <!-- endbuild -->
+        
+        <!-- build:js({.tmp,src}) scripts/modules.js -->
         <script src="scripts/modules/directives.js"></script>
         <script src="scripts/modules/services.js"></script>
         <!-- endbuild -->
