@@ -266,15 +266,6 @@ module.exports = function(grunt) {
         }]
       }
     },
-    uglify: {
-      dist: {
-        files: {
-          '<%= yeoman.dist %>/scripts/scripts.js': [
-            '<%= yeoman.dist %>/scripts/scripts.js'
-          ]
-        }
-      }
-    },
     plato: {
       report: {
         files: {
@@ -327,7 +318,6 @@ module.exports = function(grunt) {
     'copy:dist',
     'ngmin',
     'cssmin',
-    'uglify',
     'usemin',
     'ngdocs',
     'plato'
