@@ -26,7 +26,7 @@ app.directive('imageData', ['imageDataCache', 'base64', 'logService', 'webWorker
 						} else {
 							element[0].src = imageDataCache.get(image.id);
 						}
-					} 
+					}
 				});
 			}
 		}

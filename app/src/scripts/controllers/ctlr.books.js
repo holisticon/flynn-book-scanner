@@ -56,6 +56,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
                 $ionicLoading.hide();
             }
         }
+
         function doSearch() {
             $scope.books = $filter('bookFilter')(allBooks, $scope.searchQuery.fullTextSearch);
         }

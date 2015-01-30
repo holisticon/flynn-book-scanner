@@ -56,11 +56,22 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
             });
         }
 
+        function readInventory() {
+            inventoryService.read().then(function(response) {
+                $ionicLoading.hide();
+                logService.debug("Got valid server response. Settings seeem to be valid.");
+                $state.go('app.books');
+            }, function(error) {
+                $ionicLoading.hide();
+                settingsService.valid = false;
+                $rootScope.$broadcast("settingsService.invalid");
+            });
+        }
+
         function saveSettings(redirect) {
             logService.debug("Saving settings to local storage");
             $ionicLoading.show();
             var profile = $scope.flynn.activeProfile;
-
             // adding default profile
             var config = {},
                 profiles = [];
@@ -73,19 +84,8 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
                 // sync if server was added
                 if ($scope.flynn.activeProfile.remotesync) {
                     syncWithServer();
-                }
-                inventoryService.read().then(onSuccess, onError);
-
-                function onSuccess(response) {
-                    $ionicLoading.hide();
-                    logService.debug("Got valid server response. Settings seeem to be valid.");
-                    $state.go('app.books');
-                }
-
-                function onError(response) {
-                    $ionicLoading.hide();
-                    settingsService.valid = false;
-                    $rootScope.$broadcast("settingsService.invalid");
+                } else {
+                    readInventory();
                 }
             } else {
                 $ionicLoading.hide();
@@ -98,7 +98,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
             });
             inventoryService.syncRemote(true).then(function(response) {
                 $ionicLoading.hide();
-                $state.go('app.books');
+                readInventory();
             }, function(error) {
                 if (error.status === 401) {
                     $rootScope.$broadcast("login.failed");
