@@ -20,7 +20,7 @@
 //  main.m
 //  Flynn
 //
-//  Created by Martin Reinhardt on 17.06.204.
+//  Created by Martin Reinhardt on 17.06.2014.
 //  Copyright Holisticon AG 2014. All rights reserved.
 //
 

@@ -35,9 +35,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
         function load(pDontSync) {
             $ionicLoading.show();
             $scope.searchQuery = {};
-            inventoryService.read().then(onSuccess, onError);
-
-            function onSuccess(response) {
+            inventoryService.read().then(function(response) {
                 if (response.books) {
                     allBooks = enrichDbData(response.books);
                     $scope.books = enrichDbData(response.books);
@@ -45,16 +43,14 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
                     if (config.activeProfile().remotesync && !pDontSync) {
                         syncWithServer();
                     }
-                    $ionicLoading.hide();
                     $ionicScrollDelegate.scrollTop();
                 }
-            }
-
-            function onError(response) {
+                $ionicLoading.hide();
+            }, function(error) {
                 $rootScope.$broadcast("server.error");
                 $scope.searchQuery = {};
                 $ionicLoading.hide();
-            }
+            });
         }
 
         function doSearch() {
@@ -67,17 +63,13 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
         }
 
         function removeBook(pBookToRemove) {
-            inventoryService.remove(pBookToRemove).then(onSuccess, onError);
-
-            function onSuccess(response) {
+            inventoryService.remove(pBookToRemove).then(function(response) {
                 $ionicLoading.show();
                 load();
-            }
-
-            function onError(response) {
+            }, function(error) {
                 $ionicLoading.hide();
                 $rootScope.$broadcast("server.error");
-            }
+            });
         }
 
         function showBookDetails(pBook) {
