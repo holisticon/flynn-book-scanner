@@ -1,94 +1,3 @@
-app.factory('imageDataCache', function($cacheFactory) {
-    return $cacheFactory('imageData');
-});
-
-app.factory('base64', function() {
-    'use strict';
-
-    var keyStr = 'ABCDEFGHIJKLMNOP' +
-        'QRSTUVWXYZabcdef' +
-        'ghijklmnopqrstuv' +
-        'wxyz0123456789+/' +
-        '=';
-    return {
-        encode: function(input) {
-            var output = "";
-            var chr1, chr2, chr3 = "";
-            var enc1, enc2, enc3, enc4 = "";
-            var i = 0;
-
-            do {
-                chr1 = input.charCodeAt(i++);
-                chr2 = input.charCodeAt(i++);
-                chr3 = input.charCodeAt(i++);
-
-                enc1 = chr1 >> 2;
-                enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
-                enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
-                enc4 = chr3 & 63;
-
-                if (isNaN(chr2)) {
-                    enc3 = enc4 = 64;
-                } else if (isNaN(chr3)) {
-                    enc4 = 64;
-                }
-
-                output = output +
-                    keyStr.charAt(enc1) +
-                    keyStr.charAt(enc2) +
-                    keyStr.charAt(enc3) +
-                    keyStr.charAt(enc4);
-                chr1 = chr2 = chr3 = "";
-                enc1 = enc2 = enc3 = enc4 = "";
-            } while (i < input.length);
-
-            return output;
-        },
-
-        decode: function(input) {
-            var output = "";
-            var chr1, chr2, chr3 = "";
-            var enc1, enc2, enc3, enc4 = "";
-            var i = 0;
-
-            // remove all characters that are not A-Z, a-z, 0-9, +, /, or =
-            var base64test = /[^A-Za-z0-9\+\/\=]/g;
-            if (base64test.exec(input)) {
-                alert("There were invalid base64 characters in the input text.\n" +
-                    "Valid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\n" +
-                    "Expect errors in decoding.");
-            }
-            input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-
-            do {
-                enc1 = keyStr.indexOf(input.charAt(i++));
-                enc2 = keyStr.indexOf(input.charAt(i++));
-                enc3 = keyStr.indexOf(input.charAt(i++));
-                enc4 = keyStr.indexOf(input.charAt(i++));
-
-                chr1 = (enc1 << 2) | (enc2 >> 4);
-                chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-                chr3 = ((enc3 & 3) << 6) | enc4;
-
-                output = output + String.fromCharCode(chr1);
-
-                if (enc3 != 64) {
-                    output = output + String.fromCharCode(chr2);
-                }
-                if (enc4 != 64) {
-                    output = output + String.fromCharCode(chr3);
-                }
-
-                chr1 = chr2 = chr3 = "";
-                enc1 = enc2 = enc3 = enc4 = "";
-
-            } while (i < input.length);
-
-            return output;
-        }
-    };
-});
-
 /**
  * @ngdoc service
  * @name googleBookService
@@ -96,7 +5,6 @@ app.factory('base64', function() {
  * @description Provides access to the book search. Used Google Book Search as backend.
  */
 app.service('googleBookService', ['$rootScope', '$http', '$q', 'settingsService', 'base64', 'logService',
-
     function($rootScope, $http, $q, settingsService, base64, logService) {
         'use strict';
         var usedCode;
@@ -720,64 +628,6 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                 }
                 return deferred.promise;
             }
-        };
-
-    }
-]);
-
-
-/**
- * @ngdoc service
- * @name settingsService
- *
- * @module flynnBookScannerApp
- *
- * @description
- * Provides access to the book inventory. Used PouchDB as backend.
- */
-app.service('settingsService', ['$rootScope', 'localStorageService', 'logService',
-
-    function($rootScope, localStorage, logService) {
-        'use strict';
-        return {
-            save: function(pConfig) {
-                localStorage.remove('flynn_app.settings');
-                var config = pConfig;
-                config.googleApiKey = 'AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY';
-                config.timeout = 20000;
-                localStorage.add('flynn_app.settings', config);
-            },
-            load: function() {
-                logService.debug("Loading settings from local storage");
-                var settings = localStorage.get('flynn_app.settings');
-                // TODO check settings
-                if (settings) {
-                    settings.valid = true;
-                } else {
-                    settings = {};
-                    settings.valid = false;
-                    settings.activeProfileID = 0;
-                    settings.profiles = [];
-                    settings.profiles.push({});
-                }
-                settings.activeProfile = function() {
-                    return settings.profiles[settings.activeProfileID];
-                }
-                $rootScope.settings = settings;
-                return settings;
-            },
-            verify: function() {
-                logService.debug("Verifying flynn settings");
-                var config = this.load();
-                var credentials = config.activeProfile();
-                if (credentials.remotesync) {
-                    return (credentials && credentials.owner && credentials.user && credentials.password && credentials.couchdb);
-                } else {
-                    return (credentials && credentials.owner);
-                }
-
-            }
-
         };
 
     }
