@@ -3,7 +3,7 @@
 		"version": {
 			"label": "Version",
 			"hidden": false,
-			"value": "1.2.5"
+			"value": "1.3.0"
 		},
 		"release_notes": {
 			"label": "Release Notes",
