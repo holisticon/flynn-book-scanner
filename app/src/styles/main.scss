@@ -67,6 +67,24 @@
   }
 }
 
+@media screen and (orientation:landscape) {
+	.platform-ios.platform-cordova:not(.fullscreen){
+	 	.bar-header:not(.bar-subheader) {
+   			height: 40px;
+    		orientation: portrait;
+		}
+		.bar-header:not(.bar-subheader) > * {
+    		margin-top: 0px;
+    	}
+    	.has-header, .bar-subheader {
+    		top: 44px;
+		}
+		.has-subheader {
+    		top: 88px;
+		}
+	}
+}
+
 .menu-left .scroll-content {
   background-color: #DEDEDE;
 }

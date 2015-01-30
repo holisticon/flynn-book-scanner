@@ -44,8 +44,10 @@
 		7E7966E61810823500FA85AD /* icon-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DC1810823500FA85AD /* icon-small.png */; };
 		7E7966E71810823500FA85AD /* icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DD1810823500FA85AD /* icon-small@2x.png */; };
 		87EEE7809D6949339CA5AEFC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7D49BB931A4A0BA6F8A6BD /* QuartzCore.framework */; };
+		8D55B60F1222467991E4CFFA /* IonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 45420E2FA8244BD48241AB98 /* IonicKeyboard.m */; };
 		9B98F342DC6D4CBF958C7C9C /* CDVBarcodeScanner.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6637C01EE1BB44D5A40F78A1 /* CDVBarcodeScanner.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		AF9EF8CDA1C6439C8637B60A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C0EB95AB3A97440FB417657F /* libsqlite3.dylib */; };
+		AFBA3E11F1834DBB837167DC /* UIWebViewExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C17326EFF0E24743AFDFDE51 /* UIWebViewExtension.m */; };
 		B48D3C83EB384C148311EDE5 /* CDVJpegHeaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AD582AF82C44FCA250F913 /* CDVJpegHeaderWriter.m */; };
 		C67AD11580054A0EA5764E20 /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AAA1891E8C4C50A63B8AC1 /* CDVLogger.m */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
@@ -57,8 +59,6 @@
 		FB29B678C13B4BA4A5CBAC4E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 716DDFBDC31746ED90FDD081 /* libiconv.dylib */; };
 		FD8337BB855947A786B1AB65 /* CDVNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = BF22DF69BB184EA49CE044B2 /* CDVNotification.m */; };
 		FE8B5F05E3AA4A9FB93DA3FC /* CDVNotification.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FA63A984CD2A4997BF97D53B /* CDVNotification.bundle */; };
-		8D55B60F1222467991E4CFFA /* IonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 45420E2FA8244BD48241AB98 /* IonicKeyboard.m */; };
-		AFBA3E11F1834DBB837167DC /* UIWebViewExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C17326EFF0E24743AFDFDE51 /* UIWebViewExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +113,7 @@
 		30FC414816E50CA1004E6F35 /* icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72@2x.png"; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Flynn-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Flynn-Prefix.pch"; sourceTree = "<group>"; };
 		3ADBF70241724391BAD12DC5 /* SQLitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SQLitePlugin.m; path = com.phonegap.plugins.sqlite/SQLitePlugin.m; sourceTree = "<group>"; };
+		45420E2FA8244BD48241AB98 /* IonicKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IonicKeyboard.m; path = com.ionic.keyboard/IonicKeyboard.m; sourceTree = "<group>"; };
 		454A170F0D9A472D9B2DB820 /* ImageIO.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		6637C01EE1BB44D5A40F78A1 /* CDVBarcodeScanner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = unknown; name = CDVBarcodeScanner.mm; path = com.phonegap.plugins.barcodescanner/CDVBarcodeScanner.mm; sourceTree = "<group>"; };
@@ -128,12 +129,15 @@
 		7E7966DB1810823500FA85AD /* icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-76@2x.png"; sourceTree = "<group>"; };
 		7E7966DC1810823500FA85AD /* icon-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-small.png"; sourceTree = "<group>"; };
 		7E7966DD1810823500FA85AD /* icon-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-small@2x.png"; sourceTree = "<group>"; };
+		826FC0A33BDB4A3ABBAEF1E2 /* IonicKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IonicKeyboard.h; path = com.ionic.keyboard/IonicKeyboard.h; sourceTree = "<group>"; };
 		85AE37BEE45A4EAEA84D2F14 /* CDVDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVDevice.m; path = org.apache.cordova.device/CDVDevice.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Flynn-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Flynn-Info.plist"; path = "../Flynn-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		8E4173CAE89F42AB8BB33D02 /* CDVCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVCamera.m; path = org.apache.cordova.camera/CDVCamera.m; sourceTree = "<group>"; };
 		97B3D4B29BA34715A9F5A458 /* CoreVideo.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		BCABBF97BDE848648DD42EEA /* UIWebViewExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIWebViewExtension.h; path = com.ionic.keyboard/UIWebViewExtension.h; sourceTree = "<group>"; };
 		BF22DF69BB184EA49CE044B2 /* CDVNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVNotification.m; path = org.apache.cordova.dialogs/CDVNotification.m; sourceTree = "<group>"; };
 		C0EB95AB3A97440FB417657F /* libsqlite3.dylib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		C17326EFF0E24743AFDFDE51 /* UIWebViewExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIWebViewExtension.m; path = com.ionic.keyboard/UIWebViewExtension.m; sourceTree = "<group>"; };
 		C4646FD4AC4B4093830E4338 /* AVFoundation.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
 		D8AD582AF82C44FCA250F913 /* CDVJpegHeaderWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVJpegHeaderWriter.m; path = org.apache.cordova.camera/CDVJpegHeaderWriter.m; sourceTree = "<group>"; };
@@ -148,10 +152,6 @@
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = Flynn/config.xml; sourceTree = "<group>"; };
 		FA63A984CD2A4997BF97D53B /* CDVNotification.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CDVNotification.bundle; sourceTree = "<group>"; };
 		FB46FB0476C54AD083F3AFF7 /* scannerOverlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = scannerOverlay.xib; sourceTree = "<group>"; };
-		45420E2FA8244BD48241AB98 /* IonicKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "IonicKeyboard.m"; path = "com.ionic.keyboard/IonicKeyboard.m"; sourceTree = "<group>"; fileEncoding = 4; };
-		C17326EFF0E24743AFDFDE51 /* UIWebViewExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIWebViewExtension.m"; path = "com.ionic.keyboard/UIWebViewExtension.m"; sourceTree = "<group>"; fileEncoding = 4; };
-		826FC0A33BDB4A3ABBAEF1E2 /* IonicKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "IonicKeyboard.h"; path = "com.ionic.keyboard/IonicKeyboard.h"; sourceTree = "<group>"; fileEncoding = 4; };
-		BCABBF97BDE848648DD42EEA /* UIWebViewExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIWebViewExtension.h"; path = "com.ionic.keyboard/UIWebViewExtension.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
