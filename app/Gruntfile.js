@@ -3,6 +3,7 @@
 module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
+  grunt.loadNpmTasks('grunt-ng-annotate');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-karma');
@@ -251,20 +252,18 @@ module.exports = function(grunt) {
         autoWatch: true
       }
     },
-    cdnify: {
-      dist: {
-        html: ['<%= yeoman.dist %>/*.html']
-      }
-    },
-    ngmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.dist %>/scripts',
-          src: ['*.js','!webworker*.js'],
-          dest: '<%= yeoman.dist %>/scripts'
-        }]
-      }
+    ngAnnotate: {
+        options: {
+            singleQuotes: true,
+        },
+        app: {
+            files: [{
+                expand: true,
+                cwd: '<%= yeoman.dist %>/scripts',
+                src: ['*.js','!webworker*.js'],
+                dest: '<%= yeoman.dist %>/scripts'
+              }]
+        }
     },
     plato: {
       report: {
@@ -316,7 +315,7 @@ module.exports = function(grunt) {
     'autoprefixer',
     'concat',
     'copy:dist',
-    'ngmin',
+    'ngAnnotate',
     'cssmin',
     'usemin',
     'ngdocs',
