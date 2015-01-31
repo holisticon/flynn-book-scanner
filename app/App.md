@@ -1,6 +1,3 @@
-app development instructions
-==================
-
 # Setup a development environment
 
 Preparation steps:
@@ -16,7 +13,7 @@ Global steps:
 * `sudo gem install compass`
 * Install Cordova
 * `sudo npm install -g cordova`
-* `sudo npm install -g ios-deploy`
+* `sudo npm install -g cordova-media-generator`
 * Install build tools
 * `sudo npm install -g grunt-cli`
 * `sudo npm install -g bower`
