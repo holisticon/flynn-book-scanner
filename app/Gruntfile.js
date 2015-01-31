@@ -11,6 +11,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ngdocs');
 
   grunt.initConfig({
+  	app:{
+  		version: require('./package.json').version || '1.0',  		
+  		build: require('./package.json').build || {}
+  	},
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'src',
@@ -226,6 +230,31 @@ module.exports = function(grunt) {
         src: '{,*/}*.css'
       }
     },
+    shell: {
+	  options: {
+	    failOnError: true,
+	    stdout: true,
+	    stderr: true,
+            execOptions: {
+                maxBuffer: Infinity
+            }
+	  },
+	  buildIOS: {
+	    command: 'cordova build ios --release --device'
+	  },
+	  buildAndroid: {
+	    command: 'cp "<%= app.build.android.ant_property_file %>" "$(pwd)/platforms/android/ant.properties" && cordova build android --release'
+	  },
+	  prepare: {
+	    command: 'cordova prepare'
+	  },
+	  buildIPA: {
+	    command: 'cp "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/ResourceRules.plist" "$(pwd)/platforms/ios/build/device/Flynn.app" && xcrun -sdk iphoneos PackageApplication -v "$(pwd)/platforms/ios/build/device/Flynn.app" -o "$(pwd)/dist/Flynn_<%= app.version %>.ipa" --sign "<%= app.build.ios.signer %>" --embed "<%= app.build.ios.provisionProfile %>"'
+	  },
+	  buildAPK: {
+	    command: 'cp "$(pwd)/platforms/android/ant-build/Flynn-release.apk" "$(pwd)/dist/Flynn_<%= app.version %>.apk"'
+	  }
+	},
     concurrent: {
       server: [
         'compass:server',
@@ -274,6 +303,10 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.registerTask('buildIPA', ['shell:buildIOS','shell:buildIPA']);
+  grunt.registerTask('buildAPK', ['shell:buildAndroid','shell:buildAPK']);
+  grunt.registerTask('buildCordova', ['shell:buildAndroid'],'shell:buildIOS');
+
   grunt.registerTask('server', function(target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
@@ -319,7 +352,7 @@ module.exports = function(grunt) {
     'cssmin',
     'usemin',
     'ngdocs',
-    'plato'
+    'plato',
   ]);
 
   grunt.registerTask('default', [
