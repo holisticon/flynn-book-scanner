@@ -1,39 +1,46 @@
 <ion-view title="{{books.length}} Books">
-  	<ion-nav-buttons side="left">  	
-    	<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>    	
-  	</ion-nav-buttons>
-  	<ion-nav-buttons side="right">  	
-  		<button class="button button-icon icon ion-refresh" ng-click="load()"></button>  		
-	</ion-nav-buttons>  
-  	
+	<ion-nav-buttons side="left">
+		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+	</ion-nav-buttons>
+	<ion-nav-buttons side="right">
+		<button class="button button-icon icon ion-refresh" ng-click="load()"></button>
+	</ion-nav-buttons>
+
 	<ion-header-bar class="bar-subheader item-input-inset">
-		<label class="item-input-wrapper">
-    		<i class="icon ion-ios7-search placeholder-icon"></i>
-    		<input type="search" data-ng-model="searchQuery.fullTextSearch" ng-model-onblur  is-focused="true" ng-change="doSearch()"
-    		   placeholder="Type keywords to search ...">
+		<label class="item-input-wrapper"> <i class="icon ion-ios7-search placeholder-icon"></i>
+			<input type="search" data-ng-model="searchQuery.fullTextSearch" ng-model-onblur  is-focused="true" ng-change="doSearch()"
+			placeholder="Type keywords to search ...">
 		</label>
-		<button ng-click="resetSearch()" class="button button-clear">Cancel</button>	
-    </ion-header-bar>
-  	
-	<ion-content>				
+		<button ng-click="resetSearch()" class="button button-clear">
+			Cancel
+		</button>
+	</ion-header-bar>
+
+	<ion-content>
 		<ion-list>
-			<div ng-show="!books" class="item">No books found.</div>
-	       	<ion-item class="item-avatar"
-	       		collection-repeat="book in books | orderBy:'value.volumeInfo.title'" 
-				collection-item-width="'100%'"      			
-    			collection-item-height="'95'"
-	       		ng-click="showBookDetails(book)">
-	       		<image-data image="book.image" ng-show="book.image"></image-data>	       		
-				<h2>{{book.value.volumeInfo.title}}</h2>	
-				<p>{{book.authorInfo}} &nbsp;</p>
-				<p>Amount: {{book.count}}</p>
+			<div ng-show="!books" class="item">
+				No books found.
+			</div>
+			<ion-item class="item-avatar"
+			collection-repeat="book in books | orderBy:'value.volumeInfo.title'"
+			collection-item-width="'100%'"
+			collection-item-height="'95'"
+			ng-click="showBookDetails(book)">
+				<image-data image="book.image" ng-show="book.image"></image-data>
+				<h2>{{book.value.volumeInfo.title}}</h2>
+				<p>
+					{{book.authorInfo}} &nbsp;
+				</p>
+				<p>
+					Amount: {{book.count}}
+				</p>
 				<ion-option-button ng-click="showBookDetails(book)" class="button-positive">
-		      		Info
-		    	</ion-option-button>
-		    	<ion-option-button ng-click="showActionMenu(book)" class=" button-assertive">
-		      		Modify
-		    	</ion-option-button>
-	       	</ion-item>
-	   	</ion-list>	   	   	
- 	 </ion-content>
+					Info
+				</ion-option-button>
+				<ion-option-button ng-click="showActionMenu(book)" class=" button-assertive">
+					Modify
+				</ion-option-button>
+			</ion-item>
+		</ion-list>
+	</ion-content>
 </ion-view>
