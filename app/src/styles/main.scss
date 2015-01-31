@@ -40,11 +40,9 @@
 }
 
 .entryValue {
-  display: inline;
+  width: 100%;
   padding: .2em .6em .3em;
-  white-space: nowrap;
-  vertical-align: baseline;
-  border-radius: .25em;
+  white-space: normal;
   
   // Empty labels collapse automatically (not available in IE8)
   &:empty {

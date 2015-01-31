@@ -1,27 +1,32 @@
 {
-	"info": {
-		"version": {
-			"label": "Version",
-			"hidden": false,
-			"value": "1.3.3"
-		},
-		"release_notes": {
-			"label": "Release Notes",
-			"hidden": false,
-			"value": ""
-		},
-		"copyright": {
-			"label": "Copyright",
-			"hidden": false,
-			"value": "© Copyright 2014 Holisticon AG"
-		}
-	},
-	"timeout": {
-		"label": "Timeout for deferred calls",
-		"hidden": true,
-		"value": "30000"
-	},
-	"dev": false,
-	"debug": false,
-	"trace": false
+    "info": {
+        "version": {
+            "label": "Version",
+            "hidden": false,
+            "value": "1.3.3"
+        },
+        "release_notes": {
+            "label": "Release Notes",
+            "hidden": false,
+            "value": ""
+        },
+        "copyright": {
+            "label": "Copyright",
+            "hidden": false,
+            "value": "© Copyright 2014 Holisticon AG<br>"
+        },
+        "about": {
+            "label": "About",
+            "hidden": false,
+            "value": "The app used <a href=\"http://fortawesome.github.io/Font-Awesome/\">Font Awesome</a> for app icon and Splashscreen is based on <a href=\"http://commons.wikimedia.org/wiki/File:Bookshelf_icon_(red_and_blue).svg\">Wikimedia</a>. The app is based on <a href=\"http://cordova.apache.org\">Cordova</a>, <a href=\"https://angularjs.org\">AngularJS</a> and <a href=\"http://ionicframework.com\">Ionic</a>."
+        }
+    },
+    "timeout": {
+        "label": "Timeout for deferred calls",
+        "hidden": true,
+        "value": "30000"
+    },
+    "dev": false,
+    "debug": false,
+    "trace": false
 }
