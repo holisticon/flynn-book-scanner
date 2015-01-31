@@ -48,6 +48,10 @@ For windows phone support within an VM: http://blogs.msdn.com/b/interoperability
 * `cordova build android` or `cordova build ios`
 
 
+For updating icons and splash screen. Update the files in media and run
+
+* `mediagen`
+
 For running on an android device execute:
 
 * `cordova run android -d`
