@@ -71,7 +71,9 @@
 						Clear logs
 					</button>
 					<ion-list class="list card">
-						<ion-item ng-repeat="logEntry in logs | orderBy:'timestamp':true" class="item">
+						<ion-item style="width:100%"
+						collection-repeat="logEntry in logs | orderBy:'timestamp':true"
+						collection-item-height="'72'">
 							{{logEntry.timestamp | date: 'dd.MM.yyyy HH:mm'}} - {{logEntry.level}}
 							<br>
 							{{logEntry.details}}
