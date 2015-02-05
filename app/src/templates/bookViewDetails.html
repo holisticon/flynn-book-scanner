@@ -35,7 +35,7 @@
 	</label>
 	<label class="item-input" ng-show="selectedBook.value.volumeInfo.industryIdentifiers[1].identifier">
 			<span class="input-label">ISBN:</span>
- 			<span id="isbn" type="text" >{{::selectedBook.value.volumeInfo.industryIdentifiers[1].identifier}}</span>
+ 			<span id="isbn" type="text" >{{::selectedBook.isbnInfo}}</span>
 	</label> 
 	<label class="item-input" ng-show="selectedBook.value.volumeInfo.description">
  			<span id="author" >{{::selectedBook.value.volumeInfo.description}}</span>

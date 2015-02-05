@@ -68,19 +68,20 @@ String.prototype.hashCode = function() {
  */
 function enrichSingleDbEntry(pDbEntry) {
     var result = {},
-        authorInfo;
+        authorInfo,
+        isbnInfo;
     result.value = pDbEntry.value;
     result.image = pDbEntry.image;
-    // add hash
-    var isbn = pDbEntry.value.volumeInfo.industryIdentifiers[0] ? pDbEntry.value.volumeInfo.industryIdentifiers[0].identifier : '';
-    result.hashCode = isbn + pDbEntry.value.volumeInfo.title.hashCode();
+    // TODO_#65
+    // move to service
+    // Author info
     if (pDbEntry.value.volumeInfo.authors) {
         authorInfo = '';
         var authorCount = pDbEntry.value.volumeInfo.authors.length;
         for (var itemIndex in pDbEntry.value.volumeInfo.authors) {
             authorInfo += pDbEntry.value.volumeInfo.authors[itemIndex];
             if (itemIndex < authorCount - 1) {
-                authorInfo += ', ';
+                authorInfo += ',';
             }
         }
         result.authorInfo = authorInfo;
@@ -89,6 +90,21 @@ function enrichSingleDbEntry(pDbEntry) {
         var parsedDate = parseDate(pDbEntry.value.volumeInfo.publishedDate);
         result.value.volumeInfo.publishedDate = parsedDate;
     }
+
+    // TODO_#65
+    // move to service
+    if (pDbEntry.value.volumeInfo.industryIdentifiers) {
+        isbnInfo = '';
+        var isbnCount = pDbEntry.value.volumeInfo.industryIdentifiers.length;
+        for (var itemIndex in pDbEntry.value.volumeInfo.industryIdentifiers) {
+            isbnInfo += pDbEntry.value.volumeInfo.industryIdentifiers[itemIndex].identifier;
+            if (itemIndex < isbnCount - 1) {
+                isbnInfo += ',';
+            }
+        }
+        result.isbnInfo = isbnInfo;
+    }
+
     return result;
 }
 
@@ -110,7 +126,7 @@ function enrichDbData(pDbEntries) {
         for (var itemIndex in pDbEntries) {
             var itemInfo = enrichSingleDbEntry(pDbEntries[itemIndex]);
             if (itemInfo.value && itemInfo.value.volumeInfo) {
-                var id = itemInfo.hashCode;
+                var id = itemInfo.value.id;
                 if (bookEntries[id]) {
                     bookEntries[id].count++;
                     bookEntries[id].docs.push(itemInfo);

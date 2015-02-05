@@ -11,6 +11,7 @@ app.directive('bookEditDetails', ['$timeout', '$ionicLoading', 'base64', 'logSer
 			restrict: 'E',
 			scope: {
 				selectedBook: '=book',
+				editEntry: '=editEntry',
 				newEntry: '=newEntry'
 			},
 			replace: true,

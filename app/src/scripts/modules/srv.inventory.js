@@ -265,7 +265,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                         });
 
                     } else {
-                        logService.error("Search error");
+                        logService.error('Got unknown search query');
                         deferred.reject(response);
                     }
                 }
@@ -371,9 +371,12 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     var bookEntriesToAdd = 0,
                         updateNeeded = true;
                     // update already saved entry, maybe changed amount?   
-                    var isbn = pBookToSave.value.volumeInfo.industryIdentifiers[0].identifier;
                     var searchQuery = {};
-                    searchQuery.isbn = isbn;
+                    if (pBookToSave.value.volumeInfo.industryIdentifiers && pBookToSave.value.volumeInfo.industryIdentifiers.length > 1) {
+                        searchQuery.isbn = pBookToSave.value.volumeInfo.industryIdentifiers[1].identifier;
+                    } else {
+                        searchQuery.id = pBookToSave.value.id;
+                    }
                     self.search(searchQuery).then(function(searchResponse) {
                         logService.info('Found already an db entry');
                         var count = 0

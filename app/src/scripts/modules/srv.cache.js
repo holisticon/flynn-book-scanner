@@ -1,3 +1,3 @@
 app.factory('imageDataCache', function($cacheFactory) {
-    return $cacheFactory('imageData');
+	return $cacheFactory('imageData');
 });

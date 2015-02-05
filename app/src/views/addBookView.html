@@ -3,7 +3,7 @@
 		<button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
 	</ion-nav-buttons>
 	<ion-content id="addBook" class="padding">
-		<form name="searchForm">
+		<form name="form">
 			<h2>Search a book</h2>
 			<div name="searchData">
 				<label class="item-input"> <span class="input-label">ISBN</span>
@@ -23,44 +23,46 @@
 			<button ng-click="manual($event)" class="button">
 				Manual
 			</button>
-			<p class="help-block warning" ng-show="infoMsg">
-				{{infoMsg}}
-			</p>
-			<div ng-show="!books" class="paragraphs" style="margin: 10px 0">
-				No book found
-			</div>
-			<ion-list class="list card" ng-show="books">
-				<br>
-				<div class="item item-divider">
-					Search Results
-				</div>
-				<ion-item ng-repeat="book in books" class="item" ng-click="selectBook(book)">
-					<h3>{{book.value.volumeInfo.title}}</h3>
-					<p>
-						{{book.value.volumeInfo.subtitle}}
-					</p>
-					<p>
-						by <span ng-repeat="author in book.value.volumeInfo.authors">{{author}}, </span> {{book.value.volumeInfo.publishedDate | date: 'yyyy'}}
-						<br>
-					</p>
-				</ion-item>
-			</ion-list>
-			<script id="book_modal.html" type="text/ng-template">
-				<ion-modal-view>
-				<ion-header-bar>
-				<button class="button button-clear" ng-click="closeModal()">
-				Cancel
-				</button>
-				<h1 class="title">{{selectedBook.value.volumeInfo.title}}</h1>
-				<button button="button" ng-click="save(selectedBook)" class="button button-positive">
-				Save
-				</button>
-				</ion-header-bar>
-				<ion-content class="modal-background">
-				<book-edit-details book="selectedBook" new-entry="true"/>
-				</ion-content>
-				</ion-modal-view>
-			</script>
 		</form>
+		<p class="help-block warning" ng-show="infoMsg">
+			{{infoMsg}}
+		</p>
+		<div ng-show="!books" class="paragraphs" style="margin: 10px 0">
+			No book found
+		</div>
+		<ion-list class="list card" ng-show="books">
+			<br>
+			<div class="item item-divider">
+				Search Results
+			</div>
+			<ion-item ng-repeat="book in books" class="item" ng-click="selectBook(book)">
+				<h3>{{book.value.volumeInfo.title}}</h3>
+				<p>
+					{{book.value.volumeInfo.subtitle}}
+				</p>
+				<p>
+					by <span ng-repeat="author in book.value.volumeInfo.authors">{{author}}, </span> {{book.value.volumeInfo.publishedDate | date: 'yyyy'}}
+					<br>
+				</p>
+			</ion-item>
+		</ion-list>
+		<script id="book_modal.html" type="text/ng-template">
+			<ion-modal-view>
+			<form name="modalForm">
+			<ion-header-bar>
+			<button class="button button-clear" ng-click="closeModal()">
+			Cancel
+			</button>
+			<h1 class="title">{{selectedBook.value.volumeInfo.title}}</h1>
+			<button button="button" ng-click="save(selectedBook)" ng-disabled="modalForm.$invalid" class="button button-positive">
+			Save
+			</button>
+			</ion-header-bar>
+			<ion-content class="modal-background">
+			<book-edit-details book="selectedBook" new-entry="true"/>
+			</ion-content>
+			</form>
+			</ion-modal-view>
+		</script>
 	</ion-content>
 </ion-view>

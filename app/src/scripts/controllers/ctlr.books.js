@@ -75,7 +75,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
         function showBookDetails(pBook) {
             logService.debug('Showing details for book: ' + pBook.value.volumeInfo.title);
             $state.go('app.book_show', {
-                'bookId': pBook.hashCode
+                'bookId': pBook.value.id
             });
         }
 
@@ -92,7 +92,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
                 cancel: function() {},
                 buttonClicked: function(index) {
                     $state.go('app.book_edit', {
-                        'bookId': book.hashCode
+                        'bookId': book.value.id
                     });
                 },
                 destructiveButtonClicked: function() {

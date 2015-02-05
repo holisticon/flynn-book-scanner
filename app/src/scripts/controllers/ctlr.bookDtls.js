@@ -19,7 +19,7 @@ app.controller('BookDetailsController', ['$rootScope', '$scope', '$stateParams',
 
                     for (var index in allBooks) {
                         var book = allBooks[index];
-                        if (book.hashCode == bookID) {
+                        if (book.value.id == bookID) {
                             $scope.selectedBook = book;
                             break;
                         }

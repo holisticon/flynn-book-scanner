@@ -15,11 +15,40 @@ app.controller('BookEditController', ['$rootScope', '$scope', '$state', '$stateP
             var book = $scope.selectedBook,
                 config = settingsService.load();
             $ionicLoading.show();
-            logService.debug("Starting save for book.");
-            var bookImage = document.getElementById(book.value.id).getElementsByClassName('img-thumbnail')[0];
-            if (bookImage && bookImage.src && !book.image) {
+            logService.debug('Starting save for book.');
+
+            // TODO_#65
+            // move to service
+            // Author info
+            if (book.authorInfo) {
+                var authors = book.authorInfo.split(',');
+                if (authors.length > 0) {
+                    book.value.volumeInfo.authors = [];
+                    for (var index in authors) {
+                        var author = authors[index];
+                        book.value.volumeInfo.authors.push(author);
+                    }
+                }
+            }
+            // TODO_#65
+            // move to service
+            if (book.isbnInfo) {
+                var isbns = book.isbnInfo.split(',');
+                if (isbns.length > 0) {
+                    book.value.volumeInfo.industryIdentifiers = [];
+                    for (var index in isbns) {
+                        var isbn = isbns[index];
+                        book.value.volumeInfo.industryIdentifiers.push({
+                            identifier: isbn
+                        });
+                    }
+                }
+            }
+
+            var imgElement = document.getElementById(book.value.id).getElementsByClassName('img-thumbnail');
+            if (imgElement && imgElement[0].src && !book.image) {
                 // extract image info
-                blobUtil.imgSrcToBlob(bookImage.src).then(function(blob) {
+                blobUtil.imgSrcToBlob(imgElement[0].src).then(function(blob) {
                     var reader = new window.FileReader();
                     reader.readAsDataURL(blob);
                     reader.onloadend = function() {
@@ -70,7 +99,7 @@ app.controller('BookEditController', ['$rootScope', '$scope', '$state', '$stateP
                         count = 0;
                     for (var index in allBooks) {
                         var book = allBooks[index];
-                        if (book.hashCode == bookID) {
+                        if (book.value.id == bookID) {
                             $scope.selectedBook = book;
                             break;
                         }
