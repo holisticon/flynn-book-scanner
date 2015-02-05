@@ -150,8 +150,6 @@ module.exports = function(grunt) {
     },
     usemin: {
       html: ['<%= app.dist %>/{,*/}*.html'],
-      js: ['<%= app.dist %>/scripts/{,*/}*.js'],
-      css: ['<%= app.dist %>/styles/{,*/}*.css'],
       options: {
         dirs: ['<%= app.dist %>']
       }
@@ -330,6 +328,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'ngAnnotate',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
@@ -347,11 +346,8 @@ module.exports = function(grunt) {
     'autoprefixer',
     'concat',
     'copy:dist',
-    'ngAnnotate',
     'cssmin',
-    'usemin',
-    'ngdocs',
-    'plato',
+    'usemin'
   ]);
 
   grunt.registerTask('default', [
