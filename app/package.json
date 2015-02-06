@@ -5,7 +5,7 @@
   "dependencies": {},
   "build": {
     "ios": {
-      "signer": "Flynn Distribution",
+      "signer": "iPhone Distribution: Holisticon AG (G8D6696Z88)",
       "provisionProfile": "/Users/holisticon/dev/Flynn_Distribution.mobileprovision"
     },
     "android": {
