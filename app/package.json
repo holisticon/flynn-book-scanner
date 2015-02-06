@@ -5,8 +5,8 @@
   "dependencies": {},
   "build": {
     "ios": {
-      "signer": "iPhone Distribution: Holisticon AG",
-      "provisionProfile": "/Users/holisticon/Library/MobileDevice/Provisioning Profiles/2ceec20a-41aa-479e-b78f-9d3cf818138a.mobileprovision"
+      "signer": "Flynn Distribution",
+      "provisionProfile": "/Users/holisticon/dev/Flynn_Distribution.mobileprovision"
     },
     "android": {
       "ant_property_file": "/Users/holisticon/dev/cordova_ant.properties"

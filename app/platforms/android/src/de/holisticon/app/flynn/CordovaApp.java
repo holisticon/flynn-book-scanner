@@ -17,11 +17,17 @@
        under the License.
  */
 
-package de.holisticon.flynn;
+package de.holisticon.app.flynn;
 
 import android.os.Bundle;
 import org.apache.cordova.*;
 
+/**
+ * Flynn Book Scanner App
+ * Copyright Holisticon AG 2014. All rights reserved.
+ * @author Martin Reinhardt (Holisticon AG)
+ *
+ */
 public class CordovaApp extends CordovaActivity
 {
     @Override

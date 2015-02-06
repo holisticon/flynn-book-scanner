@@ -7,7 +7,7 @@
 
 BASEDIR=$(dirname $0)
 buildNo=$1
-versionNumber=`grep "id=\"de.holisticon.flynn\" version" ${BASEDIR}/../app/config.xml | cut -f3 -d"=" | cut -f2 -d"\""`
+versionNumber=`grep "id=\"de.holisticon.app.flynn\" version" ${BASEDIR}/../app/config.xml | cut -f3 -d"=" | cut -f2 -d"\""`
 if [ -z "$1" ] || [ $1 = "autocommit"  ]; then
 	newVersionNumber=`echo $versionNumber | ( IFS=".$IFS" ; read a b c && echo $a.$b.$((c + 1)) )`
 else

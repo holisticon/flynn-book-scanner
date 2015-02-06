@@ -5,7 +5,7 @@
 
 BASEDIR=$(dirname $0)
 buildNo=$1
-versionNumber=`grep "id=\"de.holisticon.flynn\" version" ${BASEDIR}/../app/config.xml | cut -f3 -d"=" | cut -f2 -d"\""`
+versionNumber=`grep "id=\"de.holisticon.app.flynn\" version" ${BASEDIR}/../app/config.xml | cut -f3 -d"=" | cut -f2 -d"\""`
 sed -e "s/version=\".*\"/version=\"${versionNumber}\" android-versionCode=\"${buildNo}\" ios-CFBundleVersion=\"${buildNo}\"/g" ${BASEDIR}/../app/config.xml > ${BASEDIR}/../app/config.xml.new
 mv ${BASEDIR}/../app/config.xml.new ${BASEDIR}/../app/config.xml
 
