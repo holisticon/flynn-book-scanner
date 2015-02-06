@@ -12,6 +12,18 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
         var config = settings.load(),
             allBooks;
 
+        function init() {
+            $scope.filterModes = [{
+                label: 'sort by title',
+                value: 'value.volumeInfo.title'
+            }, {
+                label: 'sort by author',
+                value: 'authorInfo'
+            }];
+            $scope.selectedFilter = $scope.filterModes[0].value;
+            load(true);
+        }
+
         function syncWithServer() {
             $ionicLoading.show({
                 template: '<i class="icon ion-looping loading-icon"></i>&nbsp;&nbsp;Syncing books ...'
@@ -103,7 +115,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
             });
         }
 
-        load(true);
+        init();
 
         // public methods
         $scope.load = load;
