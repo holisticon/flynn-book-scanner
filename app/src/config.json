@@ -13,7 +13,7 @@
         "copyright": {
             "label": "Copyright",
             "hidden": false,
-            "value": "© Copyright 2014 Holisticon AG<br>"
+            "value": "© Copyright 2015 Holisticon AG"
         },
         "about": {
             "label": "About",
@@ -24,7 +24,7 @@
     "timeout": {
         "label": "Timeout for deferred calls",
         "hidden": true,
-        "value": "30000"
+        "value": 30000
     },
     "dev": false,
     "debug": false,

@@ -3,9 +3,9 @@
 		<button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
 	</ion-nav-buttons>
 	<ion-content id="about" class="padding">
-		<div ng-repeat="entry in info" ng-show=!entry.hidden>
-			<span class="entryLabel"> {{entry.label}}: </span>
-			<p ng-bind-html="entry.value" class="entryValue"></p>
+		<div ng-repeat="entry in info" class="row" ng-show=!entry.hidden>
+			<div class="col entryLabel"> {{entry.label}}: </div>
+			<div ng-bind-html="entry.value" class="col col-75 entryValue"></div>
 		</div>
 		<br>
 		<a  target="_blank" href="https://github.com/holisticon/flynn-book-scanner" class="button icon-left ion-social-github"><small>View project on</small> GitHub</a>
