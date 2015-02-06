@@ -34,7 +34,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Resources;
 
 
-namespace de.holisticon.flynn
+namespace de.holisticon.app.flynn
 {
     public partial class MainPage : PhoneApplicationPage
     {

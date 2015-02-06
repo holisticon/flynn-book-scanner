@@ -32,7 +32,7 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
-namespace de.holisticon.flynn
+namespace de.holisticon.app.flynn
 {
     public partial class App : Application
     {
