@@ -10,23 +10,14 @@
             "hidden": false,
             "value": ""
         },
-        "copyright": {
-            "label": "Copyright",
-            "hidden": false,
-            "value": "© Copyright 2015 Holisticon AG"
-        },
         "about": {
             "label": "About",
             "hidden": false,
-            "value": "The app used <a href=\"http://fortawesome.github.io/Font-Awesome/\">Font Awesome</a> for app icon and Splashscreen is based on <a href=\"http://commons.wikimedia.org/wiki/File:Bookshelf_icon_(red_and_blue).svg\">Wikimedia</a>. The app is based on <a href=\"http://cordova.apache.org\">Cordova</a>, <a href=\"https://angularjs.org\">AngularJS</a> and <a href=\"http://ionicframework.com\">Ionic</a>."
+            "value": "© Copyright 2015 Holisticon AG <br><br> The app used <a href=\"http://fortawesome.github.io/Font-Awesome/\">Font Awesome</a> for app icon and Splashscreen is based on <a href=\"http://commons.wikimedia.org/wiki/File:Bookshelf_icon_(red_and_blue).svg\">Wikimedia</a>. The app is based on <a href=\"http://cordova.apache.org\">Cordova</a>, <a href=\"https://angularjs.org\">AngularJS</a> and <a href=\"http://ionicframework.com\">Ionic</a>."
         }
     },
-    "timeout": {
-        "label": "Timeout for deferred calls",
-        "hidden": true,
-        "value": 30000
-    },
-    "dev": false,
-    "debug": false,
-    "trace": false
+    "timeout":  3000,
+    "dev": 		false,
+    "debug": 	false,
+    "trace": 	false
 }
