@@ -33,13 +33,12 @@ function showErrorDialog($rootScope, $scope, $ionicLoading, log, errorTitle, err
  * @name onDeviceReady
  * @description Called after device is ready to use
  */
-var onDeviceReady = function() {
+function onDeviceReady() {
     var $http = angular.injector(['ng']).get('$http'),
         $rootScope = angular.injector(['ng']).get('$rootScope');
-    $http.get('config.json')
-        .success(function(data, status, headers, config) {
+    $http.get('config.json').success(function(data, status, headers, config) {
             var config = data;
-            app.constant("APP_CONFIG", config);
+            app.constant('APP_CONFIG', config);
             if (config.dev === true) {
                 console.debug('Skipping bootstrapping on dev mode.');
                 navigator.notification.alert('Running in dev mode!', null, 'Info');
@@ -48,9 +47,7 @@ var onDeviceReady = function() {
                 // and then finally bootstrap it:
                 angular.bootstrap(document, ['flynnBookScannerApp']);
             }
-            $rootScope.loading = false;
-        })
-        .error(function(data, status, headers, config) {
+        }).error(function(data, status, headers, config) {
             console.error('Did not get valid config.json file.');
             navigator.notification.alert('Server did not show valid response.', null, 'Server Error');
         });

@@ -7,12 +7,12 @@
  * @description
  * Provides access to the book inventory. Used PouchDB as backend.
  */
-app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService', 'base64', 'logService',
-    function($rootScope, $http, $q, settingsService, base64, logService) {
+app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService', 'base64', 'logService', 'APP_CONFIG',
+    function($rootScope, $http, $q, settingsService, base64, logService, APP_CONFIG) {
         'use strict';
         var config = settingsService.load(),
             activeProfile = config.activeProfile();
-
+        
         function getDB() {
             var NAME_OF_POUCHDB;
             config = settingsService.load();
@@ -22,14 +22,10 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
             if (!db) {
                 if (typeof cordova != 'undefined' && cordova.platformId === 'android') {
                     // for performance use indexedDB on Android
-                    db = new PouchDB(NAME_OF_POUCHDB, {
-                        adapter: 'idb'
-                    });
+                    db = new PouchDB(NAME_OF_POUCHDB, { adapter: 'idb' });
                 } else {
                     // default use websql
-                    db = new PouchDB(NAME_OF_POUCHDB, {
-                        adapter: 'websql'
-                    });
+                    db = new PouchDB(NAME_OF_POUCHDB, { adapter: 'websql' });
                 }
             }
             return db;
@@ -52,12 +48,11 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                 live: true
                             };
                         logService.info('Syncing with couchDB started: ' + couchDbUrl);
-
                         // check for network availability first
                         $http({
                             method: 'GET',
                             url: remoteCouch,
-                            timeout: 900,
+                            timeout: APP_CONFIG.timeout,
                         }).then(function(response) {
                             var syncPromise = localDB.sync(remoteCouch)
                                 .on('change', function(info) {

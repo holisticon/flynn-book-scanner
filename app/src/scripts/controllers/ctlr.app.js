@@ -40,8 +40,6 @@ app.controller('AppController', ['$scope', '$rootScope', '$state', '$ionicLoadin
         //  show settings 
         var config = settings.load();
         if (config && !config.valid) {
-            //timeout of 30 seconds
-            config.timeout = 30000;
             $state.go('app.settings');
         } else {
             $ionicLoading.hide();
