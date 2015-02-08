@@ -13,7 +13,7 @@
         "about": {
             "label": "About",
             "hidden": false,
-            "value": "© Copyright 2015 Holisticon AG <br><br> The app used <a href=\"http://fortawesome.github.io/Font-Awesome/\">Font Awesome</a> for app icon and Splashscreen is based on <a href=\"http://commons.wikimedia.org/wiki/File:Bookshelf_icon_(red_and_blue).svg\">Wikimedia</a>. The app is based on <a href=\"http://cordova.apache.org\">Cordova</a>, <a href=\"https://angularjs.org\">AngularJS</a> and <a href=\"http://ionicframework.com\">Ionic</a>."
+            "value": "© Copyright 2015 Holisticon AG <br><a target=\"_blank\" hhref=\"https://www.holisticon.de\"><img src=\"images/holisticon-logo-standard.png\"></a><br>  The app used <a href=\"http://fortawesome.github.io/Font-Awesome/\">Font Awesome</a> for app icon and Splashscreen is based on <a href=\"http://commons.wikimedia.org/wiki/File:Bookshelf_icon_(red_and_blue).svg\">Wikimedia</a>. The app is based on <a href=\"http://cordova.apache.org\">Cordova</a>, <a href=\"https://angularjs.org\">AngularJS</a> and <a href=\"http://ionicframework.com\">Ionic</a>.<br><br><a target=\"_blank\" href=\"https://github.com/holisticon/flynn-book-scanner\" class=\"button icon-left ion-social-github\"><small>View project on</small> GitHub</a>"
         }
     },
     "timeout":  3000,
