@@ -81,8 +81,9 @@ ion-tabs {
 	}
 }
 
-@media screen and (orientation:landscape)  {
-	.platform-ios.platform-cordova:not(.fullscreen){
+// don't resize header on iPad ...
+@media (max-width: 60em)  and (orientation:landscape) {
+  .platform-ios.platform-cordova:not(.fullscreen){
 	 	.bar-header:not(.bar-subheader) {
    			height: 40px;
     		orientation: portrait;
