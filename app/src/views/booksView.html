@@ -6,12 +6,6 @@
 		<button class="button button-icon icon ion-refresh" ng-click="load()"></button>
 	</ion-nav-buttons>
 	<ion-header-bar class="bar-subheader item-input-inset">
-		<label class="item-input item-select">
-			<div class="button button-icon icon ion-settings"></div>
-			<select data-ng-model="selectedFilter">
-          		<option ng-repeat="filterMode in filterModes" value="{{filterMode.value}}">{{ filterMode.label }}</option>
-			</select>
-		</label>
 		<label class="item-input-wrapper"> <i class="icon ion-ios7-search placeholder-icon"></i>
 			<input type="search" data-ng-model="searchQuery.fullTextSearch" ng-model-onblur  is-focused="true" ng-change="doSearch()"
 			placeholder="Type to search ...">
@@ -23,6 +17,16 @@
 
 	<ion-content>
 		<form name="form">
+			<div>
+				<label class="item item-input item-select">
+					<div class="input-label">
+						&nbsp;&nbsp;Options
+					</div>
+					<select data-ng-model="selectedFilter">
+		          		<option ng-repeat="filterMode in filterModes" value="{{filterMode.value}}">{{ filterMode.label }}</option>
+					</select>
+				</label>
+			</div>
 			<ion-list>
 				<div ng-show="!books" class="item">
 					No books found.

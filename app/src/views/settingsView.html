@@ -63,7 +63,8 @@
 						</div>
 						<select data-ng-model="logging.selectedLogLevel" ng-options="logLevel.name for logLevel in logging.logLevels" ng-change="filterLogs()">
 							<option value="">All logs</option>
-						</select> </label>
+						</select> 
+					</label>
 					<button type="button" ng-click="filterLogs()" class="button button-positive">
 						Refresh logs
 					</button>
