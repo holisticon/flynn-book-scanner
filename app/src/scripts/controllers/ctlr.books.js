@@ -108,8 +108,13 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
                     });
                 },
                 destructiveButtonClicked: function() {
-                    var bookToRemove = $scope.book;
-                    removeBook(bookToRemove);
+                    navigator.notification.confirm('Really remove book ' + $scope.book.value.volumeInfo.title + ' ?', function(buttonIndex) {
+                        if (buttonIndex === 1) {
+                            removeBook($scope.book);
+                            $state.go($state.current, {}, {reload: true});
+                        }
+                    })
+
                     return true;
                 }
             });

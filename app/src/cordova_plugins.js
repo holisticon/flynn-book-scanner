@@ -7,4 +7,9 @@ if (!navigator.notification) {
 			callback();
 		}
 	}
+	navigator.notification.confirm = function(text, callback, title) {
+		if (confirm(text) && callback && typeof(callback) === "function") {
+			callback(1);
+		}
+	}
 }

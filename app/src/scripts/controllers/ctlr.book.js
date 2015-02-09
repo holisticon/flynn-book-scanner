@@ -136,8 +136,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$log
 				bookToAdd = pSelectedBookValue,
 				books = booksInventory,
 				authorInfo = "";
-			logService
-				.debug('Showing details for book: ' + pSelectedBookValue.value.volumeInfo.title);
+			$log.debug('Showing details for book: ' + pSelectedBookValue.value.volumeInfo.title);
 			for (var itemIndex in pSelectedBookValue.value.volumeInfo.authors) {
 				var authorsInfo = pSelectedBookValue.value.volumeInfo.authors;
 				if (authorsInfo) {
