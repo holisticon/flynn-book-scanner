@@ -6,8 +6,8 @@
  * @description
  * Controller to show book details from inventory
  */
-app.controller('BookDetailsController', ['$rootScope', '$scope', '$stateParams', '$ionicLoading', '$location', 'logService', 'settingsService', 'inventoryService', 'googleBookService',
-    function($rootScope, $scope, $stateParams, $ionicLoading, $location, log, settingsService, inventoryService, googleBookService) {
+app.controller('BookDetailsController', ['$rootScope', '$scope', '$stateParams', '$ionicLoading', '$location', '$log', 'settingsService', 'inventoryService', 'googleBookService',
+    function($rootScope, $scope, $stateParams, $ionicLoading, $location, $log, settingsService, inventoryService, googleBookService) {
         var credentials = settingsService.load(),
             bookID = $stateParams.bookId;
 
@@ -25,7 +25,7 @@ app.controller('BookDetailsController', ['$rootScope', '$scope', '$stateParams',
                         }
                     }
                 }, function(errorResponse) {
-                    log.error('Error during load book via hashCode');
+                    $log.error('Error during load book via hashCode');
                 });
             }
         }

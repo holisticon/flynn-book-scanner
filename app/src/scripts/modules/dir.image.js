@@ -4,8 +4,8 @@
  * @module flynnBookScannerApp
  * @description creates img element from provide base64 encoded image data
  */
-app.directive('imageData', ['imageDataCache', 'base64', 'logService', 'webWorkerPool',
-	function(imageDataCache, base64, logService, webWorkerPool) {
+app.directive('imageData', ['imageDataCache', 'base64', 'webWorkerPool',
+	function(imageDataCache, base64, webWorkerPool) {
 		'use strict';
 		return {
 			restrict: 'E',

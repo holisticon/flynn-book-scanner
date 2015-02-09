@@ -6,8 +6,8 @@
  * @description
  * Interacts with inventory backend to show up book details
  */
-app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', '$ionicScrollDelegate', '$ionicLoading', '$http', '$ionicActionSheet', 'settingsService', 'logService', 'inventoryService',
-    function($rootScope, $scope, $state, $filter, $ionicScrollDelegate, $ionicLoading, $http, $ionicActionSheet, settings, logService, inventoryService) {
+app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', '$log', '$ionicScrollDelegate', '$ionicLoading', '$http', '$ionicActionSheet', 'settingsService', 'inventoryService',
+    function($rootScope, $scope, $state, $filter, $log, $ionicScrollDelegate, $ionicLoading, $http, $ionicActionSheet, settings, inventoryService) {
 
         var config = settings.load(),
             allBooks;
@@ -85,7 +85,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
         }
 
         function showBookDetails(pBook) {
-            logService.debug('Showing details for book: ' + pBook.value.volumeInfo.title);
+            $log.debug('Showing details for book: ' + pBook.value.volumeInfo.title);
             $state.go('app.book_show', {
                 'bookId': pBook.value.id
             });

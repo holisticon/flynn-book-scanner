@@ -3,16 +3,10 @@
 module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
-  grunt.loadNpmTasks('grunt-ng-annotate');
-  grunt.loadNpmTasks('grunt-contrib-htmlmin');
-  grunt.loadNpmTasks('grunt-bower-task');
-  grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-plato');
-  grunt.loadNpmTasks('grunt-ngdocs');
 
   grunt.initConfig({
   	app:{
-  		version: require('./package.json').version || '1.0',  		
+  		version: require('./package.json').version || '1.4',  		
   		build: require('./package.json').build || {},
       	src: require('./bower.json').appPath || 'src',
      	gen: require('./bower.json').appPath || 'src-gen',

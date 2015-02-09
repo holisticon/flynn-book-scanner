@@ -4,8 +4,8 @@
  * @module flynnBookScannerApp
  * @description gives focus the the element, can be used as attribute
  */
-app.directive('isFocused', ['$timeout', 'logService',
-	function($timeout, logService) {
+app.directive('isFocused', ['$timeout',
+	function($timeout) {
 		'use strict';
 		return {
 			restrict: 'A',

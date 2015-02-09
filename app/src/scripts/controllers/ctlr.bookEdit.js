@@ -6,8 +6,8 @@
  * @description
  * Controller to edit book details from inventory
  */
-app.controller('BookEditController', ['$rootScope', '$scope', '$state', '$stateParams', '$ionicLoading', '$location', 'logService', 'settingsService', 'inventoryService',
-    function($rootScope, $scope, $state, $stateParams, $ionicLoading, $location, logService, settingsService, inventoryService) {
+app.controller('BookEditController', ['$rootScope', '$scope', '$state', '$stateParams', '$ionicLoading', '$location', '$log', 'settingsService', 'inventoryService',
+    function($rootScope, $scope, $state, $stateParams, $ionicLoading, $location, $log, settingsService, inventoryService) {
         var booksInventory, credentials = settingsService.load();
         var bookID = $stateParams.bookId;
 
@@ -15,7 +15,7 @@ app.controller('BookEditController', ['$rootScope', '$scope', '$state', '$stateP
             var book = $scope.selectedBook,
                 config = settingsService.load();
             $ionicLoading.show();
-            logService.debug('Starting save for book.');
+            $log.debug('Starting save for book.');
 
             // TODO_#65
             // move to service
@@ -66,7 +66,7 @@ app.controller('BookEditController', ['$rootScope', '$scope', '$state', '$stateP
             }
 
             function onSuccess(response) {
-                logService.info("Successfully added book");
+                $log.info("Successfully added book");
                 if (response.noUpdate) {
                     navigator.notification.alert("Book already added. Please increase amount.");
                 } else  {
@@ -86,7 +86,7 @@ app.controller('BookEditController', ['$rootScope', '$scope', '$state', '$stateP
 
             function onError(response) {
                 $rootScope.$broadcast('booksave.error');
-                logService.debug('Error during book saving.');
+                $log.debug('Error during book saving.');
                 $ionicLoading.hide();
             }
         }

@@ -6,8 +6,8 @@
  * @description
  * Control preference/settings of the app and show log entries
  */
-app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '$state', 'logService', 'settingsService', 'inventoryService',
-    function($rootScope, $scope, $ionicLoading, $state, logService, settingsService, inventoryService) {
+app.controller('SettingsController', ['$rootScope', '$log', '$scope', '$ionicLoading', '$state', 'logService', 'settingsService', 'inventoryService',
+    function($rootScope, $log, $scope, $ionicLoading, $state, logService, settingsService, inventoryService) {
 
         var defaultCouch = 'https://server.holisticon.de/couchdb/flynn/',
             defaultUser = '<LDAP-User>',
@@ -19,7 +19,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
         readLogs();
 
         function loadSettings() {
-            console.debug("Loading settings from local storage");
+            $log.debug('Loading settings from local storage');
             var config = settingsService.load();
             $scope.flynn = {};
             $scope.flynn.activeProfile = {};
@@ -59,7 +59,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
         function readInventory() {
             inventoryService.read().then(function(response) {
                 $ionicLoading.hide();
-                logService.debug("Got valid server response. Settings seeem to be valid.");
+                $log.debug('Got valid server response. Settings seeem to be valid.');
                 $state.go('app.books');
             }, function(error) {
                 $ionicLoading.hide();
@@ -69,7 +69,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
         }
 
         function saveSettings(redirect) {
-            logService.debug("Saving settings to local storage");
+            $log.debug('Saving settings to local storage');
             $ionicLoading.show();
             var profile = $scope.flynn.activeProfile;
             // adding default profile
@@ -121,7 +121,7 @@ app.controller('SettingsController', ['$rootScope', '$scope', '$ionicLoading', '
                 $scope.logs = response;
                 $ionicLoading.hide();
             }, function(errorDetails) {
-                logService.error('No log entries found');
+                $log.error('No log entries found');
                 $ionicLoading.hide();
             });
         }

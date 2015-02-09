@@ -7,18 +7,19 @@
  * @description
  * Provides access to the book inventory. Used PouchDB as backend.
  */
-app.service('settingsService', ['$rootScope', 'localStorageService', 'logService', 'APP_CONFIG',
-    function($rootScope, localStorage, logService, APP_CONFIG) {
+app.service('settingsService', ['$rootScope', '$log', 'localStorageService', 'APP_CONFIG',
+    function($rootScope, $log, localStorage, APP_CONFIG) {
         'use strict';
+
+        function saveSettings(pConfig) {
+            localStorage.remove('flynn_app.settings');
+            var config = pConfig;
+            localStorage.add('flynn_app.settings', config);
+        }
         return {
-            save: function(pConfig) {
-                localStorage.remove('flynn_app.settings');
-                var config = pConfig;
-                config.googleApiKey = 'AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY';
-                localStorage.add('flynn_app.settings', config);
-            },
+            save: saveSettings,
             load: function() {
-                logService.debug('Loading settings from local storage');
+                $log.debug('Loading settings from local storage');
                 var settings = localStorage.get('flynn_app.settings');
                 // TODO check settings
                 if (settings) {
@@ -30,12 +31,22 @@ app.service('settingsService', ['$rootScope', 'localStorageService', 'logService
                     settings.profiles = [];
                     settings.profiles.push({});
                 }
-                settings.activeProfile = function() { return settings.profiles[settings.activeProfileID]; };
+                if (!settings.timeout) {
+                    settings.timeout = APP_CONFIG.timeout;
+                    saveSettings(settings);
+                }
+                if (!settings.googleApiKey) {
+                    settings.googleApiKey = APP_CONFIG.googleApiKey;
+                    saveSettings(settings);
+                }
+                settings.activeProfile = function() {
+                    return settings.profiles[settings.activeProfileID];
+                };
                 $rootScope.settings = settings;
                 return settings;
             },
             verify: function() {
-                logService.debug('Verifying flynn settings');
+                $log.debug('Verifying flynn settings');
                 var config = this.load();
                 var credentials = config.activeProfile();
                 if (credentials.remotesync) {

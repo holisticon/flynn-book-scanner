@@ -37,20 +37,20 @@ function onDeviceReady() {
     var $http = angular.injector(['ng']).get('$http'),
         $rootScope = angular.injector(['ng']).get('$rootScope');
     $http.get('config.json').success(function(data, status, headers, config) {
-            var config = data;
-            app.constant('APP_CONFIG', config);
-            if (config.dev === true) {
-                console.debug('Skipping bootstrapping on dev mode.');
-                navigator.notification.alert('Running in dev mode!', null, 'Info');
-            } else {
-                // Add additional services/constants/variables to your app,
-                // and then finally bootstrap it:
-                angular.bootstrap(document, ['flynnBookScannerApp']);
-            }
-        }).error(function(data, status, headers, config) {
-            console.error('Did not get valid config.json file.');
-            navigator.notification.alert('Server did not show valid response.', null, 'Server Error');
-        });
+        var config = data;
+        app.constant('APP_CONFIG', config);
+        if (config.dev === true) {
+            console.debug('Skipping bootstrapping on dev mode.');
+            navigator.notification.alert('Running in dev mode!', null, 'Info');
+        } else {
+            // Add additional services/constants/variables to your app,
+            // and then finally bootstrap it:
+            angular.bootstrap(document, ['flynnBookScannerApp']);
+        }
+    }).error(function(data, status, headers, config) {
+        console.error('Did not get valid config.json file.');
+        navigator.notification.alert('Server did not show valid response.', null, 'Server Error');
+    });
 }
 
 // on dev fire up event directly
@@ -117,38 +117,39 @@ app.filter('bookFilter', [function() {
     }
     return function(pBooks, pSearchText) {
         if (pSearchText) {
-            var found=false,
-            	filtered,
+            var found = false,
+                filtered,
                 searchText = pSearchText.toUpperCase();
             for (var i = 0, len = pBooks.length; i < len; i++) {
-                var book = pBooks[i],found=false;
+                var book = pBooks[i],
+                    found = false;
                 if (book.value.volumeInfo.title.toUpperCase() === searchText) { // matches whole word
-                	found=true;
+                    found = true;
                 } else {
                     if (book.value.volumeInfo.title.toUpperCase().indexOf(searchText) > -1) {
-                    	found=true;
+                        found = true;
                     } else {
                         if (book.value.volumeInfo.subtitle && book.value.volumeInfo.subtitle.toUpperCase().indexOf(searchText) > -1) {
-                        	found=true;
+                            found = true;
                         } else {
                             if (book.value.volumeInfo.description && book.value.volumeInfo.description.toUpperCase().indexOf(searchText) > -1) {
-                            	found=true;
+                                found = true;
                             } else {
                                 if (book.value.volumeInfo.publishedDate && book.value.volumeInfo.publishedDate.toString().toUpperCase().indexOf(searchText) > -1) {
-                                	found=true;
+                                    found = true;
                                 } else {
                                     if (book.value.volumeInfo.authors && searchList(book.value.volumeInfo.authors, searchText)) {
-                                    	found=true;
+                                        found = true;
                                     }
                                 }
                             }
                         }
                     }
                 }
-                if(found){
-                	if(!filtered){
-                    	filtered=[];                		
-                	}
+                if (found) {
+                    if (!filtered) {
+                        filtered = [];
+                    }
                     filtered.push(book);
                 }
             };
@@ -195,10 +196,10 @@ app.run(function($ionicPlatform) {
  * @module flynnBookScannerApp
  * @description configure app
  */
-app.config(function($urlRouterProvider,$compileProvider, $httpProvider, $stateProvider, $ionicConfigProvider, webWorkerPoolProvider, logServiceProvider, APP_CONFIG) {
-	// fix wp8 cordova errors
-	$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|ghttps?|ms-appx|x-wmapp0):/);
-	// limit webworker threads
+app.config(function($urlRouterProvider, $provide, $compileProvider, $httpProvider, $stateProvider, $ionicConfigProvider, webWorkerPoolProvider, loggerProvider, APP_CONFIG) {
+    // fix wp8 cordova errors
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|ghttps?|ms-appx|x-wmapp0):/);
+    // limit webworker threads
     webWorkerPoolProvider.workerUrl('scripts/webworker.renderImage.js');
     webWorkerPoolProvider.capacity(4);
     // places them at the bottom for all OS
@@ -209,15 +210,19 @@ app.config(function($urlRouterProvider,$compileProvider, $httpProvider, $statePr
     $ionicConfigProvider.views.maxCache(5);
     $ionicConfigProvider.templates.maxPrefetch(3);
     // configure logging
-    logServiceProvider.dbName('flynnDB_logs');
-    logServiceProvider.enableDebugLogging(APP_CONFIG.debug);
+    loggerProvider.dbName('flynnDB_logs');
+    loggerProvider.outputOnly(!APP_CONFIG.dbLogging);
+    loggerProvider.debugLogging(APP_CONFIG.debug);
     if (APP_CONFIG.debug) {
         // enable couchDB debug
         PouchDB.debug.enable('*');
     } else {
         PouchDB.debug.disable();
     }
-    logServiceProvider.enableTraceLogging(APP_CONFIG.trace);
+    loggerProvider.traceLogging(APP_CONFIG.trace);
+    $provide.decorator('$log', function($delegate) {
+        return loggerProvider.$get($delegate);
+    });
     // configure routes and states
     $stateProvider
         .state('app', {

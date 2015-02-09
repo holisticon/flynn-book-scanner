@@ -6,8 +6,8 @@
  * @description
  * Controller to add new book entries to inventory
  */
-app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$http', '$filter', '$q', '$state', '$resource', '$ionicModal', '$ionicHistory', 'logService', 'settingsService', 'inventoryService', 'googleBookService',
-	function($rootScope, $scope, $ionicLoading, $http, $filter, $q, $state, $resource, $ionicModal, $ionicHistory, logService, settingsService, inventoryService, googleBookService) {
+app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$log', '$http', '$filter', '$q', '$state', '$resource', '$ionicModal', '$ionicHistory', 'settingsService', 'inventoryService', 'googleBookService',
+	function($rootScope, $scope, $ionicLoading, $log, $http, $filter, $q, $state, $resource, $ionicModal, $ionicHistory, settingsService, inventoryService, googleBookService) {
 		var booksInventory, credentials = settingsService
 			.load().activeProfile();
 
@@ -37,13 +37,13 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
 			$ionicLoading.show();
 			cordova.plugins.barcodeScanner.scan(function(result) {
 				if (!result.cancelled) {
-					logService.debug('We got a barcode\n' + 'Result: ' + result.text + '\n' + 'Format: ' + result.format + '\n');
+					$log.debug('We got a barcode\n' + 'Result: ' + result.text + '\n' + 'Format: ' + result.format + '\n');
 					$scope.searchQuery.isbn = result.text;
 					search();
 				}
 				$ionicLoading.hide();
 			}, function(error) {
-				logService.error("Scanning failed.");
+				$log.error("Scanning failed.");
 				$rootScope.$broadcast("barcode.error");
 				$ionicLoading.hide();
 			});
@@ -72,11 +72,11 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
 				booksInventory = {};
 				inventoryService.read().then(function(response) {
 						booksInventory = response.books;
-						logService.debug('Start searching with criteria:');
+						$log.debug('Start searching with criteria:');
 						retrieve(searchQuery);
 					},
 					function(response) {
-						logService.error('Error during reading inventory for search with critera ' + JSON.stringify(searchQuery) + ':' + JSON.stringify(response));
+						$log.error('Error during reading inventory for search with critera ' + JSON.stringify(searchQuery) + ':' + JSON.stringify(response));
 					});
 			} else {
 				navigator.notification.alert('Please enter search details.', null, 'Info');
@@ -106,7 +106,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
 		function retrieve(pSearchQuery) {
 			$ionicLoading.show();
 			googleBookService.search(pSearchQuery).then(function(response) {
-					logService.info('Got valid service response');
+					$log.info('Got valid service response');
 					$scope.books = enrichDbData(response.books);
 					$ionicLoading.hide();
 				},
@@ -162,17 +162,17 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
 						currentISBN = bookEntry.value.volumeInfo.industryIdentifiers[0].identifier;
 					// only add complete entries to results
 					if (isbn0 && currentISBN == isbn0) {
-						logService.debug('Already found a saved book entry: ' + bookEntry.value.volumeInfo.title);
+						$log.debug('Already found a saved book entry: ' + bookEntry.value.volumeInfo.title);
 						bookToAdd = bookEntry;
 						count++;
 					}
 				}
 			}
 			if (count > 0) {
-				logService.debug('Found already entry in couchdb');
+				$log.debug('Found already entry in couchdb');
 				bookToAdd.infoMsg = 'Book is already added to library. Please update amount.';
 			} else {
-				logService.debug('Found no existing entry in couchdb');
+				$log.debug('Found no existing entry in couchdb');
 				bookToAdd.infoMsg = null;
 				// set default count to 1
 				count = 1;
@@ -188,7 +188,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
 
 		function save(book) {
 			$ionicLoading.show();
-			logService.debug('Starting save for book');
+			$log.debug('Starting save for book');
 			// remember last bookshelf
 			var config = settingsService.load();
 			config.activeProfile().lastBookshelf = book.value.bookshelf;
@@ -243,7 +243,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
 			}
 
 			function onSuccess(response) {
-				logService.info('Successfully added book');
+				$log.info('Successfully added book');
 				if (response.noUpdate) {
 					navigator.notification.alert('Book already added. Please increase amount.');
 				} else {
@@ -265,7 +265,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$htt
 
 			function onError(response) {
 				$rootScope.$broadcast('booksave.error');
-				logService.debug('Error during book saving');
+				$log.debug('Error during book saving');
 				$ionicLoading.hide();
 			}
 		}

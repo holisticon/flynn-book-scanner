@@ -1,34 +1,24 @@
 var cordova;
 
-// load the controller's module
-
+//load the app module
+beforeEach(module('flynnBookScannerApp'));
 
 describe("inventoryService", function() {
-  beforeEach(function() {
-    module(function($provide) {
-      $provide.constant('APP_CONFIG', {
-        timeout: '10000',
-        dev: false,
-        debug: true,
-      });
-    });
-  });
+
   var service,
     rootScope,
     httpBackend,
     config,
     mockedSettingsService;
 
-  beforeEach(module('flynnBookScannerApp'));
-
   beforeEach(function() {
-    //  new PouchDB('test').destroy(function(err, info) { });
     config = {
       activeProfile: function() {
         return {
           remotesync: false,
           dbName: 'test',
-        }
+          timeout: 1000
+        };
       }
     };
     module(function($provide) {
@@ -37,14 +27,14 @@ describe("inventoryService", function() {
           return config;
         }
       });
-    })
+    });
     inject(function(inventoryService, $httpBackend, $rootScope) {
       service = inventoryService;
       rootScope = $rootScope;
       httpBackend = $httpBackend;
       // mock views, see https://github.com/driftyco/ionic/issues/2927
       httpBackend.when('GET', new RegExp('views/.*')).respond({});
-    })
+    });
   });
 
   it('Use Authentication for Sync', function(done) {
@@ -118,7 +108,7 @@ describe("inventoryService", function() {
       };
     var bookToSave = {
       value: validBookEntry
-    }
+    };
     new PouchDB(config.activeProfile().dbName).destroy(function(err, info) {
       service.save(bookToSave).then(function(response) {
         books = response.books;
@@ -128,7 +118,7 @@ describe("inventoryService", function() {
         });
       });
       rootScope.$apply();
-    })
+    });
   });
 
   it('remove book in inventory', function(done) {
@@ -164,7 +154,7 @@ describe("inventoryService", function() {
       };
     var bookToSave = {
       value: validBookEntry
-    }
+    };
     new PouchDB(config.activeProfile().dbName).destroy(function(err, info) {
       service.save(bookToSave).then(function(response) {
         expect(response.books.length).toEqual(1);
@@ -212,7 +202,7 @@ describe("inventoryService", function() {
       };
     var bookToSave = {
       value: validBookEntry
-    }
+    };
     new PouchDB(config.activeProfile().dbName).destroy(function(err, info) {
       service.save(bookToSave).then(function(response) {
         books = response.books;
@@ -220,7 +210,7 @@ describe("inventoryService", function() {
         var updatedEntry = {
           count: 4,
           value: validBookEntry
-        }
+        };
         service.save(updatedEntry).then(function(saveResponse) {
           service.read().then(function(readResponse) {
             expect(readResponse.books.length).toEqual(4);

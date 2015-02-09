@@ -4,8 +4,8 @@
  * @module flynnBookScannerApp
  * @description show book details
  */
-app.directive('bookViewDetails', ['$timeout', '$ionicLoading', 'base64', 'logService',
-	function($timeout, $ionicLoading, base64, logService) {
+app.directive('bookViewDetails', ['$timeout', '$ionicLoading', 'base64',
+	function($timeout, $ionicLoading, base64) {
 		'use strict';
 		return {
 			restrict: 'E',

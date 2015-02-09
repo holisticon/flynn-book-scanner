@@ -37,7 +37,8 @@ module.exports = function(config) {
       'src/scripts/plugins/*.js',
       'src/scripts/modules/*.js',
       'src/scripts/controllers/*.js',
-      'test/spec/**/*.js',
+      'test/spec/controllers/*.js',
+      'test/spec/services/*.js',
       // fixtures
       {
         pattern: 'test/*.json',

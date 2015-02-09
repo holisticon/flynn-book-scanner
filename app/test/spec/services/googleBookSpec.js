@@ -1,28 +1,20 @@
 var cordova;
 
-
-// load the controller's module
+// load the app module
 beforeEach(module('flynnBookScannerApp'));
 
-beforeEach(function() {
-  module(function($provide) {
-    $provide.constant('APP_CONFIG', {
-      timeout: '10000',
-      dev: false,
-      debug: true,
-    });
-  });
-});
 describe("googleBookService", function() {
 
   var service,
     httpBackend,
+    rootScope,
     settings;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function(googleBookService, $httpBackend) {
+  beforeEach(inject(function(googleBookService, $httpBackend, $rootScope) {
     service = googleBookService;
     httpBackend = $httpBackend;
+    rootScope = $rootScope;
     // mock views, see https://github.com/driftyco/ionic/issues/2927
     httpBackend.when('GET', new RegExp('views/.*')).respond({});
   }));
@@ -32,22 +24,22 @@ describe("googleBookService", function() {
     expect(true).toBe(true);
   });
 
-  it('do empty search', function() {
+  it('do empty search', function(done) {
     var searchQuery = {};
     searchQuery.isbn = '9783898646123';
     var response = {};
     response.books = null;
     httpBackend.when("GET", "https://www.googleapis.com/books/v1/volumes/?q=:isbn=3898646122&projection=full&key=undefined").respond(response);
     httpBackend.when("GET", "https://www.googleapis.com/books/v1/volumes/?q=9783898646123&projection=full&key=undefined").respond(response);
-    var promise = service.search(searchQuery),
-      books = null;
-    promise.then(function(response) {
-      books = response.books;
+
+    service.search(searchQuery).then(function(response) {
+      var books = response.books;
+      done();
     });
     httpBackend.flush();
   });
 
-  it('do isbn search', function() {
+  it('do isbn search', function(done) {
     var validBookEntry = {
       "kind": "books#volumes",
       "totalItems": 1,
@@ -108,13 +100,10 @@ describe("googleBookService", function() {
     response.books = [validBookEntry];
     httpBackend.when("GET", "https://www.googleapis.com/books/v1/volumes/?q=:isbn=3898646122&projection=full&key=undefined").respond(response);
     httpBackend.when("GET", "https://www.googleapis.com/books/v1/volumes/?q=9783898646123&projection=full&key=undefined").respond(response);
-    var promise = service.search(searchQuery),
-      books = null;
-
-    promise.then(function(response) {
-      books = response.books;
+    service.search(searchQuery).then(function(response) {
+      var books = response.books;
+      done();
     });
     httpBackend.flush();
-    //expect(scope.books.length).toEqual(1);
   });
 });

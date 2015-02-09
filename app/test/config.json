@@ -16,11 +16,8 @@
 			"value": "© Copyright 2014 Holisticon AG"
 		}
 	},
-	"timeout": {
-		"label": "Timeout for deferred calls",
-		"hidden": true,
-		"value": "30000"
-	},
-	"dev": false,
-	"debug": false
+	"timeout": 		3000,
+    "dbLogging":	false,
+	"dev": 			false,
+	"debug": 		false
 }

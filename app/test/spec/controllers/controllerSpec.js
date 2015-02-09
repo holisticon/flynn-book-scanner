@@ -6,14 +6,14 @@ var cordova,
 navigator.notification = {};
 navigator.notification.alert = function() {};
 beforeEach(function() {
-    module(function($provide) {
-      $provide.constant('APP_CONFIG', {
-        timeout: '10000',
-        dev: false,
-        debug: true,
-      });
+  module(function($provide) {
+    $provide.constant('APP_CONFIG', {
+      timeout: 1000,
+      dev: false,
+      debug: true,
     });
   });
+});
 
 beforeEach(module('flynnBookScannerApp'));
 
