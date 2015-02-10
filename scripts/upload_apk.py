@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Copyright 2014 Marta Rodriguez.
+# Copyright 2014 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the 'License");
 # you may not use this file except in compliance with the License.
@@ -17,13 +17,11 @@
 """Uploads an apk to the alpha track."""
 
 import argparse
-
-from apiclient.discovery import build
-import httplib2
+import sys
+from apiclient import sample_tools
 from oauth2client import client
 
 TRACK = 'alpha'  # Can be 'alpha', beta', 'production' or 'rollout'
-SERVICE_ACCOUNT_EMAIL = ('appdev@holisticon.de')
 
 # Declare command-line flags.
 argparser = argparse.ArgumentParser(add_help=False)
@@ -35,29 +33,17 @@ argparser.add_argument('apk_file',
                        help='The path to the APK file to upload.')
 
 
-def main():
-  # Load the key in PKCS 12 format that you downloaded from the Google APIs
-  # Console when you created your Service account.
-  f = file('key.p12', 'rb')
-  key = f.read()
-  f.close()
-
-  # Create an httplib2.Http object to handle our HTTP requests and authorize it
-  # with the Credentials. Note that the first parameter, service_account_name,
-  # is the Email address created for the Service account. It must be the email
-  # address associated with the key that was created.
-  credentials = client.SignedJwtAssertionCredentials(
-      SERVICE_ACCOUNT_EMAIL,
-      key,
+def main(argv):
+  # Authenticate and construct service.
+  service, flags = sample_tools.init(
+      argv,
+      'androidpublisher',
+      'v2',
+      __doc__,
+      __file__, parents=[argparser],
       scope='https://www.googleapis.com/auth/androidpublisher')
-  http = httplib2.Http()
-  http = credentials.authorize(http)
-
-  service = build('androidpublisher', 'v2', http=http)
 
   # Process flags and read their values.
-  flags = argparser.parse_args()
-
   package_name = flags.package_name
   apk_file = flags.apk_file
 
@@ -92,4 +78,4 @@ def main():
            'application to re-authorize')
 
 if __name__ == '__main__':
-  main()
+  main(sys.argv)
