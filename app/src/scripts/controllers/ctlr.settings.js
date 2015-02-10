@@ -9,11 +9,6 @@
 app.controller('SettingsController', ['$rootScope', '$log', '$scope', '$ionicLoading', '$state', 'logService', 'settingsService', 'inventoryService',
     function($rootScope, $log, $scope, $ionicLoading, $state, logService, settingsService, inventoryService) {
 
-        var defaultCouch = 'https://server.holisticon.de/couchdb/flynn/',
-            defaultUser = '<LDAP-User>',
-            defaultPassword,
-            defaultOwner = 'Holisticon AG';
-
         // autoload
         loadSettings();
         readLogs();
@@ -24,12 +19,12 @@ app.controller('SettingsController', ['$rootScope', '$log', '$scope', '$ionicLoa
             $scope.flynn = {};
             $scope.flynn.activeProfile = {};
             $scope.flynn.activeProfile.name = config.activeProfile().name || 'default';
-            $scope.flynn.activeProfile.owner = config.activeProfile().owner || defaultOwner;
+            $scope.flynn.activeProfile.owner = config.activeProfile().owner;
             $scope.flynn.activeProfile.dbName = config.activeProfile().dbName || 'flynnDB_' + $scope.flynn.activeProfile.name;
             $scope.flynn.activeProfile.remotesync = config.activeProfile().remotesync || false;
-            $scope.flynn.activeProfile.couchdb = config.activeProfile().couchdb || defaultCouch;
-            $scope.flynn.activeProfile.user = config.activeProfile().user || defaultUser;
-            $scope.flynn.activeProfile.password = config.activeProfile().password || defaultPassword;
+            $scope.flynn.activeProfile.couchdb = config.activeProfile().couchdb;
+            $scope.flynn.activeProfile.user = config.activeProfile().user;
+            $scope.flynn.activeProfile.password = config.activeProfile().password;
             // load log levels
             $scope.logging = {};
             $scope.logging.logLevels = [{
