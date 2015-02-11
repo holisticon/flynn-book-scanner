@@ -23,6 +23,10 @@
                         {
                             "xml": "<feature name=\"Notification\"><param name=\"wp-package\" value=\"Notification\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"wp-package\" value=\"InAppBrowser\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -41,6 +45,10 @@
                         {
                             "xml": "<Capability Name=\"ID_CAP_IDENTITY_DEVICE\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_NETWORKING\" />",
+                            "count": 2
                         }
                     ]
                 }
@@ -67,6 +75,9 @@
             "PACKAGE_NAME": "{a3437850-a542-11e4-b1d5-f53a371496c7}"
         },
         "org.apache.cordova.dialogs": {
+            "PACKAGE_NAME": "{a3437850-a542-11e4-b1d5-f53a371496c7}"
+        },
+        "org.apache.cordova.inappbrowser": {
             "PACKAGE_NAME": "{a3437850-a542-11e4-b1d5-f53a371496c7}"
         }
     },

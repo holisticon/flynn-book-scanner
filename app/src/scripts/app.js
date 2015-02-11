@@ -28,6 +28,19 @@ function showErrorDialog($rootScope, $scope, $ionicLoading, log, errorTitle, err
     $ionicLoading.hide();
 }
 
+/**
+ * @ngdoc function
+ * @name openExternalLink
+ * @param {string} url to open
+ * @description open external url in browser app on mobile device, otherwise in a new tab on desktop device
+ */
+function openExternalLink(pUrl) {
+    if (isMobileDevice()) {
+        window.open(pUrl, '_system', 'location=yes');
+    } else {
+        window.open(pUrl, '_blank');
+    }
+}
 
 /**
  * @ngdoc function
@@ -173,6 +186,12 @@ app.filter('bookFilter', [function() {
         }
     };
 }]);
+
+app.filter('unsafe', function($sce) {
+    return function(val) {
+        return $sce.trustAsHtml(val);
+    };
+});
 
 /**
  * @ngdoc function

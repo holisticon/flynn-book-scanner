@@ -5,7 +5,7 @@
 	<ion-content id="about" class="padding">
 		<div ng-repeat="entry in info" class="row" ng-show=!entry.hidden>
 			<div class="col entryLabel"> {{entry.label}}: </div>
-			<div ng-bind-html="entry.value" class="col col-75 entryValue"></div>
+			<div ng-bind-html="entry.value | unsafe" class="col col-75 entryValue"></div>
 		</div>
 	</ion-content>
 </ion-view>

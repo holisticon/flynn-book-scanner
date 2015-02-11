@@ -253,4 +253,7 @@
     <ItemGroup>
         <Content Include="Plugins\org.apache.cordova.dialogs\notification-beep.wav" />
     </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\org.apache.cordova.inappbrowser\InAppBrowser.cs" />
+    </ItemGroup>
 </Project>

@@ -70,6 +70,9 @@
         },
         "org.apache.cordova.dialogs": {
             "PACKAGE_NAME": "Flynn"
+        },
+        "org.apache.cordova.inappbrowser": {
+            "PACKAGE_NAME": "Flynn"
         }
     },
     "dependent_plugins": {}

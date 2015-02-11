@@ -59,6 +59,7 @@
 		FB29B678C13B4BA4A5CBAC4E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 716DDFBDC31746ED90FDD081 /* libiconv.dylib */; };
 		FD8337BB855947A786B1AB65 /* CDVNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = BF22DF69BB184EA49CE044B2 /* CDVNotification.m */; };
 		FE8B5F05E3AA4A9FB93DA3FC /* CDVNotification.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FA63A984CD2A4997BF97D53B /* CDVNotification.bundle */; };
+		0F2F5D98D8AF4ADD8266D79F /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = E6BA07C968C446C0B568D0D6 /* CDVInAppBrowser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +153,8 @@
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = Flynn/config.xml; sourceTree = "<group>"; };
 		FA63A984CD2A4997BF97D53B /* CDVNotification.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CDVNotification.bundle; sourceTree = "<group>"; };
 		FB46FB0476C54AD083F3AFF7 /* scannerOverlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = scannerOverlay.xib; sourceTree = "<group>"; };
+		E6BA07C968C446C0B568D0D6 /* CDVInAppBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVInAppBrowser.m"; path = "org.apache.cordova.inappbrowser/CDVInAppBrowser.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		6A0A2E1D2E9848599D7F5054 /* CDVInAppBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVInAppBrowser.h"; path = "org.apache.cordova.inappbrowser/CDVInAppBrowser.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,6 +291,8 @@
 				C17326EFF0E24743AFDFDE51 /* UIWebViewExtension.m */,
 				826FC0A33BDB4A3ABBAEF1E2 /* IonicKeyboard.h */,
 				BCABBF97BDE848648DD42EEA /* UIWebViewExtension.h */,
+				E6BA07C968C446C0B568D0D6 /* CDVInAppBrowser.m */,
+				6A0A2E1D2E9848599D7F5054 /* CDVInAppBrowser.h */,
 			);
 			name = Plugins;
 			path = Flynn/Plugins;
@@ -494,6 +499,7 @@
 				FD8337BB855947A786B1AB65 /* CDVNotification.m in Sources */,
 				8D55B60F1222467991E4CFFA /* IonicKeyboard.m in Sources */,
 				AFBA3E11F1834DBB837167DC /* UIWebViewExtension.m in Sources */,
+				0F2F5D98D8AF4ADD8266D79F /* CDVInAppBrowser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
