@@ -22,10 +22,10 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
             if (!db) {
                 if (typeof cordova != 'undefined' && cordova.platformId === 'android') {
                     // for performance use indexedDB on Android
-                    db = new PouchDB(NAME_OF_POUCHDB, { adapter: 'idb' });
+                    db = new PouchDB(NAME_OF_POUCHDB, { adapter: 'idb', size: 50 });
                 } else {
                     // default use websql
-                    db = new PouchDB(NAME_OF_POUCHDB, { adapter: 'websql' });
+                    db = new PouchDB(NAME_OF_POUCHDB, { adapter: 'websql', size: 50 });
                 }
             }
             return db;

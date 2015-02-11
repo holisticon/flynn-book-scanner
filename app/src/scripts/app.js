@@ -28,6 +28,20 @@ function showErrorDialog($rootScope, $scope, $ionicLoading, log, errorTitle, err
     $ionicLoading.hide();
 }
 
+
+/**
+ * @ngdoc function
+ * @name isMobileDevice
+ * @description returns true if running on a mobile device, otherwise false
+ */
+function isMobileDevice() {
+    if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+        return true;
+    } else {
+        return false; //this is the browser
+    }
+}
+
 /**
  * @ngdoc function
  * @name onDeviceReady
