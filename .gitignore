@@ -48,3 +48,5 @@ app/src-gen/*
 
 
 app/platforms/windows/config.xml
+
+app/platforms/wp8/Flynn.csproj.user

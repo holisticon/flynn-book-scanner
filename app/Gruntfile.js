@@ -335,12 +335,12 @@ module.exports = function(grunt) {
 
   grunt.registerTask('release', [
     'clean:dist',
+    'ngAnnotate',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
     'concat',
     'copy:dist',
-    'cssmin',
     'usemin'
   ]);
 
