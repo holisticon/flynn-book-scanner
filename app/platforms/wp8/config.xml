@@ -1,20 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="de.holisticon.app.flynn" version="1.4.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <feature name="Camera">
-        <param name="wp-package" value="Camera" />
-    </feature>
-    <feature name="Console">
-        <param name="wp-package" value="DebugConsole" />
-    </feature>
-    <feature name="Device">
-        <param name="wp-package" value="Device" />
-    </feature>
-    <feature name="Notification">
-        <param name="wp-package" value="Notification" />
-    </feature>
-    <feature name="InAppBrowser">
-        <param name="wp-package" value="InAppBrowser" />
-    </feature>
     <name>Flynn</name>
     <description>
         flynn book scanner app

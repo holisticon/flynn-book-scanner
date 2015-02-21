@@ -11,7 +11,7 @@
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>de.holisticon.app.flynn</RootNamespace>
         <AssemblyName>de.holisticon.app.flynn</AssemblyName>
-        <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+        <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
         <SilverlightVersion>
         </SilverlightVersion>
         <TargetFrameworkProfile>
@@ -26,9 +26,8 @@
         <SilverlightAppEntry>de.holisticon.app.flynn.App</SilverlightAppEntry>
         <ValidateXaml>true</ValidateXaml>
         <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
-        <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
-        <BackgroundAgentType>AgentLibrary</BackgroundAgentType>
-        <DefaultLanguage>en-US</DefaultLanguage>
+        <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+        <BackgroundAgentType />
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <DebugSymbols>true</DebugSymbols>
@@ -148,10 +147,6 @@
             <DependentUpon>MainPage.xaml</DependentUpon>
         </Compile>
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Page Include="Plugins\org.apache.cordova.dialogs\NotificationBox.xaml">
-            <SubType>Designer</SubType>
-            <Generator>MSBuild:Compile</Generator>
-        </Page>
     </ItemGroup>
     <ItemGroup>
         <ApplicationDefinition Include="App.xaml">
@@ -168,13 +163,6 @@
         </Page>
     </ItemGroup>
     <ItemGroup>
-        <Content Include="Assets\BadgeLogo.png" />
-        <Content Include="Assets\Logo.png" />
-        <Content Include="Assets\SplashScreen.png" />
-        <Content Include="Assets\SquareTile150x150.png" />
-        <Content Include="Assets\SquareTile71x71.png" />
-        <Content Include="Assets\StoreLogo.png" />
-        <Content Include="Assets\WideLogo.png" />
         <Content Include="config.xml" />
         <Content Include="www\**" />
         <Content Include="Images\appbar.back.rest.png" />
@@ -198,9 +186,6 @@
         <None Include="cordova\run.bat" />
         <None Include="cordova\version.bat" />
         <Content Include="VERSION" />
-        <AppxManifest Include="Package.appxmanifest">
-            <SubType>Designer</SubType>
-        </AppxManifest>
         <None Include="Properties\AppManifest.xml">
             <SubType>Designer</SubType>
         </None>
@@ -232,28 +217,4 @@
         <PostBuildEvent>
         </PostBuildEvent>
     </PropertyGroup>
-    <ItemGroup>
-        <Compile Include="Plugins\org.apache.cordova.camera\Camera.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Plugins\org.apache.cordova.console\DebugConsole.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Plugins\org.apache.cordova.device\Device.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Plugins\org.apache.cordova.dialogs\Notification.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Plugins\org.apache.cordova.dialogs\NotificationBox.xaml.cs">
-            <DependentUpon>NotificationBox.xaml</DependentUpon>
-        </Compile>
-    </ItemGroup>
-    <ItemGroup />
-    <ItemGroup>
-        <Content Include="Plugins\org.apache.cordova.dialogs\notification-beep.wav" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Plugins\org.apache.cordova.inappbrowser\InAppBrowser.cs" />
-    </ItemGroup>
 </Project>

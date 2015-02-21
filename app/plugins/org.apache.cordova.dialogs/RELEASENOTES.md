@@ -78,3 +78,40 @@
 * Added check for isFinishing() on the parent activity to prevent crashes when trying to display dialogs when activity is in this phase of it's lifecycle
 * CB-4966 Dialogs are in window now No need to add anything to manifest or index.html
 * Removing FirefoxOS Quirks * no need to add special permission (it's different API with the same name) * notification.css is added automatically
+
+### 0.2.9 (Aug 06, 2014)
+* ubuntu: pass proper arguments to prompt callback
+* ubuntu: use TextField instead of TextInput
+* ubuntu: proper message escaping before passing to qml
+* **FFOS** update notification.js
+* CB-6127 Updated translations for docs
+* android: Explicitly apply default theme to dialogs
+* Fix Beep exception on Android when no argument passed
+
+### 0.2.10 (Sep 17, 2014)
+* CB-7538 Android beep thread fix Beep now executes in it's own thread. It was previously executing in the main UI thread which was causing the application to lock up will the beep was occurring.  Closing pull request
+* Set dialog text dir to locale
+* Renamed test dir, added nested plugin.xml
+* added documentation for manual tests
+* CB-6965 Added manual tests
+* CB-6965 Port notification tests to test-framework
+
+### 0.2.11 (Dec 02, 2014)
+* [CB-7737] lower min height for alert
+* CB-8038 backslash getting escaped twice in **BB10**
+* CB-8029 test 1-based indexing for confirm
+* CB-7639 Update docs + manual tests
+* CB-7639 Revert back `isAlertShowing` flag in case of exception to prevent queuing of future dialogs.
+* CB-7639 Handle button labels as array on windows
+* CB-7977 Mention `deviceready` in plugin docs
+* Check for `setTextDirection` API level
+* **Android** Make spinner dialog to use `THEME_DEVICE_DEFAULT_LIGHT` (same as the other dialogs)
+* **Android** Unbreak `API` level < `14`
+* CB-7414 **BB10** Document callback parameter for `navigator.notification.alert`
+* CB-7700 cordova-plugin-dialogs documentation translation: cordova-plugin-dialogs
+* CB-7571 Bump version of nested plugin to match parent plugin
+
+### 0.3.0 (Feb 04, 2015)
+* Correct way to specify Windows platform in config.xml
+* CB-8351 ios: Use argumentForIndex rather than NSArray extension
+* CB-7955 Add support "browser" platform

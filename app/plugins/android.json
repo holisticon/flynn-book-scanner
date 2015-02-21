@@ -17,15 +17,7 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Notification\"><param name=\"android-package\" value=\"org.apache.cordova.dialogs.Notification\" /></feature>",
                             "count": 1
                         },
                         {
@@ -34,6 +26,14 @@
                         },
                         {
                             "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Notification\"><param name=\"android-package\" value=\"org.apache.cordova.dialogs.Notification\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -577,22 +577,22 @@
         "com.phonegap.plugins.sqlite": {
             "PACKAGE_NAME": "de.holisticon.flynn"
         },
-        "org.apache.cordova.camera": {
-            "PACKAGE_NAME": "de.holisticon.flynn"
-        },
-        "org.apache.cordova.console": {
-            "PACKAGE_NAME": "de.holisticon.flynn"
-        },
         "org.apache.cordova.device": {
-            "PACKAGE_NAME": "de.holisticon.flynn"
-        },
-        "org.apache.cordova.dialogs": {
             "PACKAGE_NAME": "de.holisticon.flynn"
         },
         "com.ionic.keyboard": {
             "PACKAGE_NAME": "de.holisticon.flynn"
         },
         "org.apache.cordova.inappbrowser": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "org.apache.cordova.dialogs": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "org.apache.cordova.console": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "org.apache.cordova.camera": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
