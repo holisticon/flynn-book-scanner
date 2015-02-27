@@ -67,7 +67,7 @@
 {
     // View defaults to full size.  If you want to customize the view's size, or its subviews (e.g. webView),
     // you can do so here.
-    
+
     [super viewWillAppear:animated];
 }
 
@@ -129,20 +129,6 @@
 }
 */
 
-- (BOOL)webView:(UIWebView *)theWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    NSURL *url = [request URL];
-    
-    // Intercept the external http requests and forward to Safari.app
-    // Otherwise forward to the PhoneGap WebView
-    if ([[url scheme] isEqualToString:@"http"] || [[url scheme] isEqualToString:@"https"]) {
-        [[UIApplication sharedApplication] openURL:url];
-        return NO;
-    }
-    else {
-        return [ super webView:theWebView shouldStartLoadWithRequest:request navigationType:navigationType ];
-    }
-}
 @end
 
 @implementation MainCommandDelegate
@@ -158,8 +144,7 @@
     return [super getCommandInstance:className];
 }
 
-
-- (NSString*)pathForResource:(NSString*)resourcepath;
+- (NSString*)pathForResource:(NSString*)resourcepath
 {
     return [super pathForResource:resourcepath];
 }
