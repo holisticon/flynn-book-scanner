@@ -124,6 +124,12 @@
                             "xml": "<string />",
                             "count": 1
                         }
+                    ],
+                    "CFBundleURLTypes": [
+                        {
+                            "xml": "<array><dict><key>CFBundleURLSchemes</key><array><string>flynnApp</string></array></dict></array>",
+                            "count": 1
+                        }
                     ]
                 }
             }
@@ -152,6 +158,10 @@
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "org.apache.cordova.inappbrowser": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "de.martinreinhardt.cordova.plugins.urlhandler": {
+            "URL_SCHEME": "flynnApp",
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },

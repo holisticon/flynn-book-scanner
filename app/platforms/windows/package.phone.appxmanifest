@@ -25,6 +25,11 @@
                 </m3:DefaultTile>
                 <m3:SplashScreen Image="images\SplashScreenPhone.png" />
             </m3:VisualElements>
+            <Extensions>
+                <Extension Category="windows.protocol" StartPage="www/index.html">
+                    <Protocol Name="flynnApp" />
+                </Extension>
+            </Extensions>
         </Application>
     </Applications>
     <Capabilities>

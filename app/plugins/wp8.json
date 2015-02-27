@@ -4,7 +4,28 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {}
+        "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"CustomUrl\"><param name=\"wp-package\" value=\"CustomUrl\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "Properties/WMAppManifest.xml": {
+                "parents": {
+                    "/Deployment/App/Extensions": [
+                        {
+                            "xml": "<Protocol Name=\"shopincomo\" NavUriFragment=\"encodedLaunchUri=%s\" TaskID=\"_default\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
     },
     "installed_plugins": {
         "com.ionic.keyboard": {
@@ -15,6 +36,10 @@
         },
         "com.phonegap.plugins.sqlite": {
             "PACKAGE_NAME": "{570d7a10-b9f3-11e4-8ab3-2bb9828635be}"
+        },
+        "de.martinreinhardt.cordova.plugins.urlhandler": {
+            "URL_SCHEME": "flynnApp",
+            "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
         }
     },
     "dependent_plugins": {}

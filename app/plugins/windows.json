@@ -16,6 +16,12 @@
                             "xml": "<DeviceCapability Name=\"webcam\" />",
                             "count": 1
                         }
+                    ],
+                    "/Package/Applications/Application/Extensions": [
+                        {
+                            "xml": "<Extension Category=\"windows.protocol\" StartPage=\"www/index.html\"><Protocol Name=\"flynnApp\" /></Extension>",
+                            "count": 1
+                        }
                     ]
                 }
             },
@@ -30,6 +36,12 @@
                             "xml": "<DeviceCapability Name=\"webcam\" />",
                             "count": 1
                         }
+                    ],
+                    "/Package/Applications/Application/Extensions": [
+                        {
+                            "xml": "<Extension Category=\"windows.protocol\" StartPage=\"www/index.html\"><Protocol Name=\"flynnApp\" /></Extension>",
+                            "count": 1
+                        }
                     ]
                 }
             },
@@ -42,6 +54,12 @@
                         },
                         {
                             "xml": "<DeviceCapability Name=\"webcam\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/Package/Applications/Application/Extensions": [
+                        {
+                            "xml": "<Extension Category=\"windows.protocol\" StartPage=\"www/index.html\"><Protocol Name=\"flynnApp\" /></Extension>",
                             "count": 1
                         }
                     ]
@@ -72,6 +90,10 @@
             "PACKAGE_NAME": "Flynn"
         },
         "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "de.martinreinhardt.cordova.plugins.urlhandler": {
+            "URL_SCHEME": "flynnApp",
             "PACKAGE_NAME": "Flynn"
         }
     },

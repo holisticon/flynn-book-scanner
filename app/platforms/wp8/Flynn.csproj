@@ -217,4 +217,7 @@
         <PostBuildEvent>
         </PostBuildEvent>
     </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.urlhandler\CustomUriMapper.cs" />
+    </ItemGroup>
 </Project>

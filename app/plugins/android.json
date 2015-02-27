@@ -35,6 +35,10 @@
                         {
                             "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"LaunchMyApp\"><param name=\"android-package\" value=\"nl.xservices.plugins.LaunchMyApp\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -76,6 +80,12 @@
                     "/*": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/*/application/activity": [
+                        {
+                            "xml": "<intent-filter><data android:scheme=\"flynnApp\" /><action android:name=\"android.intent.action.VIEW\" /><category android:name=\"android.intent.category.DEFAULT\" /><category android:name=\"android.intent.category.BROWSABLE\" /></intent-filter>",
                             "count": 1
                         }
                     ]
@@ -593,6 +603,10 @@
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "de.martinreinhardt.cordova.plugins.urlhandler": {
+            "URL_SCHEME": "flynnApp",
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },

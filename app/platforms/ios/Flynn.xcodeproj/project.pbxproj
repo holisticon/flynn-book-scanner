@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		0D241DF827A34A65934BB20E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEBDD4AA8D241A2A986A49C /* CoreVideo.framework */; };
 		0D4C1CB80C894E17B029704E /* zxing-all-in-one.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06FBAA3BE0A74DB59043F320 /* zxing-all-in-one.cpp */; };
