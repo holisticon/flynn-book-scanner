@@ -3,6 +3,7 @@
 		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
 	</ion-nav-buttons>
 	<ion-nav-buttons side="right">
+		<button class="button button-icon icon ion-levels" ng-click="showFilterModal()"></button>
 		<button class="button button-icon icon ion-refresh" ng-click="load()"></button>
 	</ion-nav-buttons>
 	<ion-header-bar class="bar-subheader item-input-inset">
@@ -16,23 +17,14 @@
 	</ion-header-bar>
 
 	<ion-content>
+		
 		<form name="form">
-			<div>
-				<label class="item item-input item-select">
-					<div class="input-label">
-						&nbsp;&nbsp;Options
-					</div>
-					<select data-ng-model="selectedFilter">
-		          		<option ng-repeat="filterMode in filterModes" value="{{filterMode.value}}">{{ filterMode.label }}</option>
-					</select>
-				</label>
-			</div>
 			<ion-list>
 				<div ng-show="!books" class="item">
 					No books found.
 				</div>
 				<ion-item class="item-avatar"
-				collection-repeat="book in books | orderBy: selectedFilter"
+				collection-repeat="book in books | orderBy: filter.selectedOrder"
 				collection-item-width="'100%'"
 				collection-item-height="'95'"
 				ng-click="showBookDetails(book)">
@@ -51,7 +43,23 @@
 						Modify
 					</ion-option-button>
 				</ion-item>
-			</ion-list>
+			</ion-list>			
+			<script id="filter_modal.html" type="text/ng-template">
+				<ion-modal-view>					
+					<ion-header-bar>
+						<button class="button button-clear" ng-click="closeModal()">
+						Close
+						</button>
+						<h1 class="title">Filter options</h1>	
+						<button class="button button-positive" ng-click="applyFilter()">
+						Apply
+						</button>			
+					</ion-header-bar>					
+					<ion-content class="modal-background">
+						<ng-include src="'templates/bookFilter.html'"></ng-include>
+					</ion-content>
+				</ion-modal-view>
+			</script>
 		</form>
 	</ion-content>
 </ion-view>

@@ -1,0 +1,8 @@
+<label class="item item-input item-select">
+	<div class="input-label">
+		&nbsp;&nbsp;Options
+	</div>
+	<select data-ng-model="filter.selectedOrder">
+  		<option ng-repeat="filterMode in $parent.filterModes" value="{{filterMode.value}}">{{ filterMode.label }}</option>
+	</select>
+</label>

@@ -80,7 +80,6 @@ ion-tabs {
 		} 
 	}
 }
-
 // don't resize header on iPad ...
 @media (max-width: 60em)  and (orientation:landscape) {
   .platform-ios.platform-cordova:not(.fullscreen){

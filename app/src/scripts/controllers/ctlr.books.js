@@ -6,13 +6,36 @@
  * @description
  * Interacts with inventory backend to show up book details
  */
-app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', '$log', '$ionicScrollDelegate', '$ionicLoading', '$http', '$ionicActionSheet', 'settingsService', 'inventoryService',
-    function($rootScope, $scope, $state, $filter, $log, $ionicScrollDelegate, $ionicLoading, $http, $ionicActionSheet, settings, inventoryService) {
+app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', '$log', '$ionicScrollDelegate', '$ionicLoading', '$http', '$ionicModal', '$ionicActionSheet', 'settingsService', 'inventoryService',
+    function($rootScope, $scope, $state, $filter, $log, $ionicScrollDelegate, $ionicLoading, $http, $ionicModal, $ionicActionSheet, settings, inventoryService) {
 
         var config = settings.load(),
-            allBooks;
-
+            allBooks;       
+        
         function init() {
+        	initModal();
+        	$scope.filter={};
+            $scope.filter.selectedOrder = $scope.filterModes[0].value;
+            load(true);
+        }
+
+        function initModal() {
+			$ionicModal.fromTemplateUrl('filter_modal.html', {
+				scope: $scope,
+				animation: 'slide-in-up'
+			}).then(function(modal) {
+				$scope.modal = modal;
+			});
+			$scope.openModal = function() {
+				$scope.modal.show();
+			};
+			$scope.closeModal = function() {
+				$scope.modal.hide();
+			};
+			//Cleanup the modal when we're done with it!
+			$scope.$on('$destroy', function() {
+				$scope.modal.remove();
+			});
             $scope.filterModes = [{
                 label: 'sort by title',
                 value: 'value.volumeInfo.title'
@@ -20,8 +43,6 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
                 label: 'sort by author',
                 value: 'authorInfo'
             }];
-            $scope.selectedFilter = $scope.filterModes[0].value;
-            load(true);
         }
 
         function syncWithServer() {
@@ -83,6 +104,14 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
                 $rootScope.$broadcast("server.error");
             });
         }
+        
+        function showFilterModal(){
+			$scope.openModal();
+        }
+        
+        function applyFilter(){
+        	$scope.closeModal();
+        } 
 
         function showBookDetails(pBook) {
             $log.debug('Showing details for book: ' + pBook.value.volumeInfo.title);
@@ -124,6 +153,8 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
 
         // public methods
         $scope.load = load;
+        $scope.showFilterModal = showFilterModal;
+        $scope.applyFilter = applyFilter;
         $scope.showBookDetails = showBookDetails;
         $scope.showActionMenu = showActionMenu;
         $scope.resetSearch = resetSearch;
