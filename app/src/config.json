@@ -1,25 +1,27 @@
 {
-    "info": {
-        "version": {
-            "label": "Version",
-            "hidden": false,
-            "value": "1.4.4"
+    "config": {
+        "info": {
+            "version": {
+                "label": "Version",
+                "hidden": false,
+                "value": "1.4.4"
+            },
+            "release_notes": {
+                "label": "Release Notes",
+                "hidden": false,
+                "value": ""
+            },
+            "about": {
+                "label": "About",
+                "hidden": false,
+                "value": "© Copyright 2015 Holisticon AG <br><img onclick=\"openExternalLink('https://www.holisticon.de')\" src=\"images/holisticon-logo-standard.png\"> <br>  The app used <a onclick=\"openExternalLink('http://fortawesome.github.io/Font-Awesome/')\" href=\"#\">Font Awesome</a> for app icon and Splashscreen is based on <a onclick=\"openExternalLink('http://commons.wikimedia.org/wiki/File:Bookshelf_icon_(red_and_blue).svg')\" href=\"#\">Wikimedia</a>. The app is based on <a onclick=\"openExternalLink('http://cordova.apache.org')\"href=\"#\">Cordova</a>, <a onclick=\"openExternalLink('https://angularjs.org')\") href=\"#\" >AngularJS</a> and <a onclick=openExternalLink(\"http://ionicframework.com')\"href=\"#\"> Ionic</a>.<br><br><a onclick=\"openExternalLink('https://github.com/holisticon/flynn-book-scanner')\" href=\"#\" class=\"button icon-left ion-social-github\"><small>View project on</small> GitHub</a>"
+            }
         },
-        "release_notes": {
-            "label": "Release Notes",
-            "hidden": false,
-            "value": ""
-        },
-        "about": {
-            "label": "About",
-            "hidden": false,
-            "value": "© Copyright 2015 Holisticon AG <br><img onclick=\"openExternalLink('https://www.holisticon.de')\" src=\"images/holisticon-logo-standard.png\"> <br>  The app used <a onclick=\"openExternalLink('http://fortawesome.github.io/Font-Awesome/')\" href=\"#\">Font Awesome</a> for app icon and Splashscreen is based on <a onclick=\"openExternalLink('http://commons.wikimedia.org/wiki/File:Bookshelf_icon_(red_and_blue).svg')\" href=\"#\">Wikimedia</a>. The app is based on <a onclick=\"openExternalLink('http://cordova.apache.org')\"href=\"#\">Cordova</a>, <a onclick=\"openExternalLink('https://angularjs.org')\") href=\"#\" >AngularJS</a> and <a onclick=openExternalLink(\"http://ionicframework.com')\"href=\"#\"> Ionic</a>.<br><br><a onclick=\"openExternalLink('https://github.com/holisticon/flynn-book-scanner')\" href=\"#\" class=\"button icon-left ion-social-github\"><small>View project on</small> GitHub</a>"
-        }
-    },
-    "timeout":  3000,
-    "googleApiKey": "AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY",
-    "dbLogging":    true,
-    "dev":          false,
-    "debug":        false,
-    "trace":        false
+        "timeout":  3000,
+        "googleApiKey": "AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY",
+        "dbLogging":    true,
+        "dev":          false,
+        "debug":        false,
+        "trace":        false
+    }
 }

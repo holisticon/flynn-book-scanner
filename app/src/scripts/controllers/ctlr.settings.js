@@ -123,14 +123,18 @@ app.controller('SettingsController', ['$rootScope', '$log', '$scope', '$ionicLoa
                 readInventory();
             }, function(error) {
                 $ionicLoading.hide();
-                if (error.status === 401) {
-                    $rootScope.$broadcast("login.failed");
-                } else {
-                    if (error.status === 0) {
-                        $rootScope.$broadcast("network.offline");
-                    } else {
-                        $rootScope.$broadcast("settings.invalid");
-                    }
+                switch(error.status){
+                  case 0:
+                        $rootScope.$broadcast('network.offline');
+                      break;
+                  case 400:
+                    $rootScope.$broadcast('sync.remoteError');
+                      break;
+                  case 401:
+                    $rootScope.$broadcast('login.failed');
+                      break;
+                  default:
+                        $rootScope.$broadcast('settings.invalid');
                 }
             });
         }
@@ -139,11 +143,11 @@ app.controller('SettingsController', ['$rootScope', '$log', '$scope', '$ionicLoa
         $scope.load = loadSettings;
         $scope.save = function() {
             saveSettings(true);
-        }
+        };
         $scope.sync = function() {
             saveSettings(false);
             syncWithServer();
-        }
+        };
         $scope.showLogs = readLogs;
         $scope.clearLogs = clearLogDB;
         $scope.emailLogs = emailLogs;
@@ -160,6 +164,6 @@ app.controller('SettingsController', ['$rootScope', '$log', '$scope', '$ionicLoa
             } else {
                 readLogs();
             }
-        }
+        };
     }
 ]);

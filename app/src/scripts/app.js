@@ -89,16 +89,18 @@ function isMobileDevice() {
 
 
 function configureLogging(loggerProvider, config) {
-    loggerProvider.dbName('flynnDB_logs');
-    loggerProvider.outputOnly(!config.dbLogging);
-    loggerProvider.debugLogging(config.debug);
-    if (config.debug) {
-        // enable couchDB debug
-        PouchDB.debug.enable('*');
-    } else {
-        PouchDB.debug.disable();
-    }
-    loggerProvider.traceLogging(config.trace);
+    if(config){
+        loggerProvider.dbName('flynnDB_logs');
+        loggerProvider.outputOnly(!config.dbLogging);
+        loggerProvider.debugLogging(config.debug);
+        if (config.debug) {
+            // enable couchDB debug
+            PouchDB.debug.enable('*');
+        } else {
+            PouchDB.debug.disable();
+        }
+        loggerProvider.traceLogging(config.trace);
+    } 
 }
 
 /**
@@ -109,15 +111,36 @@ function configureLogging(loggerProvider, config) {
 function onDeviceReady() {
     var $http = angular.injector(['ng']).get('$http'),
         $rootScope = angular.injector(['ng']).get('$rootScope');
+    settingsLS = localStorage['ls.flynn_app.settings'];
     $http.get('config.json').success(function(data, status, headers, config) {
-        var config = data;
-        app.constant('APP_CONFIG', config);
-        if (config.dev === true) {            
+        var appConf;
+        if (settingsLS) {
+            var settings = JSON.parse(settingsLS);
+            if (settings.appConfig) {
+                appConf = settings.appConfig;
+                // overwrite if needed
+                if (data.overwrite) {
+                    for (var configEntry in data.config) {
+                        appConf[configEntry] = data.config[configEntry];
+                    }
+                    appConf.update = true;
+                }
+            } else {
+
+                // without settings use template from config.json
+                appConf = data.config;
+            }
+        } else {
+            // without settings use template from config.json
+            appConf = data.config;
+        }
+        app.constant('APP_CONFIG', appConf);
+        if (config.dev === true) {
             navigator.notification.alert('Running in dev mode!', null, 'Info');
-        } 
+        }
         // bootstrap app:
         angular.bootstrap(document, ['flynnBookScannerApp']);
-        
+
     }).error(function(data, status, headers, config) {
         console.error('Did not get valid config.json file.');
         navigator.notification.alert('Server did not show valid response.', null, 'Server Error');
@@ -286,8 +309,6 @@ app.config(function($urlRouterProvider, $provide, $compileProvider, $httpProvide
     // configure caching
     $ionicConfigProvider.views.maxCache(5);
     $ionicConfigProvider.templates.maxPrefetch(3);
-    // remote loggerProvider
-    APP_CONFIG.loggerProvider = loggerProvider;
     // configure logging    
     configureLogging(loggerProvider, APP_CONFIG);
     $provide.decorator('$log', function($delegate) {

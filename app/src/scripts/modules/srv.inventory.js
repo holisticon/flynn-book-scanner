@@ -7,8 +7,8 @@
  * @description
  * Provides access to the book inventory. Used PouchDB as backend.
  */
-app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService', 'base64', '$log', 
-    function($rootScope, $http, $q, settingsService, base64, logService) {
+app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService', 'base64', '$log', 'APP_CONFIG',
+    function($rootScope, $http, $q, settingsService, base64, logService,APP_CONFIG) {
         'use strict';
         var config = settingsService.load(),
             activeProfile = config.activeProfile();
@@ -52,7 +52,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                         $http({
                             method: 'GET',
                             url: remoteCouch,
-                            timeout: config.timeout,
+                            timeout: APP_CONFIG.timeout,
                         }).then(function(response) {
                             var syncPromise = localDB.sync(remoteCouch)
                                 .on('change', function(info) {
@@ -72,10 +72,13 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                         logService.debug('Already up-to-date with following answer: ' + info.toString());
                                         deferred.resolve(info);
                                     });
-                                }).on('error', function(info) {
+                                }).on('error', function(err) {
                                     $rootScope.$apply(function() {
-                                        logService.error('Error during remote sync with following answer: ' + info.toString());
-                                        deferred.reject(info);
+                                        logService.error('Error during remote sync with following answer: ' + err.toString());
+                                	if(err.stats === 400){
+                                            logService.info('Seems be a remote server error.');
+                                	}
+                                        deferred.reject(err);
                                     });
                                 }).catch(function(err) {
                                     $rootScope.$apply(function() {

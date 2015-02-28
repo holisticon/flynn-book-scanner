@@ -4,8 +4,8 @@
  * @module flynnBookScannerApp
  * @description Provides access to the book search. Used Google Book Search as backend.
  */
-app.service('googleBookService', ['$rootScope', '$http', '$q', '$log', 'settingsService', 'base64',
-    function($rootScope, $http, $q, $log, settingsService, base64) {
+app.service('googleBookService', ['$rootScope', '$http', '$q', '$log', 'settingsService', 'base64','APP_CONFIG',
+    function($rootScope, $http, $q, $log, settingsService, base64,APP_CONFIG) {
         'use strict';
         var config = settingsService.load();
 
@@ -102,8 +102,8 @@ app.service('googleBookService', ['$rootScope', '$http', '$q', '$log', 'settings
                 $log.debug('Reading book data with google books url');
                 $http({
                     method: 'GET',
-                    url: 'https://www.googleapis.com/books/v1/volumes/?q=' + searchQuery + '&projection=full&key=' + config.googleApiKey,
-                    timeout: config.timeout,
+                    url: 'https://www.googleapis.com/books/v1/volumes/?q=' + searchQuery + '&projection=full&key=' + APP_CONFIG.googleApiKey,
+                    timeout: APP_CONFIG.timeout,
                     headers: {
                         'Access-Control-Allow-Origin': 'localhost',
                         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
@@ -117,8 +117,8 @@ app.service('googleBookService', ['$rootScope', '$http', '$q', '$log', 'settings
                         $log.debug('Reading book data with google books url');
                         $http({
                             method: 'GET',
-                            url: 'https://www.googleapis.com/books/v1/volumes/?q=' + searchQuery + '&projection=full&key=' + config.googleApiKey,
-                            timeout: config.timeout,
+                            url: 'https://www.googleapis.com/books/v1/volumes/?q=' + searchQuery + '&projection=full&key=' + APP_CONFIG.googleApiKey,
+                            timeout: APP_CONFIG.timeout,
                             headers: {
                                 'Access-Control-Allow-Origin': 'localhost',
                                 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'

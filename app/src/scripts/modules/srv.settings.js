@@ -14,6 +14,9 @@ app.service('settingsService', ['$rootScope', '$log', '$http', 'localStorageServ
         function saveSettings(pConfig) {
             localStorage.remove('flynn_app.settings');
             var config = pConfig;
+            if(!config.appConfig || APP_CONFIG.update){
+        	config.appConfig = APP_CONFIG;        	
+            }
             localStorage.add('flynn_app.settings', config);
         }
 
@@ -46,19 +49,15 @@ app.service('settingsService', ['$rootScope', '$log', '$http', 'localStorageServ
                 settings.profiles = [];
                 settings.profiles.push({});
             }
-            if (!settings.timeout) {
-                settings.timeout = APP_CONFIG.timeout;
-                saveSettings(settings);
-            }
-            if (!settings.googleApiKey) {
-                settings.googleApiKey = APP_CONFIG.googleApiKey;
-                saveSettings(settings);
-            }
             settings.activeProfile = function() {
                 return settings.profiles[settings.activeProfileID];
             };
             $rootScope.settings = settings;
             return settings;
+        }
+        
+        function parseJSON(pStringValue){
+            return (pStringValue === 'false' || pStringValue === 'true') ? JSON.parse(pStringValue) : pStringValue;
         }
 
 
@@ -67,18 +66,33 @@ app.service('settingsService', ['$rootScope', '$log', '$http', 'localStorageServ
             updatedConfig.valid = false;
             $log.debug('Overwriting profile data');
             for (var property in pConfig) {
-                updatedConfig[property] = (pConfig[property] === 'false' || pConfig[property] === 'true') ? JSON.parse(pConfig[property]) : pConfig[property];
+        	switch (property){
+        	case 'profiles':
+        	    for (var profileProperty in pConfig.profiles[0]) {
+        		if(!pCurrentConfig.profiles){
+        		    updatedConfig.profiles=[];
+        		}
+            		updatedConfig.profiles[0][profileProperty] = parseJSON(pConfig.profiles[0][profileProperty]);
+            	    }
+                    break;
+        	case 'appConfig':
+        	    for (var appConfProperty in pConfig.appConfig) {
+            		updatedConfig.appConfig[appConfProperty] = parseJSON(pConfig.appConfig[appConfProperty]);
+            	    }
+                    break;
+                 default:
+                     updatedConfig[property] = parseJSON(pConfig[property]);
+                     break;
+        	}        	
             }
             $log.debug('Saving overwrite profile data');
             saveSettings(updatedConfig);
-            // configure logging    
-            configureLogging(APP_CONFIG.loggerProvider, updatedConfig);
             $rootScope.$broadcast('settings.updated');
         }
 
         function handleURL(pConfig) {
             $log.debug('Handling URL config data');
-            var config = loadSettings();
+            var currentSettings = loadSettings();
             if (pConfig.url) {
                 $log.debug('loading profile data from remote URL');
                 $http({
@@ -87,7 +101,7 @@ app.service('settingsService', ['$rootScope', '$log', '$http', 'localStorageServ
                     timeout: 2000
                 }).success(function(data, status, headers, config) {
                     if (status === 200) {
-                        overwriteConfig(config, data);
+                        overwriteConfig(currentSettings, data);
                     } else {
                         $log.error('Could not read remote profile data.');
                         $rootScope.$broadcast('settings.invalidHandleUrl', args);
@@ -97,8 +111,8 @@ app.service('settingsService', ['$rootScope', '$log', '$http', 'localStorageServ
                     $rootScope.$broadcast('settings.invalidHandleUrl', args);
                 });
             } else {
-                $log.debug('Using passed URL data');
-                overwriteConfig(config, pConfig);
+                $log.debug('Using passed URL data');                
+                overwriteConfig(currentSettings, {appConfig:pConfig});
             }
         }
         return {
