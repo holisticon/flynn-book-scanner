@@ -30,7 +30,7 @@ app.service('settingsService', ['$rootScope', '$log', '$http', 'localStorageServ
                         settings.valid = false;
                     }
                     if (activeProfile.remotesync) {
-                        if (activeProfile.username && activeProfile.password) {
+                        if (activeProfile.user && activeProfile.password) {
                             settings.valid = true;
                         } else {
                             settings.valid = false;

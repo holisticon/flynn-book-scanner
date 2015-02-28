@@ -58,28 +58,28 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                 .on('change', function(info) {
                                     $rootScope.$apply(function() {
                                         logService.info('Updating documents with remote changes...');
-                                        logService.debug('Updating documents with remote changes with following answer: ' + JSON.stringify(info));
+                                        logService.debug('Updating documents with remote changes with following answer: ' + info.toString());
                                     });
                                 }).on('complete', function(info) {
                                     $rootScope.$apply(function() {
                                         logService.info('Completed sync.');
-                                        logService.debug('Completed sync with following answer: ' + JSON.stringify(info));
+                                        logService.debug('Completed sync with following answer: ' + info.toString());
                                         deferred.resolve(info);
                                     });
                                 }).on('uptodate', function(info) {
                                     $rootScope.$apply(function() {
                                         logService.info('Already up-to-date.');
-                                        logService.debug('Already up-to-date with following answer: ' + JSON.stringify(info));
+                                        logService.debug('Already up-to-date with following answer: ' + info.toString());
                                         deferred.resolve(info);
                                     });
                                 }).on('error', function(info) {
                                     $rootScope.$apply(function() {
-                                        logService.error('Error during remote sync with following answer: ' + JSON.stringify(info));
+                                        logService.error('Error during remote sync with following answer: ' + info.toString());
                                         deferred.reject(info);
                                     });
                                 }).catch(function(err) {
                                     $rootScope.$apply(function() {
-                                        logService.error('Unkown error during remote sync.');
+                                        logService.error('Unkown error during remote sync.'+ err.toString());
                                         deferred.resolve(err);
                                     });
                                 });
