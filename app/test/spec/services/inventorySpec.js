@@ -39,7 +39,7 @@ describe("inventoryService", function() {
 
   it('Use Authentication for Sync', function(done) {
 
-    httpBackend.when('GET', 'http://M%C3%BCller:P%40assword!@remote_test/couchdb').respond({});
+    httpBackend.when('GET', 'http://M%C3%BCller:P%40assword!@remote_test/couchdb').respond({status:400});
     config = {
       activeProfile: function() {
         return {
