@@ -95,6 +95,9 @@
         "de.martinreinhardt.cordova.plugins.urlhandler": {
             "URL_SCHEME": "flynnApp",
             "PACKAGE_NAME": "Flynn"
+        },
+        "de.martinreinhardt.cordova.plugins.email": {
+            "PACKAGE_NAME": "Flynn"
         }
     },
     "dependent_plugins": {}

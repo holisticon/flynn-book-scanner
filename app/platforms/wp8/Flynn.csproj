@@ -220,4 +220,10 @@
     <ItemGroup>
         <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.urlhandler\CustomUriMapper.cs" />
     </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.email\EmailComposer.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.email\Options.cs" />
+    </ItemGroup>
 </Project>

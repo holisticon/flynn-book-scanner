@@ -147,7 +147,7 @@ dbLog.provider('logger', function loggerProvider() {
                 logEntry =   {
                     timestamp: timestamp,
                     level: pLogLevel,
-                    details: message
+                    details: '' + message
                 };
             if (db && db.bulkDocs) {
                 logEntry._id = '' + timestamp.getTime();

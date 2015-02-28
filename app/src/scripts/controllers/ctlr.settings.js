@@ -51,6 +51,33 @@ app.controller('SettingsController', ['$rootScope', '$log', '$scope', '$ionicLoa
             });
         }
 
+        function readLogs() {
+            $ionicLoading.show({
+                template: '<i class="icon ion-looping loading-icon"></i>&nbsp;&nbsp;Loading log data ...'
+            });
+            logService.readLogData().then(function(response) {
+                $scope.logs = response;
+                $ionicLoading.hide();
+            }, function(errorDetails) {
+                $log.error('No log entries found');
+                $ionicLoading.hide();
+            });
+        }        
+        
+        function emailLogs() {
+           $ionicLoading.show();
+            var logViewData = '';
+            for (var i in $scope.logs) {
+                var log = $scope.logs[i];
+                logViewData += '<p>' + log.timestamp + ' - ' + log.level + ':' + log.details + '</p>';
+            }
+            cordova.plugins.email.open({
+                subject: 'flynn: Log details',
+                body: '<br><br><h3>Log-Entries:</h3><br>' + logViewData,
+                isHtml: true
+            }, $ionicLoading.hide());
+        }
+
         function readInventory() {
             inventoryService.read().then(function(response) {
                 $ionicLoading.hide();
@@ -108,19 +135,6 @@ app.controller('SettingsController', ['$rootScope', '$log', '$scope', '$ionicLoa
             });
         }
 
-        function readLogs() {
-            $ionicLoading.show({
-                template: '<i class="icon ion-looping loading-icon"></i>&nbsp;&nbsp;Loading log data ...'
-            });
-            logService.readLogData().then(function(response) {
-                $scope.logs = response;
-                $ionicLoading.hide();
-            }, function(errorDetails) {
-                $log.error('No log entries found');
-                $ionicLoading.hide();
-            });
-        }
-
         // public methods
         $scope.load = loadSettings;
         $scope.save = function() {
@@ -132,6 +146,7 @@ app.controller('SettingsController', ['$rootScope', '$log', '$scope', '$ionicLoa
         }
         $scope.showLogs = readLogs;
         $scope.clearLogs = clearLogDB;
+        $scope.emailLogs = emailLogs;
         $scope.filterLogs = function() {
             if ($scope.logging.selectedLogLevel) {
                 $ionicLoading.show();

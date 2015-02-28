@@ -11,6 +11,10 @@
                         {
                             "xml": "<feature name=\"CustomUrl\"><param name=\"wp-package\" value=\"CustomUrl\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"EmailComposer\"><param name=\"wp-package\" value=\"EmailComposer\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -39,6 +43,9 @@
         },
         "de.martinreinhardt.cordova.plugins.urlhandler": {
             "URL_SCHEME": "flynnApp",
+            "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
+        },
+        "de.martinreinhardt.cordova.plugins.email": {
             "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
         }
     },

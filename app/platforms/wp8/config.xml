@@ -17,4 +17,7 @@
     <feature name="CustomUrl">
         <param name="wp-package" value="CustomUrl" />
     </feature>
+    <feature name="EmailComposer">
+        <param name="wp-package" value="EmailComposer" />
+    </feature>
 </widget>

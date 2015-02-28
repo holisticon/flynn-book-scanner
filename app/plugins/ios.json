@@ -43,6 +43,10 @@
                         {
                             "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"EmailComposer\"><param name=\"ios-package\" value=\"APPEmailComposer\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -114,6 +118,12 @@
                             "xml": "true",
                             "count": 1
                         }
+                    ],
+                    "MessageUI.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
                     ]
                 }
             },
@@ -162,6 +172,9 @@
         },
         "de.martinreinhardt.cordova.plugins.urlhandler": {
             "URL_SCHEME": "flynnApp",
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "de.martinreinhardt.cordova.plugins.email": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },

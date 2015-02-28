@@ -39,6 +39,10 @@
                         {
                             "xml": "<feature name=\"LaunchMyApp\"><param name=\"android-package\" value=\"nl.xservices.plugins.LaunchMyApp\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"EmailComposer\"><param name=\"android-package\" value=\"de.appplant.cordova.emailcomposer.EmailComposer\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -607,6 +611,9 @@
         },
         "de.martinreinhardt.cordova.plugins.urlhandler": {
             "URL_SCHEME": "flynnApp",
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "de.martinreinhardt.cordova.plugins.email": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
