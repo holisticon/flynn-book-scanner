@@ -35,11 +35,43 @@ function showErrorDialog($rootScope, $scope, $ionicLoading, log, errorTitle, err
  * @description open external url in browser app on mobile device, otherwise in a new tab on desktop device
  */
 function openExternalLink(pUrl) {
-    if (isMobileDevice()) {
-        window.open(pUrl, '_system', 'location=yes');
-    } else {
-        window.open(pUrl, '_blank');
+        if (isMobileDevice()) {
+            window.open(pUrl, '_system', 'location=yes');
+        } else {
+            window.open(pUrl, '_blank');
+        }
     }
+    /**
+     * @ngdoc function
+     * @name handleOpenURL
+     * @description redirect app url handler to app
+     */
+function handleOpenURL(url) {
+    setTimeout(function() {
+        if (url.toLowerCase().search('flynnapp') > -1) {
+            var type = url.substring(url.indexOf('//') + 2, url.indexOf('?')),
+                params = url.substring(url.indexOf('?') + 1).split("&");
+            // create JSON object
+            var args = {};
+            for (var i = 0, len = params.length; i < len; i++) {
+                var paramData = params[i].split("=");
+                args[paramData[0]] = paramData[1];
+            }
+
+            // get Angular scope from the known DOM element
+            e = document.body;
+            scope = angular.element(e).scope();
+            // update the model with a wrap in $apply(fn) which will refresh the view for us
+            scope.$apply(function() {
+                // broadcast URL data
+                switch (type) {
+                    case 'config':
+                        scope.$root.$broadcast('settings.handleURL', args);
+                        break;
+                }
+            });
+        }
+    }, 0);
 }
 
 /**
@@ -55,6 +87,20 @@ function isMobileDevice() {
     }
 }
 
+
+function configureLogging(loggerProvider, config) {
+    loggerProvider.dbName('flynnDB_logs');
+    loggerProvider.outputOnly(!config.dbLogging);
+    loggerProvider.debugLogging(config.debug);
+    if (config.debug) {
+        // enable couchDB debug
+        PouchDB.debug.enable('*');
+    } else {
+        PouchDB.debug.disable();
+    }
+    loggerProvider.traceLogging(config.trace);
+}
+
 /**
  * @ngdoc function
  * @name onDeviceReady
@@ -66,14 +112,12 @@ function onDeviceReady() {
     $http.get('config.json').success(function(data, status, headers, config) {
         var config = data;
         app.constant('APP_CONFIG', config);
-        if (config.dev === true) {
-            console.debug('Skipping bootstrapping on dev mode.');
+        if (config.dev === true) {            
             navigator.notification.alert('Running in dev mode!', null, 'Info');
-        } else {
-            // Add additional services/constants/variables to your app,
-            // and then finally bootstrap it:
-            angular.bootstrap(document, ['flynnBookScannerApp']);
-        }
+        } 
+        // bootstrap app:
+        angular.bootstrap(document, ['flynnBookScannerApp']);
+        
     }).error(function(data, status, headers, config) {
         console.error('Did not get valid config.json file.');
         navigator.notification.alert('Server did not show valid response.', null, 'Server Error');
@@ -242,17 +286,10 @@ app.config(function($urlRouterProvider, $provide, $compileProvider, $httpProvide
     // configure caching
     $ionicConfigProvider.views.maxCache(5);
     $ionicConfigProvider.templates.maxPrefetch(3);
-    // configure logging
-    loggerProvider.dbName('flynnDB_logs');
-    loggerProvider.outputOnly(!APP_CONFIG.dbLogging);
-    loggerProvider.debugLogging(APP_CONFIG.debug);
-    if (APP_CONFIG.debug) {
-        // enable couchDB debug
-        PouchDB.debug.enable('*');
-    } else {
-        PouchDB.debug.disable();
-    }
-    loggerProvider.traceLogging(APP_CONFIG.trace);
+    // remote loggerProvider
+    APP_CONFIG.loggerProvider = loggerProvider;
+    // configure logging    
+    configureLogging(loggerProvider, APP_CONFIG);
     $provide.decorator('$log', function($delegate) {
         return loggerProvider.$get($delegate);
     });
@@ -314,6 +351,15 @@ app.config(function($urlRouterProvider, $provide, $compileProvider, $httpProvide
                 'menuContent': {
                     templateUrl: 'views/aboutView.html',
                     controller: 'AboutController'
+                }
+            }
+        })
+        .state('app.dev', {
+            url: "/dev",
+            views: {
+                'menuContent': {
+                    templateUrl: 'views/devView.html',
+                    controller: 'DevController'
                 }
             }
         });

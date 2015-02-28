@@ -1,0 +1,24 @@
+<ion-view title="DEV MODE ACTIVE">
+	<ion-nav-buttons side="left">
+		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+	</ion-nav-buttons>
+	<ion-content id="dev" has-tabs="true" class="padding">
+		<div>
+			<p>
+				Some dev settings
+			</p>
+			<a href="flynnApp://config?url=https://server.holisticon.de/flynn/holy_config.json">Holy Config AppLink</a>
+			<br>
+			<button onclick="handleOpenURL('flynnApp://config?debug=true')" class="button button-positive">
+				Enable debug
+			</button>
+			<button onclick="handleOpenURL('flynnApp://config?debug=false')" class="button button-negative">
+				Disable debug
+			</button>
+			<button onclick="location.reload()" class="button button-assertive">
+				Reload app
+			</button>
+		</div>
+	</ion-content>
+	</ion-tab>
+</ion-view>

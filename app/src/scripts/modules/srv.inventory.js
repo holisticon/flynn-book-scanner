@@ -79,7 +79,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                     });
                                 }).catch(function(err) {
                                     $rootScope.$apply(function() {
-                                        logService.error('Unkown error during remote sync: ' + JSON.stringify(err));
+                                        logService.error('Unkown error during remote sync.');
                                         deferred.resolve(err);
                                     });
                                 });

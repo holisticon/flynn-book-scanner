@@ -7,14 +7,23 @@
  *
  * @module flynnBookScannerApp
  */
-app.controller('AppController', ['$scope', '$rootScope', '$log', '$state', '$ionicLoading', 'settingsService', 'inventoryService',
-    function($scope, $rootScope, $log, $state, $ionicLoading, settings, inventoryService) {
+app.controller('AppController', ['$scope', '$rootScope', '$log', '$state', '$window', '$ionicLoading', 'settingsService', 'inventoryService',
+    function($scope, $rootScope, $log, $state, $window, $ionicLoading, settings, inventoryService) {
         $ionicLoading.show();
+        $rootScope.$on('settings.handleURL', function(event, args) {
+            settings.handleURL(args);
+        });
+        $rootScope.$on('settings.updated', function(event, args) {
+            $window.location.reload(true);
+        });
         $rootScope.$on('settings.invalid', function(event) {
             showErrorDialog($rootScope, $scope, $ionicLoading, $log, "Settings invalid", 1001, "Settings seems to be incorrect. Please correct or check network settings.");
         });
         $rootScope.$on('network.offline', function(event) {
             showErrorDialog($rootScope, $scope, $ionicLoading, $log, "No network", 1002, "Network connection seems to be not working. Please try again later.");
+        });
+        $rootScope.$on('settings.invalidHandleUrl', function(event) {
+            showErrorDialog($rootScope, $scope, $ionicLoading, $log, "Settings invalid", 1003, "Settings seems to be incorrect. Server did not respond.");
         });
         $rootScope.$on('server.timeout', function(event) {
             showErrorDialog($rootScope, $scope, $ionicLoading, $log, "Timeout", 2001, "No answer from server");

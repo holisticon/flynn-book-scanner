@@ -62,10 +62,10 @@ app.controller('SettingsController', ['$rootScope', '$log', '$scope', '$ionicLoa
                 $log.error('No log entries found');
                 $ionicLoading.hide();
             });
-        }        
-        
+        }
+
         function emailLogs() {
-           $ionicLoading.show();
+            $ionicLoading.show();
             var logViewData = '';
             for (var i in $scope.logs) {
                 var log = $scope.logs[i];
@@ -122,6 +122,7 @@ app.controller('SettingsController', ['$rootScope', '$log', '$scope', '$ionicLoa
                 $ionicLoading.hide();
                 readInventory();
             }, function(error) {
+                $ionicLoading.hide();
                 if (error.status === 401) {
                     $rootScope.$broadcast("login.failed");
                 } else {
@@ -131,7 +132,6 @@ app.controller('SettingsController', ['$rootScope', '$log', '$scope', '$ionicLoa
                         $rootScope.$broadcast("settings.invalid");
                     }
                 }
-                $ionicLoading.hide();
             });
         }
 
