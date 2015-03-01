@@ -1,5 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="de.holisticon.app.flynn" version="1.4.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="de.holisticon.app.flynn" version="1.5.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="CustomUrl">
+        <param name="wp-package" value="CustomUrl" />
+    </feature>
+    <feature name="EmailComposer">
+        <param name="wp-package" value="EmailComposer" />
+    </feature>
     <name>Flynn</name>
     <description>
         flynn book scanner app
@@ -14,10 +20,4 @@
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="KeyboardDisplayRequiresUserAction" value="false" />
-    <feature name="CustomUrl">
-        <param name="wp-package" value="CustomUrl" />
-    </feature>
-    <feature name="EmailComposer">
-        <param name="wp-package" value="EmailComposer" />
-    </feature>
 </widget>

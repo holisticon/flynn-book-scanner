@@ -11,7 +11,7 @@
         "version": {
             "label": "Version",
             "hidden": false,
-            "value": "1.4.4"
+            "value": "1.5.0"
         },
         "release_notes": {
             "label": "Release Notes",
