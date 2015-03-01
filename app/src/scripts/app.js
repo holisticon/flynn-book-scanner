@@ -145,7 +145,7 @@ function onDeviceReady() {
 }
 
 // on dev fire up event directly
-if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+if (isMobileDevice()) {
     document.addEventListener("deviceready", onDeviceReady, false);
 } else {
     onDeviceReady();

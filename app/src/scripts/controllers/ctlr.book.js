@@ -28,6 +28,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$log
 			$scope.$on('$destroy', function() {
 				$scope.modal.remove();
 			});
+			$scope.barcodeSupported = isMobileDevice();
 		}
 
 		/**

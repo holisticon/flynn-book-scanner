@@ -17,7 +17,7 @@
 			<button ng-click="search()" class="button button-positive">
 				Search
 			</button>
-			<button ng-click="scan()" class="button" ng-show="isMobileDevice()">
+			<button ng-click="scan()" class="button" ng-show="barcodeSupported">
 				Scan ISBN
 			</button>
 			<button ng-click="manual($event)" class="button">
