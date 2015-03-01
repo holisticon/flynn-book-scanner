@@ -6,13 +6,13 @@
  * @description
  * Provide details about the app
  */
-app.controller('AboutController', ['$scope', '$rootScope', 'APP_CONFIG',
-    function($scope, $rootScope, APP_CONFIG) {
+app.controller('AboutController', ['$scope', '$rootScope', 'APP_INFO',
+    function($scope, $rootScope, APP_INFO) {
         'use strict';
 
         var load = function() {
             var info = [];
-            angular.forEach(APP_CONFIG.info, function(value, key) {
+            angular.forEach(APP_INFO, function(value, key) {
                 if (key === 'release_notes') {
                     var entry = {};
                     entry.label = value.label;
@@ -26,7 +26,7 @@ app.controller('AboutController', ['$scope', '$rootScope', 'APP_CONFIG',
                 }
             }, info);
             $scope.info = info;
-        }
+        };
 
         load();
     }

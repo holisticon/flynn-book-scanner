@@ -57,19 +57,15 @@ function handleOpenURL(url) {
                 var paramData = params[i].split("=");
                 args[paramData[0]] = paramData[1];
             }
-
             // get Angular scope from the known DOM element
             e = document.body;
             scope = angular.element(e).scope();
-            // update the model with a wrap in $apply(fn) which will refresh the view for us
-            scope.$apply(function() {
-                // broadcast URL data
-                switch (type) {
-                    case 'config':
-                        scope.$root.$broadcast('settings.handleURL', args);
-                        break;
-                }
-            });
+            // broadcast URL data
+            switch (type) {
+                case 'config':
+                    scope.$root.$broadcast('settings.handleURL', args);
+                    break;
+            }
         }
     }, 0);
 }
@@ -135,6 +131,7 @@ function onDeviceReady() {
             appConf = data.config;
         }
         app.constant('APP_CONFIG', appConf);
+        app.constant('APP_INFO', data.info);
         if (config.dev === true) {
             navigator.notification.alert('Running in dev mode!', null, 'Info');
         }
