@@ -264,7 +264,7 @@ app.filter('unsafe', function($sce) {
  * @description  Set loading text
  */
 app.constant('$ionicLoadingConfig', {
-    template: '<i class="icon ion-loading-d"></i>&nbsp;&nbsp;Loading ...'
+    template: '<ion-spinner></ion-spinner> <br> Loading '
 });
 
 

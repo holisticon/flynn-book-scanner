@@ -6,36 +6,36 @@
  * @description
  * Interacts with inventory backend to show up book details
  */
-app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', '$log', '$ionicScrollDelegate', '$ionicLoading', '$http', '$ionicModal', '$ionicActionSheet', 'settingsService', 'inventoryService',
-    function($rootScope, $scope, $state, $filter, $log, $ionicScrollDelegate, $ionicLoading, $http, $ionicModal, $ionicActionSheet, settings, inventoryService) {
+app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', '$log', '$ionicScrollDelegate', '$ionicListDelegate', '$ionicLoading', '$ionicHistory', '$http', '$ionicModal', '$ionicActionSheet', 'settingsService', 'inventoryService',
+    function($rootScope, $scope, $state, $filter, $log, $ionicScrollDelegate, $ionicListDelegate, $ionicLoading, $ionicHistory, $http, $ionicModal, $ionicActionSheet, settings, inventoryService) {
 
         var config = settings.load(),
-            allBooks;       
-        
+            allBooks;
+
         function init() {
-        	initModal();
-        	$scope.filter={};
+            initModal();
+            $scope.filter = {};
             $scope.filter.selectedOrder = $scope.filterModes[0].value;
             load(true);
         }
 
         function initModal() {
-			$ionicModal.fromTemplateUrl('filter_modal.html', {
-				scope: $scope,
-				animation: 'slide-in-up'
-			}).then(function(modal) {
-				$scope.modal = modal;
-			});
-			$scope.openModal = function() {
-				$scope.modal.show();
-			};
-			$scope.closeModal = function() {
-				$scope.modal.hide();
-			};
-			//Cleanup the modal when we're done with it!
-			$scope.$on('$destroy', function() {
-				$scope.modal.remove();
-			});
+            $ionicModal.fromTemplateUrl('filter_modal.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function(modal) {
+                $scope.modal = modal;
+            });
+            $scope.openModal = function() {
+                $scope.modal.show();
+            };
+            $scope.closeModal = function() {
+                $scope.modal.hide();
+            };
+            //Cleanup the modal when we're done with it!
+            $scope.$on('$destroy', function() {
+                $scope.modal.remove();
+            });
             $scope.filterModes = [{
                 label: 'sort by title',
                 value: 'value.volumeInfo.title'
@@ -97,21 +97,25 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
 
         function removeBook(pBookToRemove) {
             inventoryService.remove(pBookToRemove).then(function(response) {
-                $ionicLoading.show();
-                load();
+                $scope.books.splice($scope.books.indexOf(pBookToRemove), 1);
+                $ionicHistory.clearCache();
+                $state.go($state.current, {}, {
+                    cache: false,
+                    reload: true
+                });
             }, function(error) {
                 $ionicLoading.hide();
-                $rootScope.$broadcast("server.error");
+                $rootScope.$broadcast('server.error');
             });
         }
-        
-        function showFilterModal(){
-			$scope.openModal();
+
+        function showFilterModal() {
+            $scope.openModal();
         }
-        
-        function applyFilter(){
-        	$scope.closeModal();
-        } 
+
+        function applyFilter() {
+            $scope.closeModal();
+        }
 
         function showBookDetails(pBook) {
             $log.debug('Showing details for book: ' + pBook.value.volumeInfo.title);
@@ -140,11 +144,9 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
                     navigator.notification.confirm('Really remove book ' + $scope.book.value.volumeInfo.title + ' ?', function(buttonIndex) {
                         if (buttonIndex === 1) {
                             removeBook($scope.book);
-                            $state.go($state.current, {}, {reload: true});
                         }
-                    })
-
-                    return true;
+                        $ionicListDelegate.closeOptionButtons();
+                    });
                 }
             });
         }
