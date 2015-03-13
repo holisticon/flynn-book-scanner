@@ -174,7 +174,6 @@ module.exports = function(grunt) {
             'images/{,*/}*.*',
             'styles/fonts/*',
             'scripts/webworker*.js',
-            '*.js',
             'views/*.html',
             'templates/*.html'
           ]

@@ -76,7 +76,7 @@ function handleOpenURL(url) {
  * @description returns true if running on a mobile device, otherwise false
  */
 function isMobileDevice() {
-    if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+    if (window.cordova) {
         return true;
     } else {
         return false; //this is the browser

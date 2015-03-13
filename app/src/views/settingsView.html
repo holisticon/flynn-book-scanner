@@ -3,8 +3,8 @@
 		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
 	</ion-nav-buttons>
 	<form name="settingsForm" novalidate ng-submit="save()">
-		<ion-tabs class="tabs-positive tabs-icon-left">
-			<ion-tab title="General" icon-on="ion-ios7-gear" icon-off="ion-ios7-gear-outline">
+		<ion-tabs class="tabs-positive tabs-striped tabs-icon-left">
+			<ion-tab title="General" icon-on="ion-settings" icon-off="ion-settings-outline">
 				<ion-content id="general" has-tabs="true" class="padding">
 					<div>
 						<p>
@@ -22,7 +22,7 @@
 					</div>
 				</ion-content>
 			</ion-tab>
-			<ion-tab title="Server" icon-on="ion-ios7-refresh" icon-off="ion-ios7-refresh-outline">
+			<ion-tab title="Server" icon-on="ion-ios-refresh" icon-off="ion-ios-refresh-outline">
 				<ion-content id="server" has-tabs="true" class="padding">
 					<p>
 						If you like to syncronize with a remote CouchDB activate the remote sync here:
@@ -55,7 +55,7 @@
 					</div>
 				</ion-content>
 			</ion-tab>
-			<ion-tab title="Logs" icon-on="ion-ios7-speedometer" icon-off="ion-ios7-speedometer-outline">
+			<ion-tab title="Logs" icon-on="ion-ios-speedometer" icon-off="ion-ios-speedometer-outline">
 				<ion-content id="logs" has-tabs="true" class="padding">
 					<label class="item-input item-select">
 						<div class="input-label">
@@ -75,7 +75,7 @@
 						Clear
 					</button>
 					<ion-list class="list card">
-						<ion-item style="width:100%"
+						<ion-item 
 						collection-repeat="logEntry in logs | orderBy:'timestamp':true"
 						collection-item-height="'72'">
 							{{logEntry.timestamp | date: 'dd.MM.yyyy HH:mm'}} - {{logEntry.level}}

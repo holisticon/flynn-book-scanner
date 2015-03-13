@@ -3,8 +3,8 @@
 		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
 	</ion-nav-buttons>
 	<ion-nav-buttons side="right">
-		<button class="button button-icon icon ion-levels" ng-click="showFilterModal()"></button>
-		<button class="button button-icon icon ion-refresh" ng-click="load()"></button>
+		<button class="button button-icon icon ion-funnel" ng-click="showFilterModal()"></button>
+		<a href="#/app/book/add"><button class="button button-icon icon ion-plus"></button></a>
 	</ion-nav-buttons>
 	<ion-header-bar class="bar-subheader item-input-inset">
 		<label class="item-input-wrapper"> <i class="icon ion-ios7-search placeholder-icon"></i>
@@ -19,6 +19,8 @@
 	<ion-content>
 		
 		<form name="form">
+			<ion-refresher  pulling-text="Pull to refresh..." on-refresh="load()">
+  			</ion-refresher>
 			<ion-list>
 				<div ng-show="!books" class="item">
 					No books found.
