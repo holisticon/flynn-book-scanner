@@ -8,7 +8,7 @@
 	</ion-nav-buttons>
 	<ion-header-bar class="bar-subheader item-input-inset">
 		<label class="item-input-wrapper"> <i class="icon ion-ios7-search placeholder-icon"></i>
-			<input type="search" data-ng-model="searchQuery.fullTextSearch" ng-model-onblur  is-focused="true" ng-change="doSearch()"
+			<input type="search" data-ng-model="searchQuery.fullTextSearch" ng-model-onblur  is-focused="false" ng-change="doSearch()"
 			placeholder="Type to search ...">
 		</label>
 		<button ng-click="resetSearch()" class="button button-clear">
@@ -49,7 +49,7 @@
 			<script id="filter_modal.html" type="text/ng-template">
 				<ion-modal-view>					
 					<ion-header-bar>
-						<button class="button button-clear" ng-click="closeModal()">
+						<button class="button button-stable" ng-click="closeModal()">
 						Close
 						</button>
 						<h1 class="title">Filter options</h1>	

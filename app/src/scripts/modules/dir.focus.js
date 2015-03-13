@@ -20,6 +20,12 @@ app.directive('isFocused', ['$timeout',
 							cordova.plugins.Keyboard.show();
 						}
 					});
+				} else {					
+					$timeout(function() {
+						if (typeof cordova != 'undefined') {
+							cordova.plugins.Keyboard.close();
+						}
+					});
 				}
 			}
 		}

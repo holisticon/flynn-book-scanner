@@ -67,6 +67,10 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$log
 		 */
 		function search() {
 			$scope.books = null;
+			// hide keyboard
+			if (typeof cordova != 'undefined') {
+				cordova.plugins.Keyboard.close();
+			}
 			var searchQuery = $scope.searchQuery;
 			if (searchQuery && (searchQuery.isbn || searchQuery.keyword)) {
 				// reset search
@@ -259,7 +263,11 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$log
 					}
 					$ionicLoading.hide();
 					navigator.notification.alert('Book successfully added.', reset(), 'Book');
-					$ionicHistory.clearHistory();
+					$ionicHistory.clearCache();
+					$state.go('app.books', {}, {
+						cache: false,
+						reload: true
+					});
 				}
 			}
 
