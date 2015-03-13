@@ -201,9 +201,7 @@ app.filter('bookFilter', [function() {
             var entry = pList[i].toUpperCase();
             if (entry.indexOf(pSearchText) > -1) {
                 return true;
-            } else {
-                return false;
-            }
+            } 
         }
     }
     return function(pBooks, pSearchText) {
