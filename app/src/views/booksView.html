@@ -16,11 +16,11 @@
 		</button>
 	</ion-header-bar>
 
-	<ion-content>
-		
+	<ion-content>		
+		<ion-refresher 
+			pulling-text="Pull to refresh..." on-refresh="load()">
+		</ion-refresher>
 		<form name="form">
-			<ion-refresher  pulling-text="Pull to refresh..." on-refresh="load()">
-  			</ion-refresher>
 			<ion-list>
 				<div ng-show="!books" class="item">
 					No books found.
