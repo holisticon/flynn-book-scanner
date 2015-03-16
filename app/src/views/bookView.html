@@ -1,4 +1,7 @@
-<ion-view title="Book">
+<ion-view title="{{selectedBook.value.volumeInfo.title}}">
+	<ion-nav-buttons side="right">	
+		<a href="#/app/book/edit/{{selectedBook.value.id}}"><button class="button button-icon icon ion-edit"></button></a>
+	</ion-nav-buttons>
 	<ion-content id="book" class="padding">
 		<book-view-details book="selectedBook"></book-view-details>
 	</ion-content>

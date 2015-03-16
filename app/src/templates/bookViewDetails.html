@@ -1,14 +1,5 @@
 <div class="padding" id="{{selectedBook.value.id}}">  
-	<p class="help-block warning" ng-show="selectedBook.infoMsg">
-		<br>
-		<i class="icon ion-information-circled"></i> {{::selectedBook.infoMsg}}
-		<br>
-	</p> 
-	<label class="item-input" ng-show="selectedBook.value.volumeInfo.title">
-			<span class="input-label">Title:</span>
- 			<span id="title" type="text"  >{{::selectedBook.value.volumeInfo.title}}</span>
-	</label>     
-	<label class="item-input" ng-show="selectedBook.value.volumeInfo.subtitle">
+   	<label class="item-input" ng-show="selectedBook.value.volumeInfo.subtitle">
 			<span class="input-label">Subtitle:</span>
  			<span id="subtitle" type="text" >{{::selectedBook.value.volumeInfo.subtitle}}</span>
 	</label>       	                       	
