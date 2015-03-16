@@ -263,11 +263,8 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$log
 					}
 					$ionicLoading.hide();
 					navigator.notification.alert('Book successfully added.', reset(), 'Book');
-					$ionicHistory.clearCache();
-					$state.go('app.books', {}, {
-						cache: false,
-						reload: true
-					});
+	                $rootScope.$broadcast('inventory.refresh');
+                	$state.go('app.books', {}, { reload: true });
 				}
 			}
 

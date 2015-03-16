@@ -17,6 +17,9 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
             $scope.filter = {};
             $scope.filter.selectedOrder = $scope.filterModes[0].value;
             load(true);
+            $rootScope.$on('inventory.refresh', function(event, args) {
+                load(false);
+            });            
         }
 
         function initModal() {
@@ -47,7 +50,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
 
         function syncWithServer() {
             $ionicLoading.show({
-                template: '<i class="icon ion-looping loading-icon"></i>&nbsp;&nbsp;Syncing books ...'
+                template: '<ion-spinner></ion-spinner> <br> Syncing books ...'
             });
             inventoryService.syncRemote().then(function(response) {
                 $ionicLoading.hide();
@@ -80,7 +83,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
                 }
                 $ionicLoading.hide();
             }, function(error) {
-                $rootScope.$broadcast("server.error");
+                $rootScope.$broadcast('server.error');
                 $scope.searchQuery = {};
                 $ionicLoading.hide();
             });
@@ -98,11 +101,8 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
         function removeBook(pBookToRemove) {
             inventoryService.remove(pBookToRemove).then(function(response) {
                 $scope.books.splice($scope.books.indexOf(pBookToRemove), 1);
-                $ionicHistory.clearCache();
-                $state.go($state.current, {}, {
-                    cache: false,
-                    reload: true
-                });
+                $rootScope.$broadcast('inventory.refresh');
+                $state.go('app.books', {}, { reload: true });
             }, function(error) {
                 $ionicLoading.hide();
                 $rootScope.$broadcast('server.error');
@@ -139,6 +139,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
                     $state.go('app.book_edit', {
                         'bookId': book.value.id
                     });
+                    return true;
                 },
                 destructiveButtonClicked: function() {
                     navigator.notification.confirm('Really remove book ' + $scope.book.value.volumeInfo.title + ' ?', function(buttonIndex) {
@@ -147,6 +148,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
                         }
                         $ionicListDelegate.closeOptionButtons();
                     });
+                    return true;
                 }
             });
         }
