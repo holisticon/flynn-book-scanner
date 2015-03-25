@@ -264,7 +264,7 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$log
 					$ionicLoading.hide();
 					navigator.notification.alert('Book successfully added.', reset(), 'Book');
 	                $rootScope.$broadcast('inventory.refresh');
-                	$state.go('app.books', {}, { reload: true });
+                	$state.go('app.books');
 				}
 			}
 

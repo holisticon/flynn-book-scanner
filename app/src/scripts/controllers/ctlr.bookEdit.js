@@ -78,9 +78,7 @@ app.controller('BookEditController', ['$rootScope', '$scope', '$state', '$stateP
                         });
                     }
                     $ionicLoading.hide();
-                    navigator.notification.alert('Book successfully updated.', $state.go('app.books', {}, {
-                        reload: true
-                    }), 'Book');
+                    navigator.notification.alert('Book successfully updated.', $state.go('app.books'), 'Book');
                 }
             }
 
