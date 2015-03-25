@@ -14,7 +14,7 @@
     "angular-cache": "~3.2.5",
     "angular-local-storage": "0.1.5",
     "angular-ui-router": "0.2.13",
-    "ionic": "1.0.0-rc.0",
+    "ionic": "1.0.0-rc.1",
     "pouchdb": "3.3.0"
   },
   "devDependencies": {
