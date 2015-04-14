@@ -1,6 +1,6 @@
 <ion-view title="About">
 	<ion-nav-buttons side="left">
-		<button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+		<button menu-toggle="left"class="button button-icon icon ion-navicon" ng-hide="$exposeAside.active"></button>
 	</ion-nav-buttons>
 	<ion-content id="about" class="padding">
 		<div ng-repeat="entry in info" class="row" ng-show=!entry.hidden>

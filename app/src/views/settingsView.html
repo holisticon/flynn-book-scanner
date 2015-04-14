@@ -1,6 +1,6 @@
 <ion-view title="Settings">
 	<ion-nav-buttons side="left">
-		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+		<button menu-toggle="left" class="button button-icon icon ion-navicon" ng-hide="$exposeAside.active"></button>
 	</ion-nav-buttons>
 	<form name="settingsForm" novalidate ng-submit="save()">
 		<ion-tabs class="tabs-positive tabs-striped tabs-icon-left">
