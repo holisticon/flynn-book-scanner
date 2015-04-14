@@ -10,5 +10,11 @@
             "type": "registry",
             "id": "org.apache.cordova.camera"
         }
+    },
+    "org.apache.cordova.console": {
+        "source": {
+            "type": "registry",
+            "id": "org.apache.cordova.console"
+        }
     }
 }

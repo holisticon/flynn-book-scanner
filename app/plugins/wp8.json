@@ -19,6 +19,10 @@
                         {
                             "xml": "<feature name=\"Camera\"><param name=\"wp-package\" value=\"Camera\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Console\"><param name=\"wp-package\" value=\"DebugConsole\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -63,6 +67,9 @@
             "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
         },
         "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
+        },
+        "org.apache.cordova.console": {
             "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
         }
     },

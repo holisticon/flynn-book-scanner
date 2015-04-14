@@ -229,4 +229,7 @@
     <ItemGroup>
         <Compile Include="Plugins\org.apache.cordova.camera\Camera.cs" />
     </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\org.apache.cordova.console\DebugConsole.cs" />
+    </ItemGroup>
 </Project>

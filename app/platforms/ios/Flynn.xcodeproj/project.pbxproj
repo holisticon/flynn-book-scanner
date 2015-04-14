@@ -13,7 +13,6 @@
 		28597F2A12C34D439C95F501 /* scannerOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA464A952A744DF2805DFEAA /* scannerOverlay.xib */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28CCC69FB7E947B2852734FC /* CDVNotification.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E8D0F4A1EF8A457996889121 /* CDVNotification.bundle */; };
-		2E157E64967A4CB8AD60462A /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C0338506B7433DB753FC25 /* CDVLogger.m */; };
 		2F86BA7A94644A16BA1C9A9F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 629E43216AF64602A4C65E7D /* QuartzCore.framework */; };
 		301BF552109A68D80062928A /* libCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 301BF535109A57CC0062928A /* libCordova.a */; };
 		302D95F114D2391D003F00A1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302D95EF14D2391D003F00A1 /* MainViewController.m */; };
@@ -497,7 +496,6 @@
 				E0C6A573D7C1422D8E77258F /* CDVBarcodeScanner.mm in Sources */,
 				0D4C1CB80C894E17B029704E /* zxing-all-in-one.cpp in Sources */,
 				F488865179D0489BAEC3A856 /* SQLitePlugin.m in Sources */,
-				2E157E64967A4CB8AD60462A /* CDVLogger.m in Sources */,
 				ECA93C1DDAA946B4B4AD8F22 /* CDVDevice.m in Sources */,
 				48ABF3478AC747FD95D289FC /* CDVNotification.m in Sources */,
 				339191DBAAB344819D02BD47 /* CDVInAppBrowser.m in Sources */,

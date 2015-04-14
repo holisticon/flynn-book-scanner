@@ -83,9 +83,6 @@
         "org.apache.cordova.dialogs": {
             "PACKAGE_NAME": "Flynn"
         },
-        "org.apache.cordova.console": {
-            "PACKAGE_NAME": "Flynn"
-        },
         "de.martinreinhardt.cordova.plugins.urlhandler": {
             "URL_SCHEME": "flynnApp",
             "PACKAGE_NAME": "Flynn"
@@ -97,6 +94,9 @@
             "PACKAGE_NAME": "Flynn"
         },
         "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "org.apache.cordova.console": {
             "PACKAGE_NAME": "Flynn"
         }
     },

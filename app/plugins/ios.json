@@ -17,10 +17,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
                         },
@@ -46,6 +42,10 @@
                         },
                         {
                             "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -172,9 +172,6 @@
         "com.phonegap.plugins.sqlite": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "org.apache.cordova.console": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
         "org.apache.cordova.device": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
@@ -195,6 +192,9 @@
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "org.apache.cordova.console": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
