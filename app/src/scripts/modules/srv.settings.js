@@ -14,8 +14,8 @@ app.service('settingsService', ['$rootScope', '$log', '$http', 'localStorageServ
         function saveSettings(pConfig) {
             localStorage.remove('flynn_app.settings');
             var config = pConfig;
-            if(!config.appConfig || APP_CONFIG.update){
-        	config.appConfig = APP_CONFIG;        	
+            if (!config.appConfig || APP_CONFIG.update) {
+                config.appConfig = APP_CONFIG;
             }
             localStorage.add('flynn_app.settings', config);
         }
@@ -55,8 +55,8 @@ app.service('settingsService', ['$rootScope', '$log', '$http', 'localStorageServ
             $rootScope.settings = settings;
             return settings;
         }
-        
-        function parseJSON(pStringValue){
+
+        function parseJSON(pStringValue) {
             return (pStringValue === 'false' || pStringValue === 'true') ? JSON.parse(pStringValue) : pStringValue;
         }
 
@@ -65,26 +65,30 @@ app.service('settingsService', ['$rootScope', '$log', '$http', 'localStorageServ
             var updatedConfig = pCurrentConfig;
             updatedConfig.valid = false;
             $log.debug('Overwriting profile data');
+            // if (Array.isArray(pConfig)) {
             for (var property in pConfig) {
-        	switch (property){
-        	case 'profiles':
-        	    for (var profileProperty in pConfig.profiles[0]) {
-        		if(!pCurrentConfig.profiles){
-        		    updatedConfig.profiles=[];
-        		}
-            		updatedConfig.profiles[0][profileProperty] = parseJSON(pConfig.profiles[0][profileProperty]);
-            	    }
-                    break;
-        	case 'appConfig':
-        	    for (var appConfProperty in pConfig.appConfig) {
-            		updatedConfig.appConfig[appConfProperty] = parseJSON(pConfig.appConfig[appConfProperty]);
-            	    }
-                    break;
-                 default:
-                     updatedConfig[property] = parseJSON(pConfig[property]);
-                     break;
-        	}        	
+                switch (property) {
+                    case 'profiles':
+                        for (var profileProperty in pConfig.profiles[0]) {
+                            if (!pCurrentConfig.profiles) {
+                                updatedConfig.profiles = [];
+                            }
+                            updatedConfig.profiles[0][profileProperty] = parseJSON(decodeURIComponent(pConfig.profiles[0][profileProperty]));
+                        }
+                        break;
+                    case 'appConfig':
+                        for (var appConfProperty in pConfig.appConfig) {
+                            updatedConfig.appConfig[appConfProperty] = parseJSON(decodeURIComponent(pConfig.appConfig[appConfProperty]));
+                        }
+                        break;
+                    default:
+                        updatedConfig[property] = parseJSON(pConfig[property]);
+                        break;
+                }
             }
+            // } else {
+            //    updatedConfig = pConfig;
+            //}
             $log.debug('Saving overwrite profile data');
             saveSettings(updatedConfig);
             $rootScope.$broadcast('settings.updated');
@@ -111,8 +115,17 @@ app.service('settingsService', ['$rootScope', '$log', '$http', 'localStorageServ
                     $rootScope.$broadcast('settings.invalidHandleUrl', args);
                 });
             } else {
-                $log.debug('Using passed URL data');                
-                overwriteConfig(currentSettings, {appConfig:pConfig});
+                if (pConfig.profile) {
+                    $log.debug('Using passed URL data');
+                    overwriteConfig(currentSettings, {
+                        profiles: [pConfig]
+                    });
+                } else {
+                    $log.debug('Using passed URL data');
+                    overwriteConfig(currentSettings, {
+                        appConfig: pConfig
+                    });
+                }
             }
         }
         return {
