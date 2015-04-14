@@ -16,17 +16,5 @@
             "type": "registry",
             "id": "org.apache.cordova.console"
         }
-    },
-    "org.apache.cordova.device": {
-        "source": {
-            "type": "registry",
-            "id": "org.apache.cordova.device"
-        }
-    },
-    "org.apache.cordova.dialogs": {
-        "source": {
-            "type": "registry",
-            "id": "org.apache.cordova.dialogs"
-        }
     }
 }
