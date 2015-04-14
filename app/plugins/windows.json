@@ -68,9 +68,6 @@
         }
     },
     "installed_plugins": {
-        "com.ionic.keyboard": {
-            "PACKAGE_NAME": "Flynn"
-        },
         "com.phonegap.plugins.barcodescanner": {
             "PACKAGE_NAME": "Flynn"
         },
@@ -97,6 +94,9 @@
             "PACKAGE_NAME": "Flynn"
         },
         "de.martinreinhardt.cordova.plugins.email": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "com.ionic.keyboard": {
             "PACKAGE_NAME": "Flynn"
         }
     },

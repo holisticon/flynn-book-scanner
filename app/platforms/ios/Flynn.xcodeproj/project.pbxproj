@@ -54,9 +54,7 @@
 		996211DF6AF24C92B052BA99 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6CE85719E348A6A997411F /* libiconv.dylib */; };
 		B17CFC8253EA4F2690500FAD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FFEC23F9C034920AAD8009A /* AVFoundation.framework */; };
 		B413E6F1DC1E4A5395D34860 /* CDVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6081225A1940868BE9CD82 /* CDVCamera.m */; };
-		B61BF8CE943A49C9B0783F87 /* IonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7751E2E9F34A3787930713 /* IonicKeyboard.m */; };
 		B8F768C2D564439395422957 /* UIImage+CropScaleOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3845710C15D84501BD9CE2E2 /* UIImage+CropScaleOrientation.m */; };
-		CED35E4FE3214FF99F581FDC /* UIWebViewExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 47682AF4B3FF45478A6CB858 /* UIWebViewExtension.m */; };
 		D1BAFF2B4E8C4095A20041C9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB22293FCAD4092BF1CAD2C /* AudioToolbox.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		D569016A1DFA4ACDBA4CDC23 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFBB3C1D15F14C429F0158D0 /* MessageUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -502,8 +500,6 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
-				B61BF8CE943A49C9B0783F87 /* IonicKeyboard.m in Sources */,
-				CED35E4FE3214FF99F581FDC /* UIWebViewExtension.m in Sources */,
 				E0C6A573D7C1422D8E77258F /* CDVBarcodeScanner.mm in Sources */,
 				0D4C1CB80C894E17B029704E /* zxing-all-in-one.cpp in Sources */,
 				F488865179D0489BAEC3A856 /* SQLitePlugin.m in Sources */,

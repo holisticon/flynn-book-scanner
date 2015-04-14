@@ -3,7 +3,7 @@ Keyboard
 
 The `cordova.plugins.Keyboard` object provides functions to make interacting with the keyboard easier, and fires events to indicate that the keyboard will hide/show.
 
-    cordova plugin add https://github.com/driftyco/ionic-plugins-keyboard.git
+    cordova plugin add com.ionic.keyboard
 
 Methods
 -------
@@ -26,16 +26,6 @@ These events are fired on the window.
 - native.keyboardshow
   * A number `keyboardHeight` is given on the event object, which is the pixel height of the keyboard.
 - native.keyboardhide
-
-Permissions
------------
-
-#### config.xml
-
-            <feature name="Keyboard">
-                <param name="ios-package" value="IonicKeyboard" onload="true" />
-            </feature>
-
 
 Keyboard.hideKeyboardAccessoryBar
 =================
@@ -61,7 +51,7 @@ Close the keyboard if it is open.
 Supported Platforms
 -------------------
 
-- iOS, Android
+- iOS, Android, Blackberry 10
 
 
 Keyboard.disableScroll
@@ -86,7 +76,7 @@ Force keyboard to be shown on Android. This typically helps if autofocus on a te
 
 Supported Platforms
 
-- Android
+- Android, Blackberry 10
 
 native.keyboardshow
 =================
@@ -108,7 +98,7 @@ keyboardHeight: the height of the keyboard in pixels
 Supported Platforms
 -------------------
 
-- iOS, Android
+- iOS, Android, Blackberry 10
 
 
 native.keyboardhide
@@ -130,4 +120,4 @@ None
 Supported Platforms
 -------------------
 
-- iOS, Android
+- iOS, Android, Blackberry 10

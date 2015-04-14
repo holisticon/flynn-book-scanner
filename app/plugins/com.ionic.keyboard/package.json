@@ -1,5 +1,5 @@
 {
-    "version": "1.0.3",
+    "version": "1.0.4",
     "name": "com.ionic.keyboard",
     "cordova_name": "Keyboard",
     "description": "Ionic Keyboard Plugin",
@@ -12,7 +12,8 @@
     ],
     "platforms": [
         "android",
-        "ios"
+        "ios",
+        "blackberry10"
     ],
     "engines": []
 }

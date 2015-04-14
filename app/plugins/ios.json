@@ -9,10 +9,6 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>",
                             "count": 1
                         },
@@ -46,6 +42,10 @@
                         },
                         {
                             "xml": "<feature name=\"EmailComposer\"><param name=\"ios-package\" value=\"APPEmailComposer\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -146,9 +146,6 @@
         }
     },
     "installed_plugins": {
-        "com.ionic.keyboard": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
         "com.phonegap.plugins.barcodescanner": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
@@ -175,6 +172,9 @@
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "de.martinreinhardt.cordova.plugins.email": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "com.ionic.keyboard": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
