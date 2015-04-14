@@ -17,14 +17,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
                             "count": 1
                         },
@@ -46,6 +38,14 @@
                         },
                         {
                             "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
                             "count": 1
                         }
                     ]
@@ -69,6 +69,10 @@
                         {
                             "xml": "false",
                             "count": 2
+                        },
+                        {
+                            "xml": false,
+                            "count": 1
                         }
                     ],
                     "CoreVideo.framework": [
@@ -93,11 +97,19 @@
                         {
                             "xml": "true",
                             "count": 1
+                        },
+                        {
+                            "xml": true,
+                            "count": 1
                         }
                     ],
                     "CoreLocation.framework": [
                         {
                             "xml": "false",
+                            "count": 1
+                        },
+                        {
+                            "xml": false,
                             "count": 1
                         }
                     ],
@@ -105,11 +117,19 @@
                         {
                             "xml": "false",
                             "count": 3
+                        },
+                        {
+                            "xml": false,
+                            "count": 2
                         }
                     ],
                     "MobileCoreServices.framework": [
                         {
                             "xml": "false",
+                            "count": 1
+                        },
+                        {
+                            "xml": false,
                             "count": 1
                         }
                     ],
@@ -152,9 +172,6 @@
         "com.phonegap.plugins.sqlite": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "org.apache.cordova.camera": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
         "org.apache.cordova.console": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
@@ -175,6 +192,9 @@
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "com.ionic.keyboard": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "org.apache.cordova.camera": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },

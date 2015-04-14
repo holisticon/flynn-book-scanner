@@ -35,12 +35,9 @@
 		30FC414916E50CA1004E6F35 /* icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FC414816E50CA1004E6F35 /* icon-72@2x.png */; };
 		339191DBAAB344819D02BD47 /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 227F9EB6ECE24C13B7F164A5 /* CDVInAppBrowser.m */; };
 		418A893A477942FEAD3990AE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C31E3C666FC41D290BE3BC5 /* libsqlite3.dylib */; };
-		45C4C416599D436D87DFB7F5 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56D5D1ECCFC4775B1F70989 /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		48ABF3478AC747FD95D289FC /* CDVNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 5327782E933042CEAF8C3EB0 /* CDVNotification.m */; };
-		56991F740C8F4205B9CB15EF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4F4FEE4B92D4C9A9E88C5BE /* CoreLocation.framework */; };
 		5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */; };
 		7061E79A17544191A115F349 /* APPEmailComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A468ECC6576451497F50078 /* APPEmailComposer.m */; };
-		7C4B4C6D7D2D41AE983A9A65 /* CDVJpegHeaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F67B9455EEC4A2A9AEE1B5E /* CDVJpegHeaderWriter.m */; };
 		7E7966DE1810823500FA85AD /* icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966D41810823500FA85AD /* icon-40.png */; };
 		7E7966DF1810823500FA85AD /* icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966D51810823500FA85AD /* icon-40@2x.png */; };
 		7E7966E01810823500FA85AD /* icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966D61810823500FA85AD /* icon-50.png */; };
@@ -53,14 +50,13 @@
 		7E7966E71810823500FA85AD /* icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DD1810823500FA85AD /* icon-small@2x.png */; };
 		996211DF6AF24C92B052BA99 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6CE85719E348A6A997411F /* libiconv.dylib */; };
 		B17CFC8253EA4F2690500FAD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FFEC23F9C034920AAD8009A /* AVFoundation.framework */; };
-		B413E6F1DC1E4A5395D34860 /* CDVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6081225A1940868BE9CD82 /* CDVCamera.m */; };
-		B8F768C2D564439395422957 /* UIImage+CropScaleOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3845710C15D84501BD9CE2E2 /* UIImage+CropScaleOrientation.m */; };
 		D1BAFF2B4E8C4095A20041C9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB22293FCAD4092BF1CAD2C /* AudioToolbox.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		D569016A1DFA4ACDBA4CDC23 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFBB3C1D15F14C429F0158D0 /* MessageUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E0C6A573D7C1422D8E77258F /* CDVBarcodeScanner.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC3F05F877CC475F92FD63F0 /* CDVBarcodeScanner.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		ECA93C1DDAA946B4B4AD8F22 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB1094092D14122A1F0EDCE /* CDVDevice.m */; };
 		F488865179D0489BAEC3A856 /* SQLitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804B07506CD4B4BBA1DAE7E /* SQLitePlugin.m */; };
+		A3328B785E614EFD949919DB /* UIImage+CropScaleOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 67BE6D9CF3914906BCE30FAB /* UIImage+CropScaleOrientation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,7 +115,6 @@
 		32CA4F630368D1EE00C91783 /* Flynn-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Flynn-Prefix.pch"; sourceTree = "<group>"; };
 		33242284847D46CD99D49C01 /* CDVJpegHeaderWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVJpegHeaderWriter.h; path = org.apache.cordova.camera/CDVJpegHeaderWriter.h; sourceTree = "<group>"; };
 		37F6180FDD6D41BB91BB3C1D /* UIWebViewExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIWebViewExtension.h; path = com.ionic.keyboard/UIWebViewExtension.h; sourceTree = "<group>"; };
-		3845710C15D84501BD9CE2E2 /* UIImage+CropScaleOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+CropScaleOrientation.m"; path = "org.apache.cordova.camera/UIImage+CropScaleOrientation.m"; sourceTree = "<group>"; };
 		47682AF4B3FF45478A6CB858 /* UIWebViewExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIWebViewExtension.m; path = com.ionic.keyboard/UIWebViewExtension.m; sourceTree = "<group>"; };
 		4C9277F608D14F48B2AA202D /* IonicKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IonicKeyboard.h; path = com.ionic.keyboard/IonicKeyboard.h; sourceTree = "<group>"; };
 		4CB1094092D14122A1F0EDCE /* CDVDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVDevice.m; path = org.apache.cordova.device/CDVDevice.m; sourceTree = "<group>"; };
@@ -140,7 +135,6 @@
 		7E7966DC1810823500FA85AD /* icon-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-small.png"; sourceTree = "<group>"; };
 		7E7966DD1810823500FA85AD /* icon-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-small@2x.png"; sourceTree = "<group>"; };
 		7F67B9455EEC4A2A9AEE1B5E /* CDVJpegHeaderWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVJpegHeaderWriter.m; path = org.apache.cordova.camera/CDVJpegHeaderWriter.m; sourceTree = "<group>"; };
-		816414B716D941309357DBFE /* UIImage+CropScaleOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+CropScaleOrientation.h"; path = "org.apache.cordova.camera/UIImage+CropScaleOrientation.h"; sourceTree = "<group>"; };
 		8224552080FC403E97574738 /* SQLitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SQLitePlugin.h; path = com.phonegap.plugins.sqlite/SQLitePlugin.h; sourceTree = "<group>"; };
 		889BAA53522947EDAF0F30A9 /* CDVInAppBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVInAppBrowser.h; path = org.apache.cordova.inappbrowser/CDVInAppBrowser.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Flynn-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Flynn-Info.plist"; path = "../Flynn-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -161,6 +155,8 @@
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = Flynn/config.xml; sourceTree = "<group>"; };
 		FC6081225A1940868BE9CD82 /* CDVCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVCamera.m; path = org.apache.cordova.camera/CDVCamera.m; sourceTree = "<group>"; };
+		67BE6D9CF3914906BCE30FAB /* UIImage+CropScaleOrientation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIImage+CropScaleOrientation.m"; path = "org.apache.cordova.camera/UIImage+CropScaleOrientation.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		2A62E3DEFA0E431DA93394FD /* UIImage+CropScaleOrientation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIImage+CropScaleOrientation.h"; path = "org.apache.cordova.camera/UIImage+CropScaleOrientation.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,8 +173,6 @@
 				0D241DF827A34A65934BB20E /* CoreVideo.framework in Frameworks */,
 				2F86BA7A94644A16BA1C9A9F /* QuartzCore.framework in Frameworks */,
 				418A893A477942FEAD3990AE /* libsqlite3.dylib in Frameworks */,
-				45C4C416599D436D87DFB7F5 /* ImageIO.framework in Frameworks */,
-				56991F740C8F4205B9CB15EF /* CoreLocation.framework in Frameworks */,
 				D1BAFF2B4E8C4095A20041C9 /* AudioToolbox.framework in Frameworks */,
 				D569016A1DFA4ACDBA4CDC23 /* MessageUI.framework in Frameworks */,
 			);
@@ -288,10 +282,8 @@
 				B6607C55D19C446A873C6E76 /* zxing-all-in-one.h */,
 				1804B07506CD4B4BBA1DAE7E /* SQLitePlugin.m */,
 				8224552080FC403E97574738 /* SQLitePlugin.h */,
-				3845710C15D84501BD9CE2E2 /* UIImage+CropScaleOrientation.m */,
 				FC6081225A1940868BE9CD82 /* CDVCamera.m */,
 				7F67B9455EEC4A2A9AEE1B5E /* CDVJpegHeaderWriter.m */,
-				816414B716D941309357DBFE /* UIImage+CropScaleOrientation.h */,
 				2AFE677517814B549A0D3892 /* CDVCamera.h */,
 				33242284847D46CD99D49C01 /* CDVJpegHeaderWriter.h */,
 				6202B907EB0F43E281780D21 /* CDVExif.h */,
@@ -305,6 +297,8 @@
 				889BAA53522947EDAF0F30A9 /* CDVInAppBrowser.h */,
 				7A468ECC6576451497F50078 /* APPEmailComposer.m */,
 				0C9BFA5A6F034AF580CD4451 /* APPEmailComposer.h */,
+				67BE6D9CF3914906BCE30FAB /* UIImage+CropScaleOrientation.m */,
+				2A62E3DEFA0E431DA93394FD /* UIImage+CropScaleOrientation.h */,
 			);
 			name = Plugins;
 			path = Flynn/Plugins;
@@ -503,14 +497,12 @@
 				E0C6A573D7C1422D8E77258F /* CDVBarcodeScanner.mm in Sources */,
 				0D4C1CB80C894E17B029704E /* zxing-all-in-one.cpp in Sources */,
 				F488865179D0489BAEC3A856 /* SQLitePlugin.m in Sources */,
-				B8F768C2D564439395422957 /* UIImage+CropScaleOrientation.m in Sources */,
-				B413E6F1DC1E4A5395D34860 /* CDVCamera.m in Sources */,
-				7C4B4C6D7D2D41AE983A9A65 /* CDVJpegHeaderWriter.m in Sources */,
 				2E157E64967A4CB8AD60462A /* CDVLogger.m in Sources */,
 				ECA93C1DDAA946B4B4AD8F22 /* CDVDevice.m in Sources */,
 				48ABF3478AC747FD95D289FC /* CDVNotification.m in Sources */,
 				339191DBAAB344819D02BD47 /* CDVInAppBrowser.m in Sources */,
 				7061E79A17544191A115F349 /* APPEmailComposer.m in Sources */,
+				A3328B785E614EFD949919DB /* UIImage+CropScaleOrientation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

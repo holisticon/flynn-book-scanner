@@ -15,6 +15,10 @@
                         {
                             "xml": "<feature name=\"EmailComposer\"><param name=\"wp-package\" value=\"EmailComposer\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"wp-package\" value=\"Camera\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -24,6 +28,16 @@
                     "/Deployment/App/Extensions": [
                         {
                             "xml": "<Protocol Name=\"shopincomo\" NavUriFragment=\"encodedLaunchUri=%s\" TaskID=\"_default\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/Deployment/App/Capabilities": [
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_ISV_CAMERA\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_MEDIALIB_PHOTO\" />",
                             "count": 1
                         }
                     ]
@@ -46,6 +60,9 @@
             "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
         },
         "com.ionic.keyboard": {
+            "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
+        },
+        "org.apache.cordova.camera": {
             "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
         }
     },

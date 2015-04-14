@@ -226,4 +226,7 @@
     <ItemGroup>
         <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.email\Options.cs" />
     </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\org.apache.cordova.camera\Camera.cs" />
+    </ItemGroup>
 </Project>
