@@ -74,13 +74,7 @@
         "com.phonegap.plugins.sqlite": {
             "PACKAGE_NAME": "Flynn"
         },
-        "org.apache.cordova.device": {
-            "PACKAGE_NAME": "Flynn"
-        },
         "org.apache.cordova.inappbrowser": {
-            "PACKAGE_NAME": "Flynn"
-        },
-        "org.apache.cordova.dialogs": {
             "PACKAGE_NAME": "Flynn"
         },
         "de.martinreinhardt.cordova.plugins.urlhandler": {
@@ -97,6 +91,12 @@
             "PACKAGE_NAME": "Flynn"
         },
         "org.apache.cordova.console": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "org.apache.cordova.dialogs": {
             "PACKAGE_NAME": "Flynn"
         }
     },

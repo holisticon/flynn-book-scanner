@@ -26,4 +26,10 @@
     <feature name="Console">
         <param name="wp-package" value="DebugConsole" />
     </feature>
+    <feature name="Device">
+        <param name="wp-package" value="Device" />
+    </feature>
+    <feature name="Notification">
+        <param name="wp-package" value="Notification" />
+    </feature>
 </widget>
