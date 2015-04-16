@@ -98,6 +98,12 @@
         },
         "org.apache.cordova.console": {
             "PACKAGE_NAME": "Flynn"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "Flynn"
         }
     },
     "dependent_plugins": {}

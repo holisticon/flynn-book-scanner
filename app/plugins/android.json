@@ -43,6 +43,14 @@
                         {
                             "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"webView\" value=\"org.crosswalk.engine.XWalkWebViewEngine\" />",
+                            "count": 1
                         }
                     ]
                 }
@@ -614,6 +622,12 @@
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "org.apache.cordova.console": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-crosswalk-webview": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },

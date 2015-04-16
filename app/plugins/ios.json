@@ -196,6 +196,12 @@
         },
         "org.apache.cordova.console": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
     "dependent_plugins": {}

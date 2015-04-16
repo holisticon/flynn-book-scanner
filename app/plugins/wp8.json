@@ -71,6 +71,12 @@
         },
         "org.apache.cordova.console": {
             "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
+        },
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
         }
     },
     "dependent_plugins": {}
