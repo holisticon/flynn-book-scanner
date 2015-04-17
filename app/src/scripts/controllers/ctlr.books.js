@@ -19,7 +19,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
             load(true);
             $rootScope.$on('inventory.refresh', function(event, args) {
                 load(false);
-            });            
+            });
         }
 
         function initModal() {
@@ -72,7 +72,7 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
             $ionicLoading.show();
             $scope.searchQuery = {};
             inventoryService.read().then(function(response) {
-                if (response.books) {
+                if (response.books && response.books.length > 0) {
                     allBooks = enrichDbData(response.books);
                     $scope.books = enrichDbData(response.books);
                     // sync if server was added
@@ -80,6 +80,8 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
                         syncWithServer();
                     }
                     $ionicScrollDelegate.scrollTop();
+                } else {
+                    $scope.msg = 'No books found.';
                 }
                 $ionicLoading.hide();
             }, function(error) {
@@ -102,7 +104,9 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
             inventoryService.remove(pBookToRemove).then(function(response) {
                 $scope.books.splice($scope.books.indexOf(pBookToRemove), 1);
                 $rootScope.$broadcast('inventory.refresh');
-                $state.go('app.books', {}, { reload: true });
+                $state.go('app.books', {}, {
+                    reload: true
+                });
             }, function(error) {
                 $ionicLoading.hide();
                 $rootScope.$broadcast('server.error');

@@ -155,6 +155,12 @@ input[disabled], select[disabled], textarea[disabled], input[readonly]:not(.clon
   background-color: #ffffff;
 }
 
+// fix cut issue https://github.com/driftyco/ionic/issues/3541
+
+.item-select select {
+  padding: 14px 48px 8px 16px;
+}
+
 
 // fix for side-menu issue on android, see https://github.com/driftyco/ionic/issues/2122
 

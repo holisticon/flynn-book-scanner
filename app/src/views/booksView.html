@@ -23,7 +23,7 @@
 		<form name="form">
 			<ion-list>
 				<div ng-show="!books" class="item">
-					No books found.
+					{{msg}}
 				</div>
 				<ion-item class="item-avatar"
 				collection-repeat="book in books | orderBy: filter.selectedOrder"
@@ -59,6 +59,7 @@
 					</ion-header-bar>					
 					<ion-content class="modal-background">
 						<ng-include src="'templates/bookFilter.html'"></ng-include>
+						<br>
 					</ion-content>
 				</ion-modal-view>
 			</script>
