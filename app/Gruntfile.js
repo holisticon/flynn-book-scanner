@@ -242,7 +242,7 @@ module.exports = function(grunt) {
       command: 'cp "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/ResourceRules.plist" "$(pwd)/platforms/ios/build/device/Flynn.app" && xcrun -sdk iphoneos PackageApplication -v "$(pwd)/platforms/ios/build/device/Flynn.app" -o "$(pwd)/target/Flynn_<%= app.version %>.ipa" --sign "<%= app.build.ios.signer %>" --embed "<%= app.build.ios.provisionProfile %>"'
     },
     buildAPK: {
-      command: 'cp "$(pwd)/platforms/android/build/outputs/apk/android-armv7-release-unsigned.apk" "$(pwd)/target/Flynn_armv7_<%= app.version %>.apk && cp "$(pwd)/platforms/android/build/outputs/apk/android-x86-release-unsigned.apk" "$(pwd)/target/Flynn_x86_<%= app.version %>.apk"'
+      command: 'cp "$(pwd)/platforms/android/build/outputs/apk/android-armv7-release-unsigned.apk" "$(pwd)/target/Flynn_armv7_<%= app.version %>.apk" && cp "$(pwd)/platforms/android/build/outputs/apk/android-x86-release-unsigned.apk" "$(pwd)/target/Flynn_x86_<%= app.version %>.apk"'
     }
 	},
     concurrent: {
