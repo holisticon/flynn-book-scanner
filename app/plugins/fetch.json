@@ -32,5 +32,11 @@
             "subdir": ".",
             "ref": "1.0.0"
         }
+    },
+    "de.martinreinhardt.cordova.plugins.sqlite": {
+        "source": {
+            "type": "registry",
+            "id": "de.martinreinhardt.cordova.plugins.sqlite"
+        }
     }
 }

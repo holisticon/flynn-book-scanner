@@ -71,9 +71,6 @@
         "com.phonegap.plugins.barcodescanner": {
             "PACKAGE_NAME": "Flynn"
         },
-        "com.phonegap.plugins.sqlite": {
-            "PACKAGE_NAME": "Flynn"
-        },
         "org.apache.cordova.device": {
             "PACKAGE_NAME": "Flynn"
         },
@@ -103,6 +100,9 @@
             "PACKAGE_NAME": "Flynn"
         },
         "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "de.martinreinhardt.cordova.plugins.sqlite": {
             "PACKAGE_NAME": "Flynn"
         }
     },

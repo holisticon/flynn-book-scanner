@@ -169,9 +169,6 @@
         "com.phonegap.plugins.barcodescanner": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "com.phonegap.plugins.sqlite": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
         "org.apache.cordova.device": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
@@ -201,6 +198,9 @@
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "de.martinreinhardt.cordova.plugins.sqlite": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },

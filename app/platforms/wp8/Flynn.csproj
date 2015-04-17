@@ -232,4 +232,259 @@
     <ItemGroup>
         <Compile Include="Plugins\org.apache.cordova.console\DebugConsole.cs" />
     </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\SQLitePlugin.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\SQLite.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\_Custom.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\BtreeInt_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\Btree_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\Delegates.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\Hash_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\VdbeInt_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\Vdbe_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\alter_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\analyze_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\attach_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\auth_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\backup_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\bitvec_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\btmutex_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\btree_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\build_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\callback_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\complete_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\crypto.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\ctime_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\date_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\delete_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\expr_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\fault_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\fkey_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\func_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\global_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\hash_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\hwtime_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\insert_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\journal_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\keywordhash_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\legacy_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\loadext_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\main_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\malloc_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\mem_Pool.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\memjournal_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\mutex_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\mutex_noop_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\notify_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\opcodes_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\opcodes_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\os_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\os_common_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\os_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\os_win_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\pager_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\pager_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\parse_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\parse_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\pcache1_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\pcache_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\pcache_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\pragma_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\prepare_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\printf_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\random_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\resolve_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\rowset_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\select_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\sqlite3_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\sqliteInt_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\sqliteLimit_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\status_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\table_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\tokenize_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\trigger_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\update_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\utf_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\util_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\vacuum_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\vdbe_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\vdbeapi_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\vdbeaux_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\vdbeblob_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\vdbemem_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\vdbetrace_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\vtab_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\wal_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\wal_h.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\walker_c.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\where_c.cs" />
+    </ItemGroup>
 </Project>

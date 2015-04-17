@@ -1,0 +1,21 @@
+{
+    "version": "0.8.0",
+    "name": "de.martinreinhardt.cordova.plugins.sqlite",
+    "cordova_name": "Cordova Sqllite Plugine",
+    "description": "Native interface to SQLite for PhoneGap/Cordova. Allows you to use more storage and provides more flexibility than the standard Web SQL database (window.openDatabase).",
+    "license": "MIT",
+    "platforms": [
+        "android",
+        "ios",
+        "windows",
+        "wp8",
+        "wp7",
+        "amazon-fireos"
+    ],
+    "engines": [
+        {
+            "name": "cordova",
+            "version": ">=3.3.0"
+        }
+    ]
+}

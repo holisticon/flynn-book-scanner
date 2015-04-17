@@ -23,6 +23,10 @@
                         {
                             "xml": "<feature name=\"Console\"><param name=\"wp-package\" value=\"DebugConsole\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"wp-package\" value=\"SQLitePlugin\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -53,9 +57,6 @@
         "com.phonegap.plugins.barcodescanner": {
             "PACKAGE_NAME": "{570d7a10-b9f3-11e4-8ab3-2bb9828635be}"
         },
-        "com.phonegap.plugins.sqlite": {
-            "PACKAGE_NAME": "{570d7a10-b9f3-11e4-8ab3-2bb9828635be}"
-        },
         "de.martinreinhardt.cordova.plugins.urlhandler": {
             "URL_SCHEME": "flynnApp",
             "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
@@ -76,6 +77,9 @@
             "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
         },
         "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
+        },
+        "de.martinreinhardt.cordova.plugins.sqlite": {
             "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
         }
     },

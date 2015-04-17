@@ -12,6 +12,9 @@
     <feature name="Console">
         <param name="wp-package" value="DebugConsole" />
     </feature>
+    <feature name="SQLitePlugin">
+        <param name="wp-package" value="SQLitePlugin" />
+    </feature>
     <name>Flynn</name>
     <description>
         flynn book scanner app
