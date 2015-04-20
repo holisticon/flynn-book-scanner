@@ -80,6 +80,8 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
                         syncWithServer();
                     }
                     $ionicScrollDelegate.scrollTop();
+                    // Stop the ion-refresher from spinning
+                    $scope.$broadcast('scroll.refreshComplete');
                 } else {
                     $scope.msg = 'No books found.';
                 }
