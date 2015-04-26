@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-    <Identity Name="9b7ad320-a542-11e4-8378-fffd9593560a" Publisher="CN=$username$" Version="1.0.0.0" />
+    <Identity Name="de.holisticon.app.flynn" Publisher="CN=$username$" Version="1.6.2.0" />
     <Properties>
         <DisplayName>Flynn</DisplayName>
-        <PublisherDisplayName>$username$</PublisherDisplayName>
+        <PublisherDisplayName>Holisticon AG</PublisherDisplayName>
         <Logo>images\StoreLogo.png</Logo>
     </Properties>
     <Prerequisites>
@@ -14,7 +14,7 @@
         <Resource Language="x-generate" />
     </Resources>
     <Applications>
-        <Application Id="de.holisticon.flynn" StartPage="www/index.html">
+        <Application Id="de.holisticon.app.flynn" StartPage="www/index.html">
             <m2:VisualElements BackgroundColor="#464646" Description="CordovaApp" DisplayName="Flynn" ForegroundText="light" Square150x150Logo="images\Square150x150Logo.png" Square30x30Logo="images\Square30x30Logo.png">
                 <m2:DefaultTile Square310x310Logo="images\Square310x310Logo.png" Square70x70Logo="images\Square70x70Logo.png" Wide310x150Logo="images\Wide310x150Logo.png">
                     <m2:ShowNameOnTiles>
@@ -25,16 +25,9 @@
                 </m2:DefaultTile>
                 <m2:SplashScreen Image="images\SplashScreen.png" />
             </m2:VisualElements>
-            <Extensions>
-                <Extension Category="windows.protocol" StartPage="www/index.html">
-                    <Protocol Name="flynnApp" />
-                </Extension>
-            </Extensions>
         </Application>
     </Applications>
     <Capabilities>
         <Capability Name="internetClient" />
-        <Capability Name="picturesLibrary" />
-        <DeviceCapability Name="webcam" />
     </Capabilities>
 </Package>

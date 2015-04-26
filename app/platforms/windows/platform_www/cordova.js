@@ -1,5 +1,5 @@
 ﻿// Platform: windows
-// 91157c2e1bf3eb098c7e2ab31404e895ccb0df2a
+// b4af1c5ec477dd98cd651932ea6df6d46705d7f9
 /*
  Licensed to the Apache Software Foundation (ASF) under one
  or more contributor license agreements.  See the NOTICE file
@@ -19,7 +19,7 @@
  under the License.
 */
 ;(function() {
-var PLATFORM_VERSION_BUILD_LABEL = '3.7.0';
+var PLATFORM_VERSION_BUILD_LABEL = '3.8.1';
 // file: src/scripts/require.js
 
 /*jshint -W079 */
@@ -100,6 +100,8 @@ if (typeof module === "object" && typeof require === "function") {
 
 // file: src/cordova.js
 define("cordova", function(require, exports, module) {
+
+if ("cordova" in window) { throw new Error("cordova already defined"); };
 
 
 var channel = require('cordova/channel');
@@ -284,10 +286,16 @@ var cordova = {
             if (callback) {
                 if (isSuccess && status == cordova.callbackStatus.OK) {
                     callback.success && callback.success.apply(null, args);
-                } else {
+                } else if (!isSuccess) {
                     callback.fail && callback.fail.apply(null, args);
                 }
-
+                /*
+                else
+                    Note, this case is intentionally not caught.
+                    this can happen if isSuccess is true, but callbackStatus is NO_RESULT
+                    which is used to remove a callback from the list without calling the callbacks
+                    typically keepCallback is false in this case
+                */
                 // Clear callback if not expecting any more results
                 if (!keepCallback) {
                     delete cordova.callbacks[callbackId];
@@ -464,9 +472,14 @@ function each(objects, func, context) {
 
 function clobber(obj, key, value) {
     exports.replaceHookForTesting(obj, key);
-    obj[key] = value;
+    var needsProperty = false;
+    try {
+        obj[key] = value;
+    } catch (e) {
+        needsProperty = true;
+    }
     // Getters can only be overridden by getters.
-    if (obj[key] !== value) {
+    if (needsProperty || obj[key] !== value) {
         utils.defineGetter(obj, key, function() {
             return value;
         });
@@ -581,7 +594,6 @@ var utils = require('cordova/utils'),
  * onDeviceReady*              User event fired to indicate that Cordova is ready
  * onResume                    User event fired to indicate a start/resume lifecycle event
  * onPause                     User event fired to indicate a pause lifecycle event
- * onDestroy*                  Internal event fired when app is being destroyed (User should use window.onunload event, not this one).
  *
  * The events marked with an * are sticky. Once they have fired, they will stay in the fired state.
  * All listeners that subscribe after the event is fired will be executed right away.
@@ -793,9 +805,6 @@ channel.create('onResume');
 // Event to indicate a pause lifecycle event
 channel.create('onPause');
 
-// Event to indicate a destroy lifecycle event
-channel.createSticky('onDestroy');
-
 // Channels that must fire before "deviceready" is fired.
 channel.waitForInitialization('onCordovaReady');
 channel.waitForInitialization('onDOMContentLoaded');
@@ -848,18 +857,32 @@ module.exports = function (success, fail, service, action, args) {
             // CB-5806 [Windows8] Add keepCallback support to proxy
             onSuccess = function (result, callbackOptions) {
                 callbackOptions = callbackOptions || {};
+                var callbackStatus;
+                if (callbackOptions.status != null) {
+                    callbackStatus = callbackOptions.status;
+                }
+                else {
+                    callbackStatus = cordova.callbackStatus.OK;
+                }
                 cordova.callbackSuccess(callbackOptions.callbackId || callbackId,
                     {
-                        status: callbackOptions.status || cordova.callbackStatus.OK,
+                        status: callbackStatus,
                         message: result,
                         keepCallback: callbackOptions.keepCallback || false
                     });
             };
             onError = function (err, callbackOptions) {
                 callbackOptions = callbackOptions || {};
+                var callbackStatus;
+                if (callbackOptions.status != null) {
+                    callbackStatus = callbackOptions.status;
+                }
+                else {
+                    callbackStatus = cordova.callbackStatus.OK;
+                }
                 cordova.callbackError(callbackOptions.callbackId || callbackId,
                     {
-                        status: callbackOptions.status || cordova.callbackStatus.ERROR,
+                        status: callbackStatus,
                         message: err,
                         keepCallback: callbackOptions.keepCallback || false
                     });
@@ -875,6 +898,7 @@ module.exports = function (success, fail, service, action, args) {
         }
     }
 };
+
 });
 
 // file: src/common/exec/proxy.js
@@ -947,7 +971,7 @@ function replaceNavigator(origNavigator) {
         for (var key in origNavigator) {
             if (typeof origNavigator[key] == 'function') {
                 newNavigator[key] = origNavigator[key].bind(origNavigator);
-            } 
+            }
             else {
                 (function(k) {
                     utils.defineGetterSetter(newNavigator,key,function() {
@@ -1075,7 +1099,7 @@ function replaceNavigator(origNavigator) {
         for (var key in origNavigator) {
             if (typeof origNavigator[key] == 'function') {
                 newNavigator[key] = origNavigator[key].bind(origNavigator);
-            } 
+            }
             else {
                 (function(k) {
                     utils.defineGetterSetter(newNavigator,key,function() {
@@ -1130,7 +1154,7 @@ platform.bootstrap && platform.bootstrap();
  * Create all cordova objects once native side is ready.
  */
 channel.join(function() {
-    
+
     platform.initialize && platform.initialize();
 
     // Fire event to notify that all objects are created
@@ -1599,22 +1623,6 @@ function UUIDcreatePart(length) {
     return uuidpart;
 }
 
-
-});
-
-// file: src/windows/windows/commandProxy.js
-define("cordova/windows/commandProxy", function(require, exports, module) {
-
-console.log('WARNING: please require cordova/exec/proxy instead');
-module.exports = require('cordova/exec/proxy');
-
-});
-
-// file: src/windows/windows8/commandProxy.js
-define("cordova/windows8/commandProxy", function(require, exports, module) {
-
-console.log('WARNING: please require cordova/exec/proxy instead');
-module.exports = require('cordova/exec/proxy');
 
 });
 

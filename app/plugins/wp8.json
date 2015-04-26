@@ -9,19 +9,7 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"CustomUrl\"><param name=\"wp-package\" value=\"CustomUrl\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"EmailComposer\"><param name=\"wp-package\" value=\"EmailComposer\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Camera\"><param name=\"wp-package\" value=\"Camera\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Console\"><param name=\"wp-package\" value=\"DebugConsole\" /></feature>",
                             "count": 1
                         },
                         {
@@ -30,57 +18,27 @@
                         }
                     ]
                 }
-            },
-            "Properties/WMAppManifest.xml": {
-                "parents": {
-                    "/Deployment/App/Extensions": [
-                        {
-                            "xml": "<Protocol Name=\"shopincomo\" NavUriFragment=\"encodedLaunchUri=%s\" TaskID=\"_default\" />",
-                            "count": 1
-                        }
-                    ],
-                    "/Deployment/App/Capabilities": [
-                        {
-                            "xml": "<Capability Name=\"ID_CAP_ISV_CAMERA\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<Capability Name=\"ID_CAP_MEDIALIB_PHOTO\" />",
-                            "count": 1
-                        }
-                    ]
-                }
             }
         }
     },
     "installed_plugins": {
-        "com.phonegap.plugins.barcodescanner": {
-            "PACKAGE_NAME": "{570d7a10-b9f3-11e4-8ab3-2bb9828635be}"
-        },
-        "de.martinreinhardt.cordova.plugins.urlhandler": {
-            "URL_SCHEME": "flynnApp",
-            "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
-        },
-        "de.martinreinhardt.cordova.plugins.email": {
-            "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
-        },
         "com.ionic.keyboard": {
-            "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
+            "PACKAGE_NAME": "{99a1e940-e9f2-11e4-89d5-456edadb814a}"
         },
-        "org.apache.cordova.camera": {
-            "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
-        },
-        "org.apache.cordova.console": {
-            "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
+        "com.phonegap.plugins.barcodescanner": {
+            "PACKAGE_NAME": "{99a1e940-e9f2-11e4-89d5-456edadb814a}"
         },
         "cordova-plugin-crosswalk-webview": {
-            "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
+            "PACKAGE_NAME": "{99a1e940-e9f2-11e4-89d5-456edadb814a}"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "{99a1e940-e9f2-11e4-89d5-456edadb814a}"
+        },
+        "de.martinreinhardt.cordova.plugins.email": {
+            "PACKAGE_NAME": "{99a1e940-e9f2-11e4-89d5-456edadb814a}"
         },
         "de.martinreinhardt.cordova.plugins.sqlite": {
-            "PACKAGE_NAME": "{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}"
+            "PACKAGE_NAME": "{99a1e940-e9f2-11e4-89d5-456edadb814a}"
         }
     },
     "dependent_plugins": {}

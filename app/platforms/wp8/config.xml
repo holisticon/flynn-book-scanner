@@ -1,16 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="de.holisticon.app.flynn" version="1.6.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <feature name="CustomUrl">
-        <param name="wp-package" value="CustomUrl" />
-    </feature>
     <feature name="EmailComposer">
         <param name="wp-package" value="EmailComposer" />
-    </feature>
-    <feature name="Camera">
-        <param name="wp-package" value="Camera" />
-    </feature>
-    <feature name="Console">
-        <param name="wp-package" value="DebugConsole" />
     </feature>
     <feature name="SQLitePlugin">
         <param name="wp-package" value="SQLitePlugin" />

@@ -38,5 +38,24 @@
             "type": "registry",
             "id": "de.martinreinhardt.cordova.plugins.sqlite"
         }
+    },
+    "com.phonegap.plugins.barcodescanner": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/wildabeast/BarcodeScanner.git",
+            "subdir": "."
+        }
+    },
+    "de.martinreinhardt.cordova.plugins.email": {
+        "source": {
+            "type": "local",
+            "path": "/Users/mreinhardt/Documents/Programmierung/repositories/git/private/cordova-email-plugin"
+        }
+    },
+    "de.martinreinhardt.cordova.plugins.urlhandler": {
+        "source": {
+            "type": "local",
+            "path": "/Users/mreinhardt/Documents/Programmierung/repositories/git/private/cordova-urlhandler-plugin"
+        }
     }
 }

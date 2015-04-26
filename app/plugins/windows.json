@@ -4,102 +4,22 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {
-            "package.windows.appxmanifest": {
-                "parents": {
-                    "/Package/Capabilities": [
-                        {
-                            "xml": "<Capability Name=\"picturesLibrary\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<DeviceCapability Name=\"webcam\" />",
-                            "count": 1
-                        }
-                    ],
-                    "/Package/Applications/Application/Extensions": [
-                        {
-                            "xml": "<Extension Category=\"windows.protocol\" StartPage=\"www/index.html\"><Protocol Name=\"flynnApp\" /></Extension>",
-                            "count": 1
-                        }
-                    ]
-                }
-            },
-            "package.windows80.appxmanifest": {
-                "parents": {
-                    "/Package/Capabilities": [
-                        {
-                            "xml": "<Capability Name=\"picturesLibrary\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<DeviceCapability Name=\"webcam\" />",
-                            "count": 1
-                        }
-                    ],
-                    "/Package/Applications/Application/Extensions": [
-                        {
-                            "xml": "<Extension Category=\"windows.protocol\" StartPage=\"www/index.html\"><Protocol Name=\"flynnApp\" /></Extension>",
-                            "count": 1
-                        }
-                    ]
-                }
-            },
-            "package.phone.appxmanifest": {
-                "parents": {
-                    "/Package/Capabilities": [
-                        {
-                            "xml": "<Capability Name=\"picturesLibrary\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<DeviceCapability Name=\"webcam\" />",
-                            "count": 1
-                        }
-                    ],
-                    "/Package/Applications/Application/Extensions": [
-                        {
-                            "xml": "<Extension Category=\"windows.protocol\" StartPage=\"www/index.html\"><Protocol Name=\"flynnApp\" /></Extension>",
-                            "count": 1
-                        }
-                    ]
-                }
-            }
-        }
+        "files": {}
     },
     "installed_plugins": {
-        "com.phonegap.plugins.barcodescanner": {
-            "PACKAGE_NAME": "Flynn"
-        },
-        "org.apache.cordova.device": {
-            "PACKAGE_NAME": "Flynn"
-        },
-        "org.apache.cordova.inappbrowser": {
-            "PACKAGE_NAME": "Flynn"
-        },
-        "org.apache.cordova.dialogs": {
-            "PACKAGE_NAME": "Flynn"
-        },
-        "de.martinreinhardt.cordova.plugins.urlhandler": {
-            "URL_SCHEME": "flynnApp",
-            "PACKAGE_NAME": "Flynn"
-        },
-        "de.martinreinhardt.cordova.plugins.email": {
-            "PACKAGE_NAME": "Flynn"
-        },
         "com.ionic.keyboard": {
             "PACKAGE_NAME": "Flynn"
         },
-        "org.apache.cordova.camera": {
+        "com.phonegap.plugins.barcodescanner": {
             "PACKAGE_NAME": "Flynn"
         },
-        "org.apache.cordova.console": {
+        "cordova-plugin-crosswalk-webview": {
             "PACKAGE_NAME": "Flynn"
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "Flynn"
         },
-        "cordova-plugin-crosswalk-webview": {
+        "de.martinreinhardt.cordova.plugins.email": {
             "PACKAGE_NAME": "Flynn"
         },
         "de.martinreinhardt.cordova.plugins.sqlite": {

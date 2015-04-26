@@ -4,24 +4,22 @@
     <Languages xmlns="">
         <Language code="en-US" />
     </Languages>
-    <App Author="Flynn Author" BitsPerPixel="32" Description="Apache Cordova for Windows Phone" Genre="apps.normal" ProductID="{7d9ed430-b9f3-11e4-bbdb-3b4178c1d250}" Publisher="Flynn Publisher" PublisherID="{db093ed5-53b1-45f7-af72-751e8f36ab80}" RuntimeType="Silverlight" Title="Flynn" Version="1.6.2" xmlns="">
+    <App Author="Flynn author" BitsPerPixel="32" Description="Apache Cordova for Windows Phone" Genre="apps.normal" ProductID="{99a1e940-e9f2-11e4-89d5-456edadb814a}" Publisher="Flynn" PublisherID="{db093ed5-53b1-45f7-af72-751e8f36ab80}" RuntimeType="Silverlight" Title="Flynn" Version="1.6.2" xmlns="">
         <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
         <Capabilities>
             <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
             <Capability Name="ID_CAP_NETWORKING" />
-            <Capability Name="ID_CAP_ISV_CAMERA" />
-            <Capability Name="ID_CAP_MEDIALIB_PHOTO" />
         </Capabilities>
         <Tasks>
             <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
         </Tasks>
         <Tokens>
-            <PrimaryToken TaskName="_default" TokenID="Flynn">
+            <PrimaryToken TaskName="_default" TokenID="FlynnToken">
                 <TemplateFlip>
                     <SmallImageURI IsRelative="true" IsResource="false">Background.png</SmallImageURI>
                     <Count>0</Count>
                     <BackgroundImageURI IsRelative="true" IsResource="false">Background.png</BackgroundImageURI>
-                    <Title>HelloCordova</Title>
+                    <Title>Flynn</Title>
                     <BackContent />
                     <BackBackgroundImageURI />
                     <BackTitle />
@@ -38,8 +36,5 @@
             <ScreenResolution Name="ID_RESOLUTION_WXGA" />
             <ScreenResolution Name="ID_RESOLUTION_HD720P" />
         </ScreenResolutions>
-        <Extensions>
-            <Protocol Name="shopincomo" NavUriFragment="encodedLaunchUri=%s" TaskID="_default" />
-        </Extensions>
     </App>
 </Deployment>

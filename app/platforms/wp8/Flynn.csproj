@@ -21,7 +21,7 @@
         <SupportedCultures>en-US</SupportedCultures>
         <XapOutputs>true</XapOutputs>
         <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-        <XapFilename>de.holisticon.app.flynn.xap</XapFilename>
+        <XapFilename>CordovaAppProj_$(Configuration)_$(Platform).xap</XapFilename>
         <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
         <SilverlightAppEntry>de.holisticon.app.flynn.App</SilverlightAppEntry>
         <ValidateXaml>true</ValidateXaml>
@@ -218,19 +218,10 @@
         </PostBuildEvent>
     </PropertyGroup>
     <ItemGroup>
-        <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.urlhandler\CustomUriMapper.cs" />
-    </ItemGroup>
-    <ItemGroup>
         <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.email\EmailComposer.cs" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.email\Options.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Plugins\org.apache.cordova.camera\Camera.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Plugins\org.apache.cordova.console\DebugConsole.cs" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Plugins\de.martinreinhardt.cordova.plugins.sqlite\SQLitePlugin.cs" />

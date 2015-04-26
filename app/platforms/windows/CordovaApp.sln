@@ -1,55 +1,39 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-#
-# Licensed to the Apache Software Foundation (ASF) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The ASF licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-#  KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
-#
-VisualStudioVersion = 12.0.30324.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CordovaApp", "CordovaApp", "{3A47E08D-7EA5-4F3F-AA6D-1D4A41F26944}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CordovaApp", "CordovaApp.shproj", "{9EBDB27F-D75B-4D8C-B53F-7BE4A1FE89F9}"
 EndProject
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CordovaApp.Windows8.0", "CordovaApp.Windows80.jsproj", "{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CordovaApp.Windows80", "CordovaApp.Windows80.jsproj", "{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}"
 	ProjectSection(ProjectDependencies) = postProject
-		{d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}={d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}
+		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A} = {D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}
 	EndProjectSection
 EndProject
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CordovaApp.Windows", "CordovaApp.Windows.jsproj", "{58950FB6-2F93-4963-B9CD-637F83F3EFBF}"
 	ProjectSection(ProjectDependencies) = postProject
-		{d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}={d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}
+		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A} = {D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}
 	EndProjectSection
 EndProject
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CordovaApp.Phone", "CordovaApp.Phone.jsproj", "{31B67A35-9503-4213-857E-F44EB42AE549}"
 	ProjectSection(ProjectDependencies) = postProject
-		{6435c2e4-4fd2-405a-9ee2-5312ae852782}={6435c2e4-4fd2-405a-9ee2-5312ae852782}
+		{6435C2E4-4FD2-405A-9EE2-5312AE852782} = {6435C2E4-4FD2-405A-9EE2-5312AE852782}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "\Users\mreinhardt\Documents\Programmierung\repositories\git\flynn-book-scanner\app\plugins\de.martinreinhardt.cordova.plugins.sqlite\src\windows\SQLite3-WinRT\SQLite3\SQLite3.Windows.vcxproj", "{d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\plugins\de.martinreinhardt.cordova.plugins.sqlite\src\windows\SQLite3-WinRT\SQLite3\SQLite3.Windows.vcxproj", "{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "\Users\mreinhardt\Documents\Programmierung\repositories\git\flynn-book-scanner\app\plugins\de.martinreinhardt.cordova.plugins.sqlite\src\windows\SQLite3-WinRT\SQLite3\SQLite3.WindowsPhone.vcxproj", "{6435c2e4-4fd2-405a-9ee2-5312ae852782}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\plugins\de.martinreinhardt.cordova.plugins.sqlite\src\windows\SQLite3-WinRT\SQLite3\SQLite3.WindowsPhone.vcxproj", "{6435C2E4-4FD2-405A-9EE2-5312AE852782}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		CordovaApp.projitems*{58950fb6-2f93-4963-b9cd-637f83f3efbf}*SharedItemsImports = 5
 		CordovaApp.projitems*{efffab2f-bfc5-4eda-b545-45ef4995f55a}*SharedItemsImports = 5
 		CordovaApp.projitems*{9ebdb27f-d75b-4d8c-b53f-7be4a1fe89f9}*SharedItemsImports = 13
+		..\..\plugins\de.martinreinhardt.cordova.plugins.sqlite\src\windows\SQLite3-WinRT\SQLite3\SQLite3.Shared.vcxitems*{d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}*SharedItemsImports = 4
 		CordovaApp.projitems*{31b67a35-9503-4213-857e-f44eb42ae549}*SharedItemsImports = 5
+		..\..\plugins\de.martinreinhardt.cordova.plugins.sqlite\src\windows\SQLite3-WinRT\SQLite3\SQLite3.Shared.vcxitems*{6435c2e4-4fd2-405a-9ee2-5312ae852782}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,9 +46,33 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{58950FB6-2F93-4963-B9CD-637F83F3EFBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{58950FB6-2F93-4963-B9CD-637F83F3EFBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{58950FB6-2F93-4963-B9CD-637F83F3EFBF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|Any CPU.Build.0 = Debug|x86
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|Any CPU.Deploy.0 = Debug|x86
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|ARM.ActiveCfg = Debug|ARM
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|ARM.Build.0 = Debug|ARM
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|ARM.Deploy.0 = Debug|ARM
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|x64.ActiveCfg = Debug|x64
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|x64.Build.0 = Debug|x64
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|x64.Deploy.0 = Debug|x64
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|x86.ActiveCfg = Debug|x86
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|x86.Build.0 = Debug|x86
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|x86.Deploy.0 = Debug|x86
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|ARM.ActiveCfg = Release|ARM
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|ARM.Build.0 = Release|ARM
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|ARM.Deploy.0 = Release|ARM
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|x64.ActiveCfg = Release|x64
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|x64.Build.0 = Release|x64
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|x64.Deploy.0 = Release|x64
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|x86.ActiveCfg = Release|x86
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|x86.Build.0 = Release|x86
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|x86.Deploy.0 = Release|x86
+		{58950FB6-2F93-4963-B9CD-637F83F3EFBF}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{58950FB6-2F93-4963-B9CD-637F83F3EFBF}.Debug|Any CPU.Build.0 = Debug|x86
+		{58950FB6-2F93-4963-B9CD-637F83F3EFBF}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{58950FB6-2F93-4963-B9CD-637F83F3EFBF}.Debug|ARM.ActiveCfg = Debug|ARM
 		{58950FB6-2F93-4963-B9CD-637F83F3EFBF}.Debug|ARM.Build.0 = Debug|ARM
 		{58950FB6-2F93-4963-B9CD-637F83F3EFBF}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -110,38 +118,40 @@ Global
 		{31B67A35-9503-4213-857E-F44EB42AE549}.Release|x86.ActiveCfg = Release|x86
 		{31B67A35-9503-4213-857E-F44EB42AE549}.Release|x86.Build.0 = Release|x86
 		{31B67A35-9503-4213-857E-F44EB42AE549}.Release|x86.Deploy.0 = Release|x86
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|ARM.ActiveCfg = Debug|ARM
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|ARM.Build.0 = Debug|ARM
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|ARM.Deploy.0 = Debug|ARM
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|x64.ActiveCfg = Debug|x64
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|x64.Build.0 = Debug|x64
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|x64.Deploy.0 = Debug|x64
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|x86.ActiveCfg = Debug|x86
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|x86.Build.0 = Debug|x86
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Debug|x86.Deploy.0 = Debug|x86
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|ARM.ActiveCfg = Release|ARM
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|ARM.Build.0 = Release|ARM
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|ARM.Deploy.0 = Release|ARM
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|x64.ActiveCfg = Release|x64
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|x64.Build.0 = Release|x64
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|x64.Deploy.0 = Release|x64
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|x86.ActiveCfg = Release|x86
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|x86.Build.0 = Release|x86
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}.Release|x86.Deploy.0 = Release|x86
+		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}.Debug|ARM.ActiveCfg = Debug|ARM
+		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}.Debug|ARM.Build.0 = Debug|ARM
+		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}.Debug|x64.ActiveCfg = Debug|x64
+		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}.Debug|x64.Build.0 = Debug|x64
+		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}.Debug|x86.ActiveCfg = Debug|Win32
+		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}.Debug|x86.Build.0 = Debug|Win32
+		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}.Release|Any CPU.ActiveCfg = Release|Win32
+		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}.Release|ARM.ActiveCfg = Release|ARM
+		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}.Release|ARM.Build.0 = Release|ARM
+		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}.Release|x64.ActiveCfg = Release|x64
+		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}.Release|x64.Build.0 = Release|x64
+		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}.Release|x86.ActiveCfg = Release|Win32
+		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}.Release|x86.Build.0 = Release|Win32
+		{6435C2E4-4FD2-405A-9EE2-5312AE852782}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{6435C2E4-4FD2-405A-9EE2-5312AE852782}.Debug|ARM.ActiveCfg = Debug|ARM
+		{6435C2E4-4FD2-405A-9EE2-5312AE852782}.Debug|ARM.Build.0 = Debug|ARM
+		{6435C2E4-4FD2-405A-9EE2-5312AE852782}.Debug|x64.ActiveCfg = Debug|Win32
+		{6435C2E4-4FD2-405A-9EE2-5312AE852782}.Debug|x86.ActiveCfg = Debug|Win32
+		{6435C2E4-4FD2-405A-9EE2-5312AE852782}.Debug|x86.Build.0 = Debug|Win32
+		{6435C2E4-4FD2-405A-9EE2-5312AE852782}.Release|Any CPU.ActiveCfg = Release|Win32
+		{6435C2E4-4FD2-405A-9EE2-5312AE852782}.Release|ARM.ActiveCfg = Release|ARM
+		{6435C2E4-4FD2-405A-9EE2-5312AE852782}.Release|ARM.Build.0 = Release|ARM
+		{6435C2E4-4FD2-405A-9EE2-5312AE852782}.Release|x64.ActiveCfg = Release|Win32
+		{6435C2E4-4FD2-405A-9EE2-5312AE852782}.Release|x86.ActiveCfg = Release|Win32
+		{6435C2E4-4FD2-405A-9EE2-5312AE852782}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9EBDB27F-D75B-4D8C-B53F-7BE4A1FE89F9} = {3A47E08D-7EA5-4F3F-AA6D-1D4A41F26944}
+		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A} = {3A47E08D-7EA5-4F3F-AA6D-1D4A41F26944}
 		{58950FB6-2F93-4963-B9CD-637F83F3EFBF} = {3A47E08D-7EA5-4F3F-AA6D-1D4A41F26944}
 		{31B67A35-9503-4213-857E-F44EB42AE549} = {3A47E08D-7EA5-4F3F-AA6D-1D4A41F26944}
-		{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A} = {3A47E08D-7EA5-4F3F-AA6D-1D4A41F26944}
 	EndGlobalSection
 EndGlobal

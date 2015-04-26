@@ -17,6 +17,8 @@
        under the License.
 */
 
+/* jshint sub:true */
+
 var Q     = require('Q'),
     fs    = require('fs'),
     path  = require('path'),
@@ -53,9 +55,8 @@ module.exports.getMSBuildTools = function () {
 module.exports.getAppStoreUtils = function () {
     var appStoreUtils = path.join(__dirname, 'WindowsStoreAppUtils.ps1');
     if (!fs.existsSync (appStoreUtils)) {
-        return Q.reject("Can't unblock AppStoreUtils script");
+        return Q.reject('Can\'t unblock AppStoreUtils script');
     }
-    //console.log("Removing execution restrictions from AppStoreUtils...");
     return spawn('powershell', ['Unblock-File', module.exports.quote(appStoreUtils)]).then(function () {
         return Q.resolve(appStoreUtils);
     }).fail(function (err) {
@@ -65,12 +66,12 @@ module.exports.getAppStoreUtils = function () {
 
 // returns path to AppDeploy util from Windows Phone 8.1 SDK
 module.exports.getAppDeployUtils = function () {
-    var appDeployUtils = path.join((process.env["ProgramFiles(x86)"] || process.env["ProgramFiles"]),
+    var appDeployUtils = path.join((process.env['ProgramFiles(x86)'] || process.env['ProgramFiles']),
         'Microsoft SDKs', 'Windows Phone', 'v8.1', 'Tools', 'AppDeploy', 'AppDeployCmd.exe');
-    // Check if AppDeployCmd is exists
+    // Check if AppDeployCmd exists
     if (!fs.existsSync(appDeployUtils)) {
-        console.warn("WARNING: AppDeploy tool (AppDeployCmd.exe) didn't found. Assume that it's in %PATH%");
-        return Q.resolve("AppDeployCmd");
+        console.warn('WARNING: AppDeploy tool (AppDeployCmd.exe) wasn\'t found. Make sure that it\'s in %PATH%');
+        return Q.resolve('AppDeployCmd');
     }
     return Q.resolve(appDeployUtils);
 };
