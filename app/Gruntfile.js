@@ -5,13 +5,13 @@ module.exports = function(grunt) {
   require('time-grunt')(grunt);
 
   grunt.initConfig({
-  	app:{
-  		version: require('./package.json').version || '1.4',  		
-  		build: require('./package.json').build || {},
-      	src: require('./bower.json').appPath || 'src',
-     	gen: require('./bower.json').appPath || 'src-gen',
-     	dist: 'www'
-  	},
+    app: {
+      version: require('./package.json').version || '1.4',
+      build: require('./package.json').build || {},
+      src: require('./bower.json').appPath || 'src',
+      gen: require('./bower.json').appPath || 'src-gen',
+      dist: 'www'
+    },
     watch: {
       compass: {
         files: ['<%= app.src %>/styles/{,*/}*.{scss,sass}'],
@@ -135,10 +135,26 @@ module.exports = function(grunt) {
         }
       }
     },
+    'string-replace': {
+      inline: {
+        files: {
+          'www/': 'styles/**',
+        },
+        options: {
+          replacements: [
+            // place files inline example
+            {
+              pattern: /\?.*?(["|'|\)])/gi,
+              replacement: '$1'
+            }
+          ]
+        }
+      }
+    },
     useminPrepare: {
       html: '<%= app.src %>/index.html',
       options: {
-    	assetsDirs: ['<%= app.src %>/styles/{,*/}*.css', '<%= app.src %>/scripts/{,*/}*.js'],
+        assetsDirs: ['<%= app.src %>/styles/{,*/}*.css', '<%= app.src %>/scripts/{,*/}*.js'],
         dest: '<%= app.dist %>'
       }
     },
@@ -221,30 +237,30 @@ module.exports = function(grunt) {
       }
     },
     shell: {
-	  options: {
-	    failOnError: true,
-	    stdout: true,
-	    stderr: true,
-            execOptions: {
-                maxBuffer: Infinity
-            }
-	  },
-	  buildIOS: {
-	    command: 'cordova build ios --release --device'
-	  },
-    buildAndroid: {
-      command: 'cp "<%= app.build.android.ant_property_file %>" "$(pwd)/platforms/android/release-signing.properties" && cordova build android --release'
+      options: {
+        failOnError: true,
+        stdout: true,
+        stderr: true,
+        execOptions: {
+          maxBuffer: Infinity
+        }
+      },
+      buildIOS: {
+        command: 'cordova build ios --release --device'
+      },
+      buildAndroid: {
+        command: 'cp "<%= app.build.android.ant_property_file %>" "$(pwd)/platforms/android/release-signing.properties" && cordova build android --release'
+      },
+      prepare: {
+        command: 'cordova prepare'
+      },
+      buildIPA: {
+        command: 'cp "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/ResourceRules.plist" "$(pwd)/platforms/ios/build/device/Flynn.app" && xcrun -sdk iphoneos PackageApplication -v "$(pwd)/platforms/ios/build/device/Flynn.app" -o "$(pwd)/target/Flynn_<%= app.version %>.ipa" --sign "<%= app.build.ios.signer %>" --embed "<%= app.build.ios.provisionProfile %>"'
+      },
+      buildAPK: {
+        command: 'cp "$(pwd)/platforms/android/build/outputs/apk/android-armv7-release.apk" "$(pwd)/target/Flynn_armv7_<%= app.version %>.apk" && cp "$(pwd)/platforms/android/build/outputs/apk/android-x86-release.apk" "$(pwd)/target/Flynn_x86_<%= app.version %>.apk"'
+      }
     },
-	  prepare: {
-	    command: 'cordova prepare'
-	  },
-    buildIPA: {
-      command: 'cp "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/ResourceRules.plist" "$(pwd)/platforms/ios/build/device/Flynn.app" && xcrun -sdk iphoneos PackageApplication -v "$(pwd)/platforms/ios/build/device/Flynn.app" -o "$(pwd)/target/Flynn_<%= app.version %>.ipa" --sign "<%= app.build.ios.signer %>" --embed "<%= app.build.ios.provisionProfile %>"'
-    },
-    buildAPK: {
-      command: 'cp "$(pwd)/platforms/android/build/outputs/apk/android-armv7-release.apk" "$(pwd)/target/Flynn_armv7_<%= app.version %>.apk" && cp "$(pwd)/platforms/android/build/outputs/apk/android-x86-release.apk" "$(pwd)/target/Flynn_x86_<%= app.version %>.apk"'
-    }
-	},
     concurrent: {
       server: [
         'compass:server',
@@ -272,17 +288,17 @@ module.exports = function(grunt) {
       }
     },
     ngAnnotate: {
-        options: {
-            singleQuotes: true,
-        },
-        app: {
-            files: [{
-                expand: true,
-                cwd: '<%= app.dist %>/scripts',
-                src: ['*.js','!webworker*.js'],
-                dest: '<%= app.dist %>/scripts'
-              }]
-        }
+      options: {
+        singleQuotes: true,
+      },
+      app: {
+        files: [{
+          expand: true,
+          cwd: '<%= app.dist %>/scripts',
+          src: ['*.js', '!webworker*.js'],
+          dest: '<%= app.dist %>/scripts'
+        }]
+      }
     },
     plato: {
       report: {
@@ -293,9 +309,9 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('buildIPA', ['shell:buildIOS','shell:buildIPA']);
-  grunt.registerTask('buildAPK', ['shell:buildAndroid','shell:buildAPK']);
-  grunt.registerTask('buildCordova', ['shell:buildAndroid'],'shell:buildIOS');
+  grunt.registerTask('buildIPA', ['shell:buildIOS', 'shell:buildIPA']);
+  grunt.registerTask('buildAPK', ['shell:buildAndroid', 'shell:buildAPK']);
+  grunt.registerTask('buildCordova', ['shell:buildAndroid'], 'shell:buildIOS');
 
   grunt.registerTask('server', function(target) {
     if (target === 'dist') {
@@ -329,7 +345,8 @@ module.exports = function(grunt) {
     'copy:dist',
     'usemin',
     'ngdocs',
-    'plato'
+    'plato',
+    'string-replace'
   ]);
 
   grunt.registerTask('release', [
@@ -340,7 +357,8 @@ module.exports = function(grunt) {
     'autoprefixer',
     'concat',
     'copy:dist',
-    'usemin'
+    'usemin',
+    'string-replace'
   ]);
 
   grunt.registerTask('default', [

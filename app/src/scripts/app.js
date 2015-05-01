@@ -92,8 +92,10 @@ function configureLogging(loggerProvider, config) {
         if (config.debug) {
             // enable couchDB debug
             PouchDB.debug.enable('*');
+            PouchDB.debug.enable('pouchdb:find');
         } else {
             PouchDB.debug.disable();
+            PouchDB.debug.disable('pouchdb:find');
         }
         loggerProvider.traceLogging(config.trace);
     } 
