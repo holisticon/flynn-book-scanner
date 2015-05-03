@@ -1,10 +1,11 @@
 {
+    "mediaPath": "media",
     "icon": {
-        "filename": "../media/icon.png",
+        "filename": "etc/icon.png",
         "background": "fff"
     },
     "splash": {
-        "filename": "../media/splash.png",
+        "filename": "etc/splash.png",
         "background": "fff"
     }
 }

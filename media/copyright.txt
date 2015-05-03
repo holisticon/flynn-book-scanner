@@ -1,3 +1,0 @@
-Thankicon: fontawesome
-splash: http://commons.wikimedia.org/wiki/File:Bookshelf_icon_(red_and_blue).svg
-
