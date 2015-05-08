@@ -13,17 +13,8 @@ app.controller('BookDetailsController', ['$rootScope', '$scope', '$stateParams',
 
         function load() {
             if (bookID) {
-                inventoryService.read().then(function(response) {
-                    var allBooks = enrichDbData(response.books);
-                    var selectedBook;
-
-                    for (var index in allBooks) {
-                        var book = allBooks[index];
-                        if (book.value.id == bookID) {
-                            $scope.selectedBook = book;
-                            break;
-                        }
-                    }
+                inventoryService.getBook(bookID).then(function(response) {
+                    $scope.selectedBook = enrichSingleDbEntry(response.book);
                 }, function(errorResponse) {
                     $log.error('Error during load book via hashCode');
                 });

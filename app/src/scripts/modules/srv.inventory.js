@@ -8,11 +8,11 @@
  * Provides access to the book inventory. Used PouchDB as backend.
  */
 app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService', 'base64', '$log', 'APP_CONFIG',
-    function($rootScope, $http, $q, settingsService, base64, logService,APP_CONFIG) {
+    function($rootScope, $http, $q, settingsService, base64, logService, APP_CONFIG) {
         'use strict';
         var config = settingsService.load(),
             activeProfile = config.activeProfile();
-        
+
         function getDB() {
             var NAME_OF_POUCHDB;
             config = settingsService.load();
@@ -22,14 +22,36 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
             if (!db) {
                 if (typeof cordova != 'undefined' && cordova.platformId === 'android') {
                     // for performance use indexedDB on Android
-                    db = new PouchDB(NAME_OF_POUCHDB, { adapter: 'idb', size: 50 });
+                    db = new PouchDB(NAME_OF_POUCHDB, {
+                        adapter: 'idb',
+                        size: 50
+                    });
                 } else {
                     // default use websql
-                    db = new PouchDB(NAME_OF_POUCHDB, { adapter: 'websql', size: 50 });
+                    db = new PouchDB(NAME_OF_POUCHDB, {
+                        adapter: 'websql',
+                        size: 50
+                    });
                 }
             }
             return db;
         }
+
+        function updateIndex(pDB) {
+            if (pDB) {
+                // update index
+                pDB.createIndex({
+                    index: {
+                        fields: ['value.id']
+                    }
+                }).then(function(result) {
+                    logService.info('Creating index was successfull: ' + JSON.stringify(result));
+                }).catch(function(err) {
+                    logService.err('Creating index was not successfull: ' + JSON.stringify(err));
+                });
+            }
+        }
+
         return {
             syncRemote: function(reportNetworkError) {
                 var deferred = $q.defer();
@@ -75,14 +97,14 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                 }).on('error', function(err) {
                                     $rootScope.$apply(function() {
                                         logService.error('Error during remote sync with following answer: ' + err.toString());
-                                	if(err.stats === 400){
+                                        if (err.stats === 400) {
                                             logService.info('Seems be a remote server error.');
-                                	}
+                                        }
                                         deferred.reject(err);
                                     });
                                 }).catch(function(err) {
                                     $rootScope.$apply(function() {
-                                        logService.error('Unkown error during remote sync.'+ err.toString());
+                                        logService.error('Unkown error during remote sync.' + err.toString());
                                         deferred.resolve(err);
                                     });
                                 });
@@ -103,6 +125,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                 deferred.resolve(err);
                             }
                         });
+                        updateIndex(localDB);
                     } else {
                         var response = {};
                         response.status = 401;
@@ -110,6 +133,32 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     }
                     return deferred.promise;
                 }
+            },
+            getBook: function(pBookID) {
+                var deferred = $q.defer(),
+                    flynnDB = getDB();
+                logService.debug('Starting search for book: ' + pBookID);
+                if (flynnDB) {
+                    flynnDB.find({
+                        selector: {
+                            'value.id': {
+                                $eq: pBookID
+                            }
+                        }
+                    }).then(function(result) {
+                        logService.info('Search successfull.');
+                        deferred.resolve({
+                            book: result.docs[0]
+                        });
+                    }).catch(function(err) {
+                        logService.error('Error searching for book ' + pBookID + ' :' + err);
+                        deferred.reject(err);
+                    });
+                } else {
+                    logService.error('Error during db connection');
+                    deferred.reject(response);
+                }
+                return deferred.promise;
             },
             read: function() {
                 var deferred = $q.defer(),
@@ -474,11 +523,11 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                             docs.push(book);
                         }
                         flynnDB.bulkDocs(docs, function(err, result) {
-
                             $rootScope.$apply(function() {
                                 if (!err) {
                                     response.books = docs;
                                     logService.info('Saving successfull.');
+                                    updateIndex(flynnDB);
                                     deferred.resolve(response);
                                 } else {
                                     logService.error('Error saving new entries: ' + err);
