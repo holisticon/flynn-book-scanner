@@ -10,7 +10,7 @@ beforeEach(function() {
     $provide.constant('APP_CONFIG', {
       timeout: 1000,
       dev: false,
-      debug: true,
+      debug: false,
     });
   });
 });

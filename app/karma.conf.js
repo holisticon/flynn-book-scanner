@@ -32,6 +32,7 @@ module.exports = function(config) {
       'bower_components/pouchdb/dist/pouchdb.idb-alt.js',
       'bower_components/pouchdb/dist/pouchdb.localstorage.js',
       'bower_components/pouchdb/dist/pouchdb.memory.js',
+      'bower_components/pouchdb-find/dist/pouchdb.find.js',
       'src/scripts/app.js',
       'src/scripts/plugins/*.js',
       'src/scripts/plugins/*.js',
@@ -78,7 +79,7 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['PhantomJS'],
+    browsers: ['PhantomJS2'],
 
     reporters: ['progress', 'junit'],
 

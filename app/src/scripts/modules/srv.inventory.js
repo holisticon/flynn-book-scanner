@@ -8,7 +8,7 @@
  * Provides access to the book inventory. Used PouchDB as backend.
  */
 app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService', 'base64', '$log', 'APP_CONFIG',
-    function($rootScope, $http, $q, settingsService, base64, logService, APP_CONFIG) {
+    function($rootScope, $http, $q, settingsService, base64, $log, APP_CONFIG) {
         'use strict';
         var config = settingsService.load(),
             activeProfile = config.activeProfile();
@@ -37,7 +37,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
             return db;
         }
 
-        function updateIndex(pDB) {
+        function updateIndex(pDB, pCallback, pCallbackError) {
             if (pDB) {
                 // update index
                 pDB.createIndex({
@@ -45,9 +45,15 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                         fields: ['value.id']
                     }
                 }).then(function(result) {
-                    logService.info('Creating index was successfull: ' + JSON.stringify(result));
+                    $log.info('Creating index was successfull: ' + JSON.stringify(result));
+                    if (pCallback) {
+                        pCallback();
+                    }
                 }).catch(function(err) {
-                    logService.err('Creating index was not successfull: ' + JSON.stringify(err));
+                    $log.err('Creating index was not successfull: ' + JSON.stringify(err));
+                    if (pCallbackError) {
+                        pCallbackError();
+                    }
                 });
             }
         }
@@ -69,7 +75,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                             opts = {
                                 live: true
                             };
-                        logService.info('Syncing with couchDB started: ' + couchDbUrl);
+                        $log.info('Syncing with couchDB started: ' + couchDbUrl);
                         // check for network availability first
                         $http({
                             method: 'GET',
@@ -79,38 +85,38 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                             var syncPromise = localDB.sync(remoteCouch)
                                 .on('change', function(info) {
                                     $rootScope.$apply(function() {
-                                        logService.info('Updating documents with remote changes...');
-                                        logService.debug('Updating documents with remote changes with following answer: ' + info.toString());
+                                        $log.info('Updating documents with remote changes...');
+                                        $log.debug('Updating documents with remote changes with following answer: ' + info.toString());
+                                        updateIndex(localDB);
                                     });
                                 }).on('complete', function(info) {
                                     $rootScope.$apply(function() {
-                                        logService.info('Completed sync.');
-                                        logService.debug('Completed sync with following answer: ' + info.toString());
-                                        deferred.resolve(info);
+                                        $log.info('Completed sync.');
+                                        $log.debug('Completed sync with following answer: ' + info.toString());
                                     });
                                 }).on('uptodate', function(info) {
                                     $rootScope.$apply(function() {
-                                        logService.info('Already up-to-date.');
-                                        logService.debug('Already up-to-date with following answer: ' + info.toString());
+                                        $log.info('Already up-to-date.');
+                                        $log.debug('Already up-to-date with following answer: ' + info.toString());
                                         deferred.resolve(info);
                                     });
                                 }).on('error', function(err) {
                                     $rootScope.$apply(function() {
-                                        logService.error('Error during remote sync with following answer: ' + err.toString());
+                                        $log.error('Error during remote sync with following answer: ' + err.toString());
                                         if (err.stats === 400) {
-                                            logService.info('Seems be a remote server error.');
+                                            $log.info('Seems be a remote server error.');
                                         }
                                         deferred.reject(err);
                                     });
                                 }).catch(function(err) {
                                     $rootScope.$apply(function() {
-                                        logService.error('Unkown error during remote sync.' + err.toString());
+                                        $log.error('Unkown error during remote sync.' + err.toString());
                                         deferred.resolve(err);
                                     });
                                 });
                         }, function(err) {
                             if (err.status === 0) {
-                                logService.info('Seems to run in offline mode.');
+                                $log.info('Seems to run in offline mode.');
                                 if (reportNetworkError) {
                                     deferred.reject(err);
                                 } else {
@@ -118,14 +124,13 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                 }
                             } else {
                                 if (err.status === 401) {
-                                    logService.info('Seems to use invalid login data.');
+                                    $log.info('Seems to use invalid login data.');
                                     deferred.reject(err);
                                 }
-                                logService.error('Unkown error during connection check: ' + JSON.stringify(err));
+                                $log.error('Unkown error during connection check: ' + JSON.stringify(err));
                                 deferred.resolve(err);
                             }
                         });
-                        updateIndex(localDB);
                     } else {
                         var response = {};
                         response.status = 401;
@@ -137,7 +142,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
             getBook: function(pBookID) {
                 var deferred = $q.defer(),
                     flynnDB = getDB();
-                logService.debug('Starting search for book: ' + pBookID);
+                $log.debug('Starting search for book: ' + pBookID);
                 if (flynnDB) {
                     flynnDB.find({
                         selector: {
@@ -146,16 +151,16 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                             }
                         }
                     }).then(function(result) {
-                        logService.info('Search successfull.');
+                        $log.info('Search successfull.');
                         deferred.resolve({
                             book: result.docs[0]
                         });
                     }).catch(function(err) {
-                        logService.error('Error searching for book ' + pBookID + ' :' + err);
+                        $log.error('Error searching for book ' + pBookID + ' :' + err);
                         deferred.reject(err);
                     });
                 } else {
-                    logService.error('Error during db connection');
+                    $log.error('Error during db connection');
                     deferred.reject(response);
                 }
                 return deferred.promise;
@@ -166,7 +171,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     self = this,
                     flynnDB = getDB();
                 if (flynnDB) {
-                    logService.debug('Using db-adapter: ' + flynnDB.adapter);
+                    $log.debug('Using db-adapter: ' + flynnDB.adapter);
                     flynnDB.allDocs({
                         include_docs: true,
                         attachments: true
@@ -191,18 +196,18 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                                 }
                                             }
                                             bookEntry._attachments = null;
-                                            logService.debug('Read following valid book entry: ' + bookEntry.value.volumeInfo.title);
+                                            $log.debug('Read following valid book entry: ' + bookEntry.value.volumeInfo.title);
                                             books.push(bookEntry);
                                         }
                                     }
                                 }
                                 if (books) {
                                     response.books = books;
-                                    logService.debug('Found ' + books.length + ' books in inventory.');
+                                    $log.debug('Found ' + books.length + ' books in inventory.');
                                 }
                                 deferred.resolve(response);
                             } else  {
-                                logService.error('Reading from local db not working: ' + JSON.stringify(err));
+                                $log.error('Reading from local db not working: ' + JSON.stringify(err));
                                 deferred.reject(response);
                             }
                         });
@@ -235,10 +240,10 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                             }
                         }
                     }
-                    logService.info('Got ' + response.count + ' results.');
+                    $log.info('Got ' + response.count + ' results.');
                     return response;
                 } else {
-                    logService.info('Got no results.');
+                    $log.info('Got no results.');
                     return false;
                 }
             },
@@ -254,10 +259,10 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                             response.count++;
                         }
                     }
-                    logService.info('Got ' + response.count + ' results.');
+                    $log.info('Got ' + response.count + ' results.');
                     return response;
                 } else {
-                    logService.info('Got no results.');
+                    $log.info('Got no results.');
                     return false;
                 }
             },
@@ -266,10 +271,10 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     response = {},
                     self = this,
                     flynnDB = getDB();
-                logService.debug('Starting search: ' + JSON.stringify(pSearchQuery));
+                $log.debug('Starting search: ' + JSON.stringify(pSearchQuery));
                 if (pSearchQuery.isbn) {
                     var isbn = '' + pSearchQuery.isbn;
-                    logService.debug('Starting isbn-search: ' + isbn);
+                    $log.debug('Starting isbn-search: ' + isbn);
                     flynnDB.allDocs({
                         include_docs: true,
                         descending: true
@@ -283,7 +288,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                     deferred.resolve(result);
                                 }
                             } else {
-                                logService.error('Search error: ' + err);
+                                $log.error('Search error: ' + err);
                                 deferred.reject(response);
                             }
                         });
@@ -291,7 +296,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                 } else {
                     if (pSearchQuery.id) {
                         var bookId = '' + pSearchQuery.id;
-                        logService.debug('Starting id-search: ' + bookId);
+                        $log.debug('Starting id-search: ' + bookId);
                         flynnDB.allDocs({
                             include_docs: true,
                             descending: true
@@ -305,14 +310,14 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                         deferred.resolve(result);
                                     }
                                 } else {
-                                    logService.error("Search error: " + err);
+                                    $log.error("Search error: " + err);
                                     deferred.reject(response);
                                 }
                             });
                         });
 
                     } else {
-                        logService.error('Got unknown search query');
+                        $log.error('Got unknown search query');
                         deferred.reject(response);
                     }
                 }
@@ -325,7 +330,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     response = {},
                     credentials = settingsService.load(),
                     flynnDB = getDB();
-                logService.debug('Starting delete of book: ' + pBookToRemove.value.volumeInfo.title);
+                $log.debug('Starting delete of book: ' + pBookToRemove.value.volumeInfo.title);
                 if (flynnDB) {
                     var searchQuery = {};
                     searchQuery.id = pBookToRemove.value.id;
@@ -342,21 +347,21 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                 booksToBeRemoved.push(bookToRemove);
                             }
                         } else {
-                            logService.error('Error deleting entry. Book not found');
+                            $log.error('Error deleting entry. Book not found');
                             deferred.reject(response);
                         }
                         flynnDB.bulkDocs(booksToBeRemoved, function(err, result) {
                             $rootScope.$apply(function() {
                                 if (!err) {
-                                    logService.info("Delete of entry was successfull.");
-                                    deferred.resolve(response);
+                                    $log.info("Delete of entry was successfull.");
+                                    updateIndex(flynnDB, deferred.resolve(response), deferred.reject(response));
                                 } else {
-                                    logService.error("Error deleting entry: " + err);
+                                    $log.error("Error deleting entry: " + err);
                                     deferred.reject(err);
                                 }
                             });
                         }, function(response) {
-                            logService.error('Error deleting entry.');
+                            $log.error('Error deleting entry.');
                             deferred.reject(response);
                         });
                     });
@@ -367,7 +372,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
             saveUpdated: function(pBookToSave, pExistingEntries) {
                 var deferred = $q.defer(),
                     flynnDB = getDB();
-                logService.debug('Starting update for book: ' + pBookToSave.value.volumeInfo.title);
+                $log.debug('Starting update for book: ' + pBookToSave.value.volumeInfo.title);
                 if (flynnDB) {
                     var docs = [];
                     for (var index in pExistingEntries) {
@@ -387,16 +392,16 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     flynnDB.bulkDocs(docs, function(err, result) {
                         $rootScope.$apply(function() {
                             if (!err) {
-                                logService.info('Update successfull.');
+                                $log.info('Update successfull.');
                                 deferred.resolve(result);
                             } else {
-                                logService.error('Error updating book:' + err);
+                                $log.error('Error updating book:' + err);
                                 deferred.reject(err);
                             }
                         });
                     });
                 } else {
-                    logService.error('Error during db connection');
+                    $log.error('Error during db connection');
                     deferred.reject(response);
                 }
                 return deferred.promise;
@@ -413,7 +418,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                 if (!pBookToSave.count) {
                     pBookToSave.count = 1;
                 }
-                logService.debug('Starting save for book: ' + pBookToSave.value.volumeInfo.title);
+                $log.debug('Starting save for book: ' + pBookToSave.value.volumeInfo.title);
                 if (flynnDB) {
                     var bookEntriesToAdd = 0,
                         updateNeeded = true;
@@ -425,24 +430,24 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                         searchQuery.id = pBookToSave.value.id;
                     }
                     self.search(searchQuery).then(function(searchResponse) {
-                        logService.info('Found already an db entry');
+                        $log.info('Found already an db entry');
                         var count = 0
                         if (searchResponse.books) {
                             count = searchResponse.count;
                         }
                         if (count === pBookToSave.count) {
-                            logService.info('Amount not changed');
+                            $log.info('Amount not changed');
                             self.saveUpdated(pBookToSave, searchResponse.books).then(function(saveResponse) {
-                                logService.info('Update was successfull.');
-                                deferred.resolve(saveResponse);
+                                $log.info('Update was successfull.');
+                                updateIndex(flynnDB, deferred.resolve(response), deferred.reject(response));
                             }, function(response) {
-                                logService.error('Error updating entry.');
+                                $log.error('Error updating entry.');
                                 deferred.reject(response);
                             });
                         } else {
                             var booksToAdd = pBookToSave.count - count;
                             if (booksToAdd > 0) {
-                                logService.info('Adding ' + booksToAdd + ' new entries.');
+                                $log.info('Adding ' + booksToAdd + ' new entries.');
                                 var docs = [];
                                 for (var i = 1; i <= booksToAdd; i++) {
                                     var book = {};
@@ -460,10 +465,10 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                     $rootScope.$apply(function() {
                                         if (!err) {
                                             response.books = docs;
-                                            logService.info('Saving successfull.');
-                                            deferred.resolve(response);
+                                            $log.info('Saving successfull.');
+                                            updateIndex(flynnDB, deferred.resolve(response), deferred.reject(response));
                                         } else {
-                                            logService.error('Error saving new entries: ' + err);
+                                            $log.error('Error saving new entries: ' + err);
                                             deferred.reject(response);
                                         }
                                     });
@@ -471,7 +476,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                             } else {
                                 var count = 0,
                                     booksToRemove = Math.abs(booksToAdd);
-                                logService.info("Removing " + booksToRemove + " existing entries.");
+                                $log.info("Removing " + booksToRemove + " existing entries.");
                                 var booksToBeRemoved = [],
                                     booksToBeUpdated = [];
                                 for (var index in searchResponse.books) {
@@ -488,28 +493,28 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                 flynnDB.bulkDocs(booksToBeRemoved, function(err, result) {
                                     $rootScope.$apply(function() {
                                         if (!err) {
-                                            logService.info('Delete was successfull.');
+                                            $log.info('Delete was successfull.');
                                             self.saveUpdated(pBookToSave, booksToBeUpdated).then(function(saveResponse) {
-                                                logService.info('Update was successfull.');
+                                                $log.info('Update was successfull.');
                                                 deferred.resolve(saveResponse);
                                             }, function(response) {
-                                                logService.error('Error updating entry.');
+                                                $log.error('Error updating entry.');
                                                 deferred.reject(response);
                                             });
                                         } else {
-                                            logService.error("Error during: " + err);
+                                            $log.error("Error during: " + err);
                                             deferred.reject(err);
                                         }
                                     });
                                 }, function(response) {
-                                    logService.error('Error deleting entry.');
+                                    $log.error('Error deleting entry.');
                                     deferred.reject(response);
                                 });
 
                             }
                         }
                     }, function(response) {
-                        logService.info('Found no existing entries');
+                        $log.info('Found no existing entries');
                         var docs = [];
                         for (var i = 1; i <= pBookToSave.count; i++) {
                             var book = {};
@@ -526,18 +531,18 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                             $rootScope.$apply(function() {
                                 if (!err) {
                                     response.books = docs;
-                                    logService.info('Saving successfull.');
-                                    updateIndex(flynnDB);
+                                    $log.info('Saving successfull.');
+                                    updateIndex(flynnDB, deferred.resolve(response), deferred.reject(response));
                                     deferred.resolve(response);
                                 } else {
-                                    logService.error('Error saving new entries: ' + err);
+                                    $log.error('Error saving new entries: ' + err);
                                     deferred.reject(response);
                                 }
                             });
                         });
                     });
                 } else {
-                    logService.error('Error during db connection');
+                    $log.error('Error during db connection');
                     deferred.reject(response);
                 }
                 return deferred.promise;
