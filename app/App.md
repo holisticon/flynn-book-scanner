@@ -8,35 +8,65 @@ Preparation steps:
 
 Global steps:
 
-* Install nodejs (0.10.x+) + npm
+
+* Install nodejs and npm (http://nodejs.org/download/)
 * Install ruby
-* `sudo gem install compass`
+  * ```bash
+  $ sudo gem install compass
+  ```
 * Install Cordova
-* `sudo npm install -g cordova`
-* `sudo npm install -g cordova-media-generator`
+  * ```bash
+  $ sudo npm install -g cordova
+  ```
 * Install build tools
-* `sudo npm install -g grunt-cli`
-* `sudo npm install -g bower`
+  * ````bash
+  $ sudo npm install -g bower grunt-cli
+  ```
+  * optional, used for icon and splash screen generation. See [NPM package description](https://www.npmjs.com/package/cordova-media-gen) for more details.
+  ```bash
+  $ sudo npm install -g cordova-media-gen
+  ```
 
-Steps in project directory `./flynn-book-scanner`:
+Steps in project directory `app`:
 
-* `cd app`
-* `npm install`
-* `bower install`
-* `grunt`
-# `grunt server` (open chrome with `open /Applications/Google\ Chrome.app --args --disable-web-security` to http://127.0.0.1:9000/#/)
+* ```bash
+  $ cd app
+  ```
+* ```bash
+  $ npm install
+  ```
+* ```bash
+  $ bower install
+  ```
+* ```bash
+  $ grunt
+  ```
 
 # Setup a development environment
 
-Steps in project directory `./flynn-book-scanner`:
-* `cd app`
-* `grunt`
+Steps in project directory `app`:
+* ```bash
+  $ cd app
+  ```
+* ```bash
+  $ grunt server
+  ```
+* open chrome with disabled security:
+  ```bash
+  $ open /Applications/Google\ Chrome.app --args --disable-web-security`
+  or:
+  $ /usr/bin/google-chrome --disable-web-security
+  ```
 
-For debugging in project directory `./flynn-book-scanner`:
-* `cd app`
-* `./node_modules/karma/bin/karma start`
+For debugging in project directory `app`:
 
-open browser at http://localhost:8080
+* ```bash
+  $ cd app
+  ```
+* ```bash
+  $ ./node_modules/karma/bin/karma start
+  ```
+* open browser at http://localhost:8080
 
 For windows phone support within an VM: http://blogs.msdn.com/b/interoperability/archive/2012/12/21/how-to-develop-for-windows-phone-8-on-your-mac.aspx
 
@@ -48,9 +78,9 @@ For windows phone support within an VM: http://blogs.msdn.com/b/interoperability
 * `cordova build android` or `cordova build ios`
 
 
-For updating icons and splash screen. Update the files in media and run
+For updating icons and splash screen (in app/etc/). Update the files in media and run
 
-* `mediagen`
+* `cordova-media-gen`
 
 For running on an android device execute:
 

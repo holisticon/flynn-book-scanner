@@ -186,7 +186,7 @@ module.exports = function(grunt) {
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
-            'config.json',
+            '*.json',
             'images/{,*/}*.*',
             'styles/fonts/*',
             'scripts/webworker*.js',
@@ -236,31 +236,6 @@ module.exports = function(grunt) {
         src: '{,*/}*.css'
       }
     },
-    shell: {
-      options: {
-        failOnError: true,
-        stdout: true,
-        stderr: true,
-        execOptions: {
-          maxBuffer: Infinity
-        }
-      },
-      buildIOS: {
-        command: 'cordova build ios --release --device'
-      },
-      buildAndroid: {
-        command: 'cp "<%= app.build.android.ant_property_file %>" "$(pwd)/platforms/android/release-signing.properties" && cordova build android --release'
-      },
-      prepare: {
-        command: 'cordova prepare'
-      },
-      buildIPA: {
-        command: 'cp "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/ResourceRules.plist" "$(pwd)/platforms/ios/build/device/Flynn.app" && xcrun -sdk iphoneos PackageApplication -v "$(pwd)/platforms/ios/build/device/Flynn.app" -o "$(pwd)/target/Flynn_<%= app.version %>.ipa" --sign "<%= app.build.ios.signer %>" --embed "<%= app.build.ios.provisionProfile %>"'
-      },
-      buildAPK: {
-        command: 'cp "$(pwd)/platforms/android/build/outputs/apk/android-armv7-release.apk" "$(pwd)/target/Flynn_armv7_<%= app.version %>.apk" && cp "$(pwd)/platforms/android/build/outputs/apk/android-x86-release.apk" "$(pwd)/target/Flynn_x86_<%= app.version %>.apk"'
-      }
-    },
     concurrent: {
       server: [
         'compass:server',
@@ -306,12 +281,54 @@ module.exports = function(grunt) {
           'target/plato-report': ['<%= app.src %>/scripts/**/*.js']
         }
       }
+    },
+    shell: {
+      options: {
+        failOnError: true,
+        stdout: true,
+        stderr: true,
+        execOptions: {
+          maxBuffer: Infinity
+        }
+      },
+      buildIOS: {
+        command: 'cordova build ios --release --device'
+      },
+      buildAndroid: {
+        command: 'cp "<%= app.build.android.ant_property_file %>" "$(pwd)/platforms/android/release-signing.properties" && cordova build android --release'
+      },
+      prepare: {
+        command: 'cordova prepare'
+      },
+      buildIPA: {
+        command: 'cp "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/ResourceRules.plist" "$(pwd)/platforms/ios/build/device/Flynn.app" && xcrun -sdk iphoneos PackageApplication -v "$(pwd)/platforms/ios/build/device/Flynn.app" -o "$(pwd)/target/Flynn_<%= app.version %>.ipa" --sign "<%= app.build.ios.signer %>" --embed "<%= app.build.ios.provisionProfile %>"'
+      },
+      buildAPK: {
+        command: 'cp "$(pwd)/platforms/android/build/outputs/apk/android-armv7-release.apk" "$(pwd)/target/Flynn_armv7_<%= app.version %>.apk" && cp "$(pwd)/platforms/android/build/outputs/apk/android-x86-release.apk" "$(pwd)/target/Flynn_x86_<%= app.version %>.apk"'
+      },
+      prepareNW: {
+        command: 'touch "<%= app.dist %>/cordova.js" && touch "<%= app.dist %>/cordova_plugins.js"'
+      }
+    },
+    nodewebkit: {
+      options: {
+        appName: "<%= app.name %>",
+        appVersion: "<%= app.version %>",
+        main: "index.html",
+        platforms: ['win32', 'win64', 'osx32', 'osx64', 'linux32', 'linux64'],
+        buildDir: './target/desktop',
+        icon: './etc/icon.png'/*,
+        macIcns: './etc/icon.icns',
+        winIco: './etc/icon.ico'*/
+      },
+      src: ['./www/**/*'] // Your node-webkit app
     }
   });
 
   grunt.registerTask('buildIPA', ['shell:buildIOS', 'shell:buildIPA']);
   grunt.registerTask('buildAPK', ['shell:buildAndroid', 'shell:buildAPK']);
   grunt.registerTask('buildCordova', ['shell:buildAndroid'], 'shell:buildIOS');
+  grunt.registerTask('buildDesktop', ['shell:prepareNW'], 'nodewebkit');
 
   grunt.registerTask('server', function(target) {
     if (target === 'dist') {

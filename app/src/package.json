@@ -1,0 +1,9 @@
+{
+	"name": "flynn",
+	"version": "1.6.1",
+	"main": "index.html",
+	"window": {
+		"toolbar": false,
+		"frame": true
+	}
+}

@@ -42,11 +42,7 @@ app/platforms/wp8/Bin/*
 app/bin/*
 app/target/*
 app/src-gen/*
-
-
-
-
-
+app/cache/*
 app/platforms/windows/config.xml
-
 app/platforms/wp8/Flynn.csproj.user
+
