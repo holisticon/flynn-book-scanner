@@ -37,7 +37,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
             return db;
         }
 
-        function updateIndex(pDB, pCallback, pCallbackError) {
+        function updateIndex(pDB) {
             if (pDB) {
                 // update index
                 pDB.createIndex({
@@ -46,14 +46,8 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                     }
                 }).then(function(result) {
                     $log.info('Creating index was successfull: ' + JSON.stringify(result));
-                    if (pCallback) {
-                        pCallback();
-                    }
                 }).catch(function(err) {
                     $log.err('Creating index was not successfull: ' + JSON.stringify(err));
-                    if (pCallbackError) {
-                        pCallbackError();
-                    }
                 });
             }
         }
@@ -354,7 +348,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                             $rootScope.$apply(function() {
                                 if (!err) {
                                     $log.info("Delete of entry was successfull.");
-                                    updateIndex(flynnDB, deferred.resolve(response), deferred.reject(response));
+                                    updateIndex(flynnDB);
                                 } else {
                                     $log.error("Error deleting entry: " + err);
                                     deferred.reject(err);
@@ -439,7 +433,8 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                             $log.info('Amount not changed');
                             self.saveUpdated(pBookToSave, searchResponse.books).then(function(saveResponse) {
                                 $log.info('Update was successfull.');
-                                updateIndex(flynnDB, deferred.resolve(response), deferred.reject(response));
+                                updateIndex(flynnDB);
+                                deferred.resolve(response);
                             }, function(response) {
                                 $log.error('Error updating entry.');
                                 deferred.reject(response);
@@ -466,7 +461,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                         if (!err) {
                                             response.books = docs;
                                             $log.info('Saving successfull.');
-                                            updateIndex(flynnDB, deferred.resolve(response), deferred.reject(response));
+                                            updateIndex(flynnDB);
                                         } else {
                                             $log.error('Error saving new entries: ' + err);
                                             deferred.reject(response);
@@ -532,7 +527,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                 if (!err) {
                                     response.books = docs;
                                     $log.info('Saving successfull.');
-                                    updateIndex(flynnDB, deferred.resolve(response), deferred.reject(response));
+                                    updateIndex(flynnDB);
                                     deferred.resolve(response);
                                 } else {
                                     $log.error('Error saving new entries: ' + err);
