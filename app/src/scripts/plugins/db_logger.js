@@ -99,8 +99,8 @@ dbLog.provider('logger', function loggerProvider() {
         log;
     config.debug = false;
     config.outputOnly = false;
-    config.trace;
-    config.dbName;
+    config.trace = false;
+    config.dbName = 'log';
 
     /**
      * @ngdoc function
