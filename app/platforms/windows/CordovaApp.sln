@@ -9,22 +9,26 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CordovaApp", "CordovaApp.sh
 EndProject
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CordovaApp.Windows80", "CordovaApp.Windows80.jsproj", "{EFFFAB2F-BFC5-4EDA-B545-45EF4995F55A}"
 	ProjectSection(ProjectDependencies) = postProject
-		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A} = {D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}
+		{d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}={d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}
 	EndProjectSection
 EndProject
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CordovaApp.Windows", "CordovaApp.Windows.jsproj", "{58950FB6-2F93-4963-B9CD-637F83F3EFBF}"
 	ProjectSection(ProjectDependencies) = postProject
-		{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A} = {D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}
+		{d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}={d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}
 	EndProjectSection
 EndProject
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CordovaApp.Phone", "CordovaApp.Phone.jsproj", "{31B67A35-9503-4213-857E-F44EB42AE549}"
 	ProjectSection(ProjectDependencies) = postProject
-		{6435C2E4-4FD2-405A-9EE2-5312AE852782} = {6435C2E4-4FD2-405A-9EE2-5312AE852782}
+		{6435c2e4-4fd2-405a-9ee2-5312ae852782}={6435c2e4-4fd2-405a-9ee2-5312ae852782}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\plugins\de.martinreinhardt.cordova.plugins.sqlite\src\windows\SQLite3-WinRT\SQLite3\SQLite3.Windows.vcxproj", "{D1848FEE-6A8E-4EF1-8BFB-8652E5A9CD4A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\plugins\de.martinreinhardt.cordova.plugins.sqlite\src\windows\SQLite3-WinRT\SQLite3\SQLite3.WindowsPhone.vcxproj", "{6435C2E4-4FD2-405A-9EE2-5312AE852782}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "\Users\mreinhardt\Documents\Programmierung\repositories\git\job\flynn-book-scanner\app\plugins\cordova-plugin-sqlite\src\windows\SQLite3-WinRT\SQLite3\SQLite3.Windows.vcxproj", "{d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "\Users\mreinhardt\Documents\Programmierung\repositories\git\job\flynn-book-scanner\app\plugins\cordova-plugin-sqlite\src\windows\SQLite3-WinRT\SQLite3\SQLite3.WindowsPhone.vcxproj", "{6435c2e4-4fd2-405a-9ee2-5312ae852782}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

@@ -39,6 +39,9 @@
         },
         "de.martinreinhardt.cordova.plugins.sqlite": {
             "PACKAGE_NAME": "{99a1e940-e9f2-11e4-89d5-456edadb814a}"
+        },
+        "cordova-plugin-sqlite": {
+            "PACKAGE_NAME": "{99a1e940-e9f2-11e4-89d5-456edadb814a}"
         }
     },
     "dependent_plugins": {}

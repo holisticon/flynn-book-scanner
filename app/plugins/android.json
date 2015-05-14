@@ -625,6 +625,9 @@
         },
         "de.martinreinhardt.cordova.plugins.sqlite": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-sqlite": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
     "dependent_plugins": {}

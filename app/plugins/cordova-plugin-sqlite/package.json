@@ -1,0 +1,33 @@
+{
+  "name": "cordova-plugin-sqlite",
+  "version": "0.9.0",
+  "description": "Cordova SQLite Plugin",
+  "cordova": {
+    "id": "cordova-plugin-sqlite",
+    "platforms": [
+      "android",
+      "amazon-fireos",
+      "ios",
+      "wp7",
+      "wp8",
+      "windows"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hypery2k/cordova-sqlite-plugin.git"
+  },
+  "keywords": [
+    "cordova",
+    "sqlite",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-amazon-fireos",
+    "cordova-ios",
+    "cordova-wp7",
+    "cordova-wp8",
+    "cordova-windows"
+  ],
+  "author": "Martin Reinhardt",
+  "license": "MIT"
+}

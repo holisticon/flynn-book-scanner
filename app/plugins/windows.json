@@ -24,6 +24,9 @@
         },
         "de.martinreinhardt.cordova.plugins.sqlite": {
             "PACKAGE_NAME": "Flynn"
+        },
+        "cordova-plugin-sqlite": {
+            "PACKAGE_NAME": "Flynn"
         }
     },
     "dependent_plugins": {}

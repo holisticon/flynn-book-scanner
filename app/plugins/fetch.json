@@ -57,5 +57,13 @@
             "type": "local",
             "path": "/Users/mreinhardt/Documents/Programmierung/repositories/git/private/cordova-urlhandler-plugin"
         }
+    },
+    "cordova-plugin-sqlite": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-sqlite"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }
