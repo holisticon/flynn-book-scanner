@@ -178,7 +178,7 @@ dbLog.provider('logger', function loggerProvider() {
                 writeLogEntry('INFO', arguments);
             },
             error: function() {
-                $delegate.error(arguments);
+                log.error(arguments);
                 writeLogEntry('ERROR', arguments);
             },
             debug: function() {

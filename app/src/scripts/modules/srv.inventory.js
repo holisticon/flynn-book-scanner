@@ -433,8 +433,8 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                             $log.info('Amount not changed');
                             self.saveUpdated(pBookToSave, searchResponse.books).then(function(saveResponse) {
                                 $log.info('Update was successfull.');
-                                updateIndex(flynnDB);
                                 deferred.resolve(response);
+                                updateIndex(flynnDB);
                             }, function(response) {
                                 $log.error('Error updating entry.');
                                 deferred.reject(response);
@@ -492,6 +492,7 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                             self.saveUpdated(pBookToSave, booksToBeUpdated).then(function(saveResponse) {
                                                 $log.info('Update was successfull.');
                                                 deferred.resolve(saveResponse);
+                                                updateIndex(flynnDB);
                                             }, function(response) {
                                                 $log.error('Error updating entry.');
                                                 deferred.reject(response);
@@ -527,8 +528,8 @@ app.service('inventoryService', ['$rootScope', '$http', '$q', 'settingsService',
                                 if (!err) {
                                     response.books = docs;
                                     $log.info('Saving successfull.');
-                                    updateIndex(flynnDB);
                                     deferred.resolve(response);
+                                    updateIndex(flynnDB);
                                 } else {
                                     $log.error('Error saving new entries: ' + err);
                                     deferred.reject(response);

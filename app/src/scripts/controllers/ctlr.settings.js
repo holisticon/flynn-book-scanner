@@ -65,7 +65,6 @@ app.controller('SettingsController', ['$rootScope', '$log', '$scope', '$ionicLoa
         }
 
         function emailLogs() {
-            $ionicLoading.show();
             var logViewData = '';
             for (var i in $scope.logs) {
                 var log = $scope.logs[i];
@@ -75,16 +74,14 @@ app.controller('SettingsController', ['$rootScope', '$log', '$scope', '$ionicLoa
                 subject: 'flynn: Log details',
                 body: '<br><br><h3>Log-Entries:</h3><br>' + logViewData,
                 isHtml: true
-            }, $ionicLoading.hide());
+            });
         }
 
         function readInventory() {
             inventoryService.read().then(function(response) {
-                $ionicLoading.hide();
-                $log.debug('Got valid server response. Settings seeem to be valid.');
+                $log.debug('Got valid server response. Settings seems to be valid.');
                 $state.go('app.books');
             }, function(error) {
-                $ionicLoading.hide();
                 settingsService.valid = false;
                 $rootScope.$broadcast("settingsService.invalid");
             });
@@ -92,7 +89,6 @@ app.controller('SettingsController', ['$rootScope', '$log', '$scope', '$ionicLoa
 
         function saveSettings(redirect) {
             $log.debug('Saving settings to local storage');
-            $ionicLoading.show();
             var profile = $scope.flynn.activeProfile;
             // adding default profile
             var config = {},
@@ -109,8 +105,6 @@ app.controller('SettingsController', ['$rootScope', '$log', '$scope', '$ionicLoa
                 } else {
                     readInventory();
                 }
-            } else {
-                $ionicLoading.hide();
             }
         }
 
@@ -123,17 +117,17 @@ app.controller('SettingsController', ['$rootScope', '$log', '$scope', '$ionicLoa
                 readInventory();
             }, function(error) {
                 $ionicLoading.hide();
-                switch(error.status){
-                  case 0:
+                switch (error.status) {
+                    case 0:
                         $rootScope.$broadcast('network.offline');
-                      break;
-                  case 400:
-                    $rootScope.$broadcast('sync.remoteError');
-                      break;
-                  case 401:
-                    $rootScope.$broadcast('login.failed');
-                      break;
-                  default:
+                        break;
+                    case 400:
+                        $rootScope.$broadcast('sync.remoteError');
+                        break;
+                    case 401:
+                        $rootScope.$broadcast('login.failed');
+                        break;
+                    default:
                         $rootScope.$broadcast('settings.invalid');
                 }
             });

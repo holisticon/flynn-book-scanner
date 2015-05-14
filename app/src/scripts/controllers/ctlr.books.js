@@ -55,12 +55,12 @@ app.controller('BooksController', ['$rootScope', '$scope', '$state', '$filter', 
             inventoryService.syncRemote().then(function(response) {
                 $ionicLoading.hide();
             }, function(error) {
+                $ionicLoading.hide();
                 if (error.status === 401) {
                     $rootScope.$broadcast("login.failed");
                 } else {
                     $rootScope.$broadcast("settings.invalid");
                 }
-                $ionicLoading.hide();
             });
         }
 

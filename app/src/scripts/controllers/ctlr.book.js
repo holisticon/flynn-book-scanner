@@ -122,12 +122,10 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$log
 		}
 
 		function reset() {
-			$ionicLoading.show();
 			$scope.books = null;
 			$scope.searchQuery = null;
 			$scope.selectedBook = null;
 			$scope.searchQuery = {};
-			$ionicLoading.hide();
 			$scope.closeModal();
 		}
 
@@ -254,9 +252,10 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$log
 					// sync on save
 					if (config.activeProfile().remotesync) {
 						inventoryService.syncRemote().then(function(response) {
-								$ionicLoading.hide();
+								$log.info('Remote sync completed');
 							},
 							function(error) {
+								$log.error('Remote sync not completed due to errors.');
 								$rootScope.$broadcast('settings.invalid');
 								$state.go('app.settings');
 							});
@@ -269,9 +268,9 @@ app.controller('BookController', ['$rootScope', '$scope', '$ionicLoading', '$log
 			}
 
 			function onError(response) {
-				$rootScope.$broadcast('booksave.error');
-				$log.debug('Error during book saving');
 				$ionicLoading.hide();
+				$rootScope.$broadcast('booksave.error');
+				$log.error('Error during book saving');
 			}
 		}
 
