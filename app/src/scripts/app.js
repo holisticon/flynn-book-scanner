@@ -205,6 +205,7 @@ app.filter('bookFilter', [function() {
                 return true;
             } 
         }
+        return false;
     }
     return function(pBooks, pSearchText) {
         if (pSearchText) {
@@ -242,6 +243,8 @@ app.filter('bookFilter', [function() {
                         filtered = [];
                     }
                     filtered.push(book);
+                    // reset 
+                    found=false;
                 }
             };
             return filtered;
