@@ -45,6 +45,7 @@ app.service('settingsService', ['$rootScope', '$log', '$http', 'localStorageServ
             } else {
                 settings = {};
                 settings.valid = false;
+                settings.appConfig = APP_CONFIG;
                 settings.activeProfileID = 0;
                 settings.profiles = [];
                 settings.profiles.push({});
