@@ -2,6 +2,8 @@
   "name": "flynnBookScanner",
   "version": "1.6.2",
   "repository": "https://github.com/holisticon/flynn-book-scanner.git",
+  "private": true,
+  "license": "MIT",
   "dependencies": {},
   "build": {
     "ios": {
@@ -62,6 +64,7 @@
     "node": ">=0.8.0"
   },
   "scripts": {
+    "postinstall" : "bower install",
     "test": "grunt test"
   }
 }
