@@ -3,30 +3,36 @@
   "version": "1.6.2",
   "repository": "https://github.com/holisticon/flynn-book-scanner.git",
   "dependencies": {
-    "angular": "1.4.1",
-    "angular-animate": "1.4.1",
-    "angular-cookies": "1.4.1",
-    "angular-resource": "1.4.1",
-    "angular-route": "1.4.1",
-    "angular-sanitize": "1.4.1",
-    "angular-touch": "1.4.1",
+    "angular": "1.4.5",
+    "angular-animate": "1.4.5",
+    "angular-cookies": "1.4.5",
+    "angular-resource": "1.4.5",
+    "angular-route": "1.4.5",
+    "angular-sanitize": "1.4.5",
+    "angular-touch": "1.4.5",
     "angular-bootstrap": "~0.13.0",
     "angular-cache": "4.2.2",
     "angular-local-storage": "0.1.5",
     "angular-ui-router": "0.2.15",
-    "ionic": "1.0.1",
-    "pouchdb": "3.6.0",
+    "ionic": "1.1.0",
+    "pouchdb": "4.0.3",
     "pouchdb-find": "0.3.5"
   },
   "devDependencies": {
     "es5-shim": "4.1.7",
-    "angular-mocks": "1.4.1",
-    "angular-scenario": "1.4.1"
+    "angular-mocks": "1.4.5",
+    "angular-scenario": "1.4.5"
   },
   "resolutions": {
-    "angular": "1.4.1",
-    "angular-sanitize": "1.4.1",
-    "angular-animate": "1.4.1",
+    "angular": "1.4.5",
+    "angular-sanitize": "1.4.5",
+    "angular-animate": "1.4.5",
     "angular-ui-router": "0.2.15"
-  }
+  },
+  "appPath": "src",
+  "genPath": "src-gen",
+  "bowerPath": "bower_components",
+  "testPath": "test",
+  "distPath": "www",
+  "moduleName": "flynnBookApp"
 }
