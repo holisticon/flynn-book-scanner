@@ -20,8 +20,8 @@
 //  main.m
 //  Flynn
 //
-//  Created by Martin Reinhardt on 17.06.2014.
-//  Copyright Holisticon AG 2014. All rights reserved.
+//  Created by ___FULLUSERNAME___ on ___DATE___.
+//  Copyright ___ORGANIZATIONNAME___ ___YEAR___. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -1,0 +1,29 @@
+{
+  "name": "cordova-plugin-barcodescanner",
+  "version": "0.7.0",
+  "description": "Cordova Barcode Scanner Plugin",
+  "cordova": {
+    "id": "cordova-plugin-barcodescanner",
+    "platforms": [
+      "android",
+      "ios",
+      "wp8",
+      "windows8"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hypery2k/cordova-barcodescanner-plugin.git"
+  },
+  "keywords": [
+    "cordova",
+    "battery",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "cordova-wp8",
+    "cordova-windows8"
+  ],
+  "author": "Martin Reinhardt",
+  "license": "MIT"
+}

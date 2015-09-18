@@ -343,7 +343,7 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'scripts/cordova*.js',
-            'config.json',
+            '*.json',
             'scripts/webworker*.js',
             'templates/{,*/}*.html',
             'views/{,*/}*.html',
@@ -444,19 +444,26 @@ module.exports = function (grunt) {
         command: 'touch "<%= yeoman.dist %>/cordova.js" && touch "<%= yeoman.dist %>/cordova_plugins.js"'
       }
     },
+    nodewebkit: {
+      options: {
+        version: "0.12.3",
+        appName: "<%= yeoman.name %>",
+        appVersion: "<%= yeoman.version %>",
+        main: "index.html",
+        platforms: ['win32', 'win64', 'osx32', 'osx64', 'linux32', 'linux64'],
+        buildDir: './target/desktop',
+        icon: './etc/icon.png'/*,
+         macIcns: './etc/icon.icns',
+         winIco: './etc/icon.ico'*/
+      },
+      src: ['./www/**/*'] // Your node-webkit app
+    }
   });
 
-  grunt.registerTask('buildIPA', ['shell:buildIOS', 'shell:buildIPA']);
-  grunt.registerTask('buildAPK', ['shell:buildAndroid', 'shell:buildAPK']);
-
-  grunt.registerTask('package', [
-    'clean',
-    'build',
-    'test',
-    'buildIPA',
-    'buildAPK'
-  ]);
-
+  grunt.registerTask('buildIPA', ['build', 'shell:buildIOS', 'shell:buildIPA']);
+  grunt.registerTask('buildAPK', ['build', 'shell:buildAndroid', 'shell:buildAPK']);
+  grunt.registerTask('buildCordova', ['build', 'shell:buildAndroid', 'shell:buildIOS']);
+  grunt.registerTask('buildDesktop', ['build', 'shell:prepareNW', 'nodewebkit']);
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {

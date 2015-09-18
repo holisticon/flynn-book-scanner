@@ -1,5 +1,0 @@
-C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\platforms\windows\build\windows80\debug\anycpu\SQLite3.winmd
-C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\platforms\windows\build\windows80\debug\anycpu\SQLite3.pdb
-C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\platforms\windows\build\windows80\debug\anycpu\SQLite3.pri
-C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\platforms\windows\build\windows80\bld\CordovaApp.Windows80.jsprojResolveAssemblyReference.cache
-C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\platforms\windows\build\windows80\Debug\x86\SQLite3.winmd

@@ -9,27 +9,11 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"EmailComposer\"><param name=\"ios-package\" value=\"APPEmailComposer\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>",
                             "count": 1
                         },
                         {
@@ -45,6 +29,22 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"EmailComposer\"><param name=\"ios-package\" value=\"APPEmailComposer\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"SQLitePlugin\"><param name=\"ios-package\" value=\"SQLitePlugin\" /></feature>",
                             "count": 1
                         }
@@ -55,49 +55,35 @@
                 "parents": {
                     "libiconv.dylib": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 1
                         }
                     ],
                     "AVFoundation.framework": [
                         {
-                            "xml": "false",
-                            "count": 1
+                            "xml": false,
+                            "count": 2
                         }
                     ],
                     "AssetsLibrary.framework": [
                         {
-                            "xml": "false",
+                            "xml": false,
                             "count": 2
-                        },
+                        }
+                    ],
+                    "CoreVideo.framework": [
                         {
                             "xml": false,
                             "count": 1
                         }
                     ],
-                    "CoreVideo.framework": [
-                        {
-                            "xml": "false",
-                            "count": 1
-                        }
-                    ],
                     "QuartzCore.framework": [
                         {
-                            "xml": "false",
-                            "count": 1
-                        }
-                    ],
-                    "libsqlite3.dylib": [
-                        {
-                            "xml": "false",
+                            "xml": false,
                             "count": 1
                         }
                     ],
                     "ImageIO.framework": [
-                        {
-                            "xml": "true",
-                            "count": 1
-                        },
                         {
                             "xml": true,
                             "count": 1
@@ -105,29 +91,17 @@
                     ],
                     "CoreLocation.framework": [
                         {
-                            "xml": "false",
-                            "count": 1
-                        },
-                        {
                             "xml": false,
                             "count": 1
                         }
                     ],
                     "CoreGraphics.framework": [
                         {
-                            "xml": "false",
-                            "count": 3
-                        },
-                        {
                             "xml": false,
-                            "count": 2
+                            "count": 3
                         }
                     ],
                     "MobileCoreServices.framework": [
-                        {
-                            "xml": "false",
-                            "count": 1
-                        },
                         {
                             "xml": false,
                             "count": 1
@@ -135,13 +109,13 @@
                     ],
                     "AudioToolbox.framework": [
                         {
-                            "xml": "true",
+                            "xml": true,
                             "count": 1
                         }
                     ],
                     "MessageUI.framework": [
                         {
-                            "xml": "true",
+                            "xml": true,
                             "count": 1
                         }
                     ]
@@ -154,56 +128,43 @@
                             "xml": "<string />",
                             "count": 1
                         }
-                    ],
-                    "CFBundleURLTypes": [
-                        {
-                            "xml": "<array><dict><key>CFBundleURLSchemes</key><array><string>flynnApp</string></array></dict></array>",
-                            "count": 1
-                        }
                     ]
                 }
             }
         }
     },
     "installed_plugins": {
-        "com.phonegap.plugins.barcodescanner": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "org.apache.cordova.device": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "org.apache.cordova.dialogs": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "org.apache.cordova.inappbrowser": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "de.martinreinhardt.cordova.plugins.urlhandler": {
-            "URL_SCHEME": "flynnApp",
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "de.martinreinhardt.cordova.plugins.email": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
         "com.ionic.keyboard": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "org.apache.cordova.camera": {
+        "cordova-plugin-barcodescanner": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "org.apache.cordova.console": {
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-email": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-crosswalk-webview": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "de.martinreinhardt.cordova.plugins.sqlite": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
         "cordova-plugin-sqlite": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-crosswalk-webview": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },

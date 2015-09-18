@@ -1,22 +1,4 @@
 {
-    "com.ionic.keyboard": {
-        "source": {
-            "type": "registry",
-            "id": "com.ionic.keyboard"
-        }
-    },
-    "org.apache.cordova.camera": {
-        "source": {
-            "type": "registry",
-            "id": "org.apache.cordova.camera"
-        }
-    },
-    "org.apache.cordova.console": {
-        "source": {
-            "type": "registry",
-            "id": "org.apache.cordova.console"
-        }
-    },
     "cordova-plugin-whitelist": {
         "source": {
             "type": "git",
@@ -25,43 +7,82 @@
             "ref": "r1.0.0"
         }
     },
-    "cordova-plugin-crosswalk-webview": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/MobileChromeApps/cordova-plugin-crosswalk-webview.git",
-            "subdir": ".",
-            "ref": "1.0.0"
-        }
-    },
-    "de.martinreinhardt.cordova.plugins.sqlite": {
+    "com.ionic.keyboard": {
         "source": {
             "type": "registry",
-            "id": "de.martinreinhardt.cordova.plugins.sqlite"
-        }
+            "id": "com.ionic.keyboard"
+        },
+        "is_top_level": true,
+        "variables": {}
     },
-    "com.phonegap.plugins.barcodescanner": {
+    "cordova-plugin-email": {
         "source": {
-            "type": "git",
-            "url": "https://github.com/wildabeast/BarcodeScanner.git",
-            "subdir": "."
-        }
+            "type": "registry",
+            "id": "cordova-plugin-email"
+        },
+        "is_top_level": true,
+        "variables": {}
     },
-    "de.martinreinhardt.cordova.plugins.email": {
+    "cordova-plugin-camera": {
         "source": {
-            "type": "local",
-            "path": "/Users/mreinhardt/Documents/Programmierung/repositories/git/private/cordova-email-plugin"
-        }
+            "type": "registry",
+            "id": "cordova-plugin-camera"
+        },
+        "is_top_level": true,
+        "variables": {}
     },
-    "de.martinreinhardt.cordova.plugins.urlhandler": {
+    "cordova-plugin-console": {
         "source": {
-            "type": "local",
-            "path": "/Users/mreinhardt/Documents/Programmierung/repositories/git/private/cordova-urlhandler-plugin"
-        }
+            "type": "registry",
+            "id": "cordova-plugin-console"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-dialogs": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-dialogs"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-inappbrowser": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-inappbrowser"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-device": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-device"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-barcodescanner": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-barcodescanner"
+        },
+        "is_top_level": true,
+        "variables": {}
     },
     "cordova-plugin-sqlite": {
         "source": {
             "type": "registry",
             "id": "cordova-plugin-sqlite"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-crosswalk-webview": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-crosswalk-webview"
         },
         "is_top_level": true,
         "variables": {}
