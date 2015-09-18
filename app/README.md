@@ -10,10 +10,6 @@ Global steps:
 
 
 * Install nodejs and npm (http://nodejs.org/download/)
-* Install ruby
-  * ```bash
-  $ sudo gem install compass
-  ```
 * Install Cordova
   * ```bash
   $ sudo npm install -g cordova
