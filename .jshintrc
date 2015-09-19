@@ -19,8 +19,9 @@
   "trailing": true,
   "smarttabs": true,
   "globals": {
-    "angular": false,
-    "alert": false,
-    "cordova": false
+    "ngFlynnApp": true,
+    "angular": true,
+    "alert": true,
+    "cordova": true
   }
 }

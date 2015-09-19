@@ -6,10 +6,8 @@
  * @description
  * development helper
  */
-app.controller('DevController', ['$rootScope', '$scope', '$state','$log','settingsService', 'inventoryService',
-    function($rootScope, $scope, $state, $log, settings, inventoryService) {
+app.controller('DevController', function () {
+    'use strict';
 
-        var config = settings.load();               
-        
-    }
-]);
+  }
+);

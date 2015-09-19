@@ -4,25 +4,25 @@
  * @module flynnBookScannerApp
  * @description show book details
  */
-app.directive('bookViewDetails', ['$timeout', '$ionicLoading', 'base64',
-	function($timeout, $ionicLoading, base64) {
-		'use strict';
-		return {
-			restrict: 'E',
-			scope: {
-				selectedBook: '=book'
-			},
-			replace: true,
-			templateUrl: 'templates/bookViewDetails.html',
+app.directive('bookViewDetails', function ($timeout, $ionicLoading) {
+    'use strict';
 
-			link: function(scope, element, attrs) {
-				$ionicLoading.show();
-				scope.$watch('selectedBook', function(selectedBook) {
-					$timeout(function() {
-						$ionicLoading.hide();
-					}, 5);
-				});
-			}
-		}
-	}
-]);
+    return {
+      restrict: 'E',
+      scope: {
+        selectedBook: '=book'
+      },
+      replace: true,
+      templateUrl: 'templates/bookViewDetails.html',
+
+      link: function (scope) {
+        $ionicLoading.show();
+        scope.$watch('selectedBook', function () {
+          $timeout(function () {
+            $ionicLoading.hide();
+          }, 5);
+        });
+      }
+    };
+  }
+);

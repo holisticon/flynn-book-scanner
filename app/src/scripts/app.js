@@ -1,3 +1,6 @@
+// declare namespace
+var ngFlynnApp = ngFlynnApp || {};// jshint ignore:line
+
 /**
  * @ngdoc function
  * @name errorDialogClosed
@@ -6,9 +9,11 @@
  * @param {object} current scope
  * @param {object} reference to log service
  */
-function errorDialogClosed($rootScope, $scope, log) {
-  log.debug("Error dialog closed.");
-}
+ngFlynnApp.errorDialogClosed = function ($rootScope, $scope, log) {// jshint ignore:line
+  'use strict';
+
+  log.debug('Error dialog closed.');
+};
 
 /**
  * @ngdoc function
@@ -22,11 +27,29 @@ function errorDialogClosed($rootScope, $scope, log) {
  * @param {object} error code to use
  * @param {object} message to display
  */
-function showErrorDialog($rootScope, $scope, $ionicLoading, log, errorTitle, errorCode, errorDetails) {
+ngFlynnApp.showErrorDialog = function ($rootScope, $scope, $ionicLoading, log, errorTitle, errorCode, errorDetails) { // jshint ignore:line
+  'use strict';
+
   $ionicLoading.show();
-  navigator.notification.alert(errorCode + "\n" + errorDetails, errorDialogClosed($rootScope, $scope, log), "Error - " + errorTitle);
+  navigator.notification.alert(errorCode + '\n' + errorDetails, ngFlynnApp.errorDialogClosed($rootScope, $scope, log), 'Error - ' + errorTitle);
   $ionicLoading.hide();
-}
+};
+
+
+/**
+ * @ngdoc function
+ * @name isMobileDevice
+ * @description returns true if running on a mobile device, otherwise false
+ */
+ngFlynnApp.isMobileDevice = function () {
+  'use strict';
+
+  if (window.cordova) {
+    return true;
+  } else {
+    return false; //this is the browser
+  }
+};
 
 /**
  * @ngdoc function
@@ -34,32 +57,36 @@ function showErrorDialog($rootScope, $scope, $ionicLoading, log, errorTitle, err
  * @param {string} url to open
  * @description open external url in browser app on mobile device, otherwise in a new tab on desktop device
  */
-function openExternalLink(pUrl) {
-  if (isMobileDevice()) {
+ngFlynnApp.openExternalLink = function (pUrl) { // jshint ignore:line
+  'use strict';
+
+  if (ngFlynnApp.isMobileDevice()) {
     window.open(pUrl, '_system', 'location=yes');
   } else {
     window.open(pUrl, '_blank');
   }
-}
+};
+
 /**
  * @ngdoc function
  * @name handleOpenURL
  * @description redirect app url handler to app
  */
-function handleOpenURL(url) {
+function handleOpenURL(url) { // jshint ignore:line
+  'use strict';
+
   setTimeout(function () {
     if (url.toLowerCase().search('flynnapp') > -1) {
       var type = url.substring(url.indexOf('//') + 2, url.indexOf('?')),
-        params = url.substring(url.indexOf('?') + 1).split("&");
+        params = url.substring(url.indexOf('?') + 1).split('&');
       // create JSON object
       var args = {};
       for (var i = 0, len = params.length; i < len; i++) {
-        var paramData = params[i].split("=");
+        var paramData = params[i].split('=');
         args[paramData[0]] = paramData[1];
       }
       // get Angular scope from the known DOM element
-      e = document.body;
-      scope = angular.element(e).scope();
+      var scope = angular.element(document.body).scope();
       // broadcast URL data
       switch (type) {
         case 'config':
@@ -70,21 +97,9 @@ function handleOpenURL(url) {
   }, 0);
 }
 
-/**
- * @ngdoc function
- * @name isMobileDevice
- * @description returns true if running on a mobile device, otherwise false
- */
-function isMobileDevice() {
-  if (window.cordova) {
-    return true;
-  } else {
-    return false; //this is the browser
-  }
-}
+ngFlynnApp.configureLogging = function (loggerProvider, config) {
+  'use strict';
 
-
-function configureLogging(loggerProvider, config) {
   if (config) {
     loggerProvider.dbName('flynnDB_logs');
     loggerProvider.outputOnly(!config.dbLogging);
@@ -99,17 +114,18 @@ function configureLogging(loggerProvider, config) {
     }
     loggerProvider.traceLogging(config.trace);
   }
-}
+};
 
 /**
  * @ngdoc function
  * @name onDeviceReady
  * @description Called after device is ready to use
  */
-function onDeviceReady() {
+ngFlynnApp.onDeviceReady = function () {
+  'use strict';
+
   var $http = angular.injector(['ng']).get('$http'),
-    $rootScope = angular.injector(['ng']).get('$rootScope');
-  settingsLS = localStorage['ls.flynn_app.settings'];
+    settingsLS = localStorage['ls.flynn_app.settings'];
   $http.get('config.json').success(function (data, status, headers, config) {
     var appConf;
     if (settingsLS) {
@@ -140,17 +156,17 @@ function onDeviceReady() {
     // bootstrap app:
     angular.bootstrap(document, ['flynnBookScannerApp']);
 
-  }).error(function (data, status, headers, config) {
+  }).error(function (data, status, headers, config) { // jshint ignore:line
     console.error('Did not get valid config.json file.');
     navigator.notification.alert('Server did not show valid response.', null, 'Server Error');
   });
-}
+};
 
 // on dev fire up event directly
-if (isMobileDevice()) {
-  document.addEventListener("deviceready", onDeviceReady, false);
+if (ngFlynnApp.isMobileDevice()) {
+  document.addEventListener('deviceready', ngFlynnApp.onDeviceReady, false);
 } else {
-  onDeviceReady();
+  ngFlynnApp.onDeviceReady();
 }
 
 /**
@@ -159,7 +175,7 @@ if (isMobileDevice()) {
  * @description  declares flynn app
  * @module flynnBookScannerApp
  */
-var app = angular.module('flynnBookScannerApp', [
+var app = angular.module('flynnBookScannerApp', [ // jshint ignore:line
   'ui.bootstrap',
   'LocalStorageModule',
   'ngCookies',
@@ -179,6 +195,8 @@ var app = angular.module('flynnBookScannerApp', [
  * @description Reverse list in order
  */
 app.filter('reverse', function () {
+  'use strict';
+
   return function (items) {
     if (items) {
       return items.slice().reverse();
@@ -195,6 +213,8 @@ app.filter('reverse', function () {
  * @description book filter
  */
 app.filter('bookFilter', [function () {
+  'use strict';
+
   /**
    * Search in list for text
    */
@@ -214,8 +234,7 @@ app.filter('bookFilter', [function () {
         filtered,
         searchText = pSearchText.toUpperCase();
       for (var i = 0, len = pBooks.length; i < len; i++) {
-        var book = pBooks[i],
-          found = false;
+        var book = pBooks[i];
         if (book.value.volumeInfo.title.toUpperCase() === searchText) { // matches whole word
           found = true;
         } else {
@@ -248,7 +267,7 @@ app.filter('bookFilter', [function () {
           found = false;
         }
       }
-      ;
+
       return filtered;
     } else {
       return pBooks;
@@ -257,6 +276,8 @@ app.filter('bookFilter', [function () {
 }]);
 
 app.filter('unsafe', function ($sce) {
+  'use strict';
+
   return function (val) {
     return $sce.trustAsHtml(val);
   };
@@ -280,16 +301,14 @@ app.constant('$ionicLoadingConfig', {
  * @description  init ionic
  */
 app.run(function ($ionicPlatform) {
+  'use strict';
+
   $ionicPlatform.ready(function () {
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
     }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
   });
-})
+});
 
 
 /**
@@ -299,20 +318,22 @@ app.run(function ($ionicPlatform) {
  * @description configure app
  */
 app.config(function ($urlRouterProvider, $provide, $compileProvider, $httpProvider, $stateProvider, $ionicConfigProvider, webWorkerPoolProvider, loggerProvider, APP_CONFIG) {
+  'use strict';
+
   // fix wp8 cordova errors
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|ghttps?|ms-appx|x-wmapp0):/);
   // limit webworker threads
   webWorkerPoolProvider.workerUrl('scripts/webworker.renderImage.js');
   webWorkerPoolProvider.capacity(4);
   // places them at the bottom for all OS
-  $ionicConfigProvider.tabs.position("bottom");
+  $ionicConfigProvider.tabs.position('bottom');
   // makes them all look the same across all OS
-  $ionicConfigProvider.tabs.style("standard");
+  $ionicConfigProvider.tabs.style('standard');
   // configure caching
   $ionicConfigProvider.views.maxCache(5);
   $ionicConfigProvider.templates.maxPrefetch(3);
   // configure logging
-  configureLogging(loggerProvider, APP_CONFIG);
+  ngFlynnApp.configureLogging(loggerProvider, APP_CONFIG);
   $provide.decorator('$log', ['$delegate', function ($delegate) {
     if (loggerProvider.$get.length > 1) {
       // solve uglify error
@@ -324,12 +345,12 @@ app.config(function ($urlRouterProvider, $provide, $compileProvider, $httpProvid
   // configure routes and states
   $stateProvider
     .state('app', {
-      url: "/app",
+      url: '/app',
       templateUrl: 'views/navbarView.html',
       controller: 'AppController'
     })
     .state('app.settings', {
-      url: "/settings",
+      url: '/settings',
       views: {
         'menuContent': {
           templateUrl: 'views/settingsView.html',
@@ -338,7 +359,7 @@ app.config(function ($urlRouterProvider, $provide, $compileProvider, $httpProvid
       }
     })
     .state('app.book_add', {
-      url: "/book/add",
+      url: '/book/add',
       views: {
         'menuContent': {
           templateUrl: 'views/addBookView.html',
@@ -347,7 +368,7 @@ app.config(function ($urlRouterProvider, $provide, $compileProvider, $httpProvid
       }
     })
     .state('app.books', {
-      url: "/books",
+      url: '/books',
       views: {
         'menuContent': {
           templateUrl: 'views/booksView.html',
@@ -356,7 +377,7 @@ app.config(function ($urlRouterProvider, $provide, $compileProvider, $httpProvid
       }
     })
     .state('app.book_show', {
-      url: "/book/:bookId",
+      url: '/book/:bookId',
       views: {
         'menuContent': {
           templateUrl: 'views/bookView.html',
@@ -365,7 +386,7 @@ app.config(function ($urlRouterProvider, $provide, $compileProvider, $httpProvid
       }
     })
     .state('app.book_edit', {
-      url: "/book/edit/:bookId",
+      url: '/book/edit/:bookId',
       views: {
         'menuContent': {
           templateUrl: 'views/editBookView.html',
@@ -374,7 +395,7 @@ app.config(function ($urlRouterProvider, $provide, $compileProvider, $httpProvid
       }
     })
     .state('app.about', {
-      url: "/about",
+      url: '/about',
       views: {
         'menuContent': {
           templateUrl: 'views/aboutView.html',
@@ -383,7 +404,7 @@ app.config(function ($urlRouterProvider, $provide, $compileProvider, $httpProvid
       }
     })
     .state('app.dev', {
-      url: "/dev",
+      url: '/dev',
       views: {
         'menuContent': {
           templateUrl: 'views/devView.html',

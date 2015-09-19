@@ -1,3 +1,5 @@
-app.factory('imageDataCache', function($cacheFactory) {
-	return $cacheFactory('imageData');
+app.factory('imageDataCache', function ($cacheFactory) {
+  'use strict';
+
+  return $cacheFactory('imageData');
 });

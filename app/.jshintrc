@@ -20,6 +20,7 @@
   "smarttabs": true,
   "globals": {
     "app": false,
+    "ngFlynnApp": false,
     "angular": false,
     "alert": false,
     "cordova": false,

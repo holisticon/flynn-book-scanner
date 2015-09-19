@@ -446,10 +446,10 @@ module.exports = function (grunt) {
     },
     nodewebkit: {
       options: {
-        version: "0.12.3",
-        appName: "<%= yeoman.name %>",
-        appVersion: "<%= yeoman.version %>",
-        main: "index.html",
+        version: '0.12.3',
+        appName: '<%= yeoman.name %>',
+        appVersion: '<%= yeoman.version %>',
+        main: 'index.html',
         platforms: ['win32', 'win64', 'osx32', 'osx64', 'linux32', 'linux64'],
         buildDir: './target/desktop',
         icon: './etc/icon.png'/*,
