@@ -440,6 +440,7 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
                       response.books = docs;
                       $log.info('Saving successfull.');
                       updateIndex(bookDB);
+                      deferred.resolve(response);
                     } else {
                       $log.error('Error saving new entries: ' + err);
                       deferred.reject(response);
