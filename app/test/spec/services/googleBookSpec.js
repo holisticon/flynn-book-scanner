@@ -33,7 +33,7 @@ describe('googleBookService', function () {
     httpBackend.when('GET', 'https://www.googleapis.com/books/v1/volumes/?q=:isbn=3898646122&projection=full&key=undefined').respond(response);
     httpBackend.when('GET', 'https://www.googleapis.com/books/v1/volumes/?q=9783898646123&projection=full&key=undefined').respond(response);
 
-    service.search(searchQuery).then(function (response) {
+    service.search(searchQuery).then(function () {
       done();
     });
     httpBackend.flush();

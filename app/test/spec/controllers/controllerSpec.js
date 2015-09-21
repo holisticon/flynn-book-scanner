@@ -13,7 +13,7 @@ beforeEach(function () {
     $provide.constant('APP_CONFIG', {
       timeout: 1000,
       dev: false,
-      debug: false,
+      debug: false
     });
   });
 });
@@ -77,7 +77,7 @@ describe('BookController', function () {
         }
       }];
       mockedBookService = {
-        search: function (searchQuery) {
+        search: function () {
           var deferred = $q.defer();
           var response = {};
           response.books = googleSearchResult;
@@ -102,7 +102,7 @@ describe('BookController', function () {
       });
       // mock views, see https://github.com/driftyco/ionic/issues/2927
       httpBackend.when('GET', new RegExp('.*.html')).respond({});
-    })
+    });
   });
 
   it('Init module', function () {
