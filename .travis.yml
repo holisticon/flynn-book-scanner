@@ -1,10 +1,9 @@
 language: node_js
 sudo: false
 node_js:
-  - 0.10
+  - 0.12
 before_install:
-  - gem install compass
-  - npm install -g grunt-cli  bower
+  - npm install -g grunt-cli
 before_script:
   - cd app
   - npm install
