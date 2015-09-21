@@ -22,19 +22,12 @@ package de.holisticon.app.flynn;
 import android.os.Bundle;
 import org.apache.cordova.*;
 
-/**
- * Flynn Book Scanner App
- * Copyright Holisticon AG 2014. All rights reserved.
- * @author Martin Reinhardt (Holisticon AG)
- *
- */
-public class CordovaApp extends CordovaActivity
+public class MainActivity extends CordovaActivity
 {
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        super.init();
         // Set by <content src="index.html" /> in config.xml
         loadUrl(launchUrl);
     }

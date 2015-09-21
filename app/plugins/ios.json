@@ -146,6 +146,9 @@
         "cordova-plugin-console": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
@@ -158,13 +161,10 @@
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
         "cordova-plugin-sqlite": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-crosswalk-webview": {
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
