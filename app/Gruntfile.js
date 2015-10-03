@@ -452,7 +452,7 @@ module.exports = function (grunt) {
         main: 'index.html',
         platforms: ['win32', 'win64', 'osx32', 'osx64', 'linux32', 'linux64'],
         buildDir: './target/desktop',
-        icon: './etc/icon.png'/*,
+        icon: './etc/icon.png'/* fix WINE issue!,
          macIcns: './etc/icon.icns',
          winIco: './etc/icon.ico'*/
       },
