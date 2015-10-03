@@ -9,8 +9,6 @@
 app.controller('BookEditController', function ($rootScope, $scope, $state, $stateParams, $ionicLoading, $location, $log, settingsService, inventoryService) {
     'use strict';
 
-    var bookID = $stateParams.bookId;
-
     function save() {
 
       function onSuccess(response) {
@@ -90,20 +88,7 @@ app.controller('BookEditController', function ($rootScope, $scope, $state, $stat
     }
 
     function load() {
-      if (bookID) {
-        inventoryService.read().then(function (response) {
-          var allBooks = ngFlynnApp.enrichDbData(response.books);
-          for (var index in allBooks) {
-            var book = allBooks[index];
-            if (book.value.id == bookID) {
-              $scope.selectedBook = book;
-              break;
-            }
-          }
-        }, function () {
-          $log.error('Error during load book via hashCode');
-        });
-      }
+      $scope.selectedBook = $stateParams.book;
     }
 
     load();

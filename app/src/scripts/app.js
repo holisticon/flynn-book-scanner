@@ -377,7 +377,8 @@ app.config(function ($urlRouterProvider, $provide, $compileProvider, $httpProvid
       }
     })
     .state('app.book_show', {
-      url: '/book/:bookId',
+      url: '/book/show/',
+      params: {book: null},
       views: {
         'menuContent': {
           templateUrl: 'views/bookView.html',
@@ -386,7 +387,8 @@ app.config(function ($urlRouterProvider, $provide, $compileProvider, $httpProvid
       }
     })
     .state('app.book_edit', {
-      url: '/book/edit/:bookId',
+      url: '/book/edit/',
+      params: {book: null},
       views: {
         'menuContent': {
           templateUrl: 'views/editBookView.html',

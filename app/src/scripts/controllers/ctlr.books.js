@@ -125,9 +125,7 @@ app.controller('BooksController', function ($rootScope, $scope, $state, $filter,
 
     function showBookDetails(pBook) {
       $log.debug('Showing details for book: ' + pBook.value.volumeInfo.title);
-      $state.go('app.book_show', {
-        'bookId': pBook.value.id
-      });
+      $state.go('app.book_show', {'book': pBook});
     }
 
     function showActionMenu(book) {

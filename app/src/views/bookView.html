@@ -1,8 +1,10 @@
 <ion-view>
-	<ion-nav-buttons side="right">	
-		<a href="#/app/book/edit/{{selectedBook.value.id}}"><button class="button button-icon icon ion-edit"></button></a>
-	</ion-nav-buttons>
-	<ion-content id="book" class="padding">
-		<book-view-details book="selectedBook"></book-view-details>
-	</ion-content>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon icon ion-edit"
+            ng-click="edit(selectedBook)">
+    </button>
+  </ion-nav-buttons>
+  <ion-content id="book" class="padding">
+    <book-view-details book="selectedBook"></book-view-details>
+  </ion-content>
 </ion-view>

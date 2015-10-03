@@ -6,22 +6,21 @@
  * @description
  * Controller to show book details from inventory
  */
-app.controller('BookDetailsController', function ($scope, $stateParams, $log, settingsService, inventoryService) {
+app.controller('BookDetailsController', function ($scope, $state, $stateParams, $log) {
     'use strict';
 
-    var bookID = $stateParams.bookId;
-
-    function load() {
-      if (bookID) {
-        inventoryService.getBook(bookID).then(function (response) {
-          $scope.selectedBook = ngFlynnApp.enrichSingleDbEntry(response.book);
-        }, function () {
-          $log.error('Error during load book via hashCode');
-        });
-      }
+    function editBookDetails(pBook) {
+      $log.debug('Editing details for book: ' + pBook.value.volumeInfo.title);
+      $state.go('app.book_edit', {'book': pBook});
     }
 
-    load(bookID);
+    function load() {
+      $scope.selectedBook = $stateParams.book;
+    }
 
+    load();
+
+    // public methods
+    $scope.edit = editBookDetails;
   }
 );
