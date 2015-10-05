@@ -84,7 +84,12 @@ app.controller('BookController', function ($rootScope, $scope, $ionicLoading, $l
             $log.error('Error during reading inventory for search with critera ' + JSON.stringify(searchQuery) + ':' + JSON.stringify(response));
           });
       } else {
-        navigator.notification.alert('Please enter search details.', null, 'Info');
+        // TODO move to wrapper
+        if (typeof cordova != 'undefined') {
+          navigator.notification.alert('Please enter search details.', null, 'Info');
+        } else {
+          alert('Please enter search details.');
+        }
       }
     }
 
@@ -205,7 +210,13 @@ app.controller('BookController', function ($rootScope, $scope, $ionicLoading, $l
               });
           }
           $ionicLoading.hide();
-          navigator.notification.alert('Book successfully added.', reset(), 'Book');
+          // TODO move to wrapper
+          if (typeof cordova != 'undefined') {
+            navigator.notification.alert('Book successfully added.', reset(), 'Book');
+          } else {
+            alert('Book successfully added.');
+            reset();
+          }
           $rootScope.$broadcast('inventory.refresh');
           $state.go('app.books');
         }
