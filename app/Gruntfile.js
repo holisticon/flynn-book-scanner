@@ -444,7 +444,7 @@ module.exports = function (grunt) {
         command: 'touch "<%= yeoman.dist %>/cordova.js" && touch "<%= yeoman.dist %>/cordova_plugins.js"'
       }
     },
-    nodewebkit: {
+    nwjs: {
       options: {
         version: '0.12.3',
         appName: '<%= yeoman.name %>',
@@ -464,7 +464,7 @@ module.exports = function (grunt) {
   grunt.registerTask('buildIPA', ['build', 'shell:buildIOS', 'shell:buildIPA']);
   grunt.registerTask('buildAPK', ['build', 'shell:buildAndroid', 'shell:buildAPK']);
   grunt.registerTask('buildCordova', ['build', 'shell:buildAndroid', 'shell:buildIOS']);
-  grunt.registerTask('buildDesktop', ['build', 'shell:prepareNW', 'nodewebkit']);
+  grunt.registerTask('buildDesktop', ['build', 'shell:prepareNW', 'nwjs']);
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
