@@ -438,7 +438,7 @@ module.exports = function (grunt) {
         command: 'cp "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/ResourceRules.plist" "$(pwd)/platforms/ios/build/device/Flynn.app" && xcrun -sdk iphoneos PackageApplication -v "$(pwd)/platforms/ios/build/device/Flynn.app" -o "$(pwd)/target/Flynn_<%= yeoman.version %>.ipa" --sign "<%= yeoman.build.ios.signer %>" --embed "<%= yeoman.build.ios.provisionProfile %>"'
       },
       buildAPK: {
-        command: 'cp "$(pwd)/platforms/android/build/outputs/apk/android-release.apk" "$(pwd)/target/Flynn_<%= yeoman.version %>.apk"'
+        command: 'cp "$(pwd)/platforms/android/build/outputs/apk/android-armv7-release.apk" "$(pwd)/target/Flynn_arm_<%= yeoman.version %>.apk" && cp "$(pwd)/platforms/android/build/outputs/apk/android-x86-release.apk" "$(pwd)/target/Flynn_x86_<%= yeoman.version %>.apk"'
       },
       prepareNW: {
         command: 'touch "<%= yeoman.dist %>/cordova.js" && touch "<%= yeoman.dist %>/cordova_plugins.js"'
@@ -454,7 +454,7 @@ module.exports = function (grunt) {
         platforms: ['win32', 'osx32', 'linux32'],
         buildDir: './target/desktop',
         icon: './etc/icon.png',
-         macIcns: './etc/icon.icns'/* fix WINE issue!,
+        macIcns: './etc/icon.icns'/* fix WINE issue!,
          winIco: './etc/icon.ico'*/
       },
       src: ['./www/**/*'] // Your node-webkit app
