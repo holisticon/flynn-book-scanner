@@ -429,7 +429,7 @@ module.exports = function (grunt) {
         command: 'cordova build ios --release --device'
       },
       buildAndroid: {
-        command: 'cp "<%= yeoman.build.android.ant_property_file %>" "$(pwd)/platforms/android/release-signing.properties" && cp "<%= yeoman.build.android.android_keystore %>" "$(pwd)/platforms/android/android_keystore" && cordova build android --release'
+        command: 'cp "<%= yeoman.build.android.ant_property_file %>" "$(pwd)/platforms/android/release-signing.properties" && cordova build android --release'
       },
       prepare: {
         command: 'cordova prepare'
@@ -450,10 +450,11 @@ module.exports = function (grunt) {
         appName: '<%= yeoman.name %>',
         appVersion: '<%= yeoman.version %>',
         main: 'index.html',
-        platforms: ['win32', 'win64', 'osx32', 'osx64', 'linux32', 'linux64'],
+        // platforms: ['win32', 'win64', 'osx32', 'osx64', 'linux32', 'linux64'],
+        platforms: ['win32', 'osx32', 'linux32'],
         buildDir: './target/desktop',
-        icon: './etc/icon.png'/* fix WINE issue!,
-         macIcns: './etc/icon.icns',
+        icon: './etc/icon.png',
+         macIcns: './etc/icon.icns'/* fix WINE issue!,
          winIco: './etc/icon.ico'*/
       },
       src: ['./www/**/*'] // Your node-webkit app
