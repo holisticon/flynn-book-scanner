@@ -145,12 +145,20 @@ app.controller('BooksController', function ($rootScope, $scope, $state, $filter,
           return true;
         },
         destructiveButtonClicked: function () {
-          navigator.notification.confirm('Really remove book ' + $scope.book.value.volumeInfo.title + ' ?', function (buttonIndex) {
-            if (buttonIndex === 1) {
+          // TODO move to wrapper
+          if (typeof cordova != 'undefined') {
+            navigator.notification.confirm('Really remove book ' + $scope.book.value.volumeInfo.title + ' ?', function (buttonIndex) {
+              if (buttonIndex === 1) {
+                removeBook($scope.book);
+              }
+              $ionicListDelegate.closeOptionButtons();
+            });
+          } else {
+            if (confirm('Really remove book ' + $scope.book.value.volumeInfo.title + ' ?')) {
               removeBook($scope.book);
+              $ionicListDelegate.closeOptionButtons();
             }
-            $ionicListDelegate.closeOptionButtons();
-          });
+          }
           return true;
         }
       });
