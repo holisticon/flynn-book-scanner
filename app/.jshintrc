@@ -23,6 +23,7 @@
     "ngFlynnApp": false,
     "angular": false,
     "alert": false,
+    "confirm": false,
     "cordova": false,
     "angular": false,
     "PouchDB": false
