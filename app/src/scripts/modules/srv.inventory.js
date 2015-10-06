@@ -322,6 +322,7 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
                 var bookToRemove = searchResponse.books[index];
                 bookToRemove._deleted = true;
                 booksToBeRemoved.push(bookToRemove);
+                deferred.resolve({});
               }
             } else {
               $log.error('Error deleting entry. Book not found');
