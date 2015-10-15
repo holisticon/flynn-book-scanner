@@ -161,10 +161,10 @@
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-sqlite": {
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-whitelist": {
+        "cordova-plugin-sqlite": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },

@@ -71,18 +71,18 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-sqlite": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-sqlite"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-crosswalk-webview": {
         "source": {
             "type": "registry",
             "id": "cordova-plugin-crosswalk-webview"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-sqlite": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-sqlite"
         },
         "is_top_level": true,
         "variables": {}
