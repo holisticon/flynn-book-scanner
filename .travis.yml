@@ -1,9 +1,7 @@
-language: node_js
-sudo: false
-node_js:
-  - 0.12
+language: objective-c
 before_install:
-  - npm install -g grunt-cli
+  - npm install -g grunt-cli bower
+  - ./scripts/prepare_ci.sh
 before_script:
   - pwd
   - cd app
@@ -12,4 +10,4 @@ before_script:
 script:
   - pwd
   - grunt check
-  - grunt test
+  - grunt test e2e

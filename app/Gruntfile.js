@@ -416,6 +416,22 @@ module.exports = function (grunt) {
         }
       }
     },
+    protractor: {
+      options: {
+        configFile: 'protractor.dev.conf', // Default config file
+        keepAlive: true, // If false, the grunt process stops when the test fails.
+        noColor: false, // If true, protractor will not use colors in its output.
+        args: {
+          // Arguments passed to the command
+        }
+      },
+      appium: {   // Grunt requires at least one target to run so you can simply put 'all: {}' here too.
+        options: {
+          configFile: "protractor.appium.conf", // Target-specific config file
+          args: {} // Target-specific arguments
+        }
+      },
+    },
     shell: {
       options: {
         failOnError: true,
@@ -424,6 +440,9 @@ module.exports = function (grunt) {
         execOptions: {
           maxBuffer: Infinity
         }
+      },
+      buildDev: {
+        command: 'cordova build ios && cordova build android'
       },
       buildIOS: {
         command: 'cordova build ios --release --device'
@@ -488,6 +507,12 @@ module.exports = function (grunt) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
     grunt.task.run(['serve:' + target]);
   });
+
+  grunt.registerTask('e2e', [
+    'build',
+    'shell:buildDev',
+    'protractor:appium'
+  ]);
 
   grunt.registerTask('test', [
     'clean:server',

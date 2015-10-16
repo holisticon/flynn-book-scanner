@@ -159,7 +159,7 @@ ngFlynnApp.onDeviceReady = function () {
       navigator.notification.alert('Running in dev mode!', null, 'Info');
     }
     // bootstrap app:
-    angular.bootstrap(document, ['flynnBookScannerApp']);
+    angular.bootstrap(document.body, ['flynnBookScannerApp']);
 
   }).error(function (data, status, headers, config) { // jshint ignore:line
     console.error('Did not get valid config.json file.');

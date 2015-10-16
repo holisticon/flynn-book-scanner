@@ -41,6 +41,7 @@
     "grunt-nw-builder": "2.0.0",
     "grunt-open": "^0.2.3",
     "grunt-plato": "^1.2.1",
+    "grunt-protractor-runner": "2.1.0",
     "grunt-raml2html": "^0.2.1",
     "grunt-sass": "^1.0.0",
     "grunt-shell": "^1.1.1",
@@ -58,8 +59,12 @@
     "load-grunt-tasks": "^3.2.0",
     "nopt": "^3.0.3",
     "phantomjs": "^1.9.17",
+    "protractor": "^2.5.1",
     "resolve": "^1.1.6",
-    "time-grunt": "^1.0.0"
+    "shelljs": "^0.3.0",
+    "time-grunt": "^1.0.0",
+    "wd": "^0.3.12",
+    "wd-bridge": "0.0.2"
   },
   "engines": {
     "node": ">=0.8.0"

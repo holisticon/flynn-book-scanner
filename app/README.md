@@ -10,9 +10,10 @@ Global steps:
 
 
 * Install nodejs and npm (http://nodejs.org/download/)
-* Install Cordova
+* Install Cordova and Protractor
   * ```bash
-  $ sudo npm install -g cordova
+  $ (sudo) npm install -g cordova protractor
+  $ webdriver-manager update
   ```
 * Install build tools
   * ````bash
