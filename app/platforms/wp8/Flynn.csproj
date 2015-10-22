@@ -527,4 +527,10 @@
     <ItemGroup>
         <Compile Include="Plugins\cordova-plugin-sqlite\where_c.cs" />
     </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\cordova-plugin-splashscreen\SplashScreen.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\cordova-plugin-splashscreen\ResolutionHelper.cs" />
+    </ItemGroup>
 </Project>

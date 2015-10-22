@@ -4,7 +4,7 @@
     <Languages xmlns="">
         <Language code="en-US" />
     </Languages>
-    <App Author="Holisticon AG" BitsPerPixel="32" Description=".0&quot;&gt;&#xD;&#xA;    flynn book scanner app" Genre="apps.normal" ProductID="{bfe142a0-7335-11e5-a3d4-8f951938f2ea}" Publisher="Holisticon AG" PublisherID="{db093ed5-53b1-45f7-af72-751e8f36ab80}" RuntimeType="Silverlight" Title="Flynn" Version="1.6.2" xmlns="">
+    <App Author="Holisticon AG" BitsPerPixel="32" Description=".0&quot;&gt;&#xA;    flynn book scanner app" Genre="apps.normal" ProductID="{bfe142a0-7335-11e5-a3d4-8f951938f2ea}" Publisher="Holisticon AG" PublisherID="{db093ed5-53b1-45f7-af72-751e8f36ab80}" RuntimeType="Silverlight" Title="Flynn" Version="1.6.2" xmlns="">
         <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
         <Capabilities>
             <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />

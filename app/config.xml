@@ -9,6 +9,7 @@
   </author>
     <content src="index.html" />
     <access origin="*" />
+    <preference name="SplashScreen" value="etc/splash.png" />
     <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />

@@ -33,6 +33,7 @@
   </author>
     <content src="index.html" />
     <access origin="*" />
+    <preference name="SplashScreen" value="etc/splash.png" />
     <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
@@ -41,4 +42,8 @@
     <preference name="xwalkVersion" value="14+" />
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
     <preference name="xwalkMode" value="embedded" />
+    <feature name="SplashScreen">
+        <param name="wp-package" value="SplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
 </widget>

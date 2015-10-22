@@ -59,6 +59,10 @@
                         {
                             "xml": "<feature name=\"SQLitePlugin\"><param name=\"android-package\" value=\"io.liteglue.SQLitePlugin\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -625,6 +629,9 @@
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-sqlite": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },

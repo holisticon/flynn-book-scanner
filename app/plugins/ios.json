@@ -47,6 +47,10 @@
                         {
                             "xml": "<feature name=\"SQLitePlugin\"><param name=\"ios-package\" value=\"SQLitePlugin\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -98,7 +102,7 @@
                     "CoreGraphics.framework": [
                         {
                             "xml": false,
-                            "count": 3
+                            "count": 4
                         }
                     ],
                     "MobileCoreServices.framework": [
@@ -165,6 +169,9 @@
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-sqlite": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
