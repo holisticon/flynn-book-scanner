@@ -72,6 +72,7 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
                   $rootScope.$apply(function () {
                     $log.info('Completed sync.');
                     $log.debug('Completed sync with following answer: ' + info.toString());
+                    deferred.resolve(info);
                   });
                 }).on('uptodate', function (info) {
                   $rootScope.$apply(function () {
