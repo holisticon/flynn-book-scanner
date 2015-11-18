@@ -6,10 +6,10 @@ var global = global || {};// jshint ignore:line
 ngFlynnApp.nw = {};
 
 ngFlynnApp.nw.init = function () {
-
-  var win = global.gui.Window.get();
+  'use strict';
+  
   // init defult mac menu
-  if (process.platform === "darwin") {
+  if (process.platform === 'darwin') {
     var mb = new gui.Menu({type: 'menubar'});
     mb.createMacBuiltin('My App');
     gui.Window.get().menu = mb;
