@@ -1,4 +1,4 @@
-if (typeof(require) != "undefined") {
+if (typeof(require) != 'undefined') {
   var gui = require('nw.gui');
   var ngFlynnApp = ngFlynnApp || {};// jshint ignore:line
   var global = global || {};// jshint ignore:line
