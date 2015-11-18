@@ -5,7 +5,6 @@
   "license": "MIT",
   "repository": "https://github.com/holisticon/flynn-book-scanner.git",
   "private": true,
-  "license": "MIT",
   "dependencies": {},
   "build": {
     "ios": {
@@ -31,7 +30,7 @@
     "grunt-contrib-copy": "^0.7.0",
     "grunt-contrib-cssmin": "^0.13.0",
     "grunt-contrib-htmlmin": "^0.4.0",
-    "grunt-contrib-imagemin": "0.9.3",
+    "grunt-contrib-imagemin": "1.0.0",
     "grunt-contrib-jshint": "^0.11.0",
     "grunt-contrib-uglify": "^0.9.1",
     "grunt-contrib-watch": "^0.6.1",
