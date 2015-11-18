@@ -31,7 +31,12 @@ ngFlynnApp.showErrorDialog = function ($rootScope, $scope, $ionicLoading, log, e
   'use strict';
 
   $ionicLoading.show();
-  navigator.notification.alert(errorCode + '\n' + errorDetails, ngFlynnApp.errorDialogClosed($rootScope, $scope, log), 'Error - ' + errorTitle);
+  if(navigator.notification){
+    navigator.notification.alert(errorCode + '\n' + errorDetails, ngFlynnApp.errorDialogClosed($rootScope, $scope, log), 'Error - ' + errorTitle);
+  } else {
+    window.alert(errorCode + '\n' + errorDetails);
+    ngFlynnApp.errorDialogClosed($rootScope, $scope, log);
+  }
   $ionicLoading.hide();
 };
 
