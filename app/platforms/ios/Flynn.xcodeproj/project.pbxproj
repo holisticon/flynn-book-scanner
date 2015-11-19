@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		0A71372EB7FA4CDF91F6ACF9 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE591D27483E4C98868C0B11 /* CoreVideo.framework */; };
 		0C1C42B2D43949269AED83F0 /* CDVJpegHeaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B4D9AA0E3246808E0462B9 /* CDVJpegHeaderWriter.m */; };
