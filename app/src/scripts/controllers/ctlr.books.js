@@ -151,14 +151,13 @@ app.controller('BooksController', function ($rootScope, $scope, $state, $filter,
               if (buttonIndex === 1) {
                 removeBook($scope.book);
               }
-              $ionicListDelegate.closeOptionButtons();
             });
           } else {
             if (confirm('Really remove book ' + $scope.book.value.volumeInfo.title + ' ?')) {
               removeBook($scope.book);
-              $ionicListDelegate.closeOptionButtons();
             }
           }
+          $ionicListDelegate.closeOptionButtons();
           return true;
         }
       });
