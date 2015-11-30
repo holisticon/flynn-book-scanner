@@ -1,7 +1,7 @@
 {
   "name": "flynnBookScanner",
   "description": "Book scanning library app for iOS and Android",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "license": "MIT",
   "repository": "https://github.com/holisticon/flynn-book-scanner.git",
   "private": true,

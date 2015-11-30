@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="de.holisticon.app.flynn" version="1.6.2" xmlns="http://www.w3.org/ns/widgets">
+<widget id="de.holisticon.app.flynn" version="1.6.3" xmlns="http://www.w3.org/ns/widgets">
     <name>Flynn</name>
-    <description>.0"&gt;
+    <description>
     flynn book scanner app
   </description>
     <author email="info@holisticon.de" href="http://holisticon.de">
