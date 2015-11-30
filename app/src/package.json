@@ -1,6 +1,6 @@
 {
 	"name": "Flynn Book Scanner",
-	"version": "1.6.3",
+	"version": "1.6.4",
 	"main": "index.html",
 	"window": {
 		"toolbar": false,

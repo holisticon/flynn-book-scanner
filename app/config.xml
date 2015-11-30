@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="de.holisticon.app.flynn" version="1.6.3" xmlns="http://www.w3.org/ns/widgets">
+<widget id="de.holisticon.app.flynn" version="1.6.4" xmlns="http://www.w3.org/ns/widgets">
     <name>Flynn</name>
     <description>
     flynn book scanner app
