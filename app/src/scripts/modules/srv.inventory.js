@@ -34,7 +34,7 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
             fields: ['value.id']
           }
         }).then(function (result) {
-          $log.info('Creating index was successfull: ' + JSON.stringify(result));
+          $log.trace('Creating index was successfull: ' + JSON.stringify(result));
         }).catch(function (err) {
           $log.err('Creating index was not successfull: ' + JSON.stringify(err));
         });
@@ -131,7 +131,7 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
               }
             }
           }).then(function (result) {
-            $log.info('Search successfull.');
+            $log.debug('Search successfull.');
             deferred.resolve({
               book: result.docs[0]
             });
