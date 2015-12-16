@@ -1,6 +1,9 @@
-# Cordova/PhoneGap sqlite storage adapter
+# Cordova sqlite storage adapter
 
-Native interface to sqlite in a Cordova/PhoneGap plugin for Android, iOS, Windows Universal (8.1), Amazon Fire-OS, and WP(7/8) with API similar to HTML5/[Web SQL API](http://www.w3.org/TR/webdatabase/).
+
+[![Build Status](https://travis-ci.org/hypery2k/cordova-sqlite-plugin.svg?branch=master)](https://travis-ci.org/hypery2k/cordova-sqlite-plugin) [![Build status](https://ci.appveyor.com/api/projects/status/2lqw08ix1dmi97bw?svg=true)](https://ci.appveyor.com/project/hypery2k/cordova-sqlite-plugin) [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=15277276)](https://www.bountysource.com/trackers/15277276-hypery2k-cordova-sqlite-plugin?utm_source=15277276&utm_medium=shield&utm_campaign=TRACKER_BADGE)
+
+> Native interface to sqlite in a Cordova/PhoneGap plugin for Android, iOS, Windows Universal (8.1), Amazon Fire-OS, and WP(7/8) with API similar to HTML5/[Web SQL API](http://www.w3.org/TR/webdatabase/).
 
 License for Android, Windows Universal (8.1), Amazon Fire-OS, and WP(7/8) versions: MIT or Apache 2.0
 

@@ -72,13 +72,7 @@
         }
     },
     "installed_plugins": {
-        "com.ionic.keyboard": {
-            "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
-        },
         "cordova-plugin-barcodescanner": {
-            "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
-        },
-        "cordova-plugin-camera": {
             "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
         },
         "cordova-plugin-console": {
@@ -93,19 +87,19 @@
         "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
         },
-        "cordova-plugin-email": {
+        "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
         },
-        "cordova-plugin-inappbrowser": {
+        "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
         },
-        "cordova-plugin-sqlite": {
+        "cordova-plugin-email": {
             "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
         },
-        "cordova-plugin-splashscreen": {
+        "cordova-plugin-sqlite": {
             "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
         }
     },

@@ -1,7 +1,7 @@
 # Cordova Email Plugin
 
 
-[![Build Status](https://travis-ci.org/hypery2k/cordova-email-plugin.svg?branch=master)](https://travis-ci.org/hypery2k/cordova-email-plugin) [![npm version](https://badge.fury.io/js/cordova-plugin-urlhandler.svg)](http://badge.fury.io/js/cordova-plugin-urlhandler) [![Dependency Status](https://david-dm.org/hypery2k/cordova-email-plugin.svg)](https://david-dm.org/hypery2k/cordova-email-plugin) [![devDependency Status](https://david-dm.org/hypery2k/cordova-email-plugin/dev-status.svg)](https://david-dm.org/hypery2k/cordova-email-plugin#info=devDependencies) 
+[![Build Status](https://travis-ci.org/hypery2k/cordova-email-plugin.svg?branch=master)](https://travis-ci.org/hypery2k/cordova-email-plugin) [![Build status](https://ci.appveyor.com/api/projects/status/d1g8ygx20or6htpg?svg=true)](https://ci.appveyor.com/project/hypery2k/cordova-email-plugin) [![npm version](https://badge.fury.io/js/cordova-plugin-urlhandler.svg)](http://badge.fury.io/js/cordova-plugin-urlhandler) [![Dependency Status](https://david-dm.org/hypery2k/cordova-email-plugin.svg)](https://david-dm.org/hypery2k/cordova-email-plugin) [![devDependency Status](https://david-dm.org/hypery2k/cordova-email-plugin/dev-status.svg)](https://david-dm.org/hypery2k/cordova-email-plugin#info=devDependencies) 
 
 > The plugin provides access to the standard interface that manages the editing and sending an email message. You can use this view controller to display a standard email view inside your application and populate the fields of that view with initial values, such as the subject, email recipients, body text, and attachments. The user can edit the initial contents you specify and choose to send the email or cancel the operation.
 
@@ -178,10 +178,11 @@ cordova.plugins.email.open({
 
 ### Get informed when the view has been dismissed
 The `open` method supports additional callback to get informed when the view has been dismissed.
+NOTE: `sent` result is available only on iOS platform
 
 ```javascript
-cordova.plugins.email.open(properties, function () {
-    console.log('email view dismissed');
+cordova.plugins.email.open(properties, function (sent) {
+    console.log('email ' + (sent ? 'sent' : 'cancelled'));
 }, this);
 ```
 

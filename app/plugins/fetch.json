@@ -1,32 +1,8 @@
 {
-    "cordova-plugin-whitelist": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/apache/cordova-plugin-whitelist.git",
-            "subdir": ".",
-            "ref": "r1.0.0"
-        }
-    },
-    "com.ionic.keyboard": {
+    "cordova-plugin-barcodescanner": {
         "source": {
             "type": "registry",
-            "id": "com.ionic.keyboard"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova-plugin-email": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-email"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova-plugin-camera": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-camera"
+            "id": "cordova-plugin-barcodescanner"
         },
         "is_top_level": true,
         "variables": {}
@@ -35,6 +11,22 @@
         "source": {
             "type": "registry",
             "id": "cordova-plugin-console"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-crosswalk-webview": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-crosswalk-webview"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-device": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-device"
         },
         "is_top_level": true,
         "variables": {}
@@ -55,42 +47,34 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-device": {
+    "cordova-plugin-splashscreen": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-device"
+            "id": "cordova-plugin-splashscreen"
         },
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-barcodescanner": {
+    "cordova-plugin-whitelist": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-barcodescanner"
+            "id": "cordova-plugin-whitelist"
         },
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-crosswalk-webview": {
+    "cordova-plugin-email": {
         "source": {
-            "type": "registry",
-            "id": "cordova-plugin-crosswalk-webview"
+            "type": "local",
+            "path": "/Users/mreinhardt/Documents/Programmierung/repositories/git/private/cordova-email-plugin"
         },
         "is_top_level": true,
         "variables": {}
     },
     "cordova-plugin-sqlite": {
         "source": {
-            "type": "registry",
-            "id": "cordova-plugin-sqlite"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova-plugin-splashscreen": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-splashscreen"
+            "type": "local",
+            "path": "/Users/mreinhardt/Documents/Programmierung/repositories/git/private/cordova-sqlite-plugin"
         },
         "is_top_level": true,
         "variables": {}

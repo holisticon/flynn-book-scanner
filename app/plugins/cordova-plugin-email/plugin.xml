@@ -24,7 +24,7 @@ under the License.
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 id="cordova-plugin-email"
-version="0.7.0">
+version="1.0.1">
 
     <name>EmailComposer</name>
     <description>
@@ -38,7 +38,7 @@ version="0.7.0">
     <issue>https://github.com/hypery2k/cordova-email-plugin/issues</issue>
 
     <engines>
-        <engine name="cordova" version=">=3.8.0" />
+        <engine name="cordova" version=">=4.0.0" />
     </engines>
 
     <!-- interface -->

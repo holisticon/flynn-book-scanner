@@ -225,6 +225,12 @@
         <PostBuildEvent>
         </PostBuildEvent>
     </PropertyGroup>
+    <ItemGroup />
+    <ItemGroup />
+    <ItemGroup />
+    <ItemGroup />
+    <ItemGroup />
+    <ItemGroup />
     <ItemGroup>
         <Compile Include="Plugins\cordova-plugin-barcodescanner\BarcodeScanner.cs" />
     </ItemGroup>
@@ -239,11 +245,8 @@
     </ItemGroup>
     <ItemGroup>
         <Reference Include="zxing.wp8.0">
-            <HintPath>plugins\cordova-plugin-barcodescanner\zxing.wp8.0.dll</HintPath>
+            <HintPath>plugins/cordova-plugin-barcodescanner/zxing.wp8.0.dll</HintPath>
         </Reference>
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Plugins\cordova-plugin-camera\Camera.cs" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Plugins\cordova-plugin-console\DebugConsole.cs" />
@@ -264,13 +267,19 @@
         <Content Include="Plugins\cordova-plugin-dialogs\notification-beep.wav" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Plugins\cordova-plugin-inappbrowser\InAppBrowser.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\cordova-plugin-splashscreen\SplashScreen.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\cordova-plugin-splashscreen\ResolutionHelper.cs" />
+    </ItemGroup>
+    <ItemGroup>
         <Compile Include="Plugins\cordova-plugin-email\EmailComposer.cs" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Plugins\cordova-plugin-email\Options.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Plugins\cordova-plugin-inappbrowser\InAppBrowser.cs" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Plugins\cordova-plugin-sqlite\SQLitePlugin.cs" />
@@ -526,11 +535,5 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Plugins\cordova-plugin-sqlite\where_c.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Plugins\cordova-plugin-splashscreen\SplashScreen.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Plugins\cordova-plugin-splashscreen\ResolutionHelper.cs" />
     </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-email",
-  "version": "0.7.1",
+  "version": "1.0.1-dev",
   "description": "Cordova Email Plugin",
   "cordova": {
     "id": "cordova-plugin-email",
