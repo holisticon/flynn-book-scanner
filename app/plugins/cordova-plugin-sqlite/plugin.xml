@@ -21,7 +21,7 @@ SOFTWARE.
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
             id="cordova-plugin-sqlite"
-            version="0.9.0">
+            version="1.0.1">
 
     <name>Cordova Sqllite Plugine</name>
 
@@ -35,7 +35,8 @@ SOFTWARE.
     </engines>
 
     <js-module src="www/SQLitePlugin.js" name="SQLitePlugin">
-        <clobbers target="SQLitePlugin" />
+        <clobbers target="window.sqlitePlugin"/>
+        <clobbers target="cordova.plugins.sqlitePlugin"/>
     </js-module>
 
     <!-- android -->

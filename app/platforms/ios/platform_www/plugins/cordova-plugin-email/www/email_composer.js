@@ -1,5 +1,4 @@
-cordova.define("cordova-plugin-email.EmailComposer", function(require, exports, module) {
-/*
+cordova.define("cordova-plugin-email.EmailComposer", function(require, exports, module) { /*
     Copyright 2013-2014 appPlant UG
 
     Licensed to the Apache Software Foundation (ASF) under one

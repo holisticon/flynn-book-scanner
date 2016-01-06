@@ -22,19 +22,19 @@
         "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
+        "cordova-plugin-email": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-plugin-email": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
         "cordova-plugin-sqlite": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },

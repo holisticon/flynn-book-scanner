@@ -231,6 +231,9 @@
     <ItemGroup />
     <ItemGroup />
     <ItemGroup />
+    <ItemGroup />
+    <ItemGroup />
+    <ItemGroup />
     <ItemGroup>
         <Compile Include="Plugins\cordova-plugin-barcodescanner\BarcodeScanner.cs" />
     </ItemGroup>
@@ -267,6 +270,12 @@
         <Content Include="Plugins\cordova-plugin-dialogs\notification-beep.wav" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Plugins\cordova-plugin-email\EmailComposer.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\cordova-plugin-email\Options.cs" />
+    </ItemGroup>
+    <ItemGroup>
         <Compile Include="Plugins\cordova-plugin-inappbrowser\InAppBrowser.cs" />
     </ItemGroup>
     <ItemGroup>
@@ -274,12 +283,6 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Plugins\cordova-plugin-splashscreen\ResolutionHelper.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Plugins\cordova-plugin-email\EmailComposer.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Plugins\cordova-plugin-email\Options.cs" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Plugins\cordova-plugin-sqlite\SQLitePlugin.cs" />

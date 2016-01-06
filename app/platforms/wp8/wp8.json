@@ -25,15 +25,15 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"EmailComposer\"><param name=\"wp-package\" value=\"EmailComposer\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"InAppBrowser\"><param name=\"wp-package\" value=\"InAppBrowser\" /></feature>",
                             "count": 1
                         },
                         {
                             "xml": "<feature name=\"SplashScreen\"><param name=\"wp-package\" value=\"SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"EmailComposer\"><param name=\"wp-package\" value=\"EmailComposer\" /></feature>",
                             "count": 1
                         },
                         {
@@ -46,6 +46,10 @@
             "Properties/WMAppManifest.xml": {
                 "parents": {
                     "/Deployment/App/Capabilities": [
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_ISV_CAMERA\" />",
+                            "count": 1
+                        },
                         {
                             "xml": "<Capability Name=\"ID_CAP_IDENTITY_DEVICE\" />",
                             "count": 1
@@ -75,19 +79,19 @@
         "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
         },
+        "cordova-plugin-email": {
+            "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
+        },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
         },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
         },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
-        },
-        "cordova-plugin-email": {
-            "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
-        },
         "cordova-plugin-sqlite": {
+            "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
+        },
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
         }
     },
@@ -134,6 +138,15 @@
             ]
         },
         {
+            "file": "plugins/cordova-plugin-email/www/email_composer.js",
+            "id": "cordova-plugin-email.EmailComposer",
+            "pluginId": "cordova-plugin-email",
+            "clobbers": [
+                "cordova.plugins.email",
+                "plugin.email"
+            ]
+        },
+        {
             "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
             "id": "cordova-plugin-inappbrowser.inappbrowser",
             "pluginId": "cordova-plugin-inappbrowser",
@@ -151,20 +164,12 @@
             ]
         },
         {
-            "file": "plugins/cordova-plugin-email/www/email_composer.js",
-            "id": "cordova-plugin-email.EmailComposer",
-            "pluginId": "cordova-plugin-email",
-            "clobbers": [
-                "cordova.plugins.email",
-                "plugin.email"
-            ]
-        },
-        {
             "file": "plugins/cordova-plugin-sqlite/www/SQLitePlugin.js",
             "id": "cordova-plugin-sqlite.SQLitePlugin",
             "pluginId": "cordova-plugin-sqlite",
             "clobbers": [
-                "SQLitePlugin"
+                "window.sqlitePlugin",
+                "cordova.plugins.sqlitePlugin"
             ]
         }
     ],
@@ -174,10 +179,10 @@
         "cordova-plugin-crosswalk-webview": "1.4.0",
         "cordova-plugin-device": "1.1.0",
         "cordova-plugin-dialogs": "1.2.0",
+        "cordova-plugin-email": "1.1.0",
         "cordova-plugin-inappbrowser": "1.1.1",
         "cordova-plugin-splashscreen": "3.0.0",
-        "cordova-plugin-whitelist": "1.2.0",
-        "cordova-plugin-email": "1.0.1",
-        "cordova-plugin-sqlite": "0.9.0"
+        "cordova-plugin-sqlite": "1.0.1",
+        "cordova-plugin-whitelist": "1.2.0"
     }
 }

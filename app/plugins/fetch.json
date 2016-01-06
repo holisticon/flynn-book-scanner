@@ -39,6 +39,14 @@
         "is_top_level": true,
         "variables": {}
     },
+    "cordova-plugin-email": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-email"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
     "cordova-plugin-inappbrowser": {
         "source": {
             "type": "registry",
@@ -55,26 +63,18 @@
         "is_top_level": true,
         "variables": {}
     },
+    "cordova-plugin-sqlite": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-sqlite"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
     "cordova-plugin-whitelist": {
         "source": {
             "type": "registry",
             "id": "cordova-plugin-whitelist"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova-plugin-email": {
-        "source": {
-            "type": "local",
-            "path": "/Users/mreinhardt/Documents/Programmierung/repositories/git/private/cordova-email-plugin"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova-plugin-sqlite": {
-        "source": {
-            "type": "local",
-            "path": "/Users/mreinhardt/Documents/Programmierung/repositories/git/private/cordova-sqlite-plugin"
         },
         "is_top_level": true,
         "variables": {}

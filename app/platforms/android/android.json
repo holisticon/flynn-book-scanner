@@ -41,6 +41,10 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"EmailComposer\"><param name=\"android-package\" value=\"de.martinreinhardt.cordova.plugins.email.EmailComposer\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
                             "count": 1
                         },
@@ -49,15 +53,11 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"EmailComposer\"><param name=\"android-package\" value=\"de.martinreinhardt.cordova.plugins.email.EmailComposer\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"SQLitePlugin\"><param name=\"android-package\" value=\"io.liteglue.SQLitePlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -605,19 +605,19 @@
         "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
+        "cordova-plugin-email": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-plugin-email": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
         "cordova-plugin-sqlite": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
@@ -656,6 +656,15 @@
             ]
         },
         {
+            "file": "plugins/cordova-plugin-email/www/email_composer.js",
+            "id": "cordova-plugin-email.EmailComposer",
+            "pluginId": "cordova-plugin-email",
+            "clobbers": [
+                "cordova.plugins.email",
+                "plugin.email"
+            ]
+        },
+        {
             "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
             "id": "cordova-plugin-inappbrowser.inappbrowser",
             "pluginId": "cordova-plugin-inappbrowser",
@@ -673,27 +682,19 @@
             ]
         },
         {
-            "file": "plugins/cordova-plugin-whitelist/whitelist.js",
-            "id": "cordova-plugin-whitelist.whitelist",
-            "pluginId": "cordova-plugin-whitelist",
-            "runs": true
-        },
-        {
-            "file": "plugins/cordova-plugin-email/www/email_composer.js",
-            "id": "cordova-plugin-email.EmailComposer",
-            "pluginId": "cordova-plugin-email",
-            "clobbers": [
-                "cordova.plugins.email",
-                "plugin.email"
-            ]
-        },
-        {
             "file": "plugins/cordova-plugin-sqlite/www/SQLitePlugin.js",
             "id": "cordova-plugin-sqlite.SQLitePlugin",
             "pluginId": "cordova-plugin-sqlite",
             "clobbers": [
-                "SQLitePlugin"
+                "window.sqlitePlugin",
+                "cordova.plugins.sqlitePlugin"
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-whitelist/whitelist.js",
+            "id": "cordova-plugin-whitelist.whitelist",
+            "pluginId": "cordova-plugin-whitelist",
+            "runs": true
         }
     ],
     "plugin_metadata": {
@@ -702,10 +703,10 @@
         "cordova-plugin-crosswalk-webview": "1.4.0",
         "cordova-plugin-device": "1.1.0",
         "cordova-plugin-dialogs": "1.2.0",
+        "cordova-plugin-email": "1.1.0",
         "cordova-plugin-inappbrowser": "1.1.1",
         "cordova-plugin-splashscreen": "3.0.0",
-        "cordova-plugin-whitelist": "1.2.0",
-        "cordova-plugin-email": "1.0.1",
-        "cordova-plugin-sqlite": "0.9.0"
+        "cordova-plugin-sqlite": "1.0.1",
+        "cordova-plugin-whitelist": "1.2.0"
     }
 }

@@ -5,6 +5,8 @@
 
 > Native interface to sqlite in a Cordova/PhoneGap plugin for Android, iOS, Windows Universal (8.1), Amazon Fire-OS, and WP(7/8) with API similar to HTML5/[Web SQL API](http://www.w3.org/TR/webdatabase/).
 
+[![NPM](https://nodei.co/npm/cordova-plugin-sqlite.png)](https://nodei.co/npm/cordova-plugin-sqlite/)
+
 License for Android, Windows Universal (8.1), Amazon Fire-OS, and WP(7/8) versions: MIT or Apache 2.0
 
 License for iOS version: MIT only

@@ -87,19 +87,19 @@
         "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
         },
+        "cordova-plugin-email": {
+            "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
+        },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
         },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
         },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
-        },
-        "cordova-plugin-email": {
-            "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
-        },
         "cordova-plugin-sqlite": {
+            "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
+        },
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "{bfe142a0-7335-11e5-a3d4-8f951938f2ea}"
         }
     },
