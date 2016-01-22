@@ -1,54 +1,55 @@
-<div class="padding" id="{{selectedBook.value.id}}">  
-   	<label class="item-input" ng-show="selectedBook.value.volumeInfo.title">
-			<span class="input-label">Title:</span>
- 			<span id="subtitle" type="text" >{{::selectedBook.value.volumeInfo.title}}</span>
-	</label>
-   	<label class="item-input" ng-show="selectedBook.value.volumeInfo.subtitle">
-			<span class="input-label">Subtitle:</span>
- 			<span id="subtitle" type="text" >{{::selectedBook.value.volumeInfo.subtitle}}</span>
-	</label>       	                       	
-   	<label class="item-input" ng-show="selectedBook.value.volumeInfo.imageLinks.thumbnail" >
-		<span class="input-label"></span>
-		<image-data image="selectedBook.image" ng-show="selectedBook.image"></image-data>
-		<img class="img-thumbnail" alt="book image" ng-show="!selectedBook.image" ng-src="{{selectedBook.value.volumeInfo.imageLinks.thumbnail}}" />  				  			
-	</label>
-	<label class="item-input" ng-show="selectedBook.authorInfo">
-			<span class="input-label">Author:</span>
- 			<span id="author" type="text" >{{::selectedBook.authorInfo}}</span>
-	</label>
-	<label class="item-input" ng-show="selectedBook.value.volumeInfo.publisher">
-			<span class="input-label">Publisher:</span>
- 			<span id="publisher" type="text" >{{::selectedBook.value.volumeInfo.publisher}}</span>
-	</label>
-	<label class="item-input" ng-show="selectedBook.value.volumeInfo.publishedDate">
-			<span class="input-label">Published:</span>
- 			<span id="publisher" type="text" >{{::selectedBook.value.volumeInfo.publishedDate | date: 'yyyy'}}</span>
-	</label>   
-	<label class="item-input" ng-show="selectedBook.value.volumeInfo.pageCount">
-			<span class="input-label">Pages:</span>
- 			<span id="pages" type="text" >{{::selectedBook.value.volumeInfo.pageCount}}</span>
-	</label>
-	<label class="item-input" ng-show="selectedBook.value.volumeInfo.industryIdentifiers[1].identifier">
-			<span class="input-label">ISBN:</span>
- 			<span id="isbn" type="text" >{{::selectedBook.isbnInfo}}</span>
-	</label> 
-	<label class="item-input" ng-show="selectedBook.value.volumeInfo.description">
- 			<span id="author" >{{::selectedBook.value.volumeInfo.description}}</span>
-	</label> 
-	<label class="item-input" ng-show="selectedBook.count">
-			<span class="input-label">Amount:</span>
- 			<span id="amount" type="tel" >{{::selectedBook.count}}</span>
-	</label>
-	<label class="item-input" ng-show="selectedBook.value.owner">
-			<span class="input-label">Owner:</span>
- 			<span id="owner" type="text" >{{::selectedBook.value.owner}}</span>
-	</label>
-	<label class="item-input" ng-show="selectedBook.value.bookshelf">
-			<span class="input-label">Bookshelf:</span>
- 			<span id="bookshelf" type="text" >{{::selectedBook.value.bookshelf}}</span>
-	</label>
-	<label class="item-input" ng-show="selectedBook.value.comment">
-			<span class="input-label">Comment:</span>
- 			<span id="comment" type="text" >{{::selectedBook.value.volumeInfo.subtitle}}</span>
-	</label>    
+<div class="padding" id="{{selectedBook.value.id}}">
+  <label class="item-input" ng-show="selectedBook.value.volumeInfo.title">
+    <span class="input-label">Title:</span>
+    <span id="title" type="text">{{::selectedBook.value.volumeInfo.title}}</span>
+  </label>
+  <label class="item-input" ng-show="selectedBook.value.volumeInfo.subtitle">
+    <span class="input-label">Subtitle:</span>
+    <span id="subtitle" type="text">{{::selectedBook.value.volumeInfo.subtitle}}</span>
+  </label>
+  <label class="item-input" ng-show="selectedBook.value.volumeInfo.imageLinks.thumbnail">
+    <span class="input-label"></span>
+    <image-data image="selectedBook.image" ng-show="selectedBook.image"></image-data>
+    <img class="img-thumbnail" alt="book image" ng-show="!selectedBook.image"
+         ng-src="{{selectedBook.value.volumeInfo.imageLinks.thumbnail}}"/>
+  </label>
+  <label class="item-input" ng-show="selectedBook.authorInfo">
+    <span class="input-label">Author:</span>
+    <span id="author" type="text">{{::selectedBook.authorInfo}}</span>
+  </label>
+  <label class="item-input" ng-show="selectedBook.value.volumeInfo.publisher">
+    <span class="input-label">Publisher:</span>
+    <span id="publisher" type="text">{{::selectedBook.value.volumeInfo.publisher}}</span>
+  </label>
+  <label class="item-input" ng-show="selectedBook.value.volumeInfo.publishedDate">
+    <span class="input-label">Published:</span>
+    <span id="publishedDate" type="text">{{::selectedBook.value.volumeInfo.publishedDate | date: 'yyyy'}}</span>
+  </label>
+  <label class="item-input" ng-show="selectedBook.value.volumeInfo.pageCount">
+    <span class="input-label">Pages:</span>
+    <span id="pages" type="text">{{::selectedBook.value.volumeInfo.pageCount}}</span>
+  </label>
+  <label class="item-input" ng-show="selectedBook.value.volumeInfo.industryIdentifiers[1].identifier">
+    <span class="input-label">ISBN:</span>
+    <span id="isbn" type="text">{{::selectedBook.isbnInfo}}</span>
+  </label>
+  <label class="item-input" ng-show="selectedBook.value.volumeInfo.description">
+    <span id="description">{{::selectedBook.value.volumeInfo.description}}</span>
+  </label>
+  <label class="item-input" ng-show="selectedBook.count">
+    <span class="input-label">Amount:</span>
+    <span id="amount" type="tel">{{::selectedBook.count}}</span>
+  </label>
+  <label class="item-input" ng-show="selectedBook.value.owner">
+    <span class="input-label">Owner:</span>
+    <span id="owner" type="text">{{::selectedBook.value.owner}}</span>
+  </label>
+  <label class="item-input" ng-show="selectedBook.value.bookshelf">
+    <span class="input-label">Bookshelf:</span>
+    <span id="bookshelf" type="text">{{::selectedBook.value.bookshelf}}</span>
+  </label>
+  <label class="item-input" ng-show="selectedBook.value.comment">
+    <span class="input-label">Comment:</span>
+    <span id="comment" type="text">{{::selectedBook.value.volumeInfo.subtitle}}</span>
+  </label>
 </div>
