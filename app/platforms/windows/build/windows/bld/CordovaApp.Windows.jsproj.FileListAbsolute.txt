@@ -1,0 +1,6 @@
+C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\platforms\windows\build\windows\debug\anycpu\win8.1\SQLite3.winmd
+C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\platforms\windows\build\windows\debug\anycpu\win8.1\WinRTBarcodeReader.winmd
+C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\platforms\windows\build\windows\debug\anycpu\win8.1\ZXing.winmd
+C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\platforms\windows\build\windows\debug\anycpu\win8.1\SQLite3.pdb
+C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\platforms\windows\build\windows\debug\anycpu\win8.1\SQLite3.pri
+C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\platforms\windows\build\windows\bld\CordovaApp.Windows.jsprojResolveAssemblyReference.cache
