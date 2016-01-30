@@ -1,0 +1,31 @@
+{
+  "name": "cordova-plugin-urlhandler",
+  "version": "0.7.2",
+  "description": "Cordova URL Handler Plugin",
+  "cordova": {
+    "id": "cordova-plugin-urlhandler",
+    "platforms": [
+      "android",
+      "ios",
+      "wp8",
+      "windows",
+      "windows8"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hypery2k/cordova-urlhandler-plugin.git"
+  },
+  "keywords": [
+    "cordova",
+    "urlhandler",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "cordova-wp8",
+    "cordova-windows",
+    "cordova-windows8"
+  ],
+  "author": "Martin Reinhardt",
+  "license": "MIT"
+}

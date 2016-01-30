@@ -36,5 +36,20 @@
     <string></string>
     <key>UIRequiresFullScreen</key>
     <true/>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>flynnApp</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>flynnApp</string>
+        </array>
+      </dict>
+    </array>
   </dict>
 </plist>

@@ -78,5 +78,15 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "cordova-plugin-urlhandler": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-urlhandler"
+        },
+        "is_top_level": true,
+        "variables": {
+            "URL_SCHEME": "flynnApp"
+        }
     }
 }

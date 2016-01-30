@@ -44,4 +44,7 @@
     <feature name="SQLitePlugin">
         <param name="wp-package" value="SQLitePlugin" />
     </feature>
+    <feature name="CustomUrl">
+        <param name="wp-package" value="CustomUrl" />
+    </feature>
 </widget>

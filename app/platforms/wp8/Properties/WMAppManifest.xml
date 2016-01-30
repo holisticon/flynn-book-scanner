@@ -38,5 +38,8 @@
             <ScreenResolution Name="ID_RESOLUTION_WXGA" />
             <ScreenResolution Name="ID_RESOLUTION_HD720P" />
         </ScreenResolutions>
+        <Extensions>
+            <Protocol Name="shopincomo" NavUriFragment="encodedLaunchUri=%s" TaskID="_default" />
+        </Extensions>
     </App>
 </Deployment>

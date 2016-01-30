@@ -541,4 +541,7 @@
     <ItemGroup>
         <Compile Include="Plugins\cordova-plugin-sqlite\where_c.cs" />
     </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\cordova-plugin-urlhandler\CustomUriMapper.cs" />
+    </ItemGroup>
 </Project>

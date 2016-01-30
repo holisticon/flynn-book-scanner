@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The MIT License (MIT)
+
+Copyright (c) 2015 Martin Reinhardt
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+id="cordova-plugin-urlhandler"
+version="0.7.0">
+
+    <name>URLHandler</name>
+    <description>
+        Launch your app by using this URL:  mycoolapp://
+        You can add a path and even pass params like this: mycoolerapp://somepath?foo=bar
+    </description>
+    <author>Martin Reinhardt, Eddy Verbruggen</author>
+    <license>MIT</license>
+    <keywords>url, app-url, urlhandler</keywords>
+    <repo>https://github.com/hypery2k/cordova-urlhandler-plugin.git</repo>
+    <issue>https://github.com/hypery2k/cordova-urlhandler-plugin/issues</issue>
+
+    <preference name="URL_SCHEME" />
+
+    <engines>
+      <engine name="cordova" version=">=3.8.0"/>
+    </engines>
+
+    <!-- ios -->
+    <platform name="ios">
+      <js-module src="www/ios/LaunchMyApp.js" name="LaunchMyApp">
+        <clobbers target="window.plugins.launchmyapp" />
+      </js-module>
+
+      <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+        <array>
+          <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+              <string>$URL_SCHEME</string>
+            </array>
+          </dict>
+        </array>
+      </config-file>
+    </platform>
+
+    <!-- android -->
+    <platform name="android">
+      <js-module src="www/android/LaunchMyApp.js" name="LaunchMyApp">
+        <clobbers target="window.plugins.launchmyapp" />
+      </js-module>
+
+      <config-file target="res/xml/config.xml" parent="/*">
+        <feature name="LaunchMyApp">
+          <param name="android-package" value="de.martinreinhardt.cordova.plugins.urlhandler.LaunchMyApp"/>
+        </feature>
+      </config-file>
+
+      <source-file src="src/android/LaunchMyApp.java" target-dir="src/de/martinreinhardt/cordova/plugins/urlhandler"/>
+
+      <config-file target="AndroidManifest.xml" parent="/*/application/activity">
+        <intent-filter>
+          <data android:scheme="$URL_SCHEME"/>
+          <action android:name="android.intent.action.VIEW" />
+          <category android:name="android.intent.category.DEFAULT" />
+          <category android:name="android.intent.category.BROWSABLE" />
+        </intent-filter>
+      </config-file>
+    </platform>
+
+    <!-- windows8 -->
+    <platform name="windows8">
+      <config-file target="package.appxmanifest" parent="/Package/Applications/Application/Extensions">
+        <Extension Category="windows.protocol" StartPage="www/index.html">
+          <Protocol Name="$URL_SCHEME" />
+        </Extension>
+      </config-file>
+
+      <js-module src="www/windows/LaunchMyApp.js" name="LaunchMyApp">
+        <clobbers target="window.plugins.launchmyapp" />
+      </js-module>
+    </platform>
+
+    <!-- wp8 -->
+    <platform name="wp8">
+      <config-file target="config.xml" parent="/*">
+        <feature name="CustomUrl">
+          <param name="wp-package" value="CustomUrl"/>
+        </feature>
+      </config-file>
+
+      <config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Extensions">
+        <Protocol Name="shopincomo" NavUriFragment="encodedLaunchUri=%s" TaskID="_default" />
+      </config-file>
+
+      <source-file src="src/wp8/CustomUriMapper.cs" />
+      <js-module src="www/wp8/LaunchMyApp.js" name="LaunchMyApp">
+        <clobbers target="window.plugins.launchmyapp" />
+      </js-module>
+
+    </platform>
+
+    <!-- windows -->
+    <platform name="windows">
+      <config-file target="package.windows.appxmanifest" parent="/Package/Applications/Application/Extensions">
+        <Extension Category="windows.protocol" StartPage="www/index.html">
+          <Protocol Name="$URL_SCHEME" />
+        </Extension>
+      </config-file>
+      <config-file target="package.windows80.appxmanifest" parent="/Package/Applications/Application/Extensions">
+        <Extension Category="windows.protocol" StartPage="www/index.html">
+          <Protocol Name="$URL_SCHEME" />
+        </Extension>
+      </config-file>
+      <config-file target="package.phone.appxmanifest" parent="/Package/Applications/Application/Extensions">
+        <Extension Category="windows.protocol" StartPage="www/index.html">
+          <Protocol Name="$URL_SCHEME" />
+        </Extension>
+      </config-file>
+      <js-module src="www/windows/LaunchMyApp.js" name="LaunchMyApp">
+        <clobbers target="window.plugins.launchmyapp" />
+      </js-module>
+    </platform>
+
+</plugin>

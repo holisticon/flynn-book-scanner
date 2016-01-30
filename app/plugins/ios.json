@@ -94,6 +94,16 @@
                         }
                     ]
                 }
+            },
+            "*-Info.plist": {
+                "parents": {
+                    "CFBundleURLTypes": [
+                        {
+                            "xml": "<array><dict><key>CFBundleURLSchemes</key><array><string>flynnApp</string></array></dict></array>",
+                            "count": 1
+                        }
+                    ]
+                }
             }
         }
     },
@@ -126,6 +136,10 @@
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-urlhandler": {
+            "URL_SCHEME": "flynnApp",
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
