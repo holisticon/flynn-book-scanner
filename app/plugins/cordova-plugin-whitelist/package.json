@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-whitelist",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Cordova Whitelist Plugin",
   "cordova": {
     "platforms": [
@@ -20,7 +20,7 @@
   "engines": [
     {
       "name": "cordova-android",
-      "version": ">=4.0.0-dev"
+      "version": ">=4.0.0"
     }
   ],
   "author": "Apache Software Foundation",

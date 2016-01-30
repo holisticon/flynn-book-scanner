@@ -31,15 +31,10 @@
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSMainNibFile</key>
-    <string/>
+    <string></string>
     <key>NSMainNibFile~ipad</key>
-    <string/>
+    <string></string>
     <key>UIRequiresFullScreen</key>
     <true/>
-    <key>NSAppTransportSecurity</key>
-    <dict>
-      <key>NSAllowsArbitraryLoads</key>
-      <true/>
-    </dict>
   </dict>
 </plist>

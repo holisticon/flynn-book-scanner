@@ -234,6 +234,8 @@
     <ItemGroup />
     <ItemGroup />
     <ItemGroup />
+    <ItemGroup />
+    <ItemGroup />
     <ItemGroup>
         <Compile Include="Plugins\cordova-plugin-barcodescanner\BarcodeScanner.cs" />
     </ItemGroup>
