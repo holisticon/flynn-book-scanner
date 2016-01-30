@@ -16,6 +16,7 @@
     }
   },
   "devDependencies": {
+    "appium": "1.4.16",
     "bower": "^1.4.1",
     "findup-sync": "^0.2.1",
     "grunt": "^0.4.5",
