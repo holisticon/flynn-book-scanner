@@ -7,7 +7,7 @@ before_script:
   - pwd
   - cd app
   - npm install
-  - ./node_modules/appium/bin/appium.js
+  - ./node_modules/appium/bin/appium.js &
   - grunt build
 script:
   - pwd
