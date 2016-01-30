@@ -1,6 +1,7 @@
 language: objective-c
+osx_image: xcode7.2
 before_install:
-  - npm install -g grunt-cli bower
+  - npm install -g grunt-cli bower protractor
   - ./scripts/prepare_ci.sh
 before_script:
   - pwd

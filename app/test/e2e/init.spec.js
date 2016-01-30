@@ -6,9 +6,14 @@ describe('init', function () {
     util.loadApp(browser);
   });
 
-  it('should save settings', function () {
-    element(by.xpath('//*[@data-qa="inputSettingsOwner"]')).sendKeys('Holisticon AG');
+  it('should load App', function () {
     util.waitForLoader(browser);
-    element(by.xpath('//*[@data-qa="saveSettingsGeneral"]')).click();
   });
+
+  /*
+   it('should save settings', function () {
+   element(by.xpath('//*[@data-qa="inputSettingsOwner"]')).sendKeys('Holisticon AG');
+   util.waitForLoader(browser);
+   element(by.xpath('//*[@data-qa="saveSettingsGeneral"]')).click();
+   });*/
 });
