@@ -57,6 +57,7 @@
     "karma-jasmine-html-reporter": "0.1.8",
     "karma-junit-reporter": "0.3.4",
     "karma-phantomjs-launcher": "0.2.1",
+    "karma-safari-launcher": "0.1.1",
     "load-grunt-tasks": "3.2.0",
     "nopt": "^3.0.3",
     "phantomjs": "1.9.18",

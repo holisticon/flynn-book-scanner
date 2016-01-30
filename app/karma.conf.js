@@ -92,4 +92,8 @@ module.exports = function (config) {
     // URL root prevent conflicts with the site root
     // urlRoot: '_karma_'
   });
+  // use safari on travis CI
+  if (process.env.TRAVIS) {
+    config.browsers = ['Safari'];
+  }
 };

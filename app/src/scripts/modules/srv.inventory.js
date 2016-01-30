@@ -20,8 +20,19 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
       NAME_OF_POUCHDB = activeProfile.dbName;
       var db;
       if (!db) {
-        // default use websql
-        db = new PouchDB(NAME_OF_POUCHDB, {adapter: 'websql', size: 50});
+        if (typeof cordova != 'undefined') {
+
+          if (cordova.platformId === 'android') {
+            // for performance use indexedDB on Android
+            db = new PouchDB(NAME_OF_POUCHDB, {adapter: 'idb', size: 50});
+          } else {
+            // default use websql
+            db = new PouchDB(NAME_OF_POUCHDB, {adapter: 'websql', size: 50});
+          }
+        } else {
+          // default use websql
+          db = new PouchDB(NAME_OF_POUCHDB, {adapter: 'websql'});
+        }
       }
       return db;
     }
