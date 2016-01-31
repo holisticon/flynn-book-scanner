@@ -73,6 +73,13 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+      proxies: [
+        {
+          context: '/flynn',
+          host: '33.33.33.10',
+          port: 80
+        }
+      ],
       livereload: {
         options: {
           open: true,
