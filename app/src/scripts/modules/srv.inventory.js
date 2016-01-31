@@ -63,14 +63,20 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
           localDB = getDB();
         if (localDB) {
           if (activeProfile.user && activeProfile.password) {
-            var authorization = encodeURIComponent(activeProfile.user) + ':' + encodeURIComponent(activeProfile.password),
-              remoteCouch = couchDbUrl.replace('://', '://' + authorization + '@');
+            // var authorization = encodeURIComponent(activeProfile.user) + ':' + encodeURIComponent(activeProfile.password),
+            //var authorization = activeProfile.user + ':' + activeProfile.password,
+
+            var basicAuth = base64.encode(activeProfile.user + ":" + activeProfile.password);
             $log.info('Syncing with couchDB started: ' + couchDbUrl);
             // check for network availability first
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + basicAuth;
             $http({
               method: 'GET',
-              url: remoteCouch,
-              timeout: APP_CONFIG.timeout,
+              url: couchDbUrl,
+              headers: {
+                'Authorization': 'Basic ' + basicAuth
+              },
+              timeout: APP_CONFIG.timeout
             }).then(function () {
               localDB.sync(remoteCouch)
                 .on('change', function (info) {
