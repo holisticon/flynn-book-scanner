@@ -3,10 +3,9 @@ osx_image: xcode7.2
 before_install:
   - npm install -g grunt-cli bower cordova@latest protractor
   - sudo apt-get install -qq libstdc++6:i386 lib32z1
-  - export COMPONENTS=build-tools-22.0.1,android-17,sys-img-armeabi-v7a-android-22,extra-android-support,extra-google-google_play_services,extra-google-gcm,build-tools-22.0.1,extra-google-m2repository,extra-android-m2repository
-  - curl -L https://raw.github.com/embarkmobile/android-sdk-installer/version-1/android-sdk-installer | bash /dev/stdin --install=$COMPONENTS
+  - export COMPONENTS=build-tools-22.0.1,android-22,sys-img-armeabi-v7a-android-22,extra-android-support,extra-google-google_play_services,extra-google-gcm,build-tools-22.0.1,extra-google-m2repository,extra-android-m2repository
+  - curl -L https://raw.github.com/embarkmobile/android-sdk-installer/version-2/android-sdk-installer | bash /dev/stdin --install=$COMPONENTS
   - source ~/.android-sdk-installer/env
-
   # Create and start emulator
   - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
