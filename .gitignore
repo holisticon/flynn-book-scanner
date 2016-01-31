@@ -22,7 +22,6 @@ app/platforms/android/android_keystore
 app/platforms/android/CordovaLib/build/*
 app/platforms/android/build/*
 app/platforms/android/res/xml/config.xml
-app/platforms/ios/Flynn/config.xml
 app/platforms/ios/Flynn.xcodeproj/project.xcworkspace/xcuserdata/*
 app/platforms/android/assets/www/bower_components/*
 app/platforms/ios/www/bower_components/*
