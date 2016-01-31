@@ -43,6 +43,9 @@
         },
         "cordova-plugin-android-support-v4": {
             "PACKAGE_NAME": "Flynn"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "Flynn"
         }
     },
     "dependent_plugins": {}
