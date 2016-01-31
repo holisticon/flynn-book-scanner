@@ -649,6 +649,9 @@
         "cordova-plugin-urlhandler": {
             "URL_SCHEME": "flynnApp",
             "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-android-support-v4": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
     "dependent_plugins": {}

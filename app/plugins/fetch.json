@@ -88,5 +88,13 @@
         "variables": {
             "URL_SCHEME": "flynnApp"
         }
+    },
+    "cordova-plugin-android-support-v4": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-android-support-v4"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }
