@@ -26,41 +26,36 @@ Global steps:
 
 Steps in project directory `app`:
 
-* ```bash
+```bash
   $ cd app
-  ```
-* ```bash
   $ npm install
-  ```
-* ```bash
-  $ bower install
-  ```
-* ```bash
   $ grunt
-  ```
+```
 
 # Setup a development environment
 
-Steps in project directory `app`:
-* ```bash
+* Steps in project directory:
+```bash
   $ cd app
-  ```
-* ```bash
   $ grunt server
-  ```
+```
 * open chrome with disabled security:
   ```bash
   $ open /Applications/Google\ Chrome.app --args --disable-web-security`
   or:
   $ /usr/bin/google-chrome --disable-web-security
   ```
+* To test CouchDB replication start Vagrant VM:
+```bash
+  $ cd app
+  $ vagrant up
+```
+* You can access CouchDB at http://33.33.33.10/_utils/status.html (admin/admin)
 
-For debugging in project directory `app`:
+For debugging:
 
 * ```bash
   $ cd app
-  ```
-* ```bash
   $ ./node_modules/karma/bin/karma start
   ```
 * open browser at http://localhost:8080

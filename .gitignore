@@ -36,3 +36,6 @@ app/platforms/ios/Flynn.xcodeproj/xcuserdata/*
 app/platforms/ios/CordovaLib/CordovaLib.xcodeproj/xcuserdata/*
 app/node/*
 app/platforms/ios/Flynn.xcodeproj/project.xcworkspace/*
+
+# Vagrant
+app/.vagrant/*

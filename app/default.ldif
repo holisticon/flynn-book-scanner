@@ -1,0 +1,55 @@
+
+# Define top-level entry:
+dn: dc=holisticon,dc=de
+objectClass: dcObject
+objectClass: organization
+o: Holisticon AG
+dc: holisticon
+
+# Define an entry to contain users:
+dn: ou=people,dc=holisticon,dc=de
+objectClass: organizationalUnit
+ou: users
+
+# Define some users:
+dn: uid=admin, ou=people,dc=holisticon,dc=de
+userPassword: admin
+objectClass: top
+objectClass: inetOrgPerson
+sn: The admin account
+cn: The admin
+uid: admin
+
+dn: uid=consultant, ou=people,dc=holisticon,dc=de
+userPassword: consultant
+objectClass: top
+objectClass: inetOrgPerson
+sn: The consultant account
+cn: The consultant
+uid: consultant
+
+dn: uid=consultant2, ou=people,dc=holisticon,dc=de
+userPassword: umläut!
+objectClass: top
+objectClass: inetOrgPerson
+sn: The consultant account
+cn: The consultant
+uid: consultant3
+
+dn: uid=consultant3, ou=people,dc=holisticon,dc=de
+userPassword: consult@nt2
+objectClass: top
+objectClass: inetOrgPerson
+sn: The consultant account
+cn: The consultant
+uid: consultant2
+
+# Define groups top level entry
+dn: ou=groups,dc=holisticon,dc=de
+objectClass: organizationalUnit
+ou: users
+
+dn: cn=admin, ou=groups,dc=holisticon,dc=de
+objectClass: groupOfUniqueNames
+uniqueMember: cn=admin,ou=people,dc=holisticon,dc=de
+cn: admin

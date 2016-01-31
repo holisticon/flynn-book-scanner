@@ -1,0 +1,32 @@
+<VirtualHost *:80>
+  ServerAdmin webmaster@dummy-host.example.com
+     DocumentRoot "/var/www"
+     ServerName couchdb.localhost
+     AllowEncodedSlashes On
+     ProxyRequests Off
+     KeepAlive Off
+
+   <Proxy *>
+        AuthBasicProvider ldap
+        AuthLDAPURL "ldap://127.0.0.1:389/ou=people,dc=holisticon,dc=de"
+        AuthLDAPBindDN "uid=admin,ou=people,dc=holisticon,dc=de"
+        AuthLDAPBindPassword "admin"
+        AuthType Basic
+        AuthName "Flynn"
+        require valid-user
+   </Proxy>
+
+    ProxyPass / http://localhost:5984/ nocanon
+    ProxyPassReverse / http://localhost:5984/
+
+    # Remove Auth-Header to allow anonymous operations on couchdb
+    RequestHeader unset Authorization
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel warn
+
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
