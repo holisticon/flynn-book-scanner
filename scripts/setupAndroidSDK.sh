@@ -3,7 +3,7 @@ echo "# Executing https://raw.github.com/embarkmobile/android-sdk-installer"
 echo ""
 sudo apt-get install -qq libstdc++6:i386 lib32z1
 curl -L https://raw.github.com/embarkmobile/android-sdk-installer/version-2/android-sdk-installer \
-  | bash /dev/stdin --install=build-tools-22.0.1,android-22,sys-img-armeabi-v7a-android-22 \
+  | bash /dev/stdin --install=build-tools-22.0.1,android-22,sys-img-armeabi-v7a-android-22,extra-android-support \
   && source ~/.android-sdk-installer/env
 
 echo ""
