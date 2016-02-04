@@ -89,11 +89,11 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"ios-package\" value=\"SQLitePlugin\" /></feature>",
+                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
+                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"ios-package\" value=\"SQLitePlugin\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -136,9 +136,6 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-sqlite": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
@@ -150,6 +147,9 @@
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-sqlite-storage": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },

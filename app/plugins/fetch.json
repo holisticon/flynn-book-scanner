@@ -63,14 +63,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-sqlite": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-sqlite"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-whitelist": {
         "source": {
             "type": "registry",
@@ -101,6 +93,14 @@
         "source": {
             "type": "registry",
             "id": "ionic-plugin-keyboard"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-sqlite-storage": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-sqlite-storage"
         },
         "is_top_level": true,
         "variables": {}

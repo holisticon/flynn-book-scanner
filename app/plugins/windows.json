@@ -31,9 +31,6 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "Flynn"
         },
-        "cordova-plugin-sqlite": {
-            "PACKAGE_NAME": "Flynn"
-        },
         "cordova-plugin-urlhandler": {
             "URL_SCHEME": "flynnApp",
             "PACKAGE_NAME": "Flynn"
@@ -45,6 +42,9 @@
             "PACKAGE_NAME": "Flynn"
         },
         "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "cordova-sqlite-storage": {
             "PACKAGE_NAME": "Flynn"
         }
     },
