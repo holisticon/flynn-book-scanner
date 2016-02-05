@@ -38,9 +38,6 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "Flynn"
         },
-        "cordova-plugin-android-support-v4": {
-            "PACKAGE_NAME": "Flynn"
-        },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "Flynn"
         },

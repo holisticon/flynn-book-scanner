@@ -143,9 +143,6 @@
             "URL_SCHEME": "flynnApp",
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-android-support-v4": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
