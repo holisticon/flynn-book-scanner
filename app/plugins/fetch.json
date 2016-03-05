@@ -39,14 +39,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-email": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-email"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-inappbrowser": {
         "source": {
             "type": "registry",

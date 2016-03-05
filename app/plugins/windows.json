@@ -22,9 +22,6 @@
         "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "Flynn"
         },
-        "cordova-plugin-email": {
-            "PACKAGE_NAME": "Flynn"
-        },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "Flynn"
         },
