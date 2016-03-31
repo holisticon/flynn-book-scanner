@@ -1,5 +1,4 @@
-cordova.define("cordova-plugin-splashscreen.SplashScreenProxy", function(require, exports, module) {
-/*
+cordova.define("cordova-plugin-splashscreen.SplashScreenProxy", function(require, exports, module) { /*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -21,17 +20,16 @@ cordova.define("cordova-plugin-splashscreen.SplashScreenProxy", function(require
 */
 
 /*jslint sloppy:true */
-/*global Windows:true, require, module, window, document, WinJS */
+/*global WinJS */
 
-var cordova = require('cordova'),
-    channel = require('cordova/channel');
+var cordova = require('cordova');
 
 var isPhone = (cordova.platformId == "windows") && WinJS.Utilities.isPhone;
 var isHosted = window.location.protocol.indexOf('http') === 0;
-var localSplash = null;
+var localSplash = null, localSplashImage = null;
 var bgColor = "#464646"; // default backgrond color; TDOO - read it from .appxmanifest
-var splashImageSrc = (isHosted ? "ms-appx-web" : "ms-appx") + ":///images/"
-    + (isPhone ? "splashscreenphone.png" : "splashscreen.png");
+var splashImageSrc = (isHosted ? "ms-appx-web" : "ms-appx") + ":///images/" +
+    (isPhone ? "splashscreenphone.png" : "splashscreen.png");
 
 var SplashScreen = {
     setBGColor: function (cssBGColor) {

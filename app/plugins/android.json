@@ -640,11 +640,11 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-urlhandler": {
-            "URL_SCHEME": "flynnApp",
+        "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "ionic-plugin-keyboard": {
+        "cordova-plugin-urlhandler": {
+            "URL_SCHEME": "flynnApp",
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-sqlite-storage": {

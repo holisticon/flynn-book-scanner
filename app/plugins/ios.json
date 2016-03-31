@@ -84,6 +84,25 @@
         },
         "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-urlhandler": {
+            "URL_SCHEME": "flynnApp",
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
     "dependent_plugins": {}

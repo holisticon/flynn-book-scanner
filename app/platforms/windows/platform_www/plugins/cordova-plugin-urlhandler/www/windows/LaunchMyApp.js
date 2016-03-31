@@ -1,5 +1,4 @@
-cordova.define("cordova-plugin-urlhandler.LaunchMyApp", function(require, exports, module) {
-(function () {
+cordova.define("cordova-plugin-urlhandler.LaunchMyApp", function(require, exports, module) { (function () {
 	function activatedHandler(e) {
 		if (typeof handleOpenURL == 'function' && e.uri) {
 			handleOpenURL(e.uri.rawUri);

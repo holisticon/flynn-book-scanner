@@ -55,14 +55,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-whitelist": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-whitelist"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-urlhandler": {
         "source": {
             "type": "registry",
@@ -72,6 +64,14 @@
         "variables": {
             "URL_SCHEME": "flynnApp"
         }
+    },
+    "cordova-plugin-whitelist": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-whitelist"
+        },
+        "is_top_level": true,
+        "variables": {}
     },
     "ionic-plugin-keyboard": {
         "source": {
@@ -84,7 +84,7 @@
     "cordova-sqlite-storage": {
         "source": {
             "type": "registry",
-            "id": "cordova-sqlite-storage"
+            "id": "cordova-sqlite-storage@0.7.14"
         },
         "is_top_level": true,
         "variables": {}
