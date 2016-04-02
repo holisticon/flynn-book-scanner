@@ -74,7 +74,7 @@
     "node": ">=0.8.0"
   },
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install && npm rebuild node-sass && webdriver-manager update",
+    "postinstall": "bower install && npm rebuild node-sass && webdriver-manager update",
     "start": "npm rebuild node-sass && grunt serve",
     "test": "grunt test"
   }
