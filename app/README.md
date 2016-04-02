@@ -50,7 +50,10 @@ Steps in project directory `app`:
   $ cd app
   $ vagrant up
 ```
-* You can access CouchDB at http://33.33.33.10/_utils/status.html (admin/admin)
+* You can test with CouchDB at http://33.33.33.10/_utils/status.html (admin/admin)
+  * Set CouchDB to 'http://localhost:9000/flynn'
+  * User: consultant
+  * Password: consultant
 
 For debugging:
 
