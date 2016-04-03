@@ -13,16 +13,4 @@
     </ItemGroup>
     <Import Condition="Exists('$(MSBuildThisFileDirectory)CordovaAppDebug.projitems') And '$(Configuration)'=='Debug'" Project="CordovaAppDebug.projitems" />
     <Import Condition="Exists('$(MSBuildThisFileDirectory)CordovaAppRelease.projitems') And '$(Configuration)'!='Debug'" Project="CordovaAppRelease.projitems" />
-    <ItemGroup>
-        <Reference Include="ZXing">
-            <HintPath>plugins\cordova-plugin-barcodescanner\ZXing.winmd</HintPath>
-            <IsWinMDFile>true</IsWinMDFile>
-        </Reference>
-    </ItemGroup>
-    <ItemGroup>
-        <Reference Include="WinRTBarcodeReader">
-            <HintPath>plugins\cordova-plugin-barcodescanner\WinRTBarcodeReader.winmd</HintPath>
-            <IsWinMDFile>true</IsWinMDFile>
-        </Reference>
-    </ItemGroup>
 </Project>

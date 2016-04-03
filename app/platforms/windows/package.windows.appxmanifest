@@ -30,15 +30,9 @@
                     <m2:Rotation Preference="landscapeFlipped" />
                 </m2:InitialRotationPreference>
             </m2:VisualElements>
-            <Extensions>
-                <Extension Category="windows.protocol" StartPage="www/index.html">
-                    <Protocol Name="flynnApp" />
-                </Extension>
-            </Extensions>
         </Application>
     </Applications>
     <Capabilities>
         <Capability Name="internetClient" />
-        <DeviceCapability Name="webcam" />
     </Capabilities>
 </Package>

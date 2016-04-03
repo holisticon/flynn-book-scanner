@@ -69,9 +69,6 @@
     <Import Label="Shared" Project="CordovaApp.projitems" />
     <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
     <ItemGroup>
-        <ProjectReference Include="C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\plugins\cordova-plugin-sqlite\src\windows\SQLite3-WinRT\SQLite3\SQLite3.WindowsPhone.vcxproj" />
-    </ItemGroup>
-    <ItemGroup>
-        <ProjectReference Include="\Users\mreinhardt\Documents\Programmierung\repositories\git\job\flynn-book-scanner\app\plugins\cordova-sqlite-storage\src\windows\SQLite3-WinRT\SQLite3\SQLite3.WindowsPhone\SQLite3.WindowsPhone.vcxproj" />
+        <ProjectReference Include="C:\Users\conta\Documents\GitHub\flynn-book-scanner\app\plugins\cordova-sqlite-storage\src\windows\SQLite3-WinRT\SQLite3\SQLite3.WindowsPhone\SQLite3.WindowsPhone.vcxproj" />
     </ItemGroup>
 </Project>

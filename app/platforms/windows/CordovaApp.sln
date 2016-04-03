@@ -40,13 +40,9 @@ Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CordovaApp.Windows10", "Cor
 		{d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}={d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\plugins\cordova-plugin-sqlite\src\windows\SQLite3-WinRT\SQLite3\SQLite3.Windows.vcxproj", "{d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "C:\Users\conta\Documents\GitHub\flynn-book-scanner\app\plugins\cordova-sqlite-storage\src\windows\SQLite3-WinRT\SQLite3\SQLite3.Windows\SQLite3.Windows.vcxproj", "{d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\plugins\cordova-plugin-sqlite\src\windows\SQLite3-WinRT\SQLite3\SQLite3.WindowsPhone.vcxproj", "{6435c2e4-4fd2-405a-9ee2-5312ae852782}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "\Users\mreinhardt\Documents\Programmierung\repositories\git\job\flynn-book-scanner\app\plugins\cordova-sqlite-storage\src\windows\SQLite3-WinRT\SQLite3\SQLite3.Windows\SQLite3.Windows.vcxproj", "{d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "\Users\mreinhardt\Documents\Programmierung\repositories\git\job\flynn-book-scanner\app\plugins\cordova-sqlite-storage\src\windows\SQLite3-WinRT\SQLite3\SQLite3.WindowsPhone\SQLite3.WindowsPhone.vcxproj", "{6435c2e4-4fd2-405a-9ee2-5312ae852782}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "C:\Users\conta\Documents\GitHub\flynn-book-scanner\app\plugins\cordova-sqlite-storage\src\windows\SQLite3-WinRT\SQLite3\SQLite3.WindowsPhone\SQLite3.WindowsPhone.vcxproj", "{6435c2e4-4fd2-405a-9ee2-5312ae852782}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

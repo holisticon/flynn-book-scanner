@@ -80,11 +80,14 @@ function AppxManifest(path, prefix) {
  *   constructor to use based on xmlns attributes of Package node
  *
  * @param   {String}  fileName  File to create manifest for
+ * @param   {Boolean} [ignoreCache=false]  Specifies, whether manifest cache will be
+ *   used to return resultant object
+ *
  * @return  {AppxManifest|Win10AppxManifest}  Manifest instance
  */
-AppxManifest.get = function (fileName) {
+AppxManifest.get = function (fileName, ignoreCache) {
 
-    if (manifestCache[fileName]) {
+    if (!ignoreCache && manifestCache[fileName]) {
         return manifestCache[fileName];
     }
 
@@ -100,7 +103,13 @@ AppxManifest.get = function (fileName) {
 
     var prefix = prefixes[prefixes.length - 1];
     var Manifest = prefix === 'uap' ? Win10AppxManifest : AppxManifest;
-    return (manifestCache[fileName] = new Manifest(fileName, prefix));
+    var result = new Manifest(fileName, prefix);
+
+    if (!ignoreCache) {
+        manifestCache[fileName] = result;
+    }
+
+    return result;
 };
 
 AppxManifest.prototype.getPhoneIdentity = function () {
@@ -373,7 +382,15 @@ AppxManifest.prototype.getCapabilities = function () {
     });
 };
 
+function isCSSColorName(color) {
+    return color.indexOf('0x') === -1 && color.indexOf('#') === -1;
+}
+
 function refineColor(color) {
+    if (isCSSColorName(color)) {
+        return color;
+    }
+
     // return three-byte hexadecimal number preceded by "#" (required for Windows)
     color = color.replace('0x', '').replace('#', '');
     if (color.length == 3) {

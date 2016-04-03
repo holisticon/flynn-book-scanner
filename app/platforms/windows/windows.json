@@ -5,16 +5,6 @@
     },
     "config_munge": {
         "files": {
-            "package.appxmanifest": {
-                "parents": {
-                    "/Package/Capabilities": [
-                        {
-                            "xml": "<DeviceCapability Name=\"webcam\" />",
-                            "count": 1
-                        }
-                    ]
-                }
-            },
             "package.windows.appxmanifest": {
                 "parents": {
                     "/Package/Applications/Application/Extensions": [
@@ -48,12 +38,6 @@
         }
     },
     "installed_plugins": {
-        "cordova-plugin-email": {
-            "PACKAGE_NAME": "Flynn"
-        },
-        "cordova-plugin-sqlite": {
-            "PACKAGE_NAME": "Flynn"
-        },
         "cordova-plugin-barcodescanner": {
             "PACKAGE_NAME": "Flynn"
         },
@@ -75,72 +59,22 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "Flynn"
         },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "Flynn"
-        },
-        "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "Flynn"
-        },
         "cordova-plugin-urlhandler": {
             "URL_SCHEME": "flynnApp",
             "PACKAGE_NAME": "Flynn"
         },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "Flynn"
+        },
         "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "Flynn"
         }
     },
     "dependent_plugins": {},
     "modules": [
-        {
-            "file": "plugins/cordova-plugin-barcodescanner/src/windows8/BarcodeScannerProxy.js",
-            "id": "cordova-plugin-barcodescanner.BarcodeScannerProxy",
-            "pluginId": "cordova-plugin-barcodescanner",
-            "merges": [
-                ""
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-email/www/email_composer.js",
-            "id": "cordova-plugin-email.EmailComposer",
-            "pluginId": "cordova-plugin-email",
-            "clobbers": [
-                "cordova.plugins.email",
-                "plugin.email"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-email/src/windows/EmailComposerProxy.js",
-            "id": "cordova-plugin-email.EmailComposerProxy",
-            "pluginId": "cordova-plugin-email",
-            "merges": [
-                ""
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-sqlite/www/SQLitePlugin.js",
-            "id": "cordova-plugin-sqlite.SQLitePlugin",
-            "pluginId": "cordova-plugin-sqlite",
-            "clobbers": [
-                "window.sqlitePlugin",
-                "cordova.plugins.sqlitePlugin"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-sqlite/src/windows/SQLiteProxy.js",
-            "id": "cordova-plugin-sqlite.SQLiteProxy",
-            "pluginId": "cordova-plugin-sqlite",
-            "merges": [
-                ""
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-sqlite/src/windows/SQLite3-WinRT/SQLite3JS/js/SQLite3.js",
-            "id": "cordova-plugin-sqlite.SQLite3",
-            "pluginId": "cordova-plugin-sqlite",
-            "merges": [
-                ""
-            ]
-        },
         {
             "file": "plugins/cordova-plugin-barcodescanner/www/barcodescanner.js",
             "id": "cordova-plugin-barcodescanner.BarcodeScanner",
@@ -231,15 +165,6 @@
             ]
         },
         {
-            "file": "plugins/ionic-plugin-keyboard/src/windows/KeyboardProxy.js",
-            "id": "ionic-plugin-keyboard.KeyboardProxy",
-            "pluginId": "ionic-plugin-keyboard",
-            "clobbers": [
-                "cordova.plugins.Keyboard"
-            ],
-            "runs": true
-        },
-        {
             "file": "plugins/cordova-plugin-urlhandler/www/windows/LaunchMyApp.js",
             "id": "cordova-plugin-urlhandler.LaunchMyApp",
             "pluginId": "cordova-plugin-urlhandler",
@@ -270,19 +195,15 @@
             "merges": [
                 ""
             ]
+        },
+        {
+            "file": "plugins/ionic-plugin-keyboard/src/windows/KeyboardProxy.js",
+            "id": "ionic-plugin-keyboard.KeyboardProxy",
+            "pluginId": "ionic-plugin-keyboard",
+            "clobbers": [
+                "cordova.plugins.Keyboard"
+            ],
+            "runs": true
         }
-    ],
-    "plugin_metadata": {
-        "cordova-plugin-barcodescanner": "0.7.0",
-        "cordova-plugin-console": "1.0.2",
-        "cordova-plugin-crosswalk-webview": "1.6.1",
-        "cordova-plugin-device": "1.1.1",
-        "cordova-plugin-dialogs": "1.2.0",
-        "cordova-plugin-inappbrowser": "1.3.0",
-        "cordova-plugin-splashscreen": "3.2.1",
-        "cordova-plugin-whitelist": "1.2.1",
-        "ionic-plugin-keyboard": "2.0.1",
-        "cordova-plugin-urlhandler": "0.7.0",
-        "cordova-sqlite-storage": "0.7.14"
-    }
+    ]
 }

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Package IgnorableNamespaces="uap mp" xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10">
     <Identity Name="de.holisticon.app.flynn" Publisher="CN=$username$" Version="1.7.0.0" />
-    <mp:PhoneIdentity PhoneProductId="3d0656e0-c768-11e5-abd2-1dd6e6484762" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+    <mp:PhoneIdentity PhoneProductId="3d6d21f0-f98f-11e5-9685-6308945c22e8" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
     <Properties>
         <DisplayName>Flynn</DisplayName>
         <PublisherDisplayName>Holisticon AG</PublisherDisplayName>
@@ -14,7 +14,7 @@
         <Resource Language="x-generate" />
     </Resources>
     <Applications>
-        <Application Id="de.holisticon.app.flynn" StartPage="ms-appx-web:///www/index.html">
+        <Application Id="de.holisticon.app.flynn" StartPage="ms-appx-web://de.holisticon.app.flynn/www/index.html">
             <uap:VisualElements BackgroundColor="#464646" Description="CordovaApp" DisplayName="Flynn" Square150x150Logo="images\Square150x150Logo.png" Square44x44Logo="images\Square44x44Logo.png">
                 <uap:SplashScreen Image="images\splashscreen.png" />
                 <uap:DefaultTile ShortName="Flynn" Square310x310Logo="images\Square310x310Logo.png" Square71x71Logo="images\Square71x71Logo.png" Wide310x150Logo="images\Wide310x150Logo.png" />
@@ -31,6 +31,5 @@
     </Applications>
     <Capabilities>
         <Capability Name="internetClient" />
-        <DeviceCapability Name="webcam" />
     </Capabilities>
 </Package>

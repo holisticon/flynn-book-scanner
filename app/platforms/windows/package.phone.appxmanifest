@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
     <Identity Name="de.holisticon.app.flynn" Publisher="CN=$username$" Version="1.7.0.0" />
-    <mp:PhoneIdentity PhoneProductId="3d0656e0-c768-11e5-abd2-1dd6e6484762" PhonePublisherId="db093ed5-53b1-45f7-af72-751e8f36ab80" />
+    <mp:PhoneIdentity PhoneProductId="3d6d21f0-f98f-11e5-9685-6308945c22e8" PhonePublisherId="db093ed5-53b1-45f7-af72-751e8f36ab80" />
     <Properties>
         <DisplayName>Flynn</DisplayName>
         <PublisherDisplayName>Holisticon AG</PublisherDisplayName>
@@ -30,15 +30,9 @@
                     <m3:Rotation Preference="landscapeFlipped" />
                 </m3:InitialRotationPreference>
             </m3:VisualElements>
-            <Extensions>
-                <Extension Category="windows.protocol" StartPage="www/index.html">
-                    <Protocol Name="flynnApp" />
-                </Extension>
-            </Extensions>
         </Application>
     </Applications>
     <Capabilities>
         <Capability Name="internetClientServer" />
-        <DeviceCapability Name="webcam" />
     </Capabilities>
 </Package>
