@@ -64,8 +64,9 @@
     "webdriver-manager": "9.0.0",
     "xml2js": "0.4.16"
   },
+  "engine-strict": true,
   "engines": {
-    "node": ">=0.8.0"
+    "node": ">= 4.2.x"
   },
   "scripts": {
     "postinstall": "bower install && npm rebuild node-sass && webdriver-manager update",
