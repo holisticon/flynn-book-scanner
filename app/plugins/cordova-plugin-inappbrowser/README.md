@@ -17,6 +17,8 @@
 #         under the License.
 -->
 
+[![Build Status](https://travis-ci.org/apache/cordova-plugin-inappbrowser.svg?branch=master)](https://travis-ci.org/apache/cordova-plugin-inappbrowser)
+
 # cordova-plugin-inappbrowser
 
 This plugin provides a web browser view that displays when calling `cordova.InAppBrowser.open()`.
@@ -54,7 +56,7 @@ Although `window.open` is in the global scope, InAppBrowser is not available unt
         console.log("window.open works well");
     }
 
-:warning: Report issues on the [Apache Cordova issue tracker](https://issues.apache.org/jira/issues/?jql=project%20%3D%20CB%20AND%20status%20in%20%28Open%2C%20%22In%20Progress%22%2C%20Reopened%29%20AND%20resolution%20%3D%20Unresolved%20AND%20component%20%3D%20%22Plugin%20InAppBrowser%22%20ORDER%20BY%20priority%20DESC%2C%20summary%20ASC%2C%20updatedDate%20DESC)
+Report issues with this plugin on the [Apache Cordova issue tracker](https://issues.apache.org/jira/issues/?jql=project%20%3D%20CB%20AND%20status%20in%20%28Open%2C%20%22In%20Progress%22%2C%20Reopened%29%20AND%20resolution%20%3D%20Unresolved%20AND%20component%20%3D%20%22Plugin%20InAppBrowser%22%20ORDER%20BY%20priority%20DESC%2C%20summary%20ASC%2C%20updatedDate%20DESC)
 
 
 
@@ -198,7 +200,7 @@ The object returned from a call to `cordova.InAppBrowser.open`.
 - executeScript
 - insertCSS
 
-## addEventListener
+## InAppBrowser.addEventListener
 
 > Adds a listener for an event from the `InAppBrowser`.
 
@@ -244,7 +246,7 @@ The object returned from a call to `cordova.InAppBrowser.open`.
     var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
     ref.addEventListener('loadstart', function(event) { alert(event.url); });
 
-## removeEventListener
+## InAppBrowser.removeEventListener
 
 > Removes a listener for an event from the `InAppBrowser`.
 
@@ -278,7 +280,7 @@ The function is passed an `InAppBrowserEvent` object.
     ref.addEventListener('loadstart', myCallback);
     ref.removeEventListener('loadstart', myCallback);
 
-## close
+## InAppBrowser.close
 
 > Closes the `InAppBrowser` window.
 
@@ -301,7 +303,7 @@ The function is passed an `InAppBrowserEvent` object.
     var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
     ref.close();
 
-## show
+## InAppBrowser.show
 
 > Displays an InAppBrowser window that was opened hidden. Calling this has no effect if the InAppBrowser was already visible.
 
@@ -323,7 +325,7 @@ The function is passed an `InAppBrowserEvent` object.
     // some time later...
     ref.show();
 
-## executeScript
+## InAppBrowser.executeScript
 
 > Injects JavaScript code into the `InAppBrowser` window
 
@@ -365,7 +367,7 @@ The function is passed an `InAppBrowserEvent` object.
 
 Due to [MSDN docs](https://msdn.microsoft.com/en-us/library/windows.ui.xaml.controls.webview.invokescriptasync.aspx) the invoked script can return only string values, otherwise the parameter, passed to __callback__ will be `[null]`.
 
-## insertCSS
+## InAppBrowser.insertCSS
 
 > Injects CSS into the `InAppBrowser` window.
 

@@ -13,7 +13,8 @@ function getDB(pDbName) {
     } else {
       // default use websql
       logDB = new PouchDB(pDbName, {
-        adapter: 'websql'
+        adapter: 'websql',
+        location: 'default'
       });
     }
   }

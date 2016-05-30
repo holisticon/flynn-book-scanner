@@ -90,6 +90,15 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/ionic-plugin-keyboard/src/windows/KeyboardProxy.js",
+        "id": "ionic-plugin-keyboard.KeyboardProxy",
+        "pluginId": "ionic-plugin-keyboard",
+        "clobbers": [
+            "cordova.plugins.Keyboard"
+        ],
+        "runs": true
+    },
+    {
         "file": "plugins/cordova-plugin-urlhandler/www/windows/LaunchMyApp.js",
         "id": "cordova-plugin-urlhandler.LaunchMyApp",
         "pluginId": "cordova-plugin-urlhandler",
@@ -98,37 +107,28 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
-        "id": "cordova-sqlite-storage.SQLitePlugin",
-        "pluginId": "cordova-sqlite-storage",
+        "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
+        "id": "cordova-sqlite-ext.SQLitePlugin",
+        "pluginId": "cordova-sqlite-ext",
         "clobbers": [
             "SQLitePlugin"
         ]
     },
     {
-        "file": "plugins/cordova-sqlite-storage/src/windows/SQLiteProxy.js",
-        "id": "cordova-sqlite-storage.SQLiteProxy",
-        "pluginId": "cordova-sqlite-storage",
+        "file": "plugins/cordova-sqlite-ext/src/windows/sqlite-proxy.js",
+        "id": "cordova-sqlite-ext.SQLiteProxy",
+        "pluginId": "cordova-sqlite-ext",
         "merges": [
             ""
         ]
     },
     {
-        "file": "plugins/cordova-sqlite-storage/src/windows/SQLite3-WinRT/SQLite3JS/js/SQLite3.js",
-        "id": "cordova-sqlite-storage.SQLite3",
-        "pluginId": "cordova-sqlite-storage",
+        "file": "plugins/cordova-sqlite-ext/src/windows/SQLite3-Win-RT/SQLite3JS/js/SQLite3.js",
+        "id": "cordova-sqlite-ext.SQLite3",
+        "pluginId": "cordova-sqlite-ext",
         "merges": [
             ""
         ]
-    },
-    {
-        "file": "plugins/ionic-plugin-keyboard/src/windows/KeyboardProxy.js",
-        "id": "ionic-plugin-keyboard.KeyboardProxy",
-        "pluginId": "ionic-plugin-keyboard",
-        "clobbers": [
-            "cordova.plugins.Keyboard"
-        ],
-        "runs": true
     }
 ];
 module.exports.metadata = 

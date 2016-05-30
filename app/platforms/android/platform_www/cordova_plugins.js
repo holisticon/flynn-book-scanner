@@ -44,6 +44,14 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/ionic-plugin-keyboard/www/android/keyboard.js",
+        "id": "ionic-plugin-keyboard.keyboard",
+        "clobbers": [
+            "cordova.plugins.Keyboard"
+        ],
+        "runs": true
+    },
+    {
         "file": "plugins/cordova-plugin-urlhandler/www/android/LaunchMyApp.js",
         "id": "cordova-plugin-urlhandler.LaunchMyApp",
         "clobbers": [
@@ -51,40 +59,27 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-plugin-whitelist/whitelist.js",
-        "id": "cordova-plugin-whitelist.whitelist",
-        "runs": true
-    },
-    {
-        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
-        "id": "cordova-sqlite-storage.SQLitePlugin",
+        "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
+        "id": "cordova-sqlite-ext.SQLitePlugin",
         "clobbers": [
             "SQLitePlugin"
         ]
-    },
-    {
-        "file": "plugins/ionic-plugin-keyboard/www/android/keyboard.js",
-        "id": "ionic-plugin-keyboard.keyboard",
-        "clobbers": [
-            "cordova.plugins.Keyboard"
-        ],
-        "runs": true
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
     "cordova-plugin-barcodescanner": "0.7.0",
-    "cordova-plugin-console": "1.0.2",
-    "cordova-plugin-crosswalk-webview": "1.6.1",
-    "cordova-plugin-device": "1.1.1",
-    "cordova-plugin-dialogs": "1.2.0",
-    "cordova-plugin-inappbrowser": "1.3.0",
-    "cordova-plugin-splashscreen": "3.2.1",
+    "cordova-plugin-console": "1.0.3",
+    "cordova-plugin-crosswalk-webview": "1.7.0",
+    "cordova-plugin-device": "1.1.2",
+    "cordova-plugin-dialogs": "1.2.1",
+    "cordova-plugin-inappbrowser": "1.4.0",
+    "cordova-plugin-splashscreen": "3.2.2",
+    "cordova-plugin-whitelist": "1.2.2",
+    "ionic-plugin-keyboard": "2.2.0",
     "cordova-plugin-urlhandler": "0.7.0",
-    "cordova-plugin-whitelist": "1.2.1",
-    "cordova-sqlite-storage": "0.7.14",
-    "ionic-plugin-keyboard": "2.0.1"
+    "cordova-sqlite-ext": "0.10.0"
 };
 // BOTTOM OF METADATA
 });

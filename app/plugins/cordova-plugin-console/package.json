@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-console",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Cordova Console Plugin",
   "cordova": {
     "id": "cordova-plugin-console",
@@ -28,6 +28,13 @@
     "cordova-windows8",
     "cordova-windows"
   ],
+  "scripts": {
+    "test": "npm run jshint",
+    "jshint": "node node_modules/jshint/bin/jshint www && node node_modules/jshint/bin/jshint src && node node_modules/jshint/bin/jshint tests"
+  },
   "author": "Apache Software Foundation",
-  "license": "Apache 2.0"
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "jshint": "^2.6.0"
+  }
 }

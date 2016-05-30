@@ -17,8 +17,9 @@
 #         under the License.
 -->
 
-# cordova-plugin-console
+[![Build Status](https://travis-ci.org/apache/cordova-plugin-console.svg?branch=master)](https://travis-ci.org/apache/cordova-plugin-console)
 
+# cordova-plugin-console
 
 This plugin is meant to ensure that console.log() is as useful as it can be.
 It adds additional function for iOS, Ubuntu, Windows Phone 8, and Windows. If
@@ -70,7 +71,7 @@ Methods of the `console` object which implemented, but behave different from bro
 - `console.group`
 - `console.groupCollapsed`
 
-The grouping methods are just log name of the group and don't actually indicate grouping for later 
+The grouping methods are just log name of the group and don't actually indicate grouping for later
 calls to `console` object methods.
 
 ## Not supported Methods
@@ -96,5 +97,4 @@ Format chars:
 *  `%c` - format arg as `''`. No color formatting could be done.
 *  `%%` - replace with `'%'`
 
-any other char following `%` will format it's
-arg via `toString()`.
+Any other char following `%` will format its arg via `toString()`.

@@ -27,7 +27,7 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
             db = new PouchDB(NAME_OF_POUCHDB, {adapter: 'idb', size: 50});
           } else {
             // default use websql
-            db = new PouchDB(NAME_OF_POUCHDB, {adapter: 'websql', size: 50});
+            db = new PouchDB(NAME_OF_POUCHDB, {adapter: 'websql', location: 'default', size: 50});
           }
         } else {
           // default use websql
@@ -80,31 +80,31 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
                     updateIndex(localDB);
                   });
                 }).on('complete', function (info) {
-                  $rootScope.$apply(function () {
-                    $log.info('Completed sync.');
-                    $log.debug('Completed sync with following answer: ' + info.toString());
-                    deferred.resolve(info);
-                  });
-                }).on('uptodate', function (info) {
-                  $rootScope.$apply(function () {
-                    $log.info('Already up-to-date.');
-                    $log.debug('Already up-to-date with following answer: ' + info.toString());
-                    deferred.resolve(info);
-                  });
-                }).on('error', function (err) {
-                  $rootScope.$apply(function () {
-                    $log.error('Error during remote sync with following answer: ' + err.toString());
-                    if (err.stats === 400) {
-                      $log.info('Seems be a remote server error.');
-                    }
-                    deferred.reject(err);
-                  });
-                }).catch(function (err) {
-                  $rootScope.$apply(function () {
-                    $log.error('Unkown error during remote sync.' + err.toString());
-                    deferred.resolve(err);
-                  });
+                $rootScope.$apply(function () {
+                  $log.info('Completed sync.');
+                  $log.debug('Completed sync with following answer: ' + info.toString());
+                  deferred.resolve(info);
                 });
+              }).on('uptodate', function (info) {
+                $rootScope.$apply(function () {
+                  $log.info('Already up-to-date.');
+                  $log.debug('Already up-to-date with following answer: ' + info.toString());
+                  deferred.resolve(info);
+                });
+              }).on('error', function (err) {
+                $rootScope.$apply(function () {
+                  $log.error('Error during remote sync with following answer: ' + err.toString());
+                  if (err.stats === 400) {
+                    $log.info('Seems be a remote server error.');
+                  }
+                  deferred.reject(err);
+                });
+              }).catch(function (err) {
+                $rootScope.$apply(function () {
+                  $log.error('Unkown error during remote sync.' + err.toString());
+                  deferred.resolve(err);
+                });
+              });
             }, function (err) {
               if (err.status === 0) {
                 $log.info('Seems to run in offline mode.');

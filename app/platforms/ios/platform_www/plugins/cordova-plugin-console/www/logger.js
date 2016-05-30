@@ -44,7 +44,6 @@ cordova.define("cordova-plugin-console.logger", function(require, exports, modul
 var logger = exports;
 
 var exec    = require('cordova/exec');
-var utils   = require('cordova/utils');
 
 var UseConsole   = false;
 var UseLogger    = true;

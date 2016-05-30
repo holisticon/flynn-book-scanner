@@ -23,7 +23,6 @@ cordova.define("cordova-plugin-console.console", function(require, exports, modu
 //------------------------------------------------------------------------------
 
 var logger = require("./logger");
-var utils  = require("cordova/utils");
 
 //------------------------------------------------------------------------------
 // object that we're exporting

@@ -75,9 +75,9 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
-        "id": "cordova-sqlite-storage.SQLitePlugin",
-        "pluginId": "cordova-sqlite-storage",
+        "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
+        "id": "cordova-sqlite-ext.SQLitePlugin",
+        "pluginId": "cordova-sqlite-ext",
         "clobbers": [
             "SQLitePlugin"
         ]
@@ -87,16 +87,16 @@ module.exports.metadata =
 // TOP OF METADATA
 {
     "cordova-plugin-barcodescanner": "0.7.0",
-    "cordova-plugin-console": "1.0.2",
-    "cordova-plugin-crosswalk-webview": "1.6.1",
-    "cordova-plugin-device": "1.1.1",
-    "cordova-plugin-dialogs": "1.2.0",
-    "cordova-plugin-inappbrowser": "1.3.0",
-    "cordova-plugin-splashscreen": "3.2.1",
-    "cordova-plugin-whitelist": "1.2.1",
-    "ionic-plugin-keyboard": "2.0.1",
+    "cordova-plugin-console": "1.0.3",
+    "cordova-plugin-crosswalk-webview": "1.7.0",
+    "cordova-plugin-device": "1.1.2",
+    "cordova-plugin-dialogs": "1.2.1",
+    "cordova-plugin-inappbrowser": "1.4.0",
+    "cordova-plugin-splashscreen": "3.2.2",
+    "cordova-plugin-whitelist": "1.2.2",
+    "ionic-plugin-keyboard": "2.2.0",
     "cordova-plugin-urlhandler": "0.7.0",
-    "cordova-sqlite-storage": "0.7.14"
+    "cordova-sqlite-ext": "0.10.0"
 }
 // BOTTOM OF METADATA
 });

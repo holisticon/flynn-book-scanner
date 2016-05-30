@@ -37,12 +37,18 @@ Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CordovaApp.Phone", "Cordova
 EndProject
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CordovaApp.Windows10", "CordovaApp.Windows10.jsproj", "{F9B0AE20-C91C-42B9-9C6E-D3BC28B4509E}"
 	ProjectSection(ProjectDependencies) = postProject
-		{d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}={d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}
+		{76e68196-b7dc-4393-a070-d32fc33bc489}={76e68196-b7dc-4393-a070-d32fc33bc489}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "C:\Users\conta\Documents\GitHub\flynn-book-scanner\app\plugins\cordova-sqlite-storage\src\windows\SQLite3-WinRT\SQLite3\SQLite3.Windows\SQLite3.Windows.vcxproj", "{d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "C:\Users\conta\Documents\GitHub\flynn-book-scanner\app\plugins\cordova-sqlite-storage\src\windows\SQLite3-WinRT\SQLite3\SQLite3.WindowsPhone\SQLite3.WindowsPhone.vcxproj", "{6435c2e4-4fd2-405a-9ee2-5312ae852782}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3.UWP", "\Users\mreinhardt\Documents\Programmierung\repositories\git\job\flynn-book-scanner\app\plugins\cordova-sqlite-ext\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.UWP\SQLite3.UWP.vcxproj", "{76e68196-b7dc-4393-a070-d32fc33bc489}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "\Users\mreinhardt\Documents\Programmierung\repositories\git\job\flynn-book-scanner\app\plugins\cordova-sqlite-ext\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.Windows\SQLite3.Windows.vcxproj", "{d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "\Users\mreinhardt\Documents\Programmierung\repositories\git\job\flynn-book-scanner\app\plugins\cordova-sqlite-ext\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.WindowsPhone\SQLite3.WindowsPhone.vcxproj", "{6435c2e4-4fd2-405a-9ee2-5312ae852782}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
