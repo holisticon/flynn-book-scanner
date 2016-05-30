@@ -43,8 +43,8 @@ node {
 
 
     stage 'upload Apps'
-    sh 'cd app && supply --apk target/$(ls target/ | grep apk) --json_key  ~/.flynn/playstore.json --package_name de.holisticon.app.flynn --track alpha'
-    sh 'cd app && pilot upload --ipa target/$(ls target/ | grep ipa)'
+    sh 'cd app/platforms/android && supply --apk ../../target/$(ls ../../target/ | grep apk) --json_key  ~/.flynn/playstore.json --package_name de.holisticon.app.flynn --track alpha'
+    sh 'cd app/platforms/ios && pilot upload --ipa ../../target/$(ls ../../target/ | grep ipa)'
     step([$class     : 'ArtifactArchiver',
           artifacts  : 'app/target/*.ipa, app/target/*.apk',
           fingerprint: true
