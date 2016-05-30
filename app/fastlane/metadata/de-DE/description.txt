@@ -1,0 +1,3 @@
+Ja, es gibt sie noch: die Freunde des gedruckten Buches! Einige von ihnen nennen sogar eine sehr umfangreiche Sammlung ihr Eigen und wünschen sich einen besseren Überblick über ihre Bibliothek.
+Flynn hilft dir, deine Buchtitel zu erfassen, zu verwalten und zu katalogisieren. Dafür liest du bequem die ISBN über den Barcode-Scanner ein, der das Ergebnis optional mit einem Server abgleicht.
+Natürlich ist auch eine manuelle Eingabe der ISBN möglich, aber schneller und praktischer als mit dem Scanner kann man keine Ordnung schaffen!

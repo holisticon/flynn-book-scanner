@@ -1,0 +1,2 @@
+Yes, there are still lovers of printed books! And for them this app is made. Especially for people with a large collection, which want to keep track which books they own.
+Flynn helps you to assess your books and to manage them. You can easily read with the help of the barcode scanner the ISBN or add a manual entry. Optional you can sync it with your own CouchDB server instance.

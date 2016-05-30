@@ -1,0 +1,2 @@
+Layout-Verbesserung
+Verbesserung beim Bücher einlesen
