@@ -30,6 +30,7 @@ app/platforms/android/assets/www/*
 app/platforms/windows/www/*
 app/platforms/windows/obj/Debug/*
 app/platforms/windows/Bin/Debug/*
+app/platforms/osx/www/*
 app/bower_components/*
 app/src-gen/*
 app/platforms/ios/Flynn.xcodeproj/xcuserdata/*

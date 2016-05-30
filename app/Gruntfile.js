@@ -75,9 +75,17 @@ module.exports = function (grunt) {
       },
       proxies: [
         {
-          context: '/flynn',
-          host: '33.33.33.10',
-          port: 80
+          context: '/api',
+          host: 'localhost',
+          port: 9080
+        }, {
+          context: '/login',
+          host: 'localhost',
+          port: 9080
+        }, {
+          context: '/logout',
+          host: 'localhost',
+          port: 9080
         }
       ],
       livereload: {
@@ -143,6 +151,7 @@ module.exports = function (grunt) {
           dot: true,
           src: [
             '.tmp',
+            'target/*',
             '<%= yeoman.dist %>/{,*/}*',
             '!<%= yeoman.dist %>/.git{,*/}*'
           ]
@@ -180,7 +189,7 @@ module.exports = function (grunt) {
       },
       server: {
         options: {
-          map: true,
+          map: true
         },
         files: [{
           expand: true,
@@ -203,11 +212,12 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
+        exclude: ['bower_components/ionic/release/css/ionic.css'],
         ignorePath: /\.\.\.\//
       },
       test: {
         devDependencies: true,
-        src: '<%= karma.unit.configFile %>',
+        src: 'karma.conf.js',
         ignorePath: /\.\.\.\//,
         fileTypes: {
           js: {
@@ -228,8 +238,7 @@ module.exports = function (grunt) {
       dist: {
         src: [
           '<%= yeoman.dist %>/scripts/{,*/}*.js',
-          '<%= yeoman.dist %>/styles/{,*/}*.css',
-          '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.dist %>/styles/{,*/}*.css'
         ]
       }
     },
@@ -350,11 +359,11 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'scripts/cordova*.js',
-            '*.json',
             'scripts/webworker*.js',
+            'config.json',
             'templates/{,*/}*.html',
             'views/{,*/}*.html',
-            'images/{,*/}*.{webp}',
+            'images/{,**/}*.*',
             'styles/fonts/{,*/}*.*'
           ]
         }, {
@@ -366,7 +375,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             'config.json',
-            'images/{,*/}*.*',
+            'images/**/*.*',
             'styles/fonts/*',
             '*.js'
           ]
@@ -397,7 +406,7 @@ module.exports = function (grunt) {
     // Test settings
     karma: {
       unit: {
-        configFile: 'karma.conf.js',
+        configFile: 'karma.conf.ci.js',
         singleRun: true
       },
 
@@ -426,7 +435,7 @@ module.exports = function (grunt) {
     protractor: {
       options: {
         configFile: 'protractor.dev.conf', // Default config file
-        keepAlive: true, // If false, the grunt process stops when the test fails.
+        keepAlive: true, // FIXME:e2e tests
         noColor: false, // If true, protractor will not use colors in its output.
         args: {
           // Arguments passed to the command
@@ -434,7 +443,6 @@ module.exports = function (grunt) {
       },
       dev: {
         options: {
-          // Stops Grunt process if a test fails
           keepAlive: false
         }
       },
@@ -458,45 +466,36 @@ module.exports = function (grunt) {
         command: 'cordova build ios && cordova build android'
       },
       buildIOS: {
-        command: 'cordova build ios --release --device'
+        command: 'cordova build ios --release --device --buildConfig ~/.flynn/build.json'
       },
       buildAndroid: {
-        command: 'cp "<%= yeoman.build.android.ant_property_file %>" "$(pwd)/platforms/android/release-signing.properties" && cordova build android --release'
+        command: 'cordova build android --release --buildConfig ~/.flynn/build.json'
       },
       prepare: {
-        command: 'cordova prepare'
+        command: 'cordova clean && cordova prepare && mkdir -p target'
       },
       buildIPA: {
-        command: 'cp "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/ResourceRules.plist" "$(pwd)/platforms/ios/build/device/Flynn.app" && xcrun -sdk iphoneos PackageApplication -v "$(pwd)/platforms/ios/build/device/Flynn.app" -o "$(pwd)/target/Flynn_<%= yeoman.version %>.ipa" --sign "<%= yeoman.build.ios.signer %>" --embed "<%= yeoman.build.ios.provisionProfile %>"'
+        command: 'cp "$(pwd)/platforms/ios/build/device/Flynn.ipa" "$(pwd)/target/Flynn_<%= yeoman.version %>.ipa"'
       },
       buildAPK: {
-        command: 'cp "$(pwd)/platforms/android/build/outputs/apk/android-armv7-release.apk" "$(pwd)/target/Flynn_arm_<%= yeoman.version %>.apk" && cp "$(pwd)/platforms/android/build/outputs/apk/android-x86-release.apk" "$(pwd)/target/Flynn_x86_<%= yeoman.version %>.apk"'
+        command: 'cp "$(pwd)/platforms/android/build/outputs/apk/android-armv7-release.apk" "$(pwd)/target/Flynn_<%= yeoman.version %>.apk"'
       },
       prepareNW: {
         command: 'touch "<%= yeoman.dist %>/cordova.js" && touch "<%= yeoman.dist %>/cordova_plugins.js"'
       }
-    },
-    nwjs: {
-      options: {
-        version: '0.12.3',
-        appName: '<%= yeoman.name %>',
-        appVersion: '<%= yeoman.version %>',
-        main: 'index.html',
-        // platforms: ['win32', 'win64', 'osx32', 'osx64', 'linux32', 'linux64'],
-        platforms: ['win32', 'osx32', 'linux32'],
-        buildDir: './target/desktop',
-        icon: './etc/icon.png',
-        macIcns: './etc/icon.icns'/* fix WINE issue!,
-         winIco: './etc/icon.ico'*/
-      },
-      src: ['./www/**/*'] // Your node-webkit app
     }
   });
 
-  grunt.registerTask('buildIPA', ['build', 'shell:buildIOS', 'shell:buildIPA']);
-  grunt.registerTask('buildAPK', ['build', 'shell:buildAndroid', 'shell:buildAPK']);
-  grunt.registerTask('buildCordova', ['build', 'shell:buildAndroid', 'shell:buildIOS']);
-  grunt.registerTask('buildDesktop', ['build', 'shell:prepareNW', 'nwjs']);
+  grunt.registerTask('buildIPA', ['shell:prepare', 'shell:buildIOS', 'shell:buildIPA']);
+  grunt.registerTask('buildAPK', ['shell:prepare', 'shell:buildAndroid', 'shell:buildAPK']);
+
+  grunt.registerTask('package', [
+    'clean',
+    'build',
+    'buildIPA',
+    'buildAPK'
+  ]);
+
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -521,12 +520,6 @@ module.exports = function (grunt) {
     grunt.task.run(['serve:' + target]);
   });
 
-  grunt.registerTask('e2e', [
-    'build',
-    'shell:buildDev',
-    'protractor:appium'
-  ]);
-
   grunt.registerTask('test', [
     'clean:server',
     'wiredep',
@@ -534,6 +527,12 @@ module.exports = function (grunt) {
     'autoprefixer',
     'connect:test',
     'karma:unit'
+  ]);
+
+  grunt.registerTask('e2e', [
+    'build',
+    'shell:buildDev',
+    'protractor:appium'
   ]);
 
   grunt.registerTask('build', [
@@ -545,10 +544,9 @@ module.exports = function (grunt) {
     'autoprefixer',
     'concat',
     'ngAnnotate',
+    'copy:dist',
     'cssmin',
     'uglify',
-    'filerev',
-    'copy:dist',
     'usemin',
     'htmlmin'
   ]);

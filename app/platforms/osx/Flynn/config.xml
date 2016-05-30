@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="de.holisticon.app.flynn" version="1.7.0" xmlns="http://www.w3.org/ns/widgets">
+    <preference name="AllowInlineMediaPlayback" value="true" />
+    <preference name="BackupWebStorage" value="cloud" />
+    <preference name="DisallowOverscroll" value="false" />
+    <preference name="EnableViewportScale" value="false" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="true" />
+    <preference name="MediaPlaybackRequiresUserAction" value="false" />
+    <feature name="LocalStorage">
+        <param name="osx-package" value="CDVLocalStorage" />
+    </feature>
+    <feature name="Device">
+        <param name="ios-package" value="CDVDevice" />
+    </feature>
+    <name>Flynn</name>
+    <description>
+    flynn book scanner app
+  </description>
+    <author email="info@holisticon.de" href="http://holisticon.de">
+    Holisticon AG
+  </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <preference name="SplashScreen" value="etc/splash.png" />
+    <preference name="fullscreen" value="false" />
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+    <preference name="xwalkVersion" value="17+" />
+    <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
+    <preference name="xwalkMode" value="embedded" />
+    <preference name="xwalkMultipleApk" value="true" />
+</widget>
