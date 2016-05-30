@@ -5,6 +5,7 @@ Preparation steps:
 * Install Android Developer Tools
 * Install Android target 19 SDK or higher (the Android newest SDK)
 * Install Apache Ant
+* Install Python 2.x (Included on OS X and most Unix system, for Windows see: https://www.python.org/downloads/release/python-279/ Ensure that python is available on the PATH)
 
 Global steps:
 
@@ -67,6 +68,9 @@ For windows phone support within an VM: http://blogs.msdn.com/b/interoperability
 
 
 # Building & Deployment
+
+Create .flynn folder inside your home-folder with a build.json file. 
+
 * `cd app`
 * `grunt`
 * For first build on android run `android update project --path platforms/android/ -s` to set ADT project settings

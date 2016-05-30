@@ -83,7 +83,8 @@ var handlers = {
             if (fs.existsSync(targetDir)) throw new CordovaError('target destination "' + targetDir + '" already exists');
             shell.mkdir('-p', path.dirname(targetDir));
             shell.cp('-R', srcFile, path.dirname(targetDir)); // frameworks are directories
-            var project_relative = path.relative(project.projectDir, targetDir);
+            // CB-10773 translate back slashes to forward on win32
+            var project_relative = fixPathSep(path.relative(project.projectDir, targetDir));
             var pbxFile = project.xcode.addFramework(project_relative, {customFramework: true});
             if (pbxFile) {
                 project.xcode.addToPbxEmbedFrameworksBuildPhase(pbxFile);
@@ -107,7 +108,7 @@ var handlers = {
                 return;
             }
 
-            var targetDir = path.resolve(project.plugins_dir, plugin.id, path.basename(src)),
+            var targetDir = fixPathSep(path.resolve(project.plugins_dir, plugin.id, path.basename(src))),
                 pbxFile = project.xcode.removeFramework(targetDir, {customFramework: true});
             if (pbxFile) {
                 project.xcode.removeFromPbxEmbedFrameworksBuildPhase(pbxFile);
@@ -201,15 +202,22 @@ function installHelper(type, obj, plugin_dir, project_dir, plugin_id, options, p
     if (link) {
         var trueSrc = fs.realpathSync(srcFile);
         // Create a symlink in the expected place, so that uninstall can use it.
-        copyNewFile(plugin_dir, trueSrc, project_dir, destFile, link);
-
+        if (options && options.force) {
+            copyFile(plugin_dir, trueSrc, project_dir, destFile, link);
+        } else {
+            copyNewFile(plugin_dir, trueSrc, project_dir, destFile, link);
+        }
         // Xcode won't save changes to a file if there is a symlink involved.
         // Make the Xcode reference the file directly.
         // Note: Can't use path.join() here since it collapses 'Plugins/..', and xcode
         // library special-cases Plugins/ prefix.
         project_ref = 'Plugins/' + fixPathSep(path.relative(fs.realpathSync(project.plugins_dir), trueSrc));
     } else {
-        copyNewFile(plugin_dir, srcFile, project_dir, destFile, link);
+        if (options && options.force) {
+            copyFile(plugin_dir, srcFile, project_dir, destFile, link);
+        } else {
+            copyNewFile(plugin_dir, srcFile, project_dir, destFile, link);
+        }
         project_ref = 'Plugins/' + fixPathSep(path.relative(project.plugins_dir, destFile));
     }
 

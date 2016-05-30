@@ -171,9 +171,7 @@ android {
         }
     }
 
-    lintOptions {
-      abortOnError false;
-    }
+    lintOptions { disable 'MissingTranslation', 'ExtraTranslation' }
 
     compileSdkVersion cdvCompileSdkVersion
     buildToolsVersion cdvBuildToolsVersion

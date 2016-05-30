@@ -24,6 +24,11 @@
                     <Rotation Preference="landscapeFlipped" />
                 </InitialRotationPreference>
             </VisualElements>
+            <Extensions>
+                <Extension Category="windows.protocol" StartPage="www/index.html">
+                    <Protocol Name="flynnApp" />
+                </Extension>
+            </Extensions>
         </Application>
     </Applications>
     <Capabilities>

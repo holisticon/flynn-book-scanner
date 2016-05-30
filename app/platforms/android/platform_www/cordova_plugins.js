@@ -1,24 +1,6 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "file": "plugins/cordova-plugin-email/www/email_composer.js",
-        "id": "cordova-plugin-email.EmailComposer",
-        "pluginId": "cordova-plugin-email",
-        "clobbers": [
-            "cordova.plugins.email",
-            "plugin.email"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-sqlite/www/SQLitePlugin.js",
-        "id": "cordova-plugin-sqlite.SQLitePlugin",
-        "pluginId": "cordova-plugin-sqlite",
-        "clobbers": [
-            "window.sqlitePlugin",
-            "cordova.plugins.sqlitePlugin"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-barcodescanner/www/barcodescanner.js",
         "id": "cordova-plugin-barcodescanner.BarcodeScanner",
         "clobbers": [
@@ -62,9 +44,23 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/cordova-plugin-urlhandler/www/android/LaunchMyApp.js",
+        "id": "cordova-plugin-urlhandler.LaunchMyApp",
+        "clobbers": [
+            "window.plugins.launchmyapp"
+        ]
+    },
+    {
         "file": "plugins/cordova-plugin-whitelist/whitelist.js",
         "id": "cordova-plugin-whitelist.whitelist",
         "runs": true
+    },
+    {
+        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+        "id": "cordova-sqlite-storage.SQLitePlugin",
+        "clobbers": [
+            "SQLitePlugin"
+        ]
     },
     {
         "file": "plugins/ionic-plugin-keyboard/www/android/keyboard.js",
@@ -73,27 +69,11 @@ module.exports = [
             "cordova.plugins.Keyboard"
         ],
         "runs": true
-    },
-    {
-        "file": "plugins/cordova-plugin-urlhandler/www/android/LaunchMyApp.js",
-        "id": "cordova-plugin-urlhandler.LaunchMyApp",
-        "clobbers": [
-            "window.plugins.launchmyapp"
-        ]
-    },
-    {
-        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
-        "id": "cordova-sqlite-storage.SQLitePlugin",
-        "clobbers": [
-            "SQLitePlugin"
-        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "cordova-plugin-email": "1.1.0",
-    "cordova-plugin-sqlite": "1.0.1",
     "cordova-plugin-barcodescanner": "0.7.0",
     "cordova-plugin-console": "1.0.2",
     "cordova-plugin-crosswalk-webview": "1.6.1",
@@ -101,10 +81,10 @@ module.exports.metadata =
     "cordova-plugin-dialogs": "1.2.0",
     "cordova-plugin-inappbrowser": "1.3.0",
     "cordova-plugin-splashscreen": "3.2.1",
-    "cordova-plugin-whitelist": "1.2.1",
-    "ionic-plugin-keyboard": "2.0.1",
     "cordova-plugin-urlhandler": "0.7.0",
-    "cordova-sqlite-storage": "0.7.14"
+    "cordova-plugin-whitelist": "1.2.1",
+    "cordova-sqlite-storage": "0.7.14",
+    "ionic-plugin-keyboard": "2.0.1"
 };
 // BOTTOM OF METADATA
 });
