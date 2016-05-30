@@ -8,8 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
+		0D1733631CFC7D1700B70F59 /* Gruntfile.js in Resources */ = {isa = PBXBuildFile; fileRef = 0D17335F1CFC7D1700B70F59 /* Gruntfile.js */; };
+		0D1733641CFC7D1700B70F59 /* webpack.config.js in Resources */ = {isa = PBXBuildFile; fileRef = 0D1733601CFC7D1700B70F59 /* webpack.config.js */; };
+		0D1733651CFC7D1700B70F59 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = 0D1733611CFC7D1700B70F59 /* package.json */; };
+		0D1733661CFC7D1700B70F59 /* ResourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1733621CFC7D1700B70F59 /* ResourceLoader.swift */; };
 		0D7ED7751CFBF8BF002C109E /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D7ED7741CFBF8BF002C109E /* Launch Screen.storyboard */; };
 		0D7ED7771CFBF934002C109E /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D7ED7761CFBF934002C109E /* splash.png */; };
+		0D94FDE61CFC5F9800746975 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D94FDE51CFC5F9800746975 /* AppDelegate.swift */; };
+		0D94FDEA1CFC5F9800746975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D94FDE91CFC5F9800746975 /* Assets.xcassets */; };
+		0D94FDF51CFC5F9800746975 /* FlynnTVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D94FDF41CFC5F9800746975 /* FlynnTVTests.swift */; };
+		0D94FE001CFC5F9800746975 /* FlynnTVUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D94FDFF1CFC5F9800746975 /* FlynnTVUITests.swift */; };
+		0D94FE0D1CFC606000746975 /* dist in Resources */ = {isa = PBXBuildFile; fileRef = 0D94FE0C1CFC606000746975 /* dist */; };
+		0D94FE0F1CFC606A00746975 /* src in Resources */ = {isa = PBXBuildFile; fileRef = 0D94FE0E1CFC606A00746975 /* src */; };
+		0D94FE111CFC607000746975 /* Controllers in Resources */ = {isa = PBXBuildFile; fileRef = 0D94FE101CFC607000746975 /* Controllers */; };
+		0D94FE131CFC607900746975 /* Models in Resources */ = {isa = PBXBuildFile; fileRef = 0D94FE121CFC607900746975 /* Models */; };
+		0D94FE151CFC611A00746975 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0D94FE141CFC611A00746975 /* Settings.bundle */; };
 		0FEE665284974268BAADBBF9 /* IonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = BA2C6AA9450A4DDDB889CBBF /* IonicKeyboard.m */; };
 		171F4AF9DDD849DBB53DD5CB /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2EFEA37294457E8B5EEFD5 /* CDVLogger.m */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
@@ -39,6 +52,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0D94FDF11CFC5F9800746975 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D94FDE21CFC5F9800746975;
+			remoteInfo = FlynnTV;
+		};
+		0D94FDFC1CFC5F9800746975 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D94FDE21CFC5F9800746975;
+			remoteInfo = FlynnTV;
+		};
 		301BF534109A57CC0062928A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */;
@@ -61,8 +88,28 @@
 		032400C1096F4A52A3547ABB /* CDVViewController+SplashScreen.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = "CDVViewController+SplashScreen.m"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.m"; sourceTree = "<group>"; };
 		06BB7905F4744FFBBC135380 /* CDVDevice.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVDevice.m; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; };
 		0CB795FE22EF44839E166142 /* CDVSplashScreen.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVSplashScreen.h; path = "cordova-plugin-splashscreen/CDVSplashScreen.h"; sourceTree = "<group>"; };
+		0D17335F1CFC7D1700B70F59 /* Gruntfile.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Gruntfile.js; sourceTree = "<group>"; };
+		0D1733601CFC7D1700B70F59 /* webpack.config.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = webpack.config.js; sourceTree = "<group>"; };
+		0D1733611CFC7D1700B70F59 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		0D1733621CFC7D1700B70F59 /* ResourceLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceLoader.swift; sourceTree = "<group>"; };
 		0D7ED7741CFBF8BF002C109E /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "Flynn/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		0D7ED7761CFBF934002C109E /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash.png; path = Flynn/Images.xcassets/LaunchImage.launchimage/splash.png; sourceTree = "<group>"; };
+		0D94FDE31CFC5F9800746975 /* FlynnTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlynnTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D94FDE51CFC5F9800746975 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0D94FDE81CFC5F9800746975 /* application.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = application.js; sourceTree = "<group>"; };
+		0D94FDE91CFC5F9800746975 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0D94FDEB1CFC5F9800746975 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D94FDF01CFC5F9800746975 /* FlynnTVTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlynnTVTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D94FDF41CFC5F9800746975 /* FlynnTVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlynnTVTests.swift; sourceTree = "<group>"; };
+		0D94FDF61CFC5F9800746975 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D94FDFB1CFC5F9800746975 /* FlynnTVUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlynnTVUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D94FDFF1CFC5F9800746975 /* FlynnTVUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlynnTVUITests.swift; sourceTree = "<group>"; };
+		0D94FE011CFC5F9800746975 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D94FE0C1CFC606000746975 /* dist */ = {isa = PBXFileReference; lastKnownFileType = folder; path = dist; sourceTree = "<group>"; };
+		0D94FE0E1CFC606A00746975 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
+		0D94FE101CFC607000746975 /* Controllers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Controllers; sourceTree = "<group>"; };
+		0D94FE121CFC607900746975 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Models; sourceTree = "<group>"; };
+		0D94FE141CFC611A00746975 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0DBE68DD6D164520B0B548D4 /* SQLitePlugin.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = SQLitePlugin.h; path = "cordova-sqlite-ext/SQLitePlugin.h"; sourceTree = "<group>"; };
 		14329616337F4A76B5060770 /* AudioToolbox.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -108,6 +155,27 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0D94FDE01CFC5F9800746975 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D94FDED1CFC5F9800746975 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D94FDF81CFC5F9800746975 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,10 +205,59 @@
 			path = Flynn/Classes;
 			sourceTree = SOURCE_ROOT;
 		};
+		0D94FDE41CFC5F9800746975 /* FlynnTV */ = {
+			isa = PBXGroup;
+			children = (
+				0D17335F1CFC7D1700B70F59 /* Gruntfile.js */,
+				0D1733601CFC7D1700B70F59 /* webpack.config.js */,
+				0D1733611CFC7D1700B70F59 /* package.json */,
+				0D1733621CFC7D1700B70F59 /* ResourceLoader.swift */,
+				0D94FE141CFC611A00746975 /* Settings.bundle */,
+				0D94FE121CFC607900746975 /* Models */,
+				0D94FE101CFC607000746975 /* Controllers */,
+				0D94FE0E1CFC606A00746975 /* src */,
+				0D94FE0C1CFC606000746975 /* dist */,
+				0D94FDE51CFC5F9800746975 /* AppDelegate.swift */,
+				0D94FDE91CFC5F9800746975 /* Assets.xcassets */,
+				0D94FDEB1CFC5F9800746975 /* Info.plist */,
+				0D94FDE71CFC5F9800746975 /* Supporting Files */,
+			);
+			path = FlynnTV;
+			sourceTree = "<group>";
+		};
+		0D94FDE71CFC5F9800746975 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0D94FDE81CFC5F9800746975 /* application.js */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0D94FDF31CFC5F9800746975 /* FlynnTVTests */ = {
+			isa = PBXGroup;
+			children = (
+				0D94FDF41CFC5F9800746975 /* FlynnTVTests.swift */,
+				0D94FDF61CFC5F9800746975 /* Info.plist */,
+			);
+			path = FlynnTVTests;
+			sourceTree = "<group>";
+		};
+		0D94FDFE1CFC5F9800746975 /* FlynnTVUITests */ = {
+			isa = PBXGroup;
+			children = (
+				0D94FDFF1CFC5F9800746975 /* FlynnTVUITests.swift */,
+				0D94FE011CFC5F9800746975 /* Info.plist */,
+			);
+			path = FlynnTVUITests;
+			sourceTree = "<group>";
+		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* Flynn.app */,
+				0D94FDE31CFC5F9800746975 /* FlynnTV.app */,
+				0D94FDF01CFC5F9800746975 /* FlynnTVTests.xctest */,
+				0D94FDFB1CFC5F9800746975 /* FlynnTVUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -158,6 +275,9 @@
 				307C750510C5A3420062BCA9 /* Plugins */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				0D94FDE41CFC5F9800746975 /* FlynnTV */,
+				0D94FDF31CFC5F9800746975 /* FlynnTVTests */,
+				0D94FDFE1CFC5F9800746975 /* FlynnTVUITests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -259,6 +379,59 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0D94FDE21CFC5F9800746975 /* FlynnTV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0D94FE081CFC5F9800746975 /* Build configuration list for PBXNativeTarget "FlynnTV" */;
+			buildPhases = (
+				0D94FDDF1CFC5F9800746975 /* Sources */,
+				0D94FDE01CFC5F9800746975 /* Frameworks */,
+				0D94FDE11CFC5F9800746975 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FlynnTV;
+			productName = FlynnTV;
+			productReference = 0D94FDE31CFC5F9800746975 /* FlynnTV.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0D94FDEF1CFC5F9800746975 /* FlynnTVTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0D94FE091CFC5F9800746975 /* Build configuration list for PBXNativeTarget "FlynnTVTests" */;
+			buildPhases = (
+				0D94FDEC1CFC5F9800746975 /* Sources */,
+				0D94FDED1CFC5F9800746975 /* Frameworks */,
+				0D94FDEE1CFC5F9800746975 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0D94FDF21CFC5F9800746975 /* PBXTargetDependency */,
+			);
+			name = FlynnTVTests;
+			productName = FlynnTVTests;
+			productReference = 0D94FDF01CFC5F9800746975 /* FlynnTVTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0D94FDFA1CFC5F9800746975 /* FlynnTVUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0D94FE0A1CFC5F9800746975 /* Build configuration list for PBXNativeTarget "FlynnTVUITests" */;
+			buildPhases = (
+				0D94FDF71CFC5F9800746975 /* Sources */,
+				0D94FDF81CFC5F9800746975 /* Frameworks */,
+				0D94FDF91CFC5F9800746975 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0D94FDFD1CFC5F9800746975 /* PBXTargetDependency */,
+			);
+			name = FlynnTVUITests;
+			productName = FlynnTVUITests;
+			productReference = 0D94FDFB1CFC5F9800746975 /* FlynnTVUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		1D6058900D05DD3D006BFB54 /* Flynn */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Flynn" */;
@@ -284,8 +457,21 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 510;
 				TargetAttributes = {
+					0D94FDE21CFC5F9800746975 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = G8D6696Z88;
+					};
+					0D94FDEF1CFC5F9800746975 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 0D94FDE21CFC5F9800746975;
+					};
+					0D94FDFA1CFC5F9800746975 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 0D94FDE21CFC5F9800746975;
+					};
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = G8D6696Z88;
 					};
@@ -309,6 +495,9 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* Flynn */,
+				0D94FDE21CFC5F9800746975 /* FlynnTV */,
+				0D94FDEF1CFC5F9800746975 /* FlynnTVTests */,
+				0D94FDFA1CFC5F9800746975 /* FlynnTVUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -324,6 +513,36 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0D94FDE11CFC5F9800746975 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D94FE131CFC607900746975 /* Models in Resources */,
+				0D94FE0F1CFC606A00746975 /* src in Resources */,
+				0D1733651CFC7D1700B70F59 /* package.json in Resources */,
+				0D94FE0D1CFC606000746975 /* dist in Resources */,
+				0D94FE111CFC607000746975 /* Controllers in Resources */,
+				0D94FE151CFC611A00746975 /* Settings.bundle in Resources */,
+				0D1733641CFC7D1700B70F59 /* webpack.config.js in Resources */,
+				0D1733631CFC7D1700B70F59 /* Gruntfile.js in Resources */,
+				0D94FDEA1CFC5F9800746975 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D94FDEE1CFC5F9800746975 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D94FDF91CFC5F9800746975 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -361,6 +580,31 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0D94FDDF1CFC5F9800746975 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D1733661CFC7D1700B70F59 /* ResourceLoader.swift in Sources */,
+				0D94FDE61CFC5F9800746975 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D94FDEC1CFC5F9800746975 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D94FDF51CFC5F9800746975 /* FlynnTVTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D94FDF71CFC5F9800746975 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D94FE001CFC5F9800746975 /* FlynnTVUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -385,6 +629,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0D94FDF21CFC5F9800746975 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0D94FDE21CFC5F9800746975 /* FlynnTV */;
+			targetProxy = 0D94FDF11CFC5F9800746975 /* PBXContainerItemProxy */;
+		};
+		0D94FDFD1CFC5F9800746975 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0D94FDE21CFC5F9800746975 /* FlynnTV */;
+			targetProxy = 0D94FDFC1CFC5F9800746975 /* PBXContainerItemProxy */;
+		};
 		301BF551109A68C00062928A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CordovaLib;
@@ -393,6 +647,220 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0D94FE021CFC5F9800746975 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Holisticon AG (G8D6696Z88)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = FlynnTV/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = de.holisticon.app.flynn;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6ac7659f-1106-4c16-a5ee-940b775d428e";
+				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Debug;
+		};
+		0D94FE031CFC5F9800746975 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Holisticon AG (G8D6696Z88)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = FlynnTV/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = de.holisticon.app.flynn;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6ac7659f-1106-4c16-a5ee-940b775d428e";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0D94FE041CFC5F9800746975 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = FlynnTVTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = de.holisticon.app.FlynnTVTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FlynnTV.app/FlynnTV";
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Debug;
+		};
+		0D94FE051CFC5F9800746975 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = FlynnTVTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = de.holisticon.app.FlynnTVTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FlynnTV.app/FlynnTV";
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0D94FE061CFC5F9800746975 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = FlynnTVUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = de.holisticon.app.FlynnTVUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TEST_TARGET_NAME = FlynnTV;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Debug;
+		};
+		0D94FE071CFC5F9800746975 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = FlynnTVUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = de.holisticon.app.FlynnTVUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TEST_TARGET_NAME = FlynnTV;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3047A50F1AB8059700498E2A /* build-debug.xcconfig */;
@@ -412,7 +880,7 @@
 				INFOPLIST_FILE = "Flynn/Flynn-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				PRODUCT_NAME = Flynn;
-				PROVISIONING_PROFILE = "7032cf5b-bffd-4205-b50b-2375255864c0";
+				PROVISIONING_PROFILE = "f3bad0a6-5bce-4f09-892c-07caa18e4f8e";
 			};
 			name = Debug;
 		};
@@ -432,7 +900,7 @@
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "Flynn/Flynn-Info.plist";
 				PRODUCT_NAME = Flynn;
-				PROVISIONING_PROFILE = "7032cf5b-bffd-4205-b50b-2375255864c0";
+				PROVISIONING_PROFILE = "f3bad0a6-5bce-4f09-892c-07caa18e4f8e";
 			};
 			name = Release;
 		};
@@ -490,6 +958,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0D94FE081CFC5F9800746975 /* Build configuration list for PBXNativeTarget "FlynnTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D94FE021CFC5F9800746975 /* Debug */,
+				0D94FE031CFC5F9800746975 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0D94FE091CFC5F9800746975 /* Build configuration list for PBXNativeTarget "FlynnTVTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D94FE041CFC5F9800746975 /* Debug */,
+				0D94FE051CFC5F9800746975 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0D94FE0A1CFC5F9800746975 /* Build configuration list for PBXNativeTarget "FlynnTVUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D94FE061CFC5F9800746975 /* Debug */,
+				0D94FE071CFC5F9800746975 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Flynn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
