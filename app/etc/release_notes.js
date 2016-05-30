@@ -11,7 +11,7 @@ var args = process.argv.slice(2),
   exec = require('child_process').exec;
 
 var buildNo = args[0],
-  configJSON = require(__dirname + '/../src/main/frontend/config.json'),
+  configJSON = require(__dirname + '/../src/config.json'),
   configXML = fs.readFileSync(__dirname + '/../config.xml');
 
 
