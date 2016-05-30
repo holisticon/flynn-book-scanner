@@ -31,7 +31,7 @@ ngFlynnApp.showErrorDialog = function ($rootScope, $scope, $ionicLoading, log, e
   'use strict';
 
   $ionicLoading.show();
-  if(navigator.notification){
+  if (navigator.notification) {
     navigator.notification.alert(errorCode + '\n' + errorDetails, ngFlynnApp.errorDialogClosed($rootScope, $scope, log), 'Error - ' + errorTitle);
   } else {
     window.alert(errorCode + '\n' + errorDetails);
@@ -184,6 +184,7 @@ var app = angular.module('flynnBookScannerApp', [ // jshint ignore:line
   'ui.bootstrap',
   'LocalStorageModule',
   'ngCookies',
+  'ngFileUpload',
   'ngResource',
   'ngSanitize',
   'ngRoute',
@@ -398,6 +399,16 @@ app.config(function ($urlRouterProvider, $provide, $compileProvider, $httpProvid
         'menuContent': {
           templateUrl: 'views/editBookView.html',
           controller: 'BookEditController'
+        }
+      }
+    })
+    .state('app.book_upload', {
+      url: '/book/upload/',
+      params: {book: null},
+      views: {
+        'menuContent': {
+          templateUrl: 'views/uploadView.html',
+          controller: 'BookUploadController'
         }
       }
     })

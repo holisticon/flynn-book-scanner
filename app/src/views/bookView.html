@@ -3,6 +3,9 @@
     <button class="button button-icon icon ion-edit"
             ng-click="edit(selectedBook)">
     </button>
+    <button class="button button-icon icon ion-folder" ng-show="settings.appConfig.dev"
+            ng-click="upload(selectedBook)">
+    </button>
   </ion-nav-buttons>
   <ion-content id="book" class="padding">
     <book-view-details book="selectedBook"></book-view-details>

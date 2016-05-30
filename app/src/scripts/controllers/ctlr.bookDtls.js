@@ -14,6 +14,11 @@ app.controller('BookDetailsController', function ($scope, $state, $stateParams, 
       $state.go('app.book_edit', {'book': pBook});
     }
 
+    function uploadBookAttachments(pBook) {
+      $log.debug('Uploading attachements for book: ' + pBook.value.volumeInfo.title);
+      $state.go('app.book_upload', {'book': pBook});
+    }
+
     function load() {
       $scope.selectedBook = $stateParams.book;
     }
@@ -22,5 +27,6 @@ app.controller('BookDetailsController', function ($scope, $state, $stateParams, 
 
     // public methods
     $scope.edit = editBookDetails;
+    $scope.upload = uploadBookAttachments;
   }
 );
