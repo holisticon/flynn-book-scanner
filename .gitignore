@@ -9,6 +9,7 @@ atlassian-ide-plugin.xml
 *.iws
 *.log
 app/node_modules
+app/platforms/ios/FlynnTV/node_modules
 app/src/bower_components
 app/npm-debug.log
 app/www
