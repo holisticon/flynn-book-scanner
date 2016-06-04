@@ -34,7 +34,7 @@ node {
     try {
       sh "cd app && npm install && grunt e2e"
     } catch (err) {
-      // for now we ignore errors
+      throw err
     }
 
     stage 'build Apps'
