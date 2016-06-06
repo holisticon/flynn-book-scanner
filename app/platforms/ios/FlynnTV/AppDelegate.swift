@@ -8,7 +8,6 @@
 
 import UIKit
 import TVMLKit
-import XCGLogger
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDelegate {

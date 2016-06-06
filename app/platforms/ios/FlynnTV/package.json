@@ -4,8 +4,8 @@
   "description": "Flynn tvOS App",
   "private": true,
   "dependencies": {
-    "md5": "2.1.0",
-    "page": "1.6.4"
+    "atvjs": "0.2.3",
+    "md5": "2.1.0"
   },
   "devDependencies": {
     "babel-core": "6.3.13",
@@ -30,11 +30,12 @@
     "jasmine": "2.4.1",
     "socket.io": "1.3.7",
     "socket.io-client": "1.3.7",
-    "tvml-webpack-plugin": "0.1.0",
+    "tvml-webpack-plugin": "0.2.0",
     "webpack": "1.12.9"
   },
+  "engine-strict": true,
   "engines": {
-    "node": ">=0.8.0"
+    "node": ">= 4.2.x"
   },
   "scripts": {
     "start": "grunt serve",

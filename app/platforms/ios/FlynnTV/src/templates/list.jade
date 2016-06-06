@@ -1,0 +1,14 @@
+doctype xml
+document
+  listTemplate
+    list
+      header
+        title #{data.title}
+      section
+        each result in data.results
+          listItemLockup(id="#{result.id}")
+            title(style="#{result.style}") #{result.title}
+            relatedContent
+              lockup(id="#{result.id}")
+                img(src="#{result.preview.url}")
+                title(style='tv-position: center;font-weight:bold;font-size:30px;text-align:center;') #{result.preview.organizer}
