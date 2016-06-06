@@ -7,7 +7,7 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
-    "appium": "1.4.16",
+    "appium": "1.5.2",
     "bower": "1.4.1",
     "findup-sync": "0.2.1",
     "fs": "0.0.2",

@@ -7,7 +7,7 @@ before_script:
   - pwd
   - cd app
   - npm install
-  - ./node_modules/appium/bin/appium.js &
+  - ./node_modules/.bin/appium > /dev/null 2>&1 &
   - grunt build
 script:
   - source ~/.android-sdk-installer/env
