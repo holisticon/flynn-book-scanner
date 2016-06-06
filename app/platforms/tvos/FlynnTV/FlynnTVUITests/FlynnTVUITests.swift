@@ -2,8 +2,8 @@
 //  FlynnTVUITests.swift
 //  FlynnTVUITests
 //
-//  Created by Martin Reinhardt on 30.05.16.
-//
+//  Created by Martin Reinhardt on 06.06.16.
+//  Copyright © 2016 Holisticon AG. All rights reserved.
 //
 
 import XCTest

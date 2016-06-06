@@ -9,7 +9,6 @@ atlassian-ide-plugin.xml
 *.iws
 *.log
 app/node_modules
-app/platforms/ios/FlynnTV/node_modules
 app/src/bower_components
 app/npm-debug.log
 app/www
@@ -38,6 +37,10 @@ app/platforms/ios/Flynn.xcodeproj/xcuserdata/*
 app/platforms/ios/CordovaLib/CordovaLib.xcodeproj/xcuserdata/*
 app/node/*
 app/platforms/ios/Flynn.xcodeproj/project.xcworkspace/*
+app/platforms/tvos/FlynnTV/FlynnTV/node_modules/
+app/platforms/tvos/FlynnTV/FlynnTV/dist/
+app/platforms/tvos/FlynnTV/FlynnTV/tmp/
 
 # Vagrant
 app/.vagrant/*
+app/platforms/tvos/FlynnTV/FlynnTV.xcodeproj/project.xcworkspace/xcuserdata/*

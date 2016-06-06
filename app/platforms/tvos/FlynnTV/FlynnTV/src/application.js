@@ -18,7 +18,7 @@ App.onLaunch = function (options) {
     template: menuTemplate,
     data: {
       items: [
-        {id: 'books', title: 'Bücher'},
+        {id: 'books', title: 'Bibliothek'},
         {id: 'search', title: 'Suche'}
       ]
     }

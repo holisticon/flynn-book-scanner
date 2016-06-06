@@ -1,8 +1,8 @@
 //
 //  ResourceLoaderExport.swift
-//  confiis
+//  Flynn Book Scanner
 //
-//  Created by Martin Reinhardt on 13.04.16.
+//  Created by Martin Reinhardt on 23.05.16.
 //  Copyright © 2016 Holisticon AG. All rights reserved.
 //
 

@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  Flynn Book Scanner
 //
-
-//  Copyright (c) 2016 Holisticon AG. All rights reserved.
+//  Created by Martin Reinhardt on 23.05.16.
+//  Copyright © 2016 Holisticon AG. All rights reserved.
 //
 
 import UIKit
