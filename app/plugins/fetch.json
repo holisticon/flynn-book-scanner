@@ -23,14 +23,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-device": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-device"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-dialogs": {
         "source": {
             "type": "registry",
@@ -55,16 +47,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-urlhandler": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-urlhandler"
-        },
-        "is_top_level": true,
-        "variables": {
-            "URL_SCHEME": "flynnApp"
-        }
-    },
     "cordova-plugin-whitelist": {
         "source": {
             "type": "registry",
@@ -88,5 +70,23 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "cordova-plugin-device": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-device"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-urlhandler": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-urlhandler"
+        },
+        "is_top_level": true,
+        "variables": {
+            "URL_SCHEME": "flynnapp"
+        }
     }
 }

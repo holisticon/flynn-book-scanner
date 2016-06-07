@@ -25,14 +25,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-plugin-device/www/device.js",
-        "id": "cordova-plugin-device.device",
-        "pluginId": "cordova-plugin-device",
-        "clobbers": [
-            "device"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-dialogs/www/notification.js",
         "id": "cordova-plugin-dialogs.notification",
         "pluginId": "cordova-plugin-dialogs",
@@ -67,19 +59,27 @@ module.exports = [
         "runs": true
     },
     {
-        "file": "plugins/cordova-plugin-urlhandler/www/ios/LaunchMyApp.js",
-        "id": "cordova-plugin-urlhandler.LaunchMyApp",
-        "pluginId": "cordova-plugin-urlhandler",
-        "clobbers": [
-            "window.plugins.launchmyapp"
-        ]
-    },
-    {
         "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
         "id": "cordova-sqlite-ext.SQLitePlugin",
         "pluginId": "cordova-sqlite-ext",
         "clobbers": [
             "SQLitePlugin"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-device/www/device.js",
+        "id": "cordova-plugin-device.device",
+        "pluginId": "cordova-plugin-device",
+        "clobbers": [
+            "device"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-urlhandler/www/ios/LaunchMyApp.js",
+        "id": "cordova-plugin-urlhandler.LaunchMyApp",
+        "pluginId": "cordova-plugin-urlhandler",
+        "clobbers": [
+            "window.plugins.launchmyapp"
         ]
     }
 ];
@@ -89,14 +89,14 @@ module.exports.metadata =
     "cordova-plugin-barcodescanner": "0.7.0",
     "cordova-plugin-console": "1.0.3",
     "cordova-plugin-crosswalk-webview": "1.7.0",
-    "cordova-plugin-device": "1.1.2",
     "cordova-plugin-dialogs": "1.2.1",
     "cordova-plugin-inappbrowser": "1.4.0",
     "cordova-plugin-splashscreen": "3.2.2",
     "cordova-plugin-whitelist": "1.2.2",
     "ionic-plugin-keyboard": "2.2.0",
-    "cordova-plugin-urlhandler": "0.7.0",
-    "cordova-sqlite-ext": "0.10.0"
+    "cordova-sqlite-ext": "0.10.0",
+    "cordova-plugin-device": "1.1.2",
+    "cordova-plugin-urlhandler": "0.7.0"
 }
 // BOTTOM OF METADATA
 });
