@@ -88,19 +88,23 @@ app.controller('BookUploadController', function ($rootScope, $scope, $state, $st
   }
 
   function addFiles(files) {
+    // TODO real impl
+    Upload.upload({
+      url: 'https://angular-file-upload.s3.amazonaws.com/', //S3 upload url including bucket name
+      method: 'POST',
+      data: files
+    });
+  }
 
-}
+  function load() {
+    $scope.selectedBook = $stateParams.book;
+  }
 
-function load() {
-  $scope.selectedBook = $stateParams.book;
-}
-
-load();
+  load();
 
 
 // public methods
-$scope.save = save;
+  $scope.save = save;
+  $scope.addFiles = addFiles;
 
-}
-)
-;
+});
