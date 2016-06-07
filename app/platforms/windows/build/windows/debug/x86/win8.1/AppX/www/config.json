@@ -1,0 +1,22 @@
+﻿{
+    "config": {
+        "timeout":  3000,
+        "googleApiKey": "AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY",
+        "dbLogging":    true,
+        "dev":          false,
+        "debug":        false,
+        "trace":        false
+    },
+    "info": {
+        "version": {
+            "label": "Version",
+            "hidden": false,
+            "value": "1.6.2"
+        },
+        "release_notes": {
+            "label": "Release Notes",
+            "hidden": false,
+            "value": ""
+        }
+    }
+}

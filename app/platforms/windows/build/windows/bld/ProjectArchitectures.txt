@@ -1,0 +1,2 @@
+C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\platforms\windows\CordovaApp.Windows.jsproj;x64
+C:\Users\Martin\Documents\GitHub\flynn-book-scanner\app\plugins\cordova-sqlite-ext\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.Windows\SQLite3.Windows.vcxproj;x64
