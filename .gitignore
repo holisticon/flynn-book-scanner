@@ -40,7 +40,8 @@ app/platforms/ios/Flynn.xcodeproj/project.xcworkspace/*
 app/platforms/tvos/FlynnTV/FlynnTV/node_modules/
 app/platforms/tvos/FlynnTV/FlynnTV/dist/
 app/platforms/tvos/FlynnTV/FlynnTV/tmp/
+app/platforms/tvos/FlynnTV/FlynnTV.xcodeproj/project.xcworkspace/xcuserdata/*
+app/platforms/tvos/Flynn/Flynn.xcodeproj/xcuserdata/*
 
 # Vagrant
 app/.vagrant/*
-app/platforms/tvos/FlynnTV/FlynnTV.xcodeproj/project.xcworkspace/xcuserdata/*
