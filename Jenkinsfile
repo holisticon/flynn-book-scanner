@@ -13,12 +13,12 @@ node {
   checkout scm
 
   stage 'Build'
-  sh "cd app && npm install && grunt build"
+  sh "cd app && nvm use && npm install && grunt build"
 
   stage 'Unit-Tests'
   wrap([$class: 'Xvfb']) {
     try {
-      sh "cd app && npm test"
+      sh "cd app && nvm use && npm test"
     } catch (err) {
       step([
         $class     : 'JUnitResultArchiver',
@@ -32,13 +32,13 @@ node {
     checkout scm
     stage 'Integration-Tests'
     try {
-      sh "cd app && npm install && grunt e2e"
+      sh "cd app && nvm use && npm install && grunt e2e"
     } catch (err) {
       throw err
     }
 
     stage 'build Apps'
-    sh "cd app && node etc/release_notes.js ${buildNumber} && npm install && grunt clean package"
+    sh "cd app && nvm use && node etc/release_notes.js ${buildNumber} && npm install && grunt clean package"
     sh "cd app/target && for file in *.ipa; do mv \$file \$(basename \$file .ipa)_build${buildNumber}.ipa; done && for file in *.apk; do mv \$file \$(basename \$file .apk)_build${buildNumber}.apk; done"
 
 
