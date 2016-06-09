@@ -449,7 +449,9 @@ module.exports = function (grunt) {
       appium: {   // Grunt requires at least one target to run so you can simply put 'all: {}' here too.
         options: {
           configFile: 'protractor.appium.conf', // Target-specific config file
-          args: {} // Target-specific arguments
+          args: {
+            verbose: true
+          }
         }
       }
     },
