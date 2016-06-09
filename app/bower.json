@@ -10,7 +10,7 @@
     "angular-route": "1.4.11",
     "angular-sanitize": "1.4.11",
     "angular-touch": "1.4.11",
-    "angular-bootstrap": "~0.13.0",
+    "angular-bootstrap": "0.13.0",
     "angular-cache": "4.2.2",
     "angular-local-storage": "0.1.5",
     "angular-ui-router": "0.2.15",
@@ -29,8 +29,8 @@
     "angular-sanitize": "1.4.11",
     "angular-animate": "1.4.11",
     "angular-ui-router": "0.2.15",
-    "pouchdb": "~5.2.1",
-    "pouchdb-find": "~0.9.0"
+    "pouchdb": "5.2.1",
+    "pouchdb-find": "0.9.0"
   },
   "appPath": "src",
   "genPath": "src-gen",
