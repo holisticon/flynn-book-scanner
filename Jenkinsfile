@@ -1,3 +1,9 @@
+properties[
+  [$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '20', numToKeepStr: '10']],
+  [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/holisticon/flynn-book-scanner/'],
+  [$class: 'GitLabConnectionProperty', gitLabConnection: 'https://martinreinhardt-online.de/gitlab/']
+  ]
+
 node {
   // Jenkins makes these variables available for each job it runs
   def buildNumber = env.BUILD_NUMBER
@@ -14,12 +20,12 @@ node {
   checkout scm
 
   stage 'Build'
-  sh ". ~/.nvm/nvm.sh >/dev/null && cd app && nvm install && nvm use && npm install && grunt build"
+  sh ". ~/.nvm/nvm.sh >/dev/null && cd app && npm install && grunt build"
 
   stage 'Unit-Tests'
   wrap([$class: 'Xvfb']) {
     try {
-      sh ". ~/.nvm/nvm.sh >/dev/null && cd app && nvm install && nvm use && npm test"
+      sh ". ~/.nvm/nvm.sh >/dev/null && cd app && npm install && npm"
     } catch (err) {
       step([
         $class     : 'JUnitResultArchiver',
@@ -33,7 +39,7 @@ node {
     checkout scm
     stage 'Integration-Tests'
     try {
-      sh ". ~/.nvm/nvm.sh >/dev/null && cd app && nvm install && nvm use && npm install && grunt e2e"
+      sh ". ~/.nvm/nvm.sh >/dev/null && cd app && npm install && grunt e2e"
     } catch (err) {
       throw err
     }

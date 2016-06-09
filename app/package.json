@@ -68,6 +68,7 @@
     "node": ">= 4.2.x"
   },
   "scripts": {
+    "postinstall": "nvm install && nvm use",
     "postinstall": "bower install && npm rebuild node-sass && webdriver-manager update",
     "start": "npm rebuild node-sass && grunt serve",
     "test": "grunt test"
