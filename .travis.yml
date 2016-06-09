@@ -13,4 +13,4 @@ script:
   - source ~/.android-sdk-installer/env
   - pwd
   - grunt check
-  - grunt test e2e
+  - grunt test package

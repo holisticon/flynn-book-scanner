@@ -1,8 +1,7 @@
-properties[
+properties properties: [
   [$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '20', numToKeepStr: '10']],
-  [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/holisticon/flynn-book-scanner/'],
-  [$class: 'GitLabConnectionProperty', gitLabConnection: 'https://martinreinhardt-online.de/gitlab/']
-  ]
+  [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/holisticon/flynn-book-scanner/']
+]
 
 node {
   // Jenkins makes these variables available for each job it runs
