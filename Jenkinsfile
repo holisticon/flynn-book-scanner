@@ -3,6 +3,7 @@ node {
   def buildNumber = env.BUILD_NUMBER
   def workspace = env.WORKSPACE
   def buildUrl = env.BUILD_URL
+  env.PATH = "${env.JAVA_HOME}/bin:${mvnHome}/bin:${env.PATH}:/usr/local/bin:/usr/bin:/bin"
 
   // PRINT ENVIRONMENT TO JOB
   echo "workspace directory is $workspace"
