@@ -38,7 +38,7 @@ node {
     checkout scm
     stage 'Integration-Tests'
     try {
-      sh ". ~/.nvm/nvm.sh >/dev/null && cd app && npm install && grunt e2e"
+      sh "cd app && npm install && grunt e2e"
     } catch (err) {
       throw err
     }
