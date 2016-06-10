@@ -24,7 +24,7 @@ node {
   stage 'Unit-Tests'
   wrap([$class: 'Xvfb']) {
     try {
-      sh ". ~/.nvm/nvm.sh >/dev/null && cd app && npm install && npm"
+      sh ". ~/.nvm/nvm.sh >/dev/null && cd app && npm install && npm test"
     } catch (err) {
       step([
         $class     : 'JUnitResultArchiver',
