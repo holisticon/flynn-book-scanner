@@ -9,9 +9,10 @@ before_script:
   - npm install
   - ./node_modules/.bin/appium > /dev/null 2>&1 &
   - grunt build
-  - touch build.json
 script:
   - source ~/.android-sdk-installer/env
   - pwd
   - grunt check
-  - grunt test package
+  - grunt test
+  - cordova build android
+  - cordova build ios
