@@ -1,19 +1,39 @@
 {
     "prepare_queue": {
         "installed": [],
-        "uninstalled": []
+        "uninstalled": [""]
     },
     "config_munge": {
-        "files": {}
+        "files": {
+            "config.xml": {
+              "parents": {
+                "/*": [
+                  {
+                    "xml": "<feature name=\"Console\"><param name=\"osx-package\" value=\"CDVLogger\" /></feature>",
+                    "count": 1
+                  },
+                  {
+                    "xml": "<feature name=\"Device\"><param name=\"osx-package\" value=\"CDVDevice\" /></feature>",
+                    "count": 1
+                  },
+                  {
+                    "xml": "<feature name=\"Notification\"><param name=\"osx-package\" value=\"CDVNotification\" /></feature>",
+                    "count": 1
+                  },
+                  {
+                    "xml": "<feature name=\"SQLitePlugin\"><param name=\"osx-package\" value=\"SQLitePlugin\" /></feature>",
+                    "count": 1
+                  }
+                ]
+              }
+            }
+        }
     },
     "installed_plugins": {
         "cordova-plugin-barcodescanner": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-console": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-plugin-crosswalk-webview": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-device": {
@@ -28,18 +48,8 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
         "cordova-sqlite-ext": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-plugin-urlhandler": {
-            "URL_SCHEME": "flynnapp",
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
+          "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
     "dependent_plugins": {}

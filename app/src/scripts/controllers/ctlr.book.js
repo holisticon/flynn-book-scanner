@@ -68,8 +68,8 @@ app.controller('BookController', function ($rootScope, $scope, $ionicLoading, $l
     function search() {
       $scope.books = null;
       // hide keyboard
-      if (typeof cordova != 'undefined') {
-        cordova.plugins.Keyboard.close();
+      if (window.cordova && window.cordova.plugins.Keyboard) {
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
       }
       var searchQuery = $scope.searchQuery;
       if (searchQuery && (searchQuery.isbn || searchQuery.keyword)) {
