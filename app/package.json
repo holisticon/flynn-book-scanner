@@ -67,9 +67,12 @@
     "node": ">= 4.2.x"
   },
   "scripts": {
+    "build": "grunt build",
+    "package": "grunt clean package",
     "postinstall": "nvm install && nvm use",
     "postinstall": "bower install && npm rebuild node-sass && webdriver-manager update",
     "start": "npm rebuild node-sass && grunt serve",
-    "test": "grunt test"
+    "test": "grunt test",
+    "test-e2e": "grunt e2e"
   }
 }
