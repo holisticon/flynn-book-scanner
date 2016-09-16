@@ -1,8 +1,3 @@
-properties properties: [
-  [$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '20', numToKeepStr: '10']],
-  [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/holisticon/flynn-book-scanner/']
-]
-
 node {
   // Jenkins makes these variables available for each job it runs
   def buildNumber = env.BUILD_NUMBER
@@ -17,7 +12,7 @@ node {
   echo "build Number is $buildNumber"
 
   stage 'Checkout'
-  checkout scm
+  git 'https://github.com/holisticon/flynn-book-scanner.git'
 
   dir(projectHome) {
 
@@ -27,10 +22,18 @@ node {
     stage 'Unit-Tests'
     sh "npm run test"
 
-    node('mac') {
-      checkout scm
+    junit healthScaleFactor: 1.0, testResults: 'target/reports/TESTS-*.xml'
+  }
+
+  node('mac') {
+
+    git 'https://github.com/holisticon/flynn-book-scanner.git'
+
+    dir(projectHome) {
       stage 'Integration-Tests'
       sh "npm install && npm run test-e2e"
+
+      junit healthScaleFactor: 1.0, testResults: 'target/reports/TESTS-*.xml'
 
       stage 'build Apps'
       sh "node etc/release_notes.js ${buildNumber} && npm install && npm run package "
@@ -39,10 +42,9 @@ node {
       stage 'upload Apps'
       sh 'cd platforms/android && supply --apk ../../target/$(ls ../../target/ | grep apk) --json_key  ~/.flynn/playstore.json --package_name de.holisticon.app.flynn --track alpha'
       sh 'cd platforms/ios && pilot upload --ipa ../../target/$(ls ../../target/ | grep ipa)'
+
       archiveArtifacts artifacts: 'target/*.ipa, target/*.apk'
 
     }
-
-    junit healthScaleFactor: 1.0, testResults: 'target/surefire-reports/TEST-*.xml,target/failsafe-reports/TEST*.xml'
   }
 }
