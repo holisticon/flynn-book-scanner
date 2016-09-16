@@ -72,7 +72,7 @@ module.exports = function (config) {
     ],
 
     junitReporter: {
-      outputDir: 'target/unit-tests/', // results will be saved as $outputDir/$browserName.xml
+      outputDir: 'target/reports/', // results will be saved as $outputDir/$browserName.xml
       suite: 'flynnApp'
     },
 

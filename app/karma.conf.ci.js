@@ -8,10 +8,6 @@ module.exports = function (config) {
   config.set({
     // web server port
     port: 10080,
-    junitReporter: {
-      outputDir: 'target/surefire-reports', // results will be saved as $outputDir/$browserName.xml
-      suite: 'frontend'
-    },
     singleRun: true,
     autoWatch: false
   });
