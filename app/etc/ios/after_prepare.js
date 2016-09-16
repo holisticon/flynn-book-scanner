@@ -17,7 +17,7 @@ if (fs.existsSync(configPath)) {
 }
 // Change plist and write.
 if (fs.existsSync(plistPath)) {
-  var pl = plist.parseFileSync(plistPath);
+  var pl = plist.parse(fs.readFileSync(plistPath, 'utf8'));
   configure(pl);
   fs.writeFileSync(plistPath, plist.build(pl).toString());
 }
