@@ -2,6 +2,8 @@
 
 module.exports = function (grunt) {
 
+  var serveStatic = require('serve-static');
+
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
@@ -93,11 +95,11 @@ module.exports = function (grunt) {
           open: true,
           middleware: function (connect) {
             return [
-              connect.static('.tmp'),
-              connect().use('/bower_components', connect.static('./bower_components')),
-              connect().use('/fonts', connect.static('./bower_components/ionic/release/fonts')),
-              connect().use('/app/styles', connect.static('./app/styles')),
-              connect.static(appConfig.app),
+              serveStatic('.tmp'),
+              connect().use('/bower_components', serveStatic('./bower_components')),
+              connect().use('/fonts', serveStatic('./bower_components/ionic/release/fonts')),
+              connect().use('/app/styles', serveStatic('./app/styles')),
+              serveStatic(appConfig.app),
               require('grunt-connect-proxy/lib/utils').proxyRequest
             ];
           }
@@ -108,10 +110,10 @@ module.exports = function (grunt) {
           port: 9001,
           middleware: function (connect) {
             return [
-              connect.static('.tmp'),
-              connect.static('test'),
-              connect().use('/bower_components', connect.static('./bower_components')),
-              connect.static(appConfig.app)
+              serveStatic('.tmp'),
+              serveStatic('test'),
+              connect().use('/bower_components', serveStatic('./bower_components')),
+              serveStatic(appConfig.app)
             ];
           }
         }
