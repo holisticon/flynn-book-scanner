@@ -50,6 +50,8 @@
       <key>NSAllowsArbitraryLoads</key>
       <true/>
     </dict>
+    <key>NSCameraUsageDescription</key>
+    <string>The camera is used to capture ISBN codes of books</string>
     <key>UILaunchStoryboardName</key>
     <string>Launch Screen</string>
     <key>UIMainStoryboardFile</key>
