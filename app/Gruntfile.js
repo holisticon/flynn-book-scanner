@@ -482,7 +482,7 @@ module.exports = function (grunt) {
         command: 'cp "$(pwd)/platforms/ios/build/device/Flynn.ipa" "$(pwd)/target/Flynn_<%= yeoman.version %>.ipa"'
       },
       buildAPK: {
-        command: 'cp "$(pwd)/platforms/android/build/outputs/apk/android-armv7-release.apk" "$(pwd)/target/Flynn_<%= yeoman.version %>.apk"'
+        command: 'cp "$(pwd)/platforms/android/build/outputs/apk/android-release.apk" "$(pwd)/target/Flynn_<%= yeoman.version %>.apk"'
       },
       prepareNW: {
         command: 'touch "<%= yeoman.dist %>/cordova.js" && touch "<%= yeoman.dist %>/cordova_plugins.js"'
