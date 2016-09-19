@@ -27,6 +27,7 @@ app/platforms/android/assets/www/bower_components/*
 app/platforms/ios/www/bower_components/*
 app/platforms/ios/www/*
 app/platforms/android/assets/www/*
+app/platforms/windows/build/*
 app/platforms/windows/www/*
 app/platforms/windows/obj/Debug/*
 app/platforms/windows/Bin/Debug/*

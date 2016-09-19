@@ -1,22 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="de.holisticon.app.flynn" version="1.7.0" xmlns="http://www.w3.org/ns/widgets">
+<widget android-packageName="de.holisticon.app.flynn" id="de.holisticon.app.flynnBookScanner" ios-CFBundleIdentifier="de.holisticon.app.flynn" version="1.7.1" xmlns="http://www.w3.org/ns/widgets">
     <preference name="AllowInlineMediaPlayback" value="true" />
     <preference name="BackupWebStorage" value="cloud" />
     <preference name="DisallowOverscroll" value="false" />
     <preference name="EnableViewportScale" value="false" />
     <preference name="KeyboardDisplayRequiresUserAction" value="true" />
     <preference name="MediaPlaybackRequiresUserAction" value="false" />
-    
     <feature name="LocalStorage">
-      <param name="osx-package" value="CDVLocalStorage"/>
+        <param name="osx-package" value="CDVLocalStorage" />
     </feature>
     <feature name="Device">
-      <param name="osx-package" value="CDVDevice"/>
+        <param name="ios-package" value="CDVDevice" />
     </feature>
-    <feature name="SQLitePlugin">
-      <param name="osx-package" value="SQLitePlugin"/>
-    </feature>
-    
     <name>Flynn</name>
     <description>
     flynn book scanner app

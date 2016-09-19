@@ -2,7 +2,7 @@
 <widget id="de.holisticon.app.flynnBookScanner"
         android-packageName="de.holisticon.app.flynn"
         ios-CFBundleIdentifier="de.holisticon.app.flynn"
-        version="1.7.0" xmlns="http://www.w3.org/ns/widgets">
+        version="1.7.1" xmlns="http://www.w3.org/ns/widgets">
     <name>Flynn</name>
     <description>
     flynn book scanner app
