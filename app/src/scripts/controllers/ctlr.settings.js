@@ -38,15 +38,6 @@ app.controller('SettingsController', function ($rootScope, $log, $scope, $ionicL
       }];
     }
 
-    function clearLogDB() {
-      $ionicLoading.show();
-      logService.clearLogData().then(function () {
-        readLogs();
-      }, function () {
-        $ionicLoading.hide();
-      });
-    }
-
     function readLogs() {
       $ionicLoading.show({template: '<i class="icon ion - looping loading-icon"></i>&nbsp;&nbsp;Loading log data ...'});
       logService.readLogData().then(function (response) {
@@ -54,6 +45,15 @@ app.controller('SettingsController', function ($rootScope, $log, $scope, $ionicL
         $ionicLoading.hide();
       }, function () {
         $log.error('No log entries found');
+        $ionicLoading.hide();
+      });
+    }
+
+    function clearLogDB() {
+      $ionicLoading.show();
+      logService.clearLogData().then(function () {
+        readLogs();
+      }, function () {
         $ionicLoading.hide();
       });
     }
@@ -81,27 +81,6 @@ app.controller('SettingsController', function ($rootScope, $log, $scope, $ionicL
       });
     }
 
-    function saveSettings(redirect) {
-      $log.debug('Saving settings to local storage');
-      var profile = $scope.flynn.activeProfile;
-      // adding default profile
-      var config = {},
-        profiles = [];
-      profiles.push(profile);
-      config.activeProfileID = 0;
-      config.profiles = profiles;
-      // save config
-      settingsService.save(config);
-      if (redirect) {
-        // sync if server was added
-        if ($scope.flynn.activeProfile.remotesync) {
-          syncWithServer();
-        } else {
-          readInventory();
-        }
-      }
-    }
-
     function syncWithServer() {
       $ionicLoading.show({template: '<i class="icon ion - looping loading-icon"></i>&nbsp;&nbsp;Syncing books ...'});
       inventoryService.syncRemote(true).then(function () {
@@ -124,6 +103,28 @@ app.controller('SettingsController', function ($rootScope, $log, $scope, $ionicL
         }
       });
     }
+
+    function saveSettings(redirect) {
+      $log.debug('Saving settings to local storage');
+      var profile = $scope.flynn.activeProfile;
+      // adding default profile
+      var config = {},
+        profiles = [];
+      profiles.push(profile);
+      config.activeProfileID = 0;
+      config.profiles = profiles;
+      // save config
+      settingsService.save(config);
+      if (redirect) {
+        // sync if server was added
+        if ($scope.flynn.activeProfile.remotesync) {
+          syncWithServer();
+        } else {
+          readInventory();
+        }
+      }
+    }
+
 
     // autoload
     loadSettings();

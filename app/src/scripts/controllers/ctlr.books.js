@@ -12,42 +12,6 @@ app.controller('BooksController', function ($rootScope, $scope, $state, $filter,
     var config = settingsService.load(),
       allBooks;
 
-    function init() {
-      initModal();
-      $scope.filter = {};
-      $scope.filter.selectedOrder = $scope.filterModes[0].value;
-      load(true);
-      $rootScope.$on('inventory.refresh', function () {
-        load(false);
-      });
-    }
-
-    function initModal() {
-      $ionicModal.fromTemplateUrl('filter_modal.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-      }).then(function (modal) {
-        $scope.modal = modal;
-      });
-      $scope.openModal = function () {
-        $scope.modal.show();
-      };
-      $scope.closeModal = function () {
-        $scope.modal.hide();
-      };
-      //Cleanup the modal when we're done with it!
-      $scope.$on('$destroy', function () {
-        $scope.modal.remove();
-      });
-      $scope.filterModes = [{
-        label: 'sort by title',
-        value: 'value.volumeInfo.title'
-      }, {
-        label: 'sort by author',
-        value: 'authorInfo'
-      }];
-    }
-
     function syncWithServer() {
       $ionicLoading.show({
         template: '<ion-spinner></ion-spinner> <br> Syncing books ...'
@@ -92,6 +56,43 @@ app.controller('BooksController', function ($rootScope, $scope, $state, $filter,
         $ionicLoading.hide();
       });
     }
+
+    function initModal() {
+      $ionicModal.fromTemplateUrl('filter_modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function (modal) {
+        $scope.modal = modal;
+      });
+      $scope.openModal = function () {
+        $scope.modal.show();
+      };
+      $scope.closeModal = function () {
+        $scope.modal.hide();
+      };
+      //Cleanup the modal when we're done with it!
+      $scope.$on('$destroy', function () {
+        $scope.modal.remove();
+      });
+      $scope.filterModes = [{
+        label: 'sort by title',
+        value: 'value.volumeInfo.title'
+      }, {
+        label: 'sort by author',
+        value: 'authorInfo'
+      }];
+    }
+
+    function init() {
+      initModal();
+      $scope.filter = {};
+      $scope.filter.selectedOrder = $scope.filterModes[0].value;
+      load(true);
+      $rootScope.$on('inventory.refresh', function () {
+        load(false);
+      });
+    }
+
 
     function doSearch() {
       $scope.books = $filter('bookFilter')(allBooks, $scope.searchQuery.fullTextSearch);

@@ -9,9 +9,11 @@
 app.controller('BookUploadController', function ($rootScope, $scope, $state, $stateParams, $ionicLoading, $location, $log, settingsService, inventoryService, Upload) {
   'use strict';
 
+  var config = settingsService.load();
+
   function save() {
 
-    function onSuccess(response) {
+    function onSaveSuccess(response) {
       $log.info('Successfully added book');
       if (response.noUpdate) {
         navigator.notification.alert('Book already added. Please increase amount.');
@@ -35,8 +37,7 @@ app.controller('BookUploadController', function ($rootScope, $scope, $state, $st
       $ionicLoading.hide();
     }
 
-    var book = $scope.selectedBook,
-      config = settingsService.load();
+    var book = $scope.selectedBook;
     $ionicLoading.show();
     $log.debug('Starting save for book.');
 
@@ -78,11 +79,11 @@ app.controller('BookUploadController', function ($rootScope, $scope, $state, $st
           image.content_type = blob.type;
           image.data = reader.result.replace('data:image/jpeg;base64,', '');
           book.image = image;
-          inventoryService.save(book).then(onSuccess, onError);
+          inventoryService.save(book).then(onSaveSuccess, onError);
         };
       });
     } else {
-      inventoryService.save(book).then(onSuccess, onError);
+      inventoryService.save(book).then(onSaveSuccess, onError);
 
     }
   }

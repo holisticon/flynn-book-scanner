@@ -9,6 +9,8 @@
 app.controller('BookEditController', function ($rootScope, $scope, $state, $stateParams, $ionicLoading, $location, $log, settingsService, inventoryService) {
     'use strict';
 
+    var config = settingsService.load();
+
     function save() {
 
       function onSuccess(response) {
@@ -35,8 +37,7 @@ app.controller('BookEditController', function ($rootScope, $scope, $state, $stat
         $ionicLoading.hide();
       }
 
-      var book = $scope.selectedBook,
-        config = settingsService.load();
+      var book = $scope.selectedBook;
       $ionicLoading.show();
       $log.debug('Starting save for book.');
 

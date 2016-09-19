@@ -9,7 +9,9 @@
 app.controller('BookController', function ($rootScope, $scope, $ionicLoading, $log, $http, $filter, $q, $state, $resource, $ionicModal, $ionicHistory, settingsService, inventoryService, googleBookService) {
     'use strict';
 
-    var booksInventory, credentials = settingsService.load().activeProfile();
+    var booksInventory,
+      config = settingsService.load(),
+      credentials = config.activeProfile();
 
     function init() {
       $ionicModal.fromTemplateUrl('book_modal.html', {
@@ -32,32 +34,20 @@ app.controller('BookController', function ($rootScope, $scope, $ionicLoading, $l
     }
 
     /**
-     * Scan book via ISBN barcode
+     * Perform Google Book Search
+     *
      */
-    function scan() {
+    function retrieve(pSearchQuery) {
       $ionicLoading.show();
-      cordova.plugins.barcodeScanner.scan(function (result) {
-        if (!result.cancelled) {
-          $log.debug('We got a barcode\n' + 'Result: ' + result.text + '\n' + 'Format: ' + result.format + '\n');
-          $scope.searchQuery.isbn = result.text;
-          search();
-        }
-        $ionicLoading.hide();
-      }, function () {
-        $log.error('Scanning failed.');
-        $rootScope.$broadcast('barcode.error');
-        $ionicLoading.hide();
-      });
-    }
-
-    // TODO_#21_take book image
-    function takePicture() {// jshint ignore:line
-      navigator.camera.getPicture(function (imageURI) {// jshint ignore:line
-        // imageURI is the URL of the image that we can use for
-        // an <img> element or backgroundImage.
-      }, function (err) {// jshint ignore:line
-        // Ruh-roh, something bad happened
-      }, {});
+      googleBookService.search(pSearchQuery).then(function (response) {
+          $log.info('Got valid service response');
+          $scope.books = ngFlynnApp.enrichDbData(response.books);
+          $ionicLoading.hide();
+        },
+        function () {
+          $rootScope.$broadcast('booksearch.invalid');
+          $ionicLoading.hide();
+        });
     }
 
     /**
@@ -93,45 +83,33 @@ app.controller('BookController', function ($rootScope, $scope, $ionicLoading, $l
       }
     }
 
-    function addManual($event) {
-      // our function body
-      $event.preventDefault();
-      var book = {};
-      book.value = {};
-      book.value.id = Date.now();
-      book.value.volumeInfo = {};
-      book.value.volumeInfo.industryIdentifiers = [];
-      book.value.volumeInfo.authors = [];
-      book.value.volumeInfo.industryIdentifiers = [];
-      book.value.volumeInfo.industryIdentifiers.push('');
-      book.value.volumeInfo.industryIdentifiers.push('');
-      book.value.volumeInfo.authors.push('');
-      selectBook(book);
-    }
-
     /**
-     * Perform Google Book Search
-     *
+     * Scan book via ISBN barcode
      */
-    function retrieve(pSearchQuery) {
+    function scan() {
       $ionicLoading.show();
-      googleBookService.search(pSearchQuery).then(function (response) {
-          $log.info('Got valid service response');
-          $scope.books = ngFlynnApp.enrichDbData(response.books);
-          $ionicLoading.hide();
-        },
-        function () {
-          $rootScope.$broadcast('booksearch.invalid');
-          $ionicLoading.hide();
-        });
+      cordova.plugins.barcodeScanner.scan(function (result) {
+        if (!result.cancelled) {
+          $log.debug('We got a barcode\n' + 'Result: ' + result.text + '\n' + 'Format: ' + result.format + '\n');
+          $scope.searchQuery.isbn = result.text;
+          search();
+        }
+        $ionicLoading.hide();
+      }, function () {
+        $log.error('Scanning failed.');
+        $rootScope.$broadcast('barcode.error');
+        $ionicLoading.hide();
+      });
     }
 
-    function reset() {
-      $scope.books = null;
-      $scope.searchQuery = null;
-      $scope.selectedBook = null;
-      $scope.searchQuery = {};
-      $scope.closeModal();
+    // TODO_#21_take book image
+    function takePicture() {// jshint ignore:line
+      navigator.camera.getPicture(function (imageURI) {// jshint ignore:line
+        // imageURI is the URL of the image that we can use for
+        // an <img> element or backgroundImage.
+      }, function (err) {// jshint ignore:line
+        // Ruh-roh, something bad happened
+      }, {});
     }
 
     /**
@@ -192,6 +170,30 @@ app.controller('BookController', function ($rootScope, $scope, $ionicLoading, $l
       $scope.openModal();
     }
 
+    function addManual($event) {
+      // our function body
+      $event.preventDefault();
+      var book = {};
+      book.value = {};
+      book.value.id = Date.now();
+      book.value.volumeInfo = {};
+      book.value.volumeInfo.industryIdentifiers = [];
+      book.value.volumeInfo.authors = [];
+      book.value.volumeInfo.industryIdentifiers = [];
+      book.value.volumeInfo.industryIdentifiers.push('');
+      book.value.volumeInfo.industryIdentifiers.push('');
+      book.value.volumeInfo.authors.push('');
+      selectBook(book);
+    }
+
+    function reset() {
+      $scope.books = null;
+      $scope.searchQuery = null;
+      $scope.selectedBook = null;
+      $scope.searchQuery = {};
+      $scope.closeModal();
+    }
+
     function save(book) {
       function onSuccess(response) {
         $log.info('Successfully added book');
@@ -231,7 +233,6 @@ app.controller('BookController', function ($rootScope, $scope, $ionicLoading, $l
       $ionicLoading.show();
       $log.debug('Starting save for book');
       // remember last bookshelf
-      var config = settingsService.load();
       config.activeProfile().lastBookshelf = book.value.bookshelf;
       settingsService.save(config);
       // TODO_#65
