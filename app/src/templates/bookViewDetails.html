@@ -48,6 +48,10 @@
     <span class="input-label">Bookshelf:</span>
     <span id="bookshelf" type="text">{{::selectedBook.value.bookshelf}}</span>
   </label>
+  <label class="item-input">
+    <span class="input-label">Rating:</span>
+    <span rating ng-model="selectedBook.rating" readonly="true"></span>
+  </label>
   <label class="item-input" ng-show="selectedBook.value.comment">
     <span class="input-label">Comment:</span>
     <span id="comment" type="text">{{::selectedBook.value.volumeInfo.subtitle}}</span>

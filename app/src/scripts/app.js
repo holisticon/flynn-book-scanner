@@ -181,7 +181,6 @@ if (ngFlynnApp.isMobileDevice()) {
  * @module flynnBookScannerApp
  */
 var app = angular.module('flynnBookScannerApp', [ // jshint ignore:line
-  'ui.bootstrap',
   'LocalStorageModule',
   'ngCookies',
   'ngFileUpload',

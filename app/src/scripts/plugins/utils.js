@@ -82,6 +82,8 @@ ngFlynnApp.enrichSingleDbEntry = function (pDbEntry) {
     isbnInfo;
   result.value = pDbEntry.value;
   result.image = pDbEntry.image;
+  result.count = pDbEntry.count;
+  result.rating = pDbEntry.rating || 2;
   // TODO_#65
   // move to service
   // Author info

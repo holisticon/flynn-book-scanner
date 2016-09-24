@@ -1,59 +1,65 @@
-<div class="padding" id="{{selectedBook.value.id}}">  
-	<p class="help-block warning" ng-show="selectedBook.infoMsg">
-		<br>
-		<i class="icon ion-information-circled"></i> {{::selectedBook.infoMsg}}
-		<br>
-	</p> 
-	<label class="item-input">
-			<span class="input-label">Title:</span>
- 			<input id="titleInput" type="text" data-ng-model="selectedBook.value.volumeInfo.title" required/>
-	</label>     
-	<label class="item-input">
-			<span class="input-label">Subtitle:</span>
- 			<input id="subtitleInput" type="text" data-ng-model="selectedBook.value.volumeInfo.subtitle"/>
-	</label>       	                       	
-   	<label class="item-input" ng-show="selectedBook.value.volumeInfo.imageLinks.thumbnail">
-		<span class="input-label"></span>
-		<image-data image="selectedBook.image" ng-show="selectedBook.image"></image-data>
-		<img class="img-thumbnail" alt="book image" ng-show="!selectedBook.image" ng-src="{{selectedBook.value.volumeInfo.imageLinks.thumbnail}}" />  				  			
-	</label>
-	<label class="item-input">
-			<span class="input-label">Author:</span>
- 			<input id="authorInput" type="text" data-ng-model="selectedBook.authorInfo"/>
-	</label>
-	<label class="item-input">
-			<span class="input-label">Publisher:</span>
- 			<input id="publisherInput" type="text" data-ng-model="selectedBook.value.volumeInfo.publisher"/>
-	</label>
-	<label class="item-input">
-			<span class="input-label">Published:</span>
- 			<input id="publishDateInput" type="date" data-ng-model="selectedBook.value.volumeInfo.publishedDate"/>
-	</label>   
-	<label class="item-input">
-			<span class="input-label">Pages:</span>
- 			<input id="pagesInput" type="text" data-ng-model="selectedBook.value.volumeInfo.pageCount"/>
-	</label>
-	<label class="item-input">
-			<span class="input-label">ISBN:</span>
- 			<input id="isbnInput" type="text" data-ng-model="selectedBook.isbnInfo" required/>
-	</label> 
-	<label class="item-input">
- 			<textarea id="authorInput" rows="10" placeholder="Description" data-ng-model="selectedBook.value.volumeInfo.description"/>
-	</label> 
-	<label class="item-input">
-			<span class="input-label">Amount:</span>
- 			<input id="amountInput" type="tel" data-ng-model="selectedBook.count"/>
-	</label>
-	<label class="item-input">
-			<span class="input-label">Owner:</span>
- 			<input id="ownerInput" type="text" data-ng-model="selectedBook.value.owner"/>
-	</label>
-	<label class="item-input">
-			<span class="input-label">Bookshelf:</span>
- 			<input id="bookshelfInput" type="text" data-ng-model="selectedBook.value.bookshelf"/>
-	</label>
-	<label class="item-input">
-			<span class="input-label">Comment:</span>
- 			<input id="commentInput" type="text" data-ng-model="selectedBook.count.comment"/>
-	</label>    
+<div class="padding" id="{{selectedBook.value.id}}">
+  <p class="help-block warning" ng-show="selectedBook.infoMsg">
+    <br>
+    <i class="icon ion-information-circled"></i> {{::selectedBook.infoMsg}}
+    <br>
+  </p>
+  <label class="item-input">
+    <span class="input-label">Title:</span>
+    <input id="titleInput" type="text" data-ng-model="selectedBook.value.volumeInfo.title" required/>
+  </label>
+  <label class="item-input">
+    <span class="input-label">Subtitle:</span>
+    <input id="subtitleInput" type="text" data-ng-model="selectedBook.value.volumeInfo.subtitle"/>
+  </label>
+  <label class="item-input" ng-show="selectedBook.value.volumeInfo.imageLinks.thumbnail">
+    <span class="input-label"></span>
+    <image-data image="selectedBook.image" ng-show="selectedBook.image"></image-data>
+    <img class="img-thumbnail" alt="book image" ng-show="!selectedBook.image"
+         ng-src="{{selectedBook.value.volumeInfo.imageLinks.thumbnail}}"/>
+  </label>
+  <label class="item-input">
+    <span class="input-label">Author:</span>
+    <input id="authorInput" type="text" data-ng-model="selectedBook.authorInfo"/>
+  </label>
+  <label class="item-input">
+    <span class="input-label">Publisher:</span>
+    <input id="publisherInput" type="text" data-ng-model="selectedBook.value.volumeInfo.publisher"/>
+  </label>
+  <label class="item-input">
+    <span class="input-label">Published:</span>
+    <input id="publishDateInput" type="date" data-ng-model="selectedBook.value.volumeInfo.publishedDate"/>
+  </label>
+  <label class="item-input">
+    <span class="input-label">Pages:</span>
+    <input id="pagesInput" type="text" data-ng-model="selectedBook.value.volumeInfo.pageCount"/>
+  </label>
+  <label class="item-input">
+    <span class="input-label">ISBN:</span>
+    <input id="isbnInput" type="text" data-ng-model="selectedBook.isbnInfo" required/>
+  </label>
+  <label class="item-input">
+    <textarea id="authorInput" rows="10" placeholder="Description"
+              data-ng-model="selectedBook.value.volumeInfo.description"/>
+  </label>
+  <label class="item-input">
+    <span class="input-label">Amount:</span>
+    <input id="amountInput" type="tel" data-ng-model="selectedBook.count"/>
+  </label>
+  <label class="item-input">
+    <span class="input-label">Owner:</span>
+    <input id="ownerInput" type="text" data-ng-model="selectedBook.value.owner"/>
+  </label>
+  <label class="item-input">
+    <span class="input-label">Bookshelf:</span>
+    <input id="bookshelfInput" type="text" data-ng-model="selectedBook.value.bookshelf"/>
+  </label>
+  <label class="item-input">
+    <span class="input-label">Rating:</span>
+    <span rating data-ng-model="selectedBook.rating" readonly="false"></span>
+  </label>
+  <label class="item-input">
+    <span class="input-label">Comment:</span>
+    <input id="commentInput" type="text" data-ng-model="selectedBook.comment"/>
+  </label>
 </div>
