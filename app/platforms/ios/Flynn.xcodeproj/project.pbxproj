@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
 		0D7ED7751CFBF8BF002C109E /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D7ED7741CFBF8BF002C109E /* Launch Screen.storyboard */; };
@@ -36,6 +35,10 @@
 		AB5BB36A89C34A1D8CADE12B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A50F61EC2BF4D70BB0FC073 /* QuartzCore.framework */; };
 		C39962E89AD74117B52E9DF0 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFEE0514CA20490C9EE1A0EF /* CoreVideo.framework */; };
 		FF99AD38C64F4B48B4A6B0C1 /* scannerOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8520FDFC87C4E1BA835C1B8 /* scannerOverlay.xib */; };
+		D7D0885A1CAA4642A5E4ECED /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80633133076744AA9F54D4A6 /* AddressBook.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		20515250D9FA4D708CC377B9 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9F6A3B37E634B7E9450B741 /* AddressBookUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		387EBCFD0EF74B1AB3A4E5C3 /* CDVContacts.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA46B217FAC46EE8B7497A2 /* CDVContacts.m */; };
+		4751D2B8B7B84B7BA133A03C /* CDVContact.m in Sources */ = {isa = PBXBuildFile; fileRef = EF77A221043D42E084ABDD95 /* CDVContact.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +108,12 @@
 		FCDFCBE1898447C4B5EF00D3 /* CDVBarcodeScanner.mm */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = CDVBarcodeScanner.mm; path = "cordova-plugin-barcodescanner/CDVBarcodeScanner.mm"; sourceTree = "<group>"; };
 		FD674CA85A5448FEA184CC77 /* SQLitePlugin.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = SQLitePlugin.m; path = "cordova-sqlite-ext/SQLitePlugin.m"; sourceTree = "<group>"; };
 		FF2EFEA37294457E8B5EEFD5 /* CDVLogger.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVLogger.m; path = "cordova-plugin-console/CDVLogger.m"; sourceTree = "<group>"; };
+		80633133076744AA9F54D4A6 /* AddressBook.framework */ = {isa = PBXFileReference; name = "AddressBook.framework"; path = "System/Library/Frameworks/AddressBook.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		F9F6A3B37E634B7E9450B741 /* AddressBookUI.framework */ = {isa = PBXFileReference; name = "AddressBookUI.framework"; path = "System/Library/Frameworks/AddressBookUI.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		7DA46B217FAC46EE8B7497A2 /* CDVContacts.m */ = {isa = PBXFileReference; name = "CDVContacts.m"; path = "cordova-plugin-contacts/CDVContacts.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		EF77A221043D42E084ABDD95 /* CDVContact.m */ = {isa = PBXFileReference; name = "CDVContact.m"; path = "cordova-plugin-contacts/CDVContact.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		60FF616BEC1A40BBA2E713B0 /* CDVContacts.h */ = {isa = PBXFileReference; name = "CDVContacts.h"; path = "cordova-plugin-contacts/CDVContacts.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		3B470A268CBD4E4AA1906836 /* CDVContact.h */ = {isa = PBXFileReference; name = "CDVContact.h"; path = "cordova-plugin-contacts/CDVContact.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +127,8 @@
 				C39962E89AD74117B52E9DF0 /* CoreVideo.framework in Frameworks */,
 				AB5BB36A89C34A1D8CADE12B /* QuartzCore.framework in Frameworks */,
 				81EDDDFAAFDF42DEA968DBEB /* AudioToolbox.framework in Frameworks */,
+				D7D0885A1CAA4642A5E4ECED /* AddressBook.framework in Frameworks */,
+				20515250D9FA4D708CC377B9 /* AddressBookUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +207,8 @@
 				EFEE0514CA20490C9EE1A0EF /* CoreVideo.framework */,
 				5A50F61EC2BF4D70BB0FC073 /* QuartzCore.framework */,
 				14329616337F4A76B5060770 /* AudioToolbox.framework */,
+				80633133076744AA9F54D4A6 /* AddressBook.framework */,
+				F9F6A3B37E634B7E9450B741 /* AddressBookUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -242,6 +255,10 @@
 				530CDD3B99224A1C873E6990 /* sqlite3.h */,
 				8D28E4975E9A4520A4766018 /* CDVDevice.m */,
 				C7F798A8622B49F7A2B8E032 /* CDVDevice.h */,
+				7DA46B217FAC46EE8B7497A2 /* CDVContacts.m */,
+				EF77A221043D42E084ABDD95 /* CDVContact.m */,
+				60FF616BEC1A40BBA2E713B0 /* CDVContacts.h */,
+				3B470A268CBD4E4AA1906836 /* CDVContact.h */,
 			);
 			name = Plugins;
 			path = Flynn/Plugins;
@@ -380,6 +397,8 @@
 				2E9A885799AD48CFA17DC483 /* SQLitePlugin.m in Sources */,
 				5DDE884E2DEF49F4B3D8D084 /* sqlite3.c in Sources */,
 				358CB641703B41E5A0F53813 /* CDVDevice.m in Sources */,
+				387EBCFD0EF74B1AB3A4E5C3 /* CDVContacts.m in Sources */,
+				4751D2B8B7B84B7BA133A03C /* CDVContact.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -88,5 +88,23 @@
         "variables": {
             "URL_SCHEME": "flynnapp"
         }
+    },
+    "cordova-plugin-compat": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-compat"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-contacts": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-contacts"
+        },
+        "is_top_level": true,
+        "variables": {
+            "CONTACTS_USAGE_DESCRIPTION": "Used for rental list"
+        }
     }
 }

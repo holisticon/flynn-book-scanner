@@ -40,7 +40,14 @@
         "cordova-plugin-urlhandler": {
             "URL_SCHEME": "flynnapp",
             "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        }
+    }
 }

@@ -58,5 +58,7 @@
     <string>Launch Screen</string>
     <key>UIRequiresFullScreen</key>
     <false/>
+    <key>NSContactsUsageDescription</key>
+    <string>Used for rental list</string>
   </dict>
 </plist>

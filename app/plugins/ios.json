@@ -103,7 +103,15 @@
         "cordova-plugin-urlhandler": {
             "URL_SCHEME": "flynnapp",
             "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-contacts": {
+            "CONTACTS_USAGE_DESCRIPTION": "Used for rental list",
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        }
+    }
 }

@@ -30,7 +30,14 @@
         },
         "cordova-sqlite-ext": {
             "PACKAGE_NAME": "Flynn"
+        },
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "Flynn"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "Flynn"
+        }
+    }
 }

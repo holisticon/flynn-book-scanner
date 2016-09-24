@@ -4,5 +4,7 @@
     "CoreVideo.framework": 2,
     "QuartzCore.framework": 2,
     "AudioToolbox.framework": 2,
-    "libsqlite3.dylib": 1
+    "libsqlite3.dylib": 1,
+    "AddressBook.framework": 2,
+    "AddressBookUI.framework": 2
 }

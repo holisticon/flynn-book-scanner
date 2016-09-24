@@ -37,6 +37,9 @@
     <feature name="LaunchMyApp">
         <param name="android-package" value="de.martinreinhardt.cordova.plugins.urlhandler.LaunchMyApp" />
     </feature>
+    <feature name="Contacts">
+        <param name="android-package" value="org.apache.cordova.contacts.ContactManager" />
+    </feature>
     <name>Flynn</name>
     <description>
     flynn book scanner app
