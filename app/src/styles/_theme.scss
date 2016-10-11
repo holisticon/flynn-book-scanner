@@ -55,7 +55,6 @@
   }
 }
 
-
 .menu-left .bar-header {
   background-color: #153D8E;
 
@@ -70,6 +69,7 @@ ion-tabs {
     top: 54px;
   }
 }
+
 .platform-browser {
   ion-tabs {
     .has-tabs {
@@ -77,9 +77,10 @@ ion-tabs {
     }
   }
 }
+
 // don't resize header on iPad ...
-@media (max-width: 60em)  and (orientation:landscape) {
-  .platform-ios.platform-cordova:not(.fullscreen){
+@media (max-width: 60em) and (orientation: landscape) {
+  .platform-ios.platform-cordova:not(.fullscreen) {
     .bar-header:not(.bar-subheader) {
       height: 40px;
       orientation: portrait;
@@ -103,7 +104,7 @@ ion-tabs {
   background-color: #DEDEDE;
 }
 
-.tabs-positive > .tabs, .tabs-positive.tabs-striped > .tabs{
+.tabs-positive > .tabs, .tabs-positive.tabs-striped > .tabs {
   border-color: #145fd7;
   background-color: #153D8E;
 }
@@ -117,8 +118,18 @@ ion-tabs {
   right: 0;
 }
 
-.item-thumbnail-left .item-content > img:first-child{
+.item-thumbnail-left .item-content > img:first-child {
   width: auto;
+}
+
+.img-responsive {
+  width: 100%;
+  height: auto;
+}
+
+.img-logo {
+  max-width: 300px;
+  height: auto;
 }
 
 .button.button-positive {
@@ -131,7 +142,7 @@ ion-tabs {
   background-color: #4a87ee;
 }
 
-.item-stacked-label .input-label{
+.item-stacked-label .input-label {
   width: 100%;
 }
 
@@ -157,7 +168,6 @@ input[disabled], select[disabled], textarea[disabled], input[readonly]:not(.clon
 .item-select select {
   padding: 14px 48px 8px 16px;
 }
-
 
 // fix for side-menu issue on android, see https://github.com/driftyco/ionic/issues/2122
 
@@ -188,6 +198,7 @@ ul.rating li {
   background: none;
   padding: 5px 10px;
 }
+
 ul.rating li i {
   font-size: 30px;
 }
