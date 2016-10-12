@@ -31,9 +31,6 @@
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-sqlite-ext": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
@@ -42,6 +39,12 @@
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-sqlite-ext": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },

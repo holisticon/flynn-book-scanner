@@ -1,4 +1,4 @@
-<div class="padding" id="{{selectedBook.value.id}}">
+<div class="card padding" id="{{selectedBook.value.id}}">
   <label class="item-input" ng-show="selectedBook.value.volumeInfo.title">
     <span class="input-label">Title:</span>
     <span id="title" type="text">{{::selectedBook.value.volumeInfo.title}}</span>
@@ -52,8 +52,65 @@
     <span class="input-label">Rating:</span>
     <span rating ng-model="selectedBook.rating" readonly="true"></span>
   </label>
+  <label class="item-input" ng-show="selectedBook.rentalInformation.person.name">
+    <span class="input-label">Rented to:</span>
+    <span ng-model="selectedBook.rentalInformation.person.name"></span>
+  </label>
   <label class="item-input" ng-show="selectedBook.value.comment">
     <span class="input-label">Comment:</span>
     <span id="comment" type="text">{{::selectedBook.value.volumeInfo.subtitle}}</span>
   </label>
+
+  <script id="templates/search-contact.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">Search Contact</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+      </ion-header-bar>
+      <ion-content class="padding">
+        <div class="list">
+          <label class="item item-input">
+            <span class="input-label">First Name</span>
+            <input ng-model="newUser.firstName" type="text">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Last Name</span>
+            <input ng-model="newUser.lastName" type="text">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Email</span>
+            <input ng-model="newUser.email" type="text">
+          </label>
+          <button class="button button-full button-positive" ng-click="createContact(newUser)">Create</button>
+        </div>
+      </ion-content>
+    </ion-modal-view>
+  </script>
+
+  <script id="templates/add-contact.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">New Contact</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+      </ion-header-bar>
+      <ion-content class="padding">
+        <div class="list">
+          <label class="item item-input">
+            <span class="input-label">First Name</span>
+            <input ng-model="newUser.firstName" type="text">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Last Name</span>
+            <input ng-model="newUser.lastName" type="text">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Email</span>
+            <input ng-model="newUser.email" type="text">
+          </label>
+          <button class="button button-full button-positive" ng-click="createContact(newUser)">Create</button>
+        </div>
+      </ion-content>
+    </ion-modal-view>
+  </script>
 </div>
+

@@ -4,7 +4,7 @@
  * @module flynnBookScannerApp
  * @description creates input formular for adding a book
  */
-app.directive('bookEditDetails', function ($timeout, $ionicLoading) {
+app.directive('bookEditDetails', function ($timeout, $ionicLoading, $ionicModal) {
     'use strict';
 
     return {
@@ -16,7 +16,20 @@ app.directive('bookEditDetails', function ($timeout, $ionicLoading) {
       },
       replace: true,
       templateUrl: 'templates/bookEditDetails.html',
-
+      compile: function (element, attributes) {
+        return {
+          pre: function (scope) {
+            scope.persons = [{name: 'Bob'}, {name: 'Sam'}];
+            scope.searchPerson = function () {
+              $ionicModal.fromTemplateUrl('templates/search-contact.html', {
+                scope: scope
+              }).then(function (modal) {
+                scope.modal = modal;
+              });
+            }
+          }
+        }
+      },
       link: function (scope) {
         $ionicLoading.show();
         scope.$watch('selectedBook', function () {

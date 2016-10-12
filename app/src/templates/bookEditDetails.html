@@ -1,4 +1,4 @@
-<div class="padding" id="{{selectedBook.value.id}}">
+<div class="card padding" id="{{selectedBook.value.id}}">
   <p class="help-block warning" ng-show="selectedBook.infoMsg">
     <br>
     <i class="icon ion-information-circled"></i> {{::selectedBook.infoMsg}}
@@ -58,6 +58,21 @@
     <span class="input-label">Rating:</span>
     <span rating data-ng-model="selectedBook.rating" readonly="false"></span>
   </label>
+  <label class="item-input item-select">
+    <div class="input-label">
+      Rented to:
+    </div>
+    <select id="rentaltInput" ng-model="selectedBook.rentalInformation.person">
+      <option ng-repeat="person in persons">{{person.name}}</option>
+    </select>
+  </label>
+  <div class="bar item-input-inset">
+    <label class="item-input-wrapper">
+    </label>
+    <button class="button button-icon icon ion-ios-search placeholder-icon" ng-click="searchPerson()">
+      Search person
+    </button>
+  </div>
   <label class="item-input">
     <span class="input-label">Comment:</span>
     <input id="commentInput" type="text" data-ng-model="selectedBook.comment"/>

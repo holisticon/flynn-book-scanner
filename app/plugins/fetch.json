@@ -63,14 +63,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-sqlite-ext": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-sqlite-ext"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-device": {
         "source": {
             "type": "registry",
@@ -106,5 +98,21 @@
         "variables": {
             "CONTACTS_USAGE_DESCRIPTION": "Used for rental list"
         }
+    },
+    "cordova-sqlite-storage": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-sqlite-storage"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-sqlite-ext": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-sqlite-ext"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

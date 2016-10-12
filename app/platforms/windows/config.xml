@@ -9,6 +9,8 @@
   </author>
     <content src="index.html" />
     <access origin="*" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="SplashScreenDelay" value="5000" />
     <preference name="SplashScreen" value="etc/splash.png" />
     <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="false" />

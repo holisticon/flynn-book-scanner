@@ -1,30 +1,29 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="de.holisticon.app.flynnBookScanner"
-        android-packageName="de.holisticon.app.flynn"
-        ios-CFBundleIdentifier="de.holisticon.app.flynn"
-        version="1.7.1" xmlns="http://www.w3.org/ns/widgets">
-  <name>Flynn</name>
-  <description>
+<widget android-packageName="de.holisticon.app.flynn" id="de.holisticon.app.flynnBookScanner" ios-CFBundleIdentifier="de.holisticon.app.flynn" version="1.7.1" xmlns="http://www.w3.org/ns/widgets">
+    <name>Flynn</name>
+    <description>
     flynn book scanner app
   </description>
-  <author email="info@holisticon.de" href="http://holisticon.de">
+    <author email="info@holisticon.de" href="http://holisticon.de">
     Holisticon AG
   </author>
-  <content src="index.html"/>
-  <access origin="*"/>
-  <platform name="ios">
-    <hook src="etc/ios/after_prepare.js" type="after_prepare"/>
-  </platform>
-  <preference name="AutoHideSplashScreen" value="true"/>
-  <preference name="SplashScreenDelay" value="5000" />
-  <preference name="SplashScreen" value="etc/splash.png"/>
-  <preference name="fullscreen" value="false"/>
-  <preference name="webviewbounce" value="false"/>
-  <preference name="UIWebViewBounce" value="false"/>
-  <preference name="DisallowOverscroll" value="true"/>
-  <preference name="KeyboardDisplayRequiresUserAction" value="false"/>
-  <preference name="xwalkVersion" value="xwalk_core_library:18+"/>
-  <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect"/>
-  <preference name="xwalkMode" value="embedded"/>
-  <preference name="xwalkMultipleApk" value="true"/>
+    <content src="index.html" />
+    <access origin="*" />
+    <platform name="ios">
+        <hook src="etc/ios/after_prepare.js" type="after_prepare" />
+    </platform>
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="SplashScreenDelay" value="5000" />
+    <preference name="SplashScreen" value="etc/splash.png" />
+    <preference name="fullscreen" value="false" />
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+    <preference name="xwalkVersion" value="xwalk_core_library:18+" />
+    <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
+    <preference name="xwalkMode" value="embedded" />
+    <preference name="xwalkMultipleApk" value="true" />
+    <plugin name="cordova-sqlite-storage" spec="~1.4.8" />
+    <plugin name="cordova-sqlite-ext" spec="~0.10.1" />
 </widget>

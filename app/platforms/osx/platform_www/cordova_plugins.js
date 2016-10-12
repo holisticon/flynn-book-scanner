@@ -33,14 +33,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
-        "id": "cordova-sqlite-ext.SQLitePlugin",
-        "pluginId": "cordova-sqlite-ext",
-        "clobbers": [
-            "SQLitePlugin"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-contacts/www/contacts.js",
         "id": "cordova-plugin-contacts.contacts",
         "pluginId": "cordova-plugin-contacts",
@@ -115,6 +107,22 @@ module.exports = [
         "pluginId": "cordova-plugin-contacts",
         "merges": [
             ""
+        ]
+    },
+    {
+        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+        "id": "cordova-sqlite-storage.SQLitePlugin",
+        "pluginId": "cordova-sqlite-storage",
+        "clobbers": [
+            "SQLitePlugin"
+        ]
+    },
+    {
+        "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
+        "id": "cordova-sqlite-ext.SQLitePlugin",
+        "pluginId": "cordova-sqlite-ext",
+        "clobbers": [
+            "SQLitePlugin"
         ]
     }
 ];

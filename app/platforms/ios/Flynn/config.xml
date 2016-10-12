@@ -34,14 +34,14 @@
     <feature name="Keyboard">
         <param name="ios-package" onload="true" value="IonicKeyboard" />
     </feature>
-    <feature name="SQLitePlugin">
-        <param name="ios-package" value="SQLitePlugin" />
-    </feature>
     <feature name="Device">
         <param name="ios-package" value="CDVDevice" />
     </feature>
     <feature name="Contacts">
         <param name="ios-package" value="CDVContacts" />
+    </feature>
+    <feature name="SQLitePlugin">
+        <param name="ios-package" value="SQLitePlugin" />
     </feature>
     <name>Flynn</name>
     <description>
@@ -64,6 +64,8 @@
     <preference name="PageLength" value="0" />
     <preference name="PaginationBreakingMode" value="page" />
     <preference name="PaginationMode" value="unpaginated" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="SplashScreenDelay" value="5000" />
     <preference name="SplashScreen" value="etc/splash.png" />
     <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="false" />

@@ -84,6 +84,7 @@ ngFlynnApp.enrichSingleDbEntry = function (pDbEntry) {
   result.image = pDbEntry.image;
   result.count = pDbEntry.count;
   result.rating = pDbEntry.rating || 2;
+  result.rentalInformation = pDbEntry.rentalInformation || {person: {}};
   // TODO_#65
   // move to service
   // Author info

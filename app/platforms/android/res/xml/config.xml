@@ -28,9 +28,6 @@
         <param name="android-package" value="io.ionic.keyboard.IonicKeyboard" />
         <param name="onload" value="true" />
     </feature>
-    <feature name="SQLitePlugin">
-        <param name="android-package" value="io.sqlc.SQLitePlugin" />
-    </feature>
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
@@ -39,6 +36,9 @@
     </feature>
     <feature name="Contacts">
         <param name="android-package" value="org.apache.cordova.contacts.ContactManager" />
+    </feature>
+    <feature name="SQLitePlugin">
+        <param name="android-package" value="io.sqlc.SQLitePlugin" />
     </feature>
     <name>Flynn</name>
     <description>
@@ -49,6 +49,8 @@
   </author>
     <content src="index.html" />
     <access origin="*" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="SplashScreenDelay" value="5000" />
     <preference name="SplashScreen" value="etc/splash.png" />
     <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="false" />

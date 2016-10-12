@@ -11,6 +11,10 @@
                         {
                             "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"ios-package\" value=\"SQLitePlugin\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -42,9 +46,6 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-sqlite-ext": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
@@ -56,6 +57,12 @@
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-sqlite-ext": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
@@ -91,14 +98,6 @@
             "pluginId": "cordova-plugin-splashscreen",
             "clobbers": [
                 "navigator.splashscreen"
-            ]
-        },
-        {
-            "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
-            "id": "cordova-sqlite-ext.SQLitePlugin",
-            "pluginId": "cordova-sqlite-ext",
-            "clobbers": [
-                "SQLitePlugin"
             ]
         },
         {
@@ -176,6 +175,22 @@
             "pluginId": "cordova-plugin-contacts",
             "merges": [
                 ""
+            ]
+        },
+        {
+            "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+            "id": "cordova-sqlite-storage.SQLitePlugin",
+            "pluginId": "cordova-sqlite-storage",
+            "clobbers": [
+                "SQLitePlugin"
+            ]
+        },
+        {
+            "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
+            "id": "cordova-sqlite-ext.SQLitePlugin",
+            "pluginId": "cordova-sqlite-ext",
+            "clobbers": [
+                "SQLitePlugin"
             ]
         }
     ]

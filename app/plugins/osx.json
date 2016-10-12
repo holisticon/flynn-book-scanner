@@ -50,10 +50,13 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-sqlite-ext": {
+        "cordova-plugin-contacts": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-contacts": {
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-sqlite-ext": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },

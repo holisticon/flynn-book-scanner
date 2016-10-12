@@ -28,10 +28,13 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "Flynn"
         },
-        "cordova-sqlite-ext": {
+        "cordova-plugin-contacts": {
             "PACKAGE_NAME": "Flynn"
         },
-        "cordova-plugin-contacts": {
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "cordova-sqlite-ext": {
             "PACKAGE_NAME": "Flynn"
         }
     },
