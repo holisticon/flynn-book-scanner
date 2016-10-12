@@ -77,4 +77,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\plugins\cordova-sqlite-ext\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.WindowsPhone\SQLite3.WindowsPhone.vcxproj" />
     </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\plugins\cordova-sqlite-ext\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.WindowsPhone\SQLite3.WindowsPhone.vcxproj" />
+    </ItemGroup>
 </Project>

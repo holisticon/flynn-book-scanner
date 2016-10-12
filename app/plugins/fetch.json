@@ -110,7 +110,7 @@
     "cordova-sqlite-ext": {
         "source": {
             "type": "registry",
-            "id": "cordova-sqlite-ext"
+            "id": "cordova-sqlite-ext@~0.10.1"
         },
         "is_top_level": true,
         "variables": {}
