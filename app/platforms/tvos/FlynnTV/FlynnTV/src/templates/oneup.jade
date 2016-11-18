@@ -1,0 +1,10 @@
+doctype xml
+document
+  oneupTemplate(mode="caption" allowsZooming="true")
+    section
+      each item in items
+        lockup
+          img(src="#{item.img}")
+          title #{item.title}
+          row
+            subtitle #{item.subtitle}
