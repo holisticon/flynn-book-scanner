@@ -30,6 +30,24 @@
 			<key>AutocorrectionType</key>
 			<string>No</string>
 		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>User</string>
+			<key>Key</key>
+			<string>flynn_couchdb_username</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Password</string>
+			<key>Key</key>
+			<string>flynn_couchdb_password</string>
+			<key>IsSecure</key>
+			<true/>
+		</dict>
 	</array>
 </dict>
 </plist>

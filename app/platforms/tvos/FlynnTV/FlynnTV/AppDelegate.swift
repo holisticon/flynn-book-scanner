@@ -14,6 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
   
   // MARK: Members
   let resourceLoader = ResourceLoader()
+  var backendURL: String = ""
+  var username: String = ""
+  var password: String = ""
   var window: UIWindow?
   var appController: TVApplicationController?
   
@@ -30,14 +33,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
   
   func registerSettingsBundle(){
     NSUserDefaults.standardUserDefaults().registerDefaults([
-      "flynn_couchdb_url" : "http://localhost:6984/"
+      "flynn_couchdb_url" : "",
+      "flynn_couchdb_username" : "",
+      "flynn_couchdb_password" : ""
       ])
   }
   
   func defaultsChanged(){
     //Get the defaults
     let defaults = NSUserDefaults.standardUserDefaults()
-    let backendURL: String = defaults.stringForKey("flynn_couchdb_url")!
+    self.backendURL = defaults.stringForKey("flynn_couchdb_url")!
+    self.username = defaults.stringForKey("flynn_couchdb_username")!
+    self.password = defaults.stringForKey("flynn_couchdb_password")!
   }
   
   // MARK: Javascript Execution Helper
@@ -55,6 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
   // MARK: UIApplicationDelegate
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    defaultsChanged()
     
     let appControllerContext = TVApplicationControllerContext()
     
@@ -68,7 +76,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
         }
       }
     }
-   
+    appControllerContext.launchOptions["backendURL"] = self.backendURL
+    appControllerContext.launchOptions["username"] = self.username
+    appControllerContext.launchOptions["password"] = self.password
+    
     // provide BASEURL
     appControllerContext.launchOptions["BASEURL"] = resourceLoader.getBasePath();
     appController = TVApplicationController(context: appControllerContext, window: self.window, delegate: self)
@@ -124,8 +135,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
                                                      selector: "defaultsChanged",
                                                      name: NSUserDefaultsDidChangeNotification,
                                                      object: nil)
-  
-}
+    
+  }
   
   func appController(appController: TVApplicationController, didFailWithError error: NSError) {
     print("\(__FUNCTION__) invoked with error: \(error)")
