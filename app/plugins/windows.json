@@ -10,7 +10,13 @@
         "cordova-plugin-barcodescanner": {
             "PACKAGE_NAME": "Flynn"
         },
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "Flynn"
+        },
         "cordova-plugin-console": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "cordova-plugin-contacts": {
             "PACKAGE_NAME": "Flynn"
         },
         "cordova-plugin-crosswalk-webview": {
@@ -28,19 +34,22 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "Flynn"
         },
-        "cordova-plugin-contacts": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "cordova-sqlite-ext": {
             "PACKAGE_NAME": "Flynn"
         },
         "cordova-sqlite-storage": {
             "PACKAGE_NAME": "Flynn"
         },
-        "cordova-sqlite-ext": {
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "cordova-plugin-urlhandler": {
+            "URL_SCHEME": "flynnapp",
             "PACKAGE_NAME": "Flynn"
         }
     },
-    "dependent_plugins": {
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "Flynn"
-        }
-    }
+    "dependent_plugins": {}
 }

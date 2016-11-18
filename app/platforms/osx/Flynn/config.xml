@@ -9,13 +9,16 @@
     <feature name="LocalStorage">
         <param name="osx-package" value="CDVLocalStorage" />
     </feature>
+    <feature name="Device">
+        <param name="ios-package" value="CDVDevice" />
+    </feature>
     <name>Flynn</name>
     <description>
     flynn book scanner app
-  </description>
+    </description>
     <author email="info@holisticon.de" href="http://holisticon.de">
-    Holisticon AG
-  </author>
+      Holisticon AG
+    </author>
     <content src="index.html" />
     <access origin="*" />
     <preference name="AutoHideSplashScreen" value="true" />

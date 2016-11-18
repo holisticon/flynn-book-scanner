@@ -31,6 +31,8 @@
                     <m2:Rotation Preference="landscapeFlipped" />
                 </m2:InitialRotationPreference>
             </m2:VisualElements>
+            <Extensions>
+            </Extensions>
         </Application>
     </Applications>
     <Capabilities>

@@ -1,10 +1,9 @@
 {
-    "libiconv.dylib": 2,
-    "AVFoundation.framework": 2,
-    "CoreVideo.framework": 2,
-    "QuartzCore.framework": 2,
-    "AudioToolbox.framework": 2,
-    "libsqlite3.dylib": 1,
-    "AddressBook.framework": 2,
-    "AddressBookUI.framework": 2
+    "libiconv.dylib": 1,
+    "AVFoundation.framework": 1,
+    "CoreVideo.framework": 1,
+    "QuartzCore.framework": 1,
+    "AddressBook.framework": 1,
+    "AddressBookUI.framework": 1,
+    "AudioToolbox.framework": 1
 }

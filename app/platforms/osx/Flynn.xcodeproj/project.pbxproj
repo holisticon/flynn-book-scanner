@@ -5,11 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
-		0D753A271D0C5F67005D09FB /* SQLitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D753A261D0C5F67005D09FB /* SQLitePlugin.m */; };
-		0D753A2B1D0C5FB0005D09FB /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 0D753A291D0C5FB0005D09FB /* sqlite3.c */; };
-		4ED2B62B3C8C4154B8E27619 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3DF1C984EC4BC0B7424426 /* CDVDevice.m */; };
 		707060AF18FFC05700755D46 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 707060AE18FFC05700755D46 /* MainViewController.xib */; };
 		70BD682718FFB02D00A1EFCF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70BD682618FFB02D00A1EFCF /* Cocoa.framework */; };
 		70BD683118FFB02D00A1EFCF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70BD682F18FFB02D00A1EFCF /* InfoPlist.strings */; };
@@ -20,6 +16,7 @@
 		70BD686718FFB06500A1EFCF /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70BD686518FFB06500A1EFCF /* WebKit.framework */; };
 		70BD686D18FFB0BF00A1EFCF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BD686A18FFB0BF00A1EFCF /* AppDelegate.m */; };
 		70BD686E18FFB0BF00A1EFCF /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BD686C18FFB0BF00A1EFCF /* MainViewController.m */; };
+		237E4AE15F434A54A96FDDC2 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E66F0A6027946D9B65865B8 /* CDVDevice.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,11 +50,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0D753A251D0C5F67005D09FB /* SQLitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SQLitePlugin.h; path = "../../../../plugins/cordova-sqlite-ext/src/osx/SQLitePlugin.h"; sourceTree = "<group>"; };
-		0D753A261D0C5F67005D09FB /* SQLitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SQLitePlugin.m; path = "../../../../plugins/cordova-sqlite-ext/src/osx/SQLitePlugin.m"; sourceTree = "<group>"; };
-		0D753A291D0C5FB0005D09FB /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sqlite3.c; path = "../../../ios/Flynn/Plugins/cordova-sqlite-ext/sqlite3.c"; sourceTree = "<group>"; };
-		0D753A2A1D0C5FB0005D09FB /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = "../../../ios/Flynn/Plugins/cordova-sqlite-ext/sqlite3.h"; sourceTree = "<group>"; };
-		5E1C5D37DBF94EB0BF06190E /* CDVDevice.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVDevice.h; path = "cordova-plugin-device/CDVDevice.h"; sourceTree = "<group>"; };
 		707060AE18FFC05700755D46 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		707060B018FFC0D900755D46 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = Flynn/config.xml; sourceTree = "<group>"; };
 		70BD682318FFB02D00A1EFCF /* Flynn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flynn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,7 +70,8 @@
 		70BD686B18FFB0BF00A1EFCF /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		70BD686C18FFB0BF00A1EFCF /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		70DAA8D91908785C00AF3749 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
-		9F3DF1C984EC4BC0B7424426 /* CDVDevice.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVDevice.m; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; };
+		1E66F0A6027946D9B65865B8 /* CDVDevice.m */ = {isa = PBXFileReference; name = "CDVDevice.m"; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		4F5BBFC29831498C97136F3A /* CDVDevice.h */ = {isa = PBXFileReference; name = "CDVDevice.h"; path = "cordova-plugin-device/CDVDevice.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,12 +92,8 @@
 		7069FBC31905A1F9000B48E1 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				0D753A291D0C5FB0005D09FB /* sqlite3.c */,
-				0D753A2A1D0C5FB0005D09FB /* sqlite3.h */,
-				9F3DF1C984EC4BC0B7424426 /* CDVDevice.m */,
-				5E1C5D37DBF94EB0BF06190E /* CDVDevice.h */,
-				0D753A251D0C5F67005D09FB /* SQLitePlugin.h */,
-				0D753A261D0C5F67005D09FB /* SQLitePlugin.m */,
+				1E66F0A6027946D9B65865B8 /* CDVDevice.m */,
+				4F5BBFC29831498C97136F3A /* CDVDevice.h */,
 			);
 			name = Plugins;
 			path = Flynn/Plugins;
@@ -313,8 +302,7 @@
 				0D753A2B1D0C5FB0005D09FB /* sqlite3.c in Sources */,
 				70BD686D18FFB0BF00A1EFCF /* AppDelegate.m in Sources */,
 				70BD686E18FFB0BF00A1EFCF /* MainViewController.m in Sources */,
-				4ED2B62B3C8C4154B8E27619 /* CDVDevice.m in Sources */,
-				0D753A271D0C5F67005D09FB /* SQLitePlugin.m in Sources */,
+				237E4AE15F434A54A96FDDC2 /* CDVDevice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,7 +414,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Flynn/Flynn-Prefix.pch";
@@ -448,7 +435,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Flynn/Flynn-Prefix.pch";

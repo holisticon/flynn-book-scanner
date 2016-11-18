@@ -1,4 +1,22 @@
 {
+    "cordova-plugin-urlhandler": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-urlhandler"
+        },
+        "is_top_level": true,
+        "variables": {
+            "URL_SCHEME": "flynnapp"
+        }
+    },
+    "cordova-plugin-compat": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-compat"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
     "cordova-plugin-barcodescanner": {
         "source": {
             "type": "registry",
@@ -15,10 +33,26 @@
         "is_top_level": true,
         "variables": {}
     },
+    "cordova-plugin-contacts": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-contacts"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
     "cordova-plugin-crosswalk-webview": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-crosswalk-webview"
+            "id": "cordova-plugin-crosswalk-webview@2.2.0"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-device": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-device"
         },
         "is_top_level": true,
         "variables": {}
@@ -34,7 +68,7 @@
     "cordova-plugin-inappbrowser": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-inappbrowser"
+            "id": "cordova-plugin-inappbrowser@1.5.0"
         },
         "is_top_level": true,
         "variables": {}
@@ -42,7 +76,7 @@
     "cordova-plugin-splashscreen": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-splashscreen"
+            "id": "cordova-plugin-splashscreen@4.0.0"
         },
         "is_top_level": true,
         "variables": {}
@@ -50,59 +84,7 @@
     "cordova-plugin-whitelist": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-whitelist"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "ionic-plugin-keyboard": {
-        "source": {
-            "type": "registry",
-            "id": "ionic-plugin-keyboard"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova-plugin-device": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-device"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova-plugin-urlhandler": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-urlhandler"
-        },
-        "is_top_level": true,
-        "variables": {
-            "URL_SCHEME": "flynnapp"
-        }
-    },
-    "cordova-plugin-compat": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-compat"
-        },
-        "is_top_level": false,
-        "variables": {}
-    },
-    "cordova-plugin-contacts": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-contacts"
-        },
-        "is_top_level": true,
-        "variables": {
-            "CONTACTS_USAGE_DESCRIPTION": "Used for rental list"
-        }
-    },
-    "cordova-sqlite-storage": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-sqlite-storage"
+            "id": "cordova-plugin-whitelist@1.3.0"
         },
         "is_top_level": true,
         "variables": {}
@@ -111,6 +93,22 @@
         "source": {
             "type": "registry",
             "id": "cordova-sqlite-ext@~0.10.1"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-sqlite-storage": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-sqlite-storage@~1.4.8"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "ionic-plugin-keyboard": {
+        "source": {
+            "type": "registry",
+            "id": "ionic-plugin-keyboard"
         },
         "is_top_level": true,
         "variables": {}

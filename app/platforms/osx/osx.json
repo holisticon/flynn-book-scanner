@@ -11,10 +11,6 @@
                         {
                             "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"ios-package\" value=\"SQLitePlugin\" /></feature>",
-                            "count": 1
                         }
                     ]
                 }
@@ -22,13 +18,16 @@
         }
     },
     "installed_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
         "cordova-plugin-barcodescanner": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-crosswalk-webview": {
+        "cordova-plugin-contacts": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-device": {
@@ -49,20 +48,14 @@
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
+        "cordova-sqlite-ext": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
         "cordova-plugin-urlhandler": {
             "URL_SCHEME": "flynnapp",
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-plugin-contacts": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-sqlite-storage": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-sqlite-ext": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
@@ -74,30 +67,6 @@
             "pluginId": "cordova-plugin-barcodescanner",
             "clobbers": [
                 "cordova.plugins.barcodeScanner"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-device/www/device.js",
-            "id": "cordova-plugin-device.device",
-            "pluginId": "cordova-plugin-device",
-            "clobbers": [
-                "device"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-dialogs/www/notification.js",
-            "id": "cordova-plugin-dialogs.notification",
-            "pluginId": "cordova-plugin-dialogs",
-            "merges": [
-                "navigator.notification"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-            "id": "cordova-plugin-splashscreen.SplashScreen",
-            "pluginId": "cordova-plugin-splashscreen",
-            "clobbers": [
-                "navigator.splashscreen"
             ]
         },
         {
@@ -178,11 +147,27 @@
             ]
         },
         {
-            "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
-            "id": "cordova-sqlite-storage.SQLitePlugin",
-            "pluginId": "cordova-sqlite-storage",
+            "file": "plugins/cordova-plugin-device/www/device.js",
+            "id": "cordova-plugin-device.device",
+            "pluginId": "cordova-plugin-device",
             "clobbers": [
-                "SQLitePlugin"
+                "device"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+            "id": "cordova-plugin-dialogs.notification",
+            "pluginId": "cordova-plugin-dialogs",
+            "merges": [
+                "navigator.notification"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+            "id": "cordova-plugin-splashscreen.SplashScreen",
+            "pluginId": "cordova-plugin-splashscreen",
+            "clobbers": [
+                "navigator.splashscreen"
             ]
         },
         {

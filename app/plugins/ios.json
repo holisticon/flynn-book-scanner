@@ -4,79 +4,23 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {
-            "framework": {
-                "parents": {
-                    "libiconv.dylib": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ],
-                    "AVFoundation.framework": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ],
-                    "AssetsLibrary.framework": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ],
-                    "CoreVideo.framework": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ],
-                    "QuartzCore.framework": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ],
-                    "AudioToolbox.framework": [
-                        {
-                            "xml": true,
-                            "count": 1
-                        }
-                    ]
-                }
-            },
-            "config.xml": {
-                "parents": {
-                    "/*": [
-                        {
-                            "xml": "<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
-                            "count": 1
-                        }
-                    ]
-                }
-            }
-        }
+        "files": {}
     },
     "installed_plugins": {
         "cordova-plugin-barcodescanner": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-crosswalk-webview": {
+        "cordova-plugin-contacts": {
+            "CONTACTS_USAGE_DESCRIPTION": " ",
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-device": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-dialogs": {
@@ -94,27 +38,16 @@
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-device": {
+        "cordova-sqlite-ext": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-crosswalk-webview": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-urlhandler": {
             "URL_SCHEME": "flynnapp",
             "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-plugin-contacts": {
-            "CONTACTS_USAGE_DESCRIPTION": "Used for rental list",
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-sqlite-storage": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-sqlite-ext": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
-    "dependent_plugins": {
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        }
-    }
+    "dependent_plugins": {}
 }

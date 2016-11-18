@@ -52,6 +52,8 @@ if (!project.hasProperty('xwalk64bit')) {
 }
 if (cdvBuildMultipleApks == null) {
     ext.xwalkMultipleApk = getConfigPreference("xwalkMultipleApk").toBoolean();
+} else {
+    ext.xwalkMultipleApk = cdvBuildMultipleApks.toBoolean();
 }
 
 if (cdvMinSdkVersion == null) {
@@ -76,6 +78,11 @@ if (ext.xwalkMode == SHARED_MODE) {
 // Set defaults before project's build-extras.gradle
 if (!project.hasProperty('xwalkVersion')) {
     ext.xwalkVersion = getConfigPreference("xwalkVersion")
+}
+
+// Set defaults before project's build-extras.gradle
+if (!project.hasProperty('xwalkLiteVersion')) {
+    ext.xwalkLiteVersion = getConfigPreference("xwalkLiteVersion")
 }
 
 if (!project.hasProperty('xwalkCommandLine')) {
@@ -113,6 +120,10 @@ cdvPluginPostBuildExtras.add({
     }
 
     def xwalkSpec = xwalkVersion
+    if (ext.xwalkMode == LITE_MODE) {
+        xwalkSpec = xwalkLiteVersion;
+    }
+
     if ((xwalkSpec =~ /:/).count == 1) {
         xwalkSpec = DEFAULT_GROUP_ID + xwalkSpec
     } else if ((xwalkSpec =~ /:/).count == 0) {

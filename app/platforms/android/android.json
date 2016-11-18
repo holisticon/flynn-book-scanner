@@ -13,27 +13,11 @@
                             "count": 1
                         },
                         {
-                            "xml": "<preference name=\"webView\" value=\"org.crosswalk.engine.XWalkWebViewEngine\" />",
+                            "xml": "<feature name=\"Contacts\"><param name=\"android-package\" value=\"org.apache.cordova.contacts.ContactManager\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<preference default=\"xwalk_core_library_beta:18+\" name=\"xwalkVersion\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference default=\"xwalk_core_library_canary:17+\" name=\"xwalkLiteVersion\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference default=\"--disable-pull-to-refresh-effect\" name=\"xwalkCommandLine\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference default=\"embedded\" name=\"xwalkMode\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference default=\"true\" name=\"xwalkMultipleApk\" />",
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
                             "count": 1
                         },
                         {
@@ -57,19 +41,39 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"android-package\" value=\"io.sqlc.SQLitePlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"webView\" value=\"org.crosswalk.engine.XWalkWebViewEngine\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"xwalkVersion\" value=\"21+\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"xwalkLiteVersion\" value=\"xwalk_core_library_canary:17+\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"xwalkCommandLine\" value=\"--disable-pull-to-refresh-effect\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"xwalkMode\" value=\"embedded\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"xwalkMultipleApk\" value=\"true\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"android-minSdkVersion\" value=\"16\" />",
                             "count": 1
                         },
                         {
                             "xml": "<feature name=\"LaunchMyApp\"><param name=\"android-package\" value=\"de.martinreinhardt.cordova.plugins.urlhandler.LaunchMyApp\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Contacts\"><param name=\"android-package\" value=\"org.apache.cordova.contacts.ContactManager\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"android-package\" value=\"io.sqlc.SQLitePlugin\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -107,14 +111,6 @@
                     ],
                     "/*": [
                         {
-                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
-                            "count": 1
-                        },
-                        {
                             "xml": "<uses-permission android:name=\"android.permission.READ_CONTACTS\" />",
                             "count": 1
                         },
@@ -124,6 +120,14 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
                             "count": 1
                         }
                     ],
@@ -620,13 +624,19 @@
         }
     },
     "installed_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
         "cordova-plugin-barcodescanner": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-crosswalk-webview": {
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-device": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-dialogs": {
@@ -644,23 +654,19 @@
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-device": {
+        "cordova-sqlite-ext": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-crosswalk-webview": {
+            "XWALK_VERSION": "21+",
+            "XWALK_LITEVERSION": "xwalk_core_library_canary:17+",
+            "XWALK_COMMANDLINE": "--disable-pull-to-refresh-effect",
+            "XWALK_MODE": "embedded",
+            "XWALK_MULTIPLEAPK": "true",
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-urlhandler": {
             "URL_SCHEME": "flynnapp",
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-plugin-contacts": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-sqlite-storage": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-sqlite-ext": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },
@@ -671,57 +677,6 @@
             "id": "cordova-plugin-barcodescanner.BarcodeScanner",
             "clobbers": [
                 "cordova.plugins.barcodeScanner"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-dialogs/www/notification.js",
-            "id": "cordova-plugin-dialogs.notification",
-            "merges": [
-                "navigator.notification"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-dialogs/www/android/notification.js",
-            "id": "cordova-plugin-dialogs.notification_android",
-            "merges": [
-                "navigator.notification"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-            "id": "cordova-plugin-inappbrowser.inappbrowser",
-            "clobbers": [
-                "cordova.InAppBrowser.open",
-                "window.open"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-            "id": "cordova-plugin-splashscreen.SplashScreen",
-            "clobbers": [
-                "navigator.splashscreen"
-            ]
-        },
-        {
-            "file": "plugins/ionic-plugin-keyboard/www/android/keyboard.js",
-            "id": "ionic-plugin-keyboard.keyboard",
-            "clobbers": [
-                "cordova.plugins.Keyboard"
-            ],
-            "runs": true
-        },
-        {
-            "file": "plugins/cordova-plugin-device/www/device.js",
-            "id": "cordova-plugin-device.device",
-            "clobbers": [
-                "device"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-urlhandler/www/android/LaunchMyApp.js",
-            "id": "cordova-plugin-urlhandler.LaunchMyApp",
-            "clobbers": [
-                "window.plugins.launchmyapp"
             ]
         },
         {
@@ -792,11 +747,48 @@
             ]
         },
         {
-            "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
-            "id": "cordova-sqlite-storage.SQLitePlugin",
+            "file": "plugins/cordova-plugin-device/www/device.js",
+            "id": "cordova-plugin-device.device",
             "clobbers": [
-                "SQLitePlugin"
+                "device"
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+            "id": "cordova-plugin-dialogs.notification",
+            "merges": [
+                "navigator.notification"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-dialogs/www/android/notification.js",
+            "id": "cordova-plugin-dialogs.notification_android",
+            "merges": [
+                "navigator.notification"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+            "id": "cordova-plugin-inappbrowser.inappbrowser",
+            "clobbers": [
+                "cordova.InAppBrowser.open",
+                "window.open"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+            "id": "cordova-plugin-splashscreen.SplashScreen",
+            "clobbers": [
+                "navigator.splashscreen"
+            ]
+        },
+        {
+            "file": "plugins/ionic-plugin-keyboard/www/android/keyboard.js",
+            "id": "ionic-plugin-keyboard.keyboard",
+            "clobbers": [
+                "cordova.plugins.Keyboard"
+            ],
+            "runs": true
         },
         {
             "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
@@ -804,22 +796,29 @@
             "clobbers": [
                 "SQLitePlugin"
             ]
+        },
+        {
+            "id": "cordova-plugin-urlhandler.LaunchMyApp",
+            "file": "plugins/cordova-plugin-urlhandler/www/android/LaunchMyApp.js",
+            "pluginId": "cordova-plugin-urlhandler",
+            "clobbers": [
+                "window.plugins.launchmyapp"
+            ]
         }
     ],
     "plugin_metadata": {
-        "cordova-plugin-barcodescanner": "0.7.0",
-        "cordova-plugin-console": "1.0.3",
-        "cordova-plugin-crosswalk-webview": "1.7.0",
-        "cordova-plugin-dialogs": "1.2.1",
-        "cordova-plugin-inappbrowser": "1.4.0",
-        "cordova-plugin-splashscreen": "3.2.2",
-        "cordova-plugin-whitelist": "1.2.2",
-        "ionic-plugin-keyboard": "2.2.0",
-        "cordova-plugin-device": "1.1.2",
-        "cordova-plugin-urlhandler": "0.7.0",
         "cordova-plugin-compat": "1.0.0",
+        "cordova-plugin-barcodescanner": "0.7.0",
+        "cordova-plugin-console": "1.0.4",
         "cordova-plugin-contacts": "2.2.0",
-        "cordova-sqlite-storage": "1.4.8",
-        "cordova-sqlite-ext": "0.10.1"
+        "cordova-plugin-device": "1.1.3",
+        "cordova-plugin-dialogs": "1.3.0",
+        "cordova-plugin-inappbrowser": "1.5.0",
+        "cordova-plugin-splashscreen": "4.0.0",
+        "cordova-plugin-whitelist": "1.3.0",
+        "ionic-plugin-keyboard": "2.2.1",
+        "cordova-sqlite-ext": "0.10.1",
+        "cordova-plugin-crosswalk-webview": "2.1.0",
+        "cordova-plugin-urlhandler": "0.7.0"
     }
 }

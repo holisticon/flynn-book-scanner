@@ -35,7 +35,13 @@
         "cordova-plugin-barcodescanner": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
         "cordova-plugin-console": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-contacts": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-device": {
@@ -50,19 +56,22 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-contacts": {
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-sqlite-storage": {
+        "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-sqlite-ext": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
-        }
-    },
-    "dependent_plugins": {
-        "cordova-plugin-compat": {
+        },
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-urlhandler": {
+            "URL_SCHEME": "flynnapp",
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
-    }
+    },
+    "dependent_plugins": {}
 }

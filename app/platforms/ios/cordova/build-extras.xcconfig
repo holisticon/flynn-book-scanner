@@ -1,2 +1,0 @@
-CODE_SIGN_IDENTITY = iPhone Distribution: Holisticon AG (G8D6696Z88)
-CODE_SIGN_IDENTITY[sdk=iphoneos*] = iPhone Distribution: Holisticon AG (G8D6696Z88)
