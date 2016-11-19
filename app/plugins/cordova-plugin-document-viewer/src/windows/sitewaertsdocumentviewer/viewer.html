@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html ng-app="viewer" ng-csp>
+<head>
+    <meta charset="utf-8" />
+    <title>Document Viewer</title>
+    <meta id="viewPortId" name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self' gap:; img-src blob:">
+
+    <link href="js/winjs/css/ui-dark.min.css" rel="stylesheet" />
+    <script src="js/winjs/js/base.min.js"></script>
+    <script src="js/winjs/js/ui.min.js"></script>
+
+    <link href="js/angular/angular-csp.css" rel="stylesheet" />
+    <script src="js/angular/angular.min.js"></script>
+
+    <script src="js/angular-winjs/angular-winjs.js"></script>
+
+    <script src="js/pdfjs-dist/pdf.js"></script>
+
+    <!-- viewer references -->
+    <link href="css/default.css" rel="stylesheet" />
+    <script src="js/pdfLibrary.js"></script>
+    <script src="js/pdfviewer.js"></script>
+</head>
+<body ng-controller="PdfViewerCtrl as viewer"
+      ng-init="global = {}"
+      class="win-type-body"
+      ng-class="{'has-outline' : viewer.doc.outline, 'has-no-outline' : !viewer.doc.outline, 'has-one-page' : viewer.doc.pageCount == 1, 'has-many-pages' : viewer.doc.pageCount > 1}">
+
+    <script type="text/ng-template" id="loading.html">
+        <progress class="win-ring win-large"></progress>
+    </script>
+
+    <script type="text/ng-template" id="tiles.html">
+        <div ng-controller="TilesViewCtrl as view" class="view-controller tiles">
+            <win-list-view win-control="view.viewWinControl" item-data-source="view.pages.dataSource">
+                <win-item-template>
+                    <div class="pdf_page"
+                         ng-init="item.data.triggerLoad(true)"
+                         background-image="item.data.imageSrc"
+                        ng-click="viewer.setFocusedPageIndex(item.data.pageIndex); viewer.setView('pageflow');">
+                        <div class="loading"><p class="page_index" ng-bind="item.data.pageIndex + 1"></p><progress class="win-ring"></progress></div>
+                    </div>
+                </win-item-template>
+                <win-cell-spanning-layout
+                        group-info="view.getGroupInfo"
+                        item-info="view.getItemInfo"></win-cell-spanning-layout>
+            </win-list-view>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="pageflow.html">
+        <div ng-controller="PageflowViewCtrl as view" class="view-controller pageflow">
+            <win-list-view win-control="view.viewWinControl" item-data-source="view.pages.dataSource">
+                <win-item-template>
+                    <div class="pdf_page"
+                         ng-init="item.data.triggerLoad(true)"
+                         background-image="item.data.imageSrc"
+                         ng-click="viewer.appBar.show(); viewer.setFocusedPageIndex(item.data.pageIndex);">
+                        <div class="loading"><p class="page_index" ng-bind="item.data.pageIndex + 1"></p><progress class="win-ring"></progress></div>
+                    </div>
+                </win-item-template>
+                <win-cell-spanning-layout
+                        group-info="view.getGroupInfo"
+                        item-info="view.getItemInfo"></win-cell-spanning-layout>
+            </win-list-view>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="outline.html">
+        <div ng-controller="OutlineViewCtrl as view" class="view-controller outline">
+            <ul ng-if="view.outline">
+               <li ng-repeat="item in view.outline" ng-include="'outline_item.html'"></li>
+            </ul>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="outline_item.html">
+            <div class="item"
+                 ng-class="{folder : item.items, linked : item.pageIndex!=null}"
+                 ng-click="viewer.gotoPage(item.pageIndex, 'pageflow')">
+                <span class="title win-type-subtitle" ng-bind="item.title || '??'"></span>
+                <span class="page-index win-type-subtitle" ng-bind="item.pageIndex + 1"></span>
+            </div>
+            <ul ng-if="item.items">
+                <li ng-repeat="item in item.items" ng-include="'outline_item.html'"></li>
+            </ul>
+        </li>
+    </script>
+
+    <div id="viewer_view" ng-include="viewer.view.template">...</div>
+
+    <win-app-bar win-control="viewer.appBar.winControl" placement="'bottom'">
+        <win-app-bar-command type="button" icon="'back'" on-click="viewer.close()"></win-app-bar-command>
+        <win-tool-bar-content><h3 class="title win-h3" ng-bind="viewer.doc.title"></h3></win-tool-bar-content>
+        <win-app-bar-separator></win-app-bar-separator>
+        <win-app-bar-command type="'button'" icon="'document'"
+                             class="view pageflow"
+                             selected="viewer.view.id == 'pageflow'"
+                             on-click="viewer.setView('pageflow')"></win-app-bar-command>
+        <win-app-bar-command type="'button'" icon="'list'"
+                             class="view outline"
+                             selected="viewer.view.id == 'outline'"
+                             on-click="viewer.setView('outline')"></win-app-bar-command>
+        <win-app-bar-command type="'button'" icon="'viewall'"
+                             class="view tiles"
+                             selected="viewer.view.id == 'tiles'"
+                             on-click="viewer.setView('tiles')"></win-app-bar-command>
+    </win-app-bar>
+
+    <win-content-dialog win-control="viewer.error.dialog.winControl"
+                        primary-command-text="'ok'"
+                        title="'Error'"
+                        ng-init="viewer.error.dialog.winControl.hide()">
+        An error occurred: {{viewer.error.message}}
+    </win-content-dialog>
+
+
+
+</body>
+</html>

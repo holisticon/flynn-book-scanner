@@ -13,6 +13,10 @@
     <img class="img-thumbnail" alt="book image" ng-show="!selectedBook.image"
          ng-src="{{selectedBook.value.volumeInfo.imageLinks.thumbnail}}"/>
   </label>
+  <label class="item-input" ng-show="selectedBook.ebook">
+    <span class="input-label">Open ebook:</span>
+    <button class="button button-icon icon ion-ios-book-outline" ng-click="openBook()"></button>
+  </label>
   <label class="item-input" ng-show="selectedBook.authorInfo">
     <span class="input-label">Author:</span>
     <span id="author" type="text">{{::selectedBook.authorInfo}}</span>

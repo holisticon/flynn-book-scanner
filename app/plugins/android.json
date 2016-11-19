@@ -28,9 +28,6 @@
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
@@ -50,6 +47,15 @@
         },
         "cordova-plugin-urlhandler": {
             "URL_SCHEME": "flynnapp",
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-document-viewer": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-file": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },

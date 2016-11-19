@@ -184,6 +184,14 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
                           bookEntry.image.data = attachment.data;
                           bookEntry.image.id = 'thumbnail_' + bookEntry.value.id;
                         }
+
+                        var ebook = bookEntry._attachments['ebook_' + bookEntry.value.id];
+                        if (ebook) {
+                          bookEntry.ebook = {};
+                          bookEntry.ebook.filename = 'ebook_' + bookEntry.value.id;
+                          bookEntry.ebook.content_type = ebook.content_type;
+                          bookEntry.ebook.data = ebook.data;
+                        }
                       }
                       bookEntry._attachments = null;
                       $log.debug('Read following valid book entry: ' + bookEntry.value.volumeInfo.title);
@@ -368,11 +376,17 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
           for (var index in pExistingEntries) {
             var book = pExistingEntries[index];
             book.value = pBookToSave.value;
-            if (book.image) {
-              book._attachments = {};
-              book._attachments[book.image.name] = {};
-              book._attachments[book.image.name].content_type = pBookToSave.image.content_type;
-              book._attachments[book.image.name].data = pBookToSave.image.data;
+            if (pBookToSave.image) {
+              book._attachments = book._attachments || {};
+              book._attachments[pBookToSave.image.name] = {};
+              book._attachments[pBookToSave.image.name].content_type = pBookToSave.image.content_type;
+              book._attachments[pBookToSave.image.name].data = pBookToSave.image.data;
+            }
+            if (pBookToSave.ebook) {
+              book._attachments = book._attachments || {};
+              book._attachments[pBookToSave.ebook.name] = {};
+              book._attachments[pBookToSave.ebook.name].content_type = pBookToSave.ebook.content_type;
+              book._attachments[pBookToSave.ebook.name].data = pBookToSave.ebook.data;
             }
             if (book._attachments) {
               book._attachments = book._attachments;
@@ -444,6 +458,12 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
                     book._attachments[pBookToSave.image.name].content_type = pBookToSave.image.content_type;
                     book._attachments[pBookToSave.image.name].data = pBookToSave.image.data;
                   }
+                  if (pBookToSave.ebook) {
+                    book._attachments = {};
+                    book._attachments[pBookToSave.ebook.name] = {};
+                    book._attachments[pBookToSave.ebook.name].content_type = pBookToSave.ebook.content_type;
+                    book._attachments[pBookToSave.ebook.name].data = pBookToSave.ebook.data;
+                  }
                   docs.push(book);
                 }
                 bookDB.bulkDocs(docs, function (err) {
@@ -512,6 +532,12 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
                 book._attachments[pBookToSave.image.name] = {};
                 book._attachments[pBookToSave.image.name].content_type = pBookToSave.image.content_type;
                 book._attachments[pBookToSave.image.name].data = pBookToSave.image.data;
+              }
+              if (pBookToSave.ebook) {
+                book._attachments = {};
+                book._attachments[pBookToSave.ebook.name] = {};
+                book._attachments[pBookToSave.ebook.name].content_type = pBookToSave.ebook.content_type;
+                book._attachments[pBookToSave.ebook.name].data = pBookToSave.ebook.data;
               }
               docs.push(book);
             }

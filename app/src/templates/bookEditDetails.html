@@ -58,7 +58,7 @@
     <span class="input-label">Rating:</span>
     <span rating data-ng-model="selectedBook.rating" readonly="false"></span>
   </label>
-  <label class="item-input item-select">
+  <label class="item-input item-select" ng-show="false">
     <div class="input-label">
       Rented to:
     </div>
@@ -66,7 +66,7 @@
       <option ng-repeat="person in persons">{{person.name}}</option>
     </select>
   </label>
-  <div class="bar item-input-inset">
+  <div class="bar item-input-inset" ng-show="false">
     <label class="item-input-wrapper">
     </label>
     <button class="button button-icon icon ion-ios-search placeholder-icon" ng-click="searchPerson()">

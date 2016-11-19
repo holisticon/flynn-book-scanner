@@ -26,6 +26,7 @@
     "confirm": false,
     "cordova": false,
     "angular": false,
-    "PouchDB": false
+    "PouchDB": false,
+    "SitewaertsDocumentViewer": true
   }
 }

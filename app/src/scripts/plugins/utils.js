@@ -82,6 +82,7 @@ ngFlynnApp.enrichSingleDbEntry = function (pDbEntry) {
     isbnInfo;
   result.value = pDbEntry.value;
   result.image = pDbEntry.image;
+  result.ebook = pDbEntry.ebook;
   result.count = pDbEntry.count;
   result.rating = pDbEntry.rating || 2;
   result.rentalInformation = pDbEntry.rentalInformation || {person: {}};

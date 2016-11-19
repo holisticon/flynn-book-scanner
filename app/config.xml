@@ -29,4 +29,7 @@
     <plugin name="cordova-plugin-urlhandler" spec="~0.7.0">
         <variable name="URL_SCHEME" value="flynnapp" />
     </plugin>
+    <plugin name="cordova-plugin-document-viewer" spec="~0.5.0" />
+    <plugin name="cordova-plugin-splashscreen" spec="~4.0.0" />
+    <plugin name="cordova-plugin-file" spec="~4.3.0" />
 </widget>

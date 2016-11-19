@@ -15,10 +15,6 @@
     <feature name="InAppBrowser">
         <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
     </feature>
-    <feature name="SplashScreen">
-        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
-        <param name="onload" value="true" />
-    </feature>
     <feature name="Whitelist">
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
@@ -33,6 +29,18 @@
     <feature name="LaunchMyApp">
         <param name="android-package" value="de.martinreinhardt.cordova.plugins.urlhandler.LaunchMyApp" />
     </feature>
+    <feature name="SitewaertsDocumentViewer">
+        <param name="android-package" value="de.sitewaerts.cordova.documentviewer.DocumentViewerPlugin" />
+    </feature>
+    <feature name="SplashScreen">
+        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="onload" value="true" />
+    </feature>
+    <allow-navigation href="cdvfile:*" />
     <name>Flynn</name>
     <description>
     flynn book scanner app

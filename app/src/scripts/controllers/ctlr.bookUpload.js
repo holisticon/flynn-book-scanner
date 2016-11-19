@@ -6,106 +6,66 @@
  * @description
  * Controller to edit book details with new uploads from inventory
  */
-app.controller('BookUploadController', function ($rootScope, $scope, $state, $stateParams, $ionicLoading, $location, $log, settingsService, inventoryService, Upload) {
+app.controller('BookUploadController', function ($rootScope, $scope, $state, $stateParams, $location, $log,
+                                                 $ionicLoading,
+                                                 settingsService, inventoryService) {
   'use strict';
 
   var config = settingsService.load();
 
-  function save() {
-
-    function onSaveSuccess(response) {
-      $log.info('Successfully added book');
-      if (response.noUpdate) {
-        navigator.notification.alert('Book already added. Please increase amount.');
-      } else {
-        // sync on save
-        if (config.activeProfile().remotesync) {
-          inventoryService.syncRemote().then(function () {
-          }, function () {
-            $rootScope.$broadcast('settings.invalid');
-            $state.go('app.settings');
-          });
-        }
-        $ionicLoading.hide();
-        navigator.notification.alert('Book successfully updated.', $state.go('app.books'), 'Book');
-      }
-    }
-
-    function onError() {
-      $rootScope.$broadcast('booksave.error');
-      $log.debug('Error during book saving.');
-      $ionicLoading.hide();
-    }
-
-    var book = $scope.selectedBook;
-    $ionicLoading.show();
-    $log.debug('Starting save for book.');
-
-    // TODO_#65
-    // move to service
-    // Author info
-    if (book.authorInfo) {
-      var authors = book.authorInfo.split(',');
-      if (authors.length > 0) {
-        book.value.volumeInfo.authors = [];
-        for (var index in authors) {
-          var author = authors[index];
-          book.value.volumeInfo.authors.push(author);
-        }
-      }
-    }
-    // TODO_#65
-    // move to service
-    if (book.isbnInfo) {
-      var isbns = book.isbnInfo.split(',');
-      if (isbns.length > 0) {
-        book.value.volumeInfo.industryIdentifiers = [];
-        for (var isbnIndex in isbns) {
-          var isbn = isbns[isbnIndex];
-          book.value.volumeInfo.industryIdentifiers.push({identifier: isbn});
-        }
-      }
-    }
-
-    var imgElement = document.getElementById(book.value.id).getElementsByClassName('img-thumbnail');
-    if (imgElement && imgElement[0].src && !book.image) {
-      // extract image info
-      blobUtil.imgSrcToBlob(imgElement[0].src).then(function (blob) {// jshint ignore:line
-        var reader = new window.FileReader();
-        reader.readAsDataURL(blob);
-        reader.onloadend = function () {
-          var image = {};
-          image.name = 'thumbnail_' + book.value.id;
-          image.content_type = blob.type;
-          image.data = reader.result.replace('data:image/jpeg;base64,', '');
-          book.image = image;
-          inventoryService.save(book).then(onSaveSuccess, onError);
-        };
-      });
+  function onSaveSuccess(response) {
+    $log.info('Successfully added ebook');
+    if (response.noUpdate) {
+      navigator.notification.alert('Book already added. Please increase amount.');
     } else {
-      inventoryService.save(book).then(onSaveSuccess, onError);
-
+      // sync on save
+      if (config.activeProfile().remotesync) {
+        inventoryService.syncRemote().then(function () {
+        }, function () {
+          $rootScope.$broadcast('settings.invalid');
+          $state.go('app.settings');
+        });
+      }
+      $ionicLoading.hide();
+      navigator.notification.alert('Book successfully updated.', $state.go('app.books'), 'Book');
     }
   }
 
-  function addFiles(files) {
-    // TODO real impl
-    Upload.upload({
-      url: 'https://angular-file-upload.s3.amazonaws.com/', //S3 upload url including bucket name
-      method: 'POST',
-      data: files
-    });
+  function onError() {
+    $rootScope.$broadcast('booksave.error');
+    $log.debug('Error during book esaving.');
+    $ionicLoading.hide();
+  }
+
+  function uploadFile() {
+    var file = $scope.upload.src[0],
+      book = $scope.selectedBook;
+    if (file.type === 'application/pdf') {
+      var reader = new window.FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = function () {
+        var ebook = {};
+        ebook.name = 'ebook_' + book.value.id;
+        $log.debug('Saving ebook', file.name);
+        ebook.content_type = file.type;
+        ebook.data = file;
+        book.ebook = ebook;
+        inventoryService.save(book).then(onSaveSuccess, onError);
+      };
+    } else {
+      navigator.notification.alert('Only PDF files are supoorted.');
+    }
   }
 
   function load() {
+    $scope.upload = {src: ''};
     $scope.selectedBook = $stateParams.book;
   }
 
   load();
 
 
-// public methods
-  $scope.save = save;
-  $scope.addFiles = addFiles;
+  // public methods
+  $scope.uploadFile = uploadFile;
 
 });

@@ -1,5 +1,14 @@
 <ion-view>
   <ion-content id="attachments" class="padding">
-    TODO
+    <form name="form" ng-submit="uploadFile()">
+      <div class="list">
+        <label class="item item-input">
+          <input type="file" fileread="upload.src" accept="application/pdf" ng-required="true">
+        </label>
+        <button button="button" type="submit" class="button button-positive">
+          Save
+        </button>
+      </div>
+    </form>
   </ion-content>
 </ion-view>

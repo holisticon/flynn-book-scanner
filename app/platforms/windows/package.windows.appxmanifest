@@ -32,6 +32,9 @@
                 </m2:InitialRotationPreference>
             </m2:VisualElements>
             <Extensions>
+                <Extension Category="windows.protocol" StartPage="www/index.html">
+                    <Protocol Name="flynnapp" />
+                </Extension>
             </Extensions>
         </Application>
     </Applications>

@@ -16,7 +16,7 @@ app.directive('bookEditDetails', function ($timeout, $ionicLoading, $ionicModal)
       },
       replace: true,
       templateUrl: 'templates/bookEditDetails.html',
-      compile: function (element, attributes) {
+      compile: function () {
         return {
           pre: function (scope) {
             scope.persons = [{name: 'Bob'}, {name: 'Sam'}];
@@ -26,9 +26,9 @@ app.directive('bookEditDetails', function ($timeout, $ionicLoading, $ionicModal)
               }).then(function (modal) {
                 scope.modal = modal;
               });
-            }
+            };
           }
-        }
+        };
       },
       link: function (scope) {
         $ionicLoading.show();
