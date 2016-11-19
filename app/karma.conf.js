@@ -61,13 +61,13 @@ module.exports = function (config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      'PhantomJS2'
+      'PhantomJS'
     ],
 
     reporters: [
       'progress',
       'junit',
-      'html'
+      'kjhtml'
     ],
 
     junitReporter: {
