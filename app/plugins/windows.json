@@ -19,9 +19,6 @@
         "cordova-plugin-contacts": {
             "PACKAGE_NAME": "Flynn"
         },
-        "cordova-plugin-crosswalk-webview": {
-            "PACKAGE_NAME": "Flynn"
-        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "Flynn"
         },
@@ -32,12 +29,6 @@
             "PACKAGE_NAME": "Flynn"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "Flynn"
-        },
-        "cordova-sqlite-ext": {
-            "PACKAGE_NAME": "Flynn"
-        },
-        "cordova-sqlite-storage": {
             "PACKAGE_NAME": "Flynn"
         },
         "ionic-plugin-keyboard": {
@@ -54,6 +45,12 @@
             "PACKAGE_NAME": "Flynn"
         },
         "cordova-plugin-file": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "cordova-sqlite-ext": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "cordova-plugin-crosswalk-webview": {
             "PACKAGE_NAME": "Flynn"
         }
     },

@@ -1,3 +1,0 @@
-Behebt Barcode Scanner Fehler
-Behebt Fehler beim Aktualisieren
-Layout Optimierungen

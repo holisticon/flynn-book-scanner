@@ -84,15 +84,6 @@
         "cordova-plugin-document-viewer": {
             "PACKAGE_NAME": "Flynn"
         },
-        "cordova-plugin-crosswalk-webview": {
-            "PACKAGE_NAME": "Flynn"
-        },
-        "cordova-sqlite-ext": {
-            "PACKAGE_NAME": "Flynn"
-        },
-        "cordova-sqlite-storage": {
-            "PACKAGE_NAME": "Flynn"
-        },
         "cordova-plugin-urlhandler": {
             "URL_SCHEME": "flynnapp",
             "PACKAGE_NAME": "Flynn"
@@ -101,6 +92,12 @@
             "PACKAGE_NAME": "Flynn"
         },
         "cordova-plugin-file": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "cordova-sqlite-ext": {
+            "PACKAGE_NAME": "Flynn"
+        },
+        "cordova-plugin-crosswalk-webview": {
             "PACKAGE_NAME": "Flynn"
         }
     },
@@ -286,54 +283,6 @@
             "id": "cordova-plugin-document-viewer.SitewaertsDocumentViewerProxy",
             "file": "plugins/cordova-plugin-document-viewer/src/windows/sitewaertsdocumentviewerProxy_native.js",
             "pluginId": "cordova-plugin-document-viewer",
-            "merges": [
-                ""
-            ]
-        },
-        {
-            "id": "cordova-sqlite-ext.SQLitePlugin",
-            "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
-            "pluginId": "cordova-sqlite-ext",
-            "clobbers": [
-                "SQLitePlugin"
-            ]
-        },
-        {
-            "id": "cordova-sqlite-ext.SQLiteProxy",
-            "file": "plugins/cordova-sqlite-ext/src/windows/sqlite-proxy.js",
-            "pluginId": "cordova-sqlite-ext",
-            "merges": [
-                ""
-            ]
-        },
-        {
-            "id": "cordova-sqlite-ext.SQLite3",
-            "file": "plugins/cordova-sqlite-ext/src/windows/SQLite3-Win-RT/SQLite3JS/js/SQLite3.js",
-            "pluginId": "cordova-sqlite-ext",
-            "merges": [
-                ""
-            ]
-        },
-        {
-            "id": "cordova-sqlite-storage.SQLitePlugin",
-            "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
-            "pluginId": "cordova-sqlite-storage",
-            "clobbers": [
-                "SQLitePlugin"
-            ]
-        },
-        {
-            "id": "cordova-sqlite-storage.SQLiteProxy",
-            "file": "plugins/cordova-sqlite-storage/src/windows/sqlite-proxy.js",
-            "pluginId": "cordova-sqlite-storage",
-            "merges": [
-                ""
-            ]
-        },
-        {
-            "id": "cordova-sqlite-storage.SQLite3",
-            "file": "plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3JS/js/SQLite3.js",
-            "pluginId": "cordova-sqlite-storage",
             "merges": [
                 ""
             ]
@@ -528,6 +477,30 @@
                 "cordova"
             ],
             "runs": true
+        },
+        {
+            "id": "cordova-sqlite-ext.SQLitePlugin",
+            "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
+            "pluginId": "cordova-sqlite-ext",
+            "clobbers": [
+                "SQLitePlugin"
+            ]
+        },
+        {
+            "id": "cordova-sqlite-ext.SQLiteProxy",
+            "file": "plugins/cordova-sqlite-ext/src/windows/sqlite-proxy.js",
+            "pluginId": "cordova-sqlite-ext",
+            "merges": [
+                ""
+            ]
+        },
+        {
+            "id": "cordova-sqlite-ext.SQLite3",
+            "file": "plugins/cordova-sqlite-ext/src/windows/SQLite3-Win-RT/SQLite3JS/js/SQLite3.js",
+            "pluginId": "cordova-sqlite-ext",
+            "merges": [
+                ""
+            ]
         }
     ],
     "plugin_metadata": {
@@ -541,11 +514,10 @@
         "cordova-plugin-whitelist": "1.3.0",
         "ionic-plugin-keyboard": "2.2.1",
         "cordova-plugin-document-viewer": "0.5.0",
-        "cordova-plugin-crosswalk-webview": "2.1.0",
-        "cordova-sqlite-ext": "0.10.1",
-        "cordova-sqlite-storage": "1.4.8",
         "cordova-plugin-urlhandler": "0.7.0",
         "cordova-plugin-splashscreen": "4.0.0",
-        "cordova-plugin-file": "4.3.0"
+        "cordova-plugin-file": "4.3.0",
+        "cordova-sqlite-ext": "0.10.2",
+        "cordova-plugin-crosswalk-webview": "2.2.0"
     }
 }

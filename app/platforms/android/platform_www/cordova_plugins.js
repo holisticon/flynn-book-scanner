@@ -1,129 +1,112 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "file": "plugins/cordova-plugin-barcodescanner/www/barcodescanner.js",
         "id": "cordova-plugin-barcodescanner.BarcodeScanner",
+        "file": "plugins/cordova-plugin-barcodescanner/www/barcodescanner.js",
+        "pluginId": "cordova-plugin-barcodescanner",
         "clobbers": [
             "cordova.plugins.barcodeScanner"
         ]
     },
     {
-        "file": "plugins/cordova-plugin-contacts/www/contacts.js",
         "id": "cordova-plugin-contacts.contacts",
+        "file": "plugins/cordova-plugin-contacts/www/contacts.js",
+        "pluginId": "cordova-plugin-contacts",
         "clobbers": [
             "navigator.contacts"
         ]
     },
     {
-        "file": "plugins/cordova-plugin-contacts/www/Contact.js",
         "id": "cordova-plugin-contacts.Contact",
+        "file": "plugins/cordova-plugin-contacts/www/Contact.js",
+        "pluginId": "cordova-plugin-contacts",
         "clobbers": [
             "Contact"
         ]
     },
     {
+        "id": "cordova-plugin-contacts.convertUtils",
         "file": "plugins/cordova-plugin-contacts/www/convertUtils.js",
-        "id": "cordova-plugin-contacts.convertUtils"
+        "pluginId": "cordova-plugin-contacts"
     },
     {
-        "file": "plugins/cordova-plugin-contacts/www/ContactAddress.js",
         "id": "cordova-plugin-contacts.ContactAddress",
+        "file": "plugins/cordova-plugin-contacts/www/ContactAddress.js",
+        "pluginId": "cordova-plugin-contacts",
         "clobbers": [
             "ContactAddress"
         ]
     },
     {
-        "file": "plugins/cordova-plugin-contacts/www/ContactError.js",
         "id": "cordova-plugin-contacts.ContactError",
+        "file": "plugins/cordova-plugin-contacts/www/ContactError.js",
+        "pluginId": "cordova-plugin-contacts",
         "clobbers": [
             "ContactError"
         ]
     },
     {
-        "file": "plugins/cordova-plugin-contacts/www/ContactField.js",
         "id": "cordova-plugin-contacts.ContactField",
+        "file": "plugins/cordova-plugin-contacts/www/ContactField.js",
+        "pluginId": "cordova-plugin-contacts",
         "clobbers": [
             "ContactField"
         ]
     },
     {
-        "file": "plugins/cordova-plugin-contacts/www/ContactFindOptions.js",
         "id": "cordova-plugin-contacts.ContactFindOptions",
+        "file": "plugins/cordova-plugin-contacts/www/ContactFindOptions.js",
+        "pluginId": "cordova-plugin-contacts",
         "clobbers": [
             "ContactFindOptions"
         ]
     },
     {
-        "file": "plugins/cordova-plugin-contacts/www/ContactName.js",
         "id": "cordova-plugin-contacts.ContactName",
+        "file": "plugins/cordova-plugin-contacts/www/ContactName.js",
+        "pluginId": "cordova-plugin-contacts",
         "clobbers": [
             "ContactName"
         ]
     },
     {
-        "file": "plugins/cordova-plugin-contacts/www/ContactOrganization.js",
         "id": "cordova-plugin-contacts.ContactOrganization",
+        "file": "plugins/cordova-plugin-contacts/www/ContactOrganization.js",
+        "pluginId": "cordova-plugin-contacts",
         "clobbers": [
             "ContactOrganization"
         ]
     },
     {
-        "file": "plugins/cordova-plugin-contacts/www/ContactFieldType.js",
         "id": "cordova-plugin-contacts.ContactFieldType",
+        "file": "plugins/cordova-plugin-contacts/www/ContactFieldType.js",
+        "pluginId": "cordova-plugin-contacts",
         "merges": [
             ""
         ]
     },
     {
-        "file": "plugins/cordova-plugin-device/www/device.js",
         "id": "cordova-plugin-device.device",
+        "file": "plugins/cordova-plugin-device/www/device.js",
+        "pluginId": "cordova-plugin-device",
         "clobbers": [
             "device"
         ]
     },
     {
-        "file": "plugins/cordova-plugin-dialogs/www/notification.js",
         "id": "cordova-plugin-dialogs.notification",
+        "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+        "pluginId": "cordova-plugin-dialogs",
         "merges": [
             "navigator.notification"
         ]
     },
     {
-        "file": "plugins/cordova-plugin-dialogs/www/android/notification.js",
         "id": "cordova-plugin-dialogs.notification_android",
+        "file": "plugins/cordova-plugin-dialogs/www/android/notification.js",
+        "pluginId": "cordova-plugin-dialogs",
         "merges": [
             "navigator.notification"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-        "id": "cordova-plugin-inappbrowser.inappbrowser",
-        "clobbers": [
-            "cordova.InAppBrowser.open",
-            "window.open"
-        ]
-    },
-    {
-        "file": "plugins/ionic-plugin-keyboard/www/android/keyboard.js",
-        "id": "ionic-plugin-keyboard.keyboard",
-        "clobbers": [
-            "cordova.plugins.Keyboard"
-        ],
-        "runs": true
-    },
-    {
-        "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
-        "id": "cordova-sqlite-ext.SQLitePlugin",
-        "clobbers": [
-            "SQLitePlugin"
-        ]
-    },
-    {
-        "id": "cordova-plugin-urlhandler.LaunchMyApp",
-        "file": "plugins/cordova-plugin-urlhandler/www/android/LaunchMyApp.js",
-        "pluginId": "cordova-plugin-urlhandler",
-        "clobbers": [
-            "window.plugins.launchmyapp"
         ]
     },
     {
@@ -133,14 +116,6 @@ module.exports = [
         "clobbers": [
             "cordova.plugins.SitewaertsDocumentViewer",
             "SitewaertsDocumentViewer"
-        ]
-    },
-    {
-        "id": "cordova-plugin-splashscreen.SplashScreen",
-        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-        "pluginId": "cordova-plugin-splashscreen",
-        "clobbers": [
-            "navigator.splashscreen"
         ]
     },
     {
@@ -315,26 +290,68 @@ module.exports = [
             "cordova"
         ],
         "runs": true
+    },
+    {
+        "id": "cordova-plugin-inappbrowser.inappbrowser",
+        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+        "pluginId": "cordova-plugin-inappbrowser",
+        "clobbers": [
+            "cordova.InAppBrowser.open",
+            "window.open"
+        ]
+    },
+    {
+        "id": "cordova-plugin-splashscreen.SplashScreen",
+        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+        "pluginId": "cordova-plugin-splashscreen",
+        "clobbers": [
+            "navigator.splashscreen"
+        ]
+    },
+    {
+        "id": "cordova-plugin-urlhandler.LaunchMyApp",
+        "file": "plugins/cordova-plugin-urlhandler/www/android/LaunchMyApp.js",
+        "pluginId": "cordova-plugin-urlhandler",
+        "clobbers": [
+            "window.plugins.launchmyapp"
+        ]
+    },
+    {
+        "id": "cordova-sqlite-ext.SQLitePlugin",
+        "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
+        "pluginId": "cordova-sqlite-ext",
+        "clobbers": [
+            "SQLitePlugin"
+        ]
+    },
+    {
+        "id": "ionic-plugin-keyboard.keyboard",
+        "file": "plugins/ionic-plugin-keyboard/www/android/keyboard.js",
+        "pluginId": "ionic-plugin-keyboard",
+        "clobbers": [
+            "cordova.plugins.Keyboard"
+        ],
+        "runs": true
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "cordova-plugin-compat": "1.0.0",
     "cordova-plugin-barcodescanner": "0.7.0",
+    "cordova-plugin-compat": "1.0.0",
     "cordova-plugin-console": "1.0.4",
     "cordova-plugin-contacts": "2.2.0",
+    "cordova-plugin-crosswalk-webview": "2.2.0",
     "cordova-plugin-device": "1.1.3",
     "cordova-plugin-dialogs": "1.3.0",
-    "cordova-plugin-inappbrowser": "1.5.0",
-    "cordova-plugin-whitelist": "1.3.0",
-    "ionic-plugin-keyboard": "2.2.1",
-    "cordova-sqlite-ext": "0.10.1",
-    "cordova-plugin-crosswalk-webview": "2.1.0",
-    "cordova-plugin-urlhandler": "0.7.0",
     "cordova-plugin-document-viewer": "0.5.0",
+    "cordova-plugin-file": "4.3.0",
+    "cordova-plugin-inappbrowser": "1.5.0",
     "cordova-plugin-splashscreen": "4.0.0",
-    "cordova-plugin-file": "4.3.0"
+    "cordova-plugin-urlhandler": "0.7.0",
+    "cordova-plugin-whitelist": "1.3.0",
+    "cordova-sqlite-ext": "0.10.2",
+    "ionic-plugin-keyboard": "2.2.1"
 };
 // BOTTOM OF METADATA
 });

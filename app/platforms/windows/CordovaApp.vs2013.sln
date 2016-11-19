@@ -70,6 +70,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "..\..\plugins\co
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "..\..\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.WindowsPhone\SQLite3.WindowsPhone.vcxproj", "{6435c2e4-4fd2-405a-9ee2-5312ae852782}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3.UWP", "..\..\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.UWP\SQLite3.UWP.vcxproj", "{76e68196-b7dc-4393-a070-d32fc33bc489}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "..\..\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.Windows\SQLite3.Windows.vcxproj", "{d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "..\..\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.WindowsPhone\SQLite3.WindowsPhone.vcxproj", "{6435c2e4-4fd2-405a-9ee2-5312ae852782}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3.UWP", "..\..\plugins\cordova-sqlite-ext\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.UWP\SQLite3.UWP.vcxproj", "{76e68196-b7dc-4393-a070-d32fc33bc489}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "..\..\plugins\cordova-sqlite-ext\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.Windows\SQLite3.Windows.vcxproj", "{d1848fee-6a8e-4ef1-8bfb-8652e5a9cd4a}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3", "..\..\plugins\cordova-sqlite-ext\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.WindowsPhone\SQLite3.WindowsPhone.vcxproj", "{6435c2e4-4fd2-405a-9ee2-5312ae852782}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		CordovaApp.projitems*{f9b0ae20-c91c-42b9-9c6e-d3bc28b4509e}*SharedItemsImports = 5

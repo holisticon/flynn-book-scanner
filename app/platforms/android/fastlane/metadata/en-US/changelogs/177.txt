@@ -1,3 +1,0 @@
-fix barcode error
-fix refresh error on book save
-layout optimization

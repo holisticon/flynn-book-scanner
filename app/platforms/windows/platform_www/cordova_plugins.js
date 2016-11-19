@@ -185,54 +185,6 @@ module.exports = [
         ]
     },
     {
-        "id": "cordova-sqlite-ext.SQLitePlugin",
-        "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
-        "pluginId": "cordova-sqlite-ext",
-        "clobbers": [
-            "SQLitePlugin"
-        ]
-    },
-    {
-        "id": "cordova-sqlite-ext.SQLiteProxy",
-        "file": "plugins/cordova-sqlite-ext/src/windows/sqlite-proxy.js",
-        "pluginId": "cordova-sqlite-ext",
-        "merges": [
-            ""
-        ]
-    },
-    {
-        "id": "cordova-sqlite-ext.SQLite3",
-        "file": "plugins/cordova-sqlite-ext/src/windows/SQLite3-Win-RT/SQLite3JS/js/SQLite3.js",
-        "pluginId": "cordova-sqlite-ext",
-        "merges": [
-            ""
-        ]
-    },
-    {
-        "id": "cordova-sqlite-storage.SQLitePlugin",
-        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
-        "pluginId": "cordova-sqlite-storage",
-        "clobbers": [
-            "SQLitePlugin"
-        ]
-    },
-    {
-        "id": "cordova-sqlite-storage.SQLiteProxy",
-        "file": "plugins/cordova-sqlite-storage/src/windows/sqlite-proxy.js",
-        "pluginId": "cordova-sqlite-storage",
-        "merges": [
-            ""
-        ]
-    },
-    {
-        "id": "cordova-sqlite-storage.SQLite3",
-        "file": "plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3JS/js/SQLite3.js",
-        "pluginId": "cordova-sqlite-storage",
-        "merges": [
-            ""
-        ]
-    },
-    {
         "id": "cordova-plugin-urlhandler.LaunchMyApp",
         "file": "plugins/cordova-plugin-urlhandler/www/windows/LaunchMyApp.js",
         "pluginId": "cordova-plugin-urlhandler",
@@ -422,6 +374,30 @@ module.exports = [
             "cordova"
         ],
         "runs": true
+    },
+    {
+        "id": "cordova-sqlite-ext.SQLitePlugin",
+        "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
+        "pluginId": "cordova-sqlite-ext",
+        "clobbers": [
+            "SQLitePlugin"
+        ]
+    },
+    {
+        "id": "cordova-sqlite-ext.SQLiteProxy",
+        "file": "plugins/cordova-sqlite-ext/src/windows/sqlite-proxy.js",
+        "pluginId": "cordova-sqlite-ext",
+        "merges": [
+            ""
+        ]
+    },
+    {
+        "id": "cordova-sqlite-ext.SQLite3",
+        "file": "plugins/cordova-sqlite-ext/src/windows/SQLite3-Win-RT/SQLite3JS/js/SQLite3.js",
+        "pluginId": "cordova-sqlite-ext",
+        "merges": [
+            ""
+        ]
     }
 ];
 module.exports.metadata = 
@@ -437,12 +413,11 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.3.0",
     "ionic-plugin-keyboard": "2.2.1",
     "cordova-plugin-document-viewer": "0.5.0",
-    "cordova-plugin-crosswalk-webview": "2.1.0",
-    "cordova-sqlite-ext": "0.10.1",
-    "cordova-sqlite-storage": "1.4.8",
     "cordova-plugin-urlhandler": "0.7.0",
     "cordova-plugin-splashscreen": "4.0.0",
-    "cordova-plugin-file": "4.3.0"
+    "cordova-plugin-file": "4.3.0",
+    "cordova-sqlite-ext": "0.10.2",
+    "cordova-plugin-crosswalk-webview": "2.2.0"
 };
 // BOTTOM OF METADATA
 });

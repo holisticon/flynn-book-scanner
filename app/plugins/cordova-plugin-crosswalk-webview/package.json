@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-crosswalk-webview",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Changes the default WebView to CrossWalk",
   "cordova": {
     "id": "cordova-plugin-crosswalk-webview",
@@ -29,7 +29,11 @@
       },
       "2.1.0": {
         "cordova": ">=5.2.0",
-        "cordova-android": ">=4"
+        "cordova-android": "4 - 5"
+      },
+      "2.2.0": {
+        "cordova": ">=5.2.0",
+        "cordova-android": ">=6"
       },
       "3.0.0": {
         "cordova": ">100"

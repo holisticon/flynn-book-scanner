@@ -41,14 +41,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-crosswalk-webview": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-crosswalk-webview@2.2.0"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-device": {
         "source": {
             "type": "registry",
@@ -81,22 +73,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-sqlite-ext": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-sqlite-ext@~0.10.1"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova-sqlite-storage": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-sqlite-storage@~1.4.8"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "ionic-plugin-keyboard": {
         "source": {
             "type": "registry",
@@ -125,6 +101,22 @@
         "source": {
             "type": "registry",
             "id": "cordova-plugin-file"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-sqlite-ext": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-sqlite-ext@~0.10.1"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-crosswalk-webview": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-crosswalk-webview@2.2.0"
         },
         "is_top_level": true,
         "variables": {}

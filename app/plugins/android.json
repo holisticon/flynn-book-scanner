@@ -19,43 +19,43 @@
         "cordova-plugin-contacts": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-plugin-dialogs": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
-        "cordova-sqlite-ext": {
-            "PACKAGE_NAME": "de.holisticon.app.flynn"
-        },
         "cordova-plugin-crosswalk-webview": {
-            "XWALK_VERSION": "21+",
+            "XWALK_VERSION": "22+",
             "XWALK_LITEVERSION": "xwalk_core_library_canary:17+",
             "XWALK_COMMANDLINE": "--disable-pull-to-refresh-effect",
             "XWALK_MODE": "embedded",
             "XWALK_MULTIPLEAPK": "true",
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-urlhandler": {
-            "URL_SCHEME": "flynnapp",
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
         "cordova-plugin-document-viewer": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         },
-        "cordova-plugin-file": {
+        "cordova-plugin-urlhandler": {
+            "URL_SCHEME": "flynnapp",
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "cordova-sqlite-ext": {
+            "PACKAGE_NAME": "de.holisticon.app.flynn"
+        },
+        "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "de.holisticon.app.flynn"
         }
     },

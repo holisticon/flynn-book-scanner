@@ -102,14 +102,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
-        "id": "cordova-sqlite-ext.SQLitePlugin",
-        "pluginId": "cordova-sqlite-ext",
-        "clobbers": [
-            "SQLitePlugin"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-document-viewer/www/sitewaertsdocumentviewer.js",
         "id": "cordova-plugin-document-viewer.SitewaertsDocumentViewer",
         "pluginId": "cordova-plugin-document-viewer",
@@ -298,6 +290,14 @@ module.exports = [
             "cordova"
         ],
         "runs": true
+    },
+    {
+        "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
+        "id": "cordova-sqlite-ext.SQLitePlugin",
+        "pluginId": "cordova-sqlite-ext",
+        "clobbers": [
+            "SQLitePlugin"
+        ]
     }
 ];
 module.exports.metadata = 
