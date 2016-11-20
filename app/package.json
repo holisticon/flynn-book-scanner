@@ -72,6 +72,7 @@
   },
   "scripts": {
     "build": "grunt build",
+    "check": "grunt check",
     "package": "grunt clean package",
     "postinstall": "bower install && cd node_modules/grunt-sass && npm install node-sass@3.4.2",
     "watch": "npm rebuild node-sass && grunt serve",

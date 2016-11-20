@@ -4,15 +4,14 @@ before_install:
   - npm install -g grunt-cli bower cordova@6 protractor
   - ./app/etc/setupAndroidSDK.sh
 before_script:
+  - source ~/.android-sdk-installer/env
   - pwd
   - cd app
   - npm install
-  - ./node_modules/.bin/appium > /dev/null 2>&1 &
-  - grunt build
+  - npm run check
+  - npm run build
 script:
   - source ~/.android-sdk-installer/env
   - pwd
-  - grunt check
-  - grunt test
-  - cordova build android
-  - cordova build ios
+  - npm run test
+  - npm run package
