@@ -37,6 +37,7 @@ app/bower_components/*
 app/src-gen/*
 app/platforms/ios/Flynn.xcodeproj/xcuserdata/*
 app/platforms/ios/CordovaLib/CordovaLib.xcodeproj/xcuserdata/*
+app/platforms/ios/Flynn.xcarchive/
 app/node/*
 app/platforms/ios/Flynn.xcodeproj/project.xcworkspace/*
 app/platforms/tvos/FlynnTV/FlynnTV/node_modules/

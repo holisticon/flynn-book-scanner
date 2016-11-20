@@ -341,7 +341,6 @@ module.exports.metadata =
     "cordova-plugin-compat": "1.0.0",
     "cordova-plugin-console": "1.0.4",
     "cordova-plugin-contacts": "2.2.0",
-    "cordova-plugin-crosswalk-webview": "2.2.0",
     "cordova-plugin-device": "1.1.3",
     "cordova-plugin-dialogs": "1.3.0",
     "cordova-plugin-document-viewer": "0.5.0",
@@ -351,7 +350,8 @@ module.exports.metadata =
     "cordova-plugin-urlhandler": "0.7.0",
     "cordova-plugin-whitelist": "1.3.0",
     "cordova-sqlite-ext": "0.10.2",
-    "ionic-plugin-keyboard": "2.2.1"
+    "ionic-plugin-keyboard": "2.2.1",
+    "cordova-plugin-crosswalk-webview": "2.2.0"
 };
 // BOTTOM OF METADATA
 });
