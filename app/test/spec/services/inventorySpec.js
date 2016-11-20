@@ -48,7 +48,7 @@ describe('inventoryService', function () {
     });
   });
 
-  it('Use Authentication for Sync', function (done) {
+  it('should use Authentication for Sync', function (done) {
 
     httpBackend.when('GET', 'http://M%C3%BCller:P%40assword!@remote_test/couchdb').respond({
       status: 400
@@ -71,5 +71,55 @@ describe('inventoryService', function () {
     });
     rootScope.$apply();
     httpBackend.flush();
+  });
+
+  it('should save book', function (done) {
+    httpBackend.when('GET', 'http://M%C3%BCller:P%40assword!@remote_test/couchdb').respond({
+      status: 400
+    });
+    var book = {
+      value: {
+        id: 'book_' + new Date().getMilliseconds(),
+        volumeInfo: {
+          title: 'test'
+        }
+      }
+    };
+
+    service.save(book).then(function () {
+      done();
+    });
+    rootScope.$apply();
+    httpBackend.flush();
+  });
+
+  it('should save ebook for book', function (done) {
+    httpBackend.when('GET', 'http://M%C3%BCller:P%40assword!@remote_test/couchdb').respond({
+      status: 400
+    });
+    var book = {
+      value: {
+        id: 'book_' + new Date().getMilliseconds(),
+        volumeInfo: {
+          title: 'test'
+        }
+      },
+      ebook: {
+        content_type: 'image/png',
+        data: new Blob()
+      }
+    };
+    rootScope.$apply(function () {
+      service.save(book).then(function () {
+        service.updateIndex();
+        //  wait for index update
+        setTimeout(function () {
+          service.read().then(function (foundBook) {
+            expect(foundBook).toBeDefined();
+            done();
+          });
+        }, 500);
+      });
+    });
   });
 });

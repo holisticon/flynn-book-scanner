@@ -37,7 +37,7 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
       return db;
     }
 
-    function updateIndex(pDB) {
+    function updateIndex(pDB, cb) {
       if (pDB) {
         // update index
         pDB.createIndex({
@@ -46,13 +46,26 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
           }
         }).then(function (result) {
           $log.trace('Creating index was successfull: ' + JSON.stringify(result));
+          if (cb) {
+            cb();
+          }
         }).catch(function (err) {
           $log.err('Creating index was not successfull: ' + JSON.stringify(err));
+          if (cb) {
+            cb();
+          }
         });
+      } else {
+        if (cb) {
+          cb();
+        }
       }
     }
 
     return {
+      updateIndex: function () {
+        updateIndex(getDB());
+      },
       syncRemote: function (reportNetworkError) {
         var deferred = $q.defer();
         // reload config
@@ -143,8 +156,14 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
             }
           }).then(function (result) {
             $log.debug('Search successfull.');
-            deferred.resolve({
-              book: result.docs[0]
+            $rootScope.$apply(function () {
+              if (result.docs.length > 0) {
+                deferred.resolve({
+                  book: result.docs[0]
+                });
+              } else {
+                deferred.resolve();
+              }
             });
           }).catch(function (err) {
             $log.error('Error searching for book ' + pBookID + ' :' + err);

@@ -7,6 +7,10 @@ module.exports = function (config) {
   'use strict';
 
   config.set({
+
+    // see https://github.com/karma-runner/karma-junit-reporter/issues/61
+    browserNoActivityTimeout: 60000,
+
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
@@ -41,6 +45,7 @@ module.exports = function (config) {
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/angular-scenario/angular-scenario.js',
       // endbower
+      "src/*.js",
       "src/scripts/**/*.js",
       "test/mocks/**/*.js",
       "test/spec/**/*.js"
@@ -61,9 +66,14 @@ module.exports = function (config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      'PhantomJS'
+      'Chrome_without_security'
     ],
-
+    customLaunchers: {
+      Chrome_without_security: {
+        base: 'Chrome',
+        flags: ['--disable-web-security']
+      }
+    },
     reporters: [
       'progress',
       'junit',
