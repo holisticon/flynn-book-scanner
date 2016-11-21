@@ -33,7 +33,7 @@ app.controller('BookUploadController', function ($rootScope, $scope, $state, $st
 
   function onError() {
     $rootScope.$broadcast('booksave.error');
-    $log.debug('Error during book esaving.');
+    $log.debug('Error during ebook saving.');
     $ionicLoading.hide();
   }
 
@@ -45,7 +45,6 @@ app.controller('BookUploadController', function ($rootScope, $scope, $state, $st
       book = $scope.selectedBook;
     if (file.type === 'application/pdf') {
       var reader = new window.FileReader();
-      reader.readAsDataURL(file);
       reader.onloadend = function () {
         var ebook = {};
         ebook.name = 'ebook_' + book.value.id;
@@ -55,6 +54,12 @@ app.controller('BookUploadController', function ($rootScope, $scope, $state, $st
         book.ebook = ebook;
         inventoryService.save(book).then(onSaveSuccess, onError);
       };
+      reader.onerror = function (e) {
+        $log.debug('Error during ebook reading.', e);
+        $ionicLoading.hide();
+        navigator.notification.alert('Book could not be uploaded');
+      };
+      reader.readAsDataURL(file);
     } else {
       navigator.notification.alert('Only PDF files are supoorted.');
     }

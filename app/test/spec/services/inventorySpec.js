@@ -105,7 +105,7 @@ describe('inventoryService', function () {
         }
       },
       ebook: {
-        content_type: 'image/png',
+        'content_type': 'image/png',
         data: new Blob()
       }
     };
