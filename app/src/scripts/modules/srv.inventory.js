@@ -85,14 +85,16 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
               url: remoteCouch,
               timeout: APP_CONFIG.timeout
             }).then(function () {
-              localDB.sync(remoteCouch)
-                .on('change', function (info) {
-                  $rootScope.$apply(function () {
-                    $log.info('Updating documents with remote changes...');
-                    $log.debug('Updating documents with remote changes with following answer: ' + info.toString());
-                    updateIndex(localDB);
-                  });
-                }).on('complete', function (info) {
+              localDB.sync(remoteCouch, {
+                live: true,
+                retry: true
+              }).on('change', function (info) {
+                $rootScope.$apply(function () {
+                  $log.info('Updating documents with remote changes...');
+                  $log.debug('Updating documents with remote changes with following answer: ' + info.toString());
+                  updateIndex(localDB);
+                });
+              }).on('complete', function (info) {
                 $rootScope.$apply(function () {
                   $log.info('Completed sync.');
                   $log.debug('Completed sync with following answer: ' + info.toString());

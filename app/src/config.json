@@ -1,6 +1,6 @@
 {
     "config": {
-        "timeout":  3000,
+        "timeout":  30000,
         "googleApiKey": "AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY",
         "dbLogging":    true,
         "dev":          false,
