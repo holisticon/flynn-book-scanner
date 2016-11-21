@@ -2,16 +2,16 @@ language: objective-c
 osx_image: xcode7.2
 before_install:
   - npm install -g grunt-cli bower cordova@6 protractor
-  - ./app/etc/setupAndroidSDK.sh
+  #- ./app/etc/setupAndroidSDK.sh
 before_script:
-  - source ~/.android-sdk-installer/env
+  #- source ~/.android-sdk-installer/env
   - pwd
   - cd app
   - npm install
   - npm run check
   - npm run build
 script:
-  - source ~/.android-sdk-installer/env
+  #- source ~/.android-sdk-installer/env
   - pwd
   - npm run test
-  - npm run package
+  #- npm run package
