@@ -9,10 +9,14 @@ app.directive('bookViewDetails', function ($window, $log, $timeout, $ionicLoadin
 
     var selectedBook;
 
-    function writeFile(fileEntry, dataObj, mimeType) {
+    function writeFile(fileEntry, data, mimeType) {
       // Create a FileWriter object for our FileEntry
       fileEntry.createWriter(function (fileWriter) {
-        fileWriter.onwriteend = function () {
+
+        var written = 0;
+        var BLOCK_SIZE = 1 * 1024 * 1024; // write 1M every time of write
+
+        function writeFinish() {
           $log.debug('Successfully written file');
           SitewaertsDocumentViewer.viewDocument(fileEntry.nativeURL, mimeType,
             {
@@ -30,13 +34,35 @@ app.directive('bookViewDetails', function ($window, $log, $timeout, $ionicLoadin
             }, function () {
               $log.error('Error occurred during opening document');
             });
-        };
+        }
+
+        // PhoneGap FileWrite.write cannot handle too big buffer, do not know exact size,
+        // I think this issue is due to PG transfer data to iOS through URL Scheme, somehow it crash when "URL" is too long.
+        //
+        // So write small block every time:
+
+        function writeNext(cbFinish) {
+          fileWriter.onwrite = function () {
+            if (written < data.size) {
+              writeNext(cbFinish);
+            } else {
+              cbFinish();
+            }
+          };
+          if (written) {
+            fileWriter.seek(fileWriter.length);
+          }
+          fileWriter.write(data.slice(written, written + Math.min(BLOCK_SIZE, data.size - written)));
+          written += Math.min(BLOCK_SIZE, data.size - written);
+        }
+
+        writeNext(writeFinish);
+
         fileWriter.onerror = function (e) {
           $log.debug('Failed file write', e);
           $ionicLoading.hide();
         };
 
-        fileWriter.write(dataObj);
       });
     }
 
