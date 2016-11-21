@@ -10,6 +10,7 @@
 		01954232DAEF4929BC3F0A44 /* zxing-all-in-one.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3666678753234ED4AFCA134A /* zxing-all-in-one.cpp */; };
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
 		0951A49CA0A04E298759603E /* SDVReader-CoverPage.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AEC661546014FE2A2FD5A8A /* SDVReader-CoverPage.png */; };
+		0DCD90BE1DE33B3C00B04BF9 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCD90BD1DE33B3C00B04BF9 /* CloudKit.framework */; };
 		1491B2FC62C1468FB8343E81 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 1553C575E9D04FB7B8A3F5C3 /* CDVDevice.m */; };
 		155F35A1107748E1AFF8E274 /* Reader-Mark-Y.png in Resources */ = {isa = PBXBuildFile; fileRef = B3DEF36A5B5F46CF9414448C /* Reader-Mark-Y.png */; };
 		18621CBF68C24ECDA967E455 /* ReaderThumbFetch.m in Sources */ = {isa = PBXBuildFile; fileRef = B92F4054506E43A6924DF37B /* ReaderThumbFetch.m */; };
@@ -136,6 +137,8 @@
 		07A9C39DE4734AA5B704D380 /* Foundation.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		08508C67516A494D8CAEACF5 /* ReaderViewController.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = ReaderViewController.h; path = "cordova-plugin-document-viewer/ReaderViewController.h"; sourceTree = "<group>"; };
 		0BDA7CE6CDBB411B9D565E85 /* CDVInAppBrowser.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVInAppBrowser.h; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.h"; sourceTree = "<group>"; };
+		0DCD90B81DE338C500B04BF9 /* Flynn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Flynn.entitlements; path = Flynn/Flynn.entitlements; sourceTree = "<group>"; };
+		0DCD90BD1DE33B3C00B04BF9 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		0DF3F7EDB98D42C29F62343B /* ReaderThumbRender.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = ReaderThumbRender.h; path = "cordova-plugin-document-viewer/ReaderThumbRender.h"; sourceTree = "<group>"; };
 		10BEBEF715DD43EDA599C873 /* AppIcon-152.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = "AppIcon-152.png"; sourceTree = "<group>"; };
 		10D5DC7BBA6A4D09B58A6DD8 /* SDVReaderViewController.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = SDVReaderViewController.m; path = "cordova-plugin-document-viewer/SDVReaderViewController.m"; sourceTree = "<group>"; };
@@ -301,6 +304,7 @@
 				F85D6946A88741F4ADF037DC /* AddressBook.framework in Frameworks */,
 				8DF8B4BAAE8747C388B2894A /* AddressBookUI.framework in Frameworks */,
 				700CE9EACA014FEDA354B57E /* AudioToolbox.framework in Frameworks */,
+				0DCD90BE1DE33B3C00B04BF9 /* CloudKit.framework in Frameworks */,
 				3D8CA7C7EC3B44ADA9A21B1E /* UIKit.framework in Frameworks */,
 				FA16FF8B890C4101B288B327 /* Foundation.framework in Frameworks */,
 				EA79EE0F3B9344E3932198C2 /* ImageIO.framework in Frameworks */,
@@ -335,6 +339,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				0DCD90B81DE338C500B04BF9 /* Flynn.entitlements */,
 				EB87FDF41871DAF40020F90C /* config.xml */,
 				EB87FDF31871DA8E0020F90C /* www */,
 				EB87FDF11871DA420020F90C /* Staging */,
@@ -410,6 +415,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0DCD90BD1DE33B3C00B04BF9 /* CloudKit.framework */,
 				9DC5405BA5844167A7CA9644 /* libiconv.dylib */,
 				3DA030C0EAD744A39BA8B359 /* AVFoundation.framework */,
 				F94ED341999A46B883FF75FD /* CoreVideo.framework */,
@@ -588,6 +594,15 @@
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.GameCenter = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -770,8 +785,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_ENTITLEMENTS = Flynn/Flynn.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Holisticon AG (G8D6696Z88)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Holisticon AG (G8D6696Z88)";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = G8D6696Z88;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -783,7 +799,7 @@
 				INFOPLIST_FILE = "Flynn/Flynn-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				PRODUCT_NAME = Flynn;
-				PROVISIONING_PROFILE = "f3bad0a6-5bce-4f09-892c-07caa18e4f8e";
+				PROVISIONING_PROFILE = "f03923ed-8b7c-4103-b82c-4423374667c1";
 				PROVISIONING_PROFILE_SPECIFIER = "Flynn Distribution";
 			};
 			name = Debug;
@@ -797,8 +813,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_ENTITLEMENTS = Flynn/Flynn.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Holisticon AG (G8D6696Z88)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Holisticon AG (G8D6696Z88)";
 				COPY_PHASE_STRIP = YES;
 				DEVELOPMENT_TEAM = G8D6696Z88;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -808,7 +825,7 @@
 				INFOPLIST_FILE = "Flynn/Flynn-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				PRODUCT_NAME = Flynn;
-				PROVISIONING_PROFILE = "f3bad0a6-5bce-4f09-892c-07caa18e4f8e";
+				PROVISIONING_PROFILE = "f03923ed-8b7c-4103-b82c-4423374667c1";
 				PROVISIONING_PROFILE_SPECIFIER = "Flynn Distribution";
 			};
 			name = Release;
