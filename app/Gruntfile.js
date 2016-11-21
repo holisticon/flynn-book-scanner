@@ -561,8 +561,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('check', [
-    'jshint',
-    'build'
+    'jshint'
   ]);
 
   grunt.registerTask('default', [
