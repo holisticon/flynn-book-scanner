@@ -72,11 +72,15 @@
   },
   "scripts": {
     "build": "grunt build",
+    "clean": "grunt clean",
     "check": "grunt check",
     "package": "grunt clean package",
     "postinstall": "bower install && cd node_modules/grunt-sass && npm install node-sass@3.4.2",
     "watch": "npm rebuild node-sass && grunt serve",
     "test": "grunt test",
-    "test-e2e": "grunt e2e"
+    "test-e2e": "grunt e2e",
+    "android": "npm run build && cordova run android",
+    "ios": "npm run build && cordova run ios",
+    "osx": "npm run build && cordova run osx"
   }
 }

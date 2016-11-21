@@ -54,31 +54,37 @@ app.directive('bookViewDetails', function ($window, $log, $timeout, $ionicLoadin
         template: '<ion-spinner></ion-spinner> <br> Opening  ...'
       });
       var book = selectedBook;
-      // create byte array
-      var pdfOutput = atob(book.ebook.data.replace(/\s/g, '')),
-        length = pdfOutput.length,
-        arrBuffer = new Uint8Array(new ArrayBuffer(length)),
-        i = 0;
-      // convert to byte array
-      for (; i < length; i++) {
-        arrBuffer[i] = pdfOutput.charCodeAt(i);
-      }
-      // create file object
-      var file = new Blob([arrBuffer], {type: book.ebook.content_type});
-      // on cordova platform use viewer
-      if (window.requestFileSystem) {
-        window.requestFileSystem(window.TEMPORARY, 50 * 1024 * 1024, function (fs) {
-          $log.debug('file system open: ', fs.name);
-          saveFile(fs.root, file, book.ebook.filename, book.ebook.content_type);
-        }, function () {
-          $log.error('Error occurred during file system access');
+      try {
+        // create byte array
+        var pdfOutput = atob(book.ebook.data.replace(/\s/g, '')),
+          length = pdfOutput.length,
+          arrBuffer = new Uint8Array(new ArrayBuffer(length)),
+          i = 0;
+        // convert to byte array
+        for (; i < length; i++) {
+          arrBuffer[i] = pdfOutput.charCodeAt(i);
+        }
+        // create file object
+        var file = new Blob([arrBuffer], {type: book.ebook.content_type});
+        // on cordova platform use viewer
+        if (window.requestFileSystem) {
+          window.requestFileSystem(window.TEMPORARY, 50 * 1024 * 1024, function (fs) {
+            $log.debug('file system open: ', fs.name);
+            saveFile(fs.root, file, book.ebook.filename, book.ebook.content_type);
+          }, function () {
+            $log.error('Error occurred during file system access');
+            $ionicLoading.hide();
+          });
+        } else {
+          // in browser fallback to createObjectURL
+          var dataURL = URL.createObjectURL(file);
+          window.open(dataURL, '_blank');
           $ionicLoading.hide();
-        });
-      } else {
-        // in browser fallback to createObjectURL
-        var dataURL = URL.createObjectURL(file);
-        window.open(dataURL, '_blank');
+        }
+      } catch (e) {
+        $log.error('Error during file open occurred', e);
         $ionicLoading.hide();
+        navigator.notification.alert('Error during file open');
       }
     }
 
