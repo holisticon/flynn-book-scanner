@@ -29,10 +29,17 @@ app.directive('bookViewDetails', function ($window, $log, $timeout, $ionicLoadin
               $ionicLoading.hide();
             }, function () {
               $log.debug('Viewer closed');
-            }, function () {
+            }, function (appId, installer) {
               $log.error('App missing');
+              navigator.notification.confirm('Do you want to install the free PDF Viewer App ' + appId + ' for Android?', function (index) {
+                if (index === 1) {
+                  installer();
+                }
+              });
+              $ionicLoading.hide();
             }, function () {
               $log.error('Error occurred during opening document');
+              $ionicLoading.hide();
             });
         }
 
