@@ -38,6 +38,9 @@ app.controller('BookUploadController', function ($rootScope, $scope, $state, $st
   }
 
   function uploadFile() {
+    $ionicLoading.show({
+      template: '<ion-spinner></ion-spinner> <br> Uploading  ...'
+    });
     var file = $scope.upload.src[0],
       book = $scope.selectedBook;
     if (file.type === 'application/pdf') {

@@ -22,6 +22,7 @@ app.directive('bookViewDetails', function ($window, $log, $timeout, $ionicLoadin
               openWith: {enabled: true}
             }, function () {
               $log.debug('Viewer opened');
+              $ionicLoading.hide();
             }, function () {
               $log.debug('Viewer closed');
             }, function () {
@@ -32,6 +33,7 @@ app.directive('bookViewDetails', function ($window, $log, $timeout, $ionicLoadin
         };
         fileWriter.onerror = function (e) {
           $log.debug('Failed file write', e);
+          $ionicLoading.hide();
         };
 
         fileWriter.write(dataObj);
@@ -43,10 +45,14 @@ app.directive('bookViewDetails', function ($window, $log, $timeout, $ionicLoadin
         writeFile(fileEntry, fileData, mimetype);
       }, function () {
         $log.error('Error occurred writing file.');
+        $ionicLoading.hide();
       });
     }
 
     function openBook() {
+      $ionicLoading.show({
+        template: '<ion-spinner></ion-spinner> <br> Opening  ...'
+      });
       var book = selectedBook;
       // create byte array
       var pdfOutput = atob(book.ebook.data.replace(/\s/g, '')),
@@ -61,16 +67,18 @@ app.directive('bookViewDetails', function ($window, $log, $timeout, $ionicLoadin
       var file = new Blob([arrBuffer], {type: book.ebook.content_type});
       // on cordova platform use viewer
       if (window.requestFileSystem) {
-        window.requestFileSystem(window.TEMPORARY, 5 * 1024 * 1024, function (fs) {
+        window.requestFileSystem(window.TEMPORARY, 50 * 1024 * 1024, function (fs) {
           $log.debug('file system open: ', fs.name);
           saveFile(fs.root, file, book.ebook.filename, book.ebook.content_type);
         }, function () {
           $log.error('Error occurred during file system access');
+          $ionicLoading.hide();
         });
       } else {
         // in browser fallback to createObjectURL
         var dataURL = URL.createObjectURL(file);
         window.open(dataURL, '_blank');
+        $ionicLoading.hide();
       }
     }
 

@@ -24,10 +24,10 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
 
           if (cordova.platformId === 'android') {
             // for performance use indexedDB on Android
-            db = new PouchDB(NAME_OF_POUCHDB, {adapter: 'idb', size: 50});
+            db = new PouchDB(NAME_OF_POUCHDB, {adapter: 'idb', size: 500});
           } else {
             // default use websql
-            db = new PouchDB(NAME_OF_POUCHDB, {adapter: 'websql', location: 'default', size: 50});
+            db = new PouchDB(NAME_OF_POUCHDB, {adapter: 'websql', location: 'default', size: 500});
           }
         } else {
           // default use websql
