@@ -1,23 +1,23 @@
 {
-	"info": {
-		"version": {
-			"label": "Version",
-			"hidden": false,
-			"value": "1.1.0"
-		},
-		"release_notes": {
-			"label": "Release Notes",
-			"hidden": false,
-			"value": ""
-		},
-		"copyright": {
-			"label": "Copyright",
-			"hidden": false,
-			"value": "© Copyright 2014 Holisticon AG"
-		}
-	},
-	"timeout": 		3000,
-    "dbLogging":	false,
-	"dev": 			false,
-	"debug": 		false
+  "info": {
+    "version": {
+      "label": "Version",
+      "hidden": false,
+      "value": "1.1.0"
+    },
+    "release_notes": {
+      "label": "Release Notes",
+      "hidden": false,
+      "value": ""
+    },
+    "copyright": {
+      "label": "Copyright",
+      "hidden": false,
+      "value": "© Copyright 2016 Holisticon AG"
+    }
+  },
+  "timeout": 3000,
+  "dbLogging": false,
+  "dev": false,
+  "debug": false
 }

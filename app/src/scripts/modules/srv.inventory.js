@@ -7,7 +7,7 @@
  * @description
  * Provides access to the book inventory. Used PouchDB as backend.
  */
-app.service('inventoryService', function ($rootScope, $http, $q, settingsService, base64, $log, APP_CONFIG) {
+app.service('inventoryService', function ($rootScope, $http, $q, settingsService, base64, $log) {
     'use strict';
 
     var config = settingsService.load(),
@@ -16,7 +16,6 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
     function getDB() {
       var NAME_OF_POUCHDB;
       config = settingsService.load();
-      activeProfile = config.activeProfile();
       NAME_OF_POUCHDB = activeProfile.dbName;
       var db;
       if (!db) {
@@ -83,12 +82,11 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
             $http({
               method: 'GET',
               url: remoteCouch,
-              timeout: APP_CONFIG.timeout
+              timeout: activeProfile.appConfig.timeout
             }).then(function () {
-              localDB.sync(remoteCouch, {
-                live: true,
-                retry: true
-              }).on('change', function (info) {
+              localDB.sync(remoteCouch, activeProfile.appConfig.sync || {
+                  live: true
+                }).on('change', function (info) {
                 $rootScope.$apply(function () {
                   $log.info('Updating documents with remote changes...');
                   $log.debug('Updating documents with remote changes with following answer: ' + info.toString());

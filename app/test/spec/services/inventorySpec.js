@@ -5,16 +5,6 @@ var cordova;// jshint ignore:line
 //load the app module
 beforeEach(module('flynnBookScannerApp'));
 
-beforeEach(function () {
-  module(function ($provide) {
-    $provide.constant('APP_CONFIG', {
-      timeout: 1000,
-      dev: false,
-      debug: false
-    });
-  });
-});
-
 describe('inventoryService', function () {
 
   var service,
@@ -28,7 +18,11 @@ describe('inventoryService', function () {
         return {
           remotesync: false,
           dbName: 'test_' + new Date().getMilliseconds(),
-          timeout: 1000
+          appConfig: {
+            timeout: 1000,
+            dev: false,
+            debug: false
+          }
         };
       }
     };
@@ -60,7 +54,13 @@ describe('inventoryService', function () {
           couchdb: 'http://remote_test/couchdb',
           dbName: 'test',
           user: 'Müller',
-          password: 'P@assword!'
+          password: 'P@assword!',
+          appConfig: {
+            timeout: 100,
+            dev: false,
+            debug: false,
+            sync: {}
+          }
         };
       }
     };
