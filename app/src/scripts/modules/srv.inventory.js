@@ -82,7 +82,7 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
             $http({
               method: 'GET',
               url: remoteCouch,
-              timeout: activeProfile.appConfig.timeout
+              timeout: config.appConfig.timeout
             }).then(function () {
               localDB.sync(remoteCouch, activeProfile.appConfig.sync || {
                   live: true
