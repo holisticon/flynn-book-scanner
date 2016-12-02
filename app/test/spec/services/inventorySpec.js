@@ -48,19 +48,19 @@ describe('inventoryService', function () {
       status: 400
     });
     config = {
+      appConfig: {
+        timeout: 1,
+        dev: false,
+        debug: false,
+        sync: {}
+      },
       activeProfile: function () {
         return {
           remotesync: true,
           couchdb: 'http://remote_test/couchdb',
           dbName: 'test',
           user: 'Müller',
-          password: 'P@assword!',
-          appConfig: {
-            timeout: 100,
-            dev: false,
-            debug: false,
-            sync: {}
-          }
+          password: 'P@assword!'
         };
       }
     };
