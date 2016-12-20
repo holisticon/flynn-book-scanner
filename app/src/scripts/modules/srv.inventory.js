@@ -44,12 +44,12 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
             fields: ['value.id']
           }
         }).then(function (result) {
-          $log.trace('Creating index was successfull: ' + JSON.stringify(result));
+          $log.trace('Creating index was successfull: ', result);
           if (cb) {
             cb();
           }
         }).catch(function (err) {
-          $log.err('Creating index was not successfull: ' + JSON.stringify(err));
+          $log.err('Creating index was not successfull: ', err);
           if (cb) {
             cb();
           }
@@ -89,24 +89,24 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
                 }).on('change', function (info) {
                 $rootScope.$apply(function () {
                   $log.info('Updating documents with remote changes...');
-                  $log.debug('Updating documents with remote changes with following answer: ' + info.toString());
+                  $log.debug('Updating documents with remote changes with following answer: ', info);
                   updateIndex(localDB);
                 });
               }).on('complete', function (info) {
                 $rootScope.$apply(function () {
                   $log.info('Completed sync.');
-                  $log.debug('Completed sync with following answer: ' + info.toString());
+                  $log.debug('Completed sync with following answer: ', info);
                   deferred.resolve(info);
                 });
               }).on('uptodate', function (info) {
                 $rootScope.$apply(function () {
                   $log.info('Already up-to-date.');
-                  $log.debug('Already up-to-date with following answer: ' + info.toString());
+                  $log.debug('Already up-to-date with following answer: ', info);
                   deferred.resolve(info);
                 });
               }).on('error', function (err) {
                 $rootScope.$apply(function () {
-                  $log.error('Error during remote sync with following answer: ' + err.toString());
+                  $log.error('Error during remote sync with following answer: ', err);
                   if (err.stats === 400) {
                     $log.info('Seems be a remote server error.');
                   }
@@ -114,7 +114,7 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
                 });
               }).catch(function (err) {
                 $rootScope.$apply(function () {
-                  $log.error('Unkown error during remote sync.' + err.toString());
+                  $log.error('Unknown error during remote sync.', err);
                   deferred.resolve(err);
                 });
               });
