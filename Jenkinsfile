@@ -29,7 +29,7 @@ node {
       dir(projectHome) {
 
         stage('Unit-Tests') {
-          sh "npm run test"
+          sh "npm install && npm run test"
           junit healthScaleFactor: 1.0, testResults: 'target/reports/TESTS-*.xml'
         }
 
