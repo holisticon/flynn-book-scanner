@@ -6,7 +6,7 @@
  * @description
  * Control preference/settings of the app and show log entries
  */
-app.controller('SettingsController', function ($rootScope, $log, $scope, $ionicLoading, $state, logService, settingsService, inventoryService) {
+app.controller('SettingsController', function ($rootScope, $log, $scope, $ionicLoading, $state, dbLoggerService, settingsService, inventoryService) {
     'use strict';
 
     function loadSettings() {
@@ -40,7 +40,7 @@ app.controller('SettingsController', function ($rootScope, $log, $scope, $ionicL
 
     function readLogs() {
       $ionicLoading.show({template: '<i class="icon ion - looping loading-icon"></i>&nbsp;&nbsp;Loading log data ...'});
-      logService.readLogData().then(function (response) {
+      dbLoggerService.readLogData().then(function (response) {
         $scope.logs = response;
         $ionicLoading.hide();
       }, function () {
@@ -51,7 +51,7 @@ app.controller('SettingsController', function ($rootScope, $log, $scope, $ionicL
 
     function clearLogDB() {
       $ionicLoading.show();
-      logService.clearLogData().then(function () {
+      dbLoggerService.clearLogData().then(function () {
         readLogs();
       }, function () {
         $ionicLoading.hide();
@@ -146,7 +146,7 @@ app.controller('SettingsController', function ($rootScope, $log, $scope, $ionicL
       if ($scope.logging.selectedLogLevel) {
         $ionicLoading.show();
         var logLevel = $scope.logging.selectedLogLevel.logLevel;
-        logService.readLogData(logLevel).then(function (logData) {
+        dbLoggerService.readLogData(logLevel).then(function (logData) {
           $scope.logs = logData;
           $ionicLoading.hide();
         }, function () {
