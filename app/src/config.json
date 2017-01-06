@@ -4,8 +4,8 @@
         "googleApiKey": "AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY",
         "dbLogging":    true,
         "dev":          false,
-        "debug":        false,
-        "trace":        false
+        "debug":        true,
+        "trace":        true
     },
     "info": {
         "version": {

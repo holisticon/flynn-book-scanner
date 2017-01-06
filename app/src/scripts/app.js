@@ -188,8 +188,8 @@ var app = angular.module('flynnBookScannerApp', [ // jshint ignore:line
   'ngRoute',
   'ngTouch',
   'ionic',
-  'dbLog',
-  'webWorkerPool'
+  'webWorkerPool',
+  'ngDbLogger.core'
 ]);
 
 /**
@@ -321,7 +321,7 @@ app.run(function ($ionicPlatform) {
  * @module flynnBookScannerApp
  * @description configure app
  */
-app.config(function ($urlRouterProvider, $provide, $compileProvider, $httpProvider, $stateProvider, $ionicConfigProvider, webWorkerPoolProvider, loggerProvider, APP_CONFIG) {
+app.config(function ($urlRouterProvider, $provide, $compileProvider, $httpProvider, $stateProvider, $ionicConfigProvider, webWorkerPoolProvider, ngDbLoggerConfig, APP_CONFIG) {
   'use strict';
 
   // fix wp8 cordova errors
@@ -337,15 +337,10 @@ app.config(function ($urlRouterProvider, $provide, $compileProvider, $httpProvid
   $ionicConfigProvider.views.maxCache(5);
   $ionicConfigProvider.templates.maxPrefetch(3);
   // configure logging
-  ngFlynnApp.configureLogging(loggerProvider, APP_CONFIG);
-  $provide.decorator('$log', ['$delegate', function ($delegate) {
-    if (loggerProvider.$get.length > 1) {
-      // solve uglify error
-      return loggerProvider.$get[1]($delegate);
-    } else {
-      return loggerProvider.$get($delegate);
-    }
-  }]);
+  ngDbLoggerConfig.dbName = 'flynnLogDB';
+  ngDbLoggerConfig.dbLogging = APP_CONFIG.dbLogging;
+  ngDbLoggerConfig.debug = APP_CONFIG.debug;
+  ngDbLoggerConfig.trace = APP_CONFIG.trace;
   // configure routes and states
   $stateProvider
     .state('app', {
