@@ -63,7 +63,7 @@ node {
       }
     }
   } catch (e) {
-    // rocketSend channel: 'jenkins', message: 'Fehler'
+    rocketSend emoji: ':sob:', message: 'Fehler'
     throw e
   }
 

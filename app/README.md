@@ -10,7 +10,7 @@ Preparation steps:
 Global steps:
 
 
-* Install nodejs and npm (http://nodejs.org/download/)
+* Install nodejs 6+ and npm 3+ (http://nodejs.org/download/)
 * Install Cordova and Protractor
   * ```bash
   $ (sudo) npm install -g cordova protractor
