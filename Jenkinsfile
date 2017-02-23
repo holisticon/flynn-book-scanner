@@ -6,7 +6,6 @@ node {
     def workspace = env.WORKSPACE
     def buildUrl = env.BUILD_URL
     def projectHome = 'app'
-    env.PATH = "${env.JAVA_HOME}/bin:${env.PATH}:/usr/local/bin:/usr/bin:/bin"
 
     // PRINT ENVIRONMENT TO JOB
     echo "workspace directory is $workspace"
@@ -29,13 +28,25 @@ node {
       dir(projectHome) {
 
         stage('Unit-Tests') {
-          sh "npm install && npm run test"
-          junit healthScaleFactor: 1.0, testResults: 'target/reports/TESTS-*.xml'
+          try {
+            sh "npm install && npm run test"
+          } catch (exception) {
+            rocketSend channel: 'website', emoji: ':rotating_light:', message: 'Unit-Test-Fehler'
+            throw exception
+          } finally {
+            junit healthScaleFactor: 1.0, testResults: 'target/reports/TESTS-*.xml'
+          }
         }
 
         stage('Integration-Tests') {
-          sh "npm install" // TODO fix appoum tests && npm run test-e2e"
-          junit healthScaleFactor: 1.0, testResults: 'target/reports/TESTS-*.xml'
+          try {
+            sh "npm install" // TODO fix appoum tests && npm run test-e2e"
+          } catch (exception) {
+            rocketSend channel: 'website', emoji: ':rotating_light:', message: 'Integration-Test-Fehler'
+            throw exception
+          } finally {
+            junit healthScaleFactor: 1.0, testResults: 'target/reports/TESTS-*.xml'
+          }
         }
 
         stage('build Apps') {
@@ -44,7 +55,7 @@ node {
         }
 
         stage('upload Apps') {
-          sh 'cd platforms/android && supply --apk ../../target/$(ls ../../target/ | grep apk) --json_key  ~/.flynn/playstore.json --package_name de.holisticon.app.flynn --track alpha'
+          sh 'cd platforms/android && supply --apk ../../target/$(ls ../../target/ | grep apk) --json_key ~/.holisticon/playstore.json --package_name de.holisticon.app.flynn --track alpha'
           sh 'cd platforms/ios && pilot upload --ipa ../../target/$(ls ../../target/ | grep ipa)'
         }
         archiveArtifacts artifacts: 'target/*.ipa, target/*.apk'
@@ -52,7 +63,7 @@ node {
       }
     }
   } catch (e) {
-    rocketSend channel: 'jenkins', message: 'Fehler'
+    // rocketSend channel: 'jenkins', message: 'Fehler'
     throw e
   }
 
