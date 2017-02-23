@@ -89,7 +89,7 @@ app.service('googleBookService', function ($rootScope, $http, $q, $log, settings
       if (usedCode) {
         var code = convertCodeToIsbn(usedCode);
         $log.debug('Reading book data for ISBN ' + code);
-        searchQuery = 'isbn' + code;
+        searchQuery = 'isbn:' + code;
       } else {
         searchQuery = pSearchCriteria.keyword;
       }

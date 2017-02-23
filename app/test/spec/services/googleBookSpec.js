@@ -30,7 +30,7 @@ describe('googleBookService', function () {
     searchQuery.isbn = '9783898646123';
     var response = {};
     response.books = null;
-    httpBackend.when('GET', 'https://www.googleapis.com/books/v1/volumes/?q=:isbn=3898646122&projection=full&key=undefined').respond(response);
+    httpBackend.when('GET', 'https://www.googleapis.com/books/v1/volumes/?q=isbn:3898646122&projection=full&key=undefined').respond(response);
     httpBackend.when('GET', 'https://www.googleapis.com/books/v1/volumes/?q=9783898646123&projection=full&key=undefined').respond(response);
 
     service.search(searchQuery).then(function () {
@@ -96,7 +96,7 @@ describe('googleBookService', function () {
     };
     var searchQuery = {};
     searchQuery.isbn = '9783898646123';
-    httpBackend.when('GET', 'https://www.googleapis.com/books/v1/volumes/?q=:isbn=3898646122&projection=full&key=undefined').respond(response);
+    httpBackend.when('GET', 'https://www.googleapis.com/books/v1/volumes/?q=isbn:3898646122&projection=full&key=undefined').respond(response);
     httpBackend.when('GET', 'https://www.googleapis.com/books/v1/volumes/?q=9783898646123&projection=full&key=undefined').respond(response);
     service.search(searchQuery).then(function (response) {
       var books = response.books;
