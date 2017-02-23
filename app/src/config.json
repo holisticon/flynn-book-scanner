@@ -1,22 +1,22 @@
 {
-    "config": {
-        "timeout":  30000,
-        "googleApiKey": "AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY",
-        "dbLogging":    true,
-        "dev":          false,
-        "debug":        true,
-        "trace":        true
+  "config": {
+    "timeout": 240000,
+    "googleApiKey": "AIzaSyC8qspKiGBqhXNqkeF6v-D72SrKO-SzCNY",
+    "dbLogging": true,
+    "dev": false,
+    "debug": true,
+    "trace": true
+  },
+  "info": {
+    "version": {
+      "label": "Version",
+      "hidden": false,
+      "value": ""
     },
-    "info": {
-        "version": {
-            "label": "Version",
-            "hidden": false,
-            "value": ""
-        },
-        "release_notes": {
-            "label": "Release Notes",
-            "hidden": false,
-            "value": ""
-        }
+    "release_notes": {
+      "label": "Release Notes",
+      "hidden": false,
+      "value": ""
     }
+  }
 }

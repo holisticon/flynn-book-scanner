@@ -85,7 +85,8 @@ app.service('inventoryService', function ($rootScope, $http, $q, settingsService
               timeout: config.appConfig.timeout
             }).then(function () {
               localDB.sync(remoteCouch, config.appConfig.sync || {
-                  live: true
+                  live: false,
+                  retry: true
                 }).on('change', function (info) {
                 $rootScope.$apply(function () {
                   $log.info('Updating documents with remote changes...');
