@@ -49,15 +49,3 @@ xmlParser.parseString(configXML, function (err, result) {
     });
   });
 });
-
-exec('which agvtool >/dev/null', function (err, tag) {
-  if (err instanceof Error) {
-    // ignore
-  } else {
-    exec('cd ' + __dirname + '/../platforms/ios &&  agvtool new-version -all ' + buildNo, function (err) {
-      if (err instanceof Error) {
-        if (err) throw err;
-      }
-    });
-  }
-});
