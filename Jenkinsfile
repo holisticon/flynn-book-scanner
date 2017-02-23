@@ -51,12 +51,12 @@ node {
 
         stage('build Apps') {
           sh "node etc/release_notes.js ${buildNumber} && npm run clean && npm run package "
-          sh "cd target && for file in *.ipa; do mv \$file \$(basename \$file .ipa)_build${buildNumber}.ipa; done && for file in *.apk; do mv \$file \$(basename \$file .apk)_build${buildNumber}.apk; done"
+          sh "cd target && for file in *.ipa; do mv \$file Flynn_build${buildNumber}.ipa; done && for file in *.apk; do mv \$file Flynn_build${buildNumber}.apk; done"
         }
 
         stage('upload Apps') {
-          sh 'cd platforms/android && supply --apk ../../target/$(ls ../../target/ | grep apk) --json_key ~/.holisticon/playstore.json --package_name de.holisticon.app.flynn --track alpha'
-          sh 'cd platforms/ios && pilot upload --ipa ../../target/$(ls ../../target/ | grep ipa)'
+          sh "fastlane supply --apk target/Flynn_build${buildNumber}.apk --json_key ~/.holisticon/playstore.json --package_name de.holisticon.app.flynn --track alpha"
+          sh "fastlane pilot upload --ipa target/Flynn_build${buildNumber}.ipa"
         }
         archiveArtifacts artifacts: 'target/*.ipa, target/*.apk'
 
