@@ -56,7 +56,7 @@ node {
 
         stage('upload Apps') {
           sh "fastlane supply --apk target/Flynn_build${buildNumber}.apk --json_key ~/.holisticon/playstore.json --package_name de.holisticon.app.flynn --track alpha"
-          sh "fastlane pilot upload --ipa target/Flynn_build${buildNumber}.ipa"
+          sh "fastlane pilot upload --ipa target/Flynn_build${buildNumber}.ipa -u appdev@holisticon.de"
         }
         archiveArtifacts artifacts: 'target/*.ipa, target/*.apk'
 
