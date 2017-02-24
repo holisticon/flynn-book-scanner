@@ -78,26 +78,30 @@ ion-tabs {
   }
 }
 
-// don't resize header on iPad ...
-@media (max-width: 60em) and (orientation: landscape) {
-  .platform-ios.platform-cordova:not(.fullscreen) {
+.fullscreen {
+  .bar-stable {
     .bar-header:not(.bar-subheader) {
-      height: 40px;
-      orientation: portrait;
+      height: $navbar-height;
     }
+
     .bar-header:not(.bar-subheader) > * {
       margin-top: 0px;
     }
+  }
+
+  .view-container {
     .has-header, .bar-subheader {
-      top: 44px;
-    }
-    .has-subheader {
-      top: 88px;
+      top: $navbar-height;
     }
   }
-  ion-tabs .has-tabs {
-    top: 44px;
-  }
+}
+
+.has-subheader {
+  top: 88px;
+}
+
+ion-tabs .has-tabs {
+  top: 44px;
 }
 
 .menu-left .scroll-content {
