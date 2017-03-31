@@ -53,11 +53,21 @@ node {
           sh "node etc/release_notes.js ${buildNumber} && npm run clean && npm run package "
           sh "cd target && for file in *.ipa; do mv \$file Flynn_build${buildNumber}.ipa; done && for file in *.apk; do mv \$file Flynn_build${buildNumber}.apk; done"
         }
-
-        stage('upload Apps') {
-          sh "fastlane supply --apk target/Flynn_build${buildNumber}.apk --json_key ~/.holisticon/playstore.json --package_name de.holisticon.app.flynn --track alpha"
-          sh "fastlane pilot upload --ipa target/Flynn_build${buildNumber}.ipa -u appdev@holisticon.de"
-        }
+        
+        parallel(
+          'upload APK': {
+            sh "fastlane supply --apk target/Flynn_build${buildNumber}.apk --json_key ~/.holisticon/playstore.json --package_name de.holisticon.app.flynn --track alpha"
+          }, 
+          'upload IPA': {            
+            sh "fastlane pilot upload --ipa target/Flynn_build${buildNumber}.ipa -u appdev@holisticon.de"
+          }, 
+          'upload PWA': {
+            sshagent(['e96eb307-86ff-4858-82bb-cdc20bf1e4b4']) {
+              sh 'scp -P 7525 -r www/* root@apps.holisticon.de:/var/www/html/flynn'
+            }
+          },
+        failFast: false)
+       
         archiveArtifacts artifacts: 'target/*.ipa, target/*.apk'
 
       }
